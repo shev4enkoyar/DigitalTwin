@@ -3,12 +3,16 @@ version: '3.4'
 services:
   webgateway:
     image: ${DOCKER_REGISTRY-}webgateway
+    ports:
+      - "5001:443"
     build:
       context: .
       dockerfile: Gateways/WebGateway/Dockerfile
 
   dbmanager.microservice:
     image: ${DOCKER_REGISTRY-}dbmanagermicroservice
+    ports:
+      - "5100:443"
     build:
       context: .
       dockerfile: Microservices/DbManager.Microservice/Dockerfile
@@ -16,6 +20,8 @@ services:
 
   removeexpiredlinks.microservice:
     image: ${DOCKER_REGISTRY-}removeexpiredlinksmicroservice
+    ports:
+      - "5101:443"
     build:
       context: .
       dockerfile: Microservices/Tasks/RemoveExpiredLinks.Microservice/Dockerfile
