@@ -1,0 +1,22 @@
+version: '3.4'
+
+services:
+  webgateway:
+    image: ${DOCKER_REGISTRY-}webgateway
+    build:
+      context: .
+      dockerfile: Gateways/WebGateway/Dockerfile
+
+  dbmanager.microservice:
+    image: ${DOCKER_REGISTRY-}dbmanagermicroservice
+    build:
+      context: .
+      dockerfile: Microservices/DbManager.Microservice/Dockerfile
+
+
+  removeexpiredlinks.microservice:
+    image: ${DOCKER_REGISTRY-}removeexpiredlinksmicroservice
+    build:
+      context: .
+      dockerfile: Microservices/Tasks/RemoveExpiredLinks.Microservice/Dockerfile
+
