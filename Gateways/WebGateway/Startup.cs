@@ -8,6 +8,7 @@ namespace WebGateway
 {
     public class Startup
     {
+        //TODO @Arkirka Глянуть про SignalR
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddGrpc();
