@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+option csharp_namespace = "Payment.Microservice";
+
+package payment;
+
+service Payment {
+	rpc GetStatus (StatusRequest) returns (stream StatusReply);
+}
+
+message StatusRequest {
+	bool complete = 1;
+}
+
+message StatusReply {
+	string status = 1;
+}

@@ -11,21 +11,23 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{8C646B58-084
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gateways", "Gateways", "{A331A877-3CB2-4EC9-9E31-36B26808BB79}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebGateway", "Gateways\WebGateway\WebGateway.csproj", "{624DABF7-A2D5-4D5F-9A6D-DFCB58F4085C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebGateway", "Gateways\WebGateway\WebGateway.csproj", "{624DABF7-A2D5-4D5F-9A6D-DFCB58F4085C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbManager.Microservice", "Microservices\DbManager.Microservice\DbManager.Microservice.csproj", "{855AA6B9-4605-4713-AD3C-5F734C072223}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DbManager.Microservice", "Microservices\DbManager.Microservice\DbManager.Microservice.csproj", "{855AA6B9-4605-4713-AD3C-5F734C072223}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{9C0B2526-86AB-4A3E-B30A-FB9AE321EB38}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "Shared\DAL\DAL.csproj", "{C57D1C69-BD6D-4155-BF71-F5C47F102405}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAL", "Shared\DAL\DAL.csproj", "{C57D1C69-BD6D-4155-BF71-F5C47F102405}"
 EndProject
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "react-web", "Frontend\Web\react-web\react-web.esproj", "{98534F15-C031-4964-BD63-3F2D1B3F9E59}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemoveExpiredLinks.Microservice", "Microservices\Tasks\RemoveExpiredLinks.Microservice\RemoveExpiredLinks.Microservice.csproj", "{F2719FB6-DD7A-49A6-8AE0-121B2FF49FFF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RemoveExpiredLinks.Microservice", "Microservices\Tasks\RemoveExpiredLinks.Microservice\RemoveExpiredLinks.Microservice.csproj", "{F2719FB6-DD7A-49A6-8AE0-121B2FF49FFF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tasks", "Tasks", "{1AAE0D6F-59C7-4F50-AF3E-3E0AA76F99E0}"
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{DE820510-0D50-45CA-89CB-E273F49E6E82}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Payment.Microservice", "Microservices\Payment.Microservice\Payment.Microservice.csproj", "{3F684E93-1943-4E48-99EC-C25145B55E79}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,6 +61,10 @@ Global
 		{DE820510-0D50-45CA-89CB-E273F49E6E82}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DE820510-0D50-45CA-89CB-E273F49E6E82}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DE820510-0D50-45CA-89CB-E273F49E6E82}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F684E93-1943-4E48-99EC-C25145B55E79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F684E93-1943-4E48-99EC-C25145B55E79}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F684E93-1943-4E48-99EC-C25145B55E79}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F684E93-1943-4E48-99EC-C25145B55E79}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -71,6 +77,7 @@ Global
 		{98534F15-C031-4964-BD63-3F2D1B3F9E59} = {8C646B58-084E-4821-9C08-374C22C82679}
 		{F2719FB6-DD7A-49A6-8AE0-121B2FF49FFF} = {1AAE0D6F-59C7-4F50-AF3E-3E0AA76F99E0}
 		{1AAE0D6F-59C7-4F50-AF3E-3E0AA76F99E0} = {53CD2FDA-5656-4122-8BBA-9E4C1FF7FC26}
+		{3F684E93-1943-4E48-99EC-C25145B55E79} = {53CD2FDA-5656-4122-8BBA-9E4C1FF7FC26}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2D3AD7F4-ACE4-4A36-8E93-E122D0824CF2}

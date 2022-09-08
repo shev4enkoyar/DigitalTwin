@@ -26,3 +26,12 @@ services:
       context: .
       dockerfile: Microservices/Tasks/RemoveExpiredLinks.Microservice/Dockerfile
 
+
+  payment.microservice:
+    image: ${DOCKER_REGISTRY-}paymentmicroservice
+    ports:
+      - "5102:443"
+    build:
+      context: .
+      dockerfile: Microservices/Payment.Microservice/Dockerfile
+
