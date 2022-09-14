@@ -9,6 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Models\MarkerksInfo.cs~RF6f06468.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Protobuf Include="Protos\greet.proto" GrpcServices="Server" />
   </ItemGroup>
 

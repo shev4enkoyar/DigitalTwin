@@ -12,6 +12,7 @@ namespace WebGateway
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddGrpc();
+            services.AddSignalR();
 
             services.AddCors(o => o.AddPolicy("AllowAll", builder =>
             {
@@ -31,17 +32,23 @@ namespace WebGateway
 
             app.UseRouting();
             app.UseGrpcWeb();
-            app.UseCors();
-            
+            app.UseCors(x => x
+               .AllowAnyMethod()
+               .AllowAnyHeader()
+               .SetIsOriginAllowed(origin => true)
+               .AllowCredentials()
+           );
+
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapHub<MapHub>("/hubs/dashboard/map");
                 endpoints.MapGrpcService<GreeterService>().EnableGrpcWeb().RequireCors("AllowAll");
 
                 //TODO Убрать endpoint за ненадобностью
-                endpoints.MapGet("/", async context =>
+                /*endpoints.MapGet("/", async context =>
                 {
                     await context.Response.WriteAsync("Test WebManager page");
-                });
+                });*/
             });
         }
     }
