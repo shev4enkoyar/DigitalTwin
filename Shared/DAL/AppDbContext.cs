@@ -20,6 +20,14 @@ namespace DAL
 
         public DbSet<ProductPriceHistory> ProductPriceHistory { get; set; }
 
+        public DbSet<Figure> Figures { get; set; }
+
+        public DbSet<FigureCategory> FigureCategories { get; set; }
+
+        public DbSet<Color> Colors{ get; set; }
+
+        public DbSet<Icon> Icons { get; set; }
+
         #endregion
 
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)

@@ -9,6 +9,19 @@ namespace DAL.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Colors",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    HEX = table.Column<string>(type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Colors", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Extensions",
                 columns: table => new
                 {
@@ -21,6 +34,32 @@ namespace DAL.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Extensions", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "FigureCategories",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Name = table.Column<string>(type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_FigureCategories", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Icons",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Source = table.Column<string>(type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Icons", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -184,6 +223,48 @@ namespace DAL.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Figures",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    ModelId = table.Column<int>(type: "integer", nullable: false),
+                    CategoryId = table.Column<int>(type: "integer", nullable: false),
+                    ColorId = table.Column<int>(type: "integer", nullable: false),
+                    IconId = table.Column<int>(type: "integer", nullable: false),
+                    Points = table.Column<string>(type: "text", nullable: false),
+                    IsUnique = table.Column<bool>(type: "boolean", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Figures", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Figures_Colors_ColorId",
+                        column: x => x.ColorId,
+                        principalTable: "Colors",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Figures_DigitalModels_ModelId",
+                        column: x => x.ModelId,
+                        principalTable: "DigitalModels",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Figures_FigureCategories_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "FigureCategories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Figures_Icons_IconId",
+                        column: x => x.IconId,
+                        principalTable: "Icons",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_ActivatedExtensions_ExtensionId",
                 table: "ActivatedExtensions",
@@ -206,6 +287,12 @@ namespace DAL.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_Colors_HEX",
+                table: "Colors",
+                column: "HEX",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_DigitalModels_ProductId",
                 table: "DigitalModels",
                 column: "ProductId");
@@ -219,6 +306,38 @@ namespace DAL.Migrations
                 name: "IX_Extensions_Name",
                 table: "Extensions",
                 column: "Name",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_FigureCategories_Name",
+                table: "FigureCategories",
+                column: "Name",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Figures_CategoryId",
+                table: "Figures",
+                column: "CategoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Figures_ColorId",
+                table: "Figures",
+                column: "ColorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Figures_IconId",
+                table: "Figures",
+                column: "IconId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Figures_ModelId",
+                table: "Figures",
+                column: "ModelId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Icons_Source",
+                table: "Icons",
+                column: "Source",
                 unique: true);
 
             migrationBuilder.CreateIndex(
@@ -245,6 +364,12 @@ namespace DAL.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_Products_Name",
+                table: "Products",
+                column: "Name",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Users_Email",
                 table: "Users",
                 column: "Email",
@@ -260,16 +385,28 @@ namespace DAL.Migrations
                 name: "ActivateLinks");
 
             migrationBuilder.DropTable(
+                name: "Figures");
+
+            migrationBuilder.DropTable(
                 name: "LegalEntities");
 
             migrationBuilder.DropTable(
                 name: "ProductPriceHistory");
 
             migrationBuilder.DropTable(
+                name: "Extensions");
+
+            migrationBuilder.DropTable(
+                name: "Colors");
+
+            migrationBuilder.DropTable(
                 name: "DigitalModels");
 
             migrationBuilder.DropTable(
-                name: "Extensions");
+                name: "FigureCategories");
+
+            migrationBuilder.DropTable(
+                name: "Icons");
 
             migrationBuilder.DropTable(
                 name: "Products");

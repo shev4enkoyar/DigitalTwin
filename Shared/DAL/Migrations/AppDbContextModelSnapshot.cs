@@ -81,6 +81,25 @@ namespace DAL.Migrations
                     b.ToTable("ActivatedExtensions");
                 });
 
+            modelBuilder.Entity("DAL.Models.Color", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("HEX")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("HEX")
+                        .IsUnique();
+
+                    b.ToTable("Colors");
+                });
+
             modelBuilder.Entity("DAL.Models.DigitalModel", b =>
                 {
                     b.Property<int>("Id")
@@ -131,6 +150,83 @@ namespace DAL.Migrations
                         .IsUnique();
 
                     b.ToTable("Extensions");
+                });
+
+            modelBuilder.Entity("DAL.Models.Figure", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("ColorId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("IconId")
+                        .HasColumnType("integer");
+
+                    b.Property<bool>("IsUnique")
+                        .HasColumnType("boolean");
+
+                    b.Property<int>("ModelId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Points")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex("ColorId");
+
+                    b.HasIndex("IconId");
+
+                    b.HasIndex("ModelId");
+
+                    b.ToTable("Figures");
+                });
+
+            modelBuilder.Entity("DAL.Models.FigureCategory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.ToTable("FigureCategories");
+                });
+
+            modelBuilder.Entity("DAL.Models.Icon", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Source")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Source")
+                        .IsUnique();
+
+                    b.ToTable("Icons");
                 });
 
             modelBuilder.Entity("DAL.Models.LegalEntity", b =>
@@ -190,6 +286,9 @@ namespace DAL.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("Code")
+                        .IsUnique();
+
+                    b.HasIndex("Name")
                         .IsUnique();
 
                     b.ToTable("Products");
@@ -315,6 +414,41 @@ namespace DAL.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("DAL.Models.Figure", b =>
+                {
+                    b.HasOne("DAL.Models.FigureCategory", "FigureCategory")
+                        .WithMany("Figures")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DAL.Models.Color", "Color")
+                        .WithMany("Figures")
+                        .HasForeignKey("ColorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DAL.Models.Icon", "Icon")
+                        .WithMany("Figures")
+                        .HasForeignKey("IconId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DAL.Models.DigitalModel", "DigitalModel")
+                        .WithMany("Figures")
+                        .HasForeignKey("ModelId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Color");
+
+                    b.Navigation("DigitalModel");
+
+                    b.Navigation("FigureCategory");
+
+                    b.Navigation("Icon");
+                });
+
             modelBuilder.Entity("DAL.Models.LegalEntity", b =>
                 {
                     b.HasOne("DAL.Models.User", "User")
@@ -337,14 +471,31 @@ namespace DAL.Migrations
                     b.Navigation("Product");
                 });
 
+            modelBuilder.Entity("DAL.Models.Color", b =>
+                {
+                    b.Navigation("Figures");
+                });
+
             modelBuilder.Entity("DAL.Models.DigitalModel", b =>
                 {
                     b.Navigation("ActivatedExtensions");
+
+                    b.Navigation("Figures");
                 });
 
             modelBuilder.Entity("DAL.Models.Extension", b =>
                 {
                     b.Navigation("ActivatedExtensions");
+                });
+
+            modelBuilder.Entity("DAL.Models.FigureCategory", b =>
+                {
+                    b.Navigation("Figures");
+                });
+
+            modelBuilder.Entity("DAL.Models.Icon", b =>
+                {
+                    b.Navigation("Figures");
                 });
 
             modelBuilder.Entity("DAL.Models.Product", b =>
