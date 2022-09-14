@@ -1,12 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Text;
 
 namespace DAL.Models
 {
-    [Index(nameof(Code), IsUnique = true)]
     [Index(nameof(Name), IsUnique = true)]
-    public class Product
+    public class FigureCategory
     {
         [Required]
         public int Id { get; set; }
@@ -14,14 +15,8 @@ namespace DAL.Models
         [Required]
         public string Name { get; set; }
 
-        [Required]
-        public string Code { get; set; }
-
-        public decimal? CurrentPrice { get; set; }
-
         //Relationships
-        public virtual List<DigitalModel> DigitalModels { get; set; }
 
-        public virtual List<ProductPriceHistory> ProductPriceHistory { get; set; }
+        public virtual List<Figure> Figures { get; set; }
     }
 }

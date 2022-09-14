@@ -24,6 +24,8 @@ namespace DAL.Models
         //Relationships
         public virtual User User { get; set; }
 
+        public virtual List<Figure> Figures { get; set; }
+
         public virtual Product Product { get; set; }
 
         public virtual List<ActivatedExtension> ActivatedExtensions { get; set; }
