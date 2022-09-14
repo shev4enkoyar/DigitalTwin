@@ -15,18 +15,23 @@ namespace DAL
 
         public DbSet<ActivatedExtension> ActivatedExtensions { get; set; }
 
-        public DbSet<DigitalModel> DigitalModels { get; set; }
+        public DbSet<ProductPriceHistory> ProductPriceHistory { get; set; }
+
         public DbSet<Product> Products { get; set; }
 
-        public DbSet<ProductPriceHistory> ProductPriceHistory { get; set; }
+        public DbSet<DigitalModel> DigitalModels { get; set; }
+
+        public DbSet<Map> Maps { get; set; }
 
         public DbSet<Figure> Figures { get; set; }
 
         public DbSet<FigureCategory> FigureCategories { get; set; }
 
+        public DbSet<FigureType> FigureTypes{ get; set; }
+
         public DbSet<Color> Colors{ get; set; }
 
-        public DbSet<Icon> Icons { get; set; }
+        public DbSet<Color> Icons { get; set; }
 
         #endregion
 

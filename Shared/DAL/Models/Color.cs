@@ -17,6 +17,6 @@ namespace DAL.Models
 
         //Relationships
 
-        public virtual List<Figure> Figures { get; set; }
+        public virtual List<FigureCategory> FigureCategories{ get; set; }
     }
 }

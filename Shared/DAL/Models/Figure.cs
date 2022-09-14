@@ -12,29 +12,21 @@ namespace DAL.Models
         public int Id { get; set; }
 
         [Required]
-        [ForeignKey(nameof(DigitalModel))]
-        public int ModelId { get; set; }
+        [ForeignKey(nameof(Map))]
+        public int MapId { get; set; }
+
         [Required]
         [ForeignKey(nameof(FigureCategory))]
         public int CategoryId { get; set; }
-        [Required]
-        [ForeignKey(nameof(Color))]
-        public int ColorId { get; set; }
-        [Required]
-        [ForeignKey(nameof(Icon))]
-        public int IconId { get; set; }
+
         [Required]
         public string Points { get; set; }
-        [Required]
-        public bool IsUnique { get; set; }
 
         //Relationships
-        public virtual DigitalModel DigitalModel { get; set; }
+
+        public virtual Map Map { get; set; }
 
         public virtual FigureCategory FigureCategory { get; set; }
 
-        public virtual Color Color{ get; set; }
-
-        public virtual Icon Icon { get; set; }
     }
 }

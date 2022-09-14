@@ -19,12 +19,16 @@ namespace DAL.Models
         public int ProductId { get; set; }
 
         [Required]
+        [ForeignKey(nameof(Map))]
+        public int MapId { get; set; }
+
+        [Required]
         public DateTime CreateDate { get; set; }
 
         //Relationships
-        public virtual User User { get; set; }
 
-        public virtual List<Figure> Figures { get; set; }
+        public virtual Map Map { get; set; }
+        public virtual User User { get; set; }
 
         public virtual Product Product { get; set; }
 
