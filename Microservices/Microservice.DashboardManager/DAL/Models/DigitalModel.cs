@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+using System;
 
-namespace DAL.Models
+namespace Microservice.DashboardManager.DAL.Models
 {
     public class DigitalModel
     {
@@ -11,7 +10,6 @@ namespace DAL.Models
         public int Id { get; set; }
 
         [Required]
-        [ForeignKey(nameof(User))]
         public int UserId { get; set; }
 
         [Required]
@@ -19,7 +17,6 @@ namespace DAL.Models
         public int ProductId { get; set; }
 
         [Required]
-        [ForeignKey(nameof(Map))]
         public int MapId { get; set; }
 
         [Required]
@@ -27,11 +24,6 @@ namespace DAL.Models
 
         //Relationships
 
-        public virtual Map Map { get; set; }
-        public virtual User User { get; set; }
-
         public virtual Product Product { get; set; }
-
-        public virtual List<ActivatedExtension> ActivatedExtensions { get; set; }
     }
 }

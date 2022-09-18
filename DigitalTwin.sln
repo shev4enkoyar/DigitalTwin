@@ -9,14 +9,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Microservices", "Microservi
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{8C646B58-084E-4821-9C08-374C22C82679}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gateways", "Gateways", "{A331A877-3CB2-4EC9-9E31-36B26808BB79}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebGateway", "Gateways\WebGateway\WebGateway.csproj", "{624DABF7-A2D5-4D5F-9A6D-DFCB58F4085C}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{9C0B2526-86AB-4A3E-B30A-FB9AE321EB38}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAL", "Shared\DAL\DAL.csproj", "{C57D1C69-BD6D-4155-BF71-F5C47F102405}"
-EndProject
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "react-web", "Frontend\Web\react-web\react-web.esproj", "{98534F15-C031-4964-BD63-3F2D1B3F9E59}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RemoveExpiredLinks.Microservice", "Microservices\Tasks\RemoveExpiredLinks.Microservice\RemoveExpiredLinks.Microservice.csproj", "{F2719FB6-DD7A-49A6-8AE0-121B2FF49FFF}"
@@ -27,9 +19,11 @@ Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-co
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microservice.UserManager", "Microservices\Microservice.UserManager\Microservice.UserManager.csproj", "{9A93F888-A1CB-44FA-8028-AD4F59C27386}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microservice.SubscriptionManager", "Microservices\Microservice.SubscriptionManager\Microservice.SubscriptionManager.csproj", "{1756F762-38AD-40D8-9C2C-0AD0994F13F9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microservice.SubscriptionManager", "Microservices\Microservice.SubscriptionManager\Microservice.SubscriptionManager.csproj", "{1756F762-38AD-40D8-9C2C-0AD0994F13F9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microservice.DashboardManager", "Microservices\Microservice.DashboardManager\Microservice.DashboardManager.csproj", "{FE45B39C-C0C9-4673-B447-BC6C288F4FA7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microservice.DashboardManager", "Microservices\Microservice.DashboardManager\Microservice.DashboardManager.csproj", "{FE45B39C-C0C9-4673-B447-BC6C288F4FA7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microservice.MapManager", "Microservices\Microservice.MapManager\Microservice.MapManager.csproj", "{E7605C2E-AF4B-47A3-BE9F-24BF8262A268}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,14 +31,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{624DABF7-A2D5-4D5F-9A6D-DFCB58F4085C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{624DABF7-A2D5-4D5F-9A6D-DFCB58F4085C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{624DABF7-A2D5-4D5F-9A6D-DFCB58F4085C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{624DABF7-A2D5-4D5F-9A6D-DFCB58F4085C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C57D1C69-BD6D-4155-BF71-F5C47F102405}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C57D1C69-BD6D-4155-BF71-F5C47F102405}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C57D1C69-BD6D-4155-BF71-F5C47F102405}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C57D1C69-BD6D-4155-BF71-F5C47F102405}.Release|Any CPU.Build.0 = Release|Any CPU
 		{98534F15-C031-4964-BD63-3F2D1B3F9E59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{98534F15-C031-4964-BD63-3F2D1B3F9E59}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{98534F15-C031-4964-BD63-3F2D1B3F9E59}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
@@ -71,20 +57,23 @@ Global
 		{FE45B39C-C0C9-4673-B447-BC6C288F4FA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FE45B39C-C0C9-4673-B447-BC6C288F4FA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FE45B39C-C0C9-4673-B447-BC6C288F4FA7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E7605C2E-AF4B-47A3-BE9F-24BF8262A268}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7605C2E-AF4B-47A3-BE9F-24BF8262A268}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7605C2E-AF4B-47A3-BE9F-24BF8262A268}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7605C2E-AF4B-47A3-BE9F-24BF8262A268}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{8C646B58-084E-4821-9C08-374C22C82679} = {3DD479A0-A99C-44EC-B195-3CD576746C98}
-		{624DABF7-A2D5-4D5F-9A6D-DFCB58F4085C} = {A331A877-3CB2-4EC9-9E31-36B26808BB79}
-		{C57D1C69-BD6D-4155-BF71-F5C47F102405} = {9C0B2526-86AB-4A3E-B30A-FB9AE321EB38}
 		{98534F15-C031-4964-BD63-3F2D1B3F9E59} = {8C646B58-084E-4821-9C08-374C22C82679}
 		{F2719FB6-DD7A-49A6-8AE0-121B2FF49FFF} = {1AAE0D6F-59C7-4F50-AF3E-3E0AA76F99E0}
 		{1AAE0D6F-59C7-4F50-AF3E-3E0AA76F99E0} = {53CD2FDA-5656-4122-8BBA-9E4C1FF7FC26}
 		{9A93F888-A1CB-44FA-8028-AD4F59C27386} = {53CD2FDA-5656-4122-8BBA-9E4C1FF7FC26}
 		{1756F762-38AD-40D8-9C2C-0AD0994F13F9} = {53CD2FDA-5656-4122-8BBA-9E4C1FF7FC26}
 		{FE45B39C-C0C9-4673-B447-BC6C288F4FA7} = {53CD2FDA-5656-4122-8BBA-9E4C1FF7FC26}
+		{E7605C2E-AF4B-47A3-BE9F-24BF8262A268} = {53CD2FDA-5656-4122-8BBA-9E4C1FF7FC26}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2D3AD7F4-ACE4-4A36-8E93-E122D0824CF2}

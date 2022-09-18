@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace DAL.Models
+namespace Microservice.DashboardManager.DAL.Models
 {
     [Index(nameof(Code), IsUnique = true)]
     [Index(nameof(Name), IsUnique = true)]

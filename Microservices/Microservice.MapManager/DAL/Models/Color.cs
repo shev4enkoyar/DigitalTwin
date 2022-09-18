@@ -1,11 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
-using System.Xml.Linq;
 
-namespace DAL.Models
+namespace Microservice.MapManager.DAL.Models
 {
     [Index(nameof(HEX), IsUnique = true)]
     public class Color
@@ -17,6 +14,6 @@ namespace DAL.Models
 
         //Relationships
 
-        public virtual List<FigureCategory> FigureCategories{ get; set; }
+        public virtual List<FigureCategory> FigureCategories { get; set; }
     }
 }

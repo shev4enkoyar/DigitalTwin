@@ -7,7 +7,7 @@ services:
       - "5001:443"
     build:
       context: .
-      dockerfile: Gateways/WebGateway/Dockerfile
+      dockerfile: Microservices/Microservice.DashboardManager/Dockerfile
 
   dbmanager.microservice:
     image: ${DOCKER_REGISTRY-}dbmanagermicroservice

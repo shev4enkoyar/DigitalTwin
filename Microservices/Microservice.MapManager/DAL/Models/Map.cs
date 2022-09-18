@@ -1,19 +1,20 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 
-namespace DAL.Models
+namespace Microservice.MapManager.DAL.Models
 {
+    [Index(nameof(ModelId), IsUnique = true)]
     public class Map
     {
         [Required]
         public int Id { get; set; }
+        [Required]
+        public int ModelId { get; set; }
+        
+        public int ProductArea { get; set; }
 
         //Relationships
-
-        public virtual DigitalModel DigitalModel { get; set; }
 
         public virtual List<Figure> Figures { get; set; }
     }

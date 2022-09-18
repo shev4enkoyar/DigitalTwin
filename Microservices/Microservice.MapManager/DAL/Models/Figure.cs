@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 
-namespace DAL.Models
+namespace Microservice.MapManager.DAL.Models
 {
     public class Figure
     {
@@ -27,6 +24,5 @@ namespace DAL.Models
         public virtual Map Map { get; set; }
 
         public virtual FigureCategory FigureCategory { get; set; }
-
     }
 }
