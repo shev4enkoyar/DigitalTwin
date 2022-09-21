@@ -12,70 +12,59 @@ namespace Microservice.MapManager
 {
     public class MapHub : Hub<IMapClient>
     {
-        private List<FigureInfo> FigureInfos { get; } = new List<FigureInfo>();
-
-        private List<Figure> PolygonsInfos { get; set; }
-
-        //TODO TEMP
-        private int MapId = 1;
-
         private readonly ApplicationContext _dbContext;
 
         public MapHub(ApplicationContext dbContext) => _dbContext = dbContext;
 
-
         #region SignalR
 
-        public override async Task OnConnectedAsync()
-        {
-            await Task.CompletedTask;
-        }
+        public override async Task OnConnectedAsync() => await Task.CompletedTask;
 
-        public override Task OnDisconnectedAsync(Exception exception)
-        {
-            // _ = _dbContext.Figures.AddRangeAsync(FigureInfos);
-            return base.OnDisconnectedAsync(exception);
-        }
+        public override Task OnDisconnectedAsync(Exception exception) => base.OnDisconnectedAsync(exception);
 
+        /// <summary>
+        /// Send figure to the server for add or update.
+        /// </summary>
+        /// <param name="figure">Figure for add or update</param>
+        /// <returns>When adding a figure its ID will be returned</returns>
         public Task SendFigure(FigureInfo figure)
         {
-            FigureInfos.Add(figure);
-            Figure figure1 = new Figure();
-            figure1.CategoryId = figure.CategoryId;
-            figure1.Points = figure.Points;
-            figure1.MapId = MapId;
-            _dbContext.Add(figure1);
-            _dbContext.SaveChanges();
-            Clients.Caller.Recive(new FigureInitData(figure1.Id, figure1.MapId));
+            Figure model = new Figure()
+            {
+                MapId = figure.MapId,
+                CategoryId = figure.CategoryId,
+                Points = figure.Points
+            };
+
+            if (figure.Id != null)
+            {
+                model.Id = figure.Id.Value;
+                _dbContext.Figures.Update(model);
+                _dbContext.SaveChanges();
+            }
+            else
+            {
+                _dbContext.Figures.Add(model);
+                _dbContext.SaveChanges();
+                Clients.Caller.Recive(model.Id);
+            }
+            
             return Task.CompletedTask;
         }
 
-        public Task RemoveFigure(FigureInfo figure) 
+        /// <summary>
+        /// Deleting a figure by its ID
+        /// </summary>
+        /// <param name="figureId">ID figure</param>
+        public Task RemoveFigure(int figureId) 
         {
-            FigureInfos.Remove(figure);
+            var figure = _dbContext.Figures.FirstOrDefault(x => x.Id == figureId);
+            if (figure != null)
+            {
+                _dbContext.Figures.Remove(figure);
+                _dbContext.SaveChanges();
+            }
             return Task.CompletedTask;
-        }
-
-        #endregion
-
-        #region Methods
-
-        private List<Figure> GetFigures()
-        {
-            List<Figure> figures = _dbContext.Figures.Include(x => x.FigureCategory).Include(x => x.FigureCategory.Color)
-                .Include(x => x.FigureCategory.FigureType).Where(x => x.MapId == MapId).ToList();
-            if (figures.Any())
-                return figures;
-            return new List<Figure>() { new Figure() };
-        }
-
-        private List<FigureCategory> GetFigureCategories()
-        {
-            List<FigureCategory> categories = _dbContext.FigureCategories.Include(x => x.Color).Include(x => x.FigureType)
-                .Include(x => x.Icon).ToList();
-            if (categories.Any())
-                return categories;
-            return new List<FigureCategory>() { new FigureCategory() };
         }
 
         #endregion

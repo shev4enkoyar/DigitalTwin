@@ -6,6 +6,6 @@ namespace Microservice.MapManager.Clients
 {
     public interface IMapClient
     {
-        Task Recive(FigureInitData figureInitData);
+        Task Recive(int id);
     }
 }

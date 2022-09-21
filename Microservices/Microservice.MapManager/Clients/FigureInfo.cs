@@ -6,7 +6,7 @@ namespace Microservice.MapManager.Clients
 {
     public class FigureInfo
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
 
         public int MapId { get; set; }
 
