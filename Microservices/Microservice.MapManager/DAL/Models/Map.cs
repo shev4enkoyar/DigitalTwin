@@ -12,7 +12,7 @@ namespace Microservice.MapManager.DAL.Models
         [Required]
         public int ModelId { get; set; }
         
-        public int ProductArea { get; set; }
+        public string ProductArea { get; set; }
 
         //Relationships
 
