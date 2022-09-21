@@ -1,7 +1,6 @@
 ﻿using Microservice.UserManager.DAL;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -26,6 +25,14 @@ namespace Microservice.UserManager
             });
 
             services.AddGrpc();
+
+            services.AddCors(o => o.AddPolicy("AllowAll", builder =>
+            {
+                builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader()
+                       .WithExposedHeaders("Grpc-Status", "Grpc-Message", "Grpc-Encoding", "Grpc-Accept-Encoding");
+            }));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -36,15 +43,17 @@ namespace Microservice.UserManager
             }
 
             app.UseRouting();
+            app.UseGrpcWeb();
+            app.UseCors(x => x
+               .AllowAnyMethod()
+               .AllowAnyHeader()
+               .SetIsOriginAllowed(origin => true)
+               .AllowCredentials()
+           );
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGrpcService<GreeterService>();
-
-                endpoints.MapGet("/", async context =>
-                {
-                    await context.Response.WriteAsync("Communication with gRPC endpoints must be made through a gRPC client. To learn how to create a client, visit: https://go.microsoft.com/fwlink/?linkid=2086909");
-                });
+                endpoints.MapGrpcService<GreeterService>().EnableGrpcWeb().RequireCors("AllowAll"); ;
             });
         }
     }
