@@ -14,6 +14,7 @@ namespace Microservice.MapManager
     {
         private readonly ApplicationContext _dbContext;
 
+        private static int MapId { get; set; }
         public MapHub(ApplicationContext dbContext) => _dbContext = dbContext;
 
         #region SignalR
@@ -67,6 +68,25 @@ namespace Microservice.MapManager
             return Task.CompletedTask;
         }
 
+        public Task SendProductArea(string productArea)
+        {
+            if (productArea != null)
+            {
+                var map = _dbContext.Maps.FirstOrDefault(x => x.Id == MapId);
+                if (map == null)
+                    return Task.CompletedTask;
+                map.ProductArea = productArea;
+                _dbContext.Maps.Update(map);
+                _dbContext.SaveChanges();
+            }
+            return Task.CompletedTask;
+        }
+
+        public Task SendMapId(int mapId)
+        {
+            MapId = mapId;
+            return Task.CompletedTask;
+        }
         #endregion
     }
 }
