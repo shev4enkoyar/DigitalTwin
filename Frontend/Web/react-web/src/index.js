@@ -2,13 +2,23 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
+import { BrowserRouter } from 'react-router-dom'
 import reportWebVitals from './reportWebVitals';
+import { ThemeContextProvider } from './components/ThemeContext.js';
+import { ModalContextProvider } from './pages/Modal/ModalContext';
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+    <ModalContextProvider>
+    <ThemeContextProvider>
   <React.StrictMode>
-    <App />
-  </React.StrictMode>
+        <BrowserRouter>
+            <App />
+        </BrowserRouter>
+        </React.StrictMode>
+    </ThemeContextProvider>
+        </ModalContextProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function

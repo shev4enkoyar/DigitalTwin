@@ -1,0 +1,37 @@
+.InsideCardBody {
+    padding: 1em 0.8em;
+    padding-top: 10px;
+    height: max-content;
+    background-color: #302F38;
+    border: 1px solid #8C8C8C;
+    border-radius: 10px;
+}
+.textInsideForCard {
+    font-family: 'Roboto' ;
+    font-size: 17px;
+    font-weight: 600;
+    padding: 0px;
+    color: white;
+    text-align: left;
+    margin:0px
+}
+.InsideCardTarriffs {
+    margin: 5px 0px;
+    padding: 1.5em 0.8em;
+    height: max-content;
+    background-color: #302F38;
+    border-radius: 10px;
+    border:none;
+    width: max-content;
+}
+
+.textInsideForCardTarriffs {
+    display: flex;
+    align-items: center;
+    font-family: 'Bitter';
+    font-size: 14px;
+    padding: 0px;
+    color: white;
+    text-align: left;
+    margin: 5px 0px;
+}

@@ -1,0 +1,34 @@
+.input {
+    width: 300px;
+    border-radius: 3px;
+    height: 35px;
+    background: #EEEEEE;
+    border:0px;
+}
+.textForSign {
+    font-size: 14px;
+    margin: 7px 0px !important;
+    display: flex;
+    font-family: 'Open Sans';
+}
+.inputCircle {
+    width: 300px;
+    border-radius: 30px;
+    height: 28px;
+    background: #EEEEEE;
+    border: 0px;
+}
+.textForInpCircle {
+    font-size: 13px;
+    margin: 3px 3px !important;
+    display: flex;
+    font-family: 'Open Sans';
+    font-weight: 100;
+}
+.inputCircleMini {
+    width: 200px;
+    border-radius: 30px;
+    height: 28px;
+    background: #EEEEEE;
+    border: 0px;
+}

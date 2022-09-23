@@ -1,0 +1,57 @@
+.containerForPop {
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    top:0;
+    left:0;
+    background:rgb(0,0,0,0.6);
+    display:flex;
+    /*align-items:center;
+    justify-content:center;*/
+    opacity:0;
+    pointer-events:none;
+    transition:0.5s;
+}
+    .containerForPop.active {
+        z-index: 1000;
+        opacity: 1;
+        pointer-events: all;
+    }
+#mainText {
+    text-align: left;
+    font-family: 'Bitter';
+    padding-right: calc(var(--bs-gutter-x) * .5);
+    padding-left: calc(var(--bs-gutter-x) * .5);
+}
+.buttonForModal {
+    align-self:end;
+    font-size:14px;
+    height: max-content;
+    padding: 2px 30px;
+    border-radius: 5px;
+    font-family: 'Open Sans';
+}
+.icon_for_modal {
+    margin: 0px 8px;
+    width: 25px;
+    fill: white !important;
+}
+.column_For_LogInPopUp {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    padding-right: calc(var(--bs-gutter-x) * .5);
+    padding-left: calc(var(--bs-gutter-x) * .5);
+    padding-top: 10px;
+}
+.col_ForFooter {
+    justify-content: space-between!important;
+}
+.linkAutoriz {
+    margin-left:10px;
+    margin-bottom: 0px; 
+    font-family: 'Open Sans';
+    font-size: 12px; 
+    color: #F5CA5D; 
+    text-decoration: none!important;
+}

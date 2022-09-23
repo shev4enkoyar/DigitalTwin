@@ -1,0 +1,39 @@
+.icon_for_header {
+    width: 20px;
+    fill: white!important;
+}
+#DTwin-logo {
+    font-family: Roboto!important;
+    width: 30%;
+    display: flex;
+    font-size: 30px;
+    justify-content: flex-start;
+}
+#headerForHome { 
+    padding:0px;
+    background-color: #212026;
+    position:relative;
+}
+#DTwin-logo:hover:after {
+        content: "Digital Twin" !important;
+    }
+#DTwin-logo:after {
+        content: "DTwin" !important;
+    }
+#nav_links {
+    margin: 0;
+    display: flex;
+    min-width: 213px;
+    justify-content: right;
+    width: max-content;
+}
+#menu{
+    display:flex;
+    justify-content:space-around;
+}
+.navbar-brand {
+    display: inline;
+    font-size: 13px;
+    font-family: 'Open Sans' !important;
+}
+

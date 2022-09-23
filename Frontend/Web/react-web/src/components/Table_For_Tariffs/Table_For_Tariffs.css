@@ -1,0 +1,22 @@
+.HistoryTableText {
+    font-family: 'Bitter';
+    font-size: 14px;
+    padding: 0px;
+    color: white;
+    border-style: hidden;
+    
+}
+
+.ForBox {
+    border-color: #4A4A4A;
+    border-style: solid;
+    border-width: 1px;
+    padding: 10px;
+    font-weight: normal!important;
+}
+.PaddingForSum{
+    padding:0px 40px;
+}
+.PaddingForNum {
+    padding: 0px 15px;
+}
