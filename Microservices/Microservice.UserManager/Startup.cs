@@ -1,4 +1,5 @@
 ﻿using Microservice.UserManager.DAL;
+using Microservice.UserManager.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -53,7 +54,7 @@ namespace Microservice.UserManager
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGrpcService<GreeterService>().EnableGrpcWeb().RequireCors("AllowAll"); ;
+                endpoints.MapGrpcService<UserManagerService>().EnableGrpcWeb().RequireCors("AllowAll"); ;
             });
         }
     }

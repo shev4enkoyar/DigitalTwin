@@ -17,15 +17,15 @@ namespace Microservice.UserManager.DAL.Models
         public string Password { get; set; }
 
         [Required]
-        public string Role { get; set; }
+        public string Role { get; set; } = "user";
 
         [Required]
         public string Name { get; set; }
 
         [Required]
-        public bool IsActive { get; set; }
+        public bool IsActive { get; set; } = false;
 
-        public DateTime CreateDate { get; set; }
+        public DateTime CreateDate { get; set; } = DateTime.UtcNow;
 
         #region Relationships
         public virtual ActivateLink ActivateLink { get; set; }
