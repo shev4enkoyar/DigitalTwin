@@ -2,7 +2,12 @@
 using Microservice.UserManager.DAL;
 using Microservice.UserManager.DAL.Models;
 using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
+using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
+using System;
 using System.Linq;
+using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +16,8 @@ namespace Microservice.UserManager.Services
 {
     public class UserManagerService : UserManager.UserManagerBase
     {
+        public static string JWT_TOKEN_KEY = "SomeKey";
+        public static int JWT_TOKEN_VALIDITY = 30;
         private int NumHashIterations { get; } = 3;
         private readonly ApplicationContext _dbContext;
         private readonly IConfiguration _configuration;
@@ -22,6 +29,12 @@ namespace Microservice.UserManager.Services
 
         #region gRPC service
 
+
+        public override Task<Mate> CheckMate(Check request, ServerCallContext context)
+        {
+            return base.CheckMate(request, context);
+        }
+
         public override Task<UserReply> Login(UserProto request, ServerCallContext context)
         {
             UserReply reply = new UserReply() { IsException = false };
@@ -31,8 +44,7 @@ namespace Microservice.UserManager.Services
                 if (user.Password.Equals(HashLoop(NumHashIterations, request.Password)))
                 {
                     //TODO Add token
-                    string token = "";
-                    reply.Message = $"Bearer: {token}";
+                    reply = Authenticate(request);
                 }
                 else
                 {
@@ -72,6 +84,28 @@ namespace Microservice.UserManager.Services
         }
 
         #endregion
+
+        private UserReply Authenticate(UserProto user)
+        {
+            var jwtSecurityTokenHandler = new JwtSecurityTokenHandler();
+            var tokenKey = Encoding.ASCII.GetBytes(JWT_TOKEN_KEY);
+            var tokenExpireDateTime = DateTime.Now.AddMinutes(JWT_TOKEN_VALIDITY);
+            var securityTokenDescriptor = new SecurityTokenDescriptor()
+            {
+                Subject = new ClaimsIdentity(new List<Claim>
+                {
+                    new Claim("email", user.Email),
+                    new Claim(ClaimTypes.Role, "user")
+                }),
+                Expires = tokenExpireDateTime,
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(tokenKey), SecurityAlgorithms.HmacSha256Signature)
+            };
+
+            var securityToken = jwtSecurityTokenHandler.CreateToken(securityTokenDescriptor);
+            var token = jwtSecurityTokenHandler.WriteToken(securityToken);
+
+            return new UserReply { Message = token, IsException = false, ExpiresIn = (int)tokenExpireDateTime.Subtract(DateTime.Now).TotalSeconds};
+        }
 
         #region Password manipulations
 

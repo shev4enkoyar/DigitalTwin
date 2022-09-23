@@ -7,6 +7,15 @@ package userManager;
 service UserManager {
   rpc Register (UserProto) returns (UserReply);
   rpc Login (UserProto) returns (UserReply);
+  rpc CheckMate(Check) returns (Mate);
+}
+
+message Check {
+	string some = 1;
+}
+
+message Mate {
+	string hello = 1;
 }
 
 message UserProto {
@@ -18,4 +27,5 @@ message UserProto {
 message UserReply {
 	bool isException = 1;
 	string message = 2;
+	int32 expiresIn = 3;
 }
