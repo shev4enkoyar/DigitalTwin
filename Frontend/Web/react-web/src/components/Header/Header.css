@@ -26,6 +26,7 @@
     min-width: 213px;
     justify-content: right;
     width: max-content;
+    position: relative;
 }
 #menu{
     display:flex;

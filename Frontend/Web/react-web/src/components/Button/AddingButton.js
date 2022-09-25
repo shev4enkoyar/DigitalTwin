@@ -17,6 +17,6 @@ M40,34c1.104,0,2-0.895,2-2	c0-1.105-0.896-2-2-2c-0.248,0-2.913,0-6,0c0-3.087,0-5
 				</svg>
 				<p className={ "textOpenSans "+props.ClassName}>{props.textForButton}</p>
 			</Container>
-			</button>
+		</button>
 	)
 } export default AddingButton;

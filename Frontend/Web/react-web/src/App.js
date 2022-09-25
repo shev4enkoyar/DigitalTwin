@@ -10,9 +10,10 @@ import Profile from './pages/Profile.js';
 import Tariffs from './pages/Tariffs';
 import Models from './pages/Models';
 import CreateModel from './pages/CreateModel';
+import MapMain from "./pages/map/MapMain";
 
-//import { HelloRequest} from './proto/greet_pb';
-//import { GreeterClient} from './proto/greet_grpc_web_pb';
+//import { HelloRequest} from './protoGenered/greet_pb';
+//import { GreeterClient} from './protoGenered/greet_grpc_web_pb';
 class App extends Component {
 
   //GrpcSome = () => {
@@ -39,6 +40,7 @@ class App extends Component {
                       <Route path="/tariffs" element={<Tariffs />} />
                       <Route path="/models" element={<Models />} />
                       <Route path="/create_model" element={<CreateModel/>} />
+                      <Route path="/map" element={<MapMain/>} />
                   </Routes>
             {/*<img src={logo} className="App-logo" alt="logo" />*/}
             {/*<p>*/}

@@ -1,15 +1,17 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
+import {render} from 'react-dom';
 import './index.css';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom'
 import reportWebVitals from './reportWebVitals';
 import { ThemeContextProvider } from './components/ThemeContext.js';
 import { ModalContextProvider } from './pages/Modal/ModalContext';
+import "leaflet-geometryutil";
+import 'leaflet/dist/leaflet.css';
 
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
+const rootElement = document.getElementById('root');
+render(
     <ModalContextProvider>
     <ThemeContextProvider>
   <React.StrictMode>
@@ -18,7 +20,8 @@ root.render(
         </BrowserRouter>
         </React.StrictMode>
     </ThemeContextProvider>
-        </ModalContextProvider>
+        </ModalContextProvider>,
+    rootElement
 );
 
 // If you want to start measuring performance in your app, pass a function

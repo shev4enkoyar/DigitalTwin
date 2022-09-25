@@ -1,7 +1,7 @@
 import './DarkCardForHome.css';
 import { Card, Container } from 'react-bootstrap';
 import { ThemeContextConsumer } from "../../ThemeContext";
-function DarkCardForHome(props) {
+function    DarkCardForHome(props) {
     return (
         <ThemeContextConsumer>{context => (
             <Card className={props.lightGray + " " + (props.lightGray === "" ? context.theme : "") + " darkCard " +

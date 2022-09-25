@@ -1,16 +1,20 @@
 .containerForPop {
-    position: fixed;
+    position: absolute;
     height: 100vh;
     width: 100vw;
     top:0;
-    left:0;
-    background:rgb(0,0,0,0.6);
+    /*left:0;*/
+    right: 0;
+    /*background:rgb(0,0,0,0.6);*/
     display:flex;
     /*align-items:center;
     justify-content:center;*/
     opacity:0;
     pointer-events:none;
     transition:0.5s;
+    margin-top: 45px;
+    justify-content: flex-end;
+
 }
     .containerForPop.active {
         z-index: 1000;

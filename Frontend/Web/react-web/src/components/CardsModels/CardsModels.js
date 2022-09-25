@@ -7,8 +7,8 @@ function CardsModels(props) {
         <Container className="cardList">
             {
                 props.culture.map(
-                    (cult) => (
-                        <CardModel cult={cult}/>
+                    (cult, index) => (
+                        <CardModel key={index} cult={cult}/>
                     )
                 )
             }

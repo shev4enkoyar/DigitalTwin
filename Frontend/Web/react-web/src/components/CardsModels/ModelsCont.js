@@ -15,7 +15,10 @@ function ModelsCont(props) {
                 <Container className="ContForButton">
                     <Link to={'/create_model'} style={{ padding:'0px', display:'flex',justifyContent:'center' }}>
                         <AddingButton textForButton="Новая модель" ClassName="changeButtonForModelButton" />
-                        </Link>
+                    </Link>
+                    <Link to={'/map'} style={{ padding:'0px', display:'flex',justifyContent:'center' }}>
+                        <AddingButton textForButton="Карта. Тест. Тык." ClassName="changeButtonForModelButton" />
+                    </Link>
                 </Container>
             </Container>)}
         </ThemeContextConsumer>

@@ -16,14 +16,14 @@ function NavLinks(props) {
                 {
                     context => (
                         <Container id="nav_links" className={context.theme}>
-                            <Nav.Link href="/profile" className={ context.theme + " navbar-brand"}>
+                            <Nav.Link href="#aboutUs" className={ context.theme + " navbar-brand"}>
                                 О нас
                             </Nav.Link>
-                            <Nav.Link href="/tariffs" className={context.theme + " navbar-brand"}>
+                            <Nav.Link href="#tariffs" className={context.theme + " navbar-brand"}>
                                 Тарифы
                             </Nav.Link>
                             <Vector_Icon />
-                            <button onClick={() => { setActive(true) }}>
+                            <button style={{border: "none", padding: 0, background: "transparent"}} onClick={() => { setActive(true) }}>
                                 <Profile_Icon />
                             </button>
                             <LogInPopUp handleActiveChange={handleActiveChange} isActive={isActive}/>

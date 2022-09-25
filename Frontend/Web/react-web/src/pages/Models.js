@@ -31,7 +31,7 @@ class Models extends Component {
     render() {
         return (
             <ThemeContextConsumer>{context => (
-                <div style={{ height: '100%' }}>
+                <div className={"mainContainer"}>
                     <Header_Before_Profile />
                     <div className={context.theme + "Gray " + "body_style"}>
                         <ModelsCont culture={this.culture}/>

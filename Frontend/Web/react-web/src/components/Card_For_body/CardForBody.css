@@ -1,8 +1,7 @@
 .CardBodyDark {
     padding: 1em 0.8em;
     padding-top: 10px;
-    margin-left: 50%;
-    margin-right: 50%;
+    /*margin-left: 60%;*/
     height: max-content;
     background-color: #212026;
     border-radius: 6px;
@@ -11,10 +10,10 @@
 
 .textForCardDark {
     width: 100%;
-    padding: 0px;
+    padding: 2.5% 0;
     color: white;
     text-align: center;
-    font-family: 'Roboto' sans-serif;
+    font-family: 'Roboto';
 }
 .modal_cont{
     

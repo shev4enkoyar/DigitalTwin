@@ -4,13 +4,13 @@ import GroupTarif from './DarkCardForHome/GroupTarif.js';
 import { ThemeContextConsumer } from "../ThemeContext"
 function CardBlur() {
     const ContentForHome = [(
-        <p style={{ fontSize: '17px', margin: '0px', fontFamily:'Roboto' }}>
+        <p >
             Digital Twin - это цифровой двойник вашего
             агропромышленного предприятия, позволяющий
             выполнять онлайн прогнозирование урожайности и различных ситуаций
         </p>
     ), (
-        <p style={{ fontSize: '12px', margin: '4em 0px', fontFamily: 'Open Sans'}}>
+        <p style={{padding:  "20% 0"}}>
             Что-нибудь еще о том, какие мы хорошие,
             и почему нужно пользоваться нашим сервисом
         </p>

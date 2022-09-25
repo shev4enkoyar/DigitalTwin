@@ -11,6 +11,7 @@ import VK from './VK';
 const LogInPopUp = (props) => {
     return (
         <div className={props.isActive ? "containerForPop active" : "containerForPop"} onClick={() => { props.handleActiveChange() }}>
+            <div style={{position: "fixed", height: "100vh", width: "100vw", background: "rgb(0,0,0,0.6)", right: 0, top: 0}}/>
             <CardForBody onClick={e => e.stopPropagation()}>
                 <h5 id="mainText">Авторизация</h5>
                 <Input Label="E-mail"></Input>

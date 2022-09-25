@@ -94,7 +94,7 @@ const methodDescriptor_Greeter_SayHello = new grpc.web.MethodDescriptor(
 
 /**
  * @param {!proto.greet.HelloRequest} request The
- *     request proto
+ *     request protoGenered
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
  * @param {function(?grpc.web.RpcError, ?proto.greet.HelloReply)}
@@ -115,7 +115,7 @@ proto.greet.GreeterClient.prototype.sayHello =
 
 /**
  * @param {!proto.greet.HelloRequest} request The
- *     request proto
+ *     request protoGenered
  * @param {?Object<string, string>=} metadata User defined
  *     call metadata
  * @return {!Promise<!proto.greet.HelloReply>}

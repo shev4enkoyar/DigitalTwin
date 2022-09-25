@@ -4,6 +4,7 @@ import Header from '../components/Header/Header';
 import Footer from '../components/Footer/Footer.js';
 import './pages.css';
 import LogInPopUp from './Modal/LogInPopUp.js';
+import GrpcTemp from "../util/GrpcTemp";
 
 class Home extends Component {
     render() {
@@ -12,6 +13,7 @@ class Home extends Component {
                 <Header />
                 <ContentForHome />
                 <Footer />
+                {/*<GrpcTemp />*/}
             </>
         );
     }

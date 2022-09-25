@@ -12,7 +12,7 @@ class CreateModel extends Component {
 
         return (<>
                 <ThemeContextConsumer>{context => (
-                    <div style={{ height: '100%' }}>
+                    <div className={"mainContainer"}>
                         <Header />
                         <div className={context.theme + "Gray " + "body_style"}>
                             <CardForBody>

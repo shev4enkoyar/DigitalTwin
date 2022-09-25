@@ -23,7 +23,7 @@ function GroupTarif() {
     return (
         <ThemeContextConsumer>{context => (
             <Container className={context.theme + "Gray" + " textForCardDark"}>
-                <p className={context.theme + "Gray"} style={{ fontSize: '17px', margin: '0px 0px 10px 0px', fontFamily: 'Roboto!important', background: '#ffffff00' }} >Тарифные планы</p>
+                <p id="tariffs" className={context.theme + "Gray"} style={{ fontSize: '17px', margin: '0px 0px 10px 0px', fontFamily: 'Roboto!important', background: '#ffffff00' }} >Тарифные планы</p>
                 <Container id="TarifList">
                     <Tarif data={tariffs[0]} light={context.theme} />
                     < Tarif data={tariffs[1]} light={context.theme} />

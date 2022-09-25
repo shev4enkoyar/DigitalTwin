@@ -14,7 +14,7 @@ class SignUp extends Component {
         return (<>
             <ModalContextConsumer>{modalContext  => (
             <ThemeContextConsumer>{context=>( 
-            <div style={{ height:'100%' }}>
+            <div className={"mainContainer"}>
                 <Header />
                     <div className={context.theme + "Gray " + "body_style"}>
                     <CardForBody>
