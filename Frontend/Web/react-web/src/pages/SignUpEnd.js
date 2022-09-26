@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import CardForBody from './../components/Card_For_body/CardForBody.js';
+import CardForBody from '../components/cardForBody/CardForBody.js';
 import './pages.css';
 import { Container } from 'react-bootstrap';
 import ForSignUp from '../components/ForSignUp/ForSignUp'
-import Header from '../components/Header/SubHeader/Header';
 import { ThemeContextConsumer } from "../components/ThemeContext"
 import { Navigate } from 'react-router-dom';
+import NavbarHome from "../components/Header/homeNavbar/NavbarHome";
 class SignUpEnd extends Component {
     state = {
         redirect: false
@@ -26,7 +26,7 @@ class SignUpEnd extends Component {
             :
             <ThemeContextConsumer>{context => (
                 <div className={"mainContainer"}>
-                    <Header />
+                    <NavbarHome />
                     <div className={context.theme + "Gray " + "body_style"}>
                         <CardForBody >
                             <Container style={{ width: '320px' }}>

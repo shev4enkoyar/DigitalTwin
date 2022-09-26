@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import Header_Before_Profile from '../components/Header/Header_Before_Profile/Header_Before_Profile';
+import Navbar from '../components/Header/navbar/NavbarAuthorized';
 import { ThemeContextConsumer } from '../components/ThemeContext.js';
 import Inside_Card_For_Body from '../components/Inside_Card_For_Body/Inside_Card_For_Body';
-import CardForBody from '../components/Card_For_body/CardForBody';
+import CardForBody from '../components/cardForBody/CardForBody';
 import './pages.css';
 import { Row, Col, Container, Card } from 'react-bootstrap';
 import ModelsCont from '../components/CardsModels/ModelsCont';
+import NavbarHome from "../components/Header/homeNavbar/NavbarHome";
+import NavbarAuthorized from "../components/Header/navbar/NavbarAuthorized";
 class Models extends Component {
     culture = [{
         culture: "Пшеница",
@@ -32,7 +34,7 @@ class Models extends Component {
         return (
             <ThemeContextConsumer>{context => (
                 <div className={"mainContainer"}>
-                    <Header_Before_Profile />
+                    <NavbarAuthorized />
                     <div className={context.theme + "Gray " + "body_style"}>
                         <ModelsCont culture={this.culture}/>
                     </div>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import CardForBody from './../components/Card_For_body/CardForBody.js';
+import CardForBody from '../components/cardForBody/CardForBody.js';
 import './pages.css';
 import Input from './../components/input/Input.js';
 import { Container } from 'react-bootstrap';

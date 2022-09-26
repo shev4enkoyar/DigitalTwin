@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import CardForBody from './../components/Card_For_body/CardForBody.js';
+import CardForBody from '../components/cardForBody/CardForBody.js';
 import './pages.css';
 import Input from './../components/input/Input.js';
-import { Container } from 'react-bootstrap';
 import Header from '../components/Header/SubHeader/Header';
 import { ThemeContextConsumer } from "../components/ThemeContext"
 import Tumbler from '../components/Tumbler/Tumbler.js';

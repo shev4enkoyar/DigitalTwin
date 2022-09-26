@@ -45,10 +45,10 @@
 .ContForButton {
     display: flex;
     justify-content: center;
-    padding: 2% 41%;
-    height: 15%;
+    /*padding: 2% 41%;*/
+    /*height: 15%;*/
     max-height:103px;
-    width:100%;
+    width:58%;
 }
 
 p.changeButtonForModelButton {

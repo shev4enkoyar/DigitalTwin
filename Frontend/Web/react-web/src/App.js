@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component, useState} from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { Route, Routes } from 'react-router-dom'
@@ -14,7 +14,7 @@ import MapMain from "./pages/map/MapMain";
 
 //import { HelloRequest} from './protoGenered/greet_pb';
 //import { GreeterClient} from './protoGenered/greet_grpc_web_pb';
-class App extends Component {
+const App = () => {
 
   //GrpcSome = () => {
   //  var client = new GreeterClient('https://localhost:5001', null, null)
@@ -28,12 +28,15 @@ class App extends Component {
   //    }
   //  });
   //}
+    const [isAuthorized, setAuthorized] = useState(false);
 
-  render() {
+    const handleAuthorizedChanged = () => {
+        setAuthorized(!isAuthorized);
+    };
       return (
           <div className="App">
                   <Routes>
-                      <Route path="/" element={<Home />} />
+                      <Route path="/" element={<Home handleAuthorizedChanged={handleAuthorizedChanged} isAuthorized={isAuthorized}/>} />
                       <Route path="/signUp" element={<SignUp />} />
                       <Route path="/signUpEnd" element={<SignUpEnd />} />
                       <Route path="/profile" element={<Profile />} />
@@ -49,7 +52,7 @@ class App extends Component {
               {/*<button onClick={this.GrpcSome}>Ping server</button>*/}
         </div>
       );
-    }
+
 }
 
 export default App;

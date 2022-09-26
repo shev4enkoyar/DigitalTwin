@@ -13,6 +13,7 @@
     "bootstrap": "^5.2.0",
     "browserify-zlib": "^0.2.0",
     "buffer": "^6.0.3",
+    "cors": "^2.8.5",
     "express": "^4.18.1",
     "google-protobuf": "^3.21.0",
     "grpc-create-metadata": "^4.0.1",

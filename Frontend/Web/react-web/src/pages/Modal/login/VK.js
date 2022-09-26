@@ -1,6 +1,6 @@
 import { Nav } from 'react-bootstrap';
 import './LogInPopUp.css';
-import { ThemeContextConsumer } from "../../components/ThemeContext";
+import { ThemeContextConsumer } from "../../../components/ThemeContext";
 function VK() {
 
 	return (

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import Header_Before_Profile from '../components/Header/Header_Before_Profile/Header_Before_Profile';
+import Navbar from '../components/Header/navbar/NavbarAuthorized';
 import { ThemeContextConsumer } from '../components/ThemeContext.js';
 import Inside_Card_For_Body from '../components/Inside_Card_For_Body/Inside_Card_For_Body';
-import CardForBody from '../components/Card_For_body/CardForBody';
+import CardForBody from '../components/cardForBody/CardForBody';
 import './pages.css';
 import { Row, Col, Container} from 'react-bootstrap';
 import InputCircle from '../components/input/InputCircle';
@@ -14,8 +14,8 @@ class Profile extends Component {
     render() {
         return (
             <ThemeContextConsumer>{context => (
-            <div style={{ height: '100%' }}>
-                    <Header_Before_Profile />
+            <div className={"mainContainer"} >
+                    <Navbar />
                     <div className={context.theme + "Gray " + "body_style"}>
                         <CardForBody>
                             <Container className="contForInsideCard" >

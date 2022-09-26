@@ -12,7 +12,7 @@ const GrpcTemp = () => {
 
 
   const doSome = () => {
-      let client = new UserManagerClient('https://localhost:49153', null, null)
+      let client = new UserManagerClient('localhost:5050', null, null)
       let request = new UserProto();
       request.setEmail("best.ofbest@best.com");
       request.setPassword("123123!!!");

@@ -23,13 +23,13 @@ InputCircle - поле для ввода с скругленными краям�
 Input - поле для ввода 
 Vector_Icon - иконка для смены темы
 Profile_Icon - иконка для для отображения pop с данными пользователя
-NavLink - меню в Header
-Header - Header на странице Home
-SubHeader\Header - Header на странице Sign_up, Sign_up_End
-SubHeader\NavLink - меню в SubHeader\Header
-Header_Before_Pofile - Header на странице Models, Profile, Tariffs, CreateModel
+NavLink - меню в NavbarHome
+NavbarHome - NavbarHome на странице Home
+SubHeader\NavbarHome - NavbarHome на странице Sign_up, Sign_up_End
+SubHeader\NavLink - меню в SubHeader\NavbarHome
+Header_Before_Pofile - NavbarHome на странице Models, Profile, Tariffs, CreateModel
 Bell-иконка для для отображения pop с уведомлениями для пользователя
-NavLinks_Before_Pofile - NavLinks для странице Models, Profile, Tariffs, CreateModel
+NavLinks_Before_Pofile - NavLinksHome для странице Models, Profile, Tariffs, CreateModel
 ForSignUp - иконка для страницы после завершения регистрации
 Footer - подвал для страницы Home
 ContentForHome - место для содержимого главной страницы

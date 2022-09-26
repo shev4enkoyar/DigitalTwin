@@ -22,5 +22,5 @@ function ModelsCont(props) {
                 </Container>
             </Container>)}
         </ThemeContextConsumer>
-                )
+    )
 } export default ModelsCont;

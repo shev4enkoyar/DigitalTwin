@@ -3,7 +3,7 @@ import { Container } from 'react-bootstrap';
 function AddingButton(props) {
 
 	return (
-		<button type="submit" className="btn blueBut" >
+		<button type="submit" size="sm" className="btn blueBut" >
 			<Container style={{
 				display: 'flex',
 				margin: '0%',

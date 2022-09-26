@@ -1,6 +1,6 @@
 
 import './LogInPopUp.css';
-import { ThemeContextConsumer } from "../../components/ThemeContext";
+import { ThemeContextConsumer } from "../../../components/ThemeContext";
 function GPlus() {
 
 	return (
