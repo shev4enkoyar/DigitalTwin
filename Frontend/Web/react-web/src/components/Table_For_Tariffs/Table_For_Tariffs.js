@@ -31,7 +31,7 @@ function Table_For_Tariffs(props) {
     return (
         <ThemeContextConsumer>{context => (
             <table className={context.theme + " HistoryTableText"}>
-                <caption className="forTextTable">{props.textForTable}</caption>
+                <caption className={context.theme + " forTextTable "}>{props.textForTable}</caption>
             <thead>
                 <tr>{ThData()}</tr>
             </thead>

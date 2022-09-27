@@ -97,9 +97,8 @@ class Recommendations extends Component {
             <ThemeContextConsumer>{context => (
                 <div className={context.theme+"Gray "+"bodyStyle"}>
                     <HeaderForDashboard />
-                    <SideBar icons={this.iconsLeftBar} />
                     <CardForBody><Table_For_Tariffs classNamesTD="recTabl" textForTable="Рекомендации" contentsForTable={this.recommend} headersForTable={this.hRecommend}></Table_For_Tariffs></CardForBody>
-                    
+                    <SideBar icons={this.iconsLeftBar} />
                 </div>)}</ThemeContextConsumer>
         </>
     );
