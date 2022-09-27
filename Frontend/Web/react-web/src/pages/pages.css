@@ -62,6 +62,7 @@ body, html{
 .lightIcon {
     fill: #334152 !important;
     background: #FFFFFF00 !important;
+    filter: contrast(1) brightness(1)!important;
 }
 
 .lightGray {

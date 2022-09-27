@@ -1,6 +1,7 @@
 .IconForPanel, .TextForButPanel {
-    display:flex;
-    justify-content:center;
+    display: flex;
+    justify-content: center;
+    background:rgb(0,0,0,0);
 }
 .icon_for_panel {
     fill: white !important;
@@ -68,7 +69,6 @@
     .TextPanel:hover {
         color: #000;
         transition: all 0.5s;
-
     }
 
 .sidebar .TextPanel .TextForButPanel {
@@ -87,32 +87,6 @@
     fill: white !important;
     filter: invert(1);
 }
-    .icon_for_panel_blocked:hover::after {
-        content: attr(data-name);
-        position: absolute;
-        left: 0;
-        top: 0;
-        background: #262626;
-        color: #fff;
-        text-align: center;
-        font-size: 14px;
-        padding: 3px 0px;
-        width: 100%;
-        opacity: 1;
-    }
-    .icon_for_panel_blocked::after {
-        content: attr(data-name);
-        position: absolute;
-        left: 0;
-        top: 0;
-        background: #262626;
-        color: #fff;
-        text-align: center;
-        font-size: 14px;
-        padding: 3px 0px;
-        opacity:0;
-        width: 100%;
-    }
 
 .imgForPanel, .imgForPanel_blocked {
     width: 20px;
@@ -137,6 +111,7 @@
     margin: 0px;
     padding: 0px;
     text-align: left;
+    background: rgb(0,0,0,0) !important;
 }
 
 .sidebar:hover .LogoForPanel {
@@ -150,11 +125,17 @@
 .sidebar:hover .TextForButPanel {
     display: block;
 }
+.sidebar_blocked.light .TextPanel .IconForPanel_blocked:hover::after {
+    background: #FFFFFF !important;
+    color: #334152 !important;
+    fill: #334152 !important;
+    filter: invert(0);
+}
 .sidebar_blocked .TextPanel .IconForPanel_blocked:hover::after {
-    content: attr(data-name);
+    content: attr(dataName);
     position: absolute;
     top: 10px;
-    content: attr(data-name);
+    line-height: 30px;
     transition: all 0.6s;
     right: 32px;
     background: #262626;
