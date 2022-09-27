@@ -6,6 +6,7 @@ import {MapContainer, TileLayer} from 'react-leaflet';
 import 'leaflet-fullscreen/dist/Leaflet.fullscreen.js';
 import 'leaflet-fullscreen/dist/leaflet.fullscreen.css';
 /*import  '../../../../../../../leaflet-react/src/Leaflet.Editable';*/
+import './util/Leaflet.Editable';
 import {area, polygon} from "@turf/turf";
 import FiguresTypes from "./util/FiguresTypes";
 import CustomFigure from "./util/CustomFigure";
