@@ -1,6 +1,3 @@
-
-
-
 .IconForPanel, .TextForButPanel {
     display:flex;
     justify-content:center;
@@ -90,9 +87,41 @@
     fill: white !important;
     filter: invert(1);
 }
+    .icon_for_panel_blocked:hover::after {
+        content: attr(data-name);
+        position: absolute;
+        left: 0;
+        top: 0;
+        background: #262626;
+        color: #fff;
+        text-align: center;
+        font-size: 14px;
+        padding: 3px 0px;
+        width: 100%;
+        opacity: 1;
+    }
+    .icon_for_panel_blocked::after {
+        content: attr(data-name);
+        position: absolute;
+        left: 0;
+        top: 0;
+        background: #262626;
+        color: #fff;
+        text-align: center;
+        font-size: 14px;
+        padding: 3px 0px;
+        opacity:0;
+        width: 100%;
+    }
 
 .imgForPanel, .imgForPanel_blocked {
     width: 20px;
+    filter: brightness(0) invert(1);
+}
+.smallIcon {
+    width: 40px;
+    color: white;
+    filter: brightness(0) invert(1);
 }
 
 .sidebar:hover {
@@ -120,4 +149,37 @@
 
 .sidebar:hover .TextForButPanel {
     display: block;
+}
+.sidebar_blocked .TextPanel .IconForPanel_blocked:hover::after {
+    content: attr(data-name);
+    position: absolute;
+    top: 10px;
+    content: attr(data-name);
+    transition: all 0.6s;
+    right: 32px;
+    background: #262626;
+    color: #fff;
+    text-align: center;
+    font-size: 14px;
+    padding: 3px 5px;
+    min-width: -webkit-max-content;
+    min-width: max-content;
+    min-height: -webkit-max-content;
+    min-height: max-content;
+    height: -webkit-fit-content;
+    height: -moz-fit-content;
+    height: 40px;
+    border-radius: 5px;
+    width: -webkit-max-content;
+    width: 100%;
+}
+
+.IconForPanel_blocked {
+    position: relative;
+    display: inline-block;
+}
+
+.contForPanel_blocked.alt .sidebar_blocked .TextPanel .IconForPanel_blocked:hover::after {
+    left: auto;
+    right: 20px;
 }

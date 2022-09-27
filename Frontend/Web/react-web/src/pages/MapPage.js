@@ -13,6 +13,9 @@ import DocIcon from '../components/SideBar/DocIcon';
 import GraphicIcon from '../components/SideBar/GraficIcon';
 import HistoryPriceIcon from '../components/SideBar/HistoryPriceIcon';
 import RecIcon from '../components/SideBar/RecIcon';
+import MTStationIcon from '../components/SideBar/MTStationIcon';
+import CultureIcon from '../components/SideBar/CultureIcon';
+import IoTIcon from '../components/SideBar/IoTIcon';
 class MapPage extends Component { 
     iconsLeftBar = [
         new IconButton("#/", "Главная панель", <HomePanel_Icon />),
@@ -25,9 +28,9 @@ class MapPage extends Component {
         new IconButton("/models", "Вернуться к выбору модели", <BackIn_Icon />)
     ]
     iconsRightBar = [
-        new IconButton("#nogo", "Культура", <BackIn_Icon />),
-        new IconButton("#nogo", "Метостанция", <BackIn_Icon />),
-        new IconButton("#nogo", "IoT", <BackIn_Icon />)
+        new IconButton("#nogo", "Культура", <CultureIcon/>),
+        new IconButton("#nogo", "Метостанция", <MTStationIcon/>),
+        new IconButton("#nogo", "IoT", <IoTIcon/>)
 ]
     render() {
         
@@ -38,7 +41,7 @@ class MapPage extends Component {
         <MapPanel/>
         <Container className="contSide">
         <SideBar block={false} icons={this.iconsLeftBar}></SideBar>
-                        <SideBar alt={true} block={false} color="gray" icons={this.iconsRightBar}/>
+                        <SideBar alt={true} block={true} color="gray" icons={this.iconsRightBar}/>
             </Container> </div>)}</ThemeContextConsumer>
         </>
         );
