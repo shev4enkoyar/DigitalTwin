@@ -3,7 +3,7 @@ import { Container } from 'react-bootstrap';
 function ButtonEdit(props) {
 
 	return (
-		<button onClick={props.onClick}  type="submit" className={props.className + " btn blueBut"} style={props.buttonStyle}>
+		<button onClick={props.onClick}  type="submit" className={props.className + " btn"} style={props.buttonStyle}>
 			<Container style={{
 				display: 'flex',
 				margin: '0%',

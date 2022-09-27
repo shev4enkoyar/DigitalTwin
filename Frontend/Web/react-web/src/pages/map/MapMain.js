@@ -15,7 +15,7 @@ const MapMain = (props) => {
 
     const iconsSideBar = [
         new IconButton("#/", "Главная панель", <HomePanel_Icon />),
-        new IconButton("/mapPage", "Карта", <Map_Icon />),
+        new IconButton("/map", "Карта", <Map_Icon />),
         new IconButton("#nogo", "Документы", <DocIcon/>),
         new IconButton("#nogo", "Датчики IoT", <SensorsIoT />),
         new IconButton("/recom", "Рекомендации", <RecIcon/>),

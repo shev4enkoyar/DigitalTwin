@@ -26,10 +26,10 @@ import Table_For_Tariffs from '../components/Table_For_Tariffs/Table_For_Tariffs
 class Recommendations extends Component {
     iconsLeftBar = [
         new IconButton("#/", "Главная панель", <HomePanel_Icon />),
-        new IconButton("/mapPage", "Карта", <Map_Icon />),
+        new IconButton("/map", "Карта", <Map_Icon />),
         new IconButton("#nogo", "Документы", <DocIcon />),
         new IconButton("#nogo", "Датчики IoT", <SensorsIoT />),
-        new IconButton("#nogo", "Рекомендации", <RecIcon />),
+        new IconButton("/recom", "Рекомендации", <RecIcon />),
         new IconButton("#nogo", "История цен", <HistoryPriceIcon />),
         new IconButton("#nogo", "График работ", <GraphicIcon />),
         new IconButton("/models", "Вернуться к выбору модели", <BackIn_Icon />)

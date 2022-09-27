@@ -14,7 +14,7 @@
     --bs-btn-disabled-bg: #dc3545;
     --bs-btn-disabled-border-color: #dc3545;
 }
-.blueButColor{
+.blueBut{
     --bs-btn-bg: #047bf8;
     --bs-btn-border-color: #047bf8;
     --bs-btn-hover-color: #fff;
@@ -59,30 +59,21 @@
     width: 75%;
    height: 75%;
 }
-.plus {
-    fill: white !important;
-    width: 17%;
+.createBut div {
+    height: 25px;
 }
-.blueBut {
+.plus {
+    filter: brightness(100);
+    width: 32%;
+}
+.createBut {
     display: flex;
-    max-width:65%;
+    max-width: 65%;
     justify-content: center;
     margin: 5px 0px;
     padding: 5px !important;
     align-items: center;
-    --bs-btn-bg: #047bf8;
-    --bs-btn-border-color: #047bf8;
-    --bs-btn-hover-color: #fff;
-    --bs-btn-hover-bg: #0362c6;
-    --bs-btn-hover-border-color: #0362c6;
-    --bs-btn-focus-shadow-rgb: 3, 98, 198;
-    --bs-btn-active-color: #fff;
-    --bs-btn-active-bg: #0362c6;
-    --bs-btn-active-border-color: #0362c6;
-    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
-    --bs-btn-disabled-color: #fff;
-    --bs-btn-disabled-bg: #047bf8;
-    --bs-btn-disabled-border-color: #047bf8;
+    height: 45px;
 }
 .textOpenSans {
     margin: 0px 0px 0px 5px;
@@ -98,3 +89,17 @@
     color: white;
     text-align: center;
 }
+.simpleBut {
+    border-radius: 2px;
+    
+}
+    .simpleBut div {
+        padding: 0 15px!important;
+    }
+.dashBut {
+    width: 175px
+}
+.dashBut div {
+    padding:0px!important;
+        width: 152px;
+    }

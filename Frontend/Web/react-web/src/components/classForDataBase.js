@@ -2,7 +2,7 @@ import { Component } from "react";
 import Input from './input/Input';
 import Combobox from './Combobox/ComboBox';
 import './ContentDashboard/ContentDashboard.css';
-import ButtonOpt from './Button/ButtonOpt';
+import ButtonEdit from './Button/ButtonEdit';
 import { Container, Col } from 'react-bootstrap';
 import CardForBody from './cardForBody/CardForBody';
 export class Tariff {
@@ -51,7 +51,7 @@ export function DashboardCard(props){
                             {props.hText}
                         </p>
                         <Col className="ColForBut">
-                        <p className="NeedingText">
+                        <p className="NeedingText" style={{ color:props.notifyColor }}>
                             {props.descr}
                                 <Col style={{ margin: '6px 0px 6px 45px', display: 'flex', justifyContent: 'flex-end' }}>
                                     {props.isBut}
@@ -61,9 +61,9 @@ export function DashboardCard(props){
                 {props.isHistory ?
                     <div>
                         <Container className="contButton">
-                            <ButtonOpt textForButton="Импортировать"/>
+                                <ButtonEdit className="blueBut dashBut simpleBut" textForButton="Импортировать" classTextName="textOpenSans14" />
                         </Container>
-                        <div className="Warning">Файл импорта должен соответсвовать
+                            <div className="Warning" style={{paddingTop:'7px'} }>Файл импорта должен соответсвовать &zwnj;
                                 <a style={{ color: '#F5CA5D', textDecorationLine: 'none' }} href="#nogo">
                                      шаблону
                                 </a>
@@ -71,8 +71,8 @@ export function DashboardCard(props){
                             <p className="textForStatus marForDescr" >
                                 Если модель не имеет исторических данных, нажмите “Начальное состояние”
                             </p>
-                        <Container className="contButton">
-                            <ButtonOpt textForButton="Начальное состояние"/>
+                            <Container className="contButton">
+                                <ButtonEdit className="blueBut dashBut simpleBut" textForButton="Начальное состояние" classTextName="textOpenSans14" />
                         </Container>
                  </div>
                   :
@@ -83,7 +83,7 @@ export function DashboardCard(props){
                                     <Input Label="Количество" classNameP="textForSign12" className="ForDashboard" contClass="contForCardDashb" />
                                 </Container>
                                 <Container className="contButton">
-                                    <ButtonOpt textForButton="Добавить" />
+                                    <ButtonEdit className="blueBut dashBut simpleBut" textForButton="Добавить" classTextName="textOpenSans14" />
                                 </Container>
                             </div>
                         :
@@ -94,7 +94,7 @@ export function DashboardCard(props){
                                         <Container style={{ width: '30%' }} />
                                 </Container>
                                 <Container className="contButton">
-                                            <ButtonOpt textForButton="Добавить"/>
+                                        <ButtonEdit className="blueBut dashBut simpleBut" textForButton="Добавить" classTextName="textOpenSans14" />
                                 </Container>
                                 </div>
                             :

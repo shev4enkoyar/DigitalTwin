@@ -15,7 +15,7 @@ class DashbordEmpty extends Component {
         [
             new IconButton("#/", "Главная панель", <HomePanel_Icon />),
             new IconButton("/map", "Карта", <Map_Icon />),
-            new IconButton("/recom", "Датчики IoT", <SensorsIoT />),
+            new IconButton("#nogo", "Датчики IoT", <SensorsIoT />),
             new IconButton("/models", "Вернуться к выбору модели", <BackIn_Icon />)
         ]
     render() {
