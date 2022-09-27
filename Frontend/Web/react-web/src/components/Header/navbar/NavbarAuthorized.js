@@ -1,7 +1,7 @@
 import React from 'react';
 import {Container, Navbar} from 'react-bootstrap';
 import '../Header.css';
-import NavLinks_Before_Profile from './NavLinksAuthorized.js';
+import NavLinksAuthorized from './NavLinksAuthorized.js';
 import {ThemeContextConsumer} from "../../ThemeContext.js";
 
 const NavbarAuthorized = () => (
@@ -11,7 +11,7 @@ const NavbarAuthorized = () => (
             id="headerForHome" collapseOnSelect expand="lg" variant="dark">
             <Container id="menu">
                 <Navbar.Brand href="/" className={context.theme + " navbar-brand"} id="DTwin-logo"/>
-                <NavLinks_Before_Profile/>
+                <NavLinksAuthorized />
             </Container>
         </Navbar>)}
     </ThemeContextConsumer>

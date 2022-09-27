@@ -14,17 +14,31 @@
     --bs-btn-disabled-bg: #dc3545;
     --bs-btn-disabled-border-color: #dc3545;
 }
+.blueButColor{
+    --bs-btn-bg: #047bf8;
+    --bs-btn-border-color: #047bf8;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: #0362c6;
+    --bs-btn-hover-border-color: #0362c6;
+    --bs-btn-focus-shadow-rgb: 3, 98, 198;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: #0362c6;
+    --bs-btn-active-border-color: #0362c6;
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    --bs-btn-disabled-color: #fff;
+    --bs-btn-disabled-bg: #047bf8;
+    --bs-btn-disabled-border-color: #047bf8;
+}
 .ButAllMini {
-    
     display: flex;
     padding: 0px;
-    width: 28px;
-    height: 28px;
+    width: 35px;
+    height: 35px;
     align-items: center;
     justify-content: center;
     --bs-btn-color: #fff;
 }
-.upTagBut {
+.greenBut {
     margin: 0px 0px 0px 5px;
     --bs-btn-bg: #47A400;
     --bs-btn-border-color: #47A400;

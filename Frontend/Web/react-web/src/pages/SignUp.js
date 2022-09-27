@@ -20,10 +20,10 @@ class SignUp extends Component {
                         <h5 style={{ fontFamily: 'Open Sans',margin:'0px 0px 40px 0px' }}>Регистрация</h5>
                         <Tumbler/>
                         <form>
-                        <Input Label="ФИО"></Input>
-                        <Input Label="Почта"></Input>
-                        <Input Label="Пароль"></Input>
-                                <Input Label="Повторите пароль"></Input>
+                                    <Input className="input" classNameP="textForSign" Label="ФИО"></Input>
+                                    <Input className="input" classNameP="textForSign" Label="Почта"></Input>
+                                    <Input className="input" classNameP="textForSign" Label="Пароль"></Input>
+                                    <Input className="input" classNameP="textForSign" Label="Повторите пароль"></Input>
                                 <Link to={'/signUpEnd'}>
                                         <button type="submit" id="forSignUp" className=" btn btn-primary my-3" toggleModal={modalContext.toggleModal}>Создать аккаунт</button>
                                 </Link>

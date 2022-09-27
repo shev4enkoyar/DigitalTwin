@@ -5,8 +5,10 @@
     margin: 5% 0;
     background-color: #212026;
     border-radius: 2px;
+    min-width: 200px;
 }
-.textForCardDark {
+.textForCardDarkHome {
+    padding: 0px;
     width: 100%;
     color: white;
     text-align: center;
@@ -18,5 +20,6 @@
 }
 #TarifList {
     display: flex;
-    justify-content:space-around;
+    justify-content: space-around;
+    flex-wrap: wrap;
 }

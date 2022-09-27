@@ -32,18 +32,20 @@
     }
 #ContBlur {
     width: 100%;
-    height: 100%;
     background: rgba(255, 255, 255, 0.1);
     display: flex;
     justify-content: space-around;
     align-items: center;
     flex-direction: column;
+    min-height:calc(100vh - 150px);
+    height:max-content;
 }
 #ContainerForHome {
-    height: 98%;
+    height: max-content;
     max-width: 100%;
     background: #212026;
     position: relative;
+    min-height: calc(100vh - 150px);
 }
 
 p {

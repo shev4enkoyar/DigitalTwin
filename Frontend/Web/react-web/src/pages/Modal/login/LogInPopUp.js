@@ -11,8 +11,8 @@ const LogInPopUp = (props) => {
     return (
         <PopUpWithBlurCanvas isBlur={true} isActive={props.isActive} handleActiveChange={props.handleActiveChange}>
                 <h5 id="mainText">Авторизация</h5>
-                <Input Label="E-mail"></Input>
-                <Input Label="Пароль"></Input>
+            <Input Label="E-mail" className="input" classNameP="textForSign"/>
+            <Input Label="Пароль" className="input" classNameP="textForSign"/>
                 <Col className="column_For_LogInPopUp">
                     <Col style={{ display: 'flex', justifyContent: 'center', alignItems: 'flex-end' }}>
                         <GPlus />

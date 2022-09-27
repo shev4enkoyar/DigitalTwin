@@ -3,7 +3,7 @@ import { Container } from 'react-bootstrap';
 function ButtonOpt(props) {
 
 	return (
-		<button type="submit" className="btn blueBut" style={{ borderRadius: '2px'} }>
+		<button type="submit" className="btn blueButColor" style={{ borderRadius: '2px'} }>
 			<Container style={{
 				display: 'flex',
 				margin: '0px 10px',
