@@ -1,6 +1,7 @@
 import {UserProto, Check } from '../protoGenered/userManager_pb';
 import {UserManagerClient} from '../protoGenered/userManager_grpc_web_pb'
 import {useEffect} from "react";
+import ServerLinks from "./ServerLinks";
 /*import {Metadata} from "@grpc/grpc-js";*/
 /*import * as grpc from "grpc-web"*/
 
@@ -12,7 +13,7 @@ const GrpcTemp = () => {
 
 
   const doSome = () => {
-      let client = new UserManagerClient('localhost:5050', null, null)
+      let client = new UserManagerClient(ServerLinks.USER_MANAGER_MICROSERVICE, null, null)
       let request = new UserProto();
       request.setEmail("best.ofbest@best.com");
       request.setPassword("123123!!!");

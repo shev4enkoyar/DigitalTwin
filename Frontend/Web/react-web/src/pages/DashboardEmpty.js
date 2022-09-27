@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import './pages.css';
-import Input from './../components/input/Input.js';
 import { Container } from 'react-bootstrap';
 import HeaderForDashboard from '../components/Header/HeaderForDasnboard/HeaderForDashboard';
 import { ThemeContextConsumer } from "../components/ThemeContext";
-import ButtonOpt from "../components/Button/ButtonOpt";
-import Combobox from '../components/Combobox/ComboBox.js';
 import SideBar from '../components/SideBar/SideBar.js';
 import HomePanel_Icon from './../components/SideBar/HomePanel_Icon';
 import Map_Icon from './../components/SideBar/Map_Icon';
@@ -17,7 +14,7 @@ class DashbordEmpty extends Component {
     icons =
         [
             new IconButton("#/", "Главная панель", <HomePanel_Icon />),
-            new IconButton("/mapPage", "Карта", <Map_Icon />),
+            new IconButton("/map", "Карта", <Map_Icon />),
             new IconButton("/recom", "Датчики IoT", <SensorsIoT />),
             new IconButton("/models", "Вернуться к выбору модели", <BackIn_Icon />)
         ]

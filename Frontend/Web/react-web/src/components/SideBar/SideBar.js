@@ -10,9 +10,7 @@ const Sidebar = ({ children, alt, block, icons, color, isBlur, isActive, handleA
         <>
             <div className={"sidebar" + (block ? "_blocked " : " ") + (alt ? " alt " : " ")+ (color ? color : "orange")}>
                 <div className={"top_section" + (block ? "_blocked" : "")}>
-
-            </div>
-            
+                </div>
                 {
                     icons.map((item, index) => (
                         <NavLink to={item.path} key={index} className={"TextPanel " + (alt ? "reverse" : "")} activeclassName="activeForPanel">
