@@ -19,7 +19,6 @@ const PopUpWithBlurCanvas = (props) => {
 }
 
 PopUpWithBlurCanvas.propTypes ={
-    children: PropTypes.element.isRequired,
     isActive : PropTypes.bool.isRequired,
     handleActiveChange: PropTypes.func.isRequired
 }

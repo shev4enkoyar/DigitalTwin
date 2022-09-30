@@ -27,7 +27,11 @@ const DTMap = (props) => {
     useEffect(() => {
         if (map != null){
             disableAllPolygonsEdit();
-            addFigure(props.pinType);
+            if (props.pinType.points == null)
+                addFigure(props.pinType);
+            else
+                addFigureWithPoints(props.pinType);
+
         }
 
     }, [props.pinType]);
@@ -103,6 +107,24 @@ const DTMap = (props) => {
 
     }
 
+    const addFigureWithPoints = (pinType) => {
+        let points = [];
+        let point = [];
+        pinType.points.split(",").forEach(element => {
+            point.push(element);
+            if (point.length === 2){
+                points.push(point);
+                point = [];
+            }
+        });
+        if (pinType.type === FiguresTypes.POLYGON)
+            addPolygonWithPoints(points, pinType);
+        if (pinType.type === FiguresTypes.MARKER)
+            points.forEach(element => {
+                addMarker(element, {id: null, categoryId: pinType.category, mapId: pinType.mapId});
+            })
+    }
+
     const sendFigure = (customFigure) => {
         props.sendFigureInfo(new FigureModel(customFigure._db_id, customFigure._map_id , customFigure._category_id,  getFigurePoints(customFigure.figure).toString()));
     }
@@ -116,6 +138,15 @@ const DTMap = (props) => {
         configureCustomPolygon(polygon, options);
     }
 
+    const addPolygonWithPoints = (polygonPoints, pinType) => {
+        if (!isUniquesIncludesPinType(pinType)){
+            map.flyTo(polygonPoints[0], 16);
+            let polygon = L.polygon(polygonPoints, {color: pinType.color});
+            polygon.addTo(map);
+            polygon.enableEdit(map);
+            configureCustomPolygon(polygon, {category : pinType.category, mapId: pinType.mapId, isUnique: pinType.isUnique});
+        }
+    }
     const addPolygonByProto = (polygonPoints, polygonProto) => {
         let pinType;
         pinType = new PinType(polygonProto.categoryId, polygonProto.type, polygonProto.color, polygonProto.isUnique, polygonProto.mapId);

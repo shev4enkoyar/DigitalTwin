@@ -4,6 +4,7 @@ class PinType {
     color = null;
     isUnique = null;
     mapId = null;
+    points = null;
     constructor(category, type, color, isUnique, mapId) {
         this.category = category;
         this.type = type;
