@@ -25,7 +25,8 @@ const SignalRContainer = (props) => {
     const sendFigureInfo = ( figureInfo) => {
         if (connection._connectionStarted) {
             try {
-                connection.send("SendFigure", figureInfo);
+                if (figureInfo !== null || figureInfo !== "")
+                        connection.send("SendFigure", figureInfo);
             }
             catch(e) {
                 console.log(e);

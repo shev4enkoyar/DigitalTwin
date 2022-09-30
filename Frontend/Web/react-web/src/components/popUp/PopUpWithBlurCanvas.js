@@ -9,7 +9,7 @@ const PopUpWithBlurCanvas = (props) => {
             return null;
     }
     return (
-        <div className={props.isActive ? "containerForPop active" : "containerForPop"} onClick={() => { props.handleActiveChange() }}>
+        <div style={props.styleFlex} className={props.isActive ? "containerForPop active" : "containerForPop"}  onClick={() => { props.handleActiveChange() }}>
             <RenderBlur />
             <CardForBody onClick={e => e.stopPropagation()}>
                 {props.children}

@@ -120,6 +120,7 @@ const DTMap = (props) => {
         let pinType;
         pinType = new PinType(polygonProto.categoryId, polygonProto.type, polygonProto.color, polygonProto.isUnique, polygonProto.mapId);
         if (!isUniquesIncludesPinType(pinType)){
+            map.flyTo(polygonPoints[0], 16);
             let polygon = L.polygon(polygonPoints, {color: pinType.color});
             polygon.addTo(map);
             configureCustomPolygonByProto(polygon, polygonProto, pinType.isUnique);
@@ -150,8 +151,8 @@ const DTMap = (props) => {
             polygon.toggleEdit();
         });
         polygon.on('editable:disable', function () {
-            if (figures.length > 1 && customFigure.isUnique)
-                addIntersectionPolygon();
+            /*if (figures.length > 1 && customFigure.isUnique)
+                addIntersectionPolygon();*/
             sendFigure(customFigure);
         });
         polygon.on('editable:enable', function () {
@@ -277,9 +278,9 @@ const DTMap = (props) => {
     return (
       <div style={{position: 'sticky'}}>
         <MapContainer  className="map"
-          center={[35.6892, 51.3890]} 
-          zoom={20}
-          maxZoom={18}
+          center={[60, 60]}
+          zoom={5}
+          maxZoom={17}
           fullscreenControl={true}
           editable={true}
           whenCreated={setMap}
