@@ -1,5 +1,5 @@
 import { Nav } from 'react-bootstrap';
-import './SideBar.css';
+import './SideBarDashboard.css';
 import mtStationIcon from '../Data/MTStationIcon.svg';
 import { ThemeContextConsumer } from '../ThemeContext';
 function MTStationIcon(props) {

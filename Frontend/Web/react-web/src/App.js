@@ -45,7 +45,7 @@ const App = () => {
                       <Route path="/models" element={<Models />} />
                       <Route path="/createModel" element={<CreateModel />} />
                       <Route path="/dashbordEmpty" element={<DashbordEmpty />} />
-                      <Route path="/map" element={<MapMain />} />
+                      <Route path="/map" element={<MapMain/>} />
                       <Route path="/recom" element={<Recommendations />} />
                   </Routes>
             {/*<img src={logo} className="App-logo" alt="logo" />*/}

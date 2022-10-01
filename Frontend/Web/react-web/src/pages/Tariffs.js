@@ -5,8 +5,10 @@ import CardForTariffs from '../components/Inside_Card_For_Body/Inside_Card_For_T
 import CardForBody from '../components/cardForBody/CardForBody';
 import './pages.css';
 import { Row, Col, Container } from 'react-bootstrap';
+import plus_icon from './../components/Data/plusForButtonAdding.svg';
 import Table_For_Tariffs from '../components/Table_For_Tariffs/Table_For_Tariffs';
 import AddingButton from '../components/Button/AddingButton';
+import ButtonEdit from '../components/Button/ButtonEdit';
 class Tariffs extends Component {
      AddCancel = ['Наименование подписки 1',
         'Наименование подписки 2',
@@ -71,12 +73,12 @@ class Tariffs extends Component {
                     <Navbar />
                     <div className={context.theme + "Gray " + "body_style"}>
                         <Col className="MargForCol">
-                        <CardForBody >
+                            <CardForBody classForContB="centerCard" >
                                 <p className="textOpenSansForHistTar">Продлить/отменить подписки</p>
                                 
                                 {this.AddCancel.map((addcanc) =>
                                     <CardForTariffs AddCancel={addcanc} />)}
-                                <AddingButton textForButton="Добавить подписку"/>
+                                <ButtonEdit className="blueBut createBut" buttonStyle={{ maxWidth: '70%', width: '70%' }} image={plus_icon} imageClassName="plus2" textForButton="Добавить подписку" classTextName="textOpenSans14"/>
                             <a href="#nogo" className="linkAutoriz">описание подписок</a>
                             </CardForBody></Col>
                         <Col className="MargForCol">

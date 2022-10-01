@@ -16,17 +16,17 @@
     position:relative;
 }
 #DTwin-logo:hover:after {
-        content: "Digital Twin" !important;
-    }
+    content: "AgroDigitalTwin" !important;
+}
 #DTwin-logo:after {
-        content: "DTwin" !important;
+        content: "ADTwin" !important;
     }
 #ModelLogo:hover:after {
-    content: 'Модель поля "Пшеница"';
+    content: "Создать тех.карту";
 }
 
 #ModelLogo:after {
-    content: 'Модель поля "Пшеница"';
+    content: "Создать тех.карту";
 }
 #nav_links {
     margin: 0;
