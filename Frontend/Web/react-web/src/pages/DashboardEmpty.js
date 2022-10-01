@@ -3,11 +3,11 @@ import './pages.css';
 import { Container } from 'react-bootstrap';
 import HeaderForDashboard from '../components/Header/HeaderForDasnboard/HeaderForDashboard';
 import { ThemeContextConsumer } from "../components/ThemeContext";
-import SideBar from '../components/SideBar/SideBar.js';
-import HomePanel_Icon from './../components/SideBar/HomePanel_Icon';
-import Map_Icon from './../components/SideBar/Map_Icon';
-import SensorsIoT from './../components/SideBar/SensorsIoT';
-import BackIn_Icon from './../components/SideBar/BackInModel_Icon';
+import SideBarDashboard from '../components/SideBarDashboard/SideBarDashboard.js';
+import HomePanel_Icon from './../components/SideBarDashboard/HomePanel_Icon';
+import Map_Icon from './../components/SideBarDashboard/Map_Icon';
+import SensorsIoT from './../components/SideBarDashboard/SensorsIoT';
+import BackIn_Icon from './../components/SideBarDashboard/BackInModel_Icon';
 import { IconButton } from './../components/classForDataBase';
 import ContentDashboard from './../components/ContentDashboard/ContentDashboard';
 class DashbordEmpty extends Component {
@@ -35,7 +35,7 @@ class DashbordEmpty extends Component {
                         <HeaderForDashboard />
                         <ContentDashboard />
                     </Container>
-                    <SideBar icons={this.icons} />
+                    <SideBarDashboard icons={this.icons} />
                 </div>)}
             </ThemeContextConsumer>
            

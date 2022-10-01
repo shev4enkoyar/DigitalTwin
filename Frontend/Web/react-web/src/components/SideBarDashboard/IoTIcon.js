@@ -1,6 +1,6 @@
 
 import { Nav } from 'react-bootstrap';
-import './SideBar.css';
+import './SideBarDashboard.css';
 import ioTIcon from '../Data/IoTIcon.svg';
 import { ThemeContextConsumer } from '../ThemeContext';
 function IoTIcon(props) {

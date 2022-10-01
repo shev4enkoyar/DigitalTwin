@@ -1,6 +1,6 @@
 
 import { Nav } from 'react-bootstrap';
-import './SideBar.css';
+import './SideBarDashboard.css';
 import cultureIcon from '../Data/cultureIcon.svg';
 import { ThemeContextConsumer } from '../ThemeContext';
 function CultureIcon(props) {

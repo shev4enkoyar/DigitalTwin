@@ -6,22 +6,22 @@ import Input from './../components/input/Input';
 import Combobox from './../components/Combobox/ComboBox';
 import CardForBody from './../components/cardForBody/CardForBody';
 import HeaderForDashboard from './../components/Header/HeaderForDasnboard/HeaderForDashboard';
-import SideBar from './../components/SideBar/SideBar';
+import SideBarDashboard from './../components/SideBarDashboard/SideBarDashboard';
 import ButtonOpt from './../components/Button/ButtonOpt';
 import ButtonSensorOiT from './../components/Button/ButtonSensorIoT';
 import MapBut from './../components/Button/MapBut';
 import { Container, Card, Col } from 'react-bootstrap';
 import './pages.css';
 import { IconButton } from '../components/classForDataBase';
-import BackIn_Icon from '../components/SideBar/BackInModel_Icon';
-import Map_Icon from '../components/SideBar/Map_Icon';
-import SensorsIoT from '../components/SideBar/SensorsIoT';
-import HomePanel_Icon from '../components/SideBar/HomePanel_Icon';
+import BackIn_Icon from '../components/SideBarDashboard/BackInModel_Icon';
+import Map_Icon from '../components/SideBarDashboard/Map_Icon';
+import SensorsIoT from '../components/SideBarDashboard/SensorsIoT';
+import HomePanel_Icon from '../components/SideBarDashboard/HomePanel_Icon';
 import { ThemeContextConsumer } from './../components/ThemeContext';
-import DocIcon from '../components/SideBar/DocIcon';
-import GraphicIcon from '../components/SideBar/GraficIcon';
-import HistoryPriceIcon from '../components/SideBar/HistoryPriceIcon';
-import RecIcon from '../components/SideBar/RecIcon';
+import DocIcon from '../components/SideBarDashboard/DocIcon';
+import GraphicIcon from '../components/SideBarDashboard/GraficIcon';
+import HistoryPriceIcon from '../components/SideBarDashboard/HistoryPriceIcon';
+import RecIcon from '../components/SideBarDashboard/RecIcon';
 import Table_For_Tariffs from '../components/Table_For_Tariffs/Table_For_Tariffs.js';
 class Recommendations extends Component {
     iconsLeftBar = [
@@ -98,7 +98,7 @@ class Recommendations extends Component {
                 <div className={context.theme+"Gray "+"bodyStyle"}>
                     <HeaderForDashboard />
                     <CardForBody><Table_For_Tariffs classNamesTD="recTabl" textForTable="Рекомендации" contentsForTable={this.recommend} headersForTable={this.hRecommend}></Table_For_Tariffs></CardForBody>
-                    <SideBar icons={this.iconsLeftBar} />
+                    <SideBarDashboard icons={this.iconsLeftBar} />
                 </div>)}</ThemeContextConsumer>
         </>
     );

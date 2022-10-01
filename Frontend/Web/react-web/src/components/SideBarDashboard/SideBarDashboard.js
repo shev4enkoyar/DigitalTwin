@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import Profile_Icon from '../Header/Profile_Icon';
 import { NavLink } from 'react-router-dom';
-import './SideBar.css';
+import './SideBarDashboard.css';
 import PopUpWithBlurCanvas from './../popUp/PopUpWithBlurCanvas';
 import { ThemeContextConsumer } from '../ThemeContext';
 
-const Sidebar = ({ children, alt, block, icons, color, isBlur, isActive, handleActiveChange }) => {
+const SideBarDashboard = ({ children, alt, block, icons, color, isBlur, isActive, handleActiveChange }) => {
     
     return (
         
@@ -34,4 +34,4 @@ const Sidebar = ({ children, alt, block, icons, color, isBlur, isActive, handleA
     );
 };
 
-export default Sidebar;
+export default SideBarDashboard;

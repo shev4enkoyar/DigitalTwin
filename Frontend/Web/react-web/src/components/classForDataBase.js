@@ -42,7 +42,8 @@ export class MyTariff {
 
 }
 export function DashboardCard(props){
-    
+    const techs = ["Введите технику..."];
+    const earth = ["Введите тип почвы..."];
     return (
         <Container className="cardSize" >
             <CardForBody>
@@ -79,7 +80,7 @@ export function DashboardCard(props){
                     (props.isTeh ?
                             <div>
                                 <Container style={{ display: 'flex', flexWrap: 'nowrap', alignItems: 'flex-end', padding: '0px', margin: '0px 0px 0.5rem 0px', width: '100%' }}>
-                                    <Combobox classTextCombobox="textForSign12" textCombobox="Наименование техники" classNameCont="padCombobox "/>
+                                    <Combobox classTextCombobox="textForSign12" textCombobox="Наименование техники" classNameCont="padCombobox " options={techs}/>
                                     <Input Label="Количество" classNameP="textForSign12" className="ForDashboard" contClass="contForCardDashb" />
                                 </Container>
                                 <Container className="contButton">
@@ -90,7 +91,7 @@ export function DashboardCard(props){
                             (props.isEarth ?
                                 <div>
                                     <Container style={{ display: 'flex', flexWrap: 'nowrap', alignItems: 'flex-end', padding: '0px', margin: '0px 0px 0.5rem 0px', width: '100%' }}>
-                                        <Combobox classTextCombobox="textForSign12" textCombobox="Тип почвы" classNameCont="padCombobox "/>
+                                        <Combobox classTextCombobox="textForSign12" textCombobox="Тип почвы" classNameCont="padCombobox " options={earth}/>
                                         <Container style={{ width: '30%' }} />
                                 </Container>
                                 <Container className="contButton">

@@ -1,5 +1,5 @@
 import { Nav } from 'react-bootstrap';
-import './SideBar.css';
+import './SideBarDashboard.css';
 import docIcon from '../Data/DocIcon.svg';
 function DocIcon(props) {
 

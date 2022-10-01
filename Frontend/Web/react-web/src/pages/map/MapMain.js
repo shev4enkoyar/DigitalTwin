@@ -1,19 +1,19 @@
 import React, {useState} from "react";
 import SignalRContainer from "./SignalRContainer";
 import {IconButton} from "../../components/classForDataBase";
-import HomePanel_Icon from "../../components/SideBar/HomePanel_Icon";
-import Map_Icon from "../../components/SideBar/Map_Icon";
-import DocIcon from "../../components/SideBar/DocIcon";
-import SensorsIoT from "../../components/SideBar/SensorsIoT";
-import RecIcon from "../../components/SideBar/RecIcon";
-import HistoryPriceIcon from "../../components/SideBar/HistoryPriceIcon";
-import GraphicIcon from "../../components/SideBar/GraficIcon";
-import BackIn_Icon from "../../components/SideBar/BackInModel_Icon";
-import SideBar from "../../components/SideBar/SideBar";
+import HomePanel_Icon from "../../components/SideBarDashboard/HomePanel_Icon";
+import Map_Icon from "../../components/SideBarDashboard/Map_Icon";
+import DocIcon from "../../components/SideBarDashboard/DocIcon";
+import SensorsIoT from "../../components/SideBarDashboard/SensorsIoT";
+import RecIcon from "../../components/SideBarDashboard/RecIcon";
+import HistoryPriceIcon from "../../components/SideBarDashboard/HistoryPriceIcon";
+import GraphicIcon from "../../components/SideBarDashboard/GraficIcon";
+import BackIn_Icon from "../../components/SideBarDashboard/BackInModel_Icon";
+import SideBarDashboard from "../../components/SideBarDashboard/SideBarDashboard";
 
 const MapMain = (props) => {
 
-    const iconsSideBar = [
+    const iconsSideBarDashboard = [
         new IconButton("#/", "Главная панель", <HomePanel_Icon />),
         new IconButton("/map", "Карта", <Map_Icon />),
         new IconButton("#nogo", "Документы", <DocIcon/>),
@@ -26,7 +26,7 @@ const MapMain = (props) => {
 
     return (
         <div>
-            <SideBar block={false} icons={iconsSideBar}></SideBar>
+            <SideBarDashboard block={false} icons={iconsSideBarDashboard}></SideBarDashboard>
             <SignalRContainer mapId={1}/>
         </div>
 
