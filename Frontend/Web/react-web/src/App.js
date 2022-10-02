@@ -11,7 +11,7 @@ import Tariffs from './pages/Tariffs';
 import Models from './pages/Models';
 import CreateModel from './pages/CreateModel';
 import MapMain from "./pages/map/MapMain";
-import DashbordEmpty from './pages/DashboardEmpty';
+import DashboardEmpty from './pages/DashboardEmpty';
 import Recommendations from './pages/Recommendations';
 //import { HelloRequest} from './protoGenered/greet_pb';
 //import { GreeterClient} from './protoGenered/greet_grpc_web_pb';
@@ -44,7 +44,7 @@ const App = () => {
                       <Route path="/tariffs" element={<Tariffs />} />
                       <Route path="/models" element={<Models />} />
                       <Route path="/createModel" element={<CreateModel />} />
-                      <Route path="/dashbordEmpty" element={<DashbordEmpty />} />
+                      <Route path="/dashboardEmpty" element={<DashboardEmpty />} />
                       <Route path="/map" element={<MapMain/>} />
                       <Route path="/recom" element={<Recommendations />} />
                   </Routes>

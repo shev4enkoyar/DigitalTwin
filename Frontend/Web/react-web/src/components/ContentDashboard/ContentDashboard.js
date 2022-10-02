@@ -6,15 +6,17 @@ import map_icon from './../Data/Map_Icon.svg';
 import Combobox from './../Combobox/ComboBox.js';
 import Input from '../input/Input';
 import sen_icon from './../Data/SensorIoT_Icon.svg';
-import { DashboardCard } from './../classForDataBase';
+import { DashboardCard } from './DashboardCard';
 import ButtonEdit from '../Button/ButtonEdit';
-function ContentDashboard() {
-    let dashCard = [{ hText: "Статус модели", descr: "Требуется добавить исторические данные!", notifyColor:"#DC3545", isHistory:true },
+function ContentDashboard(props) {
+    let dashCard = [{ hText: "Статус модели", descr: "Требуется добавить исторические данные!", notifyColor: "#DC3545", isHistory: true },
         { hText: "Статус модели", descr: "Требуется добавить технику!", notifyColor: "#DC3545", isTeh: true },
         { hText: "Статус модели", descr: "Требуется заполнить данные карты!", notifyColor: "#DC3545", isBut: <ButtonEdit className="blueBut ButAllMini" image={map_icon} imageClassName="icon_for_but"/> },
         { hText: "Статус датчиков", descr: "Нет ни одного датчика!", notifyColor: "#E2891F", isBut: <ButtonEdit className="redBut ButAllMini" image={sen_icon} imageClassName="icon_for_but" /> },
-        { hText: "Статус модели", descr: "Требуется определить тип почвы!", notifyColor: "#DC3545", isEarth:true }]
-
+        { hText: "Статус модели", descr: "Требуется определить тип почвы!", notifyColor: "#DC3545", isEarth: true }]
+    if (!props.isInherit) {
+        dashCard.splice(0, 1)
+    }
         return (
             <ThemeContextConsumer>{context => (
                 <Container className={context.theme + "Gray "+ "contForDashboardEM "}>
