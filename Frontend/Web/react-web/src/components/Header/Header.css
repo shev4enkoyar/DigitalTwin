@@ -22,11 +22,11 @@
         content: "ADTwin" !important;
     }
 #ModelLogo:hover:after {
-    content: "Создать тех.карту";
+    content: "Создание технологической карты";
 }
 
 #ModelLogo:after {
-    content: "Создать тех.карту";
+    content: "Создание технологической карты";
 }
 #nav_links {
     margin: 0;
