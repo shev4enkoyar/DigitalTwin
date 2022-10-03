@@ -6,23 +6,35 @@ import map_icon from './../Data/Map_Icon.svg';
 import Combobox from './../Combobox/ComboBox.js';
 import Input from '../input/Input';
 import sen_icon from './../Data/SensorIoT_Icon.svg';
-import { DashboardCard } from './DashboardCard';
+import { DashboardCard, EconomicCard, FieldCard, HistoryCard, MachineCard,IoTCard, CultureCard, ChemistryCard } from './DashboardCard';
 import ButtonEdit from '../Button/ButtonEdit';
+import { useState } from 'react';
 function ContentDashboard(props) {
-    let dashCard = [{ hText: "Статус модели", descr: "Требуется добавить исторические данные!", notifyColor: "#DC3545", isHistory: true },
-        { hText: "Статус модели", descr: "Требуется добавить технику!", notifyColor: "#DC3545", isTeh: true },
-        { hText: "Статус модели", descr: "Требуется заполнить данные карты!", notifyColor: "#DC3545", isBut: <ButtonEdit className="blueBut ButAllMini" image={map_icon} imageClassName="icon_for_but"/> },
-        { hText: "Статус датчиков", descr: "Нет ни одного датчика!", notifyColor: "#E2891F", isBut: <ButtonEdit className="redBut ButAllMini" image={sen_icon} imageClassName="icon_for_but" /> },
-        { hText: "Статус модели", descr: "Требуется определить тип почвы!", notifyColor: "#DC3545", isEarth: true }]
-    if (!props.isInherit) {
-        dashCard.splice(0, 1)
+    const [ isInherit, setInherit] = useState(props.isInherit? true:false)
+    const inheritOff = () => {
+        setInherit(false)
     }
+    //let dashCard = [{ hText: "Статус модели", descr: "Требуется добавить исторические данные!", notifyColor: "#DC3545", isTextAndBut: true },
+    //    { hText: "Статус модели", descr: "Требуется добавить данные о культуре!", notifyColor: "#DC3545", isCombBut: true },
+    //    { hText: "Статус модели", descr: "Требуется добавить технику!", notifyColor: "#DC3545", isCombInpBut: true },
+    //    { hText: "Статус модели", descr: "Требуется заполнить данные карты!", notifyColor: "#DC3545", isBut: <ButtonEdit className="blueBut ButAllMini" image={map_icon} imageClassName="icon_for_but"/> },
+    //    { hText: "Статус датчиков", descr: "Нет ни одного датчика!", notifyColor: "#E2891F", isBut: <ButtonEdit className="redBut ButAllMini" image={sen_icon} imageClassName="icon_for_but" /> },
+    //    { hText: "Статус модели", descr: "Требуется определить тип почвы!", notifyColor: "#DC3545", isCombBut: true }]
+    console.log(props.isInherit)
         return (
             <ThemeContextConsumer>{context => (
                 <Container className={context.theme + "Gray "+ "contForDashboardEM "}>
-                    {dashCard.map((content) => (
-                        <DashboardCard hText={content.hText} descr={content.descr} notifyColor={content.notifyColor} isBut={content.isBut} isHistory={content.isHistory} isTeh={content.isTeh} isEarth={content.isEarth} />
-                            ))}
+                    {
+                        (!isInherit) ? '' :
+                            <HistoryCard isPred={() => inheritOff()}></HistoryCard>
+                    }
+                    <CultureCard/>
+                    <FieldCard />
+                    <MachineCard />
+                    <ChemistryCard/>
+                    <IoTCard/>
+                    <EconomicCard/>
+                        
                 </Container>
             )
             }
