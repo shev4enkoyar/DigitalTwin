@@ -11,8 +11,9 @@ body, html{
     height:100%;
 }
 .body_style {
-    width: 100%;
-    height: 100vh;
+    width: max-content;
+    min-width:100%;
+    height: inherit;
     background: #262626;
     position: relative;
     display: flex;
@@ -139,7 +140,9 @@ body, html{
     right: 0;
     left: 0;
     bottom: 0;
+    min-width:100%;
     height:max-content;
+    height:100%;
 }
 .contSide {
     position: absolute;

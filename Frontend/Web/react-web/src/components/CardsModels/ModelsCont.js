@@ -10,7 +10,7 @@ function ModelsCont(props) {
     
     return (
         <ThemeContextConsumer>{context => (
-            <Container>
+            <Container style={{height:'100%'} }>
                 <Container className="ContForH"><p className={context.theme + "Gray textForH"}>Модели {props.culture.length}/15</p>
                     <p className={context.theme + "Gray textForH"}>Общая площадь 1234/5000</p></Container>
                 <CardsModels culture={props.culture} />

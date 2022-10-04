@@ -30,7 +30,7 @@ class DashboardEmpty extends Component{
                 <ThemeContextConsumer>
                     {context =>
                     (
-                        <div className={context.theme + "Gray " + "body_style"} style={{ display: 'flex', flexDirection: 'row', padding: '0px' }}>
+                        <div className={context.theme + "Gray " + "bodyStyle"} style={{ display: 'flex', flexDirection: 'row', padding: '0px' }}>
                             <Container style={{
                                 display: 'flex', flexDirection: 'column', padding: '0px', margin: '0px',
                                 width: '100%',

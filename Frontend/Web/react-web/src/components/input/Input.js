@@ -4,8 +4,8 @@ function Input(props) {
     return (
         <Container className={props.contClass}>
             <p className={props.classNameP}>{props.Label}</p>
-            <input className={props.className}  placeholder={props.placeholder}></input>
-            </Container>
+            <input onChange={props.onChange} className={props.className} placeholder={props.placeholder}></input>
+        </Container>
 
     );
 } export default Input;
