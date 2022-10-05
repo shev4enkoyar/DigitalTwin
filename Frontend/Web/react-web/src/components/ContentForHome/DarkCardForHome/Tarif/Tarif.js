@@ -11,9 +11,13 @@ function Tarif(props) {
         );
     return (
         <Card className={props.light +" BorderForCard " + props.light+ " TarifCard"}>
-            <h4 className={props.light+ " text"}>{props.data["name"]}</h4>
-            <p className={props.light+ " text"}>{props.data["cost"]}</p>
+            <h4 className={props.light + " text"}>
+                {props.data["name"]}
+            </h4>
+            <p className={props.light + " text"}>
+                {props.data["cost"]}
+            </p>
             {myList}
-                </Card>
+        </Card>
     );
 } export default Tarif;

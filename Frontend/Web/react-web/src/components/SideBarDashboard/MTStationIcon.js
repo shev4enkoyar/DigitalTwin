@@ -9,6 +9,7 @@ function MTStationIcon(props) {
 		<Nav.Link onClick={() => { props.updateActive() }} >
 				<img className={context.theme +"Icon imgForPanel"} src={mtStationIcon} />
 			</Nav.Link >
-		)}</ThemeContextConsumer>
+		)}
+		</ThemeContextConsumer>
 	)
 } export default MTStationIcon;

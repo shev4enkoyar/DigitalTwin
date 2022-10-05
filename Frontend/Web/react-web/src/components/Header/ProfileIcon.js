@@ -11,7 +11,7 @@ function ProfileIcon(props) {
 			<img id="Layer_1" className={context.theme + (props.Gray ? "Gray " : " ") + " icon_for_header"} src={profile} />	
 
 				/*</Nav.Link >*/
-			)
+		)
 		}
 		</ThemeContextConsumer>
 		)

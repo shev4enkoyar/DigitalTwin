@@ -3,8 +3,10 @@ import { Card, Container } from 'react-bootstrap';
 function Input(props) {
     return (
         <Container className={props.contClass}>
-            <p className={props.classNameP}>{props.Label}</p>
-            <input onChange={props.onChange} className={props.className} placeholder={props.placeholder}></input>
+            <p className={props.classNameP}>
+                {props.Label}
+            </p>
+            <input onChange={props.onChange} className={props.className} placeholder={props.placeholder}/>
         </Container>
 
     );

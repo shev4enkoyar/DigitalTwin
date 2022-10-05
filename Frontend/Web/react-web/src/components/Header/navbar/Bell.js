@@ -8,9 +8,9 @@ function BellIcon(props) {
 
 		<ThemeContextConsumer >{context => (
 			<Nav.Link href="#nogo" className={context.theme + (props.Gray ? "Gray " : " ") + " navbar-brand"}>
-
 				<img src={bell} className={context.theme + (props.Gray ? "Gray " : " ") + " icon_for_header"} />
-			</Nav.Link >)
+			</Nav.Link >
+		)
 		}
 		</ThemeContextConsumer>
 	)

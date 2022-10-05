@@ -3,18 +3,22 @@ import DarkCardForHome from './DarkCardForHome/DarkCardForHome.js';
 import GroupTarif from './DarkCardForHome/GroupTarif.js';
 import { ThemeContextConsumer } from "../ThemeContext"
 function CardBlur() {
-    const ContentForHome = [(
+    const ContentForHome = [
+        (
         <p >
             Digital Twin - это цифровой двойник вашего
             агропромышленного предприятия, позволяющий
             выполнять онлайн прогнозирование урожайности и различных ситуаций
         </p>
-    ), (
+        ),
+        (
         <p style={{padding:  "20% 0"}}>
             Что-нибудь еще о том, какие мы хорошие,
             и почему нужно пользоваться нашим сервисом
         </p>
-    ), (<GroupTarif/>)];
+        ),
+        (<GroupTarif />)
+    ];
 
     return (
         <ThemeContextConsumer>

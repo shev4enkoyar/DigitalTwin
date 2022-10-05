@@ -10,11 +10,17 @@ function ModelsCont(props) {
     return (
         <ThemeContextConsumer>{context => (
             <Container style={{height:'100%'} }>
-                <Container className="ContForH"><p className={context.theme + "Gray textForH"}>Модели {props.culture.length}/15</p>
-                    <p className={context.theme + "Gray textForH"}>Общая площадь 1234/5000</p></Container>
+                <Container className="ContForH">
+                    <p className={context.theme + "Gray textForH"}>
+                    Модели {props.culture.length}/15
+                    </p>
+                    <p className={context.theme + "Gray textForH"}>
+                        Общая площадь 1234/5000
+                    </p>
+                </Container>
                 <CardsModels culture={props.culture} />
                     <Link to={'/createModel'} style={{ padding:'0px', display:'flex',justifyContent:'center' }}>
-                    <ButtonEdit className="blueBut createBut" textForButton="Новая модель" classTextName="textOpenSans14" image={plus} imageClassName="plus"/>
+                        <ButtonEdit className="blueBut createBut" textForButton="Новая модель" classTextName="textOpenSans14" image={plus} imageClassName="plus"/>
                     </Link>
             </Container>)}
         </ThemeContextConsumer>
