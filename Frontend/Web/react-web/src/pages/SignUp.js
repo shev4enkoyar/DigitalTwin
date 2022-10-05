@@ -4,19 +4,18 @@ import './pages.css';
 import Input from './../components/input/Input.js';
 import Header from '../components/Header/SubHeader/Header';
 import { ThemeContextConsumer } from "../components/ThemeContext"
-import Tumbler from '../components/Tumbler/Tumbler.js';
-import {Link} from "react-router-dom"
-import { ModalContextConsumer } from './Modal/ModalContext.js';
+import Tumbler from '../components/tumbler/Tumbler.js';
+import { Link } from "react-router-dom";
+import ButtonEdit from '../components/button/ButtonEdit.js';
 class SignUp extends Component {
     render() {
         
         return (<>
-            <ModalContextConsumer>{modalContext  => (
             <ThemeContextConsumer>{context=>( 
             <div className={"mainContainer"}>
                 <Header />
                     <div className={context.theme + "Gray " + "body_style"}>
-                    <CardForBody>
+                        <CardForBody classForContB="signUpWidth">
                         <h5 style={{ fontFamily: 'Open Sans',margin:'0px 0px 40px 0px' }}>Регистрация</h5>
                         <Tumbler/>
                         <form>
@@ -25,7 +24,7 @@ class SignUp extends Component {
                                     <Input className="input" classNameP="textForSign" Label="Пароль"></Input>
                                     <Input className="input" classNameP="textForSign" Label="Повторите пароль"></Input>
                                 <Link to={'/signUpEnd'}>
-                                        <button type="submit" id="forSignUp" className=" btn btn-primary my-3" toggleModal={modalContext.toggleModal}>Создать аккаунт</button>
+                                    <ButtonEdit buttonStyle={{ margin:'10px 0px' }} className="blueBut dashBut simpleBut" textForButton="Создать аккаунт" classTextName="textOpenSans14" />
                                 </Link>
                         </form>
                         <div id="Warning">Нажимая кнопку “Создать аккаунт”, я соглашаюсь с <a style={{ color: '#F5CA5D' }} href="#nogo">политикой конфиденциальности</a>.</div>
@@ -33,9 +32,6 @@ class SignUp extends Component {
                 </div>
                 </div>)}
             </ThemeContextConsumer>
-                )
-            }
-            </ModalContextConsumer>
         </>
         );
     }

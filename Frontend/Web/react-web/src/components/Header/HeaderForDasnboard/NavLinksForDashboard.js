@@ -1,10 +1,10 @@
 import {  Nav, Container } from 'react-bootstrap';
 import '../Header.css';
-import Vector_Icon from '../Vector_Icon';
-import Profile_Icon from '../Profile_Icon';
+import VectorIcon from '../VectorIcon';
+import ProfileIcon from '../ProfileIcon';
 import { ThemeContextConsumer, ThemeContextProvider } from "../../ThemeContext.js";
 import { useState } from 'react';
-import Bell_Icon from './../navbar/Bell';
+import BellIcon from './../navbar/Bell';
 function NavLinks_For_Profile() {
 
     const [active, setActive] = useState(false);
@@ -13,9 +13,9 @@ function NavLinks_For_Profile() {
         <ThemeContextConsumer>{ 
             context => (
         <Container id="nav_links" className={context.theme+"Gray "}>
-                    <Vector_Icon Gray={true} />
-                    <Bell_Icon Gray={true} />
-                    <Profile_Icon Gray={true} />
+                    <VectorIcon Gray={true} />
+                    <BellIcon Gray={true} />
+                    <ProfileIcon Gray={true} />
                 </Container>
             )}
             </ThemeContextConsumer>

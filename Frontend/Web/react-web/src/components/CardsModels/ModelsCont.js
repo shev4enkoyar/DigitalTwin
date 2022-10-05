@@ -1,11 +1,10 @@
 import './CardModels.css';
 import { Row, Col, Container, Card } from 'react-bootstrap';
 import CardsModels from './CardsModels';
-import AddingButton from '../Button/AddingButton';
 import { ThemeContextConsumer } from '../ThemeContext';
 import { Link } from "react-router-dom"
-import ButtonEdit from '../Button/ButtonEdit';
-import plus from './../Data/plusForButtonAdding.svg';
+import ButtonEdit from '../button/ButtonEdit';
+import plus from './../data/plusForButtonAdding.svg';
 function ModelsCont(props) {
     
     return (

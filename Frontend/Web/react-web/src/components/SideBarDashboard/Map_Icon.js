@@ -1,6 +1,6 @@
 import { Nav } from 'react-bootstrap';
 import './SideBarDashboard.css';
-import Map_icon from '../Data/Map_Icon.svg';
+import Map_icon from '../data/Map_Icon.svg';
 function Map_Icon(props) {
 
 	return (

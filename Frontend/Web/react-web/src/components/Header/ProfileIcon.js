@@ -1,8 +1,8 @@
 import {  Nav} from 'react-bootstrap';
 import './Header.css';
-import profile from '../Data/profile.svg';
+import profile from '../data/profile.svg';
 import { ThemeContextConsumer } from "../ThemeContext.js";
-function Profile_Icon(props) {
+function ProfileIcon(props) {
 	
 	return (
 		
@@ -15,4 +15,4 @@ function Profile_Icon(props) {
 		}
 		</ThemeContextConsumer>
 		)
-} export default Profile_Icon;
+} export default ProfileIcon;

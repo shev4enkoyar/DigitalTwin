@@ -1,6 +1,6 @@
 import { Nav } from 'react-bootstrap';
 import './SideBarDashboard.css';
-import recIcon from '../Data/RecIcon.svg';
+import recIcon from '../data/RecIcon.svg';
 function RecIcon(props) {
 
 	return (

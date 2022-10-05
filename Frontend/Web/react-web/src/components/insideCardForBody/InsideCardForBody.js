@@ -1,4 +1,4 @@
-import './Inside_Card_For_Body.css';
+import './InsideCardForBody.css';
 import { Card, Container } from 'react-bootstrap';
 import { ThemeContextConsumer } from '../ThemeContext';
 function CardForBody(props) {

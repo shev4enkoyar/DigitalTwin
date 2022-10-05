@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Profile_Icon from '../Header/Profile_Icon';
 import { NavLink } from 'react-router-dom';
 import './SideBarDashboard.css';
 import PopUpWithBlurCanvas from './../popUp/PopUpWithBlurCanvas';

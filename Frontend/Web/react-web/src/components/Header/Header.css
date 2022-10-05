@@ -10,12 +10,13 @@
     font-size: 30px;
     justify-content: flex-start;
 }
-#headerForHome { 
-    padding:0px;
+#headerForHome {
+    padding: 0px;
     background-color: #212026;
-    position:relative;
-    min-width:100%;
-    width:100%;
+    position: relative;
+    min-width: 100%;
+    width: 100%;
+
 }
 #DTwin-logo:hover:after {
     content: "AgroDigitalTwin" !important;
@@ -52,9 +53,19 @@
     font-size: 28px;
     font-family: 'Yeseva One' !important;
 }
-#hForModels{
-    height:90px;
-    min-height:90px;
-    padding:0px;
-    width:100%
+#hForModels {
+    height: 90px;
+    min-height: 90px;
+    padding: 0px;
+    margin: 0px;
+    position:absolute;
+    width: 100%
+}
+#menu1 {
+    width: 100%;
+    display: flex;
+    margin: 0px 20px 0px 80px;
+    justify-content: space-between;
+    align-items: center;
+    height:100%;
 }

@@ -26,3 +26,16 @@
     justify-content:center;
     flex-wrap:wrap;
 }
+.TranspCard {
+    width: 100%;
+    margin: 0%;
+    height: 100%;
+    top: -100px;
+    position: sticky;
+    padding: 0px;
+    justify-self: center;
+    right: -60px;
+}
+.signUpWidth{
+    width:min-content;
+}

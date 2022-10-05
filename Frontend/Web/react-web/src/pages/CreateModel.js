@@ -5,10 +5,9 @@ import Input from './../components/input/Input.js';
 import { Container } from 'react-bootstrap';
 import Header from '../components/Header/SubHeader/Header';
 import { ThemeContextConsumer } from "../components/ThemeContext";
-import ButtonOpt from "../components/Button/ButtonOpt";
 import { Link } from 'react-router-dom';
-import Combobox from '../components/Combobox/ComboBox.js';
-import ButtonEdit from '../components/Button/ButtonEdit.js';
+import Combobox from '../components/combobox/ComboBox.js';
+import ButtonEdit from '../components/button/ButtonEdit.js';
 class CreateModel extends Component {
     state = { isInherit: true }
     setInherit = (value) => {

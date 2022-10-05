@@ -1,6 +1,6 @@
 import { Nav } from 'react-bootstrap';
 import './SideBarDashboard.css';
-import Sens_Icon from '../Data/SensorIoT_Icon.svg';
+import Sens_Icon from '../data/SensorIoT_Icon.svg';
 function SensorsIoT(props) {
 
 	return (

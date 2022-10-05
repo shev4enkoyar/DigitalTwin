@@ -1,17 +1,16 @@
 import { Component, useState } from "react";
 import Input from './../input/Input';
-import Combobox from './../Combobox/ComboBox';
+import Combobox from './../combobox/ComboBox';
 import './ContentDashboard.css';
-import sen_icon from './../Data/SensorIoT_Icon.svg';
-import map_icon from './../Data/Map_Icon.svg';
-import ButtonEdit from './../Button/ButtonEdit';
+import sen_icon from './../data/SensorIoT_Icon.svg';
+import map_icon from './../data/Map_Icon.svg';
+import ButtonEdit from './../button/ButtonEdit';
 import { Container, Col, Row } from 'react-bootstrap';
 import CardForBody from './../cardForBody/CardForBody';
+import TransportSelect from "../../pages/Modal/transportSelect/TransportSelect";
 export function DashboardCard(props) {
-    console.log(props.off, props.f)
     return (
         <fieldset disabled={props.off ? false : "disabled"} className="cardSize">
-            <Container className="cardSize">
                 <CardForBody>
                     <Container className="ContForCardDash">
                         <p className="textForStatus" >
@@ -28,7 +27,6 @@ export function DashboardCard(props) {
                         {props.children}
                     </Container>
                 </CardForBody>
-            </Container>
         </fieldset>
     );
 };
@@ -61,12 +59,12 @@ export const CultureCard = (props) => {
         <DashboardCard hText="Статус модели" descr="Требуется добавить данные о культуре!" notifyColor="#DC3545" off={props.off}>
             <Container style={{ display: 'flex', flexWrap: 'wrap' }}>
                 <Col style={{ marginRight: '1px' }}>
-                    <Combobox classTextCombobox="textForSign12" textCombobox="Культура" classNameCont="padCombobox " options={cult} setInherit={(empty) => { props.setOff(0, { cult: empty ? 0 : 1 }) }} />
+                    <Combobox classTextCombobox="textForSign12" textCombobox="Культура" classNameCont="padCombobox " options={cult} setInherit={(empty) => { props.setOff(0, { cult: empty ? 1 : 0 }) }} />
                     <Input Label="Фракция" classNameP="textForSign12" className="inpCreateForDashCard" contClass="contForInpDashE" onChange={(event) => { props.setOff(0, { frac: event.target.value.trim() }) }} />
                     <Input Label="Норма высева" classNameP="textForSign12" className="inpCreateForDashCard" contClass="contForInpDashE" onChange={(event) => { props.setOff(0, { norm: event.target.value.trim() }) }} />
                 </Col>
                 <Col style={{ marginLeft: '1px' }}>
-                    <Combobox classTextCombobox="textForSign12" textCombobox="Сорт" classNameCont="padCombobox " options={sortForCult} setInherit={(empty) => { props.setOff(0, { sort: empty ? 0 : 1 }) }} />
+                    <Combobox classTextCombobox="textForSign12" textCombobox="Сорт" classNameCont="padCombobox " options={sortForCult} setInherit={(empty) => { props.setOff(0, { sort: empty ? 1 : 0 }) }} />
                     <Input Label="Густота" classNameP="textForSign12" className="inpCreateForDashCard" contClass="contForInpDashE" onChange={(event) => { props.setOff(0, { gust: event.target.value.trim() }) }} />
                     <Input Label="Вес этапов" classNameP="textForSign12" className="inpCreateForDashCard" contClass="contForInpDashE" onChange={(event) => { props.setOff(0, { total: event.target.value.trim() }) }} />
                 </Col>
@@ -79,15 +77,17 @@ export const CultureCard = (props) => {
 }
 export const MachineCard = (props) => {
     const techs = ["Введите технику..."];
+    
     return (
         <DashboardCard off={props.off} hText="Статус модели" descr="Требуется добавить технику!" notifyColor="#DC3545" >
             <Container style={{ display: 'flex', justifyContent: 'center', padding: '0px', margin: '0px 0px 0.5rem 0px', width: '100%' }}>
-                <ButtonEdit className="blueBut dashBut simpleBut" textForButton="Выбрать" classTextName="textOpenSans14" onClick={() => { props.setOff(2, { added: true }) }} />
+                <ButtonEdit onClick={() => { props.handleActiveChanged(true) }} className="blueBut dashBut simpleBut" textForButton="Выбрать" classTextName="textOpenSans14" />
             </Container>
             <Container className="contButton">
-                <ButtonEdit className="blueBut dashBut simpleBut" textForButton="Добавить" classTextName="textOpenSans14" />
+                <ButtonEdit className="blueBut dashBut simpleBut" textForButton="Добавить" classTextName="textOpenSans14" onClick={()=>{ props.setOff(2, { added: true }) }}/>
             </Container>
         </DashboardCard>
+
     )
 }
 export const ChemistryCard = (props) => {
@@ -117,7 +117,6 @@ export const EconomicCard = (props) => {
     )
 }
 export const FieldCard = (props) => {
-    console.log(props.off ? true : false, "dsdas")
     return (
         <DashboardCard f="d" off={props.off} hText="Статус модели" descr="Требуется добавить данные о поле!" notifyColor="#DC3545" isBut={<ButtonEdit className="blueBut ButAllMini" image={map_icon} imageClassName="icon_for_but" />}>
             <Container style={{ display: 'flex', flexWrap: 'nowrap', alignItems: 'flex-end', padding: '0px', margin: '0px 0px 0.5rem 0px', width: '100%' }}>

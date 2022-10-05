@@ -1,8 +1,8 @@
 import { Nav } from 'react-bootstrap';
 import './Header.css';
 import { ThemeContextConsumer } from "../ThemeContext.js";
-import vector from '../Data/vector.svg';
-function Vector_Icon(props) {
+import vector from '../data/vector.svg';
+function VectorIcon(props) {
     return (
         <ThemeContextConsumer>
             {context => (<Nav.Link className={context.theme + (props.Gray ? "Gray " : " ") + " navbar-brand"} onClick={context.toggleTheme}>
@@ -10,4 +10,4 @@ function Vector_Icon(props) {
             </Nav.Link>)}
         </ThemeContextConsumer>
     )
-} export default Vector_Icon;
+} export default VectorIcon;

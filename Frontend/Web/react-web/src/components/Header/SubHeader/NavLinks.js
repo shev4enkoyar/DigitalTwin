@@ -1,7 +1,7 @@
 import { Nav, Container } from 'react-bootstrap';
 import '../Header.css';
-import Vector_Icon from '../Vector_Icon';
-import Profile_Icon from '../Profile_Icon';
+import VectorIcon from '../VectorIcon';
+import ProfileIcon from '../ProfileIcon';
 import { ThemeContextConsumer, ThemeContextProvider } from "../../ThemeContext.js"
 function NavLinks() {
 
@@ -13,8 +13,8 @@ function NavLinks() {
                     </Nav.Link>
                     <Nav.Link  className={context.theme + " navbar-brand"}>
                     </Nav.Link>
-                    <Vector_Icon />
-                    <Profile_Icon />
+                    <VectorIcon />
+                    <ProfileIcon />
                 </Container>)}
         </ThemeContextConsumer>
     )

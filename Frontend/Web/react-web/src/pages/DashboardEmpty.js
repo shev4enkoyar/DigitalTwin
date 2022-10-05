@@ -1,20 +1,27 @@
 import React, { Component } from 'react';
 import './pages.css';
-import { Container } from 'react-bootstrap';
 import HeaderForDashboard from '../components/Header/HeaderForDasnboard/HeaderForDashboard';
 import { ThemeContextConsumer } from "../components/ThemeContext";
-import SideBarDashboard from '../components/SideBarDashboard/SideBarDashboard.js';
-import HomePanel_Icon from './../components/SideBarDashboard/HomePanel_Icon';
-import Map_Icon from './../components/SideBarDashboard/Map_Icon';
-import SensorsIoT from './../components/SideBarDashboard/SensorsIoT';
-import BackIn_Icon from './../components/SideBarDashboard/BackInModel_Icon';
+import SideBarDashboard from '../components/sideBarDashboard/SideBarDashboard.js';
+import HomePanel_Icon from './../components/sideBarDashboard/HomePanel_Icon';
+import Map_Icon from './../components/sideBarDashboard/Map_Icon';
+import SensorsIoT from './../components/sideBarDashboard/SensorsIoT';
+import BackIn_Icon from './../components/sideBarDashboard/BackInModel_Icon';
 import { IconButton } from './../components/classForDataBase';
-import ContentDashboard from './../components/ContentDashboard/ContentDashboard';
+import ContentDashboard from './../components/contentDashboard/ContentDashboard';
 import { useLocation } from 'react-router';
-
+import TransportSelect from './Modal/transportSelect/TransportSelect';
 class DashboardEmpty extends Component{
-
-    isInherit = this.props.location.state ? this.props.location.state.isInherit:true
+    constructor(props){
+        super(props);
+        this.state = { isActive:false };
+    }
+    handleActiveChanged = () => {
+        let prev = this.state.isActive;
+        this.setState({ isActive: !(prev) });
+        console.log(this.state);
+    }
+    isInherit = this.props.location.state ? (this.props.location.state.isInherit == 1? true:false) :true
     icons =
         [
             new IconButton("#/", "Главная панель", <HomePanel_Icon />),
@@ -24,22 +31,15 @@ class DashboardEmpty extends Component{
         ]
     render(props)
     { 
-        console.log(this.props);
         return(
             <>
                 <ThemeContextConsumer>
                     {context =>
                     (
                         <div className={context.theme + "Gray " + "bodyStyle"} style={{ display: 'flex', flexDirection: 'row', padding: '0px' }}>
-                            <Container style={{
-                                display: 'flex', flexDirection: 'column', padding: '0px', margin: '0px',
-                                width: '100%',
-                                position: 'inherit',
-                                right: '0px'
-                            }}>
-                                <HeaderForDashboard />
-                                <ContentDashboard isInherit={this.isInherit} />
-                            </Container>
+                            <TransportSelect isActive={this.state.isActive} handleActiveChanged={this.handleActiveChanged}/>
+                            <HeaderForDashboard />
+                            <ContentDashboard isInherit={this.isInherit} handleActiveChanged={this.handleActiveChanged}/>
                             <SideBarDashboard icons={this.icons} />
                         </div>
                     )

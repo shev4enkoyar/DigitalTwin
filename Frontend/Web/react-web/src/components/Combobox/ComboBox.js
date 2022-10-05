@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import './ComboBox.css';
 function Combobox(props) {
-
+    
     const changeSelect = (event) => {
-        props.setInherit((event.target.value) == props.options[0] ? true : false);
+        props.setInherit((event.target.value) /*== props.options[0] ? true : false*/);
     }
     return (
         <>

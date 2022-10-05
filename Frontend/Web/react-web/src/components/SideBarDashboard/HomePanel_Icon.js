@@ -1,6 +1,6 @@
 import { Nav } from 'react-bootstrap';
 import './SideBarDashboard.css';
-import Home_Icon from '../Data/HomePanel.svg';
+import Home_Icon from '../data/HomePanel.svg';
 function HomePanel_Icon(props) {
 
 	return (

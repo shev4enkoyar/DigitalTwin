@@ -1,11 +1,10 @@
 import {Nav, Container} from 'react-bootstrap';
 import '../Header.css';
-import Vector_Icon from '../Vector_Icon';
-import Profile_Icon from '../Profile_Icon';
+import VectorIcon from '../VectorIcon';
+import ProfileIcon from '../ProfileIcon';
 import { ThemeContextConsumer, ThemeContextProvider } from "../../ThemeContext.js"
 import LogInPopUp from '../../../pages/Modal/login/LogInPopUp';
 import { useState } from 'react';
-import { ModalContextConsumer } from '../../../pages/Modal/ModalContext';
 import ProfilePopUp from "../../../pages/Modal/profile/ProfilePopUp";
 const NavLinksHome = (props) => {
     const [isActive, setActive] = useState(false);
@@ -33,9 +32,9 @@ const NavLinksHome = (props) => {
                             <Nav.Link href="#tariffs" className={context.theme + " navbar-brand"}>
                                 Тарифы
                             </Nav.Link>
-                            <Vector_Icon />
+                            <VectorIcon />
                             <button style={{border: "none", padding: 0, background: "transparent"}} onClick={() => { setActive(true) }}>
-                                <Profile_Icon />
+                                <ProfileIcon />
                             </button>
                             <RenderOnProfileClick />
                         </Container>

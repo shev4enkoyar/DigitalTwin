@@ -1,6 +1,6 @@
 import { Nav } from 'react-bootstrap';
 import './SideBarDashboard.css';
-import graphicIcon from '../Data/GraphicIcon.svg';
+import graphicIcon from '../data/GraphicIcon.svg';
 function GraphicIcon(props) {
 
 	return (

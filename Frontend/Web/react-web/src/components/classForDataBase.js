@@ -1,5 +1,5 @@
 
-import './ContentDashboard/ContentDashboard.css';
+import './contentDashboard/ContentDashboard.css';
 export class Tariff {
     constructor(name, cost, possibility) {
       this.name = name;

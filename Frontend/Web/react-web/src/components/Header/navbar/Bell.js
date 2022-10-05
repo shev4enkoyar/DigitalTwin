@@ -1,8 +1,8 @@
 import { Nav } from 'react-bootstrap';
 import '../Header.css';
 import { ThemeContextConsumer } from "../../ThemeContext.js";
-import bell from "../../Data/bell_icon.svg";
-function Bell_Icon(props) {
+import bell from "../../data/bell_icon.svg";
+function BellIcon(props) {
 
 	return (
 
@@ -14,4 +14,4 @@ function Bell_Icon(props) {
 		}
 		</ThemeContextConsumer>
 	)
-} export default Bell_Icon;
+} export default BellIcon;

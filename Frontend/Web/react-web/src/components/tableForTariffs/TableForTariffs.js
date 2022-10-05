@@ -1,7 +1,8 @@
 import { ThemeContextConsumer } from '../ThemeContext';
-import './Table_For_Tariffs.css';
-function Table_For_Tariffs(props) {
+import './TableForTariffs.css';
+function TableForTariffs(props) {
     // get table column
+    console.log(props.contentsForTable[0])
     const column = Object.keys(props.contentsForTable[0]);
     // get table heading data
     const ThData = () => {
@@ -44,4 +45,4 @@ function Table_For_Tariffs(props) {
         </ThemeContextConsumer>
     )
 }
-export default Table_For_Tariffs;
+export default TableForTariffs;

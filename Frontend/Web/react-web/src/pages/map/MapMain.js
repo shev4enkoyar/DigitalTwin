@@ -1,15 +1,15 @@
 import React, {useState} from "react";
 import SignalRContainer from "./SignalRContainer";
 import {IconButton} from "../../components/classForDataBase";
-import HomePanel_Icon from "../../components/SideBarDashboard/HomePanel_Icon";
-import Map_Icon from "../../components/SideBarDashboard/Map_Icon";
-import DocIcon from "../../components/SideBarDashboard/DocIcon";
-import SensorsIoT from "../../components/SideBarDashboard/SensorsIoT";
-import RecIcon from "../../components/SideBarDashboard/RecIcon";
-import HistoryPriceIcon from "../../components/SideBarDashboard/HistoryPriceIcon";
-import GraphicIcon from "../../components/SideBarDashboard/GraficIcon";
-import BackIn_Icon from "../../components/SideBarDashboard/BackInModel_Icon";
-import SideBarDashboard from "../../components/SideBarDashboard/SideBarDashboard";
+import HomePanel_Icon from "../../components/sideBarDashboard/HomePanel_Icon";
+import Map_Icon from "../../components/sideBarDashboard/Map_Icon";
+import DocIcon from "../../components/sideBarDashboard/DocIcon";
+import SensorsIoT from "../../components/sideBarDashboard/SensorsIoT";
+import RecIcon from "../../components/sideBarDashboard/RecIcon";
+import HistoryPriceIcon from "../../components/sideBarDashboard/HistoryPriceIcon";
+import GraphicIcon from "../../components/sideBarDashboard/GraficIcon";
+import BackIn_Icon from "../../components/sideBarDashboard/BackInModel_Icon";
+import SideBarDashboard from "../../components/sideBarDashboard/SideBarDashboard";
 
 const MapMain = (props) => {
 

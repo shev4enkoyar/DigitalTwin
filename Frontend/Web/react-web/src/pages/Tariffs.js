@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import Navbar from '../components/Header/navbar/NavbarAuthorized';
 import { ThemeContextConsumer } from '../components/ThemeContext.js';
-import CardForTariffs from '../components/Inside_Card_For_Body/Inside_Card_For_Tariffs';
+import CardForTariffs from '../components/insideCardForBody/InsideCardForTariffs';
 import CardForBody from '../components/cardForBody/CardForBody';
 import './pages.css';
 import { Row, Col, Container } from 'react-bootstrap';
-import plus_icon from './../components/Data/plusForButtonAdding.svg';
-import Table_For_Tariffs from '../components/Table_For_Tariffs/Table_For_Tariffs';
-import AddingButton from '../components/Button/AddingButton';
-import ButtonEdit from '../components/Button/ButtonEdit';
+import plus_icon from './../components/data/plusForButtonAdding.svg';
+import TableForTariffs from '../components/tableForTariffs/TableForTariffs';
+import ButtonEdit from '../components/button/ButtonEdit';
 class Tariffs extends Component {
      AddCancel = ['Наименование подписки 1',
         'Наименование подписки 2',
@@ -84,7 +83,7 @@ class Tariffs extends Component {
                         <Col className="MargForCol">
                             <CardForBody>
                                 <Container className="ContForHistoryTariff">
-                                    <Table_For_Tariffs textForTable="История подписок" classNamesTD="ForBox" headersForTable={this.headerForTariffs} contentsForTable={this.historyTariffs} />
+                                    <TableForTariffs textForTable="История подписок" classNamesTD="ForBox" headersForTable={this.headerForTariffs} contentsForTable={this.historyTariffs} />
                                 </Container>
                             </CardForBody></Col>
                     </div>

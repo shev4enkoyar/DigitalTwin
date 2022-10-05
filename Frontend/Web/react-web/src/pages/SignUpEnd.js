@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import CardForBody from '../components/cardForBody/CardForBody.js';
 import './pages.css';
 import { Container } from 'react-bootstrap';
-import ForSignUp from '../components/ForSignUp/ForSignUp'
+import ForSignUp from '../components/forSignUp/ForSignUp'
 import { ThemeContextConsumer } from "../components/ThemeContext"
 import { Navigate } from 'react-router-dom';
 import NavbarHome from "../components/Header/homeNavbar/NavbarHome";

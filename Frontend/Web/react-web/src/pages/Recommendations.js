@@ -1,28 +1,20 @@
 import React, { Component} from 'react';
-import ContentForHome from '../components/ContentForHome/ContentForHome.js';
-import NavbarHome from '../components/Header/homeNavbar/NavbarHome';
-import Footer from '../components/Footer/Footer.js';
-import Input from './../components/input/Input';
-import Combobox from './../components/Combobox/ComboBox';
 import CardForBody from './../components/cardForBody/CardForBody';
 import HeaderForDashboard from './../components/Header/HeaderForDasnboard/HeaderForDashboard';
-import SideBarDashboard from './../components/SideBarDashboard/SideBarDashboard';
-import ButtonOpt from './../components/Button/ButtonOpt';
-import ButtonSensorOiT from './../components/Button/ButtonSensorIoT';
-import MapBut from './../components/Button/MapBut';
+import SideBarDashboard from './../components/sideBarDashboard/SideBarDashboard';
 import { Container, Card, Col } from 'react-bootstrap';
 import './pages.css';
 import { IconButton } from '../components/classForDataBase';
-import BackIn_Icon from '../components/SideBarDashboard/BackInModel_Icon';
-import Map_Icon from '../components/SideBarDashboard/Map_Icon';
-import SensorsIoT from '../components/SideBarDashboard/SensorsIoT';
-import HomePanel_Icon from '../components/SideBarDashboard/HomePanel_Icon';
+import BackIn_Icon from '../components/sideBarDashboard/BackInModel_Icon';
+import Map_Icon from '../components/sideBarDashboard/Map_Icon';
+import SensorsIoT from '../components/sideBarDashboard/SensorsIoT';
+import HomePanel_Icon from '../components/sideBarDashboard/HomePanel_Icon';
 import { ThemeContextConsumer } from './../components/ThemeContext';
-import DocIcon from '../components/SideBarDashboard/DocIcon';
-import GraphicIcon from '../components/SideBarDashboard/GraficIcon';
-import HistoryPriceIcon from '../components/SideBarDashboard/HistoryPriceIcon';
-import RecIcon from '../components/SideBarDashboard/RecIcon';
-import Table_For_Tariffs from '../components/Table_For_Tariffs/Table_For_Tariffs.js';
+import DocIcon from '../components/sideBarDashboard/DocIcon';
+import GraphicIcon from '../components/sideBarDashboard/GraficIcon';
+import HistoryPriceIcon from '../components/sideBarDashboard/HistoryPriceIcon';
+import RecIcon from '../components/sideBarDashboard/RecIcon';
+import TableForTariffs from '../components/tableForTariffs/TableForTariffs.js';
 class Recommendations extends Component {
     iconsLeftBar = [
         new IconButton("#/", "Главная панель", <HomePanel_Icon />),
@@ -97,7 +89,7 @@ class Recommendations extends Component {
             <ThemeContextConsumer>{context => (
                 <div className={context.theme+"Gray "+"bodyStyle"}>
                     <HeaderForDashboard />
-                    <CardForBody><Table_For_Tariffs classNamesTD="recTabl" textForTable="Рекомендации" contentsForTable={this.recommend} headersForTable={this.hRecommend}></Table_For_Tariffs></CardForBody>
+                    <CardForBody><TableForTariffs classNamesTD="recTabl" textForTable="Рекомендации" contentsForTable={this.recommend} headersForTable={this.hRecommend}/></CardForBody>
                     <SideBarDashboard icons={this.iconsLeftBar} />
                 </div>)}</ThemeContextConsumer>
         </>

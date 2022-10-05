@@ -1,6 +1,6 @@
 import { Nav } from 'react-bootstrap';
 import './SideBarDashboard.css';
-import historyPriceIcon from '../Data/HistoryPriceIcon.svg';
+import historyPriceIcon from '../data/HistoryPriceIcon.svg';
 function HistoryPriceIcon(props) {
 
 	return (

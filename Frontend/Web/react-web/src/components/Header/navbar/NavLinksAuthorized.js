@@ -1,10 +1,10 @@
 import {  Container } from 'react-bootstrap';
 import '../Header.css';
-import Vector_Icon from '../Vector_Icon';
-import Profile_Icon from '../Profile_Icon';
+import VectorIcon from '../VectorIcon';
+import ProfileIcon from '../ProfileIcon';
 import { ThemeContextConsumer, ThemeContextProvider } from "../../ThemeContext.js";
 import { useState } from 'react';
-import Bell_Icon from './Bell';
+import BellIcon from './Bell';
 import ProfilePopUp from "../../../pages/Modal/profile/ProfilePopUp";
 const NavLinksAuthorized = () => {
 
@@ -16,10 +16,10 @@ const NavLinksAuthorized = () => {
         <ThemeContextConsumer>{ 
             context => (
                 <Container id="nav_links" className={context.theme}>
-                    <Vector_Icon />
-                    <Bell_Icon/>
+                    <VectorIcon />
+                    <BellIcon/>
                     <button style={{border: "none", padding: 0, background: "transparent"}} onClick={() => { setActive(true) }}>
-                        <Profile_Icon/>
+                        <ProfileIcon/>
                     </button>
                     <ProfilePopUp isActive={isActive} handleActiveChange={handleActiveChange}/>
                 </Container>

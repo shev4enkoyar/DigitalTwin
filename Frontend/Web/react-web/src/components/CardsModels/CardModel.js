@@ -1,6 +1,6 @@
 import './CardModels.css';
 import { Row, Col, Container, Card } from 'react-bootstrap';
-import imgForCard from '../Data/psh.png';
+import imgForCard from '../data/psh.png';
 import { ThemeContextConsumer } from '../ThemeContext';
 function CardModel(props) {
 

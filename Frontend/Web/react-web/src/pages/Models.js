@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import Navbar from '../components/Header/navbar/NavbarAuthorized';
 import { ThemeContextConsumer } from '../components/ThemeContext.js';
-import Inside_Card_For_Body from '../components/Inside_Card_For_Body/Inside_Card_For_Body';
-import CardForBody from '../components/cardForBody/CardForBody';
 import './pages.css';
 import { Row, Col, Container, Card } from 'react-bootstrap';
-import ModelsCont from '../components/CardsModels/ModelsCont';
+import ModelsCont from '../components/cardsModels/ModelsCont';
 import NavbarHome from "../components/Header/homeNavbar/NavbarHome";
 import NavbarAuthorized from "../components/Header/navbar/NavbarAuthorized";
 class Models extends Component {

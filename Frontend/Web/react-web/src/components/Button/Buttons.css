@@ -57,7 +57,8 @@
 .icon_for_but {
     fill: white !important;
     width: 60%;
-   height: 60%;
+    height: 60%;
+    filter: brightness(0) invert(1);
 }
 .createBut div {
     height: 25px;

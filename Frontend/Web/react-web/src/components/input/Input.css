@@ -18,6 +18,9 @@ font-family: 'Open Sans';
     display: flex;
     font-family: 'Open Sans';
 }
+.forNowrap{
+    flex-wrap:nowrap;
+}
 .inputCircle {
     width: 300px;
     border-radius: 30px;
@@ -67,4 +70,13 @@ font-family: 'Open Sans';
 .contForInpDashE {
     width: 100%;
     padding: 0px;
+}
+.inpContForTransp {
+    margin: 0px;
+    padding: 0px 10px 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    width: 15%;
+    min-width: max-content;
 }

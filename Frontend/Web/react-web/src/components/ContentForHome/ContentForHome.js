@@ -1,4 +1,4 @@
-import field from '../Data/Frame 25.png';
+import field from '../data/Frame 25.png';
 import './ContentForHome.css';
 import { Container } from 'react-bootstrap';
 import CardBlur from './CardBlur.js';

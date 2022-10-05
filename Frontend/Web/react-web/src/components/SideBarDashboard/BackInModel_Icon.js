@@ -1,6 +1,6 @@
 import { Nav } from 'react-bootstrap';
 import './SideBarDashboard.css';
-import back_Icon from '../Data/BackIn_Icon.svg';
+import back_Icon from '../data/BackIn_Icon.svg';
 function BackIn_Icon(props) {
 
 	return (
