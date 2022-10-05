@@ -20,8 +20,7 @@ class CreateModel extends Component {
         return (
                 <>
                     <ThemeContextConsumer>
-                        {
-                            context =>
+                        {context =>
                             (
                             <div className="mainContainer">
                                 <Header />
@@ -31,12 +30,12 @@ class CreateModel extends Component {
                                             Создание модели
                                         </h5>
                                         <Input className="input" classNameP="textForSign" Label="Наименование модели" placeholder="Введите наименование..."/>
-                                            <Combobox classTextCombobox="textForSign" textCombobox="Был ли ранее предшественник?" setInherit={this.setInherit} options={this.isPred}/>
-                                            <Container style={{ display: 'flex', padding: '25px 0px 5px 0px', justifyContent: 'center' }}>
-                                                <Link style={{ width: '60%', display: 'flex', justifyContent: 'center' }} to="/dashboardEmpty" state={this.state}>
-                                                    <ButtonEdit className="blueBut simpleBut " textForButton="Создать модель" classTextName="textOpenSans14"/>
-                                                </Link>
-                                            </Container>
+                                        <Combobox classTextCombobox="textForSign" textCombobox="Был ли ранее предшественник?" setInherit={this.setInherit} options={this.isPred}/>
+                                        <Container style={{ display: 'flex', padding: '25px 0px 5px 0px', justifyContent: 'center' }}>
+                                            <Link style={{ width: '60%', display: 'flex', justifyContent: 'center' }} to="/dashboardEmpty" state={this.state}>
+                                                <ButtonEdit className="blueBut simpleBut " textForButton="Создать модель" classTextName="textOpenSans14"/>
+                                            </Link>
+                                        </Container>
                                         <div id="Warning">
                                             <a style={{ color: '#F5CA5D', textDecoration: 'auto' }} href="/models">
                                                 Вернуться к моделям

@@ -31,10 +31,16 @@ class SignUpEnd extends Component {
                         <CardForBody >
                             <Container style={{ width: '320px' }}>
                                 <ForSignUp />
-                                <h5 className="StyleForSignUpEndH">Регистрация в Digital Twin</h5>
-                                <p className="StyleForSignUpEndp1">Для завершения регистрации перейдите по ссылке в письме.
-                                    Письмо придет на указанный почтовый адрес в течение пары минут.</p>
-                                <p className="StyleForSignUpEndp2">Через 10 секунд вы будете автоматически перенаправлены на страницу авторизации</p>
+                                    <h5 className="StyleForSignUpEndH">
+                                        Регистрация в Digital Twin
+                                    </h5>
+                                    <p className="StyleForSignUpEndp1">
+                                        Для завершения регистрации перейдите по ссылке в письме.
+                                        Письмо придет на указанный почтовый адрес в течение пары минут.
+                                    </p>
+                                    <p className="StyleForSignUpEndp2">
+                                        Через 10 секунд вы будете автоматически перенаправлены на страницу авторизации
+                                    </p>
                             </Container>
                         </CardForBody>
                     </div>

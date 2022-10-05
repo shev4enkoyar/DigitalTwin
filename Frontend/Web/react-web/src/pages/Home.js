@@ -3,7 +3,6 @@ import ContentForHome from '../components/ContentForHome/ContentForHome.js';
 import NavbarHome from '../components/Header/homeNavbar/NavbarHome';
 import Footer from '../components/footer/Footer.js';
 import './pages.css';
-import LogInPopUp from './Modal/login/LogInPopUp.js';
 import GrpcTemp from "../util/GrpcTemp";
 
 class Home extends Component {

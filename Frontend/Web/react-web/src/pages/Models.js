@@ -7,7 +7,8 @@ import ModelsCont from '../components/cardsModels/ModelsCont';
 import NavbarHome from "../components/Header/homeNavbar/NavbarHome";
 import NavbarAuthorized from "../components/Header/navbar/NavbarAuthorized";
 class Models extends Component {
-    culture = [{
+    culture = [
+    {
         culture: "Пшеница",
         viewModel: "Вид модели",
         currentEvent: "Текущее мероприятие",
@@ -36,7 +37,8 @@ class Models extends Component {
                     <div className={context.theme + "Gray " + "body_style"}>
                         <ModelsCont culture={this.culture}/>
                     </div>
-                </div>)}
+                </div>
+            )}
             </ThemeContextConsumer>
         );
     }

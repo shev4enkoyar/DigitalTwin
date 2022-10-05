@@ -4,7 +4,7 @@ import { ThemeContextConsumer } from '../components/ThemeContext.js';
 import CardForTariffs from '../components/insideCardForBody/InsideCardForTariffs';
 import CardForBody from '../components/cardForBody/CardForBody';
 import './pages.css';
-import { Row, Col, Container } from 'react-bootstrap';
+import { Col, Container } from 'react-bootstrap';
 import plus_icon from './../components/data/plusForButtonAdding.svg';
 import TableForTariffs from '../components/tableForTariffs/TableForTariffs';
 import ButtonEdit from '../components/button/ButtonEdit';
@@ -73,19 +73,26 @@ class Tariffs extends Component {
                     <div className={context.theme + "Gray " + "body_style"}>
                         <Col className="MargForCol">
                             <CardForBody classForContB="centerCard" >
-                                <p className="textOpenSansForHistTar">Продлить/отменить подписки</p>
-                                
-                                {this.AddCancel.map((addcanc) =>
-                                    <CardForTariffs AddCancel={addcanc} />)}
+                                <p className="textOpenSansForHistTar">
+                                    Продлить/отменить подписки
+                                </p>
+                                {
+                                    this.AddCancel.map((addcanc) =>
+                                    <CardForTariffs AddCancel={addcanc} />)
+                                }
                                 <ButtonEdit className="blueBut createBut" buttonStyle={{ maxWidth: '70%', width: '70%' }} image={plus_icon} imageClassName="plus2" textForButton="Добавить подписку" classTextName="textOpenSans14"/>
-                            <a href="#nogo" className="linkAutoriz">описание подписок</a>
-                            </CardForBody></Col>
+                                <a href="#nogo" className="linkAutoriz">
+                                    описание подписок
+                                </a>
+                            </CardForBody>
+                        </Col>
                         <Col className="MargForCol">
                             <CardForBody>
                                 <Container className="ContForHistoryTariff">
                                     <TableForTariffs textForTable="История подписок" classNamesTD="ForBox" headersForTable={this.headerForTariffs} contentsForTable={this.historyTariffs} />
                                 </Container>
-                            </CardForBody></Col>
+                            </CardForBody>
+                        </Col>
                     </div>
                 </div>)}
             </ThemeContextConsumer>

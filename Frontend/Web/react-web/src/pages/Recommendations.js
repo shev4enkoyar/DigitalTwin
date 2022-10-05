@@ -2,7 +2,6 @@ import React, { Component} from 'react';
 import CardForBody from './../components/cardForBody/CardForBody';
 import HeaderForDashboard from './../components/Header/HeaderForDasnboard/HeaderForDashboard';
 import SideBarDashboard from './../components/sideBarDashboard/SideBarDashboard';
-import { Container, Card, Col } from 'react-bootstrap';
 import './pages.css';
 import { IconButton } from '../components/classForDataBase';
 import BackIn_Icon from '../components/sideBarDashboard/BackInModel_Icon';
@@ -27,7 +26,8 @@ class Recommendations extends Component {
         new IconButton("/models", "Вернуться к выбору модели", <BackIn_Icon />)
     ];
     hRecommend = ['#','Дата', 'Объект','Прогнозируемое событие','Рекомендация'];
-    recommend = [{
+    recommend = [
+    {
         num: "1",
         date: new Date(2020, 4, 7).toLocaleDateString(),
         obj: "Пшеница",
@@ -85,14 +85,19 @@ class Recommendations extends Component {
     }
     ];
     render() {
-        return (<>
-            <ThemeContextConsumer>{context => (
-                <div className={context.theme+"Gray "+"bodyStyle"}>
-                    <HeaderForDashboard />
-                    <CardForBody><TableForTariffs classNamesTD="recTabl" textForTable="Рекомендации" contentsForTable={this.recommend} headersForTable={this.hRecommend}/></CardForBody>
-                    <SideBarDashboard icons={this.iconsLeftBar} />
-                </div>)}</ThemeContextConsumer>
+        return (
+            <>
+                <ThemeContextConsumer>{context => (
+                    <div className={context.theme+"Gray "+"bodyStyle"}>
+                        <HeaderForDashboard />
+                        <CardForBody>
+                            <TableForTariffs classNamesTD="recTabl" textForTable="Рекомендации" contentsForTable={this.recommend} headersForTable={this.hRecommend} />
+                        </CardForBody>
+                        <SideBarDashboard icons={this.iconsLeftBar} />
+                    </div>
+                )}
+                </ThemeContextConsumer>
         </>
-    );
+        );
     }
 } export default Recommendations;

@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import Navbar from '../components/Header/navbar/NavbarAuthorized';
 import { ThemeContextConsumer } from '../components/ThemeContext.js';
-import Inside_Card_For_Body from '../components/insideCardForBody/InsideCardForBody';
+import InsideCardForBody from '../components/insideCardForBody/InsideCardForBody';
 import CardForBody from '../components/cardForBody/CardForBody';
 import './pages.css';
-import { Row, Col, Container} from 'react-bootstrap';
+import { Container} from 'react-bootstrap';
 import Input from '../components/input/Input';
 import GPlus from './../components/logo/G+';
 import Yandex from './../components/logo/Yandex';
@@ -14,14 +14,16 @@ class Profile extends Component {
     render() {
         return (
             <ThemeContextConsumer>{context => (
-            <div className={"mainContainer"} >
+                <div className={"mainContainer"} >
                     <Navbar />
                     <div className={context.theme + "Gray " + "body_style"}>
                         <CardForBody>
                             <Container className="contForInsideCard" >
                                 <Container className="contTwoLevelForInside">
-                                    <Inside_Card_For_Body>
-                                        <p className="FirstCardH">Профиль</p>
+                                    <InsideCardForBody>
+                                        <p className="FirstCardH">
+                                            Профиль
+                                        </p>
                                         <Input classNameP="textForInpCircle" className="inputCircle" contClass="margInputContCirce" Label="Фамилия Имя Отчество"/>
                                         <Input classNameP="textForInpCircle" className="inputCircle" contClass="margInputContCirce" Label="Электронная почта"/>
                                         <Input classNameP="textForInpCircle" className="inputCircle" contClass="margInputContCirce" Label="Номер телефона"/>
@@ -35,20 +37,24 @@ class Profile extends Component {
                                             padding: '3px 20px',
                                             borderRadius: '5px' }} className="blueBut " textForButton="Сохранить" classTextName="textOpenSans14" />
                                         </Container>
-                                    </Inside_Card_For_Body>
+                                    </InsideCardForBody>
                                 </Container >
                                 <Container className="contTwoLevelForInside">
-                                    <Inside_Card_For_Body>
-                                        <p className="SecondCardH">Подключеные сети</p>
+                                    <InsideCardForBody>
+                                        <p className="SecondCardH">
+                                            Подключеные сети
+                                        </p>
                                         <Container style={{ padding: '2px 5px' } }>
-                                        <GPlus style={{width:'50px'} } />
-                                        <VK/>
+                                            <GPlus style={{width:'50px'} } />
+                                            <VK/>
                                             <Yandex />
                                         </Container>
-                                    </Inside_Card_For_Body>
+                                    </InsideCardForBody>
                                     <Container className="contThreeLevelForInside">
-                                    <Inside_Card_For_Body>
-                                            <p className="SecondCardH">Смена пароля</p>
+                                        <InsideCardForBody>
+                                            <p className="SecondCardH">
+                                                Смена пароля
+                                            </p>
                                             <Input classNameP="textForInpCircle" className="inputCircleMini" contClass="margInputContCirce" Label="Текущий пароль"/>
                                             <Input classNameP="textForInpCircle" className="inputCircleMini" contClass="margInputContCirce" Label="Новый пароль"/>
                                             <Input classNameP="textForInpCircle" className="inputCircleMini" contClass="margInputContCirce" Label="Повторите новый пароль"/>
@@ -60,13 +66,14 @@ class Profile extends Component {
                                                     borderRadius: '5px'
                                                 }} className="blueBut " textForButton="Сменить" classTextName="textOpenSans14" />
                                             </Container>
-                                        </Inside_Card_For_Body>
+                                        </InsideCardForBody>
                                     </Container >
-                                    </Container >
-                                </Container>
+                                </Container >
+                            </Container>
                         </CardForBody>
-                        </div>
-                </div>)}
+                    </div>
+                </div>
+            )}
             </ThemeContextConsumer>
         );
     }
