@@ -13,6 +13,7 @@ import CreateModel from './pages/CreateModel';
 import MapMain from "./pages/map/MapMain";
 import DashboardEmpty from './pages/DashboardEmpty';
 import Recommendations from './pages/Recommendations';
+import Dashboard from './pages/Dashboard';
 //import { HelloRequest} from './protoGenered/greet_pb';
 //import { GreeterClient} from './protoGenered/greet_grpc_web_pb';
 const App = () => {
@@ -38,7 +39,7 @@ const App = () => {
           <div className="App">
                   <Routes>
                       <Route path="/" element={<Home handleAuthorizedChanged={handleAuthorizedChanged} isAuthorized={isAuthorized}/>} />
-                      <Route path="/signUp" element={<SignUp />} />
+                  <Route path="/signUp" element={<SignUp handleAuthorizedChanged={handleAuthorizedChanged} isAuthorized={isAuthorized} />} />} />
                       <Route path="/signUpEnd" element={<SignUpEnd />} />
                       <Route path="/profile" element={<Profile />} />
                       <Route path="/tariffs" element={<Tariffs />} />
@@ -46,7 +47,8 @@ const App = () => {
                       <Route path="/createModel" element={<CreateModel />} />
                       <Route path="/dashboardEmpty" element={<DashboardEmpty />} />
                       <Route path="/map" element={<MapMain/>} />
-                      <Route path="/recom" element={<Recommendations />} />
+                  <Route path="/recom" element={<Recommendations />} />
+                  <Route path="/dash" element={<Dashboard handleAuthorizedChanged={handleAuthorizedChanged} isAuthorized={isAuthorized} />} />
                   </Routes>
             {/*<img src={logo} className="App-logo" alt="logo" />*/}
             {/*<p>*/}

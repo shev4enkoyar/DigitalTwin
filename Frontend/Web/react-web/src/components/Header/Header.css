@@ -13,10 +13,10 @@
 #headerForHome {
     padding: 0px;
     background-color: #212026;
-    position: relative;
+    position: absolute;
     min-width: 100%;
     width: 100%;
-
+    z-index: 1;
 }
 #DTwin-logo:hover:after {
     content: "AgroDigitalTwin" !important;
@@ -24,13 +24,7 @@
 #DTwin-logo:after {
         content: "ADTwin" !important;
     }
-#ModelLogo:hover:after {
-    content: "Создание технологической карты";
-}
 
-#ModelLogo:after {
-    content: "Создание технологической карты";
-}
 #nav_links {
     margin: 0;
     display: flex;
@@ -58,13 +52,14 @@
     min-height: 90px;
     padding: 0px;
     margin: 0px;
-    position:absolute;
-    width: 100%
+    position:fixed;
+    width: 100%;
+    top:0px;
+ 
 }
 #menu1 {
     width: 100%;
     display: flex;
-    margin: 0px 20px 0px 80px;
     justify-content: space-between;
     align-items: center;
     height:100%;

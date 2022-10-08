@@ -5,13 +5,18 @@ function CardsModels(props) {
 
     return (
         <Container className="cardList">
-            {
+            <div className="forCards">
+                {
                 props.culture.map(
                     (cult, index) => (
-                        <CardModel key={index} cult={cult}/>
+                        <CardModel key={index} cult={cult} />
                     )
                 )
-            }
+                }
+            </div>
+            <div>
+                {props.children}
+            </div>
         </Container>
     )
         

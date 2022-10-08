@@ -2,24 +2,24 @@ import React, { Component } from 'react';
 import CardForBody from '../components/cardForBody/CardForBody.js';
 import './pages.css';
 import Input from './../components/input/Input.js';
-import Header from '../components/Header/SubHeader/Header';
-import { ThemeContextConsumer } from "../components/ThemeContext"
-import Tumbler from '../components/tumbler/Tumbler.js';
+import NavbarHome from '../components/Header/homeNavbar/NavbarHome';
+import { ThemeContextConsumer } from "../components/ThemeContext";
+import Background from '../components/background/Background';
 import { Link } from "react-router-dom";
 import ButtonEdit from '../components/button/ButtonEdit.js';
 class SignUp extends Component {
     render() {
         return (
-        <>
-            <ThemeContextConsumer>{context=>( 
-                <div className={"mainContainer"}>
-                    <Header />
+
+            <ThemeContextConsumer>{context => ( 
+                <>
+                    <Background/>
+                    <NavbarHome handleAuthorizedChanged={this.props.handleAuthorizedChanged} isAuthorized={this.props.isAuthorized} />
                     <div className={context.theme + "Gray " + "body_style"}>
-                        <CardForBody classForContB="signUpWidth">
+                        <CardForBody className="signUpWidth">
                             <h5 style={{ fontFamily: 'Open Sans', margin: '0px 0px 40px 0px' }}>
                                 Регистрация
                             </h5>
-                            <Tumbler/>
                             <form>
                                 <Input className="input" classNameP="textForSign" Label="ФИО"></Input>
                                 <Input className="input" classNameP="textForSign" Label="Почта"></Input>
@@ -38,10 +38,10 @@ class SignUp extends Component {
                             </div>
                         </CardForBody>
                     </div>
-                    </div>
+                </>
                 )}
             </ThemeContextConsumer>
-        </>
+        
         );
     }
 } export default SignUp;

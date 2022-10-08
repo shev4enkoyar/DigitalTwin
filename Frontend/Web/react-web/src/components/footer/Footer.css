@@ -1,7 +1,6 @@
 #Footer {
 	background-color: #262626;
-	position: relative;
-	bottom: 0;
+	position: absolute;
 	color: #fff;
 	padding-left: 0px;
 	padding-right: 0px;

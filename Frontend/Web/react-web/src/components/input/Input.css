@@ -1,5 +1,6 @@
 .input {
     width:300px;
+    min-width: 260px;
     border-radius: 3px;
     height: 35px;
     background: #EEEEEE;

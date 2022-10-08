@@ -6,6 +6,7 @@ import { Row, Col, Container, Card } from 'react-bootstrap';
 import ModelsCont from '../components/cardsModels/ModelsCont';
 import NavbarHome from "../components/Header/homeNavbar/NavbarHome";
 import NavbarAuthorized from "../components/Header/navbar/NavbarAuthorized";
+import Background from '../components/background/Background';
 class Models extends Component {
     culture = [
     {
@@ -28,16 +29,18 @@ class Models extends Component {
         currentEvent: "Текущее мероприятие",
         advice: "Совет",
         color: "#FE0000"
-        }];
+        },
+    ];
     render() {
         return (
             <ThemeContextConsumer>{context => (
-                <div className={"mainContainer"}>
+                <>
+                <Background/>
+                <Container style={{ backgroundColor: '#262626', padding: '0px', width: '100%', margin: '0px', maxWidth: '100%', height: '100%'}}>
                     <NavbarAuthorized />
-                    <div className={context.theme + "Gray " + "body_style"}>
                         <ModelsCont culture={this.culture}/>
-                    </div>
-                </div>
+                    </Container>
+                </>
             )}
             </ThemeContextConsumer>
         );

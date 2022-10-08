@@ -21,10 +21,12 @@
 }
 .modal_cont.active{
 }
-.centerCard{
-    display:flex;
-    justify-content:center;
-    flex-wrap:wrap;
+.centerCard {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
 }
 .TranspCard {
     width: 100%;
@@ -36,6 +38,18 @@
     justify-self: center;
     right: -60px;
 }
-.signUpWidth{
-    width:min-content;
+.signUpWidth {
+    width: 20%;
+    min-width: min-content;
+    padding: 1em 0.8em;
+    position: absolute;
+    height: max-content;
+    background-color: #212026;
+    border-radius: 6px;
+    margin: 0px auto;
+    top: 100px;
+}
+.profPop {
+    width: 15%;
+    min-width: 130px;
 }

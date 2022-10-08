@@ -42,7 +42,7 @@ function ContentDashboard(props) {
                 }
                 <CultureCard off={true} values={modelState[0]} setOff={setM} />
                 <FieldCard off={getAble(1)} setOff={setM} />
-                <MachineCard handleActiveChanged={props.handleActiveChanged} isActive={props.isActive} off={getAble(2)} setOff={setM} />
+                <MachineCard handleActiveChanged={props.handleActiveChanged} isActive={props.isActive} off={getAble(2)||true} setOff={setM} />
                 <ChemistryCard off={getAble(3)} setOff={setM} />
                 <IoTCard off={getAble(4)} setOff={setM} />
                 <EconomicCard off={getAble(5)} setOff={setM} />

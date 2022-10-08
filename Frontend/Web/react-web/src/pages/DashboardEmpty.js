@@ -10,6 +10,7 @@ import BackIn_Icon from './../components/sideBarDashboard/BackInModel_Icon';
 import { IconButton } from './../components/classForDataBase';
 import ContentDashboard from './../components/contentDashboard/ContentDashboard';
 import { useLocation } from 'react-router';
+import { Container } from 'react-bootstrap';
 import TransportSelect from './Modal/transportSelect/TransportSelect';
 class DashboardEmpty extends Component{
     constructor(props){
@@ -36,12 +37,12 @@ class DashboardEmpty extends Component{
                 <ThemeContextConsumer>
                     {context =>
                     (
-                        <div className={context.theme + "Gray " + "bodyStyle"} style={{ display: 'flex', flexDirection: 'row', padding: '0px' }}>
+                        <Container className={context.theme + "Gray " + "mainContainer"} style={{ display: 'flex', flexDirection: 'row', padding: '0px', background: "#262626", height: "max-content", minHeight:"100%" }}>
                             <TransportSelect isActive={this.state.isActive} handleActiveChanged={this.handleActiveChanged}/>
                             <HeaderForDashboard />
                             <ContentDashboard isInherit={this.isInherit} handleActiveChanged={this.handleActiveChanged}/>
                             <SideBarDashboard icons={this.icons} />
-                        </div>
+                        </Container>
                     )
                     }
                 </ThemeContextConsumer>

@@ -7,7 +7,7 @@ import {ThemeContextConsumer} from "../../ThemeContext.js";
 const NavbarAuthorized = () => (
     <ThemeContextConsumer>{context => (
         <Navbar
-            className={context.theme + " " + context.theme + "Header" + " navbar navbar-expand-lg navbar-dark sticky-top"}
+            className={context.theme + " " + context.theme + "Header" + " navbar  navbar-dark"}
             id="headerForHome" collapseOnSelect expand="lg" variant="dark">
             <Container id="menu">
                 <Navbar.Brand href="/" className={context.theme + " navbar-brand"} id="DTwin-logo"/>

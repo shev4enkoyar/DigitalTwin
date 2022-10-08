@@ -1,11 +1,13 @@
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import './TransportSelect.css';
+import { Container } from 'react-bootstrap';
 import PopUpWithBlurCanvas from "../../../components/popUp/PopUpWithBlurCanvas";
 import TabForTransportSelect from './TabForTransportSelect';
 const TransportSelect = (props) => {
     return (
         <PopUpWithBlurCanvas isBlur={true} isActive={props.isActive} handleActiveChange={props.handleActiveChange} className="TranspCard" styleFlex={{ top: '0px!important', marginTop:'0px' } }>
+            <Container>
             <Tabs
                 defaultActiveKey="first"
                 id="justify-tab-example"
@@ -20,7 +22,8 @@ const TransportSelect = (props) => {
                 <Tab eventKey="third" title="Транспорт для сбора" >
                     <TabForTransportSelect onClick={props.handleActiveChanged} />
                 </Tab>
-            </Tabs>
+                </Tabs>
+            </Container>
         </PopUpWithBlurCanvas>
 
     );

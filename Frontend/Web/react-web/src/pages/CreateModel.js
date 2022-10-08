@@ -3,11 +3,12 @@ import CardForBody from '../components/cardForBody/CardForBody.js';
 import './pages.css';
 import Input from './../components/input/Input.js';
 import { Container } from 'react-bootstrap';
-import Header from '../components/Header/SubHeader/Header';
+import NavbarAuthorized from '../components/Header/navbar/NavbarAuthorized';
 import { ThemeContextConsumer } from "../components/ThemeContext";
 import { Link } from 'react-router-dom';
 import Combobox from '../components/combobox/ComboBox.js';
 import ButtonEdit from '../components/button/ButtonEdit.js';
+import Background from '../components/background/Background.js';
 class CreateModel extends Component {
     state = { isInherit: true }
     setInherit = (value) => {
@@ -18,14 +19,14 @@ class CreateModel extends Component {
     render() {
 
         return (
-                <>
                     <ThemeContextConsumer>
                         {context =>
-                            (
-                            <div className="mainContainer">
-                                <Header />
+                        (
+                            <>
+                                <Background/>
+                                <NavbarAuthorized />
                                 <div className={context.theme + "Gray " + "body_style"}>
-                                    <CardForBody>
+                                    <CardForBody className="signUpWidth">
                                         <h5 style={{ fontFamily: 'Open Sans', margin: '20px 0px 50px 0px' }}>
                                             Создание модели
                                         </h5>
@@ -43,11 +44,10 @@ class CreateModel extends Component {
                                         </div>
                                     </CardForBody>
                                 </div>
-                            </div>
-                            )
+                            </>
+                        )
                         }
                     </ThemeContextConsumer>
-                </>
                 );
-            }
+        }
 } export default CreateModel;

@@ -10,10 +10,12 @@ export default class HeaderForDashboard extends Component {
         return (
             <ThemeContextConsumer>{context => (
                 <Navbar className={context.theme + "Gray " + "Header" + " navbar navbar-expand-lg navbar-dark"} id="hForModels" collapseOnSelect expand="lg" variant="dark">
-                    <div id="menu1">
-                        <Navbar.Brand href="/" className={context.theme + "Gray navbar-brandForD"} id="ModelLogo" />
+                    <Container  id="menu1">
+                        <Navbar.Brand className={context.theme + "Gray navbar-brandForD"} id="ModelLogo" >
+                            Создание технологической карты
+                        </Navbar.Brand>
                         <NavLinksForDashboard/>
-                    </div>
+                    </Container>
                 </Navbar>)}
            </ThemeContextConsumer>
         )

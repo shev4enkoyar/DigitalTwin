@@ -1,5 +1,6 @@
 import { ThemeContextConsumer } from '../ThemeContext';
 import './TableForTariffs.css';
+import { Container } from 'react-bootstrap';
 function TableForTariffs(props) {
     // get table column
     console.log(props.contentsForTable[0])
@@ -11,7 +12,7 @@ function TableForTariffs(props) {
         //    return <th className="ForBox" key={data}>{data}</th>
         /* })*/
         return props.headersForTable.map((data, index) => {
-            return <th className={props.classNamesTD} key={data}>{data}</th>
+            return <th className={props.classNamesTD} key={data}><Container style={{ padding: '0px', width: '25%' } }>{data}</Container></th>
         })
     }
     // get table row data
@@ -31,15 +32,17 @@ function TableForTariffs(props) {
     }
     return (
         <ThemeContextConsumer>{context => (
-            <table className={context.theme + " HistoryTableText"}>
+            <Container>
+            <table className={props.classNameTable+" "+context.theme + " HistoryTableText"}>
                 <caption className={context.theme + " forTextTable "}>{props.textForTable}</caption>
-            <thead>
-                <tr>{ThData()}</tr>
+                    <thead>
+                            <tr>{ThData()}</tr>
             </thead>
             <tbody>
                 {tdData()}
             </tbody>
-            </table>
+                </table>
+            </Container>
         )
         }
         </ThemeContextConsumer>

@@ -68,9 +68,9 @@ class Tariffs extends Component {
     render() {
         return (
             <ThemeContextConsumer>{context => (
-                <div className={"mainContainer"}>
+                <Container className={"mainContainer"}>
                     <Navbar />
-                    <div className={context.theme + "Gray " + "body_style"}>
+                    <Container className={context.theme + "Gray " + "body_style"}>
                         <Col className="MargForCol">
                             <CardForBody classForContB="centerCard" >
                                 <p className="textOpenSansForHistTar">
@@ -93,8 +93,8 @@ class Tariffs extends Component {
                                 </Container>
                             </CardForBody>
                         </Col>
-                    </div>
-                </div>)}
+                    </ Container>
+                </Container>)}
             </ThemeContextConsumer>
         );
     }

@@ -51,11 +51,44 @@
 .col_ForFooter {
     justify-content: space-between!important;
 }
+
 .linkAutoriz {
-    margin-left:10px;
-    margin-bottom: 0px; 
+    margin-left: 10px;
+    margin-bottom: 0px;
     font-family: 'Open Sans';
-    font-size: 12px; 
-    color: #F5CA5D; 
-    text-decoration: none!important;
+    font-size: 12px;
+    color: #F5CA5D;
+    text-decoration: none !important;
+}
+
+.containerForPop.active div .modal_cont {
+    width: 20vw;
+    min-width: 250px;
+    display: flex;
+    text-align: left;
+    z-index:0;
+}
+
+.profileLink {
+    width: 100%;
+    text-align: left;
+    font-size: 15px;
+    font-family: 'Bitter';
+}
+
+    .profileLink a {
+        text-decoration: none;
+        color: white;
+    }
+
+#out {
+    color: red;
+}
+#mainText {
+    font-size: 20px;
+    text-align: left;
+    font-family: 'Bitter';
+    padding-right: calc(var(--bs-gutter-x) * .5);
+    padding-left: calc(var(--bs-gutter-x) * .5);
+    padding-bottom: 20px;
 }

@@ -1,6 +1,7 @@
 import './ContentForHome.css';
 import DarkCardForHome from './DarkCardForHome/DarkCardForHome.js';
 import GroupTarif from './DarkCardForHome/GroupTarif.js';
+import { Container } from 'react-bootstrap';
 import { ThemeContextConsumer } from "../ThemeContext"
 function CardBlur() {
     const ContentForHome = [
@@ -24,7 +25,7 @@ function CardBlur() {
         <ThemeContextConsumer>
             {
                 context=>(
-                    <div id="MarginForBlur">
+                    <Container id="MarginForBlur">
                         <div id="BorderForBlur">
                             <div id="ContBlur">
                                     <DarkCardForHome contentForHome={ContentForHome[0]} lightGray="" />
@@ -32,7 +33,7 @@ function CardBlur() {
                                     <DarkCardForHome contentForHome={ContentForHome[2]} lightGray={context.theme+"Gray"} />
                             </div>
                         </div>
-                    </div>
+                    </Container>
                 )
             }
         </ThemeContextConsumer>

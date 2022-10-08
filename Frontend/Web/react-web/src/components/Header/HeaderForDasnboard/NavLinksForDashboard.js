@@ -5,17 +5,23 @@ import ProfileIcon from '../ProfileIcon';
 import { ThemeContextConsumer, ThemeContextProvider } from "../../ThemeContext.js";
 import { useState } from 'react';
 import BellIcon from './../navbar/Bell';
-function NavLinks_For_Profile() {
+import ProfilePopUp from '../../../pages/Modal/profile/ProfilePopUp';
+function NavLinks_For_Profile(props) {
 
-    const [active, setActive] = useState(false);
-
+    const [isActive, setActive] = useState(false);
+    const handleActiveChange = () => {
+        setActive(!isActive);
+    }
     return (
         <ThemeContextConsumer>{ 
             context => (
         <Container id="nav_links" className={context.theme+"Gray "}>
                     <VectorIcon Gray={true} />
                     <BellIcon Gray={true} />
-                    <ProfileIcon Gray={true} />
+                    <button style={{ border: "none", padding: 0, background: "transparent" }} onClick={() => { setActive(true) }}>
+                        <ProfileIcon Gray={true} />
+                    </button>
+                    <ProfilePopUp isActive={isActive} handleActiveChange={handleActiveChange} />
                 </Container>
             )}
             </ThemeContextConsumer>

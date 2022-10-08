@@ -1,4 +1,4 @@
-import { Row, Col} from 'react-bootstrap';
+import { Row, Col, Container} from 'react-bootstrap';
 import './TransportSelect.css';
 import Combobox from './../../../components/combobox/ComboBox';
 import Input from './../../../components/input/Input';
@@ -25,7 +25,7 @@ const TabForTransportSelect = (props) => {
     }
     const zagForTransp =['#', 'Наименование транспорта', 'Марка транспорта', 'Количество транспорта', 'Марка шин', 'Количество шин'];
     return (
-        <div className="tabForTransp">
+        <Container className="tabForTransp">
             <Row id="rowForTab">
                 <Combobox setInherit={(value) => { handleSelectTransp({ transp: value }) }} classTextCombobox="textForSign12" textCombobox="Транспорт" classNameCont="forTransp " options={transport} />
                 <Combobox setInherit={(value) => { handleSelectTransp({ markTransp: value }) }} classTextCombobox="textForSign12" textCombobox="Марка транспорта" classNameCont="forTransp " options={markaTrans} />
@@ -37,8 +37,8 @@ const TabForTransportSelect = (props) => {
                 <ButtonEdit onClick={handleAddingTransp} className="blueBut dashBut simpleBut" textForButton="Добавить" classTextName="textOpenSans14" buttonStyle={{margin:'10px 0px'} } />
                 <ButtonEdit onClick={() => { props.onClick(false) }} className="blueBut dashBut simpleBut" textForButton="Закрыть окно" classTextName="textOpenSans14" buttonStyle={{ margin: '5px 0px' }} />  
             </Col>
-            <TableForTariffs textForTable="Добавленный транспорт" classNamesTD="ForBox" headersForTable={zagForTransp} contentsForTable={(isAddTransp[0] === undefined) ? [{ num: "", transp: "", markaTrans: "", countTransp: "", markaSHin: "", countShin: "" }] : isAddTransp} />
-        </div>
+            <TableForTariffs classNameTable="margTable" classNamesTD="" textForTable="Добавленный транспорт" classNamesTD="ForBox" headersForTable={zagForTransp} contentsForTable={(isAddTransp[0] === undefined) ? [{ num: "", transp: "", markaTrans: "", countTransp: "", markaSHin: "", countShin: "" }] : isAddTransp} />
+        </Container>
 
     );
 }; export default TabForTransportSelect;
