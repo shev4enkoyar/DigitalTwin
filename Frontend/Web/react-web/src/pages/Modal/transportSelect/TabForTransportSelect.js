@@ -27,17 +27,17 @@ const TabForTransportSelect = (props) => {
     return (
         <Container className="tabForTransp">
             <Row id="rowForTab">
-                <Combobox setInherit={(value) => { handleSelectTransp({ transp: value }) }} classTextCombobox="textForSign12" textCombobox="Транспорт" classNameCont="forTransp " options={transport} />
-                <Combobox setInherit={(value) => { handleSelectTransp({ markTransp: value }) }} classTextCombobox="textForSign12" textCombobox="Марка транспорта" classNameCont="forTransp " options={markaTrans} />
+                <Combobox setInherit={(value) => { handleSelectTransp({ transp: value }) }} className="FormControlSelect" classTextCombobox="textForSign12" textCombobox="Транспорт" classNameCont="forTransp " options={transport} />
+                <Combobox setInherit={(value) => { handleSelectTransp({ markTransp: value }) }} className="FormControlSelect" classTextCombobox="textForSign12" textCombobox="Марка транспорта" classNameCont="forTransp " options={markaTrans} />
                 <Input onChange={(value) => { handleSelectTransp({ countTransp: value.target.value }) }} Label="Количество транспорта" classNameP="textForSign12 forNowrap" className="inpCreateForDashCard " contClass="inpContForTransp" placeholder="0" />
-                <Combobox setInherit={(value) => { handleSelectTransp({ markShin: value }) }} classTextCombobox="textForSign12" textCombobox="Марка шин" classNameCont="forTransp " options={markaSHin} />
+                <Combobox setInherit={(value) => { handleSelectTransp({ markShin: value }) }} className="FormControlSelect"  classTextCombobox="textForSign12" textCombobox="Марка шин" classNameCont="forTransp " options={markaSHin} />
                 <Input onChange={(value) => { handleSelectTransp({ countShin: value.target.value }) }} Label="Количество шин" classNameP="textForSign12 forNowrap" className="inpCreateForDashCard " contClass="inpContForTransp" placeholder="0" />
             </Row>
             <Col style={{ marginBottom: '40px', display: 'flex', flexDirection:'column' }}>
                 <ButtonEdit onClick={handleAddingTransp} className="blueBut dashBut simpleBut" textForButton="Добавить" classTextName="textOpenSans14" buttonStyle={{margin:'10px 0px'} } />
                 <ButtonEdit onClick={() => { props.onClick(false) }} className="blueBut dashBut simpleBut" textForButton="Закрыть окно" classTextName="textOpenSans14" buttonStyle={{ margin: '5px 0px' }} />  
             </Col>
-            <TableForTariffs classNameTable="margTable" classNamesTD="" textForTable="Добавленный транспорт" classNamesTD="ForBox" headersForTable={zagForTransp} contentsForTable={(isAddTransp[0] === undefined) ? [{ num: "", transp: "", markaTrans: "", countTransp: "", markaSHin: "", countShin: "" }] : isAddTransp} />
+            <TableForTariffs classNameTab="margTable" textForTable="Добавленный транспорт" classNamesTD="ForBox" headersForTable={zagForTransp} contentsForTable={(isAddTransp[0] === undefined) ? [{ num: "", transp: "", markaTrans: "", countTransp: "", markaSHin: "", countShin: "" }] : isAddTransp} />
         </Container>
 
     );

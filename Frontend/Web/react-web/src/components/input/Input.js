@@ -6,7 +6,7 @@ function Input(props) {
             <p className={props.classNameP}>
                 {props.Label}
             </p>
-            <input onChange={props.onChange} className={props.className} placeholder={props.placeholder}/>
+            <input onChange={props.onChange} onInput={props.onInput} value={props.value} className={props.className} placeholder={props.placeholder}/>
         </Container>
 
     );

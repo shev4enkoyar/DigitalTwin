@@ -11,7 +11,7 @@ function Combobox(props) {
                 <label className={props.classTextCombobox} >
                     {props.textCombobox}
                 </label>
-                <select onChange={changeSelect} className="form-control " id="FormControlSelect">
+                <select onChange={changeSelect} className={props.className+" form-control "}>
                     {props.options.map
                         (
                             (option) =>

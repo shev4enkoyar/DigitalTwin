@@ -14,6 +14,7 @@ import GraphicIcon from '../components/sideBarDashboard/GraficIcon';
 import HistoryPriceIcon from '../components/sideBarDashboard/HistoryPriceIcon';
 import RecIcon from '../components/sideBarDashboard/RecIcon';
 import TableForTariffs from '../components/tableForTariffs/TableForTariffs.js';
+import Background from '../components/background/Background';
 class Recommendations extends Component {
     iconsLeftBar = [
         new IconButton("#/", "Главная панель", <HomePanel_Icon />),
@@ -86,18 +87,19 @@ class Recommendations extends Component {
     ];
     render() {
         return (
-            <>
-                <ThemeContextConsumer>{context => (
-                    <div className={context.theme+"Gray "+"bodyStyle"}>
-                        <HeaderForDashboard />
-                        <CardForBody>
-                            <TableForTariffs classNamesTD="recTabl" textForTable="Рекомендации" contentsForTable={this.recommend} headersForTable={this.hRecommend} />
-                        </CardForBody>
-                        <SideBarDashboard icons={this.iconsLeftBar} />
-                    </div>
+            <ThemeContextConsumer>{context => (
+                    <>
+                        <Background/>
+                        <div className={context.theme + "Gray " + "body_style"}>
+                            <HeaderForDashboard />
+                        <CardForBody className="signUpWidth">
+                                <TableForTariffs classNameTab="margTable" classNamesTD="ForBox" textForTable="Рекомендации" contentsForTable={this.recommend} headersForTable={this.hRecommend} />
+                            </CardForBody>
+                            <SideBarDashboard icons={this.iconsLeftBar} />
+                        </div>
+                    </>
                 )}
-                </ThemeContextConsumer>
-        </>
+            </ThemeContextConsumer>
         );
     }
 } export default Recommendations;

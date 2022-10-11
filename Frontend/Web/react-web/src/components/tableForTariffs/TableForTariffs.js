@@ -12,7 +12,7 @@ function TableForTariffs(props) {
         //    return <th className="ForBox" key={data}>{data}</th>
         /* })*/
         return props.headersForTable.map((data, index) => {
-            return <th className={props.classNamesTD} key={data}><Container style={{ padding: '0px', width: '25%' } }>{data}</Container></th>
+            return <th className={props.classNamesTD} key={data}>{data}</th>
         })
     }
     // get table row data
@@ -33,10 +33,10 @@ function TableForTariffs(props) {
     return (
         <ThemeContextConsumer>{context => (
             <Container>
-            <table className={props.classNameTable+" "+context.theme + " HistoryTableText"}>
+                <table className={props.classNameTab +" "+ context.theme + " HistoryTableText"}>
                 <caption className={context.theme + " forTextTable "}>{props.textForTable}</caption>
                     <thead>
-                            <tr>{ThData()}</tr>
+                        <tr className={props.classNameTR}>{ThData()}</tr>
             </thead>
             <tbody>
                 {tdData()}

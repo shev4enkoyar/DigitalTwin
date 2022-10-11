@@ -6,7 +6,7 @@ function CardForBody(props) {
         <ThemeContextConsumer>
             {
                 context => (
-                    <Card onClick={props.onClick} className={props.className + " "+(props.active ? "modal_cont active " : "modal_cont ") + context.theme + " CardBodyDark"}> 
+                    <Card style={props.styleForCard} onClick={props.onClick} className={props.className + " "+(props.active ? "modal_cont active " : "modal_cont ") + context.theme + " CardBodyDark"}> 
                         <Container style={props.styleTextForCard} className={props.classForContB + " " + context.theme + " textForCardDark"}>
                             {props.children}
                         </Container>

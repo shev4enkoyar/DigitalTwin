@@ -10,14 +10,16 @@ import ContForProfile from './../components/contForAnkProfile/ContForProfile';
 import Yandex from './../components/logo/Yandex';
 import VK from './../components/logo/VK';
 import ButtonEdit from '../components/button/ButtonEdit';
+import Background from '../components/background/Background';
 class Profile extends Component {
     render() {
         return (
             <ThemeContextConsumer>{context => (
-                <Container className={"mainContainer"} >
+                <>
+                    <Background/>
                     <Navbar />
                     <Container className={context.theme + "Gray " + "body_style"}>
-                        <CardForBody styleTextForCard={{ display: 'flex', flexWrap: 'wrap'}}>
+                        <CardForBody styleForCard={{ width: 'auto', padding: '3% 0.5%' }} className="signUpWidth" styleTextForCard={{ display: 'flex', flexWrap: 'wrap' }}>
                             <Col>
                                 <ContForProfile classNameForContMain="contTwoLevelForInside" classNameForP="FirstCardH" nameCard="Профиль">
                                     <Input classNameP="textForInpCircle" className="inputCircle" contClass="margInputContCirce" Label="Фамилия Имя Отчество" />
@@ -58,7 +60,7 @@ class Profile extends Component {
                             </Col>
                         </CardForBody>
                     </Container>
-                </Container>
+                </>
             )}
             </ThemeContextConsumer>
         );

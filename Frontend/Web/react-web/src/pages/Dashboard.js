@@ -25,13 +25,10 @@ import Background from '../components/background/Background';
 import GroupTarif from './../components/ContentForHome/DarkCardForHome/Tarif/Tarif';
 import NavbarHome from '../components/Header/homeNavbar/NavbarHome';
 class Dashboard extends Component {
-  
-    render() {
+    
+    render(props) {
         return (
             <>
-                <Background />
-                <NavbarHome handleAuthorizedChanged={this.props.handleAuthorizedChanged} isAuthorized={this.props.isAuthorized} />
-
             </>
                 );
     }

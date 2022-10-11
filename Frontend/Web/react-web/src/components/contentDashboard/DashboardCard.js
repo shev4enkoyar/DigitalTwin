@@ -55,22 +55,32 @@ export const CultureCard = (props) => {
     let isAllOk = false;
     const cult = ["Введите наименование культуры...", "Рис", "Овес"]
     const sortForCult = ["Введите сорт культуры...", "cc"]
+    const [isState, setState] = useState({ cult: 0, sort: 0, frac: "", gust: "", norm: "", total: "" })
+    const isFull = () => {
+        if (isState === null || isState === undefined) {
+        }
+        props.setStatus({ cult: !Object.keys(isState).map(val => isState[val]).some(function (value, index, array) { return (value === false || value === 0 || value === "" || value === undefined) }) })
+    }
+    const setStateValue = (value) => {
+        setState({...isState,...value})
+        console.log(isState)
+    }
     return (
         <DashboardCard hText="Статус модели" descr="Требуется добавить данные о культуре!" notifyColor="#DC3545" off={props.off}>
             <Container style={{ display: 'flex', flexWrap: 'wrap' }}>
                 <Col style={{ marginRight: '1px' }}>
-                    <Combobox classTextCombobox="textForSign12" textCombobox="Культура" classNameCont="padCombobox " options={cult} setInherit={(empty) => { props.setOff(0, { cult: empty ? 1 : 0 }) }} />
-                    <Input Label="Фракция" classNameP="textForSign12" className="inpCreateForDashCard" contClass="contForInpDashE" onChange={(event) => { props.setOff(0, { frac: event.target.value.trim() }) }} />
-                    <Input Label="Норма высева" classNameP="textForSign12" className="inpCreateForDashCard" contClass="contForInpDashE" onChange={(event) => { props.setOff(0, { norm: event.target.value.trim() }) }} />
+                    <Combobox className="FormControlSelect" classTextCombobox="textForSign12" textCombobox="Культура" classNameCont="padCombobox " options={cult} setInherit={(empty) => {setStateValue({ cult: empty ? 1 : 0 }) }} />
+                    <Input Label="Фракция" classNameP="textForSign12" className="inpCreateForDashCard" contClass="contForInpDashE" value={isState.frac} onChange={(event) => { setStateValue({ frac: event.target.value.trim() }) }} />
+                    <Input Label="Норма высева" classNameP="textForSign12" className="inpCreateForDashCard" contClass="contForInpDashE" onInput={(event) => { var reg = /^[0-9]*$/i.test(event.target.value); console.log(reg, props.values); if (reg) setStateValue({ norm: event.target.value.trim() }) }} value={isState.norm} />
                 </Col>
                 <Col style={{ marginLeft: '1px' }}>
-                    <Combobox classTextCombobox="textForSign12" textCombobox="Сорт" classNameCont="padCombobox " options={sortForCult} setInherit={(empty) => { props.setOff(0, { sort: empty ? 1 : 0 }) }} />
-                    <Input Label="Густота" classNameP="textForSign12" className="inpCreateForDashCard" contClass="contForInpDashE" onChange={(event) => { props.setOff(0, { gust: event.target.value.trim() }) }} />
-                    <Input Label="Вес этапов" classNameP="textForSign12" className="inpCreateForDashCard" contClass="contForInpDashE" onChange={(event) => { props.setOff(0, { total: event.target.value.trim() }) }} />
+                    <Combobox className="FormControlSelect" classTextCombobox="textForSign12" textCombobox="Сорт" classNameCont="padCombobox " options={sortForCult} setInherit={(empty) => {setStateValue({ sort: empty ? 1 : 0 }) }} />
+                    <Input Label="Густота" classNameP="textForSign12" className="inpCreateForDashCard" contClass="contForInpDashE" value={isState.gust} onChange={(event) => {setStateValue({ gust: event.target.value.trim() }) }} />
+                    <Input Label="Вес этапов" classNameP="textForSign12" className="inpCreateForDashCard" contClass="contForInpDashE" value={isState.total} onChange={(event) => {setStateValue({ total: event.target.value.trim() }) }} />
                 </Col>
             </Container>
             <Container className="contButton">
-                <ButtonEdit className="blueBut dashBut simpleBut" textForButton="Добавить" classTextName="textOpenSans14" />
+                <ButtonEdit className="blueBut dashBut simpleBut" textForButton="Добавить" classTextName="textOpenSans14" onClick={isFull} />
             </Container>
         </DashboardCard>
     )
@@ -117,8 +127,9 @@ export const EconomicCard = (props) => {
     )
 }
 export const FieldCard = (props) => {
+
     return (
-        <DashboardCard f="d" off={props.off} hText="Статус модели" descr="Требуется добавить данные о поле!" notifyColor="#DC3545" isBut={<ButtonEdit className="blueBut ButAllMini" image={map_icon} imageClassName="icon_for_but" />}>
+        <DashboardCard f="d" off={props.statusOff} hText="Статус модели" descr="Требуется добавить данные о поле!" notifyColor="#DC3545" isBut={<ButtonEdit className="blueBut ButAllMini" image={map_icon} imageClassName="icon_for_but" />}>
             <Container style={{ display: 'flex', flexWrap: 'nowrap', alignItems: 'flex-end', padding: '0px', margin: '0px 0px 0.5rem 0px', width: '100%' }}>
                 <Input className="inpCreateForDashCard" Label="Кадастровый номер" classNameP="textForSign12" onChange={(event) => { props.setOff(1, { kad: event.target.value.trim() }) }} />
             </Container>

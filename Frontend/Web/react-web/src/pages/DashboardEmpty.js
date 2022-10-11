@@ -12,10 +12,11 @@ import ContentDashboard from './../components/contentDashboard/ContentDashboard'
 import { useLocation } from 'react-router';
 import { Container } from 'react-bootstrap';
 import TransportSelect from './Modal/transportSelect/TransportSelect';
+import Background from '../components/background/Background';
 class DashboardEmpty extends Component{
     constructor(props){
         super(props);
-        this.state = { isActive:false };
+        this.state = { isActive: false };
     }
     handleActiveChanged = () => {
         let prev = this.state.isActive;
@@ -33,20 +34,19 @@ class DashboardEmpty extends Component{
     render(props)
     { 
         return(
-            <>
                 <ThemeContextConsumer>
                     {context =>
                     (
-                        <Container className={context.theme + "Gray " + "mainContainer"} style={{ display: 'flex', flexDirection: 'row', padding: '0px', background: "#262626", height: "max-content", minHeight:"100%" }}>
+                        <>
+                            <Background/>
                             <TransportSelect isActive={this.state.isActive} handleActiveChanged={this.handleActiveChanged}/>
                             <HeaderForDashboard />
                             <ContentDashboard isInherit={this.isInherit} handleActiveChanged={this.handleActiveChanged}/>
                             <SideBarDashboard icons={this.icons} />
-                        </Container>
+                        </>
                     )
                     }
                 </ThemeContextConsumer>
-            </>
         );
     }
 }

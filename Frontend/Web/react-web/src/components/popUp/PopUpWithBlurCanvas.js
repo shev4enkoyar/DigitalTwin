@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 const PopUpWithBlurCanvas = (props) => {
     const RenderBlur = () => {
         if (props.isBlur)
-            return <div className={"blur"}/>;
+            return <div className={props.isActive ? "blur active":"blur"}/>;
         else
             return null;
     }

@@ -11,6 +11,7 @@ import ButtonEdit from '../button/ButtonEdit';
 import { useState } from 'react';
 function ContentDashboard(props) {
     const [modelState, setModelState] = useState([{ cult: 0, sort: 0, frac: "", gust: "", norm: "", total: "" }, { kad: "" }, { added: false }, { chem: false }, { dat: false }, { econom: false }])
+    const [statusState, setStatusState] = useState({cult:false, kad: false, trans:false, chem: false,ioT:false,ak:false})
     const [isInherit, setInherit] = useState(props.isInherit ? true : false)
     const inheritOff = () => {
         setInherit(false)
@@ -29,10 +30,16 @@ function ContentDashboard(props) {
         }
         return true
     }
+    const getAble1 = (k) => {
+        return !Object.keys(statusState).map((val, i) => {return i<k? statusState[val]:true }).some(function (value, index, array) { return (value === false) })
+    }
     const setM = (i, f) => {
         setModelState(modelState.map((val, index) => index == i ? { ...val, ...f } : { ...val }))
+    }
+    const setStatus = (value) => {
+        setStatusState({...statusState, ...value })
         console.log(modelState)
-    } 
+    }
     return (
         <ThemeContextConsumer>{context => (
             <Container className={context.theme + "Gray " + "contForDashboardEM "}>
@@ -40,8 +47,8 @@ function ContentDashboard(props) {
                     (!isInherit) ? '' :
                         <HistoryCard off={true} isPred={() => inheritOff()}></HistoryCard>
                 }
-                <CultureCard off={true} values={modelState[0]} setOff={setM} />
-                <FieldCard off={getAble(1)} setOff={setM} />
+                <CultureCard off={true} values={modelState[0]} setOff={setM} setStatus={setStatus} />
+                <FieldCard off={getAble(1)} setOff={setM} setStatus={setStatus} statusOff={getAble1(1)} />
                 <MachineCard handleActiveChanged={props.handleActiveChanged} isActive={props.isActive} off={getAble(2)||true} setOff={setM} />
                 <ChemistryCard off={getAble(3)} setOff={setM} />
                 <IoTCard off={getAble(4)} setOff={setM} />

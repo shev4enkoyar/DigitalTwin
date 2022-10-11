@@ -1,9 +1,10 @@
 import { ThemeContextConsumer } from '../ThemeContext';
+import './Background.css';
 function Background(props) {
 
     return (
         <ThemeContextConsumer>{context => (
-            <div className={context.theme + 'Gray'} style={{ position: "fixed", backgroundColor: '#262626', padding: '0px', width: '100%', margin: '0px', maxWidth: '100%', height: '100%' }} />
+            <div className={context.theme + 'Gray background'} style={props.style}/>
         )
         }
         </ThemeContextConsumer>

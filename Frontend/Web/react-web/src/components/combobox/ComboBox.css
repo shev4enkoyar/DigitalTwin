@@ -1,16 +1,20 @@
-#FormControlSelect {
+.FormControlSelect {
     appearance: auto !important;
     background-color: #EEEEEE;
     border-radius: 3px;
     padding: 0px 0px 0px !important;
     height: 35px;
     color: #78797B;
+    width: 100%;
+}
+.minWForCombobox {
+    min-width: 260px;
 }
 .contForCombobox {
     width: 100%;
     padding-right: calc(var(--bs-gutter-x) * .5);
     padding-left: calc(var(--bs-gutter-x) * .5);
-    padding-top:10px;
+    padding-top: 10px;
     display: flex;
     align-items: flex-start;
     flex-direction: column;

@@ -1,0 +1,9 @@
+.background {
+    position: fixed;
+    background-color: #262626;
+    padding: 0px;
+    width: 100%;
+    margin: 0px;
+    max-width: 100%;
+    height: 100%;
+}

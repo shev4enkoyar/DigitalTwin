@@ -32,6 +32,8 @@
     justify-content: right;
     width: max-content;
     position: relative;
+    padding: 0px;
+    margin: 0px 35px;
 }
 #menu{
     display:flex;
@@ -44,23 +46,29 @@
 }
 .navbar-brandForD {
     display: inline;
-    font-size: 28px;
+    font-size: 170%;
+    white-space: pre-line;
     font-family: 'Yeseva One' !important;
+    margin: 0px;
+    padding: 0px 0px 0px 20px;
 }
 #hForModels {
     height: 90px;
     min-height: 90px;
     padding: 0px;
     margin: 0px;
-    position:fixed;
+    top: 0px;
+    position: absolute;
+    min-width: 100%;
     width: 100%;
-    top:0px;
- 
+    z-index: 1;
 }
 #menu1 {
     width: 100%;
+    min-width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height:100%;
+    height: 100%;
+    padding: 0px 5%;
 }

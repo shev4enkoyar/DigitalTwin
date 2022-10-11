@@ -7,7 +7,7 @@ import TabForTransportSelect from './TabForTransportSelect';
 const TransportSelect = (props) => {
     return (
         <PopUpWithBlurCanvas isBlur={true} isActive={props.isActive} handleActiveChange={props.handleActiveChange} className="TranspCard" styleFlex={{ top: '0px!important', marginTop:'0px' } }>
-            <Container>
+            <Container style={{ padding: '0px'} }>
             <Tabs
                 defaultActiveKey="first"
                 id="justify-tab-example"

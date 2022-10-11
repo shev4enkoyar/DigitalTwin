@@ -1,9 +1,10 @@
 .contForDashboardEM {
     margin-left: 80px;
     padding: 0px 0px 0px 0px;
-    max-width: 90%;
+    width: calc(100% - 80px);
     display: flex;
-    margin-top: 90px;
+    margin-top: 115px;
+    position: absolute;
     flex-wrap: wrap;
 }
 .marForDescr {

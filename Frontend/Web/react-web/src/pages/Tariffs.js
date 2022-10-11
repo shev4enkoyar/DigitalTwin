@@ -8,6 +8,7 @@ import { Col, Container } from 'react-bootstrap';
 import plus_icon from './../components/data/plusForButtonAdding.svg';
 import TableForTariffs from '../components/tableForTariffs/TableForTariffs';
 import ButtonEdit from '../components/button/ButtonEdit';
+import Background from '../components/background/Background';
 class Tariffs extends Component {
      AddCancel = ['Наименование подписки 1',
         'Наименование подписки 2',
@@ -68,11 +69,12 @@ class Tariffs extends Component {
     render() {
         return (
             <ThemeContextConsumer>{context => (
-                <Container className={"mainContainer"}>
+                <>
+                    <Background/>
                     <Navbar />
                     <Container className={context.theme + "Gray " + "body_style"}>
                         <Col className="MargForCol">
-                            <CardForBody classForContB="centerCard" >
+                            <CardForBody styleForCard={{ position: 'relative'} } className="signUpWidth" classForContB=" centerCard" >
                                 <p className="textOpenSansForHistTar">
                                     Продлить/отменить подписки
                                 </p>
@@ -87,14 +89,15 @@ class Tariffs extends Component {
                             </CardForBody>
                         </Col>
                         <Col className="MargForCol">
-                            <CardForBody>
+                            <CardForBody styleForCard={{ position: 'relative' }} className="signUpWidth">
                                 <Container className="ContForHistoryTariff">
                                     <TableForTariffs textForTable="История подписок" classNamesTD="ForBox" headersForTable={this.headerForTariffs} contentsForTable={this.historyTariffs} />
                                 </Container>
                             </CardForBody>
                         </Col>
                     </ Container>
-                </Container>)}
+                </>
+            )}
             </ThemeContextConsumer>
         );
     }

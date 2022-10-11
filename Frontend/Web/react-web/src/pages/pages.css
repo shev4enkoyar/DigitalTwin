@@ -17,6 +17,7 @@ body, html{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    max-width:50%;
 }
 
 #Warning {
@@ -84,7 +85,7 @@ body, html{
 
 
 .MargForCol{
-    margin: 0px 5px;
+    margin: 5px 5px;
     flex: 0 0;
 }
 .ContForHistoryTariff {
@@ -132,15 +133,6 @@ body, html{
     display: block;
 }
 
-.blur {
-    position: fixed;
-    height: 100vh;
-    width: 100vw;
-    background: rgb(0,0,0,0.6);
-    right: 0;
-    top: 0;
-    display:none;
-}
 .contForPanel_blocked.alt .sidebar_blocked .TextPanel .IconForPanel_blocked:hover::after {
     left: auto;
     right: 20px;
