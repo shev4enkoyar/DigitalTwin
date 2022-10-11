@@ -51,13 +51,13 @@ body, html{
     background: #FFFFFF !important;
     color: #334152 !important;
     fill: #334152 !important;
-    filter: invert(0);
 }
 
 .lightIcon {
     fill: #334152 !important;
     background: #FFFFFF00 !important;
-    filter: contrast(1) brightness(1)!important;
+    filter: contrast(1) brightness(1) !important;
+    filter: invert(0);
 }
 
 .lightGray {

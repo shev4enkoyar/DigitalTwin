@@ -8,7 +8,7 @@ const ProfilePopUp = (props) => {
     return (
         <ThemeContextConsumer>{
             context => (
-                <PopUpWithBlurCanvas className="profPop" isActive={props.isActive} handleActiveChange={props.handleActiveChange} >
+                <PopUpWithBlurCanvas isBlur={true} isActive={props.isActive} handleActiveChange={props.handleActiveChange} className="profPop" >
                     <p id="mainText" className='profileLink'>
                         Профиль
                     </p>

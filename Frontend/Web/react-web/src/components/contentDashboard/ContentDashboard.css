@@ -55,8 +55,8 @@
 }
 
 .cardSize {
-    min-width:300px;
-    width: 23%;
+    min-width: 300px;
+    width: calc(25% - 20px);
     display: flex;
     justify-content: center;
     margin: 2px 10px 20px;

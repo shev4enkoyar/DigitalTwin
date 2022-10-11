@@ -7,7 +7,7 @@ function VectorIcon(props) {
         <ThemeContextConsumer>
             {context => (
                 <Nav.Link className={context.theme + (props.Gray ? "Gray " : " ") + " navbar-brand"} onClick={context.toggleTheme}>
-                    <img fill="#000000" src={vector} className={context.theme + (props.Gray ? "Gray " : " ") + " icon_for_header"} />
+                    <img fill="#000000" src={vector} className={context.theme + (props.Gray ? "Gray " : "Icon ") + " icon_for_header"} />
                 </Nav.Link>)}
         </ThemeContextConsumer>
     )

@@ -8,7 +8,7 @@ function ProfileIcon(props) {
 		
 		<ThemeContextConsumer >{context => (
 				/*<Nav.Link href="/profile" className={context.theme + " navbar-brand"}>*/
-			<img id="Layer_1" className={context.theme + (props.Gray ? "Gray " : " ") + " icon_for_header"} src={profile} />	
+			<img id="Layer_1" className={context.theme + (props.Gray ? "Gray " : "Icon ") + " icon_for_header"} src={profile} />	
 
 				/*</Nav.Link >*/
 		)

@@ -75,8 +75,8 @@ export const CultureCard = (props) => {
                 </Col>
                 <Col style={{ marginLeft: '1px' }}>
                     <Combobox className="FormControlSelect" classTextCombobox="textForSign12" textCombobox="Сорт" classNameCont="padCombobox " options={sortForCult} setInherit={(empty) => {setStateValue({ sort: empty ? 1 : 0 }) }} />
-                    <Input Label="Густота" classNameP="textForSign12" className="inpCreateForDashCard" contClass="contForInpDashE" value={isState.gust} onChange={(event) => {setStateValue({ gust: event.target.value.trim() }) }} />
-                    <Input Label="Вес этапов" classNameP="textForSign12" className="inpCreateForDashCard" contClass="contForInpDashE" value={isState.total} onChange={(event) => {setStateValue({ total: event.target.value.trim() }) }} />
+                    <Input Label="Густота" classNameP="textForSign12" className="inpCreateForDashCard" contClass="contForInpDashE" onInput={(event) => { var reg = /^[0-9]*$/i.test(event.target.value); console.log(reg, props.values); if (reg) setStateValue({ gust: event.target.value.trim() }) }} value={isState.gust} />
+                    <Input Label="Вес этапов" classNameP="textForSign12" className="inpCreateForDashCard" contClass="contForInpDashE" onInput={(event) => { var reg = /^[0-9]*$/i.test(event.target.value); console.log(reg, props.values); if (reg) setStateValue({ total: event.target.value.trim() }) }} value={isState.total} />
                 </Col>
             </Container>
             <Container className="contButton">
@@ -87,54 +87,95 @@ export const CultureCard = (props) => {
 }
 export const MachineCard = (props) => {
     const techs = ["Введите технику..."];
-    
+    const isFull = () => {
+        props.setStatus()
+    }
     return (
         <DashboardCard off={props.off} hText="Статус модели" descr="Требуется добавить технику!" notifyColor="#DC3545" >
             <Container style={{ display: 'flex', justifyContent: 'center', padding: '0px', margin: '0px 0px 0.5rem 0px', width: '100%' }}>
                 <ButtonEdit onClick={() => { props.handleActiveChanged(true) }} className="blueBut dashBut simpleBut" textForButton="Выбрать" classTextName="textOpenSans14" />
             </Container>
             <Container className="contButton">
-                <ButtonEdit className="blueBut dashBut simpleBut" textForButton="Добавить" classTextName="textOpenSans14" onClick={()=>{ props.setOff(2, { added: true }) }}/>
+                <ButtonEdit className="blueBut dashBut simpleBut" textForButton="Добавить" classTextName="textOpenSans14" onClick={isFull} />
             </Container>
         </DashboardCard>
 
     )
 }
 export const ChemistryCard = (props) => {
+    const [isState, setState] = useState({ cult: 0, sort: 0, frac: "", gust: "", norm: "", total: "" })
+    const isFull = () => {
+        if (isState === null || isState === undefined) {
+        }
+        props.setStatus({ chem: !Object.keys(isState).map(val => isState[val]).some(function (value, index, array) { return (value === false || value === 0 || value === "" || value === undefined) }) })
+    }
+    const setStateValue = (value) => {
+        setState({ ...isState, ...value })
+        console.log(isState)
+    }
     return (
         <DashboardCard off={props.off} hText="Статус модели" descr="Требуется добавить данные о химических средствах!" notifyColor="#DC3545" >
             <Container className="contButton">
-                <ButtonEdit className="blueBut dashBut simpleBut" textForButton="Добавить" classTextName="textOpenSans14" onClick={() => { props.setOff(3, { chem: true }) }} />
+                <ButtonEdit className="blueBut dashBut simpleBut" textForButton="Добавить" classTextName="textOpenSans14" onClick={isFull} />
             </Container>
         </DashboardCard>
     )
 }
 export const IoTCard = (props) => {
+    const [isState, setState] = useState({ cult: 0, sort: 0, frac: "", gust: "", norm: "", total: "" })
+    const isFull = () => {
+        if (isState === null || isState === undefined) {
+        }
+        props.setStatus({ ioT: !Object.keys(isState).map(val => isState[val]).some(function (value, index, array) { return (value === false || value === 0 || value === "" || value === undefined) }) })
+    }
+    const setStateValue = (value) => {
+        setState({ ...isState, ...value })
+        console.log(isState)
+    }
     return (
-        <DashboardCard off={props.off} hText="Статус датчиков" descr="Нет ни одного датчика!" notifyColor="#E2891F" isBut={<ButtonEdit className="redBut ButAllMini" image={sen_icon} imageClassName="icon_for_but" onClick={() => { props.setOff(4, { dat: true }) }} />} >
+        <DashboardCard off={props.off} hText="Статус датчиков" descr="Нет ни одного датчика!" notifyColor="#E2891F" isBut={<ButtonEdit onClick={isFull} className="redBut ButAllMini" image={sen_icon} imageClassName="icon_for_but"/>} >
             <Container style={{ display: 'flex', flexWrap: 'nowrap', alignItems: 'flex-end', padding: '0px', margin: '0px 0px 0.5rem 0px', width: '100%' }}>
             </Container>
         </DashboardCard>
     )
 }
 export const EconomicCard = (props) => {
+    const [isState, setState] = useState({ cult: 0, sort: 0, frac: "", gust: "", norm: "", total: "" })
+    const isFull = () => {
+        if (isState === null || isState === undefined) {
+        }
+        props.setStatus({ ak: !Object.keys(isState).map(val => isState[val]).some(function (value, index, array) { return (value === false || value === 0 || value === "" || value === undefined) }) })
+    }
+    const setStateValue = (value) => {
+        setState({ ...isState, ...value })
+        console.log(isState)
+    }
     return (
         <DashboardCard off={props.off} hText="Статус модели" descr="Требуется добавить данные экономических показателей!" notifyColor="#DC3545">
             <Container className="contButton">
-                <ButtonEdit className="blueBut dashBut simpleBut" textForButton="Добавить" classTextName="textOpenSans14" onClick={() => { props.setOff(5, { econom: true }) }} />
+                <ButtonEdit className="blueBut dashBut simpleBut" textForButton="Добавить" classTextName="textOpenSans14" onClick={isFull} />
             </Container>
         </DashboardCard>
     )
 }
 export const FieldCard = (props) => {
-
+    const [isState, setState] = useState({ numKad: 0 })
+    const isFull = () => {
+        if (isState === null || isState === undefined) {
+        }
+        props.setStatus({ kad: !Object.keys(isState).map(val => isState[val]).some(function (value, index, array) { return (value === false || value === 0 || value === "" || value === undefined) }) })
+    }
+    const setStateValue = (value) => {
+        setState({ ...isState, ...value })
+        console.log(isState)
+    }
     return (
         <DashboardCard f="d" off={props.statusOff} hText="Статус модели" descr="Требуется добавить данные о поле!" notifyColor="#DC3545" isBut={<ButtonEdit className="blueBut ButAllMini" image={map_icon} imageClassName="icon_for_but" />}>
             <Container style={{ display: 'flex', flexWrap: 'nowrap', alignItems: 'flex-end', padding: '0px', margin: '0px 0px 0.5rem 0px', width: '100%' }}>
-                <Input className="inpCreateForDashCard" Label="Кадастровый номер" classNameP="textForSign12" onChange={(event) => { props.setOff(1, { kad: event.target.value.trim() }) }} />
+                <Input className="inpCreateForDashCard" Label="Кадастровый номер" classNameP="textForSign12" onInput={(event) => { var reg = /^[0-9]*$/i.test(event.target.value); console.log(reg, props.values); if (reg) setStateValue({ numKad: event.target.value.trim() }) }} value={isState.numKad} />
             </Container>
             <Container className="contButton">
-                <ButtonEdit className="blueBut dashBut simpleBut" textForButton="Добавить" classTextName="textOpenSans14" />
+                <ButtonEdit className="blueBut dashBut simpleBut" textForButton="Добавить" classTextName="textOpenSans14" onClick={isFull} />
             </Container>
         </DashboardCard>
     )

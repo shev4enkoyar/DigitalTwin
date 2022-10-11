@@ -42,7 +42,7 @@
     justify-content: center;
     flex-wrap: wrap;
     position: absolute;
-    margin: calc(5% + 140px) 12.5%;
+    margin: calc(3% + 120px) 12.5%;
     max-width: 75%;
 }
 .forCards {
@@ -60,7 +60,7 @@
     position: absolute;
     display: flex;
     justify-content: space-between;
-    margin: calc(5% + 75px) 20%;
+    margin: calc(3% + 80px) 20%;
     width: 60%;
 }
 .ContForButton {
