@@ -15,9 +15,6 @@ function CardsModels(props) {
                     )
                 }
             </div>
-            <div>
-                {props.children}
-            </div>
         </Container>
     )
         

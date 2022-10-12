@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import '../pages.css';
-import {Button, Container} from 'react-bootstrap';
-import ModelsCont from './components/ModelsCont';
+import {Button, Col, Container} from 'react-bootstrap';
+import ModelsContent from './components/ModelsContent';
 import {ThemeContextConsumer} from "../../components/ThemeContext";
 import {Link} from "react-router-dom";
+import CardModel from "./components/CardModel";
 class Models extends Component {
     culture = [
     {
@@ -27,13 +28,25 @@ class Models extends Component {
         advice: "Совет",
         color: "#FE0000"
         },
+        
     ];
     render() {
         return (
             <ThemeContextConsumer>{context => (
                 <>
-                    <Container style={{ backgroundColor: '#262626', padding: '0px', width: '100%', margin: '0px', maxWidth: '100%', height: '100%'}}>
-                        <ModelsCont culture={this.culture}/>
+                    <Container className="text-center mt-5" >
+                            <ModelsContent >
+                                {
+                                    this.culture.map(el =>
+                                        <Col className="d-flex justify-content-center">
+                                            <CardModel cult={el} />
+                                        </Col>
+                                    )
+                                }
+                            </ModelsContent>
+                            <Button className="blueBut createBut mt-3" textForButton="Новая модель" classTextName="textOpenSans14" imageClassName="plus" >
+                                <a style={{color: "#fff"}}  href={'/createModel'}>Плюсик</a >
+                            </Button>
                     </Container>
                 </>
             )}
