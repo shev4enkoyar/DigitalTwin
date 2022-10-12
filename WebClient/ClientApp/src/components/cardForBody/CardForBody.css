@@ -1,11 +1,12 @@
+/*
 .CardBodyDark {
     padding: 1em 0.8em;
     padding-top: 10px;
-    /*margin-left: 60%;*/
+    !*margin-left: 60%;*!
     height: max-content;
     background-color: #212026;
     border-radius: 6px;
-    /*width:min-content;*/
+    !*width:min-content;*!
 }
 
 .textForCardDark {
@@ -52,4 +53,4 @@
 .profPop {
     width: 15%;
     min-width: 130px;
-}
+}*/
