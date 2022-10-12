@@ -13,14 +13,14 @@ import 'leaflet/dist/leaflet.css';
 const rootElement = document.getElementById('root');
 render(
     <ModalContextProvider>
-    <ThemeContextProvider>
-  <React.StrictMode>
-        <BrowserRouter>
-            <App />
-        </BrowserRouter>
-        </React.StrictMode>
-    </ThemeContextProvider>
-        </ModalContextProvider>,
+        <ThemeContextProvider>
+            <React.StrictMode>
+                <BrowserRouter>
+                    <App />
+                </BrowserRouter>
+            </React.StrictMode>
+        </ThemeContextProvider>
+    </ModalContextProvider>,
     rootElement
 );
 
