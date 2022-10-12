@@ -1,0 +1,25 @@
+.darkCard {
+    padding: 1.5em 0.8em;
+    width: 70%;
+    min-height: max-content;
+    margin: 5% 0;
+    background-color: #212026;
+    border-radius: 2px;
+    min-width: 200px;
+}
+.textForCardDarkHome {
+    padding: 0px;
+    width: 100%;
+    color: white;
+    text-align: center;
+    font-family: 'Roboto';
+    background-color: #ffffff00 !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#TarifList {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}

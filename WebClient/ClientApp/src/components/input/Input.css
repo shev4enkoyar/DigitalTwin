@@ -1,0 +1,83 @@
+.input {
+    width:100%;
+    min-width: 260px;
+    border-radius: 3px;
+    height: 35px;
+    background: #EEEEEE;
+    border:0px;
+}
+.textForSign12{
+font-size: 12px;
+margin: 7px 0px !important;
+display: flex;
+font-family: 'Open Sans';
+}
+
+.textForSign {
+    font-size: 14px;
+    margin: 7px 0px !important;
+    display: flex;
+    font-family: 'Open Sans';
+}
+.forNowrap{
+    flex-wrap:nowrap;
+}
+.inputCircle {
+    width: 300px;
+    border-radius: 30px;
+    height: 28px;
+    background: #EEEEEE;
+    border: 0px;
+}
+.textForInpCircle {
+    font-size: 13px;
+    margin: 3px 3px !important;
+    display: flex;
+    font-family: 'Open Sans';
+    font-weight: 100;
+}
+.inputCircleMini {
+    width: 200px;
+    border-radius: 30px;
+    height: 28px;
+    background: #EEEEEE;
+    border: 0px;
+}
+.ForDashboard {
+    width: 53px;
+    border-radius: 3px;
+    height: 35px;
+    background: #EEEEEE;
+    border: 0px;
+}
+.margInputContCirce {
+    margin: 0px 0px 10px 0px;
+
+}
+.contForCardDashb {
+    padding: 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    width: 30%;
+}
+.inpCreateForDashCard {
+    width: 100%;
+    border-radius: 3px;
+    height: 35px;
+    background: #EEEEEE;
+    border: 0px;
+}
+.contForInpDashE {
+    width: 100%;
+    padding: 0px;
+}
+.inpContForTransp {
+    margin: 0px;
+    padding: 0px 10px 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    width: 15%;
+    min-width: max-content;
+}

@@ -1,0 +1,139 @@
+.App{
+   /* width:100%;*/
+}
+#root {
+    /*height: 100%;*/
+    position: relative;
+}
+.body_style {
+    width: max-content;
+    min-width: 100%;
+    height: 100%;
+    position: absolute;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width:50%;
+}
+
+body {
+    background: #262626;
+}
+
+#Warning {
+    font-size: 12px;
+    margin: 0px 4%;
+    width: 92%;
+    text-align: center;
+    font-family: 'Open Sans';
+}
+.StyleForSignUpEndH {
+    font-family: 'Open Sans';
+    text-align: center;
+    margin: 7% 4%;
+    width: 92%;
+}
+.StyleForSignUpEndp1 {
+    font-family: 'Open Sans';
+    text-align: center;
+    font-size: 13px;
+    margin: 2% 7%;
+    width: 85%;
+    padding: 0px;
+}
+.StyleForSignUpEndp2 {
+    font-family: 'Open Sans';
+    text-align: center;
+    font-size: 12px;
+}
+
+.light {
+    background: #FFFFFF !important;
+    color: #334152 !important;
+    fill: #334152 !important;
+    filter: invert(0);
+}
+
+.lightIcon {
+    fill: #334152 !important;
+    background: #FFFFFF00 !important;
+    filter: contrast(1) brightness(1)!important;
+}
+
+.lightGray {
+    background-color: #F2F4F8 !important;
+    color: #334152 !important;
+    fill: #334152 !important;
+    filter: none;
+}
+
+.lightBorderForCard {
+    border: 1px solid #000000 !important;
+}
+
+.lightHeader {
+    box-shadow: 0px 1px 7px 0px rgb(0 0 0 / 40%);
+}
+
+.lightForInsideCard {
+    background: #F2F4F8 !important;
+}
+
+.lightForInsideCardShadow {
+    box-shadow: 0px 2px 3px 0px rgb(0 0 0 / 40%);
+}
+
+
+.MargForCol{
+    margin: 5px 5px;
+    flex: 0 0;
+}
+.ContForHistoryTariff {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+}
+
+.mainContainer {
+    position: relative;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    min-width: 100%;
+    height: max-content;
+    height: 100%;
+    width: fit-content;
+    padding: 0px;
+}
+.contSide {
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    min-width: 100%;
+    padding-left: 10px;
+}
+
+    .contSide .contForPanel {
+        top: 30px;
+        left: 10px;
+    }
+.bodyStyle {
+    width: 100%;
+    min-height: 100%;
+    background: #262626;
+    position: relative;
+    display: flex;
+    flex-wrap:wrap;
+    justify-content:space-around;
+}
+.sidebar:hover + .blur {
+    display: block;
+}
+
+.contForPanel_blocked.alt .sidebar_blocked .TextPanel .IconForPanel_blocked:hover::after {
+    left: auto;
+    right: 20px;
+}
