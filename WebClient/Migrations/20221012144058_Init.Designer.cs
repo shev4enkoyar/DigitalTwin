@@ -10,8 +10,8 @@ using WebClient.Data;
 namespace WebClient.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221011230755_modifyCompanyTable")]
-    partial class modifyCompanyTable
+    [Migration("20221012144058_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
