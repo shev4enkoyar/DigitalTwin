@@ -13,7 +13,10 @@ namespace Microservice.ImageManager.Controllers
             string directory = Directory.GetCurrentDirectory();
             string path = Path.Combine(directory, "images", imageId);
             if (System.IO.File.Exists(path))
-                return PhysicalFile(path, "image/jpeg");
+            {
+                string fullPath = Path.GetFullPath(path);
+                return PhysicalFile(fullPath, "image/jpeg");
+            }
             return NotFound($"Image not found on path: {path}");
         }
     }

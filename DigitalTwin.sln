@@ -19,7 +19,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microservice.MapManager", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebClient", "WebClient\WebClient.csproj", "{347E7C74-D6FA-4F0B-A44A-5A4A47529003}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microservice.ImageManager", "Microservices\Microservice.ImageManager\Microservice.ImageManager.csproj", "{F6DA0046-A163-4D05-AB55-CB14BABE4232}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microservice.ImageManager", "Microservices\Microservice.ImageManager\Microservice.ImageManager.csproj", "{F6DA0046-A163-4D05-AB55-CB14BABE4232}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{2435615E-6B37-4964-B02F-A30428048D30}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,6 +55,10 @@ Global
 		{F6DA0046-A163-4D05-AB55-CB14BABE4232}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F6DA0046-A163-4D05-AB55-CB14BABE4232}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F6DA0046-A163-4D05-AB55-CB14BABE4232}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2435615E-6B37-4964-B02F-A30428048D30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2435615E-6B37-4964-B02F-A30428048D30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2435615E-6B37-4964-B02F-A30428048D30}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2435615E-6B37-4964-B02F-A30428048D30}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
