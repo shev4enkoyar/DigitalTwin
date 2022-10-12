@@ -38,7 +38,7 @@ const App = () => {
       return (
           <div className="App">
                   <Routes>
-                      <Route path="/" element={<Home handleAuthorizedChanged={handleAuthorizedChanged} isAuthorized={isAuthorized}/>} />
+                      <Route path="/" element={<Home />} />
                   <Route path="/signUp" element={<SignUp handleAuthorizedChanged={handleAuthorizedChanged} isAuthorized={isAuthorized} />} />} />
                       <Route path="/signUpEnd" element={<SignUpEnd />} />
                       <Route path="/profile" element={<Profile />} />

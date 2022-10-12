@@ -14,7 +14,6 @@ export class IconButton {
         this.name = name;
         this.icon = icon;
     }
-
 }
 
 export class Culture {

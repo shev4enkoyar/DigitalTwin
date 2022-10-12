@@ -28,7 +28,7 @@ namespace Microservice.UserManager
                 options.UseNpgsql(_configuration.GetConnectionString("DefaultConnection"));
             });
 
-            services.AddAuthentication(option =>
+            /*services.AddAuthentication(option =>
             {
                 option.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 option.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -43,9 +43,11 @@ namespace Microservice.UserManager
                     ValidateIssuer = false,
                     ValidateAudience = false
                 };
-            });
+            });*/
 
-            services.AddAuthentication();
+            /*services.AddAuthentication();
+
+            services.AddAuthorization();*/
 
             services.AddGrpc();
 
@@ -66,8 +68,8 @@ namespace Microservice.UserManager
             }
 
             app.UseRouting();
-            app.UseAuthentication();
-            app.UseAuthorization();
+            /*app.UseAuthentication();
+            app.UseAuthorization();*/
             app.UseGrpcWeb();
             app.UseCors(x => x
                .AllowAnyMethod()
