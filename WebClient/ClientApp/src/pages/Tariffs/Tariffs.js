@@ -3,7 +3,7 @@ import { ThemeContextConsumer } from '../../components/ThemeContext.js';
 import CardForTariffs from './components/insideCardForBody/InsideCardForTariffs';
 import CardForBody from '../../components/cardForBody/CardForBody';
 import '../pages.css';
-import {Button, Col, Container} from 'react-bootstrap';
+import {Button, Col, Container, Row} from 'react-bootstrap';
 import TableForTariffs from './components/tableForTariffs/TableForTariffs';
 class Tariffs extends Component {
      AddCancel = ['Наименование подписки 1',
@@ -67,28 +67,30 @@ class Tariffs extends Component {
             <ThemeContextConsumer>{context => (
                 <div >
                     <Container className={context.theme + "Gray " + "body_style"}>
-                        <Col className="MargForCol">
-                            <CardForBody styleForCard={{ position: 'relative'} } className="signUpWidth" classForContB=" centerCard" >
-                                <p className="textOpenSansForHistTar">
-                                    Продлить/отменить подписки
-                                </p>
-                                {
-                                    this.AddCancel.map((addcanc) =>
-                                    <CardForTariffs AddCancel={addcanc} />)
-                                }
-                                <Button className="blueBut createBut" buttonStyle={{ maxWidth: '70%', width: '70%' }}  imageClassName="plus2" textForButton="Добавить подписку" classTextName="textOpenSans14"/>
-                                <a href="src/pages/tariffs/Tariffs#nogo" className="linkAutoriz">
-                                    описание подписок
-                                </a>
-                            </CardForBody>
-                        </Col>
-                        <Col className="MargForCol">
-                            <CardForBody styleForCard={{ position: 'relative' }} className="signUpWidth">
-                                <Container className="ContForHistoryTariff">
-                                    <TableForTariffs textForTable="История подписок" classNamesTD="ForBox" headersForTable={this.headerForTariffs} contentsForTable={this.historyTariffs} />
-                                </Container>
-                            </CardForBody>
-                        </Col>
+                        <Row>
+                            <Col className="MargForCol">
+                                <CardForBody styleForCard={{ position: 'relative'} } className="signUpWidth" classForContB=" centerCard" >
+                                    <p className="textOpenSansForHistTar">
+                                        Продлить/отменить подписки
+                                    </p>
+                                    {
+                                        this.AddCancel.map((addcanc) =>
+                                            <CardForTariffs AddCancel={addcanc} />)
+                                    }
+                                    <Button className="blueBut createBut" buttonStyle={{ maxWidth: '70%', width: '70%' }}  imageClassName="plus2" textForButton="Добавить подписку" classTextName="textOpenSans14"/>
+                                    <a href="src/pages/tariffs/Tariffs#nogo" className="linkAutoriz">
+                                        описание подписок
+                                    </a>
+                                </CardForBody>
+                            </Col>
+                            <Col className="MargForCol">
+                                <CardForBody styleForCard={{ position: 'relative' }} className="signUpWidth">
+                                    <Container className="ContForHistoryTariff">
+                                        <TableForTariffs textForTable="История подписок" classNamesTD="ForBox" headersForTable={this.headerForTariffs} contentsForTable={this.historyTariffs} />
+                                    </Container>
+                                </CardForBody>
+                            </Col>
+                        </Row>
                     </ Container>
                 </div>
             )}
