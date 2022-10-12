@@ -1,15 +1,13 @@
 import React, { Component} from 'react';
-import ContentForHome from './components/ContentForHome.js';
+import HomeContent from './components/HomeContent.js';
 import Footer from '../../components/footer/Footer.js';
 import '../pages.css';
-import {Layout} from "../../components/Layout";
 
 class Home extends Component {
     render() {
         return (
             <>
-                {/*<Background/>*/}
-                <ContentForHome />
+                <HomeContent />
                 <Footer />
             </>
         );

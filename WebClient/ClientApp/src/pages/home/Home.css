@@ -1,3 +1,4 @@
+/*
 #BorderForBlur {
     box-shadow: 1px 0px 7px 0px rgb(0 0 0 / 40%), -1px 0px 7px 0px rgb(0 0 0 / 40%);
     width: calc(60% + 70px);
@@ -12,7 +13,7 @@
 }
 
 #field {
-    /*top: -80px;*/
+    !*top: -80px;*!
     position:fixed;
     left:0px; 
     top:-50px;
@@ -38,18 +39,34 @@
     flex-direction: column;
     padding: 35px 0px 150px;
 }
-#ContainerForHome {
-    height: inherit;
-    max-width: 100%;
-    /*background: #212026;*/
-    background-image: url("/public/images/Frame25.png");
-    top:55px;
-    /*position: relative;*/
-    padding:0px;
-}
+
 
 p {
     fontSize: '17px';
     margin: 0px;
     font-family: 'Roboto';
+}
+*/
+
+.backgroundContainer {
+    /*height: inherit;
+    max-width: 100%;
+    !*background: #212026;*!*/
+    background-image: url("/public/images/Frame25.png");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    /*top:55px;
+    !*position: relative;*!
+padding:0px;*/
+}
+
+.blurContainer {
+    background: rgba(255, 255, 255, 0.1);
+    overflow: auto;
+}
+
+.card {
+    background-color: #212026;
+    color: #FFFFFF;
+    margin: 5%;
 }

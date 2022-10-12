@@ -1,12 +1,5 @@
-#Footer {
-	background-color: #262626;
-	position: absolute;
-	color: #fff;
-	padding-left: 0px;
-	padding-right: 0px;
-	width: 100%;
-	height: 150px;
-}
+/*
+
 
 #footer_Content {
 	display: flex;
@@ -16,4 +9,13 @@
 }
 .footerShadow {
 	box-shadow: 1px 0px 7px 0px rgb(0 0 0 / 40%);
+}*/
+.footer {
+    background-color: #262626;
+    /*position: absolute;*/
+    color: #fff;
+    /*padding-left: 0px;
+    padding-right: 0px;
+    width: 100%;*/
+    /*height: 150px;*/
 }

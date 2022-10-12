@@ -1,5 +1,5 @@
 import './ContentDashboard.css';
-import { Container, Col } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 import { EconomicCard, FieldCard, HistoryCard, MachineCard, IoTCard, CultureCard, ChemistryCard } from './DashboardCard';
 import { useState } from 'react';
 import {ThemeContextConsumer} from "../../../components/ThemeContext";
