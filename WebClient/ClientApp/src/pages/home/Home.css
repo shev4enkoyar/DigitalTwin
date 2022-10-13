@@ -63,6 +63,8 @@ padding:0px;*/
 .blurContainer {
     background: rgba(255, 255, 255, 0.1);
     overflow: auto;
+    backdrop-filter: blur(5px);
+    box-shadow: 1px 0px 7px 0px rgb(0 0 0 / 40%), -1px 0px 7px 0px rgb(0 0 0 / 40%);
 }
 
 .card {

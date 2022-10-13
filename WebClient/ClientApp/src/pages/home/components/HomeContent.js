@@ -29,7 +29,7 @@ const HomeContent = () => {
                         <Container className="backgroundContainer" fluid>
                             <ContainerBlur >
                                 {
-                                    content.map(el => <div className="card text-center">{el}</div>)
+                                    content.map(el => <div className="card text-center  p-3">{el}</div>)
                                 }
                             </ContainerBlur>
                         </Container>
