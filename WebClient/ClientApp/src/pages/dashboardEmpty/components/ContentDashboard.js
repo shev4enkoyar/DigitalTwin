@@ -1,5 +1,5 @@
 import './ContentDashboard.css';
-import { Container } from 'react-bootstrap';
+import {Col, Container, Row} from 'react-bootstrap';
 import { EconomicCard, FieldCard, HistoryCard, MachineCard, IoTCard, CultureCard, ChemistryCard } from './DashboardCard';
 import { useState } from 'react';
 import {ThemeContextConsumer} from "../../../components/ThemeContext";
@@ -38,17 +38,32 @@ function ContentDashboard(props) {
     return (
         <ThemeContextConsumer>{context => (
             <Container className={context.theme + "Gray " + "contForDashboardEM "}>
-                {
-                    (!isInherit) ? '' :
-                        <HistoryCard off={true} isPred={() => inheritOff()}></HistoryCard>
-                }
-                <CultureCard off={true} values={modelState[0]} setOff={setM} setStatus={setStatus} />
-                <FieldCard off={getAble(1)} setOff={setM} setStatus={setStatus} statusOff={getAble1(1)} />
-                <MachineCard handleActiveChanged={props.handleActiveChanged} isActive={props.isActive} off={getAble(2)||true} setOff={setM} />
-                <ChemistryCard off={getAble(3)} setOff={setM} />
-                <IoTCard off={getAble(4)} setOff={setM} />
-                <EconomicCard off={getAble(5)} setOff={setM} />
-
+                <Row>
+                    {
+                        (!isInherit) ? '' :
+                            <Col>
+                                <HistoryCard off={true} isPred={() => inheritOff()} />
+                            </Col>
+                    }
+                    <Col>
+                        <CultureCard off={true} values={modelState[0]} setOff={setM} setStatus={setStatus} />
+                    </Col>
+                    <Col>
+                        <FieldCard off={getAble(1)} setOff={setM} setStatus={setStatus} statusOff={getAble1(1)} />
+                    </Col>
+                    <Col>
+                        <MachineCard handleActiveChanged={props.handleActiveChanged} isActive={props.isActive} off={getAble(2)||true} setOff={setM} />
+                    </Col>
+                    <Col>
+                        <ChemistryCard off={getAble(3)} setOff={setM} />
+                    </Col>
+                    <Col>
+                        <IoTCard off={getAble(4)} setOff={setM} />
+                    </Col>
+                    <Col>
+                        <EconomicCard off={getAble(5)} setOff={setM} />
+                    </Col>
+                </Row>
             </Container>
         )
         }

@@ -35,9 +35,9 @@ class Dash extends Component{
                     {context =>
                         (
                             <>
+                                <SideBarDashboard icons={this.icons} />
                                 {/*<TransportSelect isActive={this.state.isActive} handleActiveChanged={this.handleActiveChanged}/>*/}
                                 <ContentDashboard isInherit={this.isInherit} handleActiveChanged={this.handleActiveChanged}/>
-                                <SideBarDashboard icons={this.icons} />
                             </>
                         )
                     }
