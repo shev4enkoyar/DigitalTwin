@@ -3,7 +3,6 @@ import '../pages.css';
 import {Button, Col, Container} from 'react-bootstrap';
 import ModelsContent from './components/ModelsContent';
 import {ThemeContextConsumer} from "../../components/ThemeContext";
-import {Link} from "react-router-dom";
 import CardModel from "./components/CardModel";
 class Models extends Component {
     culture = [
