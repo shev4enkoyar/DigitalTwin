@@ -60,16 +60,27 @@ html {
 }
 
 body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
+    /* Margin bottom by footer height */
+    background-color: #262626;
+    margin-bottom: 60px;
 }
+
+.card {
+    background-color: #212026;
+    color: #FFFFFF;
+    margin: 2%;
+    padding: 2%;
+    border-radius: 2.5%;
+}
+
 .footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  overflow: scroll;
-  white-space: nowrap;
-  /* Set the fixed height of the footer here */
-  height: 60px;
-  line-height: 60px; /* Vertically center the text there */
+    position: absolute;
+    background-color: #212026;
+    color: #fff;
+    bottom: 0;
+    width: 100%;
+    /*white-space: nowrap;*/
+    /* Set the fixed height of the footer here */
+    /*height: 60px;
+    line-height: 60px;*/ /* Vertically center the text there */
 }
