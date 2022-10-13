@@ -13,6 +13,7 @@ import HistoryPriceIcon from '../components/sideBarDashboard/HistoryPriceIcon';
 import RecIcon from '../components/sideBarDashboard/RecIcon';
 import {IconButton} from "../components/sideBarDashboard/util/IconButton";
 import TableForTariffs from "./Tariffs/components/tableForTariffs/TableForTariffs";
+import {Container, Table} from "reactstrap";
 class Recommendations extends Component {
     iconsLeftBar = [
         new IconButton("#/", "Главная панель", <HomePanel_Icon />),
@@ -86,14 +87,36 @@ class Recommendations extends Component {
     render() {
         return (
             <ThemeContextConsumer>{context => (
-                    <>
-                        <div className={context.theme + "Gray " + "body_style"}>
-                        <CardForBody className="signUpWidth">
-                                <TableForTariffs classNameTab="margTable" classNamesTD="ForBox" textForTable="Рекомендации" contentsForTable={this.recommend} headersForTable={this.hRecommend} />
-                        </CardForBody>
+                    <div style={{overflow: "auto"}}>
                         <SideBarDashboard icons={this.iconsLeftBar} />
-                        </div>
-                    </>
+                        <Container  className="p-1 mt-5">
+                            <Table style={{color: "#fff", background: "#212026"}} >
+                                <thead>
+                                <tr>
+                                    <th>{this.hRecommend.at(0)}</th>
+                                    <th>{this.hRecommend.at(1)}</th>
+                                    <th>{this.hRecommend.at(2)}</th>
+                                    <th>{this.hRecommend.at(3)}</th>
+                                    <th>{this.hRecommend.at(4)}</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    {
+                                        this.recommend.map(el =>
+                                            <tr>
+                                                <td>{el.num}</td>
+                                                <td>{el.date}</td>
+                                                <td>{el.obj}</td>
+                                                <td>{el.progEv}</td>
+                                                <td>{el.rec}</td>
+                                            </tr>
+                                        )
+                                    }
+                                </tbody>
+                            </Table>
+                            {/*<TableForTariffs classNameTab="margTable" classNamesTD="ForBox" textForTable="Рекомендации" contentsForTable={this.recommend} headersForTable={this.hRecommend} />*/}
+                        </Container>
+                    </div>
                 )}
             </ThemeContextConsumer>
         );
