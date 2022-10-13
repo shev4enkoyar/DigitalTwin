@@ -48,17 +48,17 @@ namespace WebClient.Areas.Identity.Pages.Account
         {
             [Required]
             [EmailAddress]
-            [Display(Name = "Email")]
+            [Display(Name = "Почта")]
             public string Email { get; set; }
 
             [Required]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             [DataType(DataType.Password)]
-            [Display(Name = "Password")]
+            [Display(Name = "Пароль")]
             public string Password { get; set; }
 
             [DataType(DataType.Password)]
-            [Display(Name = "Confirm password")]
+            [Display(Name = "Повторите пароль")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
         }
@@ -89,7 +89,7 @@ namespace WebClient.Areas.Identity.Pages.Account
                         values: new { area = "Identity", userId = user.Id, code = code, returnUrl = returnUrl },
                         protocol: Request.Scheme);
 
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
+                    await _emailSender.SendEmailAsync(Input.Email, "Подтвердите вашу почту",
                         $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
