@@ -81,7 +81,7 @@ const SidePanel = (props) => {
                     <RenderCategoriesPopUp/>
 
                     <li style={{marginTop: '80%'}}>
-                        <button onClick={() => {
+                        <button className="mapSidebarButton" onClick={() => {
                             handleRemoveButtonActive();
                             changePinTypeToDefault();
                         }}>
