@@ -10,7 +10,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Microservice.DashboardManager.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20220915133001_Init")]
+    [Migration("20221013195608_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,6 +33,10 @@ namespace Microservice.DashboardManager.Migrations
 
                     b.Property<int>("MapId")
                         .HasColumnType("integer");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<int>("ProductId")
                         .HasColumnType("integer");

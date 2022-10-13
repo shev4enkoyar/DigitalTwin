@@ -32,6 +32,10 @@ namespace Microservice.DashboardManager.Migrations
                     b.Property<int>("MapId")
                         .HasColumnType("integer");
 
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<int>("ProductId")
                         .HasColumnType("integer");
 
