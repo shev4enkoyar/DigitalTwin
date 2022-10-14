@@ -4,7 +4,7 @@ option csharp_namespace = "Microservice.DashboardManager";
 
 package productProto;
 
-service ProductProtoService {
+service ProductService {
   rpc GetProducts (ProductRequest) returns (stream ProductReply);
 }
 

@@ -1,0 +1,16 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "Microservice.MapManager.Protos";
+
+package mapProto;
+
+service MapService {
+  rpc GetMapId (GetMapIdRequest) returns (GetMapIdReply);
+}
+
+message GetMapIdRequest {
+	int32 modelId = 1;
+}
+message GetMapIdReply {
+    int32 mapId = 1;
+}

@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+option csharp_namespace = "Microservice.DashboardManager";
+
+package digitalModelProto;
+
+service DigitalModelService {
+  rpc PushDigitalModels (ModelRequest) returns (ModelReply);
+  rpc GetDigitalModels (GetModelsRequest) returns (stream GetModelsReply);
+}
+
+message ModelRequest {
+  string name = 1;
+  int32 userId = 2;
+  int32 productId = 3; 
+}
+
+message ModelReply {
+   string status = 1;
+}
+
+message GetModelsRequest {
+	int32 userId = 1;
+}
+
+message GetModelsReply {
+   repeated ModelProto models = 1;
+}
+
+message ModelProto {
+  int32 id = 1;
+  string name = 2;
+  int32 userId = 3;
+  string productName = 4;
+  string productCode = 5;
+  string productCurrentPrice = 6;
+  int32 mapId = 7;
+}
