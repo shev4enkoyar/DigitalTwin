@@ -1,4 +1,5 @@
 ﻿using Microservice.DashboardManager.DAL;
+using Microservice.DashboardManager.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -40,7 +41,8 @@ namespace Microservice.DashboardManager
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapGrpcService<GreeterService>();
-
+                endpoints.MapGrpcService<DigitalModelProtoService>();
+                endpoints.MapGrpcService<ProductProtoService>();
                 endpoints.MapGet("/", async context =>
                 {
                     await context.Response.WriteAsync("Communication with gRPC endpoints must be made through a gRPC client. To learn how to create a client, visit: https://go.microsoft.com/fwlink/?linkid=2086909");

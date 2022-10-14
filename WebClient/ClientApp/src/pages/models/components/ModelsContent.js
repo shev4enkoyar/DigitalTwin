@@ -1,9 +1,7 @@
 import './CardModels.css';
 import {Col, Container, Row} from 'react-bootstrap';
-import CardsModels from './CardsModels';
 import React, {Children} from "react";
 import {ThemeContextConsumer} from "../../../components/ThemeContext";
-import CardModel from "./CardModel";
 function ModelsContent(props) {
     
     return (

@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Microservice.DashboardManager.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20221013211521_modelTableChanged")]
-    partial class modelTableChanged
+    [Migration("20221014173200_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -31,7 +31,7 @@ namespace Microservice.DashboardManager.Migrations
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<int>("MapId")
+                    b.Property<int?>("MapId")
                         .HasColumnType("integer");
 
                     b.Property<string>("Name")
@@ -41,8 +41,8 @@ namespace Microservice.DashboardManager.Migrations
                     b.Property<int>("ProductId")
                         .HasColumnType("integer");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("integer");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
 
                     b.HasKey("Id");
 

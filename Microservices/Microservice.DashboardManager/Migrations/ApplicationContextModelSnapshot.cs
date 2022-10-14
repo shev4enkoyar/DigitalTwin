@@ -29,7 +29,7 @@ namespace Microservice.DashboardManager.Migrations
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<int>("MapId")
+                    b.Property<int?>("MapId")
                         .HasColumnType("integer");
 
                     b.Property<string>("Name")
@@ -39,8 +39,8 @@ namespace Microservice.DashboardManager.Migrations
                     b.Property<int>("ProductId")
                         .HasColumnType("integer");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("integer");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
 
                     b.HasKey("Id");
 

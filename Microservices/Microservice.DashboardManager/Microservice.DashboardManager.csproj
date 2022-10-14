@@ -5,9 +5,12 @@
     <UserSecretsId>ac80082a-751a-4582-8328-7c6d04bdaa99</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerfileContext>..\..</DockerfileContext>
+    <DockerComposeProjectPath>..\..\docker-compose.dcproj</DockerComposeProjectPath>
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="DAL\Models\DigitalModel.cs~RF3ed3a41.TMP" />
+    <None Remove="Protos\digitalModelProto.proto" />
     <None Remove="Protos\mapProto.proto" />
   </ItemGroup>
 

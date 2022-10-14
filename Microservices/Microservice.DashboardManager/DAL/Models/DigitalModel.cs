@@ -6,6 +6,8 @@ namespace Microservice.DashboardManager.DAL.Models
 {
     public class DigitalModel
     {
+        private int? mapId;
+
         [Required]
         public int Id { get; set; }
 
@@ -13,13 +15,13 @@ namespace Microservice.DashboardManager.DAL.Models
         public string Name { get; set; }
 
         [Required]
-        public int UserId { get; set; }
+        public Guid UserId { get; set; }
 
         [Required]
         [ForeignKey(nameof(Product))]
         public int ProductId { get; set; }
 
-        public int MapId { get; set; }
+        public int? MapId { get => mapId == null ? -1 : mapId; set => mapId = value; }
 
         [Required]
         public DateTime CreateDate { get; set; }

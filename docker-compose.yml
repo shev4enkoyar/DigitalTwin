@@ -1,0 +1,19 @@
+version: '3.4'
+
+services:
+  webclient:
+    image: ${DOCKER_REGISTRY-}webclient
+    ports: 
+      - "5001:80"
+    build:
+      context: .
+      dockerfile: WebClient/Dockerfile
+
+  microservice.dashboardmanager:
+    image: ${DOCKER_REGISTRY-}microservicedashboardmanager
+    ports: 
+      - "5100:80"
+    build:
+      context: .
+      dockerfile: Microservices/Microservice.DashboardManager/Dockerfile
+

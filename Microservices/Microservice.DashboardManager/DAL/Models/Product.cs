@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Microservice.DashboardManager.DAL.Models
 {
@@ -20,6 +21,7 @@ namespace Microservice.DashboardManager.DAL.Models
         public decimal? CurrentPrice { get; set; }
 
         //Relationships
+        
         public virtual List<DigitalModel> DigitalModels { get; set; }
 
         public virtual List<ProductPriceHistory> ProductPriceHistory { get; set; }

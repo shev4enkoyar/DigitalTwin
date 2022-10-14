@@ -19,29 +19,34 @@ namespace Microservice.DashboardManager.Services
             _dbContext = dbContext;
         }
 
+
         public override Task<ModelReply> PushDigitalModels(ModelRequest request, ServerCallContext context)
         {
-            if (_dbContext.DigitalModels.Any(x => x.UserId == request.UserId))
+            //TODO TEST EXAMPLE NEED REFACTOR
+
+            if (_dbContext.DigitalModels.Any(x => x.UserId.ToString().Equals(request.UserId)))
             {
                 //error
                 return Task.FromResult(new ModelReply { Status = "record already exist" });
             }
-            else 
+            else
             {
-                var model = new DigitalModel();
-                model.Name = request.Name;
-                model.UserId = request.UserId;
-                model.ProductId = request.ProductId;
+                var model = new DigitalModel
+                {
+                    Name = request.Name,
+                    UserId = System.Guid.Parse(request.UserId),
+                    ProductId = request.ProductId
+                };
                 _dbContext.DigitalModels.Add(model);
                 _dbContext.SaveChanges();
-                //here address where  
+                //TODO here address where  
                 using var channel = GrpcChannel.ForAddress("https://localhost:7042");
                 var client = new MapService.MapServiceClient(channel);
-                var reply = client.GetMapId( new GetMapIdRequest { ModelId = model.Id } );
+                var reply = client.GetMapId(new GetMapIdRequest { ModelId = model.Id });
                 return Task.FromResult(new ModelReply { Status = "ok" });
             }
-            
-            
+
+
         }
 
         public override async Task GetDigitalModels(GetModelsRequest request, IServerStreamWriter<GetModelsReply> responseStream, ServerCallContext context)
@@ -52,23 +57,23 @@ namespace Microservice.DashboardManager.Services
             await Task.FromResult(modelsReply);
         }
 
-        private IEnumerable<ModelProto> GetProtoModels(int userId)
+        private IEnumerable<ModelProto> GetProtoModels(string userId)
         {
-            return _dbContext.DigitalModels
-                .Include(x => x.Product.Name)
-                .Include(x => x.Product.Code)
-                .Include(x => x.Product.CurrentPrice)
-                .Where(x => x.MapId == userId)
-                .Select(x => new ModelProto()
-                {
-                    Id = x.Id,
-                    Name = x.Name,
-                    UserId = x.UserId,
-                    ProductName = x.Product.Name,
-                    ProductCode = x.Product.Code,
-                    ProductCurrentPrice = x.Product.CurrentPrice.ToString(),
-                    MapId = x.MapId
-                });
+            var temp = _dbContext.DigitalModels.Include(x => x.Product).ToList();
+            var result = temp.Where(x => x.UserId.ToString().Equals(userId))
+                                .Select(x => new ModelProto()
+                                {
+                                    Id = x.Id,
+                                    Name = x.Name,
+                                    UserId = x.UserId.ToString(),
+                                    ProductName = x.Product.Name,
+                                    ProductCode = x.Product.Code,
+                                    ProductCurrentPrice = x.Product.CurrentPrice.ToString(),
+                                    MapId = (int) x.MapId
+                                })
+                                .ToList();
+            return result;
+
         }
     }
 }
