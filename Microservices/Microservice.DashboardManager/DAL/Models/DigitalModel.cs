@@ -19,7 +19,6 @@ namespace Microservice.DashboardManager.DAL.Models
         [ForeignKey(nameof(Product))]
         public int ProductId { get; set; }
 
-        [Required]
         public int MapId { get; set; }
 
         [Required]
