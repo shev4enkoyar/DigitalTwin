@@ -9,19 +9,11 @@
     <DefaultItemExcludes>$(DefaultItemExcludes);$(SpaRoot)node_modules\**</DefaultItemExcludes>
   </PropertyGroup>
 
-	<ItemGroup>
-    <Protobuf Include="Protos\greet.proto" GrpcServices="Server" />
-    <Protobuf Include="Protos\mapProto.proto" GrpcServices="Server" />
-	<Protobuf Include="Protos\productProto.proto" GrpcServices="Server" />
-	<Protobuf Include="Protos\digitalModelProto.proto" GrpcServices="Server" />
-	<Protobuf Include="Protos\mapProto.proto" GrpcServices="Client" />
-  </ItemGroup>		<Protobuf Include="Protos\greet.proto" GrpcServices="Server" />
-		<Protobuf Include="Protos\mapProto.proto" GrpcServices="Server" />
-		<Protobuf Include="Protos\productProto.proto" GrpcServices="Server" />
-		<Protobuf Include="Protos\digitalModelProto.proto" GrpcServices="Server" />
-		<Protobuf Include="Protos\mapProto.proto" GrpcServices="Client" />
+    <ItemGroup>
+	    <Protobuf Include="Protos\productProto.proto" GrpcServices="Client" />
+	    <Protobuf Include="Protos\digitalModelProto.proto" GrpcServices="Client" />
+    </ItemGroup>	
 	
-	ClientClient
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="3.1.30" />
     <PackageReference Include="Microsoft.AspNetCore.ApiAuthorization.IdentityServer" Version="3.1.30" />
