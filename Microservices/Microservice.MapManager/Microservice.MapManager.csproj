@@ -16,6 +16,7 @@
     <Protobuf Include="Protos\greet.proto" GrpcServices="Server" />
     <Protobuf Include="Protos\figureProto.proto" GrpcServices="Server" />
     <Protobuf Include="Protos\figureCategoryProto.proto" GrpcServices="Server" />
+	<Protobuf Include="Protos\mapProto.proto" GrpcServices="Server" />
   </ItemGroup>
 
   <ItemGroup>
