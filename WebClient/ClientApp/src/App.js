@@ -10,7 +10,7 @@ import { ApplicationPaths } from './components/api-authorization/ApiAuthorizatio
 import './custom.css'
 import Tariffs from "./pages/Tariffs/Tariffs";
 import Models from "./pages/models/Models";
-import CreateModel from "./pages/CreateModel";
+import CreateModel from "./pages/createModel/CreateModel";
 import DashboardEmpty from "./pages/dashboardEmpty/DashboardEmpty";
 import MapMain from "./pages/map/MapMain";
 import Recommendations from "./pages/Recommendations";
@@ -28,7 +28,7 @@ export default class App extends Component {
                 <AuthorizeRoute path='/fetch-data' component={FetchData } />
 
                 <Route path="/createModel" component={CreateModel} />
-                <Route path="/dashboardEmpty" component={DashboardEmpty} />
+                <Route path="/dashboard" component={DashboardEmpty} />
                 <Route path="/map" component={MapMain} />
                 <Route path="/recom" component={Recommendations } />
 
