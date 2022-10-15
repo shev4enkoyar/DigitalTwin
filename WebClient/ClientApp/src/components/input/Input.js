@@ -2,7 +2,7 @@ import './Input.css';
 import { Card, Container } from 'react-bootstrap';
 function Input(props) {
     return (
-        <Container className={props.contClass}>
+        <Container className={props.contClass + " p-0"}>
             <p className={props.classNameP}>
                 {props.Label}
             </p>
