@@ -19,7 +19,7 @@ const SidePanelCanvas = (props) => {
                 <div style={{padding: "10px 15px"}}>
                 </div>
                 <Container style={{padding: "0px 5px"}}>
-                    <Col>{props.children}</Col>
+                    {props.children}
                 </Container>
            </div>
 }

@@ -15,7 +15,7 @@ const GrpcContainer = (props) => {
         let client = new FigureServiceClient(ServerLinks.MAP_MICROSERVICE, null, null);
         let request = new SendRequest();
         //TODO Change mapId argument
-        request.setMapid(1);
+        request.setMapid(props.mapId);
         let call = client.getFigures(request);
         call.on('data',function(response){
             setFigures(response.getFiguresList());

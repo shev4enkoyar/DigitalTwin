@@ -48,12 +48,21 @@ const SidePanel = (props) => {
             </>
         );
     }
+    const buttonStyle = {
+        backgroundColor: "transparent",
+        backgroundRepeat: "no-repeat",
+        border: "none",
+        cursor: "pointer",
+        overflow: "hidden",
+        outline: "none",
+        width: "fit-content"
+    }
         let categoriesButtons = props.categoriesProto !== null
             ?
                 props.categoriesProto.map((el, index) => {
                     return(
-                        <li key={index}>
-                            <button onClick={() => {
+                        <li style={{listStyleType: "none"}} key={index}>
+                            <button style={buttonStyle} onClick={() => {
                                 setPopupChildren(popupChildrenContent(el))
                                 setPopupStyle({margin: 20 + (index + 1) * 32 + "px 50px"});
                                 handleActiveChange();
@@ -74,13 +83,13 @@ const SidePanel = (props) => {
 
         return (
             <SidePanelCanvas>
-                <ul>
+                <ul style={{padding: 0}}>
                     {
                         categoriesButtons
                     }
                     <RenderCategoriesPopUp/>
 
-                    <li style={{marginTop: '80%'}}>
+                    <li style={{marginTop: '80%', listStyleType: "none"}}>
                         <button className="mapSidebarButton" onClick={() => {
                             handleRemoveButtonActive();
                             changePinTypeToDefault();
@@ -117,6 +126,8 @@ const SidePanel = (props) => {
             new PinType("none", "none", "none", false, props.mapId)
             );
     }
+
+
 }
 
 export default SidePanel;

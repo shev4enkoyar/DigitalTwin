@@ -27,7 +27,7 @@ const MapManager = (props) => {
         <div style={{height: "100%"}}>
             <SidePanel mapId={props.mapId} categoriesProto={categoriesProto} pinType={pinType} handlePinTypeChange={handlePinTypeChange} isRemoveButtonActive={isRemoveButtonActive} handleRemoveButtonActive={handleRemoveButtonActive}/>
             <DTMap sendProductArea={props.sendProductArea} figureInitData={props.figureInitData} removeFigureInfo={props.removeFigureInfo} sendFigureInfo={props.sendFigureInfo} figuresProto={figuresProto} pinType={pinType} isRemoveButtonActive={isRemoveButtonActive}/>
-            <GrpcContainer handleFigureCategoriesProto={handleFigureCategoriesProto} handleFiguresProto={handleFiguresProto}/>
+            <GrpcContainer mapId={props.mapId} handleFigureCategoriesProto={handleFigureCategoriesProto} handleFiguresProto={handleFiguresProto}/>
         </div>
 
     );
