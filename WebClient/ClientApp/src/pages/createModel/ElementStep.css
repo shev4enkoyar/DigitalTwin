@@ -1,0 +1,11 @@
+﻿@media (max-width: 1019px) {
+    .textForStep {
+        display: none;
+    }
+}
+.progressStep {
+    background-color: rgb(37 36 44 / 91%);
+}
+    .progressStep div {
+        filter: invert(1);
+    }

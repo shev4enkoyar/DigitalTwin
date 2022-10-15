@@ -7,7 +7,7 @@ const CardNameModel = (props) => {
     const isPred = ["Да", "Нет",]
 
     return (
-        <fieldset style={{ visibility: props.visible ? "visible" : "hidden", minWidth: '360px', width: 'calc(25% - 20px)', position: 'absolute' }} className="d-flex justify-content-center mx-auto my-5">
+        <fieldset style={{ visibility: props.visible ? "visible" : "hidden", minWidth: '360px', width: 'calc(25% - 20px)', position: 'inherit' }} className="d-flex justify-content-center mx-auto my-5">
             <CardForBody className="signUpWidth" classForContB="d-flex flex-column align-items-center p-4">
                 <h5 style={{ fontFamily: 'Open Sans', margin: '10px 0px 30px 0px' }} className="d-flex justify-content-center">
                     Создание модели

@@ -3,7 +3,7 @@ import { Container, Col, Row } from 'react-bootstrap';
 import CardForBody from './../cardForBody/CardForBody';
 const BaseCard=(props)=> {
     return (
-        <fieldset className="cardSize my-5" style={{ visibility: props.visible ? "visible" : "hidden", position: 'absolute' }}>
+        <fieldset className="cardSize my-5" style={{ visibility: props.visible ? "visible" : "hidden", position: 'inherit' }}>
             <CardForBody classForContB="p-3">
                 <Container className="ContForCardDash">
                     <p className="textForStatus" >
