@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
+import {Redirect, Route} from 'react-router-dom';
 import { Layout } from './components/layout/Layout';
 import  Home  from './pages/home/Home.js'
 import { FetchData } from './components/FetchData';
@@ -14,6 +14,8 @@ import CreateModel from "./pages/createModel/CreateModel";
 import DashboardEmpty from "./pages/dashboardEmpty/DashboardEmpty";
 import MapMain from "./pages/map/MapMain";
 import Recommendations from "./pages/Recommendations";
+import {Dashboard} from "./pages/Dashboard";
+import {Switch} from "react-router";
 
 export default class App extends Component {
   static displayName = App.name;
@@ -28,12 +30,13 @@ export default class App extends Component {
                 <AuthorizeRoute path='/fetch-data' component={FetchData } />
 
                 <Route path="/createModel" component={CreateModel} />
-                <Route path="/dashboard" component={DashboardEmpty} />
+                <Route path="/dashboardEmpty" component={DashboardEmpty} />
                 <Route path="/map" component={MapMain} />
                 <Route path="/recom" component={Recommendations } />
 
                 <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
                 <Route path="/models" component={Models } />
+
             </Layout>
     );
   }
