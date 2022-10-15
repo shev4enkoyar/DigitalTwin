@@ -28,11 +28,12 @@ export default class App extends Component {
                 <AuthorizeRoute path="/tariffs" component={Tariffs } />
                 <AuthorizeRoute path='/counter' component={Counter } />
                 <AuthorizeRoute path='/fetch-data' component={FetchData } />
+                <AuthorizeRoute path="/dashboard-:modelId" component={Dashboard} />
 
-                <Route path="/createModel" component={CreateModel} />
-                <Route path="/dashboardEmpty" component={DashboardEmpty} />
-                <Route path="/map" component={MapMain} />
-                <Route path="/recom" component={Recommendations } />
+                <AuthorizeRoute path="/createModel" component={CreateModel} />
+                <AuthorizeRoute path="/dashboardEmpty" component={DashboardEmpty} />
+                <AuthorizeRoute path="/map-:modelId" component={MapMain} />
+                <AuthorizeRoute path="/recom" component={Recommendations } />
 
                 <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
                 <Route path="/models" component={Models } />
