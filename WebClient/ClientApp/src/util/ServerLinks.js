@@ -1,6 +1,6 @@
 const ServerLinks = {
-    MAP_MICROSERVICE : 'https://coffemint.space',
-    MAP_MICROSERVICE_SIGNALR_HUB : 'https://coffemint.space/hubs/dashboard/map',
+    MAP_MICROSERVICE : 'https://localhost:49153',
+    MAP_MICROSERVICE_SIGNALR_HUB : 'https://localhost:49153/hubs/dashboard/map',
     USER_MANAGER_MICROSERVICE : 'https://localhost:5001'
 }
 
