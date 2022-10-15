@@ -5,6 +5,7 @@ import ModelsContent from './components/ModelsContent';
 import {ThemeContextConsumer} from "../../components/ThemeContext";
 import CardModel from "./components/CardModel";
 import authService from "../../components/api-authorization/AuthorizeService";
+import {Link} from "react-router-dom";
 class Models extends Component {
 
     constructor(props) {
@@ -24,17 +25,22 @@ class Models extends Component {
                 {
                     this.state.culture.map(el =>
                         <Col className="d-flex justify-content-center">
-                            <CardModel title={el.name}>
-                                <p className="paramForModelCard">
-                                    {el.productName}
-                                </p>
-                                <p className="paramForModelCard">
-                                    {"Текущее мероприятие"}
-                                </p>
-                                <p className="paramForModelCard">
-                                    {"Совет"}
-                                </p>
-                            </CardModel>
+                            <Link to={"/dashboard-" + el.id}>
+                                <button className="d-flex justify-content-center" style={this.buttonStyle}>
+                                    <CardModel className="d-flex justify-content-center" title={el.name}>
+                                        <p className="paramForModelCard">
+                                            {el.productName}
+                                        </p>
+                                        <p className="paramForModelCard">
+                                            {"Текущее мероприятие"}
+                                        </p>
+                                        <p className="paramForModelCard">
+                                            {"Совет"}
+                                        </p>
+                                    </CardModel>
+                                </button>
+                            </Link>
+
                         </Col>
                     )
                 }
@@ -60,6 +66,25 @@ class Models extends Component {
             headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
         });
         const data = await response.json();
+        data.sort((a, b) => {
+            if (a.id < b.id) {
+                return -1;
+            }
+            if (a.id > b.id) {
+                return 1;
+            }
+            return 0;
+        });
         this.setState({ culture: data, loading: false });
+    }
+
+    buttonStyle = {
+        backgroundColor: "transparent",
+        backgroundRepeat: "no-repeat",
+        border: "none",
+        cursor: "pointer",
+        overflow: "hidden",
+        outline: "none",
+        width: "fit-content"
     }
 } export default Models;
