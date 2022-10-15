@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
 import './ComboBox.css';
+import { Container } from 'react-bootstrap';
 function Combobox(props) {
-    
+
     const changeSelect = (event) => {
-        props.setInherit((event.target.value) /*== props.options[0] ? true : false*/);
+        props.onChange((event.target.value) /*== props.options[0] ? true : false*/);
     }
     return (
         <>
-            <div className={"form-group contForCombobox " + props.classNameCont}>
+            <Container className={"p-0 form-group contForCombobox " + props.classNameCont}>
                 <label className={props.classTextCombobox} >
                     {props.textCombobox}
                 </label>
-                <select onChange={changeSelect} className={props.className+" form-control "}>
+                <select onChange={changeSelect} className={props.className + " form-control "}>
                     {props.options.map
                         (
                             (option) =>
@@ -21,7 +22,7 @@ function Combobox(props) {
                         )
                     }
                 </select>
-            </div>
+            </Container>
         </>
     )
 } export default Combobox;
