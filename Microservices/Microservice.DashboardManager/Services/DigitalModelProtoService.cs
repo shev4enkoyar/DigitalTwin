@@ -6,6 +6,7 @@ using Microservice.DashboardManager.Protos;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace Microservice.DashboardManager.Services
@@ -33,7 +34,11 @@ namespace Microservice.DashboardManager.Services
             _dbContext.DigitalModels.Add(model);
             _dbContext.SaveChanges();
             //TODO here address where  
-            using var channel = GrpcChannel.ForAddress("https://localhost:49165");
+            var httpHandler = new HttpClientHandler()
+            {
+                ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+            };
+            using var channel = GrpcChannel.ForAddress("https://localhost:49165", new GrpcChannelOptions { HttpHandler = httpHandler });
             var client = new MapService.MapServiceClient(channel);
             var reply = client.GetMapId(new GetMapIdRequest { ModelId = model.Id });
             model.MapId = reply.MapId;

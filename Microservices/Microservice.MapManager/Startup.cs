@@ -59,7 +59,7 @@ namespace Microservice.MapManager
                 endpoints.MapHub<MapHub>("/hubs/dashboard/map");
                 endpoints.MapGrpcService<FigureProtoService>().EnableGrpcWeb().RequireCors("AllowAll");
                 endpoints.MapGrpcService<FigureCategoryProtoService>().EnableGrpcWeb().RequireCors("AllowAll");
-
+                endpoints.MapGrpcService<MapProtoService>().EnableGrpcWeb().RequireCors("AllowAll");
             });
         }
     }
