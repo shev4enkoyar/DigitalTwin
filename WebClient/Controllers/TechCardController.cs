@@ -10,10 +10,12 @@ using System.Security.Claims;
 using Grpc.Core;
 using System.Threading.Tasks;
 using System.Net.Http;
+using System.Text.Json.Serialization;
 
 namespace WebClient.Controllers
 {
     [Authorize]
+    [ApiController]
     [Route("api/techcard")]
     public class TechCardController : ControllerBase
     {
@@ -25,23 +27,73 @@ namespace WebClient.Controllers
         }
 
 
-        [HttpGet]
-        public async Task<IEnumerable<ModelProto>> Get()
+        [HttpGet("get_all")]
+        public async Task<IEnumerable<ModelProto>> GetDigitalModels()
         {
-            var httpHandler = new HttpClientHandler();
-            httpHandler.ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            using var channel = GrpcChannel.ForAddress(Configuration.GetSection("gRPCConnections")["Micriservices.DashboardManager"], new GrpcChannelOptions { HttpHandler = httpHandler });
-            var client = new DigitalModelService.DigitalModelServiceClient(channel);
-           
-            using var call = client.GetDigitalModels(new GetModelsRequest { UserId = userId });
-            GetModelsReply response = null;
-            while (await call.ResponseStream.MoveNext())
+            var httpHandler = new HttpClientHandler()
             {
-                Console.WriteLine(call.ResponseStream.Current.Models);
-                response = call.ResponseStream.Current;
+                ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+            };
+
+            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (userId == null)
+                return null;
+
+            using var channel = GrpcChannel.ForAddress(
+                Configuration.GetSection("gRPCConnections")["Micriservices.DashboardManager"],
+                new GrpcChannelOptions { HttpHandler = httpHandler }
+            );
+
+            GetModelsReply response = null;
+            using (var call = new DigitalModelService.DigitalModelServiceClient(channel).GetDigitalModels(new GetModelsRequest { UserId = userId }))
+            {
+                while (await call.ResponseStream.MoveNext())
+                {
+                    Console.WriteLine(call.ResponseStream.Current.Models);
+                    response = call.ResponseStream.Current;
+                }
             }
             return response.Models;
+        }
+
+        [HttpGet("create")]
+        public async Task<IActionResult> CreateDigitalModel( int productId, string name)
+        {
+            var httpHandler = new HttpClientHandler()
+            {
+                ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+            };
+            
+            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (userId == null)
+                return Unauthorized();
+            ModelRequest request = new ModelRequest
+            {
+                Name = name,
+                ProductId = productId,
+                UserId = userId
+            };
+
+            using var channel = GrpcChannel.ForAddress(
+                Configuration.GetSection("gRPCConnections")["Micriservices.DashboardManager"],
+                new GrpcChannelOptions { HttpHandler = httpHandler });
+
+            ModelReply reply = new DigitalModelService.DigitalModelServiceClient(channel).PushDigitalModels(request);
+            if (reply.Status.Equals("ok"))
+                return Ok();
+            return Ok();
+        }
+
+        public class TechCardModel
+        {
+            [JsonPropertyName("name")]
+            public string Name { get; set; }
+
+            [JsonPropertyName("productId")]
+            public int ProductId { get; set; }
+
+            [JsonPropertyName("userId")]
+            public string UserId { get; set; }
         }
     }
 }

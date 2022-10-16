@@ -23,20 +23,24 @@ export default class App extends Component {
   render () {
     return (
             <Layout>
-                <Route exact path='/' component={Home } />
-                <AuthorizeRoute path={ApplicationPaths.IdentityManagePath} component={ApiAuthorizationRoutes} />
-                <AuthorizeRoute path="/tariffs" component={Tariffs } />
-                <AuthorizeRoute path='/counter' component={Counter } />
-                <AuthorizeRoute path='/fetch-data' component={FetchData } />
-                <AuthorizeRoute path="/dashboard-:modelId" component={Dashboard} />
+                <Switch>
+                    <Route exact path='/' component={Home } />
+                    <AuthorizeRoute path={ApplicationPaths.IdentityManagePath} component={ApiAuthorizationRoutes} />
+                    <AuthorizeRoute path="/tariffs" component={Tariffs } />
+                    <AuthorizeRoute path='/counter' component={Counter } />
+                    <AuthorizeRoute path='/fetch-data' component={FetchData } />
+                    <AuthorizeRoute path="/dashboard/:modelId" component={Dashboard} />
 
-                <AuthorizeRoute path="/createModel" component={CreateModel} />
-                <AuthorizeRoute path="/dashboardEmpty" component={DashboardEmpty} />
-                <AuthorizeRoute path="/map-:modelId" component={MapMain} />
-                <AuthorizeRoute path="/recom" component={Recommendations } />
+                    <AuthorizeRoute path="/createModel" component={CreateModel} />
+                    <AuthorizeRoute path="/dashboardEmpty" component={DashboardEmpty} />
+                    <AuthorizeRoute path="/map/:modelId" component={MapMain} />
+                    <AuthorizeRoute path="/recom" component={Recommendations } />
 
-                <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
-                <Route path="/models" component={Models } />
+                    <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
+                    <AuthorizeRoute path="/models" component={Models } />
+                    <Redirect from="*" to="/" />
+                </Switch>
+
 
             </Layout>
     );

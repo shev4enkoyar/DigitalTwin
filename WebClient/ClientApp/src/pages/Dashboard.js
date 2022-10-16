@@ -16,7 +16,7 @@ export class Dashboard extends Component {
 
     iconsLeftBar = [
         new IconButton("#/", "Главная панель", <HomePanel_Icon />),
-        new IconButton( "/map-" + this.props.match.params.modelId , "Карта", <Map_Icon />),
+        new IconButton( "/map/" + this.props.match.params.modelId  , "Карта", <Map_Icon />),
         new IconButton("#nogo", "Документы", <DocIcon />),
         new IconButton("#nogo", "Датчики IoT", <SensorsIoT />),
         new IconButton("/recom", "Рекомендации", <RecIcon />),

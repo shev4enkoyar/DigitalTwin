@@ -19,8 +19,8 @@ class MapMain extends Component{
         this.state = { mapId: -1, loading: true };
     }
     iconsSideBarDashboard = [
-        new IconButton("/dashboard-" + this.props.match.params.modelId, "Главная панель", <HomePanel_Icon />),
-        new IconButton("/map", "Карта", <Map_Icon />),
+        new IconButton("/dashboard/" + this.props.match.params.modelId, "Главная панель", <HomePanel_Icon />),
+        new IconButton("/map/" + this.props.match.params.modelId, "Карта", <Map_Icon />),
         new IconButton("#nogo", "Документы", <DocIcon/>),
         new IconButton("#nogo", "Датчики IoT", <SensorsIoT />),
         new IconButton("/recom", "Рекомендации", <RecIcon/>),

@@ -25,7 +25,7 @@ class Models extends Component {
                 {
                     this.state.culture.map(el =>
                         <Col className="d-flex justify-content-center">
-                            <Link to={"/dashboard-" + el.id}>
+                            <Link to={"/dashboard/" + el.id}>
                                 <button className="d-flex justify-content-center" style={this.buttonStyle}>
                                     <CardModel className="d-flex justify-content-center" title={el.name}>
                                         <p className="paramForModelCard">
@@ -62,7 +62,7 @@ class Models extends Component {
 
     async GetTechCardsData() {
         const token = await authService.getAccessToken();
-        const response = await fetch('api/techcard', {
+        const response = await fetch('api/techcard/get_all', {
             headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
         });
         const data = await response.json();

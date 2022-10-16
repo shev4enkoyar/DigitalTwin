@@ -24,29 +24,23 @@ namespace Microservice.DashboardManager.Services
         {
             //TODO TEST EXAMPLE NEED REFACTOR
 
-            if (_dbContext.DigitalModels.Any(x => x.UserId.ToString().Equals(request.UserId)))
+            var model = new DigitalModel
             {
-                //error
-                return Task.FromResult(new ModelReply { Status = "record already exist" });
-            }
-            else
-            {
-                var model = new DigitalModel
-                {
-                    Name = request.Name,
-                    UserId = System.Guid.Parse(request.UserId),
-                    ProductId = request.ProductId
-                };
-                _dbContext.DigitalModels.Add(model);
-                _dbContext.SaveChanges();
-                //TODO here address where  
-                using var channel = GrpcChannel.ForAddress("https://localhost:7042");
-                var client = new MapService.MapServiceClient(channel);
-                var reply = client.GetMapId(new GetMapIdRequest { ModelId = model.Id });
-                return Task.FromResult(new ModelReply { Status = "ok" });
-            }
-
-
+                Name = request.Name,
+                UserId = System.Guid.Parse(request.UserId),
+                ProductId = request.ProductId
+            };
+            _dbContext.DigitalModels.Add(model);
+            _dbContext.SaveChanges();
+            //TODO here address where  
+            using var channel = GrpcChannel.ForAddress("https://localhost:49165");
+            var client = new MapService.MapServiceClient(channel);
+            var reply = client.GetMapId(new GetMapIdRequest { ModelId = model.Id });
+            model.MapId = reply.MapId;
+            _dbContext.Update(model);
+            _dbContext.SaveChanges();
+            return Task.FromResult(new ModelReply { Status = "ok" });
+           
         }
 
         public override async Task GetDigitalModels(GetModelsRequest request, IServerStreamWriter<GetModelsReply> responseStream, ServerCallContext context)
