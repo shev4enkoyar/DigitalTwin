@@ -50,7 +50,7 @@ class MapMain extends Component{
 
     async GetMapId() {
         const token = await authService.getAccessToken();
-        const response = await fetch('api/techcard', {
+        const response = await fetch('api/techcard/get_all', {
             headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
         });
         const data = await response.json();

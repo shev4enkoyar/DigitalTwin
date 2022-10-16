@@ -27,7 +27,7 @@ namespace Microservice.DashboardManager.Services
             var model = new DigitalModel
             {
                 Name = request.Name,
-                UserId = System.Guid.Parse(request.UserId),
+                CompanyId = System.Guid.Parse(request.CompanyId),
                 ProductId = request.ProductId
             };
             _dbContext.DigitalModels.Add(model);
@@ -40,13 +40,13 @@ namespace Microservice.DashboardManager.Services
             _dbContext.Update(model);
             _dbContext.SaveChanges();
             return Task.FromResult(new ModelReply { Status = "ok" });
-           
+
         }
 
         public override async Task GetDigitalModels(GetModelsRequest request, IServerStreamWriter<GetModelsReply> responseStream, ServerCallContext context)
         {
             GetModelsReply modelsReply = new GetModelsReply();
-            modelsReply.Models.AddRange(GetProtoModels(request.UserId));
+            modelsReply.Models.AddRange(GetProtoModels(request.CompanyId));
             await responseStream.WriteAsync(modelsReply);
             await Task.FromResult(modelsReply);
         }
@@ -54,16 +54,16 @@ namespace Microservice.DashboardManager.Services
         private IEnumerable<ModelProto> GetProtoModels(string userId)
         {
             var temp = _dbContext.DigitalModels.Include(x => x.Product).ToList();
-            var result = temp.Where(x => x.UserId.ToString().Equals(userId))
+            var result = temp.Where(x => x.CompanyId.ToString().Equals(userId))
                                 .Select(x => new ModelProto()
                                 {
                                     Id = x.Id,
                                     Name = x.Name,
-                                    UserId = x.UserId.ToString(),
+                                    CompanyId = x.CompanyId.ToString(),
                                     ProductName = x.Product.Name,
                                     ProductCode = x.Product.Code,
                                     ProductCurrentPrice = x.Product.CurrentPrice.ToString(),
-                                    MapId = (int) x.MapId
+                                    MapId = (int)x.MapId
                                 })
                                 .ToList();
             return result;

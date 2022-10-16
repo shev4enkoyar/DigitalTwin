@@ -52,9 +52,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Protos\digitalModelProto.proto">
-      <GrpcServices>Server</GrpcServices>
-    </None>
+    <None Remove="Protos\digitalModelProto.proto" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="Protos\productProto.proto">
       <GrpcServices>Server</GrpcServices>
     </None>

@@ -11,6 +11,7 @@ using Grpc.Core;
 using System.Threading.Tasks;
 using System.Net.Http;
 using System.Text.Json.Serialization;
+using Microservice.DashboardManager.Protos;
 
 namespace WebClient.Controllers
 {
@@ -45,7 +46,8 @@ namespace WebClient.Controllers
             );
 
             GetModelsReply response = null;
-            using (var call = new DigitalModelService.DigitalModelServiceClient(channel).GetDigitalModels(new GetModelsRequest { UserId = userId }))
+            //TODO REDO
+            using (var call = new DigitalModelService.DigitalModelServiceClient(channel).GetDigitalModels(new GetModelsRequest { CompanyId = userId }))
             {
                 while (await call.ResponseStream.MoveNext())
                 {
@@ -63,15 +65,16 @@ namespace WebClient.Controllers
             {
                 ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
             };
-            
+
             string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (userId == null)
                 return Unauthorized();
+            //TODO REDO
             ModelRequest request = new ModelRequest
             {
                 Name = name,
                 ProductId = productId,
-                UserId = userId
+                CompanyId = userId
             };
 
             using var channel = GrpcChannel.ForAddress(
@@ -82,18 +85,6 @@ namespace WebClient.Controllers
             if (reply.Status.Equals("ok"))
                 return Ok();
             return Ok();
-        }
-
-        public class TechCardModel
-        {
-            [JsonPropertyName("name")]
-            public string Name { get; set; }
-
-            [JsonPropertyName("productId")]
-            public int ProductId { get; set; }
-
-            [JsonPropertyName("userId")]
-            public string UserId { get; set; }
         }
     }
 }

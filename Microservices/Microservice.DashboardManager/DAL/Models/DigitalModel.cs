@@ -15,7 +15,7 @@ namespace Microservice.DashboardManager.DAL.Models
         public string Name { get; set; }
 
         [Required]
-        public Guid UserId { get; set; }
+        public Guid CompanyId { get; set; }
 
         [Required]
         [ForeignKey(nameof(Product))]

@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option csharp_namespace = "Microservice.WebClient.Protos";
+option csharp_namespace = "Microservice.DashboardManager.Protos";
 
 package digitalModelProto;
 
@@ -11,7 +11,7 @@ service DigitalModelService {
 
 message ModelRequest {
   string name = 1;
-  string userId = 2;
+  string companyId = 2;
   int32 productId = 3; 
 }
 
@@ -20,7 +20,7 @@ message ModelReply {
 }
 
 message GetModelsRequest {
-	string userId = 1;
+	string companyId = 1;
 }
 
 message GetModelsReply {
@@ -30,7 +30,7 @@ message GetModelsReply {
 message ModelProto {
   int32 id = 1;
   string name = 2;
-  string userId = 3;
+  string companyId = 3;
   string productName = 4;
   string productCode = 5;
   string productCurrentPrice = 6;
