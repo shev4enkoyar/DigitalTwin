@@ -44,6 +44,8 @@ namespace Microservice.DashboardManager.Services
 
             SubscriptionsClientReply reply = new SubscriptionsClientReply();
             /*reply.Subscriptions.AddRange(result);*/
+            await responseStream.WriteAsync(reply);
+            await Task.FromResult(reply);
         }
 
         /* public override Task GetAllClientSubscriptions(AllClientSubscriptionsRequest request, IServerStreamWriter<SubscriptionsClientReply> responseStream, ServerCallContext context)
