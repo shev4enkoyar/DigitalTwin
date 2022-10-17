@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microservice.SubscriptionManager.DAL.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Microservice.SubscriptionManager.DAL
 {
@@ -6,11 +7,15 @@ namespace Microservice.SubscriptionManager.DAL
     {
         #region Properties
 
+        public DbSet<Subscription> Subscriptions{ get; set; }
+
+        public DbSet<ActivatedSubscription> ActivatedSubscriptions{ get; set; }
+
         #endregion
 
         public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
         {
-            Database.EnsureCreated();
+            /*Database.EnsureCreated();*/
         }
 
 
