@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+option csharp_namespace = "Microservice.DashboardManager";
+
+package subscriptionClientProto;
+
+service SubscriptionClientService {
+  rpc GetAllClientSubscriptions (AllClientSubscriptionsRequest) returns (stream SubscriptionsClientReply);
+  rpc GetActivatedClientSubscriptions (ActivatedClientSubscriptionsRequest) returns (stream SubscriptionsClientReply);
+}
+
+message AllClientSubscriptionsRequest {
+
+}
+message ActivatedClientSubscriptionsRequest {
+	int32 modelId = 1;
+}
+message SubscriptionsClientReply {
+   repeated SubscriptionClientProto subscriptions = 1;
+}
+
+message SubscriptionClientProto {
+  int32 id = 1;
+  string name = 2;
+  string price = 3;
+}

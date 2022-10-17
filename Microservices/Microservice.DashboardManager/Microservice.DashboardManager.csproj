@@ -12,6 +12,10 @@
     <None Remove="DAL\Models\DigitalModel.cs~RF3ed3a41.TMP" />
     <None Remove="Protos\digitalModelProto.proto" />
     <None Remove="Protos\mapProto.proto" />
+    <None Remove="Protos\subscriptionClientProto.proto~RFda21a00.TMP" />
+    <None Remove="Protos\subscriptionClientProto.proto~RFdc7eea2.TMP" />
+    <None Remove="Protos\subscriptionClientProto.proto~RFdcc66ec.TMP" />
+    <None Remove="Protos\subscriptionProto.proto" />
   </ItemGroup>
 
   <ItemGroup>
@@ -20,6 +24,8 @@
 	<Protobuf Include="Protos\productProto.proto" GrpcServices="Server" />
 	<Protobuf Include="Protos\digitalModelProto.proto" GrpcServices="Server" />
 	<Protobuf Include="Protos\mapProto.proto" GrpcServices="Client" />
+	  <Protobuf Include="Protos\subscriptionProto.proto" GrpcServices="Client" />
+	  <Protobuf Include="Protos\subscriptionClientProto.proto" GrpcServices="Server" />
   </ItemGroup>
 
   <ItemGroup>
