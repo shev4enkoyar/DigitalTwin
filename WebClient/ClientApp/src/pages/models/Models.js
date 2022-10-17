@@ -20,7 +20,7 @@ class Models extends Component {
     render() {
 
         let content =  this.state.loading
-            ? <p><em>Loading...</em></p>
+            ? <p style={{color: "#FFF"}}><em>Loading...</em></p>
             : <ModelsContent >
                 {
                     this.state.culture.map(el =>
