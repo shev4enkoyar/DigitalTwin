@@ -25,8 +25,6 @@ export default class AuthorizeRouteWithPermission extends Component {
         authService.unsubscribe(this._subscription);
     }
 
-
-
      checkPermission(functional){
         let data = this.state.functional;
         if (data.includes(functional))
