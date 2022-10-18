@@ -38,7 +38,6 @@ export default class App extends Component {
                     <Switch>
                         <Route exact path='/' component={Home } />
                         <AuthorizeRoute path={ApplicationPaths.IdentityManagePath} component={ApiAuthorizationRoutes} />
-                        <AuthorizeRoute path="/registerCompany" component={CreateCompany } />
                         <AuthorizeRoute path="/tariffs" component={Tariffs } />
                         <AuthorizeRoute path="/tariffs-all" component={AllTariffs } />
                         <AuthorizeRoute path='/counter' component={Counter } />
@@ -52,6 +51,7 @@ export default class App extends Component {
 
                         <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
 
+                        <AuthorizeRouteWithPermission path={ClientRoutes.PREFIX + ClientRoutes.REGISTER_COMPANY} component={CreateCompany} name={ClientRoutes.REGISTER_COMPANY}/>
                         <AuthorizeRouteWithPermission path={ClientRoutes.PREFIX + ClientRoutes.MODELS} component={Models} name={ClientRoutes.MODELS}/>
                         <AuthorizeRouteWithPermission path={ClientRoutes.PREFIX + ClientRoutes.CREATE_MODEL} component={CreateModel} name={ClientRoutes.CREATE_MODEL}/>
 

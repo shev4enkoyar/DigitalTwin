@@ -4,6 +4,8 @@ using System.Threading.Tasks;
 using System.Linq;
 using WebClient.Data;
 using WebClient.Models;
+using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
 
 namespace WebClient.Controllers
 {
@@ -12,11 +14,13 @@ namespace WebClient.Controllers
     [Route("api/company")]
     public class CompanyController : ControllerBase
     {
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly ApplicationDbContext _dbContext;
 
-        public CompanyController(ApplicationDbContext dbContext)
+        public CompanyController(ApplicationDbContext dbContext, UserManager<ApplicationUser> userManager)
         {
             _dbContext = dbContext;
+            _userManager = userManager;
         }
 
         [HttpGet("create")]
@@ -35,7 +39,23 @@ namespace WebClient.Controllers
             };
 
             await _dbContext.Companies.AddAsync(createdCompany);
+            _dbContext.SaveChanges();
+            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var user = await _userManager.FindByIdAsync(userId);
+            user.CompanyId = createdCompany.Id;
+            await _userManager.UpdateAsync(user);
             return Ok();
+        }
+
+        [HttpGet("get_id")]
+        public async Task<string> GetCompanyId()
+        {
+            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user.CompanyId.ToString() == null)
+                return "0";
+            
+            return user.CompanyId.ToString();
         }
     }
 }

@@ -20,7 +20,7 @@ export class CreateCompany extends Component {
                   <Input Label="ИНН" classNameP="textForSign12" className="inpCreateForDashCard" contClass="contForInpDashE" onInput={(event) => { let reg = /^[0-9A-Za-zА-Яа-я]*$/i.test(event.target.value); if (reg) this.setState({ inn: event.target.value.trim() }) }} />
                   <Input Label="Имя руководителя" classNameP="textForSign12" className="inpCreateForDashCard" contClass="contForInpDashE" onInput={(event) => { let reg = /^[0-9A-Za-zА-Яа-я]*$/i.test(event.target.value); if (reg) this.setState({ supervisorName: event.target.value.trim() }) }} />
                   <Input Label="ID контракта" classNameP="textForSign12" className="inpCreateForDashCard" contClass="contForInpDashE" onInput={(event) => { this.setState({ contractId: event.target.value.trim() }) }} />
-                  <Button onInput={this.createCompany}>
+                  <Button onClick={() => this.createCompany()}>
                       Зарегистрировать компанию
                   </Button>
               </CardForBody>
@@ -29,7 +29,7 @@ export class CreateCompany extends Component {
     }
 
     async createCompany() {
-        if (this.state.name === "" && this.state.inn === "" && this.state.supervisorName === "" && this.state.contractId === ""){
+        if (this.state.name === "" || this.state.inn === "" || this.state.supervisorName === "" || this.state.contractId === ""){
             this.setState({error: "Одно или несколько полей пусто"});
             return "error"
         }
