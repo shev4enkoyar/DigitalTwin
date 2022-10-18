@@ -6,6 +6,9 @@ using System.Security.Claims;
 using System;
 using System.Threading.Tasks;
 using Microservice.DashboardManager.Protos;
+using System.Collections;
+using System.Linq;
+using Microservice.SubscriptionManager;
 
 namespace Microservice.DashboardManager.Services
 {
@@ -26,7 +29,7 @@ namespace Microservice.DashboardManager.Services
             };
 
             using var channel = GrpcChannel.ForAddress(
-                Configuration.GetSection("gRPCConnections")["Micriservices.DashboardManager"],
+                Configuration.GetSection("gRPCConnections")["Micriservices.SubscriptionManager"],
                 new GrpcChannelOptions { HttpHandler = httpHandler }
             );
 
@@ -41,16 +44,54 @@ namespace Microservice.DashboardManager.Services
             }
 
             var result = response.Subscriptions;
-
+            var list = result.Select(x => new SubscriptionClientProto
+            {
+                Id = x.Id,
+                Name = x.Name,
+                Price = x.Price,
+                FunctionalAccess = x.FunctionalAccess
+            });
             SubscriptionsClientReply reply = new SubscriptionsClientReply();
-            /*reply.Subscriptions.AddRange(result);*/
+            reply.Subscriptions.AddRange(list);
             await responseStream.WriteAsync(reply);
             await Task.FromResult(reply);
         }
 
-        /* public override Task GetAllClientSubscriptions(AllClientSubscriptionsRequest request, IServerStreamWriter<SubscriptionsClientReply> responseStream, ServerCallContext context)
-         {
-             return base.GetAllClientSubscriptions(request, responseStream, context);
-         }*/
+        public override async Task GetAllClientSubscriptions(AllClientSubscriptionsRequest request, IServerStreamWriter<SubscriptionsClientReply> responseStream, ServerCallContext context)
+        {
+            var httpHandler = new HttpClientHandler()
+            {
+                ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+            };
+
+            using var channel = GrpcChannel.ForAddress(
+                Configuration.GetSection("gRPCConnections")["Micriservices.SubscriptionManager"],
+                new GrpcChannelOptions { HttpHandler = httpHandler }
+            );
+
+            SubscriptionsReply response = null;
+            //TODO REDO
+            using (var call = new SubscriptionService.SubscriptionServiceClient(channel).GetAllSubscriptions(new AllSubscriptionsRequest()))
+            {
+                while (await call.ResponseStream.MoveNext())
+                {
+                    response = call.ResponseStream.Current;
+                }
+            }
+
+            var result = response.Subscriptions;
+            var list = result.Select(x => new SubscriptionClientProto
+            {
+                Id = x.Id,
+                Name = x.Name,
+                Price = x.Price,
+                FunctionalAccess = x.FunctionalAccess
+            });
+            SubscriptionsClientReply reply = new SubscriptionsClientReply();
+            reply.Subscriptions.AddRange(list);
+            await responseStream.WriteAsync(reply);
+            await Task.FromResult(reply);
+        }
     }
+
 }

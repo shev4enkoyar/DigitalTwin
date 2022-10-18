@@ -41,7 +41,8 @@ namespace Microservice.SubscriptionManager.Services
                                 {
                                     Id = x.Id,
                                     Name = x.Subscription.Name,
-                                    Price = x.Subscription.Price.ToString()
+                                    Price = x.Subscription.Price.ToString(),
+                                    FunctionalAccess = x.Subscription.FunctionalAccess
                                 })
                                 .ToList();
             return result;
@@ -56,7 +57,8 @@ namespace Microservice.SubscriptionManager.Services
                             {
                                 Id = x.Id,
                                 Name = x.Name,
-                                Price = x.Price.ToString()
+                                Price = x.Price.ToString(),
+                                FunctionalAccess = x.FunctionalAccess
                             })
                             .ToList();
             return result;
