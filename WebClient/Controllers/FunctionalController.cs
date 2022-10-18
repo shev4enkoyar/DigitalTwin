@@ -26,7 +26,7 @@ namespace WebClient.Controllers
         [HttpGet("get_all")]
         public async Task<IEnumerable<string>> GetFunctional()
         {
-            List<string> functions = new List<string>() { "models" };
+            List<string> functions = new List<string>() { "models", "createModel" };
             string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var user = await _userManager.FindByIdAsync(userId);
             if (user.CompanyId == null)

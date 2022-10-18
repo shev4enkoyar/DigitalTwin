@@ -2,6 +2,7 @@
 using Grpc.Net.Client;
 using Microservice.DashboardManager.Protos;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -9,6 +10,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using WebClient.Models;
 
 namespace WebClient.Controllers
 {
@@ -18,9 +20,11 @@ namespace WebClient.Controllers
     public class TechCardController : ControllerBase
     {
         public IConfiguration Configuration { get; }
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public TechCardController(IConfiguration configuration)
+        public TechCardController(IConfiguration configuration, UserManager<ApplicationUser> userManager)
         {
+            _userManager = userManager;
             Configuration = configuration;
         }
 
@@ -66,12 +70,13 @@ namespace WebClient.Controllers
             string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (userId == null)
                 return Unauthorized();
+            var user = await _userManager.FindByIdAsync(userId);
             //TODO REDO
             ModelRequest request = new ModelRequest
             {
                 Name = name,
                 ProductId = productId,
-                CompanyId = userId
+                CompanyId = user.CompanyId.ToString()
             };
 
             using var channel = GrpcChannel.ForAddress(
