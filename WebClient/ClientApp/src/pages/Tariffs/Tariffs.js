@@ -5,7 +5,18 @@ import CardForBody from '../../components/cardForBody/CardForBody';
 import '../pages.css';
 import {Button, Col, Container, Row} from 'react-bootstrap';
 import TableForTariffs from './components/tableForTariffs/TableForTariffs';
+import {Link} from "react-router-dom";
+import authService from "../../components/api-authorization/AuthorizeService";
 class Tariffs extends Component {
+    constructor(props) {
+        super(props);
+        this.state = { tariffs: [], loading: true };
+    }
+
+    componentDidMount() {
+        this.GetTariffs();
+    }
+
      AddCancel = ['Наименование подписки 1',
         'Наименование подписки 2',
         'Наименование подписки 3',
@@ -63,6 +74,32 @@ class Tariffs extends Component {
     ]
     
     render() {
+        let content = this.state.loading
+            ?
+                <p style={{color: "#FFF"}}><em>Loading...</em></p>
+            :
+                Object.entries(this.state.tariffs).map(([el, props]) =>
+                    <>
+                        <p style={{color: "#FFF"}}>{"Модель: " + el}</p>
+                        {props.map(prop => {
+                            return (
+                                <CardForTariffs >
+                                    <Col style={{ margin: '0% 6% 0% 0%' }}>
+                                        <p style={{ margin: '0px', lineHeight: '15px' }} >
+                                            {"Подписка: " + prop}
+                                        </p>
+                                    </Col>
+                                    <Col>
+                                        <Button className="redBut ButAllMini"  imageClassName="icon_for_but" > Крестик</Button>
+                                    </Col>
+                                    <Col>
+                                        <Button className="greenBut ButAllMini" imageClassName="icon_for_but"> Обновить </Button>
+                                    </Col>
+                                </CardForTariffs>
+                            );
+                        })}
+                    </>
+                )
         return (
             <ThemeContextConsumer>{context => (
                 <div >
@@ -74,13 +111,12 @@ class Tariffs extends Component {
                                         Продлить/отменить подписки
                                     </p>
                                     {
-                                        this.AddCancel.map((addcanc) =>
-                                            <CardForTariffs AddCancel={addcanc} />)
+                                        content
                                     }
                                     <Button className="blueBut createBut" buttonStyle={{ maxWidth: '70%', width: '70%' }}  imageClassName="plus2" textForButton="Добавить подписку" classTextName="textOpenSans14"/>
-                                    <a href="src/pages/tariffs/Tariffs#nogo" className="linkAutoriz">
+                                    <Link to="/tariffs-all" >
                                         описание подписок
-                                    </a>
+                                    </Link>
                                 </CardForBody>
                             </Col>
                             <Col className="MargForCol">
@@ -96,5 +132,15 @@ class Tariffs extends Component {
             )}
             </ThemeContextConsumer>
         );
+    }
+
+    async GetTariffs() {
+        const token = await authService.getAccessToken();
+        const response = await fetch('api/subscriptions/get_all_by_company', {
+            headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
+        });
+        const data = await response.json();
+        debugger;
+        this.setState({ tariffs: data, loading: false });
     }
 } export default Tariffs;

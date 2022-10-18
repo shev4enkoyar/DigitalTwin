@@ -15,6 +15,7 @@
     <ItemGroup>
 	    <Protobuf Include="Protos\productProto.proto" GrpcServices="Client" />
 	    <Protobuf Include="Protos\digitalModelProto.proto" GrpcServices="Client" />
+	    <Protobuf Include="Protos\subscriptionClientProto.proto" GrpcServices="Client" />
     </ItemGroup>	
 	
   <ItemGroup>
@@ -53,6 +54,7 @@
 
   <ItemGroup>
     <None Remove="Protos\digitalModelProto.proto" />
+    <None Remove="Protos\subscriptionClientProto.proto" />
   </ItemGroup>
 
   <ItemGroup>

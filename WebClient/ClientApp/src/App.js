@@ -19,6 +19,8 @@ import {Switch} from "react-router";
 import authService from "./components/api-authorization/AuthorizeService";
 import {ClientRoutes} from "./util/ClientRoutes";
 import AuthorizeRouteWithPermission from "./components/api-authorization/AuthorizeRouteWithPermission";
+import AllTariffs from "./pages/Tariffs/AllTariffs";
+import {CreateCompany} from "./pages/createCompany/CreateCompany";
 
 export default class App extends Component {
   static displayName = App.name;
@@ -36,7 +38,9 @@ export default class App extends Component {
                     <Switch>
                         <Route exact path='/' component={Home } />
                         <AuthorizeRoute path={ApplicationPaths.IdentityManagePath} component={ApiAuthorizationRoutes} />
+                        <AuthorizeRoute path="/registerCompany" component={CreateCompany } />
                         <AuthorizeRoute path="/tariffs" component={Tariffs } />
+                        <AuthorizeRoute path="/tariffs-all" component={AllTariffs } />
                         <AuthorizeRoute path='/counter' component={Counter } />
                         <AuthorizeRoute path='/fetch-data' component={FetchData } />
                         <AuthorizeRoute path="/dashboard/:modelId" component={Dashboard} />

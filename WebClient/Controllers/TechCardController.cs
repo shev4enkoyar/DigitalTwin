@@ -1,17 +1,14 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System.Linq;
-using System;
-using Microservice.WebClient.Protos;
+﻿using Grpc.Core;
 using Grpc.Net.Client;
-using Microsoft.Extensions.Configuration;
-using System.Security.Claims;
-using Grpc.Core;
-using System.Threading.Tasks;
-using System.Net.Http;
-using System.Text.Json.Serialization;
 using Microservice.DashboardManager.Protos;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace WebClient.Controllers
 {
@@ -59,7 +56,7 @@ namespace WebClient.Controllers
         }
 
         [HttpGet("create")]
-        public async Task<IActionResult> CreateDigitalModel( int productId, string name)
+        public async Task<IActionResult> CreateDigitalModel(int productId, string name)
         {
             var httpHandler = new HttpClientHandler()
             {
