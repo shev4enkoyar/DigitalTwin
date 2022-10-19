@@ -59,8 +59,8 @@ namespace WebClient.Areas.Identity.Pages.Account
 
                 await _emailSender.SendEmailAsync(
                     Input.Email,
-                    "Reset Password",
-                    $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    "Сброс пароля",
+                    $"Пожалуйста, сбросьте пароль <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>нажав здесь</a>.");
 
                 return RedirectToPage("./ForgotPasswordConfirmation");
             }
