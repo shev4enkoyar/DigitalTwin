@@ -6,6 +6,7 @@ import {Link} from "react-router-dom";
 import {NavLink} from "reactstrap";
 import authService from "../../api-authorization/AuthorizeService";
 import {ClientRoutes} from "../../../util/ClientRoutes";
+import '../NavMenu.css'
 
 class ProfileDropDown extends Component{
 
@@ -27,7 +28,7 @@ class ProfileDropDown extends Component{
 
     render() {
         return (
-            <DropdownButton id="dropdown-basic-button" title="Профиль">
+            <DropdownButton className="background-transparent" id="dropdown-basic-button" title={<img className="icon" src="https://www.svgrepo.com/show/333287/profile.svg"/>}>
                 <Dropdown.Item href={ApplicationPaths.IdentityManagePath}>Профиль</Dropdown.Item>
                 <Dropdown.Item href="/tariffs">Подписки</Dropdown.Item>
                 {

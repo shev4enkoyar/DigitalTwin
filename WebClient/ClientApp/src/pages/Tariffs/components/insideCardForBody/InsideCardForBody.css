@@ -22,7 +22,8 @@
     background-color: #302F38;
     border-radius: 10px;
     border:none;
-    width: max-content;
+    width: fit-content;
+    height: fit-content;
 }
 
 .textInsideForCardTarriffs {

@@ -14,3 +14,11 @@ code {
   border-color: #1861ac;
 }
 */
+
+.icon {
+    filter: invert(99%) sepia(100%) saturate(15%) hue-rotate(111deg) brightness(106%) contrast(100%);
+    width: 100%;
+    height: 100%;
+}
+
+

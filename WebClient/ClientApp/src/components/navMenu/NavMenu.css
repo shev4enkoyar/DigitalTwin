@@ -12,3 +12,12 @@ header {
 .box-shadow {
   box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
 }
+
+.dropdown-toggle::after {
+  display: none !important;
+}
+
+#dropdown-basic-button {
+  background-color: transparent;
+  border: none;
+}

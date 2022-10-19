@@ -17,11 +17,6 @@ class Tariffs extends Component {
         this.GetTariffs();
     }
 
-     AddCancel = ['Наименование подписки 1',
-        'Наименование подписки 2',
-        'Наименование подписки 3',
-        'Наименование подписки 4'
-    ]
     headerForTariffs = [ '#', 'Дата', 'Наименования', 'Сумма'];
     historyTariffs = [{
         num: "1",
@@ -89,12 +84,19 @@ class Tariffs extends Component {
                                             {"Подписка: " + prop}
                                         </p>
                                     </Col>
-                                    <Col>
-                                        <Button className="redBut ButAllMini"  imageClassName="icon_for_but" > Крестик</Button>
+
+                                    <Col className="d-flex justify-content-end">
+                                        <Button variant="success" imageClassName="icon_for_but">
+                                            <img style={{width: "25px", height: "25px"}} className="icon"
+                                                 src="https://img.icons8.com/ios-filled/344/update-tag.png"/>
+                                        </Button>
                                     </Col>
-                                    <Col>
-                                        <Button className="greenBut ButAllMini" imageClassName="icon_for_but"> Обновить </Button>
+                                    <Col >
+                                        <Button variant="danger" >
+                                            <img style={{width: "25px", height: "25px"}} class="icon" src="https://www.svgrepo.com/show/59221/delete.svg"/>
+                                        </Button>
                                     </Col>
+
                                 </CardForTariffs>
                             );
                         })}
@@ -106,17 +108,19 @@ class Tariffs extends Component {
                     <Container className={context.theme + "Gray " + "body_style"}>
                         <Row>
                             <Col className="MargForCol">
-                                <CardForBody styleForCard={{ position: 'relative'} } className="signUpWidth" classForContB=" centerCard" >
+                                <CardForBody styleForCard={{ position: 'relative', width: "fit-content"}} className="signUpWidth text-center" classForContB=" centerCard" >
                                     <p className="textOpenSansForHistTar">
                                         Продлить/отменить подписки
                                     </p>
                                     {
                                         content
                                     }
-                                    <Button className="blueBut createBut" buttonStyle={{ maxWidth: '70%', width: '70%' }}  imageClassName="plus2" textForButton="Добавить подписку" classTextName="textOpenSans14"/>
-                                    <Link to="/tariffs-all" >
-                                        описание подписок
-                                    </Link>
+                                    <Button className="my-3" onClick={() => window.location.replace("/tariffs-all")}>
+                                            <img style={{width: "35px", height: "35px"}} className="icon"
+                                                 src="https://www.svgrepo.com/show/274451/add.svg"/>
+                                        {" Добавить подписку"}
+                                    </Button>
+
                                 </CardForBody>
                             </Col>
                             <Col className="MargForCol">
