@@ -10,7 +10,7 @@ const CardNameModel = (props) => {
         <fieldset style={{ visibility: props.visible ? "visible" : "hidden", minWidth: '360px', width: 'calc(25% - 20px)', position: 'inherit' }} className="mx-auto my-5">
             <CardForBody className="signUpWidth" classForContB="d-flex flex-column align-items-center p-4">
                 <h5 style={{ fontFamily: 'Open Sans', margin: '10px 0px 30px 0px' }} className="d-flex justify-content-center">
-                    Создание модели
+                    Формирование технологическойй карты
                 </h5>
                 <Input value={props.values.name} onInput={(event) => { var reg = /^[0-9A-Za-zА-Яа-я]*$/i.test(event.target.value); if (reg) props.setStatus({ name: event.target.value.trim() }) }} className="input" classNameP="textForSign" Label="Наименование модели" placeholder="Введите наименование..." />
                 <Combobox onChange={(empty) => { props.setStatus({ pred: empty }) }} className="FormControlSelect minWForCombobox" classTextCombobox="textForSign" textCombobox="Был ли ранее предшественник?" options={isPred} />
