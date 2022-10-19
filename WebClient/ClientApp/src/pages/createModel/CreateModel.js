@@ -7,17 +7,15 @@ import FieldCard from '../../components/cardsForDashboard/FieldCard';
 import CultureCard from '../../components/cardsForDashboard/CultureCard';
 import HistoryCard from '../../components/cardsForDashboard/HistoryCard';
 import EconomicCard from '../../components/cardsForDashboard/EconomicCard';
-/*import ElementStep from './ElementStep';
-import { Button, Container } from 'react-bootstrap';*/
+import ElementStep from './ElementStep';
+import { Button, Container } from 'react-bootstrap';
 import CardNameModel from './CardNameModel';
 class CreateModel extends Component {
     constructor(props) {
         super(props);
         this.state = { children: [{ name: "", pred: "Да", visible: false }, { hist: false, visible: false }, { productId: -1, cult: 0, sort: 0, frac: "", gust: "", norm: "", total: "", visible: false }, { kad: "", visible: false }, { added: true, visible: false }, { chem: 0, pest: 0, ud: 0, xxx: 0, visible: true }, { dat: false, visible: false }, { econom: true, visible: false }] };
     }
-
-
-
+    steps=["first", "second","three", "four", "five","six","seven","eight"]
     handleVisibleSwitch = (i) => {
         const temp = this.state.children.map((value, index, array) => { return { ...value, visible: index === i } })
         this.setState({
