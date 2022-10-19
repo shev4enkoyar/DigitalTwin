@@ -40,7 +40,7 @@ namespace WebClient.Controllers
             string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (userId == null)
                 return null;
-
+            var user = await _userManager.FindByIdAsync(userId);
             using var channel = GrpcChannel.ForAddress(
                 Configuration.GetSection("gRPCConnections")["Micriservices.DashboardManager"],
                 new GrpcChannelOptions { HttpHandler = httpHandler }
@@ -48,7 +48,7 @@ namespace WebClient.Controllers
 
             GetModelsReply response = null;
             //TODO REDO
-            using (var call = new DigitalModelService.DigitalModelServiceClient(channel).GetDigitalModels(new GetModelsRequest { CompanyId = userId }))
+            using (var call = new DigitalModelService.DigitalModelServiceClient(channel).GetDigitalModels(new GetModelsRequest { CompanyId = user.CompanyId.ToString()}))
             {
                 while (await call.ResponseStream.MoveNext())
                 {
