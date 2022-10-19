@@ -7,7 +7,7 @@ import {Button, Col, Container, Row} from 'react-bootstrap';
 import TableForTariffs from './components/tableForTariffs/TableForTariffs';
 import {Link} from "react-router-dom";
 import authService from "../../components/api-authorization/AuthorizeService";
-class Tariffs extends Component {
+class Subscriptions extends Component {
     constructor(props) {
         super(props);
         this.state = { tariffs: [], loading: true };
@@ -76,6 +76,10 @@ class Tariffs extends Component {
                 Object.entries(this.state.tariffs).map(([el, props]) =>
                     <>
                         <p style={{color: "#FFF"}}>{"Модель: " + el}</p>
+                        props.length === 0
+                            ?
+                                <p style={{color: "#FFF"}}><em>Loading...</em></p>
+                            :
                         {props.map(prop => {
                             return (
                                 <CardForTariffs >
@@ -99,7 +103,8 @@ class Tariffs extends Component {
 
                                 </CardForTariffs>
                             );
-                        })}
+                        })
+                        }
                     </>
                 )
         return (
@@ -147,4 +152,4 @@ class Tariffs extends Component {
         debugger;
         this.setState({ tariffs: data, loading: false });
     }
-} export default Tariffs;
+} export default Subscriptions;

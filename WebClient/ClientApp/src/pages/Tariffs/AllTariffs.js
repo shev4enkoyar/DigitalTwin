@@ -22,21 +22,27 @@ class AllTariffs extends Component {
             :
                 this.state.tariffs.map(el => {
                     return (
-                        <CardForTariffs >
-                            <Col style={{ margin: '0% 6% 0% 0%' }}>
-                                <p style={{ margin: '0px', lineHeight: '15px' }} >
-                                    {el.name}
-                                </p>
-                            </Col>
-                            <Col>
-                                <Button className="greenBut ButAllMini" imageClassName="icon_for_but"> Добавить подписку </Button>
-                            </Col>
+                        <CardForTariffs parentStyle={{width: "100%"}}>
+                            <div style={{display: "grid", gridTemplateColumns: "1fr 1fr"}}>
+                                <Col >
+                                    <p >
+                                        {el.name}
+                                    </p>
+                                </Col>
+                                <Col className="d-flex justify-content-end">
+                                    <Button > Выбрать </Button>
+                                </Col>
+                            </div>
+
                         </CardForTariffs>
                     )
                 });
         return (
-            <Container>
-                <CardForBody>
+            <Container className="d-flex justify-content-center" fluid>
+                <CardForBody styleForCard={{ width: "fit-content"}}>
+                    <h3 className="text-center my-3" style={{color: "#fff"}}>
+                        Подписки
+                    </h3>
                     {content}
                 </CardForBody>
             </Container>

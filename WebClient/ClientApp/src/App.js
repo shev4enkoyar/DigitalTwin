@@ -8,7 +8,7 @@ import AuthorizeRoute from './components/api-authorization/AuthorizeRoute';
 import ApiAuthorizationRoutes from './components/api-authorization/ApiAuthorizationRoutes';
 import {ApplicationPaths, QueryParameterNames} from './components/api-authorization/ApiAuthorizationConstants';
 import './custom.css'
-import Tariffs from "./pages/Tariffs/Tariffs";
+import Subscriptions from "./pages/Tariffs/Subscriptions";
 import Models from "./pages/models/Models";
 import CreateModel from "./pages/createModel/CreateModel";
 import DashboardEmpty from "./pages/dashboardEmpty/DashboardEmpty";
@@ -36,21 +36,15 @@ export default class App extends Component {
         return (
                 <Layout>
                     <Switch>
-                        <Route exact path='/' component={Home } />
-                        <AuthorizeRoute path={ApplicationPaths.IdentityManagePath} component={ApiAuthorizationRoutes} />
-                        <AuthorizeRoute path="/tariffs" component={Tariffs } />
-                        <AuthorizeRoute path="/tariffs-all" component={AllTariffs } />
-                        <AuthorizeRoute path='/counter' component={Counter } />
-                        <AuthorizeRoute path='/fetch-data' component={FetchData } />
-                        <AuthorizeRoute path="/dashboard/:modelId" component={Dashboard} />
-
-
                         <AuthorizeRoute path="/dashboardEmpty" component={DashboardEmpty} />
-                        <AuthorizeRoute path="/map/:modelId" component={MapMain} />
-                        <AuthorizeRoute path="/recom" component={Recommendations } />
-
+                        <Route exact path={ClientRoutes.PREFIX} component={Home } />
                         <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
-
+                        <AuthorizeRoute path={ApplicationPaths.IdentityManagePath} component={ApiAuthorizationRoutes} />
+                        <AuthorizeRoute path={ClientRoutes.PREFIX + ClientRoutes.SUBSCRIPTIONS}  component={Subscriptions } />
+                        <AuthorizeRoute path={ClientRoutes.PREFIX + ClientRoutes.SUBSCRIPTIONS_ALL}  component={AllTariffs } />
+                        <AuthorizeRoute path={ClientRoutes.PREFIX + ClientRoutes.RECOMMENDATIONS}  component={Recommendations } />
+                        <AuthorizeRoute path={ClientRoutes.PREFIX + ClientRoutes.DASHBOARD + ClientRoutes.SUFFIX_MODEL_ID}  component={Dashboard} />
+                        <AuthorizeRoute path={ClientRoutes.PREFIX + ClientRoutes.MAP + ClientRoutes.SUFFIX_MODEL_ID}  component={MapMain} />
                         <AuthorizeRouteWithPermission path={ClientRoutes.PREFIX + ClientRoutes.REGISTER_COMPANY} component={CreateCompany} name={ClientRoutes.REGISTER_COMPANY}/>
                         <AuthorizeRouteWithPermission path={ClientRoutes.PREFIX + ClientRoutes.MODELS} component={Models} name={ClientRoutes.MODELS}/>
                         <AuthorizeRouteWithPermission path={ClientRoutes.PREFIX + ClientRoutes.CREATE_MODEL} component={CreateModel} name={ClientRoutes.CREATE_MODEL}/>
