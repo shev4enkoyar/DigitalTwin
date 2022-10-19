@@ -13,9 +13,9 @@ import CardNameModel from './CardNameModel';
 class CreateModel extends Component {
     constructor(props) {
         super(props);
-        this.state = { children: [{ name: "", pred: "Да", visible: false }, { hist: false, visible: false }, { productId: -1, cult: 0, sort: 0, frac: "", gust: "", norm: "", total: "", visible: false }, { kad: "", visible: false }, { added: true, visible: false }, { chem: 0, pest: 0, ud: 0, xxx: 0, visible: true }, { dat: false, visible: false }, { econom: true, visible: false }] };
+        this.state = { children: [{ name: "", pred: "Да", visible: true }, { hist: false, visible: false }, { productId: -1, cult: 0, sort: 0, frac: "", gust: "", norm: "", total: "", visible: false }, { kad: "", visible: false }, { added: true, visible: false }, { chem: 0, pest: 0, ud: 0, xxx: 0, visible: false}, { dat: false, visible: false }, { vys: "", obr: "", sbor: "", workerN:"" , period:"", visible: false }] };
     }
-    steps=["first", "second","three", "four", "five","six","seven","eight"]
+    steps=["Создание технологической карты", "Загрузка исторических данных","Ввод данных о культуре", "Ввод данных о поле", "Добавление техники","Данные о химических средствах","Установка датчиков IoT","Ввод экономических показателей"]
     handleVisibleSwitch = (i) => {
         const temp = this.state.children.map((value, index, array) => { return { ...value, visible: index === i } })
         this.setState({
@@ -57,7 +57,7 @@ class CreateModel extends Component {
                 <TransportCard handleActiveChanged={() => { }} setStatus={(v) => { this.setStatus(v, 4) }} values={this.state.children[4]} visible={this.state.children[4].visible} onClick={() => { this.handleVisibleSwitch(5) }} />
                 <ChemistryCard setStatus={(v) => { this.setStatus(v, 5) }} values={this.state.children[5]} visible={this.state.children[5].visible} onClick={() => { this.handleVisibleSwitch(6) }} />
                 <IotCard setStatus={(v) => { this.setStatus(v, 6) }} values={this.state.children[6]} visible={this.state.children[6].visible} onClick={() => { this.handleVisibleSwitch(7) }} />
-                <EconomicCard setStatus={(v) => { this.setStatus(v, 7) }} values={this.state.children[7]} visible={this.state.children[7].visible} data={this.state.children}/>
+                <EconomicCard setStatus={(v) => { this.setStatus(v, 7) }} values={this.state.children[7]} visible={this.state.children[7].visible} data={this.state.children} onClick={() => {}} />
             </div>
         );
     }
