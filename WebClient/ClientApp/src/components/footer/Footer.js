@@ -6,7 +6,7 @@ function Footer() {
     return (
         <ThemeContextConsumer>
             {context => (
-                <footer className="footer" fluid>
+                <footer className="footer">
                     <p className="text-center" >
                         Подвал
                     </p>
