@@ -30,7 +30,7 @@ namespace WebClient.Controllers
         [HttpGet("get_all")]
         public async Task<string> GetAllRoles()
         {
-            var roles = _roleManager.Roles;
+            var roles = _roleManager.Roles.ToList();
             if (roles == null)
                 return null;
 
@@ -42,7 +42,7 @@ namespace WebClient.Controllers
                 {
                     string name = _dbContext.Functionals.FirstOrDefault(x => x.Id == int.Parse(item)).Name;
                     if(name == null)
-                        continue;
+                        functional.Add("");
                     functional.Add(name);
                 }
                 rolePairs.Add(role.NormalizedName, functional);

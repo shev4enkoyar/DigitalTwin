@@ -11,7 +11,7 @@ export class CompanyInvite extends Component{
 
     constructor(props) {
         super(props);
-        this.state = { email: "", roles: "", rolesDb: []};
+        this.state = { email: "", roles: [], rolesDb: []};
     }
 
     componentDidMount() {
@@ -31,12 +31,23 @@ export class CompanyInvite extends Component{
             { dataField: 'role', text: <p style={{color: "#fff"}}>Роль</p> },
             { dataField: 'functional', text: <p style={{color: "#fff"}}>Разрешения</p> },
         ]
+        const selectRow = {
+            mode: 'checkbox',
+            onSelect: (row, isSelect, rowIndex, e) => {
+                let roles = this.state.roles;
+                if (isSelect)
+                    roles.push(row.role);
+                else
+                    roles.splice(roles.indexOf(row.role), 1)
+                this.setState({roles});
+            }
+        };
         return(
             <Container>
                 <CardForBody >
-                    <BootstrapTable rowStyle={{color: "#fff", background: "#262626"}} keyField='id' data={this.state.rolesDb} columns={columns} />
+                    <BootstrapTable selectRow={selectRow} rowStyle={{color: "#fff", background: "#262626"}} keyField='id' data={this.state.rolesDb} columns={columns} />
                     <Input Label="Email" classNameP="textForSign12" className="inpCreateForDashCard" contClass="contForInpDashE" onInput={(event) => { this.setState({ contractId: event.target.value.trim() }) }} />
-                    <Button onClick={() => this.inviteUserByEmail()}>
+                    <Button onClick={() => alert(this.state.roles)}>
                         Зарегистрировать компанию
                     </Button>
                 </CardForBody>
@@ -55,25 +66,41 @@ export class CompanyInvite extends Component{
         let result = [];
         Object.entries(data).map(([el, props]) => {
             let functional = "";
+            let functionalName = "";
             props.map(prop => {
-                if (ClientRoutes.COMPANY_INVITE === prop)
-                    functional += "Возможность пприглашать людей в компанию /n";
-                if (ClientRoutes.MODELS === prop)
-                    functional += "Возможность просматривать технологические карты /n";
-                if (ClientRoutes.CREATE_MODEL === prop)
-                    functional += "Возможность создавать технологические карты /n";
-                if (ClientRoutes.SUBSCRIPTIONS === prop)
-                    functional += "Возможность просматривать подписки на технологические карты /n";
-                if (ClientRoutes.SUBSCRIPTIONS_ALL === prop)
-                    functional += "Возможность оформлять подписки на технологические карты /n";
-                if (ClientRoutes.DASHBOARD === prop)
-                    functional += "Возможность просматривать общую сводку по технологической карте /n";
-                if (ClientRoutes.MAP === prop)
-                    functional += "Возможность работы с картой /n";
-                if (ClientRoutes.RECOMMENDATIONS === prop)
-                    functional += "Возможность просматривать рекомендации по технологической карте /n";
+                if (ClientRoutes.COMPANY_INVITE === prop){
+                    functional += "Возможность приглашать людей в компанию; ";
+                }
+                if (ClientRoutes.MODELS === prop){
+                    functional += "Возможность просматривать технологические карты; ";
+                }
+                if (ClientRoutes.CREATE_MODEL === prop){
+                    functional += "Возможность создавать технологические карты; ";
+                }
+                if (ClientRoutes.SUBSCRIPTIONS === prop){
+
+                    functional += "Возможность просматривать подписки на технологические карты; ";
+                }
+
+                if (ClientRoutes.SUBSCRIPTIONS_ALL === prop){
+
+                    functional += "Возможность оформлять подписки на технологические карты; ";
+                }
+
+                if (ClientRoutes.DASHBOARD === prop){
+
+                    functional += "Возможность просматривать общую сводку по технологической карте; ";
+                }
+                if (ClientRoutes.MAP === prop){
+
+                    functional += "Возможность работы с картой; ";
+                }
+                if (ClientRoutes.RECOMMENDATIONS === prop){
+
+                    functional += "Возможность просматривать рекомендации по технологической карте; ";
+                }
             });
-            result.push({role: el, functional })
+            result.push({role: el, functional, functionalName })
         })
         this.setState({ rolesDb: result});
     }
