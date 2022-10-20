@@ -8,6 +8,7 @@ export  const ClientRoutes = {
     SUBSCRIPTIONS_ALL: 'tariffs-all',
     DASHBOARD: 'dashboard',
     MAP: 'map',
-    RECOMMENDATIONS: 'recom'
+    RECOMMENDATIONS: 'recom',
+    COMPANY_INVITE: 'inviteCompany'
 }
 

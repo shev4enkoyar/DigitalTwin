@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import {Redirect, Route} from 'react-router-dom';
 import { Layout } from './components/layout/Layout';
 import  Home  from './pages/home/Home.js'
-import { FetchData } from './components/FetchData';
-import { Counter } from './components/Counter';
 import AuthorizeRoute from './components/api-authorization/AuthorizeRoute';
 import ApiAuthorizationRoutes from './components/api-authorization/ApiAuthorizationRoutes';
 import {ApplicationPaths, QueryParameterNames} from './components/api-authorization/ApiAuthorizationConstants';
@@ -21,6 +19,7 @@ import {ClientRoutes} from "./util/ClientRoutes";
 import AuthorizeRouteWithPermission from "./components/api-authorization/AuthorizeRouteWithPermission";
 import AllTariffs from "./pages/Tariffs/AllTariffs";
 import {CreateCompany} from "./pages/createCompany/CreateCompany";
+import {CompanyInvite} from "./pages/companyInvite/CompanyInvite";
 
 export default class App extends Component {
   static displayName = App.name;
@@ -43,6 +42,7 @@ export default class App extends Component {
                         <AuthorizeRoute path={ClientRoutes.PREFIX + ClientRoutes.SUBSCRIPTIONS}  component={Subscriptions } />
                         <AuthorizeRoute path={ClientRoutes.PREFIX + ClientRoutes.SUBSCRIPTIONS_ALL}  component={AllTariffs } />
                         <AuthorizeRoute path={ClientRoutes.PREFIX + ClientRoutes.RECOMMENDATIONS}  component={Recommendations } />
+                        <AuthorizeRoute path={ClientRoutes.PREFIX + ClientRoutes.COMPANY_INVITE}  component={CompanyInvite } />
                         <AuthorizeRoute path={ClientRoutes.PREFIX + ClientRoutes.DASHBOARD + ClientRoutes.SUFFIX_MODEL_ID}  component={Dashboard} />
                         <AuthorizeRoute path={ClientRoutes.PREFIX + ClientRoutes.MAP + ClientRoutes.SUFFIX_MODEL_ID}  component={MapMain} />
                         <AuthorizeRouteWithPermission path={ClientRoutes.PREFIX + ClientRoutes.REGISTER_COMPANY} component={CreateCompany} name={ClientRoutes.REGISTER_COMPANY}/>
