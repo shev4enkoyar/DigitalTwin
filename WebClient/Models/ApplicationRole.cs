@@ -10,5 +10,8 @@ namespace WebClient.Models
 
         [Required]
         public string TranslatedName { get; set; }
+
+        [Required]
+        public string Description { get; set; }
     }
 }
