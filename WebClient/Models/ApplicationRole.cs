@@ -7,5 +7,8 @@ namespace WebClient.Models
     {
         [Required]
         public string FunctionalAccess { get; set; }
+
+        [Required]
+        public string TranslatedName { get; set; }
     }
 }
