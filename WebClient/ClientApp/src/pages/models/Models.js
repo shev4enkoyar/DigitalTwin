@@ -46,16 +46,18 @@ class Models extends Component {
                 }
               </ModelsContent>
         return (
-            <ThemeContextConsumer>{context => (
-                <>
-                    <Container className="text-center mt-5" >
-                        {content}
-                        <Button className="blueBut createBut mt-3" textForButton="Новая модель" classTextName="textOpenSans14" imageClassName="plus" >
-                            <a style={{color: "#fff"}}  href={'/createModel'}>Плюсик</a >
-                        </Button>
-                    </Container>
-                </>
-            )}
+            <ThemeContextConsumer>{
+                context => (
+                    <>
+                        <Container className="text-center mt-5" >
+                            {content}
+                            <Button className="blueBut createBut mt-3" textForButton="Новая модель" classTextName="textOpenSans14" imageClassName="plus" >
+                                <a style={{color: "#fff"}}  href={'/createModel'}>Плюсик</a >
+                            </Button>
+                        </Container>
+                    </>
+                )
+            }
             </ThemeContextConsumer>
         );
     }
