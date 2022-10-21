@@ -23,6 +23,15 @@ namespace WebClient.Data
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<ApplicationRole>().ToTable("AspNetRoles");
+
+            modelBuilder.Entity<ApplicationRole>().HasData(new ApplicationRole 
+            { 
+                Name = "Maintainer", 
+                NormalizedName = "MAINTAINER", 
+                FunctionalAccess = "1;2", 
+                TranslatedName = "Владелец компании",
+                Description = ""
+            });
         }
     }
 }
