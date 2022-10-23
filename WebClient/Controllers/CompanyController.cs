@@ -105,7 +105,6 @@ namespace WebClient.Controllers
                     await _notificationHub.Clients.Client(connectionId).Recive(new Notification { });
                 }
             }
-
             return Ok();
         }
     }

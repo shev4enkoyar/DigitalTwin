@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebClient.Models
@@ -10,7 +8,7 @@ namespace WebClient.Models
         public int Id { get; set; }
 
         [Required]
-        public string Message{ get; set; }
+        public string Message { get; set; }
 
         [Required]
         public string RedirectLink { get; set; }
@@ -20,7 +18,7 @@ namespace WebClient.Models
 
         [Required]
         [ForeignKey(nameof(ApplicationUser))]
-        public string UserId{ get; set; }
+        public string UserId { get; set; }
 
         #region Relationships
 

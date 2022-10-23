@@ -2,7 +2,7 @@
 {
 	enum NotificationType
 	{
-        Statement,
+		Statement,
 		Question
 	}
 }

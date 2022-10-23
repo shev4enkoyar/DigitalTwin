@@ -1,14 +1,12 @@
-﻿using Grpc.Net.Client;
+﻿using Grpc.Core;
+using Grpc.Net.Client;
+using Microservice.WebClient.Protos;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
 using System.Net.Http;
-using System.Security.Claims;
 using System.Threading.Tasks;
-using System;
-using Microservice.WebClient.Protos;
-using Grpc.Core;
 
 namespace WebClient.Controllers
 {
@@ -26,9 +24,13 @@ namespace WebClient.Controllers
         [HttpGet]
         public async Task<IEnumerable<ProductProto>> Get()
         {
-            var httpHandler = new HttpClientHandler();
-            httpHandler.ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
-            using var channel = GrpcChannel.ForAddress(Configuration.GetSection("gRPCConnections")["Micriservices.DashboardManager"], new GrpcChannelOptions { HttpHandler = httpHandler });
+            var httpHandler = new HttpClientHandler
+            {
+                ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+            };
+            using var channel = GrpcChannel.ForAddress(Configuration.GetSection("gRPCConnections")["Micriservices.DashboardManager"],
+                new GrpcChannelOptions { HttpHandler = httpHandler });
+
             var client = new ProductService.ProductServiceClient(channel);
 
             using var call = client.GetProducts(new ProductRequest());

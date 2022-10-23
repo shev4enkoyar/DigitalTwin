@@ -1,14 +1,10 @@
-﻿using Grpc.Net.Client;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using System.Net.Http;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using System;
-using Microsoft.AspNetCore.Identity;
 using WebClient.Models;
-using System.Linq;
 
 namespace WebClient.Controllers
 {
@@ -23,6 +19,7 @@ namespace WebClient.Controllers
         {
             _userManager = userManage;
         }
+
         [HttpGet("get_all")]
         public async Task<IEnumerable<string>> GetFunctional()
         {

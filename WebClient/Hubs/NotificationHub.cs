@@ -42,6 +42,7 @@ namespace WebClient.Hubs
         {
             var connectionId = Context.ConnectionId;
             _userConnectionManager.RemoveUserConnection(connectionId);
-            var value = await Task.FromResult(0);        }
+            _ = await Task.FromResult(0);
+        }
     }
 }

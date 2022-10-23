@@ -31,7 +31,7 @@ namespace WebClient.Controllers
         }
 
         [HttpGet("get_all")]
-        public async Task<IEnumerable<SubscriptionClientProto>> GetAllSubscriptions() 
+        public async Task<IEnumerable<SubscriptionClientProto>> GetAllSubscriptions()
         {
             var httpHandler = new HttpClientHandler()
             {
@@ -67,7 +67,7 @@ namespace WebClient.Controllers
             {
                 ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
             };
-            
+
             using var channel = GrpcChannel.ForAddress(
                 Configuration.GetSection("gRPCConnections")["Micriservices.DashboardManager"],
                 new GrpcChannelOptions { HttpHandler = httpHandler }
@@ -94,8 +94,8 @@ namespace WebClient.Controllers
             return JsonConvert.SerializeObject(modelSubscriptions);
         }
 
-        private async Task<IEnumerable<ModelProto>> GetAllModelsAsync() {
-
+        private async Task<IEnumerable<ModelProto>> GetAllModelsAsync()
+        {
             var httpHandler = new HttpClientHandler()
             {
                 ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator

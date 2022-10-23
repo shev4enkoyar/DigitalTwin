@@ -1,13 +1,9 @@
-﻿using Grpc.Net.Client;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http;
-using System.Threading.Tasks;
 using WebClient.Data;
 using WebClient.Models;
 using WebClient.Util;
@@ -29,7 +25,7 @@ namespace WebClient.Controllers
         }
 
         [HttpGet("get_all")]
-        public async Task<string> GetAllRoles()
+        public string GetAllRoles()
         {
             var roles = _roleManager.Roles.ToList();
             if (roles == null)
@@ -38,15 +34,15 @@ namespace WebClient.Controllers
             List<FullRoleModel> result = new List<FullRoleModel>();
             foreach (var role in roles)
             {
-                List<string> functional = new List<string>(); 
-                foreach (var item in role.FunctionalAccess.Split(';')) 
+                List<string> functional = new List<string>();
+                foreach (var item in role.FunctionalAccess.Split(';'))
                 {
                     string name = _dbContext.Functionals.FirstOrDefault(x => x.Id == int.Parse(item)).Name;
-                    if(name == null)
+                    if (name == null)
                         functional.Add("");
                     functional.Add(name);
                 }
-                result.Add(new FullRoleModel { Role = role, Functional = functional } );
+                result.Add(new FullRoleModel { Role = role, Functional = functional });
             }
             return JsonConvert.SerializeObject(result);
         }

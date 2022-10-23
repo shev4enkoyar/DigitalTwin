@@ -10,7 +10,7 @@ namespace WebClient.Models
 
         [Required]
         [ForeignKey(nameof(Company))]
-        public Guid CompanyId{ get; set; }
+        public Guid CompanyId { get; set; }
 
         [Required]
         [ForeignKey(nameof(ApplicationUser))]
@@ -21,9 +21,9 @@ namespace WebClient.Models
 
         #region Relationships
 
-        public virtual Company Company{ get; set; }
+        public virtual Company Company { get; set; }
 
-        public virtual ApplicationUser ApplicationUser{ get; set; }
+        public virtual ApplicationUser ApplicationUser { get; set; }
 
         #endregion
     }

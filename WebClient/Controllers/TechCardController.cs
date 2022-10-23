@@ -28,7 +28,6 @@ namespace WebClient.Controllers
             Configuration = configuration;
         }
 
-
         [HttpGet("get_all")]
         public async Task<IEnumerable<ModelProto>> GetDigitalModels()
         {
@@ -48,7 +47,8 @@ namespace WebClient.Controllers
 
             GetModelsReply response = null;
             //TODO REDO
-            using (var call = new DigitalModelService.DigitalModelServiceClient(channel).GetDigitalModels(new GetModelsRequest { CompanyId = user.CompanyId.ToString()}))
+            using (var call = new DigitalModelService.DigitalModelServiceClient(channel)
+                .GetDigitalModels(new GetModelsRequest { CompanyId = user.CompanyId.ToString() }))
             {
                 while (await call.ResponseStream.MoveNext())
                 {
