@@ -49,6 +49,8 @@ namespace WebClient
             services.AddControllersWithViews();
             services.AddRazorPages();
 
+            services.AddSignalR();
+
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
@@ -82,6 +84,7 @@ namespace WebClient
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
+
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller}/{action=Index}/{id?}");
