@@ -36,26 +36,45 @@ export class CompanyInvite extends Component{
             onSelect: (row, isSelect, rowIndex, e) => {
                 let roles = this.state.roles;
                 if (isSelect)
-                    roles.push(row.role);
+                    roles.push(row);
                 else
-                    roles.splice(roles.indexOf(row.role), 1)
+                    roles.splice(roles.indexOf(row), 1)
                 this.setState({roles});
             }
         };
+        const inviteUser = (email, rolesId) => {
+            this.inviteUser(email, rolesId);
+        }
         return(
+
             <Container>
                 <CardForBody >
                     <BootstrapTable selectRow={selectRow} rowStyle={{color: "#fff", background: "#262626"}} keyField='id' data={this.state.rolesDb} columns={columns} />
                     <Input Label="Email" classNameP="textForSign12" className="inpCreateForDashCard" contClass="contForInpDashE" onInput={(event) => { this.setState({ contractId: event.target.value.trim() }) }} />
-                    <Button onClick={() => alert(this.state.roles)}>
-                        Зарегистрировать компанию
+                    <Button onClick={() => {
+                        let email = this.state.email;
+                        let rolesId = "";
+                        this.state.roles.map(el => rolesId += el.id + ";");
+                        inviteUser(email, rolesId);
+                    }}>
+                        ПРигласить пользователя
                     </Button>
                 </CardForBody>
             </Container>
         );
+    }
 
-
-        }
+    async inviteUser(email, rolesId) {
+        const token = await authService.getAccessToken();
+        await fetch(`api/company/invite?email=${email}&rolesId=${rolesId}`, {
+            headers: !token ? {} :
+                {
+                    'Authorization': `Bearer ${token}`,
+                }
+        });
+        //TODO придумать чтот получше этого
+        alert("Успешно!");
+    }
 
     async populateRoles() {
         const token = await authService.getAccessToken();
@@ -64,10 +83,9 @@ export class CompanyInvite extends Component{
         });
         const data = await response.json();
         let result = [];
-        Object.entries(data).map(([el, props]) => {
+        data.map(el => {
             let functional = "";
-            let functionalName = "";
-            props.map(prop => {
+            el.Functional.map(prop => {
                 if (ClientRoutes.COMPANY_INVITE === prop){
                     functional += "Возможность приглашать людей в компанию; ";
                 }
@@ -100,7 +118,7 @@ export class CompanyInvite extends Component{
                     functional += "Возможность просматривать рекомендации по технологической карте; ";
                 }
             });
-            result.push({role: el, functional, functionalName })
+            result.push({role: el.Role.TranslatedName, functional, id: el.Role.Id })
         })
         this.setState({ rolesDb: result});
     }
