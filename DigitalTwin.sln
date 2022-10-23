@@ -3,13 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32819.101
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Frontend", "Frontend", "{3DD479A0-A99C-44EC-B195-3CD576746C98}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Microservices", "Microservices", "{53CD2FDA-5656-4122-8BBA-9E4C1FF7FC26}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{8C646B58-084E-4821-9C08-374C22C82679}"
-EndProject
-Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "react-web", "Frontend\Web\react-web\react-web.esproj", "{98534F15-C031-4964-BD63-3F2D1B3F9E59}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microservice.SubscriptionManager", "Microservices\Microservice.SubscriptionManager\Microservice.SubscriptionManager.csproj", "{1756F762-38AD-40D8-9C2C-0AD0994F13F9}"
 EndProject
@@ -21,20 +15,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebClient", "WebClient\WebC
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microservice.ImageManager", "Microservices\Microservice.ImageManager\Microservice.ImageManager.csproj", "{F6DA0046-A163-4D05-AB55-CB14BABE4232}"
 EndProject
-Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{D6FDF617-EBED-4683-A0D0-84C6F42D63C3}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{98534F15-C031-4964-BD63-3F2D1B3F9E59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{98534F15-C031-4964-BD63-3F2D1B3F9E59}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{98534F15-C031-4964-BD63-3F2D1B3F9E59}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{98534F15-C031-4964-BD63-3F2D1B3F9E59}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{98534F15-C031-4964-BD63-3F2D1B3F9E59}.Release|Any CPU.Build.0 = Release|Any CPU
-		{98534F15-C031-4964-BD63-3F2D1B3F9E59}.Release|Any CPU.Deploy.0 = Release|Any CPU
 		{1756F762-38AD-40D8-9C2C-0AD0994F13F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1756F762-38AD-40D8-9C2C-0AD0994F13F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1756F762-38AD-40D8-9C2C-0AD0994F13F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -55,17 +41,11 @@ Global
 		{F6DA0046-A163-4D05-AB55-CB14BABE4232}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F6DA0046-A163-4D05-AB55-CB14BABE4232}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F6DA0046-A163-4D05-AB55-CB14BABE4232}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D6FDF617-EBED-4683-A0D0-84C6F42D63C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D6FDF617-EBED-4683-A0D0-84C6F42D63C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D6FDF617-EBED-4683-A0D0-84C6F42D63C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D6FDF617-EBED-4683-A0D0-84C6F42D63C3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{8C646B58-084E-4821-9C08-374C22C82679} = {3DD479A0-A99C-44EC-B195-3CD576746C98}
-		{98534F15-C031-4964-BD63-3F2D1B3F9E59} = {8C646B58-084E-4821-9C08-374C22C82679}
 		{1756F762-38AD-40D8-9C2C-0AD0994F13F9} = {53CD2FDA-5656-4122-8BBA-9E4C1FF7FC26}
 		{FE45B39C-C0C9-4673-B447-BC6C288F4FA7} = {53CD2FDA-5656-4122-8BBA-9E4C1FF7FC26}
 		{E7605C2E-AF4B-47A3-BE9F-24BF8262A268} = {53CD2FDA-5656-4122-8BBA-9E4C1FF7FC26}
