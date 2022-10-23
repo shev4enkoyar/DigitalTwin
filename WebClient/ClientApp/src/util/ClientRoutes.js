@@ -1,14 +1,13 @@
-export  const ClientRoutes = {
+export const ClientRoutes = {
     PREFIX: "/",
     SUFFIX_MODEL_ID: '/:modelId',
     MODELS: "models",
     CREATE_MODEL : 'createModel',
     REGISTER_COMPANY: 'registerCompany',
-    SUBSCRIPTIONS:  'tariffs',
-    SUBSCRIPTIONS_ALL: 'tariffs-all',
+    SUBSCRIPTIONS:  'activatedSubscriptions',
+    SUBSCRIPTIONS_ALL: 'allSubscriptions',
     DASHBOARD: 'dashboard',
     MAP: 'map',
-    RECOMMENDATIONS: 'recom',
+    RECOMMENDATIONS: 'recommendation',
     COMPANY_INVITE: 'inviteCompany'
 }
-
