@@ -24,13 +24,13 @@ const EconomicCard = (props) => {
     }
     return (
         <BaseCard visible={props.visible} hText="Статус модели" descr="Требуется добавить данные экономических показателей!" notifyColor="#DC3545">
-            <Col>
+            <Container>
                 <Input Label="Наименование работы по высеву" classNameP="textForSign12" className="inpCreateForDashCard" contClass="contForInpDashE" value={props.values.vys} onInput={(event) => { props.setStatus({ vys: event.target.value.trim() }) }} />
                 <Input Label="Наименование работы по обработке" classNameP="textForSign12" className="inpCreateForDashCard" contClass="contForInpDashE" value={props.values.obr} onInput={(event) => {props.setStatus({ obr: event.target.value.trim() }) }} />
                 <Input Label="Наименование работы по сбору урожая" classNameP="textForSign12" className="inpCreateForDashCard" contClass="contForInpDashE" value={props.values.sbor} onInput={(event) => { props.setStatus({ sbor: event.target.value.trim() }) }} />
                 <Input Label="Длительность (период)" classNameP="textForSign12" className="inpCreateForDashCard" contClass="contForInpDashE" value={props.values.period} onInput={(event) => { props.setStatus({ period: event.target.value.trim() }) }} />
                 <Input Label="Работник на га" classNameP="textForSign12" className="inpCreateForDashCard" contClass="contForInpDashE" value={props.values.workerN} onInput={(event) => { var reg = /^([0-9]*)$/i.test(event.target.value); if (reg) props.setStatus({ workerN: event.target.value.trim() }) }} />
-            </Col>
+            </Container>
             <Button className="btn btn-primary my-2" style={{ width: "190px" }} onClick={() => {
                 if (isFull() == true) props.onClick();
                 let digitalModel = {

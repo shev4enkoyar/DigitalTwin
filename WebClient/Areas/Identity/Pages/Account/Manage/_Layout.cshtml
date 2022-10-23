@@ -8,22 +8,24 @@
         Layout = "/Areas/Identity/Pages/_Layout.cshtml";
     }
 }
+<div class="d-flex justify-content-center">
+    <div class="card-body" style="background-color:#212026; margin:2%;padding:2%; border-radius:2.5%">
+        <h2 class="text-white text-center">Управление учетной записью</h2>
 
-<h2>Manage your account</h2>
-
-<div>
-    <h4>Change your account settings</h4>
-    <hr />
-    <div class="row">
-        <div class="col-md-3">
-            <partial name="_ManageNav" />
-        </div>
-        <div class="col-md-9">
-            @RenderBody()
+        <div>
+            <h4 class="text-white text-center">Настройка аккаунта</h4>
+            <hr />
+            <div class="row">
+                <div class="col-md-3">
+                    <partial name="_ManageNav" />
+                </div>
+                <div class="col-md-9 text-white">
+                    @RenderBody()
+                </div>
+            </div>
         </div>
     </div>
 </div>
-
 @section Scripts {
     @RenderSection("Scripts", required: false)
 }
