@@ -10,6 +10,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using WebClient.Data;
 using WebClient.Models;
+using WebClient.Util;
 
 namespace WebClient.Controllers
 {
@@ -34,7 +35,7 @@ namespace WebClient.Controllers
             if (roles == null)
                 return null;
 
-            Dictionary<string, List<string>> rolePairs = new Dictionary<string, List<string>>();
+            List<FullRoleModel> result = new List<FullRoleModel>();
             foreach (var role in roles)
             {
                 List<string> functional = new List<string>(); 
@@ -45,9 +46,9 @@ namespace WebClient.Controllers
                         functional.Add("");
                     functional.Add(name);
                 }
-                rolePairs.Add(role.NormalizedName, functional);
+                result.Add(new FullRoleModel { Role = role, Functional = functional } );
             }
-            return JsonConvert.SerializeObject(rolePairs);
+            return JsonConvert.SerializeObject(result);
         }
     }
 }

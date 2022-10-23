@@ -10,7 +10,11 @@ namespace WebClient.Data
     {
         public DbSet<Company> Companies { get; set; }
 
+        public DbSet<CompanyInvite> CompanyInvites{ get; set; }
+
         public DbSet<Functional> Functionals { get; set; }
+
+        public DbSet<Notification> Notifications{ get; set; }
 
         public ApplicationDbContext(
             DbContextOptions options,
