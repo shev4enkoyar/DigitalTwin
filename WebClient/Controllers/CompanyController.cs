@@ -83,7 +83,7 @@ namespace WebClient.Controllers
             if (user.CompanyId != null)
                 return BadRequest("Данный пользователь уже зарегистрирован в другой компании");
 
-            var companyInvite = new CompanyInvite { RolesId = rolesId, UserId = Guid.Parse(user.Id), CompanyId = (Guid)companyId };
+            var companyInvite = new CompanyInvite { RolesId = rolesId, UserId = user.Id, CompanyId = (Guid)companyId };
             _dbContext.Add(companyInvite);
             _dbContext.SaveChanges();
             var notification = new Notification()
@@ -92,7 +92,7 @@ namespace WebClient.Controllers
                 $"Для того чтобы принять приглашение кликните по уведомлению.",
                 Type = NotificationType.Question.ToString(),
                 RedirectLink = $"acceptingInvite/{companyInvite.Id}",
-                UserId = Guid.Parse(user.Id)
+                UserId = user.Id
             };
             _dbContext.Add(notification);
             _dbContext.SaveChanges();

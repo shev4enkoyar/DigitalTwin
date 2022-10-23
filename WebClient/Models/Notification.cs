@@ -20,7 +20,7 @@ namespace WebClient.Models
 
         [Required]
         [ForeignKey(nameof(ApplicationUser))]
-        public Guid UserId{ get; set; }
+        public string UserId{ get; set; }
 
         #region Relationships
 

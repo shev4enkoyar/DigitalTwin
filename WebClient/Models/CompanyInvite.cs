@@ -14,7 +14,7 @@ namespace WebClient.Models
 
         [Required]
         [ForeignKey(nameof(ApplicationUser))]
-        public Guid UserId { get; set; }
+        public string UserId { get; set; }
 
         [Required]
         public string RolesId { get; set; }
