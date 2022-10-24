@@ -40,10 +40,7 @@
 .opt{
     padding: 0px 0px 0px!important;
 }
+    */
 .forTransp {
-    width: fit-content;
-    padding-top: 0px;
-    margin-top: 0px;
-    padding-bottom: 0px;
-    margin-bottom: 0px;
-}*/
+    width: max-content;
+}

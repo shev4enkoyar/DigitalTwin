@@ -8,7 +8,7 @@ function Combobox(props) {
     }
     return (
         <>
-            <Container className={"p-0 form-group contForCombobox " + props.classNameCont}>
+            <Container className={"form-group contForCombobox " + props.classNameCont}>
                 <label className={props.classTextCombobox} >
                     {props.textCombobox}
                 </label>
