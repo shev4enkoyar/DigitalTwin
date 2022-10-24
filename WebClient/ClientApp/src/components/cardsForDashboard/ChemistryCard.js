@@ -16,11 +16,11 @@ const ChemistryCard = (props) => {
         <BaseCard visible={props.visible} off={props.off} hText="Статус модели" descr="Требуется добавить данные о химических средствах!" notifyColor="#DC3545" >
             <Container className="contButton flex-wrap mx-3" style={{ width:'fit-content' }}>
                 <Row>
-                    <Col className="px-1">
+                    <Col className="px-1 d-flex flex-column justify-content-end">
                         <Combobox className="FormControlSelect" classTextCombobox="textForSign12" textCombobox="Средство хим. защиты" classNameCont="padCombobox " options={chem} onChange={(empty) => { props.setStatus({ chem: empty }) }} />
                         <Combobox className="FormControlSelect" classTextCombobox="textForSign12" textCombobox="Пестициды" classNameCont="padCombobox " options={pest} onChange={(empty) => { props.setStatus({pest: empty }) }} />
                     </Col>
-                    <Col className="px-1">
+                    <Col className="px-1 d-flex flex-column justify-content-end">
                         <Combobox className="FormControlSelect" classTextCombobox="textForSign12" textCombobox="Удобрения" classNameCont="padCombobox " options={ud} onChange={(empty) => { props.setStatus({ ud: empty }) }} />
                         <Combobox className="FormControlSelect" classTextCombobox="textForSign12" textCombobox="Тип почвы" classNameCont="padCombobox " options={xxx} onChange={(empty) => { props.setStatus({ xxx: empty }) }} />
                     </Col>
