@@ -74,10 +74,8 @@ font-family: 'Open Sans';
 }
 .inpContForTransp {
     margin: 0px;
-    padding: 0px 10px 0px;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
     width: 15%;
     min-width: max-content;
 }
