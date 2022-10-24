@@ -8,12 +8,14 @@ import CultureCard from '../../components/cardsForDashboard/CultureCard';
 import HistoryCard from '../../components/cardsForDashboard/HistoryCard';
 import EconomicCard from '../../components/cardsForDashboard/EconomicCard';
 import ElementStep from './ElementStep';
+import TransportSelect from './../dashboardEmpty/transportSelect/TransportSelect';
 import { Button, Container } from 'react-bootstrap';
+
 import CardNameModel from './CardNameModel';
 class CreateModel extends Component {
     constructor(props) {
         super(props);
-        this.state = { children: [{ name: "", pred: "Да", visible: true }, { hist: false, visible: false }, { productId: -1, cult: 0, sort: 0, frac: "", gust: "", norm: "", total: "", visible: false }, { kad: "", visible: false }, { added: true, visible: false }, { chem: 0, pest: 0, ud: 0, xxx: 0, visible: false}, { dat: false, visible: false }, { vys: "", obr: "", sbor: "", workerN:"" , period:"", visible: false }] };
+        this.state = { children: [{ name: "", pred: "Да", visible: true }, { hist: false, visible: false }, { productId: -1, cult: 0, sort: 0, frac: "", gust: "", norm: "", total: "", visible: false }, { kad: "", visible: false }, { zasev:[], obrabotka:[], sbor:[], visible: false, isActive:false}, { chem: 0, pest: 0, ud: 0, xxx: 0, visible: false }, { dat: false, visible: false }, { vys: "", obr: "", sbor: "", workerN: "", period: "", visible: false }] };
     }
     steps=["Создание технологической карты", "Загрузка исторических данных","Ввод данных о культуре", "Ввод данных о поле", "Добавление техники","Данные о химических средствах","Установка датчиков IoT","Ввод экономических показателей"]
     handleVisibleSwitch = (i) => {
@@ -23,6 +25,11 @@ class CreateModel extends Component {
         }
         )
         console.log(temp)
+    }
+    handleActiveChanged = () => {
+        let prev = this.state.children[4].isActive;
+        this.setStatus({ isActive: !(prev) }, 4);
+        console.log(this.state);
     }
     handleIsProgress = () => {
         let index = 0;
@@ -45,6 +52,7 @@ class CreateModel extends Component {
 
         return (
             <div className="d-flex justify-content-center w-100 h-100 position-absolute">
+                <TransportSelect setStatus={(v) => { this.setStatus(v, 4) }} values={this.state.children[4]} handleActiveChanged={this.handleActiveChanged} />
                 <Container className="d-flex p-0 m-0" style={{ backgroundColor: '#302F38', borderRadius: '3px', border: '1px solid #000', maxHeight: '65px', }}>{
                     this.steps.map((value, index) =>
                         <ElementStep active={this.state.children[index].visible} key={index} progress={this.handleIsProgress() >= index} numberStep={index + 1} nameCard={value} />
@@ -54,7 +62,7 @@ class CreateModel extends Component {
                 <HistoryCard setStatus={(v) => { this.setStatus(v, 1) }} values={this.state.children[1]} visible={this.state.children[1].visible} onClick={() => { this.handleVisibleSwitch(2) }}></HistoryCard>
                 <CultureCard setStatus={(v) => { this.setStatus(v, 2) }} values={this.state.children[2]} visible={this.state.children[2].visible} onClick={() => { this.handleVisibleSwitch(3) }} />
                 <FieldCard setStatus={(v) => { this.setStatus(v, 3) }} values={this.state.children[3]} visible={this.state.children[3].visible} onClick={() => { this.handleVisibleSwitch(4) }} />
-                <TransportCard handleActiveChanged={() => { }} setStatus={(v) => { this.setStatus(v, 4) }} values={this.state.children[4]} visible={this.state.children[4].visible} onClick={() => { this.handleVisibleSwitch(5) }} />
+                <TransportCard setStatus={(v) => { this.setStatus(v, 4) }} values={this.state.children[4]} visible={this.state.children[4].visible} onClick={() => { this.handleVisibleSwitch(5) }} />
                 <ChemistryCard setStatus={(v) => { this.setStatus(v, 5) }} values={this.state.children[5]} visible={this.state.children[5].visible} onClick={() => { this.handleVisibleSwitch(6) }} />
                 <IotCard setStatus={(v) => { this.setStatus(v, 6) }} values={this.state.children[6]} visible={this.state.children[6].visible} onClick={() => { this.handleVisibleSwitch(7) }} />
                 <EconomicCard setStatus={(v) => { this.setStatus(v, 7) }} values={this.state.children[7]} visible={this.state.children[7].visible} data={this.state.children} onClick={() => {}} />
