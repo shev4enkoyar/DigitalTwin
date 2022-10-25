@@ -17,7 +17,7 @@ import {Switch} from "react-router";
 import authService from "./components/api-authorization/AuthorizeService";
 import {ClientRoutes} from "./util/ClientRoutes";
 import AuthorizeRouteWithPermission from "./components/api-authorization/AuthorizeRouteWithPermission";
-import AllTariffs from "./pages/Tariffs/AllTariffs";
+import AllSubscriptions from "./pages/Tariffs/AllSubscriptions";
 import {CreateCompany} from "./pages/createCompany/CreateCompany";
 import {CompanyInvite} from "./pages/companyInvite/CompanyInvite";
 
@@ -40,12 +40,12 @@ export default class App extends Component {
                         <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
                         <AuthorizeRoute path={ApplicationPaths.IdentityManagePath} component={ApiAuthorizationRoutes} />
                         <AuthorizeRoute path={ClientRoutes.PREFIX + ClientRoutes.SUBSCRIPTIONS}  component={Subscriptions } />
-                        <AuthorizeRoute path={ClientRoutes.PREFIX + ClientRoutes.SUBSCRIPTIONS_ALL}  component={AllTariffs } />
+                        <AuthorizeRoute path={ClientRoutes.PREFIX + ClientRoutes.SUBSCRIPTIONS_ALL}  component={AllSubscriptions } />
                         <AuthorizeRoute path={ClientRoutes.PREFIX + ClientRoutes.RECOMMENDATIONS}  component={Recommendations } />
-                        <AuthorizeRoute path={ClientRoutes.PREFIX + ClientRoutes.COMPANY_INVITE}  component={CompanyInvite } />
                         <AuthorizeRoute path={ClientRoutes.PREFIX + ClientRoutes.DASHBOARD + ClientRoutes.SUFFIX_MODEL_ID}  component={Dashboard} />
                         <AuthorizeRoute path={ClientRoutes.PREFIX + ClientRoutes.MAP + ClientRoutes.SUFFIX_MODEL_ID}  component={MapMain} />
                         <AuthorizeRouteWithPermission path={ClientRoutes.PREFIX + ClientRoutes.REGISTER_COMPANY} component={CreateCompany} name={ClientRoutes.REGISTER_COMPANY}/>
+                        <AuthorizeRouteWithPermission path={ClientRoutes.PREFIX + ClientRoutes.COMPANY_INVITE} component={CompanyInvite} name={ClientRoutes.COMPANY_INVITE}/>
                         <AuthorizeRouteWithPermission path={ClientRoutes.PREFIX + ClientRoutes.MODELS} component={Models} name={ClientRoutes.MODELS}/>
                         <AuthorizeRouteWithPermission path={ClientRoutes.PREFIX + ClientRoutes.CREATE_MODEL} component={CreateModel} name={ClientRoutes.CREATE_MODEL}/>
 

@@ -76,34 +76,34 @@ class Subscriptions extends Component {
                 Object.entries(this.state.tariffs).map(([el, props]) =>
                     <>
                         <p style={{color: "#FFF"}}>{"Модель: " + el}</p>
-                        props.length === 0
+                        {props.length === 0
                             ?
-                                <p style={{color: "#FFF"}}><em>Loading...</em></p>
+                                <p style={{color: "#FFF"}}><em>Подписок нет</em></p>
                             :
-                        {props.map(prop => {
-                            return (
-                                <CardForTariffs >
-                                    <Col style={{ margin: '0% 6% 0% 0%' }}>
-                                        <p style={{ margin: '0px', lineHeight: '15px' }} >
-                                            {"Подписка: " + prop}
-                                        </p>
-                                    </Col>
+                                props.map(prop => {
+                                    return (
+                                        <CardForTariffs >
+                                            <Col style={{ margin: '0% 6% 0% 0%' }}>
+                                                <p style={{ margin: '0px', lineHeight: '15px' }} >
+                                                    {"Подписка: " + prop}
+                                                </p>
+                                            </Col>
 
-                                    <Col className="d-flex justify-content-end">
-                                        <Button variant="success" imageClassName="icon_for_but">
-                                            <img style={{width: "25px", height: "25px"}} className="icon"
-                                                 src="https://img.icons8.com/ios-filled/344/update-tag.png"/>
-                                        </Button>
-                                    </Col>
-                                    <Col >
-                                        <Button variant="danger" >
-                                            <img style={{width: "25px", height: "25px"}} class="icon" src="https://www.svgrepo.com/show/59221/delete.svg"/>
-                                        </Button>
-                                    </Col>
+                                            <Col className="d-flex justify-content-end">
+                                                <Button variant="success" imageClassName="icon_for_but">
+                                                    <img style={{width: "25px", height: "25px"}} className="icon"
+                                                         src="https://img.icons8.com/ios-filled/344/update-tag.png"/>
+                                                </Button>
+                                            </Col>
+                                            <Col >
+                                                <Button variant="danger" >
+                                                    <img style={{width: "25px", height: "25px"}} class="icon" src="https://www.svgrepo.com/show/59221/delete.svg"/>
+                                                </Button>
+                                            </Col>
 
-                                </CardForTariffs>
-                            );
-                        })
+                                        </CardForTariffs>
+                                    );
+                                })
                         }
                     </>
                 )

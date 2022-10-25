@@ -4,7 +4,7 @@ import CardForBody from "../../components/cardForBody/CardForBody";
 import authService from "../../components/api-authorization/AuthorizeService";
 import CardForTariffs from "./components/insideCardForBody/InsideCardForTariffs";
 
-class AllTariffs extends Component {
+class AllSubscriptions extends Component {
 
     constructor(props) {
         super(props);
@@ -68,4 +68,4 @@ class AllTariffs extends Component {
     }
 }
 
-export default AllTariffs;
+export default AllSubscriptions;

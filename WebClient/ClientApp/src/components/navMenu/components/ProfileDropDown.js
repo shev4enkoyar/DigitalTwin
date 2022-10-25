@@ -30,7 +30,13 @@ class ProfileDropDown extends Component{
         return (
             <DropdownButton className="background-transparent" id="dropdown-basic-button" title={<img className="icon" src="https://www.svgrepo.com/show/333287/profile.svg"/>}>
                 <Dropdown.Item href={ApplicationPaths.IdentityManagePath}>Профиль</Dropdown.Item>
-                <Dropdown.Item href="/tariffs">Подписки</Dropdown.Item>
+                {
+                    this.checkPermission(ClientRoutes.SUBSCRIPTIONS)
+                        ?
+                        <Dropdown.Item href={ClientRoutes.PREFIX + ClientRoutes.SUBSCRIPTIONS}>Подписки</Dropdown.Item>
+                        :
+                        null
+                }
                 {
                     this.checkPermission(ClientRoutes.MODELS)
                         ?
@@ -42,6 +48,13 @@ class ProfileDropDown extends Component{
                     this.checkPermission(ClientRoutes.REGISTER_COMPANY)
                         ?
                             <Dropdown.Item href={ClientRoutes.PREFIX + ClientRoutes.REGISTER_COMPANY}>Зарегистрировать компанию</Dropdown.Item>
+                        :
+                            null
+                }
+                {
+                    this.checkPermission(ClientRoutes.COMPANY_INVITE)
+                        ?
+                            <Dropdown.Item href={ClientRoutes.PREFIX + ClientRoutes.COMPANY_INVITE}>Пригласить в компанию</Dropdown.Item>
                         :
                             null
                 }
