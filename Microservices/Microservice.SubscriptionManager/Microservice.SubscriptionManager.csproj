@@ -13,7 +13,7 @@
 
   <ItemGroup>
     <Protobuf Include="Protos\greet.proto" GrpcServices="Server" />
-    <Protobuf Include="Protos\subscriptionProto.proto" GrpcServices="Server" />
+	<Protobuf Include="Protos\subscriptionProto.proto" GrpcServices="Server" />
   </ItemGroup>
 
   <ItemGroup>

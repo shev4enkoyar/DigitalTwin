@@ -55,6 +55,58 @@ namespace WebClient.Controllers
             return response.Subscriptions;
         }
 
+        [HttpGet("activate/{modelId}")]
+        public async Task<IActionResult> ActivateSubscription(int modelId, int days, int subscriptionId) 
+        {
+            //TODO REDO
+            var httpHandler = new HttpClientHandler()
+            {
+                ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+            };
+
+            using var channel = GrpcChannel.ForAddress(
+                Configuration.GetSection("gRPCConnections")["Micriservices.DashboardManager"],
+                new GrpcChannelOptions { HttpHandler = httpHandler }
+            );
+
+            var client = new SubscriptionClientService.SubscriptionClientServiceClient(channel);
+            var reply = await client.AddClientSubscriptionAsync(new AddClientSubscriptionRequest
+            {
+                ActivatedData =  DateTime.Now.ToString(),
+                ExpirationData = DateTime.Now.AddDays(days).ToString(),
+                SubscriptionId = subscriptionId,
+                ModelId = modelId
+            });
+            if(reply.Status.Equals("ok"))
+                return Ok();
+            return BadRequest(reply.Status);
+        }
+
+        [HttpGet("update")]
+        public async Task<IActionResult> UpdateActivatedSubscription(int days, int subscriptionId) 
+        {
+            //TODO REDO
+            var httpHandler = new HttpClientHandler()
+            {
+                ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+            };
+
+            using var channel = GrpcChannel.ForAddress(
+                Configuration.GetSection("gRPCConnections")["Micriservices.DashboardManager"],
+                new GrpcChannelOptions { HttpHandler = httpHandler }
+            );
+
+            var client = new SubscriptionClientService.SubscriptionClientServiceClient(channel);
+            var reply = await client.UpdateClientSubscriptionAsync(new UpdateClientSubscriptionRequest
+            {
+                ActivatedSubscriptionId = subscriptionId,
+                Days = days
+            });
+            if (reply.Status.Equals("ok"))
+                return Ok();
+            return BadRequest(reply.Status);
+        }
+
         [HttpGet("get_all_by_company")]
         public async Task<string> GetAllSubscriptionsByCompany()
         {

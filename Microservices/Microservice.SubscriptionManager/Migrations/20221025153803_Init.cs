@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Microservice.SubscriptionManager.Migrations
@@ -28,8 +29,8 @@ namespace Microservice.SubscriptionManager.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    ActivatedData = table.Column<int>(type: "integer", nullable: false),
-                    ExpirationData = table.Column<int>(type: "integer", nullable: false),
+                    ActivatedData = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    ExpirationData = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     SubscriptionId = table.Column<int>(type: "integer", nullable: false),
                     ModelId = table.Column<int>(type: "integer", nullable: false)
                 },

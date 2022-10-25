@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Microservice.SubscriptionManager.DAL.Models
@@ -9,10 +10,10 @@ namespace Microservice.SubscriptionManager.DAL.Models
         public int Id { get; set; }
 
         [Required]
-        public DataType ActivatedData{ get; set; }
+        public DateTime ActivatedData{ get; set; }
 
         [Required]
-        public DataType ExpirationData { get; set; }
+        public DateTime ExpirationData { get; set; }
 
         [Required]
         [ForeignKey(nameof(Subscription))]

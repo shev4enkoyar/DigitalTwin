@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using Microservice.DashboardManager.Protos;
 using System.Collections;
 using System.Linq;
-using Microservice.SubscriptionManager;
 
 namespace Microservice.DashboardManager.Services
 {
@@ -34,7 +33,7 @@ namespace Microservice.DashboardManager.Services
             );
 
             SubscriptionsReply response = null;
-            //TODO REDO
+
             using (var call = new SubscriptionService.SubscriptionServiceClient(channel).GetActivatedSubscriptions(new ActivatedSubscriptionsRequest { ModelId = request.ModelId }))
             {
                 while (await call.ResponseStream.MoveNext())
@@ -70,7 +69,7 @@ namespace Microservice.DashboardManager.Services
             );
 
             SubscriptionsReply response = null;
-            //TODO REDO
+
             using (var call = new SubscriptionService.SubscriptionServiceClient(channel).GetAllSubscriptions(new AllSubscriptionsRequest()))
             {
                 while (await call.ResponseStream.MoveNext())
@@ -92,6 +91,54 @@ namespace Microservice.DashboardManager.Services
             await responseStream.WriteAsync(reply);
             await Task.FromResult(reply);
         }
+
+        public override Task<AddClientSubscriptionReply> AddClientSubscription(AddClientSubscriptionRequest request, ServerCallContext context)
+        {
+            var httpHandler = new HttpClientHandler()
+            {
+                ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+            };
+
+            using var channel = GrpcChannel.ForAddress(
+                Configuration.GetSection("gRPCConnections")["Micriservices.SubscriptionManager"],
+                new GrpcChannelOptions { HttpHandler = httpHandler }
+            );
+
+            var client = new SubscriptionService.SubscriptionServiceClient(channel);
+            var reply = client.AddSubscription(new AddSubscriptionRequest 
+            { 
+                ActivatedData = request.ActivatedData, 
+                ExpirationData = request.ExpirationData,
+                SubscriptionId = request.SubscriptionId,
+                ModelId = request.ModelId
+            });
+       
+            return Task.FromResult(new AddClientSubscriptionReply { Status = reply.Status });
+        }
+
+        public override Task<UpdateClientSubscriptionReply> UpdateClientSubscription(UpdateClientSubscriptionRequest request, ServerCallContext context)
+        {
+            var httpHandler = new HttpClientHandler()
+            {
+                ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+            };
+
+            using var channel = GrpcChannel.ForAddress(
+                Configuration.GetSection("gRPCConnections")["Micriservices.SubscriptionManager"],
+                new GrpcChannelOptions { HttpHandler = httpHandler }
+            );
+
+            var client = new SubscriptionService.SubscriptionServiceClient(channel);
+            var reply = client.UpdateSubscription(new UpdateSubscriptionRequest
+            {
+                ActivatedSubscriptionId = request.ActivatedSubscriptionId,
+                Days = request.Days
+            });
+
+            return Task.FromResult(new UpdateClientSubscriptionReply { Status = reply.Status });
+
+        }
+
     }
 
 }

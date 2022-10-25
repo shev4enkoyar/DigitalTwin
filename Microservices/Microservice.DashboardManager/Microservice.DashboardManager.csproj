@@ -24,8 +24,8 @@
 	<Protobuf Include="Protos\productProto.proto" GrpcServices="Server" />
 	<Protobuf Include="Protos\digitalModelProto.proto" GrpcServices="Server" />
 	<Protobuf Include="Protos\mapProto.proto" GrpcServices="Client" />
-	  <Protobuf Include="Protos\subscriptionProto.proto" GrpcServices="Client" />
-	  <Protobuf Include="Protos\subscriptionClientProto.proto" GrpcServices="Server" />
+	<Protobuf Include="Protos\subscriptionProto.proto" GrpcServices="Client " />
+	<Protobuf Include="Protos\subscriptionClientProto.proto" GrpcServices="Server" />
   </ItemGroup>
 
   <ItemGroup>

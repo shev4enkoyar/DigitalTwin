@@ -7,6 +7,8 @@ package subscriptionProto;
 service SubscriptionService {
   rpc GetAllSubscriptions (AllSubscriptionsRequest) returns (stream SubscriptionsReply);
   rpc GetActivatedSubscriptions (ActivatedSubscriptionsRequest) returns (stream SubscriptionsReply);
+  rpc AddSubscription (AddSubscriptionRequest) returns (AddSubscriptionReply);
+  rpc UpdateSubscription (UpdateSubscriptionRequest) returns (UpdateSubscriptionReply);
 }
 
 message AllSubscriptionsRequest {
@@ -16,6 +18,26 @@ message ActivatedSubscriptionsRequest {
 }
 message SubscriptionsReply {
    repeated SubscriptionProto subscriptions = 1;
+}
+
+message AddSubscriptionRequest {
+    string activatedData = 1;
+    string expirationData = 2;
+    int32 subscriptionId = 3;
+    int32 modelId = 4;
+}
+
+message AddSubscriptionReply {
+    string status = 1;
+}
+
+message UpdateSubscriptionRequest {
+    int32 activatedSubscriptionId = 1;
+    int32 days = 2;
+}
+
+message UpdateSubscriptionReply {
+    string status = 1;
 }
 
 message SubscriptionProto {
