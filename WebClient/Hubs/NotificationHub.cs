@@ -24,7 +24,7 @@ namespace WebClient.Hubs
     */
     public class NotificationHub : Hub<INotificationClient>
     {
-        private readonly IUserConnectionManager _userConnectionManager;
+        private IUserConnectionManager _userConnectionManager;
         public NotificationHub(IUserConnectionManager userConnectionManager)
         {
             _userConnectionManager = userConnectionManager;

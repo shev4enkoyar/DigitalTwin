@@ -1,8 +1,8 @@
 ﻿namespace WebClient.Util
 {
-	enum NotificationType
+	public static class NotificationType
 	{
-		Statement,
-		Question
+		public static string Statement { get; } = "Statement";
+        public static string Invite { get; } = "Invite"; 
 	}
 }

@@ -7,6 +7,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using WebClient.Data;
+using WebClient.Hubs;
+using WebClient.Interface;
 using WebClient.Models;
 using IConfiguration = Microsoft.Extensions.Configuration.IConfiguration;
 
@@ -43,6 +45,7 @@ namespace WebClient
 
             services.AddSignalR();
 
+            // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "ClientApp/build";
@@ -70,13 +73,22 @@ namespace WebClient
             app.UseAuthentication();
             app.UseIdentityServer();
             app.UseAuthorization();
+
+            app.UseCors(x => x
+               .AllowAnyMethod()
+               .AllowAnyHeader()
+               .SetIsOriginAllowed(origin => true)
+               .AllowCredentials()
+           );
+
             app.UseEndpoints(endpoints =>
             {
-
+                endpoints.MapHub<NotificationHub>("hubs/notification");
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
+                
             });
 
             app.UseSpa(spa =>

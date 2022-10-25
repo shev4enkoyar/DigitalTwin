@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import authService from './AuthorizeService';
 import { ApplicationPaths } from './ApiAuthorizationConstants';
 import ProfileDropDown from "../navMenu/components/ProfileDropDown";
+import {NotificationDropDown} from "../navMenu/components/NotificationDropDown";
 
 export class LoginMenu extends Component {
     constructor(props) {
@@ -46,6 +47,7 @@ export class LoginMenu extends Component {
 
     authenticatedView(userName, logoutPath) {
         return (<Fragment>
+            <NotificationDropDown/>
             <ProfileDropDown logoutPath={logoutPath}/>
         </Fragment>);
 
