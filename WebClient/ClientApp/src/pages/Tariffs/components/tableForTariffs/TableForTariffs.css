@@ -1,4 +1,4 @@
-
+/*
 
 .HistoryTableText {
     font-family: 'Bitter';
@@ -42,6 +42,5 @@
 @media screen and (max-width: 640px) {
     .margTable th, tr{
         overflow-x: auto;
-        display: block;
     }
-}
+}*/
