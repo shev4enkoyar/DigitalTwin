@@ -1,29 +1,44 @@
-import { Row, Col, Container, Button} from 'react-bootstrap';
+import { Row, Col, Container, Button } from 'react-bootstrap';
 import './TransportSelect.css';
 import React from "react";
 import Combobox from './../../../components/combobox/ComboBox';
 import Input from './../../../components/input/Input';
-import TableForTariffs from './../../Tariffs/components/tableForTariffs/TableForTariffs';
+import BootstrapTable from 'react-bootstrap-table-next';
 import { useState } from 'react';
 const TabForTransportSelect = (props) => {
     const transport = ["Выберите транспорт...", "Трактор",]
     const markaTrans = ["Выберите марку транспорта...", "1213",]
     const [useAddTransp, setUseAddTransp] = useState
-    (
-        { transp: "Выберите транспорт...", markTransp: "Выберите марку транспорта...", countTransp: ""}
-    )
-    const handleSelectTransp = (value) =>
-    {
+        (
+            { transp: "Выберите транспорт...", markTransp: "Выберите марку транспорта...", countTransp: "" }
+        )
+    const handleSelectTransp = (value) => {
         const prev = useAddTransp;
         setUseAddTransp({ ...prev, ...value })
         console.log(useAddTransp)
     }
-    const handleAddingTransp = () =>
-    {
+    const handleAddingTransp = () => {
         const prev = props.values;
         props.setStatus([...prev, { num: (prev ? prev.length : 0) + 1, ...useAddTransp }])
     }
-    const zagForTransp =['#', 'Наименование транспорта', 'Марка транспорта', 'Количество транспорта'];
+    const zagForTransp = [
+        {
+            dataField: 'num',
+            text: '#'
+        },
+        {
+            dataField: 'transp',
+            text: 'Наименование транспорта'
+        },
+        {
+            dataField: 'markTransp',
+            text: 'Марка транспорта'
+        },
+        {
+            dataField: 'countTransp',
+            text: 'Количество транспорта'
+        }
+    ];
     return (
         <Container className="tabForTransp">
             <Row id="rowForTab" className="d-flex justify-content-center">
@@ -36,7 +51,10 @@ const TabForTransportSelect = (props) => {
                     Добавить
                 </Button>
             </Col>
-            <TableForTariffs classNameTab="margTable" textForTable="Добавленный транспорт" classNamesTD="ForBox" headersForTable={zagForTransp} contentsForTable={(props.values.length === 0) ? [{ num: "", transp: "", markaTrans: "", countTransp: "" }] : props.values} />
+            <Container className="ContForHistoryTariff p-0 contForReactTable">
+                <BootstrapTable classes="HistoryTableText" keyField='num' data={(props.values.length === 0) ? [{ num: "", transp: "", markaTrans: "", countTransp: "" }] : props.values} columns={zagForTransp} />
+            </Container>
+            {/*<TableForTariffs classNameTab="margTable" textForTable="Добавленный транспорт" classNamesTD="ForBox" headersForTable={zagForTransp} contentsForTable={(props.values.length === 0) ? [{ num: "", transp: "", markaTrans: "", countTransp: "" }] : props.values} />*/}
         </Container>
 
     );

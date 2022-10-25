@@ -4,8 +4,8 @@ import CardForTariffs from './components/insideCardForBody/InsideCardForTariffs'
 import CardForBody from '../../components/cardForBody/CardForBody';
 import '../pages.css';
 import {Button, Col, Container, Row} from 'react-bootstrap';
-import TableForTariffs from './components/tableForTariffs/TableForTariffs';
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
+import BootstrapTable from 'react-bootstrap-table-next';
 import authService from "../../components/api-authorization/AuthorizeService";
 import {ClientRoutes} from "../../util/ClientRoutes";
 class Subscriptions extends Component {
@@ -17,8 +17,25 @@ class Subscriptions extends Component {
     componentDidMount() {
         this.GetTariffs();
     }
-
-    headerForTariffs = [ '#', 'Дата', 'Наименования', 'Сумма'];
+    headerForTariffs = [
+        {
+            dataField: 'num',
+            text: '#'
+        },
+        {
+            dataField: 'date',
+            text: 'Дата'
+        },
+        {
+            dataField: 'name',
+            text: 'Наименования'
+        },
+        {
+            dataField: 'sum',
+            text: 'Сумма'
+        }
+    ];
+    //headerForTariffs = [ '#', 'Дата', 'Наименования', 'Сумма'];
     historyTariffs = [{
         num: "1",
         date: new Date(2020, 4, 7).toLocaleDateString(),
@@ -129,10 +146,11 @@ class Subscriptions extends Component {
 
                                 </CardForBody>
                             </Col>
-                            <Col className="MargForCol">
-                                <CardForBody styleForCard={{ position: 'relative' }} className="signUpWidth">
-                                    <Container className="ContForHistoryTariff">
-                                        <TableForTariffs textForTable="История подписок" classNamesTD="ForBox" headersForTable={this.headerForTariffs} contentsForTable={this.historyTariffs} />
+                            <Col className="MargForCol p-0">
+                                <CardForBody styleForCard={{ position: 'relative', padding: '3%' }} className="signUpWidth">
+                                    <Container className="ContForHistoryTariff p-0 contForReactTable">
+                                        <BootstrapTable classes="HistoryTableText" keyField='num' data={this.historyTariffs} columns={this.headerForTariffs} />
+                                        {/*<TableForTariffs textForTable="История подписок" classNamesTD="ForBox" headersForTable={this.headerForTariffs} contentsForTable={this.historyTariffs} />*/}
                                     </Container>
                                 </CardForBody>
                             </Col>

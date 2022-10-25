@@ -2,30 +2,52 @@ import React, { Component} from 'react';
 import CardForBody from './../components/cardForBody/CardForBody';
 import SideBarDashboard from './../components/sideBarDashboard/SideBarDashboard';
 import './pages.css';
-import BackIn_Icon from '../components/sideBarDashboard/BackInModel_Icon';
-import Map_Icon from '../components/sideBarDashboard/Map_Icon';
-import SensorsIoT from '../components/sideBarDashboard/SensorsIoT';
-import HomePanel_Icon from '../components/sideBarDashboard/HomePanel_Icon';
 import { ThemeContextConsumer } from './../components/ThemeContext';
-import DocIcon from '../components/sideBarDashboard/DocIcon';
-import GraphicIcon from '../components/sideBarDashboard/GraficIcon';
-import HistoryPriceIcon from '../components/sideBarDashboard/HistoryPriceIcon';
-import RecIcon from '../components/sideBarDashboard/RecIcon';
 import {IconButton} from "../components/sideBarDashboard/util/IconButton";
-import TableForTariffs from "./Tariffs/components/tableForTariffs/TableForTariffs";
+import BootstrapTable from 'react-bootstrap-table-next';
 import {Container, Table} from "reactstrap";
 class Recommendations extends Component {
     iconsLeftBar = [
-        new IconButton("#/", "Главная панель", <HomePanel_Icon />),
-        new IconButton("/map", "Карта", <Map_Icon />),
-        new IconButton("#nogo", "Документы", <DocIcon />),
-        new IconButton("#nogo", "Датчики IoT", <SensorsIoT />),
-        new IconButton("/recom", "Рекомендации", <RecIcon />),
-        new IconButton("#nogo", "История цен", <HistoryPriceIcon />),
-        new IconButton("#nogo", "График работ", <GraphicIcon />),
-        new IconButton("/models", "Вернуться к выбору модели", <BackIn_Icon />)
+        new IconButton("#/", "Главная панель",
+            <img style={{ width: "25px", height: "25px" }} className="icon" src="https://img.icons8.com/windows/344/home.png" />),
+        new IconButton("/map", "Карта",
+            <img style={{ width: "25px", height: "25px" }} className="icon" src="https://img.icons8.com/small/344/map.png" />),
+        new IconButton("#nogo", "Документы", 
+            <img style={{ width: "25px", height: "25px" }} className="icon" src="https://img.icons8.com/ios/344/document--v1.png" />),
+        new IconButton("#nogo", "Датчики IoT",
+            <img style={{ width: "25px", height: "25px" }} className="icon" src="https://img.icons8.com/windows/344/sensor.png" />),
+        new IconButton("/recom", "Рекомендации",
+            <img style={{ width: "25px", height: "25px" }} className="icon" src="https://img.icons8.com/ios-glyphs/344/task.png" />),
+        new IconButton("#nogo", "История цен",
+            <img style={{ width: "25px", height: "25px" }} className="icon" src="https://img.icons8.com/material-outlined/344/ruble.png" />),
+        new IconButton("#nogo", "График работ",
+            <img style={{ width: "25px", height: "25px" }} className="icon" src="https://img.icons8.com/ios/344/rebalance-portfolio.png" />),
+        new IconButton("/models", "Вернуться к выбору модели",
+            <img style={{ width: "25px", height: "25px" }} className="icon" src="https://img.icons8.com/ios/344/logout-rounded--v1.png" />)
     ];
-    hRecommend = ['#','Дата', 'Объект','Прогнозируемое событие','Рекомендация'];
+    hRecommend = [
+        {
+            dataField: 'num',
+            text: '#'
+        },
+        {
+            dataField: 'date',
+            text: 'Дата'
+        },
+        {
+            dataField: 'obj',
+            text: 'Объект'
+        },
+        {
+            dataField: 'progEv',
+            text: 'Прогнозируемое событие'
+        }
+        ,
+        {
+            dataField: 'rec',
+            text: 'Рекомендация'
+        }
+    ];
     recommend = [
     {
         num: "1",
@@ -83,39 +105,43 @@ class Recommendations extends Component {
         progEv: "Умеренные дожди",
         rec: "Не производить плановый полив",
     }
-    ];
+    ]
     render() {
         return (
             <ThemeContextConsumer>{context => (
                     <div style={{overflow: "auto"}}>
-                        <SideBarDashboard icons={this.iconsLeftBar} />
-                        <Container  className="p-1 mt-5">
-                            <Table style={{color: "#fff", background: "#212026"}} >
-                                <thead>
-                                <tr>
-                                    <th>{this.hRecommend.at(0)}</th>
-                                    <th>{this.hRecommend.at(1)}</th>
-                                    <th>{this.hRecommend.at(2)}</th>
-                                    <th>{this.hRecommend.at(3)}</th>
-                                    <th>{this.hRecommend.at(4)}</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                    {
-                                        this.recommend.map(el =>
-                                            <tr>
-                                                <td>{el.num}</td>
-                                                <td>{el.date}</td>
-                                                <td>{el.obj}</td>
-                                                <td>{el.progEv}</td>
-                                                <td>{el.rec}</td>
-                                            </tr>
-                                        )
-                                    }
-                                </tbody>
-                            </Table>
+                    <SideBarDashboard icons={this.iconsLeftBar} />
+                    <CardForBody styleForCard={{ position: 'relative', padding: '3%', margin: '5% 10% 0% 15%' }} styleTextForCard={{ padding:'0px' }}>
+                        <Container className="ContForHistoryTariff p-0 contForReactTable">
+                            <BootstrapTable classes="HistoryTableText" keyField='num' data={this.recommend} columns={this.hRecommend} />
+                            
+                            {/*<Table style={{color: "#fff", background: "#212026"}} >*/}
+                            {/*    <thead>*/}
+                            {/*    <tr>*/}
+                            {/*        <th>{this.hRecommend.at(0)}</th>*/}
+                            {/*        <th>{this.hRecommend.at(1)}</th>*/}
+                            {/*        <th>{this.hRecommend.at(2)}</th>*/}
+                            {/*        <th>{this.hRecommend.at(3)}</th>*/}
+                            {/*        <th>{this.hRecommend.at(4)}</th>*/}
+                            {/*    </tr>*/}
+                            {/*    </thead>*/}
+                            {/*    <tbody>*/}
+                            {/*        {*/}
+                            {/*            this.recommend.map(el =>*/}
+                            {/*                <tr>*/}
+                            {/*                    <td>{el.num}</td>*/}
+                            {/*                    <td>{el.date}</td>*/}
+                            {/*                    <td>{el.obj}</td>*/}
+                            {/*                    <td>{el.progEv}</td>*/}
+                            {/*                    <td>{el.rec}</td>*/}
+                            {/*                </tr>*/}
+                            {/*            )*/}
+                            {/*        }*/}
+                            {/*    </tbody>*/}
+                            {/*</Table>*/}
                             {/*<TableForTariffs classNameTab="margTable" classNamesTD="ForBox" textForTable="Рекомендации" contentsForTable={this.recommend} headersForTable={this.hRecommend} />*/}
                         </Container>
+                    </CardForBody>
                     </div>
                 )}
             </ThemeContextConsumer>
