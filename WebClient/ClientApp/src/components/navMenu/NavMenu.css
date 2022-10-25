@@ -21,3 +21,11 @@ header {
   background-color: transparent;
   border: none;
 }
+
+.dropdown-item {
+  white-space: normal;
+}
+
+.dropdown-menu {
+  width: 15em;
+}
