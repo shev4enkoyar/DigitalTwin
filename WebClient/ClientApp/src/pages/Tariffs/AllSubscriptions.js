@@ -1,8 +1,9 @@
 import React, {Component} from "react";
-import {Button, Col, Container} from "react-bootstrap";
+import {Button, Col, Container, Row} from "react-bootstrap";
 import CardForBody from "../../components/cardForBody/CardForBody";
 import authService from "../../components/api-authorization/AuthorizeService";
 import CardForTariffs from "./components/insideCardForBody/InsideCardForTariffs";
+import {ClientRoutes} from "../../util/ClientRoutes";
 
 class AllSubscriptions extends Component {
 
@@ -22,29 +23,31 @@ class AllSubscriptions extends Component {
             :
                 this.state.tariffs.map(el => {
                     return (
-                        <CardForTariffs parentStyle={{width: "100%"}}>
-                            <div style={{display: "grid", gridTemplateColumns: "1fr 1fr"}}>
-                                <Col >
-                                    <p >
-                                        {el.name}
-                                    </p>
-                                </Col>
-                                <Col className="d-flex justify-content-end">
-                                    <Button > Выбрать </Button>
-                                </Col>
-                            </div>
-
-                        </CardForTariffs>
+                        <Col>
+                            <CardForBody styleForCard={{ width: "max-content"}}>
+                                <h3 className="text-center mt-4" style={{color: "#fff"}}>
+                                    {el.name}
+                                </h3>
+                                <Container className="text-center">
+                                    <Button className="my-4" style={{whiteSpace: "nowrap"}}>
+                                        <img style={{width: "30px", height: "30px"}} className="icon"
+                                             src="https://www.svgrepo.com/show/274451/add.svg"/>
+                                        {" Оформить подписку"}
+                                    </Button>
+                                </Container>
+                                <Container>
+                                    <p style={{color: "#FFF", fontSize: "0.7rem"}} className="text-center mb-4"><em>Подписка не продлевается автоматически</em></p>
+                                </Container>
+                            </CardForBody>
+                        </Col>
                     )
                 });
         return (
             <Container className="d-flex justify-content-center" fluid>
-                <CardForBody styleForCard={{ width: "fit-content"}}>
-                    <h3 className="text-center my-3" style={{color: "#fff"}}>
-                        Подписки
-                    </h3>
+                <Row className="mt-3">
                     {content}
-                </CardForBody>
+                </Row>
+
             </Container>
         );
     }

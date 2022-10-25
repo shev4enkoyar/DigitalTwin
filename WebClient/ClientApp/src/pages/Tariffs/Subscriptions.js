@@ -7,6 +7,7 @@ import {Button, Col, Container, Row} from 'react-bootstrap';
 import TableForTariffs from './components/tableForTariffs/TableForTariffs';
 import {Link} from "react-router-dom";
 import authService from "../../components/api-authorization/AuthorizeService";
+import {ClientRoutes} from "../../util/ClientRoutes";
 class Subscriptions extends Component {
     constructor(props) {
         super(props);
@@ -120,7 +121,7 @@ class Subscriptions extends Component {
                                     {
                                         content
                                     }
-                                    <Button className="my-3" onClick={() => window.location.replace("/tariffs-all")}>
+                                    <Button className="my-3" onClick={() => window.location.replace(ClientRoutes.PREFIX + ClientRoutes.SUBSCRIPTIONS_ALL)}>
                                             <img style={{width: "35px", height: "35px"}} className="icon"
                                                  src="https://www.svgrepo.com/show/274451/add.svg"/>
                                         {" Добавить подписку"}
