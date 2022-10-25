@@ -9,10 +9,13 @@ using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using WebClient.Data;
 using WebClient.Models;
+using WebClient.Util;
 
 namespace WebClient.Controllers
 {
@@ -22,16 +25,18 @@ namespace WebClient.Controllers
     public class SubscriptionsController : ControllerBase
     {
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly ApplicationDbContext _dbContext;
         public IConfiguration Configuration { get; }
 
-        public SubscriptionsController(IConfiguration configuration, UserManager<ApplicationUser> userManager)
+        public SubscriptionsController(IConfiguration configuration, UserManager<ApplicationUser> userManager, ApplicationDbContext dbContext)
         {
             Configuration = configuration;
             _userManager = userManager;
+            _dbContext = dbContext;
         }
 
         [HttpGet("get_all")]
-        public async Task<IEnumerable<SubscriptionClientProto>> GetAllSubscriptions()
+        public async Task<IEnumerable<FullSubscriptionModel>> GetAllSubscriptions()
         {
             var httpHandler = new HttpClientHandler()
             {
@@ -52,7 +57,17 @@ namespace WebClient.Controllers
                     response = call.ResponseStream.Current;
                 }
             }
-            return response.Subscriptions;
+            List<FullSubscriptionModel> result = new List<FullSubscriptionModel>();
+            foreach (var subscription in response.Subscriptions) 
+            {
+                List<string> functions = new List<string>();
+                foreach (var id in subscription.FunctionalAccess.Split(";"))
+                {
+                    functions.Add(_dbContext.Functionals.FirstOrDefault(x => x.Id == int.Parse(id)).Name);
+                }
+                result.Add(new FullSubscriptionModel { Id = subscription.Id, Functions = functions, Name = subscription.Name, Price = subscription.Price });
+            }
+            return result;
         }
 
         [HttpGet("activate/{modelId}")]

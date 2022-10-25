@@ -2,8 +2,6 @@ import React, {Component} from "react";
 import {Button, Col, Container, Row} from "react-bootstrap";
 import CardForBody from "../../components/cardForBody/CardForBody";
 import authService from "../../components/api-authorization/AuthorizeService";
-import CardForTariffs from "./components/insideCardForBody/InsideCardForTariffs";
-import {ClientRoutes} from "../../util/ClientRoutes";
 
 class AllSubscriptions extends Component {
 
