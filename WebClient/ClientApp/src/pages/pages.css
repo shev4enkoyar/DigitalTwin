@@ -138,3 +138,14 @@ body {
     left: auto;
     right: 20px;
 }*/
+.HistoryTableText {
+    font-family: 'Bitter';
+    font-size: 14px;
+    padding: 0px;
+    color: white;
+    border-style: hidden !important;
+    min-width: max-content;
+}
+.contForReactTable {
+    overflow-x: auto;
+}
