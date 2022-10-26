@@ -10,6 +10,8 @@ service MapService {
 
 message GetMapIdRequest {
 	int32 modelId = 1;
+	string cadaster = 2;
+	string categoryName = 3;
 }
 message GetMapIdReply {
     int32 mapId = 1;

@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+option csharp_namespace = "Microservice.MapManager.Protos";
+
+package testCadasterProto;
+
+service CadasterService {
+  rpc TestCadaster (TestCadasterRequest) returns (TestCadasterReply);
+}
+
+message TestCadasterRequest {
+	string cadaster = 1;
+}
+message TestCadasterReply {
+    string status = 1;
+}

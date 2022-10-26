@@ -60,6 +60,7 @@ namespace Microservice.MapManager
                 endpoints.MapGrpcService<FigureProtoService>().EnableGrpcWeb().RequireCors("AllowAll");
                 endpoints.MapGrpcService<FigureCategoryProtoService>().EnableGrpcWeb().RequireCors("AllowAll");
                 endpoints.MapGrpcService<MapProtoService>().EnableGrpcWeb().RequireCors("AllowAll");
+                endpoints.MapGrpcService<TestCadasterProtoService>().EnableGrpcWeb().RequireCors("AllowAll");
             });
         }
     }
