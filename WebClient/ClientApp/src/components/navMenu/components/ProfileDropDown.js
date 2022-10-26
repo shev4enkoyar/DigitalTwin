@@ -5,7 +5,8 @@ import {ApplicationPaths} from "../../api-authorization/ApiAuthorizationConstant
 import {Link} from "react-router-dom";
 import {NavLink} from "reactstrap";
 import authService from "../../api-authorization/AuthorizeService";
-import {ClientRoutes} from "../../../util/ClientRoutes";
+import { ClientRoutes } from "../../../util/ClientRoutes";
+import { ThemeContextConsumer } from './../../ThemeContext';
 import '../NavMenu.css'
 
 class ProfileDropDown extends Component{
@@ -28,7 +29,9 @@ class ProfileDropDown extends Component{
 
     render() {
         return (
-            <DropdownButton className="background-transparent" id="dropdown-basic-button" title={<img className="icon" src="https://www.svgrepo.com/show/333287/profile.svg"/>}>
+          <ThemeContextConsumer>
+           {context => (
+                    <DropdownButton className="background-transparent" id="dropdown-basic-button" title={<img className={context.theme + "Icon" + " icon"} src="https://www.svgrepo.com/show/333287/profile.svg"/>}>
                 <Dropdown.Item href={ApplicationPaths.IdentityManagePath}>Профиль</Dropdown.Item>
                 {
                     this.checkPermission(ClientRoutes.SUBSCRIPTIONS)
@@ -64,7 +67,9 @@ class ProfileDropDown extends Component{
                         Выйти
                     </NavLink>
                 </Dropdown.Item>
-            </DropdownButton>
+           </DropdownButton>
+          )}
+        </ThemeContextConsumer>
         );
     }
 

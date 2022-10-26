@@ -9,7 +9,7 @@ import {Link} from "react-router-dom";
 import {ClientRoutes} from "../../../util/ClientRoutes";
 import authService from "../../api-authorization/AuthorizeService";
 import {NotificationManager} from "react-notifications";
-
+import { ThemeContextConsumer } from './../../ThemeContext';
 export class NotificationDropDown extends Component{
     constructor(props) {
         super(props);
@@ -56,14 +56,17 @@ export class NotificationDropDown extends Component{
                             )
                         }
                     })
-        return(
-            <DropdownButton
-                className="background-transparent"
-                id="dropdown-basic-button"
-                title={<img className="icon" src="https://icons.getbootstrap.com/assets/icons/bell-fill.svg"/>}
-            >
-                {content}
-            </DropdownButton>
+        return (
+          <ThemeContextConsumer>
+                {context => (
+                    <DropdownButton
+                        className="background-transparent"
+                        id="dropdown-basic-button"
+                        title={<img className={context.theme + "Icon" + " icon"} src="https://icons.getbootstrap.com/assets/icons/bell-fill.svg" />}>
+                        {content}
+                    </DropdownButton>
+                )}
+          </ThemeContextConsumer>
         );
     }
 

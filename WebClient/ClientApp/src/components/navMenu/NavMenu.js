@@ -3,8 +3,8 @@ import {Collapse, Container, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, N
 import { Link } from 'react-router-dom';
 import { LoginMenu } from '../api-authorization/LoginMenu';
 import './NavMenu.css';
-
-
+import { ThemeContextConsumer } from './../ThemeContext';
+import './../../pages/pages.css';
 export class NavMenu extends Component {
   static displayName = NavMenu.name;
 
@@ -24,11 +24,13 @@ export class NavMenu extends Component {
   }
 
   render () {
-    return (
-      <header>
+      return (
+     <ThemeContextConsumer>{
+     context => (
+       <header className={context.theme + (this.props.Gray ? "Gray " : " " + context.theme +"ForInsideCardShadow ")}>
         <Navbar className="navbar-expand-sm navbar-toggleable-sm ng-white box-shadow  " dark>
           <Container >
-            <NavbarBrand tag={Link} to="/">AgroDigitalTwin</NavbarBrand>
+            <NavbarBrand className={context.theme + (this.props.Gray ? "Gray " : " ")} tag={Link} to="/">AgroDigitalTwin</NavbarBrand>
             <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
             <Collapse className="d-sm-inline-flex flex-sm-row-reverse" isOpen={!this.state.collapsed} navbar>
               <ul className="navbar-nav flex-grow">
@@ -47,7 +49,9 @@ export class NavMenu extends Component {
             </Collapse>
           </Container>
         </Navbar>
-      </header>
+      </header>)
+      }
+     </ThemeContextConsumer>
     );
   }
 }
