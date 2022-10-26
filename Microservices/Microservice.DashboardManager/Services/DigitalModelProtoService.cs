@@ -4,6 +4,7 @@ using Microservice.DashboardManager.DAL;
 using Microservice.DashboardManager.DAL.Models;
 using Microservice.DashboardManager.Protos;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -14,10 +15,12 @@ namespace Microservice.DashboardManager.Services
     public class DigitalModelProtoService : DigitalModelService.DigitalModelServiceBase
     {
         private readonly ApplicationContext _dbContext;
+        private readonly IConfiguration _configuration;
 
-        public DigitalModelProtoService(ApplicationContext dbContext)
+        public DigitalModelProtoService(ApplicationContext dbContext, IConfiguration configuration)
         {
             _dbContext = dbContext;
+            _configuration = configuration;
         }
 
 
@@ -40,7 +43,12 @@ namespace Microservice.DashboardManager.Services
             };
             using var channel = GrpcChannel.ForAddress("https://localhost:49165", new GrpcChannelOptions { HttpHandler = httpHandler });
             var client = new MapService.MapServiceClient(channel);
-            var reply = client.GetMapId(new GetMapIdRequest { ModelId = model.Id });
+            if ((request.Cadastre == null && request.CategoryName != null) || 
+                (request.Cadastre != null && request.CategoryName == null))
+            {
+                return Task.FromResult(new ModelReply { Status = "cadaster error" });
+            }
+            var reply = client.GetMapId(new GetMapIdRequest { ModelId = model.Id, Cadaster = request.Cadastre, CategoryName = request.CategoryName });
             model.MapId = reply.MapId;
             _dbContext.Update(model);
             _dbContext.SaveChanges();

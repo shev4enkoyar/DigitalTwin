@@ -60,7 +60,7 @@ namespace WebClient.Controllers
         }
 
         [HttpGet("create")]
-        public async Task<IActionResult> CreateDigitalModel(int productId, string name)
+        public async Task<IActionResult> CreateDigitalModel(int productId, string name, string cadaster = null, string categoryName = null)
         {
             var httpHandler = new HttpClientHandler()
             {
@@ -76,7 +76,9 @@ namespace WebClient.Controllers
             {
                 Name = name,
                 ProductId = productId,
-                CompanyId = user.CompanyId.ToString()
+                CompanyId = user.CompanyId.ToString(),
+                Cadastre = cadaster,
+                CategoryName = categoryName
             };
 
             using var channel = GrpcChannel.ForAddress(
