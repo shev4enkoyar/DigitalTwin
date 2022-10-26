@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 import authService from './AuthorizeService';
 import { ApplicationPaths } from './ApiAuthorizationConstants';
 import ProfileDropDown from "../navMenu/components/ProfileDropDown";
-import {NotificationDropDown} from "../navMenu/components/NotificationDropDown";
-
+import { NotificationDropDown } from "../navMenu/components/NotificationDropDown";
+import ThemeToggler from './../navMenu/components/ThemeToggler';
 export class LoginMenu extends Component {
     constructor(props) {
         super(props);
@@ -47,6 +47,7 @@ export class LoginMenu extends Component {
 
     authenticatedView(userName, logoutPath) {
         return (<Fragment>
+            <ThemeToggler />
             <NotificationDropDown/>
             <ProfileDropDown logoutPath={logoutPath}/>
         </Fragment>);
