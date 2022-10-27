@@ -1,20 +1,28 @@
 ﻿import './CardsForDashboard.css';
 import { Button, Container, Row,Col } from 'react-bootstrap';
 import BaseCard from "./BaseCard";
-import Input from "./../input/Input";
+import Input from "../../../components/input/Input";
 import React, {useState} from "react";
-import authService from "../api-authorization/AuthorizeService";
+import authService from "../../../components/api-authorization/AuthorizeService";
 import axios from "axios";
 const EconomicCard = (props) => {
     const CreateTechCard = async (digitalModel) => {
         const token = await authService.getAccessToken();
         let response = null;
-        await fetch(`api/techcard/create?name=${digitalModel.Name}&productId=${digitalModel.ProductId}`, {
-            headers: !token ? {} :
-                {
-                    'Authorization': `Bearer ${token}`,
-                }
-        });
+        if (digitalModel.Cadaster === "" && digitalModel.CategoryName === "")
+            await fetch(`api/techcard/create?name=${digitalModel.Name}&productId=${digitalModel.ProductId}`, {
+                headers: !token ? {} :
+                    {
+                        'Authorization': `Bearer ${token}`,
+                    }
+            });
+        else
+            await fetch(`api/techcard/create?name=${digitalModel.Name}&productId=${digitalModel.ProductId}&cadaster=${digitalModel.Cadaster}&categoryName=${digitalModel.CategoryName}`, {
+                headers: !token ? {} :
+                    {
+                        'Authorization': `Bearer ${token}`,
+                    }
+            });
         return await response.text();
     }
     const isFull = () => {
@@ -32,13 +40,15 @@ const EconomicCard = (props) => {
                 <Input Label="Работник на га" classNameP="textForSign12" className="inpCreateForDashCard" contClass="contForInpDashE" value={props.values.workerN} onInput={(event) => { var reg = /^([0-9]*)$/i.test(event.target.value); if (reg) props.setStatus({ workerN: event.target.value.trim() }) }} />
             </Container>
             <Button className="btn btn-primary my-2" style={{ width: "190px" }} onClick={() => {
-                if (isFull() == true) props.onClick();
                 let digitalModel = {
                     Name: props.data.at(0).name,
                     UserId: -1,
-                    ProductId: props.data.at(2).productId
+                    ProductId: props.data.at(2).productId,
+                    Cadaster: props.data.at(3).kad,
+                    CategoryName: props.data.at(2).cult + " " + props.data.at(2).sort
                 };
                 console.log(CreateTechCard(digitalModel));
+                props.onClick();
             }}>
                 <a style={{
                     color: "#fff", textDecoration: 'none'}} href="/models">

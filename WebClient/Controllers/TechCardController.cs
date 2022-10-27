@@ -72,14 +72,24 @@ namespace WebClient.Controllers
                 return Unauthorized();
             var user = await _userManager.FindByIdAsync(userId);
             //TODO REDO
-            ModelRequest request = new ModelRequest
-            {
-                Name = name,
-                ProductId = productId,
-                CompanyId = user.CompanyId.ToString(),
-                Cadastre = cadaster,
-                CategoryName = categoryName
-            };
+            ModelRequest request;
+            if (cadaster == null && categoryName == null)
+                request = new ModelRequest
+                {
+                    Name = name,
+                    ProductId = productId,
+                    CompanyId = user.CompanyId.ToString()
+                    
+                };
+            else
+                request = new ModelRequest
+                {
+                    Name = name,
+                    ProductId = productId,
+                    CompanyId = user.CompanyId.ToString(),
+                    Cadastre = cadaster,
+                    CategoryName = categoryName
+                };
 
             using var channel = GrpcChannel.ForAddress(
                 Configuration.GetSection("gRPCConnections")["Micriservices.DashboardManager"],
@@ -88,7 +98,7 @@ namespace WebClient.Controllers
             ModelReply reply = new DigitalModelService.DigitalModelServiceClient(channel).PushDigitalModels(request);
             if (reply.Status.Equals("ok"))
                 return Ok();
-            return Ok();
+            return BadRequest();
         }
     }
 }

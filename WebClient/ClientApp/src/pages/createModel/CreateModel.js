@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import '../pages.css';
-import TransportCard from '../../components/cardsForDashboard/TransportCard';
-import IotCard from '../../components/cardsForDashboard/IotCard';
-import ChemistryCard from '../../components/cardsForDashboard/ChemistryCard';
-import FieldCard from '../../components/cardsForDashboard/FieldCard';
-import CultureCard from '../../components/cardsForDashboard/CultureCard';
-import HistoryCard from '../../components/cardsForDashboard/HistoryCard';
-import EconomicCard from '../../components/cardsForDashboard/EconomicCard';
+import TransportCard from './components/TransportCard';
+import IotCard from './components/IotCard';
+import ChemistryCard from './components/ChemistryCard';
+import FieldCard from './components/FieldCard';
+import CultureCard from './components/CultureCard';
+import HistoryCard from './components/HistoryCard';
+import EconomicCard from './components/EconomicCard';
 import ElementStep from './ElementStep';
 import TransportSelect from './../dashboardEmpty/transportSelect/TransportSelect';
 import { Button, Container } from 'react-bootstrap';
@@ -53,9 +53,10 @@ class CreateModel extends Component {
         return (
             <div className="d-flex justify-content-center w-100 h-100 position-absolute">
                 <TransportSelect setStatus={(v) => { this.setStatus(v, 4) }} values={this.state.children[4]} handleActiveChanged={this.handleActiveChanged} />
-                <Container className="d-flex p-0 m-0" style={{ backgroundColor: '#302F38', borderRadius: '3px', border: '1px solid #000', maxHeight: '65px', }}>{
-                    this.steps.map((value, index) =>
-                        <ElementStep active={this.state.children[index].visible} key={index} progress={this.handleIsProgress() >= index} numberStep={index + 1} nameCard={value} />
+                <Container className="d-flex p-0 m-0" style={{ backgroundColor: '#302F38', borderRadius: '3px', border: '1px solid #000', maxHeight: '65px', }}>
+                    {
+                        this.steps.map((value, index) =>
+                            <ElementStep active={this.state.children[index].visible} key={index} progress={this.handleIsProgress() >= index} numberStep={index + 1} nameCard={value} />
                     )}
                 </Container>
                 <CardNameModel setStatus={(v) => { this.setStatus(v, 0) }} values={this.state.children[0]} visible={this.state.children[0].visible} onClick={() => { this.handleVisibleSwitch(this.state.children[0].pred == "Да" ? 1 : 2) }} />

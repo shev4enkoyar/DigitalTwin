@@ -41,7 +41,7 @@ namespace Microservice.MapManager.Services
             _dbContext.Add(map);
             _dbContext.SaveChanges();
 
-            if (request.Cadaster != null)
+            if (request.Cadaster != null && !request.Cadaster.Equals(""))
             {
                 Figure cadastreFigure = new Figure()
                 {

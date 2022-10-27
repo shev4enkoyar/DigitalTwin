@@ -1,7 +1,7 @@
 ﻿import './CardsForDashboard.css';
 import { Container,Button, Col, Row } from 'react-bootstrap';
 import BaseCard from "./BaseCard";
-import Combobox from '../combobox/ComboBox';
+import Combobox from '../../../components/combobox/ComboBox';
 const ChemistryCard = (props) => {
     const chem = ["Выберите хим.средство...", "аа", "=="]
     const pest = ["Выберите пестициды...", "аа"]

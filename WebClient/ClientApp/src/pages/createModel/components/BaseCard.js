@@ -1,6 +1,6 @@
 ﻿import './CardsForDashboard.css';
 import { Container, Col, Row } from 'react-bootstrap';
-import CardForBody from './../cardForBody/CardForBody';
+import CardForBody from '../../../components/cardForBody/CardForBody';
 const BaseCard=(props)=> {
     return (
         <fieldset className="cardSize my-5" style={{ visibility: props.visible ? "visible" : "hidden", position: 'inherit' }}>

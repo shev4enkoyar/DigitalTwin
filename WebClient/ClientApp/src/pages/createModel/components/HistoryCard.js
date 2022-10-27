@@ -8,7 +8,7 @@ const HistoryCard = (props) => {
                     Импортировать
             </Button>
             <div className="Warning" style={{ paddingTop: '7px' }}>Файл импорта должен соответсвовать &zwnj;
-                <a style={{ color: '#F5CA5D', textDecorationLine: 'none' }} href="#nogo">
+                <a style={{ color: '#F5CA5D', textDecorationLine: 'none' }} href="src/pages/createModel/components/HistoryCard#nogo">
                     шаблону
                 </a>
             </div>
