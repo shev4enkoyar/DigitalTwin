@@ -14,6 +14,8 @@ namespace Microservice.MapManager.DAL.Models
         
         public string ProductArea { get; set; }
 
+        public bool IsCadaster{ get; set; }
+
         //Relationships
 
         public virtual List<Figure> Figures { get; set; }

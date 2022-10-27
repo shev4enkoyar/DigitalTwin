@@ -51,6 +51,8 @@ namespace Microservice.MapManager.Services
                 };
 
                 _dbContext.Figures.Add(cadastreFigure);
+                map.IsCadaster = true;
+                _dbContext.Update(map);
                 _dbContext.SaveChanges();
             }
             return map.Id;

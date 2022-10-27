@@ -5,6 +5,7 @@ import ServerLinks from "../../util/ServerLinks";
 const SignalRContainer = (props) => {
     const [ connection, setConnection ] = useState(null);
     const [ figureInitData, setFigureInitData ] = useState(null);
+    const [ isCadaster, setCadaster ] = useState(false);
 
     useEffect(() => {
         const newConnection = new HubConnectionBuilder()
@@ -14,6 +15,10 @@ const SignalRContainer = (props) => {
             .build();
         newConnection.on('Recive', message => {
             setFigureInitData(message);
+
+        })
+        newConnection.on('ReciveIfCadaster', message => {
+            setCadaster(message);
         })
         setConnection(newConnection);
         newConnection.start().then(() => {
@@ -65,7 +70,7 @@ const SignalRContainer = (props) => {
     }
 
 
-    return <MapManager sendProductArea={sendProductArea} mapId={props.mapId} figureInitData={figureInitData} removeFigureInfo={removeFigureInfo} sendFigureInfo={sendFigureInfo}> </ MapManager>
+    return <MapManager sendProductArea={sendProductArea} mapId={props.mapId} isCadaster={isCadaster} figureInitData={figureInitData} removeFigureInfo={removeFigureInfo} sendFigureInfo={sendFigureInfo}> </ MapManager>
 }
 
 export default SignalRContainer;
