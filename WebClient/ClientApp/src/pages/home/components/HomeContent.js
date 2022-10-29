@@ -1,10 +1,11 @@
 /*import field from '../../../public/images/Frame25.png';*/
 import '../Home.css';
 import React from 'react';
-import { Container } from 'react-bootstrap';
 import ContainerBlur from './ContainerBlur.js';
-import { ThemeContextConsumer } from '../../../components/ThemeContext.js';
+
 import GroupTarif from "../../../components/ContentForHome/DarkCardForHome/GroupTarif";
+import {ThemeContextConsumer} from "../../../components/ThemeContext";
+import {Container} from "reactstrap/lib";
 const HomeContent = () => {
     const content = [
         (

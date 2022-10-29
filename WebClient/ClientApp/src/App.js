@@ -14,7 +14,6 @@ import MapMain from "./pages/map/MapMain";
 import Recommendations from "./pages/Recommendations";
 import {Dashboard} from "./pages/Dashboard";
 import {Switch} from "react-router";
-import authService from "./components/api-authorization/AuthorizeService";
 import {ClientRoutes} from "./util/ClientRoutes";
 import AuthorizeRouteWithPermission from "./components/api-authorization/AuthorizeRouteWithPermission";
 import AllSubscriptions from "./pages/Tariffs/AllSubscriptions";

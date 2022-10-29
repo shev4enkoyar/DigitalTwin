@@ -9,9 +9,9 @@ import HistoryCard from './components/HistoryCard';
 import EconomicCard from './components/EconomicCard';
 import ElementStep from './ElementStep';
 import TransportSelect from './../dashboardEmpty/transportSelect/TransportSelect';
-import { Button, Container } from 'react-bootstrap';
 
 import CardNameModel from './CardNameModel';
+import {Container} from "reactstrap/lib";
 class CreateModel extends Component {
     constructor(props) {
         super(props);

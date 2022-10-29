@@ -4,7 +4,8 @@ import './SidePanel.css';
 import FiguresTypes from "./util/FiguresTypes";
 import PinType from "./util/PinType";
 import PopUpWithBlurCanvas from "../../components/popUp/PopUpWithBlurCanvas";
-import {Button, Form} from "react-bootstrap";
+import {Form} from "reactstrap";
+import {Button} from "reactstrap/lib";
 
 const SidePanel = (props) => {
 
@@ -19,12 +20,12 @@ const SidePanel = (props) => {
         return (
             <>
                 <h5 style={{ marginBottom: "10px" }}>Укажите координаты<br/> через запятую:</h5>
-                <Form.Group style={{ margin: "0 5px"}} className="mb-3" controlId="formBasicEmail">
+                {/*<Form.Group style={{ margin: "0 5px"}} className="mb-3" controlId="formBasicEmail">
                     <Form.Control onChange={(event) => points = event.target.value} placeholder="Введите координаты" />
                     <Form.Text className="text-muted">
                         Пример ввода:<br/> 25.33245,12.555663,12.22345,12.555667
                     </Form.Text>
-                </Form.Group>
+                </Form.Group>*/}
                 <Button onClick={() => {
                     if (points === "")
                         alert("Точки не указаны!")

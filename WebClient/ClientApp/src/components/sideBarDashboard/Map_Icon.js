@@ -1,12 +1,13 @@
-import { Nav } from 'react-bootstrap';
+
 import './SideBarDashboard.css';
 /*import Map_icon from '../data/Map_Icon.svg';*/
 import React from "react";
+import {NavLink} from "reactstrap/lib";
 function Map_Icon(props) {
 
 	return (
-		<Nav.Link onClick={() => { props.updateActive() }} >
+		<NavLink onClick={() => { props.updateActive() }} >
 			<img className="imgForPanel"  />
-		</Nav.Link >
+		</NavLink >
 	)
 } export default Map_Icon;

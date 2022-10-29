@@ -1,6 +1,7 @@
 ﻿import './CardsForDashboard.css';
-import { Container, Col, Row,Button } from 'react-bootstrap';
 import BaseCard from "./BaseCard";
+import React from "react";
+import Button from "react-bootstrap/lib/Button";
 const HistoryCard = (props) => {
     return (
         <BaseCard visible={props.visible} hText="Статус модели" descr="Требуется добавить исторические данные!" notifyColor="#DC3545" off={props.off}>

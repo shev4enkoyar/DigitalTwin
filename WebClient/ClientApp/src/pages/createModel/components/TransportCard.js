@@ -1,6 +1,8 @@
 ﻿import './CardsForDashboard.css';
-import { Container, Button } from 'react-bootstrap';
+import React from "react";
 import BaseCard from "./BaseCard";
+import {Container} from "reactstrap";
+import {Button} from "reactstrap/lib";
 const TransportCard = (props) => {
     return (
         <BaseCard visible={props.visible} off={props.off} hText="Статус модели" descr="Требуется добавить технику!" notifyColor="#DC3545" >

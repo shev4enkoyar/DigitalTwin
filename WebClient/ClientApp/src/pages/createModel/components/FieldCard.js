@@ -1,9 +1,9 @@
 ﻿import Input from '../../../components/input/Input';
 import './CardsForDashboard.css';
-import { Container, Button } from 'react-bootstrap';
 import BaseCard from "./BaseCard";
 import React, {Component} from "react";
 import authService from "../../../components/api-authorization/AuthorizeService";
+import {Button, Container} from "reactstrap/lib";
 class FieldCard extends Component{
     constructor(props) {
         super(props);

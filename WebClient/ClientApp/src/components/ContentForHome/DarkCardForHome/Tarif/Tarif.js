@@ -1,6 +1,6 @@
 import './Tarif.css';
-import { Card } from 'react-bootstrap';
 import React from "react";
+import {Card} from "reactstrap";
 function Tarif(props) {
         let rows = [];
         /*props.data["possibility"].forEach((item, i) => rows.push(<li key={item + i}>{item}</li>));*/

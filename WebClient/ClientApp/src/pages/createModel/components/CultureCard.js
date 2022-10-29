@@ -1,10 +1,11 @@
 ﻿import Input from '../../../components/input/Input';
 import './CardsForDashboard.css';
-import { Container, Col, Button } from 'react-bootstrap';
 import Combobox from "../../../components/combobox/ComboBox";
 import BaseCard from "./BaseCard";
 import React, {Component} from "react";
 import authService from "../../../components/api-authorization/AuthorizeService";
+import {Button, Col} from "reactstrap";
+import {Container} from "reactstrap/lib";
 class CultureCard extends Component{
      cult = ["Введите наименование культуры...", "Рис", "Овес"]
      sortForCult = ["Введите сорт культуры...", "cc"]

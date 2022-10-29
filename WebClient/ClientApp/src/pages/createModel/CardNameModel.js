@@ -1,8 +1,8 @@
 ﻿import React, { Component } from 'react';
 import Input from '../../components/input/Input.js';
-import { Container, Button } from 'react-bootstrap';
 import Combobox from '../../components/combobox/ComboBox.js';
 import CardForBody from '../../components/cardForBody/CardForBody.js';
+import Button from "react-bootstrap/lib/Button";
 const CardNameModel = (props) => {
     const isPred = ["Да", "Нет",]
 

@@ -1,10 +1,10 @@
 import './DarkCardForHome.css';
-import { Container } from 'react-bootstrap';
 import Tarif from './Tarif/Tarif.js';
 import React, {Component} from 'react';
 import { ThemeContextConsumer } from "../../ThemeContext"
 import authService from "../../api-authorization/AuthorizeService";
 import {ClientRoutes} from "../../../util/ClientRoutes";
+import {Container} from "reactstrap/lib";
 class GroupTarif extends Component{
     constructor(props) {
         super(props);

@@ -1,5 +1,6 @@
 import './Input.css';
-import { Card, Container } from 'react-bootstrap';
+import React from "react";
+import {Container} from "reactstrap/lib";
 function Input(props) {
     return (
         <Container className={props.contClass+ " px-0"}>

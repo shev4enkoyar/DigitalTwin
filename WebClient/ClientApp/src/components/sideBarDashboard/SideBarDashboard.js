@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import './SideBarDashboard.css';
-import PopUpWithBlurCanvas from './../popUp/PopUpWithBlurCanvas';
 import { ThemeContextConsumer } from '../ThemeContext';
 
 const SideBarDashboard = ({ children, alt, block, icons, color, isBlur, isActive, handleActiveChange }) => {

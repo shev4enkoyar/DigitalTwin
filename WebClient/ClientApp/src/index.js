@@ -7,7 +7,6 @@ import "leaflet-geometryutil";
 import 'leaflet/dist/leaflet.css';
 import {ModalContextProvider} from "./pages/modal/ModalContext";
 import {ThemeContextProvider} from "./components/ThemeContext";
-//import registerServiceWorker from './registerServiceWorker';
 
 const baseUrl = document.getElementsByTagName('base')[0].getAttribute('href');
 const rootElement = document.getElementById('root');

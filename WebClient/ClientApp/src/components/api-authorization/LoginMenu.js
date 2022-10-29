@@ -50,6 +50,9 @@ export class LoginMenu extends Component {
             <ThemeToggler />
             <NotificationDropDown/>
             <ProfileDropDown logoutPath={logoutPath}/>
+            <NavLink tag={Link} to={logoutPath}>
+                Выйти
+            </NavLink>
         </Fragment>);
 
     }

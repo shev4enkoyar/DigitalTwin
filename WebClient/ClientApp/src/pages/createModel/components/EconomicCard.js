@@ -1,10 +1,9 @@
 ﻿import './CardsForDashboard.css';
-import { Button, Container, Row,Col } from 'react-bootstrap';
 import BaseCard from "./BaseCard";
 import Input from "../../../components/input/Input";
 import React, {useState} from "react";
 import authService from "../../../components/api-authorization/AuthorizeService";
-import axios from "axios";
+import {Button, Container} from "reactstrap/lib";
 const EconomicCard = (props) => {
     const CreateTechCard = async (digitalModel) => {
         const token = await authService.getAccessToken();

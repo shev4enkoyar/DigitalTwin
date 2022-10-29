@@ -1,8 +1,6 @@
 import React, {Component, Fragment} from "react";
-import DropdownButton from "react-bootstrap/DropdownButton";
 import {HubConnectionBuilder, JsonHubProtocol} from "@microsoft/signalr";
 import ServerLinks from "../../../util/ServerLinks";
-import Dropdown from "react-bootstrap/Dropdown";
 import {NotificationType} from "./util/NotificationType";
 import {Button, Col, Row} from "react-bootstrap";
 import {Link} from "react-router-dom";
@@ -10,6 +8,9 @@ import {ClientRoutes} from "../../../util/ClientRoutes";
 import authService from "../../api-authorization/AuthorizeService";
 import {NotificationManager} from "react-notifications";
 import { ThemeContextConsumer } from './../../ThemeContext';
+import Dropdown from "react-bootstrap/lib/Dropdown";
+import DropdownButton from "react-bootstrap/lib/DropdownButton";
+import MenuItem from "react-bootstrap/lib/MenuItem";
 export class NotificationDropDown extends Component{
     constructor(props) {
         super(props);
@@ -24,14 +25,14 @@ export class NotificationDropDown extends Component{
     render() {
         let content = this.state.notifications.length === 0
                 ?
-                    <Dropdown.Item>Уведомлений нет</Dropdown.Item>
+                    <MenuItem>Уведомлений нет</MenuItem>
                 :
                     this.state.notifications.map((el, index) => {
                         if (el.Type === NotificationType.INVITE){
                             let links = el.RedirectLink.split(';');
                             return (
                                 <Fragment key={index}>
-                                    <Dropdown.Item>
+                                    <MenuItem>
                                         {el.Message}
                                         <Row >
                                             <Col className="d-flex justify-content-end" >
@@ -45,14 +46,14 @@ export class NotificationDropDown extends Component{
                                                 </Button>
                                             </Col>
                                         </Row>
-                                    </Dropdown.Item>
+                                    </MenuItem>
                                 </Fragment>
                             )
                         } else {
                             return (
-                                <Dropdown.Item href={ClientRoutes.PREFIX + el.RedirectLink} key={index}>
+                                <MenuItem href={ClientRoutes.PREFIX + el.RedirectLink} key={index}>
                                     {el.Message}
-                                </Dropdown.Item>
+                                </MenuItem>
                             )
                         }
                     })

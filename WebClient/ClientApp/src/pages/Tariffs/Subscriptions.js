@@ -3,11 +3,13 @@ import { ThemeContextConsumer } from '../../components/ThemeContext.js';
 import CardForTariffs from './components/insideCardForBody/InsideCardForTariffs';
 import CardForBody from '../../components/cardForBody/CardForBody';
 import '../pages.css';
-import {Button, Col, Container, Row} from 'react-bootstrap';
-import { Link } from "react-router-dom";
 import BootstrapTable from 'react-bootstrap-table-next';
 import authService from "../../components/api-authorization/AuthorizeService";
 import {ClientRoutes} from "../../util/ClientRoutes";
+import Button from "react-bootstrap/lib/Button";
+import {Container} from "reactstrap/lib";
+import Row from "react-bootstrap/lib/Row";
+import {Col} from "react-bootstrap";
 class Subscriptions extends Component {
     constructor(props) {
         super(props);
@@ -101,20 +103,20 @@ class Subscriptions extends Component {
                                 props.map(prop => {
                                     return (
                                         <CardForTariffs >
-                                            <Col style={{ margin: '0% 6% 0% 0%' }}>
+                                            <Col className="col" style={{ margin: '0% 6% 0% 0%' }}>
                                                 <p style={{ margin: '0px', lineHeight: '15px' }} >
                                                     {"Подписка: " + prop}
                                                 </p>
                                             </Col>
 
-                                            <Col className="d-flex justify-content-end">
-                                                <Button variant="success" imageClassName="icon_for_but">
+                                            <Col className="col d-flex justify-content-end">
+                                                <Button className="btn-success">
                                                     <img style={{width: "25px", height: "25px"}} className="icon"
                                                          src="https://img.icons8.com/ios-filled/344/update-tag.png"/>
                                                 </Button>
                                             </Col>
-                                            <Col >
-                                                <Button variant="danger" >
+                                            <Col className="col">
+                                                <Button className="btn-danger" >
                                                     <img style={{width: "25px", height: "25px"}} class="icon" src="https://www.svgrepo.com/show/59221/delete.svg"/>
                                                 </Button>
                                             </Col>
@@ -127,10 +129,9 @@ class Subscriptions extends Component {
                 )
         return (
             <ThemeContextConsumer>{context => (
-                <div >
                     <Container className={context.theme + "Gray " + "body_style"}>
                         <Row>
-                            <Col className="MargForCol">
+                            <Col className="col">
                                 <CardForBody styleForCard={{ position: 'relative', width: "fit-content"}} className="signUpWidth text-center" classForContB=" centerCard" >
                                     <p className="textOpenSansForHistTar">
                                         Продлить/отменить подписки
@@ -138,7 +139,7 @@ class Subscriptions extends Component {
                                     {
                                         content
                                     }
-                                    <Button className="my-3" onClick={() => window.location.replace(ClientRoutes.PREFIX + ClientRoutes.SUBSCRIPTIONS_ALL)}>
+                                    <Button className="my-3 btn-primary" onClick={() => window.location.replace(ClientRoutes.PREFIX + ClientRoutes.SUBSCRIPTIONS_ALL)}>
                                             <img style={{width: "35px", height: "35px"}} className="icon"
                                                  src="https://www.svgrepo.com/show/274451/add.svg"/>
                                         {" Добавить подписку"}
@@ -146,7 +147,7 @@ class Subscriptions extends Component {
 
                                 </CardForBody>
                             </Col>
-                            <Col className="MargForCol p-0">
+                            <Col className="col p-0">
                                 <CardForBody styleForCard={{ position: 'relative', padding: '3%' }} className="signUpWidth">
                                     <Container className="ContForHistoryTariff p-0 contForReactTable">
                                         <BootstrapTable classes="HistoryTableText" keyField='num' data={this.historyTariffs} columns={this.headerForTariffs} />
@@ -156,7 +157,6 @@ class Subscriptions extends Component {
                             </Col>
                         </Row>
                     </ Container>
-                </div>
             )}
             </ThemeContextConsumer>
         );

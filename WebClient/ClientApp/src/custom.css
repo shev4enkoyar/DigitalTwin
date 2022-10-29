@@ -21,4 +21,8 @@ code {
     height: 100%;
 }
 
-
+.rs-popover {
+    position: absolute;
+    background-color: #262626;
+    color: #FFFFFF;
+}

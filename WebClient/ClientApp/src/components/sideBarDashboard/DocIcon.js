@@ -1,14 +1,15 @@
-import { Nav } from 'react-bootstrap';
+
 import './SideBarDashboard.css';
 /*import docIcon from '../data/DocIcon.svg';*/
 import React from "react";
+import {NavLink} from "reactstrap/lib";
 function DocIcon(props) {
 
 	return (
 
 
-		<Nav.Link onClick={() => { props.updateActive() }} >
+		<NavLink onClick={() => { props.updateActive() }} >
 			<img className="imgForPanel" />
-		</Nav.Link >
+		</NavLink >
 	)
 } export default DocIcon;
