@@ -1,7 +1,14 @@
 ﻿@{
+    string theme;
+    if (!(Context.Request.Cookies.TryGetValue("ThemeSave", out theme)))
+    {
+        theme = "dark";
+    }
     if (ViewData.TryGetValue("ParentLayout", out var parentLayout))
     {
         Layout = (string)parentLayout;
+
+
     }
     else
     {
@@ -9,17 +16,17 @@
     }
 }
 <div class="d-flex justify-content-center">
-    <div class="card-body" style="background-color:#212026; margin:2%;padding:2%; border-radius:2.5%">
-        <h2 class="text-white text-center">Управление учетной записью</h2>
+    <div class="@theme card-body" style="background:#212026; margin:2%;padding:2%; border-radius:2.5%">
+        <h2 class="@theme text-white text-center">Управление учетной записью</h2>
 
         <div>
-            <h4 class="text-white text-center">Настройка аккаунта</h4>
+            <h4 class="@theme text-white text-center">Настройка аккаунта</h4>
             <hr />
             <div class="row">
-                <div class="col-md-3">
+                <div class="@theme col-md-3">
                     <partial name="_ManageNav" />
                 </div>
-                <div class="col-md-9 text-white">
+                <div class="@theme col-md-9 text-white">
                     @RenderBody()
                 </div>
             </div>

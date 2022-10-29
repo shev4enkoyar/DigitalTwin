@@ -85,3 +85,43 @@ body {
     /*height: 60px;
     line-height: 60px;*/ /* Vertically center the text there */
 }
+.light {
+    background: #FFFFFF !important;
+    color: #334152 !important;
+    fill: #334152 !important;
+}
+
+.lightIcon {
+    fill: #334152 !important;
+    background: #FFFFFF00 !important;
+    filter: contrast(1) brightness(1) !important;
+}
+
+.lightGray {
+    background-color: #F2F4F8 !important;
+    color: #334152 !important;
+    fill: #334152 !important;
+    filter: none;
+}
+
+.lightBorderForCard {
+    border: 1px solid #000000 !important;
+}
+
+.lightHeader {
+    box-shadow: 0px 1px 7px 0px rgb(0 0 0 / 40%);
+}
+
+.lightForInsideCard {
+    background: #F2F4F8 !important;
+}
+
+.lightForInsideCardShadow {
+    box-shadow: 0px 2px 3px 0px rgb(0 0 0 / 40%);
+}
+
+.lightStep {
+    background-color: #d0d0d1 !important;
+    border: 1px solid #848487 !important;
+    color: #334152 !important;
+}

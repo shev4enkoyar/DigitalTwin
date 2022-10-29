@@ -6,6 +6,7 @@ import { ApplicationPaths } from './ApiAuthorizationConstants';
 import ProfileDropDown from "../navMenu/components/ProfileDropDown";
 import { NotificationDropDown } from "../navMenu/components/NotificationDropDown";
 import ThemeToggler from './../navMenu/components/ThemeToggler';
+import { ThemeContextConsumer } from '../ThemeContext';
 export class LoginMenu extends Component {
     constructor(props) {
         super(props);
@@ -58,13 +59,20 @@ export class LoginMenu extends Component {
     }
 
     anonymousView(registerPath, loginPath) {
-        return (<Fragment>
-            <NavItem>
-                <NavLink tag={Link}  to={registerPath}>Зарегистрироваться</NavLink>
-            </NavItem>
-            <NavItem>
-                <NavLink tag={Link}  to={loginPath}>Войти</NavLink>
-            </NavItem>
-        </Fragment>);
+        return (
+            <ThemeContextConsumer>{
+                context=>(
+                    <Fragment>
+                        <NavItem>
+                            <NavLink className={context.theme} tag={Link} to={registerPath}>Зарегистрироваться</NavLink>
+                        </NavItem>
+                        <NavItem>
+                            <NavLink className={context.theme} tag={Link} to={loginPath}>Войти</NavLink>
+                        </NavItem>
+                    </Fragment>
+                )
+            }
+            </ThemeContextConsumer>
+                );
     }
 }

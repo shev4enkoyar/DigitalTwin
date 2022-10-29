@@ -4,7 +4,13 @@
     ViewData["Title"] = "Двухфакторная аутентификация (2FA)";
     ViewData["ActivePage"] = ManageNavPages.TwoFactorAuthentication;
 }
-
+@{
+    string theme;
+    if (!(Request.Cookies.TryGetValue("ThemeSave", out theme)))
+    {
+        theme = "dark";
+    }
+}
 <partial name="_StatusMessage" for="StatusMessage" />
 <h4 class="text-center">@ViewData["Title"]</h4>
 @if (Model.Is2faEnabled)
@@ -45,12 +51,12 @@
 <div class="d-flex justify-content-center">
 @if (!Model.HasAuthenticator)
 {
-    <a id="enable-authenticator" asp-page="./EnableAuthenticator" class="btn btn-default">Добавить приложение</a>
+        <a id="enable-authenticator" asp-page="./EnableAuthenticator" class="btn btn-default @theme">Добавить приложение</a>
 }
 else
 {
-    <a id="enable-authenticator" asp-page="./EnableAuthenticator" class="btn btn-default text-white">Настроить приложение</a>
-    <a id="reset-authenticator" asp-page="./ResetAuthenticator" class="btn btn-default text-white">Сбросить приложение</a>
+        <a id="enable-authenticator" asp-page="./EnableAuthenticator" class="btn btn-default text-white @theme">Настроить приложение</a>
+        <a id="reset-authenticator" asp-page="./ResetAuthenticator" class="btn btn-default text-white @theme">Сбросить приложение</a>
 }
 </div>
 @section Scripts {
