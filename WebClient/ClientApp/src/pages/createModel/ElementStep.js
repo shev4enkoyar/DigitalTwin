@@ -1,6 +1,7 @@
-﻿import { Button, Container } from 'react-bootstrap';
+﻿
 import './ElementStep.css';
 import React from "react";
+import {Container} from "reactstrap/lib";
 const ElementStep = (props) => {
     
     return (

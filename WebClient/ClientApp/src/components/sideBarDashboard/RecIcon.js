@@ -1,14 +1,14 @@
-import { Nav } from 'react-bootstrap';
-import './SideBarDashboard.css';
+
 /*import recIcon from '../data/RecIcon.svg';*/
 import React from "react";
+import {NavLink} from "reactstrap/lib";
 function RecIcon(props) {
 
 	return (
 
 
-		<Nav.Link onClick={() => { props.updateActive() }} >
+		<NavLink onClick={() => { props.updateActive() }} >
 			<img className="imgForPanel"  />
-		</Nav.Link >
+		</NavLink >
 	)
 } export default RecIcon;

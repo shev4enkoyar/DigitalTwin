@@ -1,14 +1,13 @@
-import { Nav } from 'react-bootstrap';
-import './SideBarDashboard.css';
-/*mport graphicIcon from '../data/GraphicIcon.svg';*/
+
 import React from "react";
+import {NavLink} from "reactstrap/lib";
 function GraphicIcon(props) {
 
 	return (
 
 
-		<Nav.Link onClick={() => { props.updateActive() }} >
+		<NavLink onClick={() => { props.updateActive() }} >
 			<img className="imgForPanel"  />
-		</Nav.Link >
+		</NavLink >
 	)
 } export default GraphicIcon;

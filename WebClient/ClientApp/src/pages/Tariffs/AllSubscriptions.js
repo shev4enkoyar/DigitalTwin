@@ -1,7 +1,10 @@
 import React, {Component} from "react";
-import {Button, Col, Container, Row} from "react-bootstrap";
 import CardForBody from "../../components/cardForBody/CardForBody";
 import authService from "../../components/api-authorization/AuthorizeService";
+import Col from "react-bootstrap/lib/Col";
+import {Container} from "reactstrap/lib";
+import Button from "react-bootstrap/lib/Button";
+import Row from "react-bootstrap/lib/Row";
 
 class AllSubscriptions extends Component {
 

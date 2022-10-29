@@ -1,9 +1,12 @@
-import Tab from 'react-bootstrap/Tab';
-import Tabs from 'react-bootstrap/Tabs';
-import { Container, Button } from 'react-bootstrap';
+
 import PopUpWithBlurCanvas from "../../../components/popUp/PopUpWithBlurCanvas";
 import TabForTransportSelect from './TabForTransportSelect';
 import './../../pages.css';
+import React from "react";
+import Tabs from "react-bootstrap/lib/Tabs";
+import Tab from "react-bootstrap/lib/Tab";
+import {Container} from "reactstrap/lib";
+import Button from "react-bootstrap/lib/Button";
 const TransportSelect = (props) => {
     return (
         <PopUpWithBlurCanvas isBlur={true} isActive={props.values.isActive} handleActiveChange={() => { props.setStatus({isActive:false})} } className="TranspCard" styleFlex={{ top: '0px!important', marginTop:'0px', margin:'auto' } } >

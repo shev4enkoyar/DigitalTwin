@@ -82,10 +82,11 @@ namespace Microservice.MapManager
             return Task.CompletedTask;
         }
 
-        public Task SendMapId(int mapId)
+        public async Task SendMapId(int mapId)
         {
             MapId = mapId;
-            return Task.CompletedTask;
+            var map = _dbContext.Maps.Where(x => x.Id == mapId).FirstOrDefault();
+            await Clients.Caller.ReciveIfCadaster(map.IsCadaster);
         }
         #endregion
     }

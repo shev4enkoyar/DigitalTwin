@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import '@turf/turf';
 import L from 'leaflet';
 import {intersect} from "@turf/turf";
-import {MapContainer, TileLayer} from 'react-leaflet';
+import {Map, TileLayer} from 'react-leaflet';
 import 'leaflet-fullscreen/dist/Leaflet.fullscreen.js';
 import 'leaflet-fullscreen/dist/leaflet.fullscreen.css';
 import './util/Leaflet.Editable';
@@ -95,11 +95,11 @@ const DTMap = (props) => {
     const addFigure = (pinType) => {
         if (!isUniquesIncludesPinType(pinType)){
             if (pinType.type === FiguresTypes.MARKER){
-                map.on('click', function (e) {
+                map.leafletElement.on('click', function (e) {
                     addMarker(e.latlng, {id: null, categoryId: pinType.category, mapId: pinType.mapId});
                 })
             } else {
-                map.removeEventListener('click');
+                map.leafletElement.removeEventListener('click');
             }
             if (pinType.type === FiguresTypes.POLYGON)
                 addPolygon({category : pinType.category, mapId: pinType.mapId, isUnique: pinType.isUnique});
@@ -134,16 +134,16 @@ const DTMap = (props) => {
     }
 
     const addPolygon = (options) => {
-        let polygon = map.editTools.startPolygon(null, {color: props.pinType.color});
+        let polygon = map.leafletElement.editTools.startPolygon(null, {color: props.pinType.color});
         configureCustomPolygon(polygon, options);
     }
 
     const addPolygonWithPoints = (polygonPoints, pinType) => {
         if (!isUniquesIncludesPinType(pinType)){
-            map.flyTo(polygonPoints[0], 16);
+            map.leafletElement.flyTo(polygonPoints[0], 16);
             let polygon = L.polygon(polygonPoints, {color: pinType.color});
-            polygon.addTo(map);
-            polygon.enableEdit(map);
+            polygon.addTo(map.leafletElement);
+            polygon.enableEdit(map.leafletElement);
             configureCustomPolygon(polygon, {category : pinType.category, mapId: pinType.mapId, isUnique: pinType.isUnique});
         }
     }
@@ -151,9 +151,9 @@ const DTMap = (props) => {
         let pinType;
         pinType = new PinType(polygonProto.categoryId, polygonProto.type, polygonProto.color, polygonProto.isUnique, polygonProto.mapId);
         if (!isUniquesIncludesPinType(pinType)){
-            map.flyTo(polygonPoints[0], 16);
+            map.leafletElement.flyTo(polygonPoints[0], 16);
             let polygon = L.polygon(polygonPoints, {color: pinType.color});
-            polygon.addTo(map);
+            polygon.addTo(map.leafletElement);
             configureCustomPolygonByProto(polygon, polygonProto, pinType.isUnique);
         }
     }
@@ -195,7 +195,7 @@ const DTMap = (props) => {
     }
 
     const addMarker = (points, options) => {
-        let maker = L.marker(points, {icon: new L.Icon({iconUrl: 'https://www.svgrepo.com/show/425042/boat-sailing-ship.svg'})}).addTo(map);
+        let maker = L.marker(points, {icon: new L.Icon({iconUrl: 'https://www.svgrepo.com/show/425042/boat-sailing-ship.svg'})}).addTo(map.leafletElement);
         configureCustomMarker(maker, options);
     }
 
@@ -224,7 +224,7 @@ const DTMap = (props) => {
 
     const addIntersectionPolygon = () => {
         let tPolygons = [];
-        figures.filter(el => el.figure instanceof L.Polygon).map((el) => tPolygons.push(convertLPolygonToTPolygon(el.figure)));
+        figures.filter(el => el.figure instanceof L.Polygon).map.leafletElement((el) => tPolygons.push(convertLPolygonToTPolygon(el.figure)));
         if (tPolygons.length > 0) {
             let intersectionTurf = intersect(...tPolygons);
             if (intersectionTurf !== null) {
@@ -255,7 +255,7 @@ const DTMap = (props) => {
         let culturePolygonArea;
 
         if (polygonsIntersect.length !== 0)
-            polygonsIntersect.map((el) => {
+            polygonsIntersect.map.leafletElement((el) => {
                 intersectionPolygonsArea += area(convertLPolygonToTPolygon(el));
                 return null;
             })
@@ -286,7 +286,7 @@ const DTMap = (props) => {
             unique = new PinType(null, null, null, false, null);
         figures.splice(figures.indexOf(customFigure), 1);
         sendRemoveFigure(customFigure);
-        map.removeLayer(customFigure.figure);
+        map.leafletElement.removeLayer(customFigure.figure);
     }
 
     const disableAllPolygonsEdit = () => {
@@ -308,20 +308,20 @@ const DTMap = (props) => {
 
     return (
       <div style={{position: 'sticky', height: "100%"}}>
-        <MapContainer  className="map"
+        <Map className="map"
                        style={{height: "100%"}}
           center={[60, 60]}
           zoom={5}
           maxZoom={17}
           fullscreenControl={true}
           editable={true}
-          whenCreated={setMap}
+         ref={setMap}
         >
           <TileLayer
             attribution='&amp;copy <a href="http://www.esri.com/">Esri</a> i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
             url="http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
           />
-        </MapContainer>
+        </Map>
       </div>
     );
   }

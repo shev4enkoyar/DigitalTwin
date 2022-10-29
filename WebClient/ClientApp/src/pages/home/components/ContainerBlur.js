@@ -1,6 +1,6 @@
 import '../Home.css';
-import { Container } from 'react-bootstrap';
 import React from 'react';
+import {Container} from "reactstrap/lib";
 function ContainerBlur(props) {
 
 

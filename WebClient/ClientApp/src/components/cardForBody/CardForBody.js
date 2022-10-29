@@ -1,6 +1,7 @@
 import './CardForBody.css';
-import { Card, Container } from 'react-bootstrap';
+
 import React from "react";
+import {Card, Container} from "reactstrap";
 function CardForBody(props) {
     return(
             <Card style={props.styleForCard} onClick={props.onClick} className={props.className + " " + (props.active ? "modal_cont active " : "modal_cont ") +  " CardBodyDark"}>

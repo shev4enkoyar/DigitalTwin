@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import '../pages.css';
-import {Button, Card, Col, Container} from 'react-bootstrap';
 import ModelsContent from './components/ModelsContent';
 import {ThemeContextConsumer} from "../../components/ThemeContext";
 import CardModel from "./components/CardModel";
 import authService from "../../components/api-authorization/AuthorizeService";
 import {Link} from "react-router-dom";
+import Col from "react-bootstrap/lib/Col";
+import {Container} from "reactstrap/lib";
+import Button from "react-bootstrap/lib/Button";
 class Models extends Component {
 
     constructor(props) {
@@ -51,7 +53,7 @@ class Models extends Component {
                     <>
                         <Container className="text-center mt-5" >
                             {content}
-                            <Button className="blueBut createBut mt-3" textForButton="Новая модель" classTextName="textOpenSans14" imageClassName="plus" >
+                            <Button className="blueBut createBut mt-3 btn-primary"  >
                                 <a style={{color: "#fff"}}  href={'/createModel'}>Плюсик</a >
                             </Button>
                         </Container>

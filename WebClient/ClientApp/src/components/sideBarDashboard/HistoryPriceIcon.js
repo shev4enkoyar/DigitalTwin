@@ -1,14 +1,14 @@
-import { Nav } from 'react-bootstrap';
-import './SideBarDashboard.css';
+
 /*import historyPriceIcon from '../data/HistoryPriceIcon.svg';*/
 import React from "react";
+import {NavLink} from "reactstrap/lib";
 function HistoryPriceIcon(props) {
 
 	return (
 
 
-		<Nav.Link onClick={() => { props.updateActive() }} >
+		<NavLink onClick={() => { props.updateActive() }} >
 			<img style={{width:'14px'}} />
-		</Nav.Link >
+		</NavLink >
 	)
 } export default HistoryPriceIcon;
