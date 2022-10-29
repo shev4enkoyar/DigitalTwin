@@ -6,7 +6,8 @@ import Input from "../../components/input/Input";
 import BootstrapTable from 'react-bootstrap-table-next';
 import authService from "../../components/api-authorization/AuthorizeService";
 import {ClientRoutes} from "../../util/ClientRoutes";
-
+import { ThemeContextConsumer } from "../../components/ThemeContext";
+import './../../pages/pages.css';
 export class CompanyInvite extends Component{
 
     constructor(props) {
@@ -28,8 +29,8 @@ export class CompanyInvite extends Component{
         ];
 
         const columns = [
-            { dataField: 'role', text: <p style={{color: "#fff"}}>Роль</p> },
-            { dataField: 'functional', text: <p style={{color: "#fff"}}>Разрешения</p> },
+            { dataField: 'role', text: "Роль" },
+            { dataField: 'functional', text: "Разрешения" },
         ]
         const selectRow = {
             mode: 'checkbox',
@@ -46,21 +47,26 @@ export class CompanyInvite extends Component{
             this.inviteUser(email, rolesId);
         }
         return(
-
-            <Container>
-                <CardForBody >
-                    <BootstrapTable selectRow={selectRow} rowStyle={{color: "#fff", background: "#262626"}} keyField='id' data={this.state.rolesDb} columns={columns} />
-                    <Input Label="Email" classNameP="textForSign12" className="inpCreateForDashCard" contClass="contForInpDashE" onInput={(event) => { this.setState({ email: event.target.value.trim() }) }} />
-                    <Button onClick={() => {
-                        let email = this.state.email;
-                        let rolesId = "";
-                        this.state.roles.map(el => rolesId += el.id + ";");
-                        inviteUser(email, rolesId);
-                    }}>
-                        ПРигласить пользователя
-                    </Button>
-                </CardForBody>
-            </Container>
+            <ThemeContextConsumer>
+                { 
+                    context => (
+                        <Container>
+                            <CardForBody >
+                                <BootstrapTable classes={context.theme + " tableForCompanyInvite"} selectRow={selectRow} keyField='id' data={this.state.rolesDb} columns={columns} />
+                                <Input Label="Email" classNameP="textForSign12" className="inpCreateForDashCard" contClass="contForInpDashE" onInput={(event) => { this.setState({ email: event.target.value.trim() }) }} />
+                                <Button onClick={() => {
+                                    let email = this.state.email;
+                                    let rolesId = "";
+                                    this.state.roles.map(el => rolesId += el.id + ";");
+                                    inviteUser(email, rolesId);
+                                }}>
+                                    Пригласить пользователя
+                                </Button>
+                            </CardForBody>
+                        </Container>
+                    )
+                }
+            </ThemeContextConsumer>
         );
     }
 

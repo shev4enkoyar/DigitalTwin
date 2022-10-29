@@ -6,6 +6,8 @@ import {Container} from "reactstrap/lib";
 import Button from "react-bootstrap/lib/Button";
 import Row from "react-bootstrap/lib/Row";
 
+import './../../pages/pages.css';
+import { ThemeContextConsumer } from "../../components/ThemeContext";
 class AllSubscriptions extends Component {
 
     constructor(props) {
@@ -20,36 +22,50 @@ class AllSubscriptions extends Component {
     render() {
         let content =  this.state.loading
             ?
-                <p style={{color: "#FFF"}}><em>Loading...</em></p>
+            <ThemeContextConsumer>
+                {
+                    context=>(
+                        <p className={context.theme} style={{ color: "#FFF" }}><em>Loading...</em></p>
+                )
+                }
+            </ThemeContextConsumer>
             :
                 this.state.tariffs.map(el => {
                     return (
-                        <Col>
-                            <CardForBody styleForCard={{ width: "max-content"}}>
-                                <h3 className="text-center mt-4" style={{color: "#fff"}}>
-                                    {el.name}
-                                </h3>
-                                <Container className="text-center">
-                                    <Button className="my-4" style={{whiteSpace: "nowrap"}}>
-                                        <img style={{width: "30px", height: "30px"}} className="icon"
-                                             src="https://www.svgrepo.com/show/274451/add.svg"/>
-                                        {" Оформить подписку"}
-                                    </Button>
-                                </Container>
-                                <Container>
-                                    <p style={{color: "#FFF", fontSize: "0.7rem"}} className="text-center mb-4"><em>Подписка не продлевается автоматически</em></p>
-                                </Container>
-                            </CardForBody>
-                        </Col>
+                        <ThemeContextConsumer>
+                            {context=>(
+                                <Col>
+                                    <CardForBody styleForCard={{ width: "max-content" }}>
+                                        <h3 className={context.theme+" text-center mt-4"} style={{ color: "#fff" }}>
+                                            {el.name}
+                                        </h3>
+                                        <Container className="text-center">
+                                            <Button className="my-4" style={{ whiteSpace: "nowrap" }}>
+                                                <img style={{ width: "30px", height: "30px" }} className="icon"
+                                                    src="https://www.svgrepo.com/show/274451/add.svg" />
+                                                {" Оформить подписку"}
+                                            </Button>
+                                        </Container>
+                                        <Container>
+                                            <p style={{ color: "#FFF", fontSize: "0.7rem" }} className="text-center mb-4"><em>Подписка не продлевается автоматически</em></p>
+                                        </Container>
+                                    </CardForBody>
+                                </Col>
+                            )}
+                        </ThemeContextConsumer>
                     )
                 });
         return (
-            <Container className="d-flex justify-content-center" fluid>
-                <Row className="mt-3">
-                    {content}
-                </Row>
-
-            </Container>
+            <ThemeContextConsumer>
+                {context(
+                    <Container className="d-flex justify-content-center" fluid>
+                        <Row className={context.theme + "Gray mt-3"}>
+                            {content}
+                        </Row>
+                    </Container>
+                )
+                }
+            </ThemeContextConsumer>
         );
     }
 
