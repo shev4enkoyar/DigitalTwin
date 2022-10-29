@@ -19,7 +19,7 @@ using WebClient.Util;
 
 namespace WebClient.Controllers
 {
-    [Authorize]
+    
     [ApiController]
     [Route("api/subscriptions")]
     public class SubscriptionsController : ControllerBase
@@ -70,6 +70,7 @@ namespace WebClient.Controllers
             return result;
         }
 
+        [Authorize]
         [HttpGet("activate/{modelId}")]
         public async Task<IActionResult> ActivateSubscription(int modelId, int days, int subscriptionId) 
         {
@@ -97,6 +98,7 @@ namespace WebClient.Controllers
             return BadRequest(reply.Status);
         }
 
+        [Authorize]
         [HttpGet("update")]
         public async Task<IActionResult> UpdateActivatedSubscription(int days, int subscriptionId) 
         {
@@ -122,6 +124,7 @@ namespace WebClient.Controllers
             return BadRequest(reply.Status);
         }
 
+        [Authorize]
         [HttpGet("get_all_by_company")]
         public async Task<string> GetAllSubscriptionsByCompany()
         {
