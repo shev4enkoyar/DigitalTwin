@@ -47,14 +47,20 @@ export class LoginMenu extends Component {
     }
 
     authenticatedView(userName, logoutPath) {
-        return (<Fragment>
-            <ThemeToggler />
-            <NotificationDropDown/>
-            <ProfileDropDown logoutPath={logoutPath}/>
-            <NavLink tag={Link} to={logoutPath}>
-                Выйти
-            </NavLink>
-        </Fragment>);
+        return (
+            <ThemeContextConsumer>{
+                    context => (
+                        <Fragment>
+                            <ThemeToggler />
+                            <NotificationDropDown />
+                            <ProfileDropDown logoutPath={logoutPath} />
+                            <NavLink tag={Link} to={logoutPath} className={context.theme + (context.theme.Gray ? "Gray " : " ")}>
+                                Выйти
+                            </NavLink>
+                        </Fragment>
+                        )
+                }
+            </ThemeContextConsumer>);
 
     }
 
@@ -63,6 +69,7 @@ export class LoginMenu extends Component {
             <ThemeContextConsumer>{
                 context=>(
                     <Fragment>
+                        <ThemeToggler />
                         <NavItem>
                             <NavLink className={context.theme} tag={Link} to={registerPath}>Зарегистрироваться</NavLink>
                         </NavItem>
