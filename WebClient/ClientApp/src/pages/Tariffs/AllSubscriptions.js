@@ -9,9 +9,6 @@ import Modal from "react-bootstrap/lib/Modal";
 import './Subscriptions.css';
 import './../../pages/pages.css';
 import { ThemeContextConsumer } from "../../components/ThemeContext";
-
-import './../../pages/pages.css';
-import { ThemeContextConsumer } from "../../components/ThemeContext";
 class AllSubscriptions extends Component {
 
     constructor(props) {
@@ -40,7 +37,7 @@ class AllSubscriptions extends Component {
                         {context => (
                     <Col lg={4} xl={3} className="mb-5 d-flex justify-content-center p-0">
                         <CardForBody styleForCard={{ width: "fit-content", height: "100%", padding: "0 5%" }}>
-                                    <h3 className={context.theme + "text-center mt-4"} style={{ color: "#fff" }}>
+                                    <h3 className={context.theme + " text-center mt-4"} style={{ color: "#fff" }}>
                                 {el.name}
                             </h3>
                             <Container className="text-center">
@@ -75,9 +72,9 @@ class AllSubscriptions extends Component {
             });
         return (
             <ThemeContextConsumer>
-                {context(
-            <Container className="d-flex justify-content-center w-100" fluid>
-                        <Row className={context.theme + "mt-3"}>
+                {context=>(
+                    <Container className={context.theme + "Gray d-flex justify-content-center w-100"} fluid>
+                        <Row className={context.theme + "Gray mt-3"}>
                     {content}
                 </Row>
 
