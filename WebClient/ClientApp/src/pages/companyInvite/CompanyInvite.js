@@ -1,5 +1,5 @@
 import {Component} from "react";
-import {Button, Container} from "react-bootstrap";
+import { Button, Container } from "reactstrap/lib";
 import React from "react";
 import CardForBody from "../../components/cardForBody/CardForBody";
 import Input from "../../components/input/Input";

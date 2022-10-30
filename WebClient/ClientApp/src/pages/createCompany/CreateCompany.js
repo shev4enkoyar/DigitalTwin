@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Button, Container, Row} from "react-bootstrap";
+import { Button, Container } from "reactstrap/lib";
 import Input from "../../components/input/Input";
 import CardForBody from "../../components/cardForBody/CardForBody";
 import authService from "../../components/api-authorization/AuthorizeService";
