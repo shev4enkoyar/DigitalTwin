@@ -1,0 +1,35 @@
+﻿.subscriptions .modal-content {
+    background-color: #212026;
+    color: white;
+}
+
+.blue_button {
+    background-color: #0d6efd;
+    color: white
+}
+
+    .blue_button :hover {
+        background-color: #084298;
+        color: white
+    }
+
+.grey_button {
+    background-color: #adb5bd;
+    color: white
+}
+
+    .grey_button :hover {
+        background-color: #495057;
+        color: white
+    }
+
+.green_button {
+    background-color: #198754;
+    color: white
+}
+
+    .green_button :hover {
+        background-color: #0f5132;
+        color: white
+    }
+
