@@ -6,8 +6,6 @@ import {NavLink} from "reactstrap/lib";
 function DocIcon(props) {
 
 	return (
-
-
 		<NavLink onClick={() => { props.updateActive() }} >
 			<img className="imgForPanel" />
 		</NavLink >

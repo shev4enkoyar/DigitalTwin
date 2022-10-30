@@ -1,9 +1,7 @@
 import './CardModels.css';
 import React, {Children} from "react";
 import {ThemeContextConsumer} from "../../../components/ThemeContext";
-import {Container} from "reactstrap/lib";
-import Row from "react-bootstrap/lib/Row";
-import Col from "react-bootstrap/lib/Col";
+import {Col, Container, Row} from "reactstrap/lib";
 function ModelsContent(props) {
     
     return (

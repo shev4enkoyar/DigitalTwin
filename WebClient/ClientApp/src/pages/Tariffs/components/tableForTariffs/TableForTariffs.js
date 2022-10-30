@@ -1,7 +1,7 @@
 import React from "react";
 import './TableForTariffs.css';
-import { Container } from 'react-bootstrap';
 import {ThemeContextConsumer} from "../../../../components/ThemeContext";
+import {Container} from "reactstrap/lib";
 function TableForTariffs(props) {
     // get table column
     console.log(props.contentsForTable[0])

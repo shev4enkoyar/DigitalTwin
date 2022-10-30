@@ -6,10 +6,7 @@ import '../pages.css';
 import BootstrapTable from 'react-bootstrap-table-next';
 import authService from "../../components/api-authorization/AuthorizeService";
 import {ClientRoutes} from "../../util/ClientRoutes";
-import Button from "react-bootstrap/lib/Button";
-import {Container} from "reactstrap/lib";
-import Row from "react-bootstrap/lib/Row";
-import {Col} from "react-bootstrap";
+import {Button, Col, Container, Row} from "reactstrap/lib";
 class Subscriptions extends Component {
     constructor(props) {
         super(props);

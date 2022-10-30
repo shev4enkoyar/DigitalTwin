@@ -1,4 +1,3 @@
-
 import React, {Component} from "react";
 import {ApplicationPaths} from "../../api-authorization/ApiAuthorizationConstants";
 import {Link} from "react-router-dom";

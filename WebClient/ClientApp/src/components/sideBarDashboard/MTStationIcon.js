@@ -1,15 +1,16 @@
-import { Nav } from 'react-bootstrap';
+
 import './SideBarDashboard.css';
 /*import mtStationIcon from '../data/MTStationIcon.svg';*/
 import React from "react";
 import { ThemeContextConsumer } from '../ThemeContext';
+import {NavLink} from "reactstrap/lib";
 function MTStationIcon(props) {
 
 	return (
 		<ThemeContextConsumer>{context=>(
-		<Nav.Link onClick={() => { props.updateActive() }} >
+		<NavLink onClick={() => { props.updateActive() }} >
 				<img className={context.theme +"Icon imgForPanel"}  />
-			</Nav.Link >
+			</NavLink >
 		)}
 		</ThemeContextConsumer>
 	)

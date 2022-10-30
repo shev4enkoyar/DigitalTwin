@@ -2,7 +2,6 @@
 import '../Home.css';
 import React from 'react';
 import ContainerBlur from './ContainerBlur.js';
-
 import GroupTarif from "../../../components/ContentForHome/DarkCardForHome/GroupTarif";
 import {ThemeContextConsumer} from "../../../components/ThemeContext";
 import {Container} from "reactstrap/lib";

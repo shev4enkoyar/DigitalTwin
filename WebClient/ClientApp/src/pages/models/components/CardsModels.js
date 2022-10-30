@@ -1,7 +1,7 @@
 import './CardModels.css';
-import { Container} from 'react-bootstrap';
 import React from "react";
 import CardModel from './CardModel';
+import {Container} from "reactstrap/lib";
 function CardsModels(props) {
 
     return (

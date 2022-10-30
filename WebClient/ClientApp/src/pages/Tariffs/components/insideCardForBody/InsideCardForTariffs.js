@@ -1,8 +1,7 @@
 import './InsideCardForBody.css';
 import React from "react";
 import {ThemeContextConsumer} from "../../../../components/ThemeContext";
-import {Card, Container} from "reactstrap/lib";
-import Row from "react-bootstrap/lib/Row";
+import {Card, Container, Row} from "reactstrap/lib";
 function CardForTariffs(props) { 
     return (
         <ThemeContextConsumer>

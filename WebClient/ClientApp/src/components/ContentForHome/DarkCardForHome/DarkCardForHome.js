@@ -1,7 +1,7 @@
 import './DarkCardForHome.css';
-import { Card, Container } from 'react-bootstrap';
 import React from 'react';
 import { ThemeContextConsumer } from "../../ThemeContext";
+import {Card, Container} from "reactstrap/lib";
 function    DarkCardForHome(props) {
     return (
         <ThemeContextConsumer>

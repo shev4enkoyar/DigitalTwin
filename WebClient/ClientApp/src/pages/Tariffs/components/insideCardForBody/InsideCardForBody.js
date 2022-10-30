@@ -1,7 +1,7 @@
 import './InsideCardForBody.css';
-import { Card, Container } from 'react-bootstrap';
 import React from "react";
 import {ThemeContextConsumer} from "../../../../components/ThemeContext";
+import {Card, Container} from "reactstrap/lib";
 
 function InsideCardForBody(props) {
     return (

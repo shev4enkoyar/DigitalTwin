@@ -1,5 +1,6 @@
-﻿import { Button } from 'react-bootstrap';
-import { ThemeContextConsumer } from "../../ThemeContext";
+﻿import { ThemeContextConsumer } from "../../ThemeContext";
+import React from "react";
+import {Button} from "reactstrap/lib";
 function VectorIcon(props) {
     return (
         <ThemeContextConsumer>

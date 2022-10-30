@@ -3,10 +3,7 @@ import PopUpWithBlurCanvas from "../../../components/popUp/PopUpWithBlurCanvas";
 import TabForTransportSelect from './TabForTransportSelect';
 import './../../pages.css';
 import React from "react";
-import Tabs from "react-bootstrap/lib/Tabs";
-import Tab from "react-bootstrap/lib/Tab";
-import {Container} from "reactstrap/lib";
-import Button from "react-bootstrap/lib/Button";
+import {Button, Container} from "reactstrap/lib";
 const TransportSelect = (props) => {
     return (
         <PopUpWithBlurCanvas isBlur={true} isActive={props.values.isActive} handleActiveChange={() => { props.setStatus({isActive:false})} } className="TranspCard" styleFlex={{ top: '0px!important', marginTop:'0px', margin:'auto' } } >
@@ -14,7 +11,7 @@ const TransportSelect = (props) => {
                 <Button onClick={() => { props.setStatus({ isActive: false }) }} className="btn btn-danger position-absolute" style={{right: '3px',top: '2px' }}>
                     x
                 </Button>
-                <Tabs
+                {/*<Tabs
                     defaultActiveKey="first"
                     id="justify-tab-example"
                     className="mb-3 bg-transparent d-flex justify-content-center border-0">
@@ -27,7 +24,7 @@ const TransportSelect = (props) => {
                     <Tab tabClassName="bg-primary text-white" eventKey="third" title="Транспорт для сбора">
                         <TabForTransportSelect onClick={() => { props.setStatus({ isActive: false }) }} setStatus={(v) => { props.setStatus({ sbor: v }) }} values={props.values.sbor} />
                     </Tab>
-                </Tabs>
+                </Tabs>*/}
             </Container>
         </PopUpWithBlurCanvas>
 

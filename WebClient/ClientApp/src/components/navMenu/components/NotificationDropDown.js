@@ -2,17 +2,13 @@ import React, {Component, Fragment} from "react";
 import {HubConnectionBuilder, JsonHubProtocol} from "@microsoft/signalr";
 import ServerLinks from "../../../util/ServerLinks";
 import {NotificationType} from "./util/NotificationType";
-import {Button, Col, Row} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import {ClientRoutes} from "../../../util/ClientRoutes";
 import authService from "../../api-authorization/AuthorizeService";
 import {NotificationManager} from "react-notifications";
 import { ThemeContextConsumer } from './../../ThemeContext';
-import Dropdown from "react-bootstrap/lib/Dropdown";
-import DropdownButton from "react-bootstrap/lib/DropdownButton";
-import MenuItem from "react-bootstrap/lib/MenuItem";
 export class NotificationDropDown extends Component{
-    constructor(props) {
+   /* constructor(props) {
         super(props);
         this.state = { notifications: []};
     }
@@ -108,5 +104,5 @@ export class NotificationDropDown extends Component{
             NotificationManager.info(message.Message);
             this.setState({notifications })
         })
-    }
+    }*/
 }

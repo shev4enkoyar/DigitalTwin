@@ -1,5 +1,3 @@
-
-
 class CustomFigure {
     _db_id = null;
     _map_id = null;

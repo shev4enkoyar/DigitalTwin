@@ -1,9 +1,9 @@
 import './ContentDashboard.css';
-import {Col, Container, Row} from 'react-bootstrap';
 import { EconomicCard, FieldCard, HistoryCard, MachineCard, IoTCard, CultureCard, ChemistryCard } from './DashboardCard';
 import { useState } from 'react';
 import {ThemeContextConsumer} from "../../../components/ThemeContext";
 import React from "react";
+import {Col, Container, Row} from "reactstrap/lib";
 function ContentDashboard(props) {
     const [modelState, setModelState] = useState([{ cult: 0, sort: 0, frac: "", gust: "", norm: "", total: "" }, { kad: "" }, { added: false }, { chem: false }, { dat: false }, { econom: false }])
     const [statusState, setStatusState] = useState({cult:false, kad: false, trans:false, chem: false,ioT:false,ak:false})

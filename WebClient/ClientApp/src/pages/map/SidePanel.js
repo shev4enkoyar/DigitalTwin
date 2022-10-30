@@ -4,7 +4,6 @@ import './SidePanel.css';
 import FiguresTypes from "./util/FiguresTypes";
 import PinType from "./util/PinType";
 import PopUpWithBlurCanvas from "../../components/popUp/PopUpWithBlurCanvas";
-import {Form} from "reactstrap";
 import {Button} from "reactstrap/lib";
 
 const SidePanel = (props) => {

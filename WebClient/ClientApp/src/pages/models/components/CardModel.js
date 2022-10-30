@@ -1,8 +1,7 @@
 import './CardModels.css';
 import React from "react";
 import {ThemeContextConsumer} from "../../../components/ThemeContext";
-import Col from "react-bootstrap/lib/Col";
-import {Card} from "reactstrap/lib";
+import {Card, Col} from "reactstrap/lib";
 function CardModel(props) {
 
     return (

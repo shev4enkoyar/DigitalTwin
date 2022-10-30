@@ -1,4 +1,3 @@
-import { Container } from 'react-bootstrap';
 import './Footer.css';
 import React from "react";
 import { ThemeContextConsumer } from "../ThemeContext.js"
