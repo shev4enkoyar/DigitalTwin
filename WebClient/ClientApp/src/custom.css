@@ -26,3 +26,9 @@ code {
     background-color: #262626;
     color: #FFFFFF;
 }
+
+.background-transparent{
+    border: none;
+    background-color: transparent;
+    outline: none;
+}

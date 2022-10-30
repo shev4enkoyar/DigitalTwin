@@ -3,8 +3,8 @@ import { NavItem, NavLink } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import authService from './AuthorizeService';
 import { ApplicationPaths } from './ApiAuthorizationConstants';
-import ProfileDropDown from "../navMenu/components/ProfileDropDown";
-import { NotificationDropDown } from "../navMenu/components/NotificationDropDown";
+import ProfileDropDown from "../navMenu/components/profile/ProfileDropDown";
+import { NotificationDropDown } from "../navMenu/components/notification/NotificationDropDown";
 import ThemeToggler from './../navMenu/components/ThemeToggler';
 import { ThemeContextConsumer } from '../ThemeContext';
 export class LoginMenu extends Component {

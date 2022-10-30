@@ -1,10 +1,10 @@
 import {Dropdown, Popover} from "rsuite";
 import React, {useEffect, useState} from "react";
-import authService from "../../api-authorization/AuthorizeService";
+import authService from "../../../api-authorization/AuthorizeService";
 import {NavLink} from "reactstrap";
 import {Link} from "react-router-dom";
-import {ApplicationPaths} from "../../api-authorization/ApiAuthorizationConstants";
-import {ClientRoutes} from "../../../util/ClientRoutes";
+import {ApplicationPaths} from "../../../api-authorization/ApiAuthorizationConstants";
+import {ClientRoutes} from "../../../../util/ClientRoutes";
 
 const RenderProfileContent = ({ onClose, left, top, className, ...rest }, ref) => {
     const [functional, setFunctional] = useState(null);

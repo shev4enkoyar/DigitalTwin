@@ -4,9 +4,9 @@ import Combobox from './../../../components/combobox/ComboBox';
 import './ContentDashboard.css';
 /*import sen_icon from './../data/SensorIoT_Icon.svg';
 import map_icon from './../data/Map_Icon.svg';*/
-import {Container, Col, Button} from 'react-bootstrap';
 import CardForBody from './../../../components/cardForBody/CardForBody';
 import React from "react";
+import {Button, Col, Container} from "reactstrap/lib";
 export function DashboardCard(props) {
     return (
         <fieldset disabled={props.off ? false : "disabled"} className="cardSize">
