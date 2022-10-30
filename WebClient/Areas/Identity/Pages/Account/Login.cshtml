@@ -4,15 +4,17 @@
 @{
     ViewData["Title"] = "Авторизация";
     string theme;
+    string themeGray;
     if (!(Request.Cookies.TryGetValue("ThemeSave", out theme)))
     {
         theme = "dark";
     }
+    themeGray=theme+"Gray";
 }
 
-<h1 class="text-center">@ViewData["Title"]</h1>
+<h1 class="@themeGray text-white text-center">@ViewData["Title"]</h1>
 <div class="d-flex justify-content-center">
-    <div class="@theme card">
+    <div class="@theme card" style="width:40%">
         <section>
             <form id="account" method="post">
                 <h4 class="text-center">Войти <br/>в свою учётную запись</h4>
