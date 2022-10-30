@@ -31,7 +31,7 @@ export class NavMenu extends Component {
         <Navbar className="navbar-expand-sm navbar-toggleable-sm ng-white box-shadow  " dark>
           <Container >
             <NavbarBrand className={context.theme + (this.props.Gray ? "Gray " : " ")} tag={Link} to="/">AgroDigitalTwin</NavbarBrand>
-            <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
+            <NavbarToggler onClick={this.toggleNavbar} className={context.theme + (this.props.Gray ? "Gray " : " ") + " mr-2"} />
             <Collapse className="d-sm-inline-flex flex-sm-row-reverse" isOpen={!this.state.collapsed} navbar>
               <ul className="navbar-nav flex-grow">
                 {/*<li>

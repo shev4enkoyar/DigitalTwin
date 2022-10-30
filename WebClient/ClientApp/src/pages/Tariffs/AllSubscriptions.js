@@ -10,6 +10,8 @@ import './Subscriptions.css';
 import './../../pages/pages.css';
 import { ThemeContextConsumer } from "../../components/ThemeContext";
 
+import './../../pages/pages.css';
+import { ThemeContextConsumer } from "../../components/ThemeContext";
 class AllSubscriptions extends Component {
 
     constructor(props) {

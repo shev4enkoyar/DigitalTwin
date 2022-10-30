@@ -9,9 +9,9 @@ import HistoryCard from './components/HistoryCard';
 import EconomicCard from './components/EconomicCard';
 import ElementStep from './ElementStep';
 import TransportSelect from './../dashboardEmpty/transportSelect/TransportSelect';
-
+import { ThemeContextConsumer } from '../../components/ThemeContext';
 import CardNameModel from './CardNameModel';
-import {Container} from "reactstrap/lib";
+import { Container } from "reactstrap/lib";
 class CreateModel extends Component {
     constructor(props) {
         super(props);
@@ -51,23 +51,28 @@ class CreateModel extends Component {
     render() {
 
         return (
-            <div className="d-flex justify-content-center w-100 h-100 position-absolute">
-                <TransportSelect setStatus={(v) => { this.setStatus(v, 4) }} values={this.state.children[4]} handleActiveChanged={this.handleActiveChanged} />
-                <Container className="d-flex p-0 m-0" style={{ backgroundColor: '#302F38', borderRadius: '3px', border: '1px solid #000', maxHeight: '65px', }}>
-                    {
-                        this.steps.map((value, index) =>
-                            <ElementStep active={this.state.children[index].visible} key={index} progress={this.handleIsProgress() >= index} numberStep={index + 1} nameCard={value} />
-                    )}
-                </Container>
-                <CardNameModel setStatus={(v) => { this.setStatus(v, 0) }} values={this.state.children[0]} visible={this.state.children[0].visible} onClick={() => { this.handleVisibleSwitch(this.state.children[0].pred == "Да" ? 1 : 2) }} />
-                <HistoryCard setStatus={(v) => { this.setStatus(v, 1) }} values={this.state.children[1]} visible={this.state.children[1].visible} onClick={() => { this.handleVisibleSwitch(2) }}></HistoryCard>
-                <CultureCard setStatus={(v) => { this.setStatus(v, 2) }} values={this.state.children[2]} visible={this.state.children[2].visible} onClick={() => { this.handleVisibleSwitch(3) }} />
-                <FieldCard setStatus={(v) => { this.setStatus(v, 3) }} values={this.state.children[3]} visible={this.state.children[3].visible} onClick={() => { this.handleVisibleSwitch(4) }} />
-                <TransportCard setStatus={(v) => { this.setStatus(v, 4) }} values={this.state.children[4]} visible={this.state.children[4].visible} onClick={() => { this.handleVisibleSwitch(5) }} />
-                <ChemistryCard setStatus={(v) => { this.setStatus(v, 5) }} values={this.state.children[5]} visible={this.state.children[5].visible} onClick={() => { this.handleVisibleSwitch(6) }} />
-                <IotCard setStatus={(v) => { this.setStatus(v, 6) }} values={this.state.children[6]} visible={this.state.children[6].visible} onClick={() => { this.handleVisibleSwitch(7) }} />
-                <EconomicCard setStatus={(v) => { this.setStatus(v, 7) }} values={this.state.children[7]} visible={this.state.children[7].visible} data={this.state.children} onClick={() => {}} />
-            </div>
+            <ThemeContextConsumer>
+                {
+                    context => (
+                        <div className={ context.theme + "Gray"+" d-flex justify-content-center w-100 h-100 position-absolute mt-2 "}>
+                            <TransportSelect setStatus={(v) => { this.setStatus(v, 4) }} values={this.state.children[4]} handleActiveChanged={this.handleActiveChanged} />
+                            <Container className={context.theme +"Step d-flex p-0 m-0"} style={{ backgroundColor: '#302F38', borderRadius: '3px', border: '1px solid #000', maxHeight: '65px', }}>{
+                                this.steps.map((value, index) =>
+                                    <ElementStep active={this.state.children[index].visible} key={index} progress={this.handleIsProgress() >= index} numberStep={index + 1} nameCard={value} />
+                                )}
+                            </Container>
+                            <CardNameModel setStatus={(v) => { this.setStatus(v, 0) }} values={this.state.children[0]} visible={this.state.children[0].visible} onClick={() => { this.handleVisibleSwitch(this.state.children[0].pred == "Да" ? 1 : 2) }} />
+                            <HistoryCard setStatus={(v) => { this.setStatus(v, 1) }} values={this.state.children[1]} visible={this.state.children[1].visible} onClick={() => { this.handleVisibleSwitch(2) }}></HistoryCard>
+                            <CultureCard setStatus={(v) => { this.setStatus(v, 2) }} values={this.state.children[2]} visible={this.state.children[2].visible} onClick={() => { this.handleVisibleSwitch(3) }} />
+                            <FieldCard setStatus={(v) => { this.setStatus(v, 3) }} values={this.state.children[3]} visible={this.state.children[3].visible} onClick={() => { this.handleVisibleSwitch(4) }} />
+                            <TransportCard setStatus={(v) => { this.setStatus(v, 4) }} values={this.state.children[4]} visible={this.state.children[4].visible} onClick={() => { this.handleVisibleSwitch(5) }} />
+                            <ChemistryCard setStatus={(v) => { this.setStatus(v, 5) }} values={this.state.children[5]} visible={this.state.children[5].visible} onClick={() => { this.handleVisibleSwitch(6) }} />
+                            <IotCard setStatus={(v) => { this.setStatus(v, 6) }} values={this.state.children[6]} visible={this.state.children[6].visible} onClick={() => { this.handleVisibleSwitch(7) }} />
+                            <EconomicCard setStatus={(v) => { this.setStatus(v, 7) }} values={this.state.children[7]} visible={this.state.children[7].visible} data={this.state.children} onClick={() => {}} />
+                        </div>
+                        )
+                }
+            </ThemeContextConsumer>
         );
     }
 

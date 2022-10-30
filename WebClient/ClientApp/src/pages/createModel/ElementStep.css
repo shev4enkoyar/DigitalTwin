@@ -3,9 +3,35 @@
         display: none;
     }
 }
-.progressStep {
+.darkprogressStep {
     background-color: rgb(37 36 44 / 91%);
 }
-    .progressStep div {
-        filter: invert(1);
-    }
+.darkprogressStep div {
+    filter: invert(1);
+}
+.circleStep {
+    width: 25px;
+    height: 25px;
+    min-width: 25px;
+    min-height: 25px;
+    background-color: white;
+}
+.colorText{
+    color:white;
+}
+.lightStep {
+    background-color: #d0d0d1 !important;
+    border: 1px solid #848487 !important;
+    color: #334152 !important;
+}
+.lightprogressStep {
+    background-color: #A6A6A8;
+    color: #334152!important;
+}
+.lightprogressStep div {
+    background-color: #848487;
+    filter: invert(1);
+}
+        /*.progressStep div {
+    background-color: #d0d0d1;
+}*/

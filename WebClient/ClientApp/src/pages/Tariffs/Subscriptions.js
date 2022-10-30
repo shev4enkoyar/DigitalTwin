@@ -91,14 +91,30 @@ class Subscriptions extends Component {
     render() {
         let content = this.state.loading
             ?
-                <p style={{color: "#FFF"}}><em>Loading...</em></p>
+            <ThemeContextConsumer>
+                {context =>
+                    (
+                        <p className={context.theme} style={{ color: "#FFF" }}><em>Loading...</em></p>
+                    )
+                }
+            </ThemeContextConsumer>
             :
                 Object.entries(this.state.tariffs).map(([el, props]) =>
                     <>
-                        <p style={{color: "#FFF"}}>{"Модель: " + el}</p>
+                        <ThemeContextConsumer>
+                            {context=>(
+                                <p className={context.theme} style={{ color: "#FFF" }}>{"Модель: " + el}</p>
+                            )
+                            }
+                        </ThemeContextConsumer>
                         {props.length === 0
                             ?
-                                <p style={{color: "#FFF"}}><em>Подписок нет</em></p>
+                            <ThemeContextConsumer>
+                                {context => (
+                                    <p className={context.theme} style={{ color: "#FFF" }}><em>Подписок нет</em></p>
+                                )
+                                }
+                            </ThemeContextConsumer>
                             :
                                 props.map(prop => {
                                     return (
@@ -150,7 +166,7 @@ class Subscriptions extends Component {
                             <Col className="col p-0">
                                 <CardForBody styleForCard={{ position: 'relative', padding: '3%' }} className="signUpWidth">
                                     <Container className="ContForHistoryTariff p-0 contForReactTable">
-                                        <BootstrapTable classes="HistoryTableText" keyField='num' data={this.historyTariffs} columns={this.headerForTariffs} />
+                                        <BootstrapTable classes={context.theme + " HistoryTableText "} keyField='num' data={this.historyTariffs} columns={this.headerForTariffs} />
                                         {/*<TableForTariffs textForTable="История подписок" classNamesTD="ForBox" headersForTable={this.headerForTariffs} contentsForTable={this.historyTariffs} />*/}
                                     </Container>
                                 </CardForBody>

@@ -3,6 +3,7 @@ import {Button, Container, Row} from "react-bootstrap";
 import Input from "../../components/input/Input";
 import CardForBody from "../../components/cardForBody/CardForBody";
 import authService from "../../components/api-authorization/AuthorizeService";
+import { ThemeContextConsumer } from "../../components/ThemeContext";
 
 export class CreateCompany extends Component {
 
@@ -13,20 +14,26 @@ export class CreateCompany extends Component {
 
     render() {
         return (
-            <Container className="d-flex justify-content-center">
-                <CardForBody styleForCard={{ width: 'max-content' }} >
-                  <p className="my-4" style={{ color: "red" }}>{this.state.error}</p>
-                  <Input Label="Название комании" classNameP="textForSign16" className="inpCreateForDashCard" contClass="contForInpDashE" onInput={(event) => { let reg = /^[0-9A-Za-zА-Яа-я]*$/i.test(event.target.value); if (reg) this.setState({ name: event.target.value.trim() }) }} />
-                  <Input Label="ИНН" classNameP="textForSign16" className="inpCreateForDashCard" contClass="contForInpDashE" onInput={(event) => { let reg = /^[0-9A-Za-zА-Яа-я]*$/i.test(event.target.value); if (reg) this.setState({ inn: event.target.value.trim() }) }} />
-                  <Input Label="Имя руководителя" classNameP="textForSign16" className="inpCreateForDashCard" contClass="contForInpDashE" onInput={(event) => { let reg = /^[0-9A-Za-zА-Яа-я]*$/i.test(event.target.value); if (reg) this.setState({ supervisorName: event.target.value.trim() }) }} />
-                  <Input Label="ID контракта" classNameP="textForSign16" className="inpCreateForDashCard" contClass="contForInpDashE" onInput={(event) => { this.setState({ contractId: event.target.value.trim() }) }} />
-                  <Container className="my-3 mb-4">
-                    <Button onClick={() => this.createCompany()}>
-                        Зарегистрировать компанию
-                    </Button>
-                  </Container>
-              </CardForBody>
-          </Container>
+            <ThemeContextConsumer>
+                {
+                    context => (
+                        <Container className={context.theme + "Gray " + "d-flex justify-content-center"} style={{marginTop:'3px'} }>
+                            <CardForBody styleForCard={{ width: 'max-content' }} >
+                                <p className="my-4" style={{ color: "red" }}>{this.state.error}</p>
+                                <Input Label="Название комании" classNameP="textForSign16" className="inpCreateForDashCard" contClass="contForInpDashE" onInput={(event) => { let reg = /^[0-9A-Za-zА-Яа-я]*$/i.test(event.target.value); if (reg) this.setState({ name: event.target.value.trim() }) }} />
+                                <Input Label="ИНН" classNameP="textForSign16" className="inpCreateForDashCard" contClass="contForInpDashE" onInput={(event) => { let reg = /^[0-9A-Za-zА-Яа-я]*$/i.test(event.target.value); if (reg) this.setState({ inn: event.target.value.trim() }) }} />
+                                <Input Label="Имя руководителя" classNameP="textForSign16" className="inpCreateForDashCard" contClass="contForInpDashE" onInput={(event) => { let reg = /^[0-9A-Za-zА-Яа-я]*$/i.test(event.target.value); if (reg) this.setState({ supervisorName: event.target.value.trim() }) }} />
+                                <Input Label="ID контракта" classNameP="textForSign16" className="inpCreateForDashCard" contClass="contForInpDashE" onInput={(event) => { this.setState({ contractId: event.target.value.trim() }) }} />
+                                <Container className="my-3 mb-4">
+                                    <Button onClick={() => this.createCompany()}>
+                                        Зарегистрировать компанию
+                                    </Button>
+                                </Container>
+                            </CardForBody>
+                        </Container>
+                    )
+                }
+            </ThemeContextConsumer>
         );
     }
 

@@ -2,25 +2,34 @@
 @using Microsoft.AspNetCore.Mvc.ViewEngines
 @inject IWebHostEnvironment Environment
 @inject ICompositeViewEngine Engine
+@{
+    string theme;
+    string themeGray;
+    if (!(Context.Request.Cookies.TryGetValue("ThemeSave", out theme)))
+    {
+        theme = "dark";
+    }
+    themeGray=theme+"Gray";
+}
 <!DOCTYPE html>
-<html>
-<head>
+<html class="@themeGray">
+<head runat="server">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - WebClient</title>
     <link rel="stylesheet" href="~/Identity/lib/bootstrap/dist/css/bootstrap.min.css" />
-    @*<link rel="stylesheet" href="~/Identity/css/site.css" />*@
-    <link rel="stylesheet" href="/css/site.css" />
-   
+    @*<link rel="stylesheet" href="~/Identity/css/site.css" />*@ 
+        <link rel="stylesheet" href="/css/site.css" />
+    <link rel="stylesheet" href="~/../ClientApp/src/pages/pages.css" />
 </head>
-<body>
+<body class="@themeGray">
     <header >
-        <nav class="navbar-expand-sm navbar-toggleable-sm ng-white box-shadow  navbar navbar-dark">
+        <nav class="@theme navbar-expand-sm navbar-toggleable-sm ng-white box-shadow  navbar navbar-dark">
             <div class="container">
-                <a class="navbar-brand" href="~/">AgroDigitalTwin</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                <a class="@theme navbar-brand" href="~/">AgroDigitalTwin</a>
+                <button class="@theme navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
+                    <span class="@theme navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     @{
@@ -41,12 +50,12 @@
         </nav>
     </header>
 
-    <div class="container">
+    <div class="@themeGray container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
-    <footer class="footer text-center">
+    <footer class="@theme footer text-center">
         <p class="mb-0">
             Подвал
         </p>

@@ -51,7 +51,7 @@ class Models extends Component {
             <ThemeContextConsumer>{
                 context => (
                     <>
-                        <Container className="text-center mt-5" >
+                        <Container className={context.theme + "Gray " + "text-center mt-5"} style={{ minWidth: '100%' }} >
                             {content}
                             <Button className="blueBut createBut mt-3 btn-primary"  >
                                 <a style={{color: "#fff"}}  href={'/createModel'}>Плюсик</a >

@@ -25,7 +25,7 @@ export class NotificationDropDown extends Component{
     render() {
         let content = this.state.notifications.length === 0
                 ?
-                    <MenuItem>Уведомлений нет</MenuItem>
+                    <MenuItem className="text-center">Уведомлений нет</MenuItem>
                 :
                     this.state.notifications.map((el, index) => {
                         if (el.Type === NotificationType.INVITE){

@@ -10,6 +10,11 @@
     {
         returnUrl = query["returnUrl"];
     }
+    string theme;
+    if (!(Context.Request.Cookies.TryGetValue("ThemeSave", out theme)))
+    {
+        theme = "dark";
+    }
 }
 
 <ul class="navbar-nav">
@@ -38,10 +43,10 @@
     else
     {
         <li class="nav-item">
-            <a class="nav-link" asp-area="Identity" asp-page="/Account/Register" asp-route-returnUrl="@returnUrl">Зарегистрироваться</a>
+            <a class="@theme nav-link" asp-area="Identity" asp-page="/Account/Register" asp-route-returnUrl="@returnUrl">Зарегистрироваться</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" asp-area="Identity" asp-page="/Account/Login"asp-route-returnUrl="@returnUrl">Войти</a>
+            <a class="@theme nav-link" asp-area="Identity" asp-page="/Account/Login" asp-route-returnUrl="@returnUrl">Войти</a>
         </li>
     }
 </ul>

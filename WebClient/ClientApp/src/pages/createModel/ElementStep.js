@@ -1,23 +1,24 @@
 ﻿
 import './ElementStep.css';
 import React from "react";
-import {Container} from "reactstrap/lib";
 const ElementStep = (props) => {
     
     return (
         <>
-            <Container className={(props.progress ? "progressStep" : " ") + " p-1 m-0 d-flex justify-content-center align-items-center"} style={{ minHeight: '55px', width: '13%', height:'100%' }}>
-                <div className=" rounded-circle d-flex justify-content-center align-items-center mx-1" style={{
-                    backgroundColor: 'white',
-                    width: '30px',
-                    height: '30px',
-                    minWidth: '30px', minHeight: '30px',                }}>
-                    <label className="m-0" style={{ color: '#262626', fontFamily: "Open Sans" }}>
-                        {props.numberStep}
-                    </label>
-                </div>
-                <label className="textForStep my-0 mx-1" style={{ color: '#ffff', fontFamily: "Open Sans", fontSize: '80%'} }>{props.nameCard}</label>
-            </Container>
+            <ThemeContextConsumer>
+                {
+                    context => (
+                        <Container className={context.theme + (props.progress ? "progressStep " : context.theme === "light" ? "lightStep":"") + " px-1 m-0 d-flex justify-content-center align-items-center"} style={{ minHeight: '55px', width: '13%', height: '100%' }}>
+                            <div className={context.theme + (props.progress ? "progressStep " : "") + " circleStep rounded-circle d-flex justify-content-center align-items-center mr-1"}>
+                                <label className=" m-0" style={{ color: '#262626', fontFamily: "Open Sans" }}>
+                                    {props.numberStep}
+                                </label>
+                            </div>
+                            <label className={context.theme + (props.progress ? "progressStep colorText" : context.theme === "light" ? "lightStep" : " colorText")+" textForStep m-0"} style={{fontFamily: "Open Sans", fontSize: '80%' }}>{props.nameCard}</label>
+                        </Container>
+                    )
+                }
+            </ThemeContextConsumer>
         </>
     )
 }
