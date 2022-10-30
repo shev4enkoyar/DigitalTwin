@@ -145,7 +145,7 @@ class Subscriptions extends Component {
                 )
         return (
             <ThemeContextConsumer>{context => (
-                    <Container className={context.theme + "Gray " + "body_style"}>
+                <Container className={context.theme + "Gray " + "body_style"} style={{ "minWidth": '100%'} }>
                         <Row>
                             <Col className="col">
                                 <CardForBody styleForCard={{ position: 'relative', width: "fit-content"}} className="signUpWidth text-center" classForContB=" centerCard" >
