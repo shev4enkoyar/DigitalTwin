@@ -1,16 +1,60 @@
-
+import React, { useState } from 'react';
 import PopUpWithBlurCanvas from "../../../components/popUp/PopUpWithBlurCanvas";
 import TabForTransportSelect from './TabForTransportSelect';
 import './../../pages.css';
-import React from "react";
-import {Button, Container} from "reactstrap/lib";
+import { TabContent, TabPane, Nav, NavItem, NavLink, Container, Button} from "reactstrap/lib";
 const TransportSelect = (props) => {
+    const [state, setState] = useState({ activeTab: '1' });
+    const toggle=(tab) =>{
+        if (state.activeTab !== tab) {
+            setState({
+            activeTab: tab
+            });
+        }
+    }
     return (
         <PopUpWithBlurCanvas isBlur={true} isActive={props.values.isActive} handleActiveChange={() => { props.setStatus({isActive:false})} } className="TranspCard" styleFlex={{ top: '0px!important', marginTop:'0px', margin:'auto' } } >
             <Container style={{ padding: '0px' }}>
                 <Button onClick={() => { props.setStatus({ isActive: false }) }} className="btn btn-danger position-absolute" style={{right: '3px',top: '2px' }}>
                     x
                 </Button>
+                <Nav tabs>
+                    <NavItem>
+                        <NavLink
+                            className={state.activeTab === '1'? "active":"" }
+                            onClick={() => { toggle('1'); }}
+                        >
+                            Транспорт для засева
+                        </NavLink>
+                    </NavItem>
+                    <NavItem>
+                        <NavLink
+                            className={state.activeTab === '2'? "active" : ""}
+                            onClick={() => { toggle('2'); }}
+                        >
+                            Транспорт для обработки
+                        </NavLink>
+                    </NavItem>
+                    <NavItem>
+                        <NavLink
+                            className={state.activeTab === '3' ? "active" : ""}
+                            onClick={() => { toggle('3'); }}
+                        >
+                            Транспорт для сбора
+                        </NavLink>
+                    </NavItem>
+                </Nav>
+                <TabContent activeTab={state.activeTab}>
+                    <TabPane tabId="1">
+                        <TabForTransportSelect onClick={() => { props.setStatus({ isActive: false }) }} setStatus={(v) => { props.setStatus({ zasev: v }) }} values={props.values.zasev} />
+                    </TabPane>
+                    <TabPane tabId="2">
+                        <TabForTransportSelect onClick={() => { props.setStatus({ isActive: false }) }} setStatus={(v) => { props.setStatus({ obrabotka: v }) }} values={props.values.obrabotka} />
+                    </TabPane>
+                    <TabPane tabId="3">
+                        <TabForTransportSelect onClick={() => { props.setStatus({ isActive: false }) }} setStatus={(v) => { props.setStatus({ sbor: v }) }} values={props.values.sbor} />
+                    </TabPane>
+                </TabContent>
                 {/*<Tabs
                     defaultActiveKey="first"
                     id="justify-tab-example"
