@@ -24,7 +24,7 @@ class Models extends Component {
             : <ModelsContent >
                 {
                     this.state.culture.map(el =>
-                        <Col className="d-flex justify-content-center">
+                        <Col className="d-flex justify-content-center" >
                             <Link to={"/dashboard/" + el.id}>
                                 <button className="d-flex justify-content-center" style={this.buttonStyle}>
                                     <CardModel className="d-flex justify-content-center" title={el.name}>
