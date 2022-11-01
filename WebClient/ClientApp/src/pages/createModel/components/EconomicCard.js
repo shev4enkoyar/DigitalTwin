@@ -38,22 +38,27 @@ const EconomicCard = (props) => {
                 <Input Label="Длительность (период)" classNameP="textForSign12" className="inpCreateForDashCard" contClass="contForInpDashE" value={props.values.period} onInput={(event) => { props.setStatus({ period: event.target.value.trim() }) }} />
                 <Input Label="Работник на га" classNameP="textForSign12" className="inpCreateForDashCard" contClass="contForInpDashE" value={props.values.workerN} onInput={(event) => { var reg = /^([0-9]*)$/i.test(event.target.value); if (reg) props.setStatus({ workerN: event.target.value.trim() }) }} />
             </Container>
-            <Button className="btn btn-primary my-2" style={{ width: "190px" }} onClick={() => {
-                let digitalModel = {
-                    Name: props.data.at(0).name,
-                    UserId: -1,
-                    ProductId: props.data.at(2).productId,
-                    Cadaster: props.data.at(3).kad,
-                    CategoryName: props.data.at(2).cult + " " + props.data.at(2).sort
-                };
-                console.log(CreateTechCard(digitalModel));
-                props.onClick();
-            }}>
-                <a style={{
-                    color: "#fff", textDecoration: 'none'}} href="/models">
-                    Создать модель
-                </a>
-            </Button>
+            <Container className="contButton">
+                <Button onClick={() => { props.Back() }} className="btn btn-primary m-2">
+                    Назад
+                </Button>
+                <Button className="btn btn-primary my-2"  onClick={() => {
+                    let digitalModel = {
+                        Name: props.data.at(0).name,
+                        UserId: -1,
+                        ProductId: props.data.at(2).productId,
+                        Cadaster: props.data.at(3).kad,
+                        CategoryName: props.data.at(2).cult + " " + props.data.at(2).sort
+                    };
+                    console.log(CreateTechCard(digitalModel));
+                    props.onClick();
+                }}>
+                    <a style={{
+                        color: "#fff", textDecoration: 'none'}} href="/models">
+                            Создать модель
+                    </a>
+                </Button>
+            </Container>
         </BaseCard>
     )
 
