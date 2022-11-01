@@ -9,7 +9,7 @@ const ElementStep = (props) => {
             <ThemeContextConsumer>
                 {
                     context => (
-                        <Container className={context.theme + (props.progress ? "progressStep " : context.theme === "light" ? "lightStep":"") + " px-1 m-0 d-flex justify-content-center align-items-center"} style={{ minHeight: '55px', width: '13%', height: '100%' }}>
+                        <Container className={context.theme + (props.progress ? "progressStep " : context.theme === "light" ? "lightStep":"") + " px-1 m-0 d-flex justify-content-center align-items-center"} style={{ minHeight: '55px', width: 'calc(100%/7)', height: '100%' }}>
                             <div className={context.theme + (props.progress ? "progressStep " : "") + " circleStep rounded-circle d-flex justify-content-center align-items-center mr-1"}>
                                 <label className=" m-0" style={{ color: '#262626', fontFamily: "Open Sans" }}>
                                     {props.numberStep}
