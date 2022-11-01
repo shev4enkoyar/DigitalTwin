@@ -491,8 +491,8 @@ namespace WebClient.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "ee581aa6-9cab-49ef-b375-477805680e8b",
-                            ConcurrencyStamp = "6a836991-e94a-40b9-bde7-f32c1e8a31e8",
+                            Id = "926eea56-05ce-4a9c-922a-68943ab904fc",
+                            ConcurrencyStamp = "cce904b0-b55f-473f-b019-9eb0077901ef",
                             Name = "Maintainer",
                             NormalizedName = "MAINTAINER",
                             Description = "",
@@ -501,8 +501,8 @@ namespace WebClient.Migrations
                         },
                         new
                         {
-                            Id = "04d445b2-72b4-46ab-881f-5ac35a49ff62",
-                            ConcurrencyStamp = "9475ac8f-76fa-4cd8-8d80-1be2f105c5e9",
+                            Id = "a8a110a6-8fe6-42f7-b2eb-33b71a880100",
+                            ConcurrencyStamp = "6b18b7c6-cea5-4858-bc7e-5f10b112dac6",
                             Name = "Admin",
                             NormalizedName = "ADMIN",
                             Description = "Danger for using",
