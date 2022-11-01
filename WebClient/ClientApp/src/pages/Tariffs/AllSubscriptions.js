@@ -6,6 +6,7 @@ import {Button, Col, Container, Row} from "reactstrap/lib";
 import './Subscriptions.css';
 import './../../pages/pages.css';
 import { ThemeContextConsumer } from "../../components/ThemeContext";
+import {functionalConverter} from "../../util/functionalConverter";
 
 class AllSubscriptions extends Component {
 
@@ -50,16 +51,21 @@ class AllSubscriptions extends Component {
                             </Container>
                             <Container>
                                 {el.functions.map(func => {
-                                    return (
-                                        <Row className="justify-content-between" style={{ padding: "0 5%" }}>
-                                            <Col className="col-1">
-                                                <p style={{ fontSize: "20px" }}>&#10003;</p>
-                                            </Col>
-                                            <Col className="col-10">
-                                                <p className="text-left">{func}</p>
-                                            </Col>
-                                        </Row>
-                                    )
+                                    let description = functionalConverter(func);
+                                    return description === null
+                                        ?
+                                            null
+                                        :
+                                             (
+                                                <Row className="justify-content-between" style={{ padding: "0 5%" }}>
+                                                    <Col className="col-1">
+                                                        <p style={{ fontSize: "20px" }}>&#10003;</p>
+                                                    </Col>
+                                                    <Col className="col-10">
+                                                        <p className="text-left">{description}</p>
+                                                    </Col>
+                                                </Row>
+                                            )
                                 })}
                             </Container>
                         </CardForBody>

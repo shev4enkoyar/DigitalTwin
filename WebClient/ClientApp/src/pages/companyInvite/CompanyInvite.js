@@ -8,6 +8,7 @@ import authService from "../../components/api-authorization/AuthorizeService";
 import {ClientRoutes} from "../../util/ClientRoutes";
 import { ThemeContextConsumer } from "../../components/ThemeContext";
 import './../../pages/pages.css';
+import {functionalConverter} from "../../util/functionalConverter";
 export class CompanyInvite extends Component{
 
     constructor(props) {
@@ -92,37 +93,9 @@ export class CompanyInvite extends Component{
         data.map(el => {
             let functional = "";
             el.Functional.map(prop => {
-                if (ClientRoutes.COMPANY_INVITE === prop){
-                    functional += "Возможность приглашать людей в компанию; ";
-                }
-                if (ClientRoutes.MODELS === prop){
-                    functional += "Возможность просматривать технологические карты; ";
-                }
-                if (ClientRoutes.CREATE_MODEL === prop){
-                    functional += "Возможность создавать технологические карты; ";
-                }
-                if (ClientRoutes.SUBSCRIPTIONS === prop){
-
-                    functional += "Возможность просматривать подписки на технологические карты; ";
-                }
-
-                if (ClientRoutes.SUBSCRIPTIONS_ALL === prop){
-
-                    functional += "Возможность оформлять подписки на технологические карты; ";
-                }
-
-                if (ClientRoutes.DASHBOARD === prop){
-
-                    functional += "Возможность просматривать общую сводку по технологической карте; ";
-                }
-                if (ClientRoutes.MAP === prop){
-
-                    functional += "Возможность работы с картой; ";
-                }
-                if (ClientRoutes.RECOMMENDATIONS === prop){
-
-                    functional += "Возможность просматривать рекомендации по технологической карте; ";
-                }
+                let temp = functionalConverter(prop);
+                if (temp !== null)
+                    functional += temp;
             });
             result.push({role: el.Role.TranslatedName, functional, id: el.Role.Id })
         })

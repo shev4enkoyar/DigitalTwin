@@ -29,3 +29,8 @@ header {
 .dropdown-menu {
   width: 15em;
 }
+
+.rs-dropdown-menu {
+  list-style-type: none;
+  padding: 0;
+}

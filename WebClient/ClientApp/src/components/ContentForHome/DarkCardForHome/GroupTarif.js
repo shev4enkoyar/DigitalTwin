@@ -3,7 +3,7 @@ import Tarif from './Tarif/Tarif.js';
 import React, {Component} from 'react';
 import { ThemeContextConsumer } from "../../ThemeContext"
 import authService from "../../api-authorization/AuthorizeService";
-import {ClientRoutes} from "../../../util/ClientRoutes";
+import {functionalConverter} from "../../../util/functionalConverter"
 import {Container} from "reactstrap/lib";
 class GroupTarif extends Component{
     constructor(props) {
@@ -95,36 +95,9 @@ class GroupTarif extends Component{
         data.map(el => {
             let functional = [];
             el.functions.map(prop => {
-                if (ClientRoutes.COMPANY_INVITE === prop){
-                    functional.push("Возможность приглашать людей в компанию; ");
-                }
-                if (ClientRoutes.MODELS === prop){
-                    functional.push("Возможность просматривать технологические карты; ");
-                }
-                if (ClientRoutes.CREATE_MODEL === prop){
-                    functional.push("Возможность создавать технологические карты; ");
-                }
-                if (ClientRoutes.SUBSCRIPTIONS === prop){
-
-                    functional.push("Возможность просматривать подписки на технологические карты; ");
-                }
-
-                if (ClientRoutes.SUBSCRIPTIONS_ALL === prop){
-
-                    functional.push("Возможность оформлять подписки на технологические карты; ");
-                }
-
-                if (ClientRoutes.DASHBOARD === prop){
-
-                    functional.push("Возможность просматривать общую сводку по технологической карте; ");
-                }
-                if (ClientRoutes.MAP === prop){
-
-                    functional.push("Возможность работы с картой; ");
-                }
-                if (ClientRoutes.RECOMMENDATIONS === prop){
-                    functional.push("Возможность просматривать рекомендации по технологической карте; ");
-                }
+                let description = functionalConverter(prop);
+                if(description !== null)
+                    functional.push(description);
             });
             result.push({name: el.name, price: el.price, functions: functional })
         })
