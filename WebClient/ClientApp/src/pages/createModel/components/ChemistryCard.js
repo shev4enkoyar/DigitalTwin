@@ -15,7 +15,7 @@ const ChemistryCard = (props) => {
         return !Object.keys(props.values).map(val => props.values[val]).some(function (value, index, array) { return (value === false || value === 0 || value === "" || value === undefined) })
     }
     return (
-        <BaseCard visible={props.visible} off={props.off} hText="Статус модели" descr="Требуется добавить данные о химических средствах!" notifyColor="#DC3545" >
+        <BaseCard visible={props.visible} off={props.off} hText="Статус тех.карты" descr="Требуется добавить данные о химических средствах!" notifyColor="#DC3545" >
             <Container className="contButton flex-wrap mx-3" style={{ width:'fit-content' }}>
                 <Row>
                     <Col className="px-1 d-flex flex-column justify-content-end">

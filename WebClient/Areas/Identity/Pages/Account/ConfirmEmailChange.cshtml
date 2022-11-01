@@ -2,7 +2,14 @@
 @model ConfirmEmailChangeModel
 @{
     ViewData["Title"] = "Подтвердить изменение электронной почты";
+    string theme;
+    string themeGray;
+    if (!(Request.Cookies.TryGetValue("ThemeSave", out theme)))
+    {
+        theme = "dark";
+    }
+    themeGray = theme + "Gray";
 }
 
-<h1>@ViewData["Title"]</h1>
+<h1 class="@themeGray text-white text-center">@ViewData["Title"]</h1>
 <partial name="_StatusMessage" model="Model.StatusMessage" />

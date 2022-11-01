@@ -2,6 +2,13 @@
 @model ConfirmEmailModel
 @{
     ViewData["Title"] = "Подтвердить Email";
+    string theme;
+    string themeGray;
+    if (!(Request.Cookies.TryGetValue("ThemeSave", out theme)))
+    {
+        theme = "dark";
+    }
+    themeGray = theme + "Gray";
 }
 
-<h1>@ViewData["Title"]</h1>
+<h1 class="@themeGray text-white ">@ViewData["Title"]</h1>
