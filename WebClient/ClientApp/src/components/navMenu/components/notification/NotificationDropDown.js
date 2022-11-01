@@ -1,56 +1,90 @@
-import React, {Component, Fragment} from "react";
-import {HubConnectionBuilder, JsonHubProtocol} from "@microsoft/signalr";
-import ServerLinks from "../../../../util/ServerLinks";
-import {NotificationType} from "./util/NotificationType";
-import {Link} from "react-router-dom";
-import {ClientRoutes} from "../../../../util/ClientRoutes";
+import React, {Fragment, useEffect, useState} from 'react';
+import {
+    Dropdown,
+    DropdownToggle,
+    DropdownMenu,
+    DropdownItem,
+} from 'reactstrap';
 import authService from "../../../api-authorization/AuthorizeService";
-import {NotificationManager} from "react-notifications";
-import { ThemeContextConsumer } from '../../../ThemeContext';
-import RenderProfileContent from "../profile/renderProfileContent";
-import {Button, Whisper} from "rsuite";
-import RenderNotificationContent from "./RenderNotificationContent";
-export class NotificationDropDown extends Component{
-    constructor(props) {
-        super(props);
-        this.state = { notifications: []};
-    }
+import {NotificationType} from "./util/NotificationType";
+import {Col, Row} from "reactstrap/lib";
+import {Button} from "rsuite";
+import {ClientRoutes} from "../../../../util/ClientRoutes";
+import {ThemeContextConsumer} from "../../../ThemeContext";
 
-    componentDidMount() {
-        this.GetNotifications();
-        this.populateConnection();
-    }
+function NotificationDropDown({ direction, ...args }) {
+    const [dropdownOpen, setDropdownOpen] = useState(false);
+    const [notifications, setNotifications] = useState(null);
 
-    render() {
+    useEffect( () => {
+        let array;
+        async function fetchData() {
+            array = await GetNotifications();
+            setNotifications(array);
+        }
+        fetchData();
+    }, [])
 
-        return (
-          <ThemeContextConsumer>
-                {context => (
-                    /*<DropdownButton
-                        className="background-transparent"
-                        id="dropdown-basic-button"
-                        title={<img className={context.theme + "Icon" + " icon"} src="https://icons.getbootstrap.com/assets/icons/bell-fill.svg" />}>
+    const toggle = () => setDropdownOpen((prevState) => !prevState);
+
+    let content = notifications === null || notifications === undefined
+        ?
+        <DropdownItem className="text-center">Уведомлений нет</DropdownItem>
+        :
+        this.state.notifications.map((el, index) => {
+            if (el.Type === NotificationType.INVITE){
+                let links = el.RedirectLink.split(';');
+                return (
+                    <Fragment key={index}>
+                        <DropdownItem>
+                            {el.Message}
+                            <Row >
+                                <Col className="d-flex justify-content-end" >
+                                    <Button onClick={() => FetchLink(ClientRoutes.PREFIX + links.at(0))}>
+                                        Да
+                                    </Button>
+                                </Col>
+                                <Col className="d-flex justify-content-start">
+                                    <Button onClick={() => FetchLink(ClientRoutes.PREFIX + links.at(1))}>
+                                        Нет
+                                    </Button>
+                                </Col>
+                            </Row>
+                        </DropdownItem>
+                    </Fragment>
+                )
+            } else {
+                return (
+                    <DropdownItem href={ClientRoutes.PREFIX + el.RedirectLink} key={index}>
+                        {el.Message}
+                    </DropdownItem>
+                )
+            }
+        });
+
+    return (
+        <ThemeContextConsumer>
+            {context => (
+                <Dropdown isOpen={dropdownOpen} toggle={toggle} direction={direction}>
+                    <DropdownToggle color="transparent" caret>
+                        <img className={context.theme + "Icon" + " icon"} src="https://icons.getbootstrap.com/assets/icons/bell-fill.svg" />
+                    </DropdownToggle>
+                    <DropdownMenu {...args}>
                         {content}
-                    </DropdownButton>*/
-                    <Whisper placement="bottomStart" trigger="click" speaker={RenderNotificationContent}>
-                        <Button className="background-transparent">
-                            <img className={context.theme + "Icon" + " icon"} src="https://icons.getbootstrap.com/assets/icons/bell-fill.svg" />
-                        </Button>
+                    </DropdownMenu>
+                </Dropdown>
+            )}
+        </ThemeContextConsumer>
+    );
 
-                    </Whisper>
-                )}
-          </ThemeContextConsumer>
-        );
-    }
-
-    async FetchLink(link) {
+    const FetchLink = async (link) => {
         const token = await authService.getAccessToken();
         await fetch(link, {
             headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
         });
     }
 
-    async GetNotifications() {
+    const GetNotifications = async () => {
         const token = await authService.getAccessToken();
         const response = await fetch('api/notification/get_all', {
             headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
@@ -65,17 +99,9 @@ export class NotificationDropDown extends Component{
             }
             return 0;
         });
-        this.setState({ notifications: data });
-    }
-
-    populateConnection() {
-        const newConnection = new HubConnectionBuilder()
-            .withUrl(ServerLinks.WEBCLIENT_SIGNALR_HUB)
-            .withAutomaticReconnect()
-            .withHubProtocol(new JsonHubProtocol())
-            .build();
-        newConnection.on('Recive', message => {
-            NotificationManager.info(message.Message);
-        })
+        return data;
     }
 }
+
+
+export default NotificationDropDown;

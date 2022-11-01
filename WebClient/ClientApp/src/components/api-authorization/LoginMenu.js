@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom';
 import authService from './AuthorizeService';
 import { ApplicationPaths } from './ApiAuthorizationConstants';
 import ProfileDropDown from "../navMenu/components/profile/ProfileDropDown";
-import { NotificationDropDown } from "../navMenu/components/notification/NotificationDropDown";
-import ThemeToggler from './../navMenu/components/ThemeToggler';
 import { ThemeContextConsumer } from '../ThemeContext';
+import ThemeToggler from "../navMenu/components/ThemeToggler";
+import NotificationDropDown from "../navMenu/components/notification/NotificationDropDown";
 export class LoginMenu extends Component {
     constructor(props) {
         super(props);
@@ -51,12 +51,8 @@ export class LoginMenu extends Component {
             <ThemeContextConsumer>{
                     context => (
                         <Fragment>
-                            <ThemeToggler />
-                            <NotificationDropDown />
-                            <ProfileDropDown logoutPath={logoutPath} />
-                            <NavLink tag={Link} to={logoutPath} className={context.theme + (context.theme.Gray ? "Gray " : " ")}>
-                                Выйти
-                            </NavLink>
+                            <NotificationDropDown/>
+                            <ProfileDropDown direction="down" />
                         </Fragment>
                         )
                 }

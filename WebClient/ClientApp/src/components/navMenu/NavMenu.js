@@ -5,6 +5,7 @@ import { LoginMenu } from '../api-authorization/LoginMenu';
 import './NavMenu.css';
 import { ThemeContextConsumer } from './../ThemeContext';
 import './../../pages/pages.css';
+import ThemeToggler from "./components/ThemeToggler";
 export class NavMenu extends Component {
   static displayName = NavMenu.name;
 
@@ -31,22 +32,11 @@ export class NavMenu extends Component {
         <Navbar className="navbar-expand-sm navbar-toggleable-sm ng-white box-shadow  " dark>
           <Container >
             <NavbarBrand className={context.theme + (this.props.Gray ? "Gray " : " ")} tag={Link} to="/">AgroDigitalTwin</NavbarBrand>
-            <NavbarToggler onClick={this.toggleNavbar} className={context.theme + (this.props.Gray ? "Gray " : " ") + " mr-2"} />
-            <Collapse className="d-sm-inline-flex flex-sm-row-reverse" isOpen={!this.state.collapsed} navbar>
-              <ul className="navbar-nav flex-grow">
-                {/*<li>
-                  <ThemeContextConsumer>
-                    {context => (
-                        <Nav.Link className={context.theme } onClick={context.toggleTheme}>
-                          <img fill="#000000" src={vector} className={context.theme + (props.Gray ? "Gray " : "Icon ") + " icon_for_header"} />
-                          Солнышко
-                        </Nav.Link>)}
-                  </ThemeContextConsumer>
-                </li>*/}
+              <ul style={{flexDirection: "inherit"}} className="navbar-nav flex-grow">
+                <ThemeToggler />
                 <LoginMenu>
                 </LoginMenu>
               </ul>
-            </Collapse>
           </Container>
         </Navbar>
       </header>)

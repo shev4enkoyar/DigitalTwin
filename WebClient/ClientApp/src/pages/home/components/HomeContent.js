@@ -5,6 +5,7 @@ import ContainerBlur from './ContainerBlur.js';
 import GroupTarif from "../../../components/ContentForHome/DarkCardForHome/GroupTarif";
 import {ThemeContextConsumer} from "../../../components/ThemeContext";
 import {Container} from "reactstrap/lib";
+import CarouselMenu from "./CarouselMenu";
 const HomeContent = () => {
     const content = [
         (
@@ -12,12 +13,6 @@ const HomeContent = () => {
                 Digital Twin - это цифровой двойник вашего
                 агропромышленного предприятия, позволяющий
                 выполнять онлайн прогнозирование урожайности и различных ситуаций
-            </p>
-        ),
-        (
-            <p style={{padding:  "20% 0"}}>
-                Что-нибудь еще о том, какие мы хорошие,
-                и почему нужно пользоваться нашим сервисом
             </p>
         )
     ];
@@ -27,6 +22,9 @@ const HomeContent = () => {
                 context => (
                     <Container className="backgroundContainer" fluid>
                             <ContainerBlur >
+                                <div style={{padding: 0, border: 0}} className={context.theme + "Gray " + context.theme + " card text-center "}>
+                                    <CarouselMenu/>
+                                </div>
                                 {
                                     content.map(el => <div className={context.theme +" "+ context.theme+"BorderForCard card text-center  p-3"}>{el}</div>)
                                 }
