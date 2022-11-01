@@ -9,7 +9,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Microservice.MapManager.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20221013210955_Init")]
+    [Migration("20221101133107_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -143,6 +143,9 @@ namespace Microservice.MapManager.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<bool>("IsCadaster")
+                        .HasColumnType("boolean");
 
                     b.Property<int>("ModelId")
                         .HasColumnType("integer");

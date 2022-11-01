@@ -53,7 +53,8 @@ namespace Microservice.MapManager.Migrations
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     ModelId = table.Column<int>(type: "integer", nullable: false),
-                    ProductArea = table.Column<string>(type: "text", nullable: true)
+                    ProductArea = table.Column<string>(type: "text", nullable: true),
+                    IsCadaster = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
                 {
