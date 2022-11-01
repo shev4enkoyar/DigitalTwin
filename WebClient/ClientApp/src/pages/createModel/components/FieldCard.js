@@ -62,6 +62,9 @@ class FieldCard extends Component{
                     >
                         Пропустить
                     </Button>
+                    <Button onClick={() => { this.props.Back() }} className="btn btn-primary my-2" style={{ width: "190px" }} >
+                        Назад
+                    </Button>
                 </Container>
             </BaseCard>
         )
