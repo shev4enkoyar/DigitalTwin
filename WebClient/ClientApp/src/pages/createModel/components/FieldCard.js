@@ -11,10 +11,12 @@ class FieldCard extends Component{
     }
     render() {
         return (
-            <BaseCard visible={this.props.visible} off={this.props.statusOff} hText="Статус модели" descr="Требуется добавить данные о поле!" notifyColor="#DC3545"
+            <BaseCard visible={this.props.visible} off={this.props.statusOff} hText="Статус тех.карты" descr="Требуется добавить данные о поле!" notifyColor="#DC3545"
                       isBut={
                           <Button className="blueBut ButAllMini" >
-                              <img style={{ width: "25px", height: "25px" }} className="icon" src="https://img.icons8.com/small/344/map.png" />
+                              <a href="/map">
+                                  <img style={{ width: "25px", height: "25px" }} className="icon" src="https://img.icons8.com/small/344/map.png" />
+                              </a>
                           </Button>
                       }>
                 {
