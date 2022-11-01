@@ -14,10 +14,14 @@ class CultureCard extends Component{
         }
         return !Object.keys(this.props.values).map(val => this.props.values[val]).some(function (value, index, array) { return (value === false || value === 0 || value === "" || value === undefined) })
     }
-
+    errorForInp = (value) => {
+        const prev = this.state;
+        this.setState({ ...prev, errors: { ...(prev.errors), ...value } })
+        console.log(this.state)
+    }
     constructor(props) {
         super(props);
-        this.state = { cultureNames: [], cultureSort: [], productData: [], loading: true};
+        this.state = { cultureNames: [], cultureSort: [], productData: [], loading: true, errors: { fracEr: "", normEr: "", gustEr: "", totalEr: "" } };
     }
     componentDidMount() {
         this.GetProducts();
@@ -28,7 +32,7 @@ class CultureCard extends Component{
                 ?
                     <p style={{color: "#FFF"}}><em>Loading...</em></p>
                 :
-                    <BaseCard visible={this.props.visible} hText="Статус модели" descr="Требуется добавить данные о культуре!" notifyColor="#DC3545" off={this.props.off}>
+                <BaseCard className="widForCult" visible={this.props.visible} hText="Статус тех.карты" descr="Требуется добавить данные о культуре!" notifyColor="#DC3545" off={this.props.off}>
                         <Container className="p-0 d-flex flex-wrap" style={{ display: 'flex', flexWrap: 'wrap' }}>
                             <Col className="px-1">
                                 <Combobox className="FormControlSelect" classTextCombobox="textForSign12" textCombobox="Культура" classNameCont="padCombobox " options={this.state.cultureNames} onChange={
@@ -45,9 +49,11 @@ class CultureCard extends Component{
                                         });
                                         this.setState({ cultureSort: sort });
                                     }}
-                                />
-                                <Input Label="Фракция" classNameP="textForSign12" className="inpCreateForDashCard" contClass="contForInpDashE" value={this.props.values.frac} onInput={(event) => { let reg = /^[0-9A-Za-zА-Яа-я]*$/i.test(event.target.value); if (reg) this.props.setStatus({ frac: event.target.value.trim() }) }} />
-                                <Input Label="Норма высева" classNameP="textForSign12" className="inpCreateForDashCard" contClass="contForInpDashE" onInput={(event) => { var reg = /^(0|([1-9][0-9]{0,5}))?(\.|(\.[0-9]{1,5}))?$/i.test(event.target.value); if (reg) this.props.setStatus({ norm: event.target.value.trim() }) }} value={this.props.values.norm} />
+                            />
+                            <p>{this.state.errors.fracEr}</p>
+                            <Input Label="Фракция" classNameP="textForSign12" className="inpCreateForDashCard" contClass="contForInpDashE" value={this.props.values.frac} onInput={(event) => { let reg = /^[0-9A-Za-zА-Яа-я]*$/i.test(event.target.value); if (reg) { this.props.setStatus({ frac: event.target.value.trim() }); this.errorForInp({ fracEr: "" }); }  else this.errorForInp({fracEr: "Вводите только числа и буквы" }) }} />
+                            <p>{this.state.errors.normEr}</p>
+                            <Input Label="Норма высева" classNameP="textForSign12" className="inpCreateForDashCard" contClass="contForInpDashE" onInput={(event) => { var reg = /^(0|([1-9][0-9]{0,5}))?(\.|(\.[0-9]{1,5}))?$/i.test(event.target.value); if (reg) { this.props.setStatus({ norm: event.target.value.trim() }); this.errorForInp({ normEr: "" }); } else this.errorForInp({ normEr: "Вводите только целые или дробные числа" }) }} value={this.props.values.norm} />
                             </Col>
                             <Col className="px-1">
                                 <Combobox className="FormControlSelect" classTextCombobox="textForSign12" textCombobox="Сорт" classNameCont="padCombobox " options={this.state.cultureSort} onChange={
@@ -57,11 +63,16 @@ class CultureCard extends Component{
                                             productId: this.state.productData.find(el => el.name === this.props.values.cult + ' ' + empty).id
                                         })
                                     }}
-                                />
-                                <Input Label="Густота" classNameP="textForSign12" className="inpCreateForDashCard" contClass="contForInpDashE" onInput={(event) => { var reg = /^(0|([1-9][0-9]{0,5}))?(\.|(\.[0-9]{1,5}))?$/i.test(event.target.value); if (reg) this.props.setStatus({ gust: event.target.value.trim() }) }} value={this.props.values.gust} />
-                                <Input Label="Вес этапов" classNameP="textForSign12" className="inpCreateForDashCard" contClass="contForInpDashE" onInput={(event) => { var reg = /^(0|([1-9][0-9]{0,5}))?(\.|(\.[0-9]{1,5}))?$/i.test(event.target.value); if (reg) this.props.setStatus({ total: event.target.value.trim() }) }} value={this.props.values.total} />
+                            />
+                            <p>{this.state.errors.gustEr}</p>
+                            <Input Label="Густота" classNameP="textForSign12" className="inpCreateForDashCard" contClass="contForInpDashE" onInput={(event) => { var reg = /^(0|([1-9][0-9]{0,5}))?(\.|(\.[0-9]{1,5}))?$/i.test(event.target.value); if (reg) { this.props.setStatus({ gust: event.target.value.trim() }); this.errorForInp({ gustEr: "" }); } else this.errorForInp({ gustEr: "Вводите только целые или дробные числа" }) }} value={this.props.values.gust} />
+                            <p>{this.state.errors.totalEr}</p>
+                            <Input Label="Вес этапов" classNameP="textForSign12" className="inpCreateForDashCard" contClass="contForInpDashE" onInput={(event) => { var reg = /^(0|([1-9][0-9]{0,5}))?(\.|(\.[0-9]{1,5}))?$/i.test(event.target.value); if (reg) { this.props.setStatus({ total: event.target.value.trim() }); this.errorForInp({ totalEr: "" }); } else this.errorForInp({ totalEr: "Вводите только целые или дробные числа" }) }} value={this.props.values.total} />
                             </Col>
-                        </Container>
+                    </Container>
+                    <Button onClick={() => { this.props.Back() }} className="btn btn-primary my-2" style={{ width: "190px" }} >
+                            Назад
+                        </Button>
                         <Button onClick={() => { if (this.isFull() == true) this.props.onClick(); }} className="btn btn-primary my-2" style={{ width: "190px" }} >
                             Далее
                         </Button>
