@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using WebClient.Data;
 using WebClient.Hubs;
+using WebClient.Interface;
 using WebClient.Models;
 using IConfiguration = Microsoft.Extensions.Configuration.IConfiguration;
 
@@ -41,6 +42,7 @@ namespace WebClient
 
             services.AddControllersWithViews();
             services.AddRazorPages();
+            services.AddScoped<IUserConnectionManager, UserConnectionManager>();
 
             services.AddSignalR();
 
