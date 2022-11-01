@@ -11,7 +11,7 @@ class FieldCard extends Component{
     }
     render() {
         return (
-            <BaseCard visible={this.props.visible} off={this.props.statusOff} hText="Статус тех.карты" descr="Требуется добавить данные о поле!" notifyColor="#DC3545"
+            <BaseCard className="widForCult" visible={this.props.visible} off={this.props.statusOff} hText="Статус тех.карты" descr="Требуется добавить данные о поле!" notifyColor="#DC3545"
                       isBut={
                           <Button className="blueBut ButAllMini" >
                               <a href="/map">
@@ -40,21 +40,10 @@ class FieldCard extends Component{
                     />
                 </Container>
                 <Container className="contButton">
-                    <Button className="btn btn-primary my-2"
-                            style={{ width: "190px" }}
-                            onClick={async () => {
-                                let cadaster = this.props.values.kad;
-                                let validate = await this.validateCadaster(cadaster);
-                                debugger;
-                                if(validate)
-                                    this.props.onClick()
-                                else
-                                    this.setState({ error: "Кадастровый номер не найден" })
-                            }}
-                    >
-                        Далее
+                    <Button onClick={() => { this.props.Back() }} className="btn btn-primary m-2" style={{ width: "190px" }} >
+                        Назад
                     </Button>
-                    <Button className="btn btn-primary my-2"
+                    <Button className="btn btn-primary m-2"
                             style={{ width: "190px" }}
                             onClick={() => {
                                 this.props.onClick()
@@ -62,8 +51,19 @@ class FieldCard extends Component{
                     >
                         Пропустить
                     </Button>
-                    <Button onClick={() => { this.props.Back() }} className="btn btn-primary my-2" style={{ width: "190px" }} >
-                        Назад
+                    <Button className="btn btn-primary m-2"
+                        style={{ width: "190px" }}
+                        onClick={async () => {
+                            let cadaster = this.props.values.kad;
+                            let validate = await this.validateCadaster(cadaster);
+                            debugger;
+                            if (validate)
+                                this.props.onClick()
+                            else
+                                this.setState({ error: "Кадастровый номер не найден" })
+                        }}
+                    >
+                        Далее
                     </Button>
                 </Container>
             </BaseCard>
