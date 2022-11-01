@@ -4,7 +4,7 @@ import React from "react";
 import {Button} from "reactstrap/lib";
 const HistoryCard = (props) => {
     return (
-        <BaseCard visible={props.visible} hText="Статус модели" descr="Требуется добавить исторические данные!" notifyColor="#DC3545" off={props.off}>
+        <BaseCard visible={props.visible} hText="Статус тех.карты" descr="Требуется добавить исторические данные!" notifyColor="#DC3545" off={props.off}>
             <Button className="btn btn-primary my-2" style={{ width: "190px" }}>
                     Импортировать
             </Button>

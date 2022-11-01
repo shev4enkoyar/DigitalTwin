@@ -30,7 +30,7 @@ const EconomicCard = (props) => {
         return !Object.keys(this.props.values).map(val => this.props.values[val]).some(function (value, index, array) { return (value === false || value === 0 || value === "" || value === undefined) })
     }
     return (
-        <BaseCard visible={props.visible} hText="Статус модели" descr="Требуется добавить данные экономических показателей!" notifyColor="#DC3545">
+        <BaseCard visible={props.visible} hText="Статус тех.карты" descr="Требуется добавить данные экономических показателей!" notifyColor="#DC3545">
             <Container>
                 <Input Label="Наименование работы по высеву" classNameP="textForSign12" className="inpCreateForDashCard" contClass="contForInpDashE" value={props.values.vys} onInput={(event) => { props.setStatus({ vys: event.target.value.trim() }) }} />
                 <Input Label="Наименование работы по обработке" classNameP="textForSign12" className="inpCreateForDashCard" contClass="contForInpDashE" value={props.values.obr} onInput={(event) => {props.setStatus({ obr: event.target.value.trim() }) }} />
