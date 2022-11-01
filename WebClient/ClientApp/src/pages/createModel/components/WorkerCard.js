@@ -16,7 +16,7 @@ const TransportCard = (props) => {
     return (
         <BaseCard className="widForCult" visible={props.visible} off={props.off} hText="Статус тех.карты" descr={warning()} notifyColor="#DC3545" >
             <Container style={{ display: 'flex', justifyContent: 'center', padding: '0px', margin: '0px 0px 0.5rem 0px', width: '100%' }}>
-                <Button onClick={() => { props.setStatus({ isActive: true }) }} className="btn btn-primary my-2" style={{ width: "190px" }} >
+                <Button onClick={() => { props.setStatus({ isActive: true }) }} className="btn btn-warning my-2" style={{ width: "190px" }} >
                     Выбрать
                 </Button>
             </Container>

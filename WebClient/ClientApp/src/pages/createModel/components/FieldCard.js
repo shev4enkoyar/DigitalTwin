@@ -40,7 +40,7 @@ class FieldCard extends Component{
                     />
                 </Container>
                 <Container className="contButton">
-                    <Button onClick={() => { this.props.Back() }} className="btn btn-primary m-2" style={{ width: "190px" }} >
+                    <Button onClick={() => { this.props.Back() }} className="btn m-2" style={{ width: "190px" }} >
                         Назад
                     </Button>
                     <Button className="btn btn-primary m-2"

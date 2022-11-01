@@ -16,10 +16,10 @@ const HistoryCard = (props) => {
             <p className="textForStatus marForDescr" >
                 Если модель не имеет исторических данных, нажмите “Начальное состояние”
             </p>
-            <Button className="btn btn-primary my-2" style={{ width: "190px" }}>
+            <Button className="btn btn-danger my-2" style={{ width: "190px" }}>
                     Начальное состояние
                 </Button>
-            <Button onClick={props.onClick} className="btn btn-primary my-2" style={{ width: "190px" }} >
+            <Button onClick={props.onClick} className="btn my-2" style={{ width: "190px" }} >
                 Далее
             </Button>
         </BaseCard>
