@@ -1,0 +1,38 @@
+version: '3.4'
+
+services:
+  microservice.dashboardmanager:
+    image: ${DOCKER_REGISTRY-}microservicedashboardmanager
+    ports:
+      - "49162:49162"
+    build:
+      context: .
+      dockerfile: Microservices/Microservice.DashboardManager/Dockerfile
+      
+      
+
+  microservice.mapmanager:
+    image: ${DOCKER_REGISTRY-}microservicemapmanager
+    ports:
+      - "49165:49165"
+    build:
+      context: .
+      dockerfile: Microservices/Microservice.MapManager/Dockerfile
+      
+
+  microservice.imagemanager:
+    image: ${DOCKER_REGISTRY-}microserviceimagemanager
+    build:
+      context: .
+      dockerfile: Microservices/Microservice.ImageManager/Dockerfile
+
+
+  microservice.subscriptionmanager:
+    image: ${DOCKER_REGISTRY-}microservicesubscriptionmanager
+    ports:
+      - "49169:49169"
+    build:
+      context: .
+      dockerfile: Microservices/Microservice.SubscriptionManager/Dockerfile
+      
+

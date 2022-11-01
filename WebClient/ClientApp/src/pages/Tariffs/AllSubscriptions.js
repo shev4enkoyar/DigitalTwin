@@ -5,6 +5,7 @@ import {Button, Col, Container, Row} from "reactstrap/lib";
 import './Subscriptions.css';
 import './../../pages/pages.css';
 import { ThemeContextConsumer } from "../../components/ThemeContext";
+import {Modal} from "reactstrap";
 class AllSubscriptions extends Component {
 
     constructor(props) {
