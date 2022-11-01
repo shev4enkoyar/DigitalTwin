@@ -1,4 +1,5 @@
-import React, {Component} from "react";
+import { Modal } from "reactstrap";
+import React, { Component } from "react";
 import CardForBody from "../../components/cardForBody/CardForBody";
 import authService from "../../components/api-authorization/AuthorizeService";
 import {Button, Col, Container, Row} from "reactstrap/lib";

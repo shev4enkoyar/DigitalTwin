@@ -8,7 +8,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using WebClient.Data;
 using WebClient.Hubs;
-using WebClient.Interface;
 using WebClient.Models;
 using IConfiguration = Microsoft.Extensions.Configuration.IConfiguration;
 
@@ -88,7 +87,7 @@ namespace WebClient
                     name: "default",
                     pattern: "{controller}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
-                
+
             });
 
             app.UseSpa(spa =>
