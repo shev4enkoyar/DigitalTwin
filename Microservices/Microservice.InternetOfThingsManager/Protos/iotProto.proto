@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+option csharp_namespace = "Microservice.InternetOfThingsManager.Protos";
+
+package sensorProto;
+
+service InternetOfThingsService {
+  rpc AddSensor (AddSensorRequest) returns (AddSensorReply);
+  rpc RemoveSensor (RemoveSensorRequest) returns (RemoveSensorReply);
+  //rpc GetAllSensors (UpdateSubscriptionRequest) returns (UpdateSubscriptionReply);
+  //rpc GetSensorData (UpdateSubscriptionRequest) returns (UpdateSubscriptionReply);
+  
+}
+
+message AddSensorRequest {
+    string sensorGuid = 1;
+    int32 modelId = 2;
+    string name = 3;
+    string functionalArray = 4;
+}
+
+message AddSensorReply {
+    string link = 1;
+}
+
+message RemoveSensorRequest {
+    string sensorGuid = 1;
+}
+
+message RemoveSensorReply {
+    bool isDeleteComplete = 1;
+}

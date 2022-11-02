@@ -9,9 +9,9 @@ namespace Shared
     {
         private static readonly string dashboard = "https://localhost:49162";
         private static readonly string map = "https://localhost:49165";
-        private static readonly string subscription = "https://host.docker.internal:49169/";
+        private static readonly string subscription = "https://localhost:49169/"; // OLD https://host.docker.internal:49169/
         private static readonly string image = null;
-        private static readonly string internetOfThings = null;
+        private static readonly string internetOfThings = "https://localhost:49165";  //TODO TEST!!!
 
         #region Properties
 
@@ -26,7 +26,7 @@ namespace Shared
         public static string Map => CheckEmptyIP(map);
 
         /// <summary>SubscriptionManager IP</summary>
-        /// <value>https://host.docker.internal:49169/</value>
+        /// <value>https://localhost:49169/</value>
         /// <exception cref="ArgumentNullException"/>
         public static string Subscription => CheckEmptyIP(subscription);
 
@@ -36,7 +36,7 @@ namespace Shared
         public static string Image => CheckEmptyIP(image);
 
         /// <summary>InternetOfThingsManager IP</summary>
-        /// <value>exception</value>
+        /// <value>https://localhost:49165</value>
         /// <exception cref="ArgumentNullException"/>
         public static string InternetOfThings => CheckEmptyIP(internetOfThings);
 

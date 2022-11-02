@@ -5,6 +5,7 @@ using Microservice.DashboardManager.DAL.Models;
 using Microservice.DashboardManager.Protos;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Shared;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -41,7 +42,7 @@ namespace Microservice.DashboardManager.Services
             {
                 ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
             };
-            using var channel = GrpcChannel.ForAddress("https://host.docker.internal:49165", new GrpcChannelOptions { HttpHandler = httpHandler });
+            using var channel = GrpcChannel.ForAddress(MicroservicesIP.Map, new GrpcChannelOptions { HttpHandler = httpHandler });
             var client = new MapService.MapServiceClient(channel);
             if ((request.Cadastre == null && request.CategoryName != null) ||
                 (request.Cadastre != null && request.CategoryName == null))
@@ -53,7 +54,6 @@ namespace Microservice.DashboardManager.Services
             _dbContext.Update(model);
             _dbContext.SaveChanges();
             return Task.FromResult(new ModelReply { Status = "ok" });
-
         }
 
         public override async Task GetDigitalModels(GetModelsRequest request, IServerStreamWriter<GetModelsReply> responseStream, ServerCallContext context)
