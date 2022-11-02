@@ -46,7 +46,7 @@ const TabForWorkers = (props) => {
         <ThemeContextConsumer>
             {
                 context => (
-                        <Container className="contButton flex-wrap mx-3" style={{ width: 'fit-content' }}>
+                        <Container className="tabForTransp">
                             <Row id="rowForTab" className="d-flex justify-content-center">
                                 <Combobox onChange={(value) => { handleSelectWorker({ dol: value }) }} className="FormControlSelect" classTextCombobox="textForSign12" textCombobox="Должность" classNameCont="forTransp px-1" options={dol} />
                                 <Input value={useAddWorker.stavk} onInput={(event) => { var reg = /^(0|([1-9][0-9]{0,5}))?(\.|(\.[0-9]{1,5}))?$/i.test(event.target.value); if (reg) handleSelectWorker({ stavk: event.target.value.trim() }) }} Label="Ставка" classNameP="textForSign12 forNowrap" className="inpCreateForDashCard" contClass="inpContForTransp  px-1" placeholder="0" />
