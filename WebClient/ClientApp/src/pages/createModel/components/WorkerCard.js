@@ -1,7 +1,7 @@
-﻿import './CardsForDashboard.css';
-import React from "react";
-import BaseCard from "./BaseCard";
+﻿import React from "react";
 import { Button, Container } from "reactstrap/lib";
+import BaseCard from "./BaseCard";
+import './CardsForDashboard.css';
 const TransportCard = (props) => {
     const warning = () => {
         if ((props.values.rZasev.length > 0) && (props.values.rObrabotka.length > 0) && (props.values.rSbor.length > 0)) {

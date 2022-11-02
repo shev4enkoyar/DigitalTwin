@@ -1,7 +1,7 @@
 import React from "react";
+import { Container } from "reactstrap/lib";
+import { ThemeContextConsumer } from "../../../../components/ThemeContext";
 import './TableForTariffs.css';
-import {ThemeContextConsumer} from "../../../../components/ThemeContext";
-import {Container} from "reactstrap/lib";
 function TableForTariffs(props) {
     // get table column
     console.log(props.contentsForTable[0])
@@ -34,14 +34,14 @@ function TableForTariffs(props) {
     return (
         <ThemeContextConsumer>{context => (
             <Container>
-                <table className={props.classNameTab +" "+ context.theme + " HistoryTableText"}>
-                <caption className={context.theme + " forTextTable "}>{props.textForTable}</caption>
+                <table className={props.classNameTab + " " + context.theme + " HistoryTableText"}>
+                    <caption className={context.theme + " forTextTable "}>{props.textForTable}</caption>
                     <thead>
                         <tr className={props.classNameTR}>{ThData()}</tr>
-            </thead>
-            <tbody>
-                {tdData()}
-            </tbody>
+                    </thead>
+                    <tbody>
+                        {tdData()}
+                    </tbody>
                 </table>
             </Container>
         )

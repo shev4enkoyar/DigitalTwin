@@ -1,7 +1,7 @@
+import React, { useState } from 'react';
 import DTMap from "./DTMap";
-import React, {useState} from 'react';
-import SidePanel from "./SidePanel";
 import GrpcContainer from "./GrpcContainer";
+import SidePanel from "./SidePanel";
 import PinType from "./util/PinType";
 
 const MapManager = (props) => {
@@ -24,13 +24,13 @@ const MapManager = (props) => {
     function handleRemoveButtonActive(isRemoveButtonActive) {
         setRemoveButtonActive(isRemoveButtonActive);
     }
-    let panel = props.isCadaster ? null : <SidePanel isCadaster={isCadaster} mapId={props.mapId} categoriesProto={categoriesProto} pinType={pinType} handlePinTypeChange={handlePinTypeChange} isRemoveButtonActive={isRemoveButtonActive} handleRemoveButtonActive={handleRemoveButtonActive}/>
+    let panel = props.isCadaster ? null : <SidePanel isCadaster={isCadaster} mapId={props.mapId} categoriesProto={categoriesProto} pinType={pinType} handlePinTypeChange={handlePinTypeChange} isRemoveButtonActive={isRemoveButtonActive} handleRemoveButtonActive={handleRemoveButtonActive} />
     return (
 
-        <div style={{height: "100%"}}>
+        <div style={{ height: "100%" }}>
             {panel}
-            <DTMap sendProductArea={props.sendProductArea} figureInitData={props.figureInitData} removeFigureInfo={props.removeFigureInfo} sendFigureInfo={props.sendFigureInfo} figuresProto={figuresProto} pinType={pinType} isRemoveButtonActive={isRemoveButtonActive}/>
-            <GrpcContainer mapId={props.mapId} handleFigureCategoriesProto={handleFigureCategoriesProto} handleFiguresProto={handleFiguresProto}/>
+            <DTMap sendProductArea={props.sendProductArea} figureInitData={props.figureInitData} removeFigureInfo={props.removeFigureInfo} sendFigureInfo={props.sendFigureInfo} figuresProto={figuresProto} pinType={pinType} isRemoveButtonActive={isRemoveButtonActive} />
+            <GrpcContainer mapId={props.mapId} handleFigureCategoriesProto={handleFigureCategoriesProto} handleFiguresProto={handleFiguresProto} />
         </div>
 
     );

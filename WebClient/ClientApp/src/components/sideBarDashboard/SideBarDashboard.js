@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import './SideBarDashboard.css';
 import { ThemeContextConsumer } from '../ThemeContext';
+import './SideBarDashboard.css';
 
 const SideBarDashboard = ({ children, alt, block, icons, color, isBlur, isActive, handleActiveChange }) => {
     

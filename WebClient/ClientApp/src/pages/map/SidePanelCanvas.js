@@ -1,6 +1,6 @@
 
 import React from "react";
-import {Container} from "reactstrap/lib";
+import { Container } from "reactstrap/lib";
 
 let style = {
     position: "absolute",
@@ -14,13 +14,13 @@ let style = {
     padding: '0px 0px'
 };
 const SidePanelCanvas = (props) => {
-    return <div style={{...style}}>
-                <div style={{padding: "10px 15px"}}>
-                </div>
-                <Container style={{padding: "0px 5px"}}>
-                    {props.children}
-                </Container>
-           </div>
+    return <div style={{ ...style }}>
+        <div style={{ padding: "10px 15px" }}>
+        </div>
+        <Container style={{ padding: "0px 5px" }}>
+            {props.children}
+        </Container>
+    </div>
 }
 
 export default SidePanelCanvas;

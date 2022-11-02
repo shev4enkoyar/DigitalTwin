@@ -1,35 +1,35 @@
-import {ClientRoutes} from "./ClientRoutes";
+import { ClientRoutes } from "./ClientRoutes";
 
- export function functionalConverter(functional) {
+export function functionalConverter(functional) {
     let result = null;
-    if (ClientRoutes.COMPANY_INVITE === functional){
+    if (ClientRoutes.COMPANY_INVITE === functional) {
         result = "Возможность приглашать людей в компанию; ";
     }
-    if (ClientRoutes.MODELS === functional){
+    if (ClientRoutes.MODELS === functional) {
         result = "Возможность просматривать технологические карты; ";
     }
-    if (ClientRoutes.CREATE_MODEL === functional){
+    if (ClientRoutes.CREATE_MODEL === functional) {
         result = "Возможность создавать технологические карты; ";
     }
-    if (ClientRoutes.SUBSCRIPTIONS === functional){
+    if (ClientRoutes.SUBSCRIPTIONS === functional) {
 
         result = "Возможность просматривать подписки на технологические карты; ";
     }
 
-    if (ClientRoutes.SUBSCRIPTIONS_ALL === functional){
+    if (ClientRoutes.SUBSCRIPTIONS_ALL === functional) {
 
         result = "Возможность оформлять подписки на технологические карты; ";
     }
 
-    if (ClientRoutes.DASHBOARD === functional){
+    if (ClientRoutes.DASHBOARD === functional) {
 
         result = "Возможность просматривать общую сводку по технологической карте; ";
     }
-    if (ClientRoutes.MAP === functional){
+    if (ClientRoutes.MAP === functional) {
 
         result = "Возможность работы с картой; ";
     }
-    if (ClientRoutes.RECOMMENDATIONS === functional){
+    if (ClientRoutes.RECOMMENDATIONS === functional) {
 
         result = "Возможность просматривать рекомендации по технологической карте; ";
     }

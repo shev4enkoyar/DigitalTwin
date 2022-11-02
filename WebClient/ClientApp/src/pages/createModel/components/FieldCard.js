@@ -1,9 +1,9 @@
-﻿import Input from '../../../components/input/Input';
-import './CardsForDashboard.css';
-import BaseCard from "./BaseCard";
-import React, {Component} from "react";
+﻿import React, { Component } from "react";
+import { Button, Container } from "reactstrap/lib";
 import authService from "../../../components/api-authorization/AuthorizeService";
-import {Button, Container} from "reactstrap/lib";
+import Input from '../../../components/input/Input';
+import BaseCard from "./BaseCard";
+import './CardsForDashboard.css';
 class FieldCard extends Component{
     constructor(props) {
         super(props);

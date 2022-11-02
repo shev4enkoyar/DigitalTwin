@@ -1,29 +1,26 @@
 import React, { useState } from 'react';
 import {
-    Carousel,
-    CarouselItem,
-    CarouselControl,
-    CarouselIndicators,
-    CarouselCaption,
+    Carousel, CarouselCaption, CarouselControl,
+    CarouselIndicators, CarouselItem
 } from 'reactstrap';
 
 const items = [
     {
         src: 'https://picsum.photos/id/123/1200/400',
-        altText: 'Денчик хорош',
-        caption: 'Очень хорош',
+        altText: 'Хороший слайд',
+        caption: 'Очень хороший',
         key: 1,
     },
     {
         src: 'https://picsum.photos/id/456/1200/400',
-        altText: 'Он мега хорош',
-        caption: 'Мега хорош',
+        altText: 'Мега хороший слайд',
+        caption: 'Мега хороший',
         key: 2,
     },
     {
         src: 'https://picsum.photos/id/678/1200/400',
-        altText: 'Хочу чтоб он женился на мне!!!!!!',
-        caption: 'пусть женится....',
+        altText: 'Приятный слайд',
+        caption: 'Да-да',
         key: 3,
     },
 ];

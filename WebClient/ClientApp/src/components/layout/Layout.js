@@ -1,4 +1,4 @@
-import React, {Children, Component} from 'react';
+import React, { Children, Component } from 'react';
 import { NavMenu } from '../navMenu/NavMenu';
 import { ThemeContextConsumer } from '../ThemeContext';
 export class Layout extends Component {

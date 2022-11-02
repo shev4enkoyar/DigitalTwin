@@ -1,12 +1,11 @@
-import './TransportSelect.css';
-import React from "react";
-import './../../../pages/pages.css';
+import React, { useState } from "react";
+import BootstrapTable from 'react-bootstrap-table-next';
+import { Button, Col, Container, Row } from "reactstrap/lib";
+import { ThemeContextConsumer } from '../../../components/ThemeContext';
 import Combobox from './../../../components/combobox/ComboBox';
 import Input from './../../../components/input/Input';
-import BootstrapTable from 'react-bootstrap-table-next';
-import { useState } from 'react';
-import { ThemeContextConsumer } from '../../../components/ThemeContext';
-import { Button, Col, Container, Row } from "reactstrap/lib";
+import './../../../pages/pages.css';
+import './TransportSelect.css';
 const TabForTransportSelect = (props) => {
     const transport = ["Выберите транспорт...", "Трактор",]
     const markaTrans = ["Выберите марку транспорта...", "1213",]

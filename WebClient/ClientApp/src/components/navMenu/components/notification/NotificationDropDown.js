@@ -1,16 +1,13 @@
-import React, {Fragment, useEffect, useState} from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import {
-    Dropdown,
-    DropdownToggle,
-    DropdownMenu,
-    DropdownItem,
+    Dropdown, DropdownItem, DropdownMenu, DropdownToggle
 } from 'reactstrap';
+import { Col, Row } from "reactstrap/lib";
+import { Button } from "rsuite";
+import { ClientRoutes } from "../../../../util/ClientRoutes";
 import authService from "../../../api-authorization/AuthorizeService";
-import {NotificationType} from "./util/NotificationType";
-import {Col, Row} from "reactstrap/lib";
-import {Button} from "rsuite";
-import {ClientRoutes} from "../../../../util/ClientRoutes";
-import {ThemeContextConsumer} from "../../../ThemeContext";
+import { ThemeContextConsumer } from "../../../ThemeContext";
+import { NotificationType } from "./util/NotificationType";
 
 function NotificationDropDown({ direction, ...args }) {
     const [dropdownOpen, setDropdownOpen] = useState(false);

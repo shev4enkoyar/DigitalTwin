@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
-import '../pages.css';
-import SideBarDashboard from '../../components/sideBarDashboard/SideBarDashboard.js';
+import { useLocation } from 'react-router';
+import BackIn_Icon from '../../components/sideBarDashboard/BackInModel_Icon';
 import HomePanel_Icon from '../../components/sideBarDashboard/HomePanel_Icon';
 import Map_Icon from '../../components/sideBarDashboard/Map_Icon';
 import SensorsIoT from '../../components/sideBarDashboard/SensorsIoT';
-import BackIn_Icon from '../../components/sideBarDashboard/BackInModel_Icon';
+import SideBarDashboard from '../../components/sideBarDashboard/SideBarDashboard.js';
+import '../pages.css';
 import ContentDashboard from './components/ContentDashboard';
-import { useLocation } from 'react-router';
 /*import TransportSelect from './Modal/transportSelect/TransportSelect';*/ //TODO Redo
-import {ThemeContextConsumer} from "../../components/ThemeContext";
-import {IconButton} from "../../components/sideBarDashboard/util/IconButton";
-class Dash extends Component{
-    constructor(props){
+import { IconButton } from "../../components/sideBarDashboard/util/IconButton";
+import { ThemeContextConsumer } from "../../components/ThemeContext";
+class Dash extends Component {
+    constructor(props) {
         super(props);
         this.state = { isActive: false };
     }
@@ -20,7 +20,7 @@ class Dash extends Component{
         this.setState({ isActive: !(prev) });
         console.log(this.state);
     }
-    isInherit = this.props.location.state ? (this.props.location.state.isInherit == 1? true:false) :true
+    isInherit = this.props.location.state ? (this.props.location.state.isInherit == 1 ? true : false) : true
     icons =
         [
             new IconButton("#/", "Главная панель", <HomePanel_Icon />),
@@ -28,20 +28,19 @@ class Dash extends Component{
             new IconButton("#nogo", "Датчики IoT", <SensorsIoT />),
             new IconButton("/models", "Вернуться к выбору модели", <BackIn_Icon />),
         ]
-    render(props)
-    { 
-        return(
-                <ThemeContextConsumer>
-                    {context =>
-                        (
-                            <>
-                                <SideBarDashboard icons={this.icons} />
-                                {/*<TransportSelect isActive={this.state.isActive} handleActiveChanged={this.handleActiveChanged}/>*/}
-                                <ContentDashboard isInherit={this.isInherit} handleActiveChanged={this.handleActiveChanged}/>
-                            </>
-                        )
-                    }
-                </ThemeContextConsumer>
+    render(props) {
+        return (
+            <ThemeContextConsumer>
+                {context =>
+                (
+                    <>
+                        <SideBarDashboard icons={this.icons} />
+                        {/*<TransportSelect isActive={this.state.isActive} handleActiveChanged={this.handleActiveChanged}/>*/}
+                        <ContentDashboard isInherit={this.isInherit} handleActiveChanged={this.handleActiveChanged} />
+                    </>
+                )
+                }
+            </ThemeContextConsumer>
         );
     }
 }

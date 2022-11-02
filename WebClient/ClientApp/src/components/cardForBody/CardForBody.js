@@ -1,7 +1,7 @@
-import './CardForBody.css';
-import { Card, Container } from "reactstrap";
 import React from "react";
+import { Card, Container } from "reactstrap";
 import { ThemeContextConsumer } from '../ThemeContext';
+import './CardForBody.css';
 function CardForBody(props) {
     return (
         <ThemeContextConsumer>

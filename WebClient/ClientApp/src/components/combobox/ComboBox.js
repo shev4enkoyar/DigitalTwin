@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { Container } from "reactstrap/lib";
 import './ComboBox.css';
-import {Container} from "reactstrap/lib";
 function Combobox(props) {
 
     const changeSelect = (event) => {

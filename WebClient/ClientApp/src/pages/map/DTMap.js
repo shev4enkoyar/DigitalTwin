@@ -1,17 +1,16 @@
-import React, {useState, useEffect} from 'react';
 import '@turf/turf';
+import { area, intersect, polygon } from "@turf/turf";
 import L from 'leaflet';
-import {intersect} from "@turf/turf";
-import {Map, TileLayer} from 'react-leaflet';
-import 'leaflet-fullscreen/dist/Leaflet.fullscreen.js';
 import 'leaflet-fullscreen/dist/leaflet.fullscreen.css';
-import './util/Leaflet.Editable';
-import {area, polygon} from "@turf/turf";
-import FiguresTypes from "./util/FiguresTypes";
-import CustomFigure from "./util/CustomFigure";
-import PinType from "./util/PinType";
+import 'leaflet-fullscreen/dist/Leaflet.fullscreen.js';
+import React, { useEffect, useState } from 'react';
+import { Map, TileLayer } from 'react-leaflet';
 import useUnload from "../../util/useUnload";
+import CustomFigure from "./util/CustomFigure";
 import FigureModel from "./util/FigureModel";
+import FiguresTypes from "./util/FiguresTypes";
+import './util/Leaflet.Editable';
+import PinType from "./util/PinType";
 
 let figures = [], polygonsIntersect = [], unique = new PinType(null, null, null, false, null);
 const DTMap = (props) => {

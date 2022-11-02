@@ -1,7 +1,7 @@
-﻿import './CardsForDashboard.css';
-import React from "react";
+﻿import React from "react";
+import { Button } from "reactstrap/lib";
 import BaseCard from "./BaseCard";
-import {Button} from "reactstrap/lib";
+import './CardsForDashboard.css';
 const IotCard = (props) => {
     return (
         <BaseCard visible={props.visible} off={props.off} hText="Статус тех.карты" descr="Нет ни одного датчика!" notifyColor="#E2891F"

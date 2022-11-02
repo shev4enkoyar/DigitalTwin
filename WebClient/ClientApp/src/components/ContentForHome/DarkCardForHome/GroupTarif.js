@@ -1,10 +1,10 @@
+import React, { Component } from 'react';
+import { Container } from "reactstrap/lib";
+import { functionalConverter } from "../../../util/functionalConverter";
+import authService from "../../api-authorization/AuthorizeService";
+import { ThemeContextConsumer } from "../../ThemeContext";
 import './DarkCardForHome.css';
 import Tarif from './Tarif/Tarif.js';
-import React, {Component} from 'react';
-import { ThemeContextConsumer } from "../../ThemeContext"
-import authService from "../../api-authorization/AuthorizeService";
-import {functionalConverter} from "../../../util/functionalConverter"
-import {Container} from "reactstrap/lib";
 class GroupTarif extends Component{
     constructor(props) {
         super(props);

@@ -1,6 +1,6 @@
 
 import React from "react";
-import {NavLink} from "reactstrap/lib";
+import { NavLink } from "reactstrap/lib";
 function GraphicIcon(props) {
 
 	return (

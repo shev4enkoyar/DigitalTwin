@@ -2,7 +2,7 @@
 import './SideBarDashboard.css';
 /*import docIcon from '../data/DocIcon.svg';*/
 import React from "react";
-import {NavLink} from "reactstrap/lib";
+import { NavLink } from "reactstrap/lib";
 function DocIcon(props) {
 
 	return (

@@ -1,6 +1,6 @@
-import './Input.css';
 import React from "react";
-import {Container} from "reactstrap/lib";
+import { Container } from "reactstrap/lib";
+import './Input.css';
 function Input(props) {
     return (
         <Container className={props.contClass+ " px-0"}>

@@ -1,9 +1,9 @@
-﻿import './CardsForDashboard.css';
-import React from "react";
-import BaseCard from "./BaseCard";
+﻿import React from "react";
+import { Button } from "reactstrap";
+import { Col, Container, Row } from "reactstrap/lib";
 import Combobox from '../../../components/combobox/ComboBox';
-import {Col, Container, Row} from "reactstrap/lib";
-import {Button} from "reactstrap";
+import BaseCard from "./BaseCard";
+import './CardsForDashboard.css';
 const ChemistryCard = (props) => {
     const chem = ["Выберите хим.средство...", "аа", "=="]
     const pest = ["Выберите пестициды...", "аа"]

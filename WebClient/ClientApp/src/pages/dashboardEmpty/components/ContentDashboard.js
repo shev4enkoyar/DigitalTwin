@@ -1,12 +1,11 @@
+import React, { useState } from "react";
+import { Col, Container, Row } from "reactstrap/lib";
+import { ThemeContextConsumer } from "../../../components/ThemeContext";
 import './ContentDashboard.css';
-import { EconomicCard, FieldCard, HistoryCard, MachineCard, IoTCard, CultureCard, ChemistryCard } from './DashboardCard';
-import { useState } from 'react';
-import {ThemeContextConsumer} from "../../../components/ThemeContext";
-import React from "react";
-import {Col, Container, Row} from "reactstrap/lib";
+import { ChemistryCard, CultureCard, EconomicCard, FieldCard, HistoryCard, IoTCard, MachineCard } from './DashboardCard';
 function ContentDashboard(props) {
     const [modelState, setModelState] = useState([{ cult: 0, sort: 0, frac: "", gust: "", norm: "", total: "" }, { kad: "" }, { added: false }, { chem: false }, { dat: false }, { econom: false }])
-    const [statusState, setStatusState] = useState({cult:false, kad: false, trans:false, chem: false,ioT:false,ak:false})
+    const [statusState, setStatusState] = useState({ cult: false, kad: false, trans: false, chem: false, ioT: false, ak: false })
     const [isInherit, setInherit] = useState(props.isInherit ? true : false)
     const inheritOff = () => {
         setInherit(false)
@@ -26,13 +25,13 @@ function ContentDashboard(props) {
         return true
     }
     const getAble1 = (k) => {
-        return !Object.keys(statusState).map((val, i) => {return i<k? statusState[val]:true }).some(function (value, index, array) { return (value === false) })
+        return !Object.keys(statusState).map((val, i) => { return i < k ? statusState[val] : true }).some(function (value, index, array) { return (value === false) })
     }
     const setM = (i, f) => {
         setModelState(modelState.map((val, index) => index == i ? { ...val, ...f } : { ...val }))
     }
     const setStatus = (value) => {
-        setStatusState({...statusState, ...value })
+        setStatusState({ ...statusState, ...value })
         console.log(modelState)
     }
     return (
@@ -52,7 +51,7 @@ function ContentDashboard(props) {
                         <FieldCard off={getAble(1)} setOff={setM} setStatus={setStatus} statusOff={getAble1(1)} />
                     </Col>
                     <Col>
-                        <MachineCard handleActiveChanged={props.handleActiveChanged} isActive={props.isActive} off={getAble(2)||true} setOff={setM} />
+                        <MachineCard handleActiveChanged={props.handleActiveChanged} isActive={props.isActive} off={getAble(2) || true} setOff={setM} />
                     </Col>
                     <Col>
                         <ChemistryCard off={getAble(3)} setOff={setM} />

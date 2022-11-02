@@ -1,12 +1,12 @@
-import {  useState } from "react";
-import Input from './../../../components/input/Input';
+import { useState } from "react";
 import Combobox from './../../../components/combobox/ComboBox';
+import Input from './../../../components/input/Input';
 import './ContentDashboard.css';
 /*import sen_icon from './../data/SensorIoT_Icon.svg';
 import map_icon from './../data/Map_Icon.svg';*/
-import CardForBody from './../../../components/cardForBody/CardForBody';
 import React from "react";
-import {Button, Col, Container} from "reactstrap/lib";
+import { Button, Col, Container } from "reactstrap/lib";
+import CardForBody from './../../../components/cardForBody/CardForBody';
 export function DashboardCard(props) {
     return (
         <fieldset disabled={props.off ? false : "disabled"} className="cardSize">

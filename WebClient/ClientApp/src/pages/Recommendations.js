@@ -1,18 +1,18 @@
-import React, { Component} from 'react';
+import React, { Component } from 'react';
+import BootstrapTable from 'react-bootstrap-table-next';
+import { Container } from "reactstrap";
+import { IconButton } from "../components/sideBarDashboard/util/IconButton";
 import CardForBody from './../components/cardForBody/CardForBody';
 import SideBarDashboard from './../components/sideBarDashboard/SideBarDashboard';
-import './pages.css';
 import { ThemeContextConsumer } from './../components/ThemeContext';
-import {IconButton} from "../components/sideBarDashboard/util/IconButton";
-import BootstrapTable from 'react-bootstrap-table-next';
-import {Container, Table} from "reactstrap";
+import './pages.css';
 class Recommendations extends Component {
     iconsLeftBar = [
         new IconButton("#/", "Главная панель",
             <img style={{ width: "25px", height: "25px" }} className="icon" src="https://img.icons8.com/windows/344/home.png" />),
         new IconButton("/map", "Карта",
             <img style={{ width: "25px", height: "25px" }} className="icon" src="https://img.icons8.com/small/344/map.png" />),
-        new IconButton("#nogo", "Документы", 
+        new IconButton("#nogo", "Документы",
             <img style={{ width: "25px", height: "25px" }} className="icon" src="https://img.icons8.com/ios/344/document--v1.png" />),
         new IconButton("#nogo", "Датчики IoT",
             <img style={{ width: "25px", height: "25px" }} className="icon" src="https://img.icons8.com/windows/344/sensor.png" />),
@@ -49,72 +49,72 @@ class Recommendations extends Component {
         }
     ];
     recommend = [
-    {
-        num: "1",
-        date: new Date(2020, 4, 7).toLocaleDateString(),
-        obj: "Пшеница",
-        progEv: "Кратковременная засуха",
-        rec:"Осуществить дополнительный полив",
-    },
-    {
-        num: "2",
-        date: new Date(2020, 7, 21).toLocaleDateString(),
-        obj: "Пшеница",
-        progEv: "Умеренные дожди",
-        rec: "Не производить плановый полив",
-    },
-    {
-        num: "3",
-        date: new Date(2020, 11, 12).toLocaleDateString(),
-        obj: "Пшеница",
-        progEv: "Град",
-        rec: "Накрыть культуры плотными материалами",
-    },
-    {
-        num: "4",
-        date: new Date(2021, 1, 30).toLocaleDateString(),
-        obj: "Пшеница",
-        progEv: "Кратковременная засуха",
-        rec: "Осуществить дополнительный полив",
-    },
-    {
-        num: "5",
-        date: new Date(2021, 4, 25).toLocaleDateString(),
-        obj: "Пшеница",
-        progEv: "Кратковременная засуха",
-        rec: "Осуществить дополнительный полив",
-    },
-    {
-        num: "6",
-        date: new Date(2021, 9, 28).toLocaleDateString(),
-        obj: "Пшеница",
-        progEv: "Гроза",
-        rec: "Накрыть культуры плотными материалами",
-    },
-    {
-        num: "7",
-        date: new Date(2022, 0, 22).toLocaleDateString(),
-        obj: "Пшеница",
-        progEv: "Гроза",
-        rec: "Накрыть культуры плотными материалами",
-    },
-    {
-        num: "8",
-        date: new Date(2022, 4, 13).toLocaleDateString(),
-        obj: "Пшеница",
-        progEv: "Умеренные дожди",
-        rec: "Не производить плановый полив",
-    }
+        {
+            num: "1",
+            date: new Date(2020, 4, 7).toLocaleDateString(),
+            obj: "Пшеница",
+            progEv: "Кратковременная засуха",
+            rec: "Осуществить дополнительный полив",
+        },
+        {
+            num: "2",
+            date: new Date(2020, 7, 21).toLocaleDateString(),
+            obj: "Пшеница",
+            progEv: "Умеренные дожди",
+            rec: "Не производить плановый полив",
+        },
+        {
+            num: "3",
+            date: new Date(2020, 11, 12).toLocaleDateString(),
+            obj: "Пшеница",
+            progEv: "Град",
+            rec: "Накрыть культуры плотными материалами",
+        },
+        {
+            num: "4",
+            date: new Date(2021, 1, 30).toLocaleDateString(),
+            obj: "Пшеница",
+            progEv: "Кратковременная засуха",
+            rec: "Осуществить дополнительный полив",
+        },
+        {
+            num: "5",
+            date: new Date(2021, 4, 25).toLocaleDateString(),
+            obj: "Пшеница",
+            progEv: "Кратковременная засуха",
+            rec: "Осуществить дополнительный полив",
+        },
+        {
+            num: "6",
+            date: new Date(2021, 9, 28).toLocaleDateString(),
+            obj: "Пшеница",
+            progEv: "Гроза",
+            rec: "Накрыть культуры плотными материалами",
+        },
+        {
+            num: "7",
+            date: new Date(2022, 0, 22).toLocaleDateString(),
+            obj: "Пшеница",
+            progEv: "Гроза",
+            rec: "Накрыть культуры плотными материалами",
+        },
+        {
+            num: "8",
+            date: new Date(2022, 4, 13).toLocaleDateString(),
+            obj: "Пшеница",
+            progEv: "Умеренные дожди",
+            rec: "Не производить плановый полив",
+        }
     ]
     render() {
         return (
             <ThemeContextConsumer>{context => (
-                    <div style={{overflow: "auto"}}>
+                <div style={{ overflow: "auto" }}>
                     <SideBarDashboard icons={this.iconsLeftBar} />
-                    <CardForBody styleForCard={{ position: 'relative', padding: '3%', margin: '5% 10% 0% 15%' }} styleTextForCard={{ padding:'0px' }}>
+                    <CardForBody styleForCard={{ position: 'relative', padding: '3%', margin: '5% 10% 0% 15%' }} styleTextForCard={{ padding: '0px' }}>
                         <Container className="ContForHistoryTariff p-0 contForReactTable">
                             <BootstrapTable classes="HistoryTableText" keyField='num' data={this.recommend} columns={this.hRecommend} />
-                            
+
                             {/*<Table style={{color: "#fff", background: "#212026"}} >*/}
                             {/*    <thead>*/}
                             {/*    <tr>*/}
@@ -142,8 +142,8 @@ class Recommendations extends Component {
                             {/*<TableForTariffs classNameTab="margTable" classNamesTD="ForBox" textForTable="Рекомендации" contentsForTable={this.recommend} headersForTable={this.hRecommend} />*/}
                         </Container>
                     </CardForBody>
-                    </div>
-                )}
+                </div>
+            )}
             </ThemeContextConsumer>
         );
     }

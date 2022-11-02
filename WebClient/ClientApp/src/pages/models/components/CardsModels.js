@@ -1,7 +1,7 @@
-import './CardModels.css';
 import React from "react";
+import { Container } from "reactstrap/lib";
 import CardModel from './CardModel';
-import {Container} from "reactstrap/lib";
+import './CardModels.css';
 function CardsModels(props) {
 
     return (
@@ -17,5 +17,5 @@ function CardsModels(props) {
             </div>
         </Container>
     )
-        
-}export default CardsModels;
+
+} export default CardsModels;

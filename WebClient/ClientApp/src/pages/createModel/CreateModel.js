@@ -1,19 +1,17 @@
 import React, { Component } from 'react';
-import '../pages.css';
-import TransportCard from './components/TransportCard';
-import IotCard from './components/IotCard';
-import ChemistryCard from './components/ChemistryCard';
-import FieldCard from './components/FieldCard';
-import CultureCard from './components/CultureCard';
-import HistoryCard from './components/HistoryCard';
-import EconomicCard from './components/EconomicCard';
-import ElementStep from './ElementStep';
-import TransportSelect from './../dashboardEmpty/transportSelect/TransportSelect';
-import { ThemeContextConsumer } from '../../components/ThemeContext';
-import CardNameModel from './CardNameModel';
 import { Container } from "reactstrap/lib";
+import { ThemeContextConsumer } from '../../components/ThemeContext';
+import '../pages.css';
+import TransportSelect from './../dashboardEmpty/transportSelect/TransportSelect';
+import CardNameModel from './CardNameModel';
+import CultureCard from './components/CultureCard';
+import EconomicCard from './components/EconomicCard';
+import FieldCard from './components/FieldCard';
+import HistoryCard from './components/HistoryCard';
+import TransportCard from './components/TransportCard';
 import WorkerCard from './components/WorkerCard';
 import WorkerSelect from './components/WorkerSelect';
+import ElementStep from './ElementStep';
 class CreateModel extends Component {
     constructor(props) {
         super(props);

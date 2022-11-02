@@ -1,13 +1,13 @@
-import './InsideCardForBody.css';
 import React from "react";
-import {ThemeContextConsumer} from "../../../../components/ThemeContext";
-import {Card, Container} from "reactstrap/lib";
+import { Card, Container } from "reactstrap/lib";
+import { ThemeContextConsumer } from "../../../../components/ThemeContext";
+import './InsideCardForBody.css';
 
 function InsideCardForBody(props) {
     return (
         <ThemeContextConsumer>
             {context => (
-                <Card className={context.theme + " " + context.theme + "ForInsideCardShadow " + " " +context.theme +"ForInsideCard  " + " InsideCardBody"}>
+                <Card className={context.theme + " " + context.theme + "ForInsideCardShadow " + " " + context.theme + "ForInsideCard  " + " InsideCardBody"}>
                     <Container className={context.theme + " " + context.theme + "ForInsideCard  " + " textInsideForCard"}>
                         {props.children}
                     </Container>

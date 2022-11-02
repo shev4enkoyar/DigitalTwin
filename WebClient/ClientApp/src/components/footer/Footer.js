@@ -1,6 +1,6 @@
-import './Footer.css';
 import React from "react";
-import { ThemeContextConsumer } from "../ThemeContext.js"
+import { ThemeContextConsumer } from "../ThemeContext.js";
+import './Footer.css';
 function Footer() {
     return (
         <ThemeContextConsumer>

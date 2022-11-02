@@ -1,6 +1,6 @@
-import CardForBody from "../cardForBody/CardForBody";
-import "./PopUpCanvas.css"
 import React from "react";
+import CardForBody from "../cardForBody/CardForBody";
+import "./PopUpCanvas.css";
 const PopUpWithBlurCanvas = (props) => {
     const RenderBlur = () => {
         if (props.isBlur)

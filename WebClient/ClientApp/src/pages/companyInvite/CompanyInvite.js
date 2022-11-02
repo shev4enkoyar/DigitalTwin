@@ -1,14 +1,12 @@
-import {Component} from "react";
+import React, { Component } from "react";
+import BootstrapTable from 'react-bootstrap-table-next';
 import { Button, Container } from "reactstrap/lib";
-import React from "react";
+import authService from "../../components/api-authorization/AuthorizeService";
 import CardForBody from "../../components/cardForBody/CardForBody";
 import Input from "../../components/input/Input";
-import BootstrapTable from 'react-bootstrap-table-next';
-import authService from "../../components/api-authorization/AuthorizeService";
-import {ClientRoutes} from "../../util/ClientRoutes";
 import { ThemeContextConsumer } from "../../components/ThemeContext";
+import { functionalConverter } from "../../util/functionalConverter";
 import './../../pages/pages.css';
-import {functionalConverter} from "../../util/functionalConverter";
 export class CompanyInvite extends Component{
 
     constructor(props) {

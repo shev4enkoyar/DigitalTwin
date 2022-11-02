@@ -2,7 +2,7 @@
 import './SideBarDashboard.css';
 /*import back_Icon from '../data/BackIn_Icon.svg';*/
 import React from "react";
-import {NavLink} from "reactstrap/lib";
+import { NavLink } from "reactstrap/lib";
 function BackIn_Icon(props) {
 
 	return (

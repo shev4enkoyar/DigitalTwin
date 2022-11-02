@@ -1,10 +1,10 @@
-﻿import './CardsForDashboard.css';
-import React, { useState } from "react";
+﻿import React, { useState } from "react";
 import BootstrapTable from 'react-bootstrap-table-next';
+import { Button, Col, Container, Row } from "reactstrap/lib";
 import Combobox from '../../../components/combobox/ComboBox';
 import Input from '../../../components/input/Input';
-import { Col, Container, Row, Button } from "reactstrap/lib";
 import { ThemeContextConsumer } from '../../../components/ThemeContext';
+import './CardsForDashboard.css';
 const TabForWorkers = (props) => {
     const dol = ["Выберите должность...", "тракторист",]
     const [useAddWorker, setUseAddWorker] = useState

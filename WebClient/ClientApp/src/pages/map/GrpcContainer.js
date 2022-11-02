@@ -1,9 +1,9 @@
-import {FigureServiceClient} from '../../protoGenered/figureProto_grpc_web_pb';
+import { useEffect } from "react";
+import { FigureCategoryServiceClient } from '../../protoGenered/figureCategoryProto_grpc_web_pb';
+import { FigureCategoryRequest } from '../../protoGenered/figureCategoryProto_pb';
+import { FigureServiceClient } from '../../protoGenered/figureProto_grpc_web_pb';
 import { SendRequest } from '../../protoGenered/figureProto_pb';
-import {FigureCategoryServiceClient} from '../../protoGenered/figureCategoryProto_grpc_web_pb'
-import { FigureCategoryRequest } from '../../protoGenered/figureCategoryProto_pb'
 import ServerLinks from "../../util/ServerLinks";
-import {useEffect} from "react";
 
 const GrpcContainer = (props) => {
     useEffect(() => {

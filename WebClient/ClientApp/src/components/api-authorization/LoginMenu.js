@@ -1,12 +1,12 @@
 import React, { Component, Fragment } from 'react';
-import { NavItem, NavLink } from 'reactstrap';
 import { Link } from 'react-router-dom';
-import authService from './AuthorizeService';
-import { ApplicationPaths } from './ApiAuthorizationConstants';
-import ProfileDropDown from "../navMenu/components/profile/ProfileDropDown";
-import { ThemeContextConsumer } from '../ThemeContext';
-import ThemeToggler from "../navMenu/components/ThemeToggler";
+import { NavItem, NavLink } from 'reactstrap';
 import NotificationDropDown from "../navMenu/components/notification/NotificationDropDown";
+import ProfileDropDown from "../navMenu/components/profile/ProfileDropDown";
+import ThemeToggler from "../navMenu/components/ThemeToggler";
+import { ThemeContextConsumer } from '../ThemeContext';
+import { ApplicationPaths } from './ApiAuthorizationConstants';
+import authService from './AuthorizeService';
 export class LoginMenu extends Component {
     constructor(props) {
         super(props);

@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import '../pages.css';
-import ModelsContent from './components/ModelsContent';
-import {ThemeContextConsumer} from "../../components/ThemeContext";
-import CardModel from "./components/CardModel";
+import { Link } from "react-router-dom";
+import { Button, Col, Container } from "reactstrap/lib";
 import authService from "../../components/api-authorization/AuthorizeService";
-import {Link} from "react-router-dom";
-import {Button, Col, Container} from "reactstrap/lib";
+import { ThemeContextConsumer } from "../../components/ThemeContext";
+import '../pages.css';
+import CardModel from "./components/CardModel";
+import ModelsContent from './components/ModelsContent';
 class Models extends Component {
 
     constructor(props) {

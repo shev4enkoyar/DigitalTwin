@@ -1,15 +1,12 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
+import { Link } from "react-router-dom";
 import {
-    Dropdown,
-    DropdownToggle,
-    DropdownMenu,
-    DropdownItem, NavLink,
+    Dropdown, DropdownItem, DropdownMenu, DropdownToggle, NavLink
 } from 'reactstrap';
+import { ClientRoutes } from "../../../../util/ClientRoutes";
+import { ApplicationPaths } from "../../../api-authorization/ApiAuthorizationConstants";
 import authService from "../../../api-authorization/AuthorizeService";
-import {ApplicationPaths} from "../../../api-authorization/ApiAuthorizationConstants";
-import {Link} from "react-router-dom";
-import {ClientRoutes} from "../../../../util/ClientRoutes";
-import {ThemeContextConsumer} from "../../../ThemeContext";
+import { ThemeContextConsumer } from "../../../ThemeContext";
 
 function ProfileDropDown({ direction, ...args }) {
     const GetFunctional = async () => {

@@ -1,11 +1,11 @@
-import React, {useEffect, useState} from "react";
-import {HubConnectionBuilder, JsonHubProtocol} from "@microsoft/signalr";
-import MapManager from "./MapManager";
+import { HubConnectionBuilder, JsonHubProtocol } from "@microsoft/signalr";
+import React, { useEffect, useState } from "react";
 import ServerLinks from "../../util/ServerLinks";
+import MapManager from "./MapManager";
 const SignalRContainer = (props) => {
-    const [ connection, setConnection ] = useState(null);
-    const [ figureInitData, setFigureInitData ] = useState(null);
-    const [ isCadaster, setCadaster ] = useState(false);
+    const [connection, setConnection] = useState(null);
+    const [figureInitData, setFigureInitData] = useState(null);
+    const [isCadaster, setCadaster] = useState(false);
 
     useEffect(() => {
         const newConnection = new HubConnectionBuilder()
@@ -26,13 +26,13 @@ const SignalRContainer = (props) => {
         });
     }, []);
 
-    const sendFigureInfo = ( figureInfo) => {
+    const sendFigureInfo = (figureInfo) => {
         if (connection._connectionStarted) {
             try {
                 if (figureInfo !== null || figureInfo !== "")
-                        connection.send("SendFigure", figureInfo);
+                    connection.send("SendFigure", figureInfo);
             }
-            catch(e) {
+            catch (e) {
                 console.log(e);
             }
         }
@@ -41,12 +41,12 @@ const SignalRContainer = (props) => {
         }
     }
 
-    const sendProductArea = ( area) => {
+    const sendProductArea = (area) => {
         if (connection._connectionStarted) {
             try {
                 connection.send("SendProductArea", area);
             }
-            catch(e) {
+            catch (e) {
                 console.log(e);
             }
         }
@@ -55,12 +55,12 @@ const SignalRContainer = (props) => {
         }
     }
 
-    const removeFigureInfo = async ( figureInfo) => {
+    const removeFigureInfo = async (figureInfo) => {
         if (connection._connectionStarted) {
             try {
                 await connection.invoke("RemoveFigure", figureInfo);
             }
-            catch(e) {
+            catch (e) {
                 console.log(e);
             }
         }

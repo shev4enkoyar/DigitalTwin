@@ -1,18 +1,18 @@
-import React, {Component} from "react";
-import SignalRContainer from "./SignalRContainer";
+import React, { Component } from "react";
+import authService from "../../components/api-authorization/AuthorizeService";
+import BackIn_Icon from "../../components/sideBarDashboard/BackInModel_Icon";
+import DocIcon from "../../components/sideBarDashboard/DocIcon";
+import GraphicIcon from "../../components/sideBarDashboard/GraficIcon";
+import HistoryPriceIcon from "../../components/sideBarDashboard/HistoryPriceIcon";
 import HomePanel_Icon from "../../components/sideBarDashboard/HomePanel_Icon";
 import Map_Icon from "../../components/sideBarDashboard/Map_Icon";
-import DocIcon from "../../components/sideBarDashboard/DocIcon";
-import SensorsIoT from "../../components/sideBarDashboard/SensorsIoT";
 import RecIcon from "../../components/sideBarDashboard/RecIcon";
-import HistoryPriceIcon from "../../components/sideBarDashboard/HistoryPriceIcon";
-import GraphicIcon from "../../components/sideBarDashboard/GraficIcon";
-import BackIn_Icon from "../../components/sideBarDashboard/BackInModel_Icon";
+import SensorsIoT from "../../components/sideBarDashboard/SensorsIoT";
 import SideBarDashboard from "../../components/sideBarDashboard/SideBarDashboard";
-import {IconButton} from "../../components/sideBarDashboard/util/IconButton";
-import authService from "../../components/api-authorization/AuthorizeService";
+import { IconButton } from "../../components/sideBarDashboard/util/IconButton";
+import SignalRContainer from "./SignalRContainer";
 
-class MapMain extends Component{
+class MapMain extends Component {
 
     constructor(props) {
         super(props);
@@ -21,11 +21,11 @@ class MapMain extends Component{
     iconsSideBarDashboard = [
         new IconButton("/dashboard/" + this.props.match.params.modelId, "Главная панель", <HomePanel_Icon />),
         new IconButton("/map/" + this.props.match.params.modelId, "Карта", <Map_Icon />),
-        new IconButton("#nogo", "Документы", <DocIcon/>),
+        new IconButton("#nogo", "Документы", <DocIcon />),
         new IconButton("#nogo", "Датчики IoT", <SensorsIoT />),
-        new IconButton("/recom", "Рекомендации", <RecIcon/>),
-        new IconButton("#nogo", "История цен", <HistoryPriceIcon/>),
-        new IconButton("#nogo", "График работ", <GraphicIcon/>),
+        new IconButton("/recom", "Рекомендации", <RecIcon />),
+        new IconButton("#nogo", "История цен", <HistoryPriceIcon />),
+        new IconButton("#nogo", "График работ", <GraphicIcon />),
         new IconButton("/models", "Вернуться к выбору модели", <BackIn_Icon />)
     ]
 
@@ -37,12 +37,12 @@ class MapMain extends Component{
         return (
             this.state.loading
                 ?
-                    <p><em>Loading...</em></p>
+                <p><em>Loading...</em></p>
                 :
-                    <div style={{height: "100%"}}>
-                        <SideBarDashboard block={false} icons={this.iconsSideBarDashboard}></SideBarDashboard>
-                        <SignalRContainer mapId={this.state.mapId}/>
-                    </div>
+                <div style={{ height: "100%" }}>
+                    <SideBarDashboard block={false} icons={this.iconsSideBarDashboard}></SideBarDashboard>
+                    <SignalRContainer mapId={this.state.mapId} />
+                </div>
 
         );
     }

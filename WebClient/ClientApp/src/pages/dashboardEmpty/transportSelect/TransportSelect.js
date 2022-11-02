@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
+import { Button, Container, Nav, NavItem, NavLink, TabContent, TabPane } from "reactstrap/lib";
 import PopUpWithBlurCanvas from "../../../components/popUp/PopUpWithBlurCanvas";
-import TabForTransportSelect from './TabForTransportSelect';
 import './../../pages.css';
-import { TabContent, TabPane, Nav, NavItem, NavLink, Container, Button} from "reactstrap/lib";
+import TabForTransportSelect from './TabForTransportSelect';
 const TransportSelect = (props) => {
     const [state, setState] = useState({ activeTab: '1' });
     const toggle=(tab) =>{
