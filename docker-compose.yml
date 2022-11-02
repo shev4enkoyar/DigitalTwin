@@ -8,8 +8,6 @@ services:
     build:
       context: .
       dockerfile: Microservices/Microservice.DashboardManager/Dockerfile
-      
-      
 
   microservice.mapmanager:
     image: ${DOCKER_REGISTRY-}microservicemapmanager
@@ -18,13 +16,6 @@ services:
     build:
       context: .
       dockerfile: Microservices/Microservice.MapManager/Dockerfile
-      
-
-  microservice.imagemanager:
-    image: ${DOCKER_REGISTRY-}microserviceimagemanager
-    build:
-      context: .
-      dockerfile: Microservices/Microservice.ImageManager/Dockerfile
 
 
   microservice.subscriptionmanager:
@@ -34,5 +25,4 @@ services:
     build:
       context: .
       dockerfile: Microservices/Microservice.SubscriptionManager/Dockerfile
-      
 

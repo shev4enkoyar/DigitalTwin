@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebClient", "WebClient\WebC
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microservice.ImageManager", "Microservices\Microservice.ImageManager\Microservice.ImageManager.csproj", "{F6DA0046-A163-4D05-AB55-CB14BABE4232}"
 EndProject
-Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{5F4068B7-6BBB-4636-9FC3-CCBE34DB8B01}"
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{30459ECC-74FF-49DA-9667-B049D26CA0A5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csproj", "{0A75E37E-EA35-4BAA-952C-E5F756A1769C}"
 EndProject
@@ -45,6 +45,10 @@ Global
 		{F6DA0046-A163-4D05-AB55-CB14BABE4232}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F6DA0046-A163-4D05-AB55-CB14BABE4232}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F6DA0046-A163-4D05-AB55-CB14BABE4232}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30459ECC-74FF-49DA-9667-B049D26CA0A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30459ECC-74FF-49DA-9667-B049D26CA0A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30459ECC-74FF-49DA-9667-B049D26CA0A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30459ECC-74FF-49DA-9667-B049D26CA0A5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5F4068B7-6BBB-4636-9FC3-CCBE34DB8B01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5F4068B7-6BBB-4636-9FC3-CCBE34DB8B01}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5F4068B7-6BBB-4636-9FC3-CCBE34DB8B01}.Release|Any CPU.ActiveCfg = Release|Any CPU
