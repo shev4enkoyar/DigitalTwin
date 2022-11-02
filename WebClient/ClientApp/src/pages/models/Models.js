@@ -26,7 +26,7 @@ class Models extends Component {
                     this.state.culture.map(el =>
                         <Col className="d-flex justify-content-center" >
                             <Link to={"/dashboard/" + el.id}>
-                                <button className="d-flex justify-content-center" style={this.buttonStyle}>
+                                <button className="d-flex btn-primary justify-content-center" style={this.buttonStyle}>
                                     <CardModel className="d-flex justify-content-center" title={el.name}>
                                         <p className="paramForModelCard">
                                             {el.productName}
@@ -51,9 +51,13 @@ class Models extends Component {
                     <>
                         <Container className={context.theme + "Gray " + "text-center mt-5"} style={{ minWidth: '100%' }} >
                             {content}
-                            <Button className="blueBut createBut mt-3 btn-primary"  >
-                                <a style={{color: "#fff"}}  href={'/createModel'}>Плюсик</a >
-                            </Button>
+                            <button className="btn createBut mt-3 btn-primary"  >
+                                <a className="d-flex align-items-center" style={{ color: "#fff" }} href={'/createModel'}>
+                                    <img style={{ width: "35px", height: "35px", paddingRight:"5px" }} className="icon"
+                                        src="https://www.svgrepo.com/show/274451/add.svg" />
+                                    Новая модель
+                                </a >
+                            </button>
                         </Container>
                     </>
                 )
