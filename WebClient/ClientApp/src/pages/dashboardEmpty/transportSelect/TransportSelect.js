@@ -18,7 +18,7 @@ const TransportSelect = (props) => {
                 <Button onClick={() => { props.setStatus({ isActive: false }) }} className="btn btn-danger position-absolute" style={{right: '3px',top: '2px' }}>
                     x
                 </Button>
-                <Nav tabs>
+                <Nav tabs className="justify-content-center">
                     <NavItem>
                         <NavLink
                             className={state.activeTab === '1'? "active":"" }

@@ -2,12 +2,14 @@
 import { Button } from "reactstrap/lib";
 import BaseCard from "./BaseCard";
 import './CardsForDashboard.css';
+import BaseCard from "./BaseCard";
+import React from "react";
 const HistoryCard = (props) => {
     return (
         <BaseCard visible={props.visible} hText="Статус тех.карты" descr="Требуется добавить исторические данные!" notifyColor="#DC3545" off={props.off}>
-            <Button className="btn btn-primary my-2" style={{ width: "190px" }}>
+            <button className="btn btn-primary my-2" style={{ width: "190px" }}>
                     Импортировать
-            </Button>
+            </button>
             <div className="Warning" style={{ paddingTop: '7px' }}>Файл импорта должен соответсвовать &zwnj;
                 <a style={{ color: '#F5CA5D', textDecorationLine: 'none' }} href="src/pages/createModel/components/HistoryCard#nogo">
                     шаблону
@@ -16,12 +18,12 @@ const HistoryCard = (props) => {
             <p className="textForStatus marForDescr" >
                 Если модель не имеет исторических данных, нажмите “Начальное состояние”
             </p>
-            <Button className="btn btn-danger my-2" style={{ width: "190px" }}>
+            <button className="btn btn-danger my-2" style={{ width: "190px" }}>
                     Начальное состояние
-                </Button>
-            <Button onClick={props.onClick} className="btn my-2" style={{ width: "190px" }} >
+            </button>
+            <button onClick={props.onClick} className="btn btn-primary my-2" style={{ width: "190px" }} >
                 Далее
-            </Button>
+            </button>
         </BaseCard>
     )
 }

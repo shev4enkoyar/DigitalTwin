@@ -1,8 +1,8 @@
 ﻿import React, { useState } from 'react';
-import { Button, Container, Nav, NavItem, NavLink, TabContent, TabPane } from "reactstrap/lib";
 import PopUpWithBlurCanvas from "../../../components/popUp/PopUpWithBlurCanvas";
-import './../../pages.css';
 import TabForWorkers from './TabForWorkers';
+import './../../pages.css';
+import { TabContent, TabPane, Nav, NavItem, NavLink, Container, Button } from "reactstrap";
 const WorkerSelect = (props) => {
     const [state, setState] = useState({ activeTab: '1' });
     const toggle = (tab) => {
@@ -18,10 +18,10 @@ const WorkerSelect = (props) => {
                 <Button onClick={() => { props.setStatus({ isActive: false }) }} className="btn btn-danger position-absolute" style={{ right: '3px', top: '2px' }}>
                     x
                 </Button>
-                <Nav tabs>
+                <Nav tabs className="justify-content-center">
                     <NavItem>
                         <NavLink
-                            className={state.activeTab === '1' ? "active" : ""}
+                            className={state.activeTab === '1'? "active" : ""}
                             onClick={() => { toggle('1'); }}
                         >
                             Работники для засева
