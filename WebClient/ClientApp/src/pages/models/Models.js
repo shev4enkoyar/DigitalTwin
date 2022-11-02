@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
-import { Button, Col, Container } from "reactstrap/lib";
+import { Col, Container } from "reactstrap/lib";
 import authService from "../../components/api-authorization/AuthorizeService";
 import { ThemeContextConsumer } from "../../components/ThemeContext";
 import '../pages.css';
 import CardModel from "./components/CardModel";
 import ModelsContent from './components/ModelsContent';
+import {LoadingFragment} from "../../util/LoadingFragment";
 class Models extends Component {
 
     constructor(props) {
@@ -19,9 +20,8 @@ class Models extends Component {
 
     render() {
 
-        let content =  this.state.loading
-            ? <p style={{color: "#FFF"}}><em>Loading...</em></p>
-            : <ModelsContent >
+        let content =
+            <ModelsContent >
                 {
                     this.state.culture.map(el =>
                         <Col className="d-flex justify-content-center" >
@@ -48,18 +48,20 @@ class Models extends Component {
         return (
             <ThemeContextConsumer>{
                 context => (
-                    <>
-                        <Container className={context.theme + "Gray " + "text-center mt-5"} style={{ minWidth: '100%' }} >
-                            {content}
-                            <button className="btn createBut mt-3 btn-primary"  >
-                                <a className="d-flex align-items-center" style={{ color: "#fff" }} href={'/createModel'}>
-                                    <img style={{ width: "35px", height: "35px", paddingRight:"5px" }} className="icon"
-                                        src="https://www.svgrepo.com/show/274451/add.svg" />
-                                    Новая модель
-                                </a >
-                            </button>
-                        </Container>
-                    </>
+                    this.state.loading
+                        ?   <LoadingFragment fullscreen={true}/>
+                        :   <>
+                                <Container className={context.theme + "Gray " + "text-center mt-5"} style={{ minWidth: '100%' }} >
+                                    {content}
+                                    <button className="btn createBut mt-3 btn-primary"  >
+                                        <a className="d-flex align-items-center" style={{ color: "#fff" }} href={'/createModel'}>
+                                            <img style={{ width: "35px", height: "35px", paddingRight:"5px" }} className="icon"
+                                                src="https://www.svgrepo.com/show/274451/add.svg" />
+                                            Новая модель
+                                        </a >
+                                    </button>
+                                </Container>
+                            </>
                 )
             }
             </ThemeContextConsumer>

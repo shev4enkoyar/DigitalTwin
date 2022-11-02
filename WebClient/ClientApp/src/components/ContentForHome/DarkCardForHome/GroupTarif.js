@@ -5,6 +5,7 @@ import authService from "../../api-authorization/AuthorizeService";
 import { ThemeContextConsumer } from "../../ThemeContext";
 import './DarkCardForHome.css';
 import Tarif from './Tarif/Tarif.js';
+import {LoadingFragment} from "../../../util/LoadingFragment";
 class GroupTarif extends Component{
     constructor(props) {
         super(props);
@@ -43,7 +44,7 @@ class GroupTarif extends Component{
                         {
                             this.state.loading
                             ?
-                                <p style={{color: "#FFF"}}><em>Loading...</em></p>
+                                <LoadingFragment/>
                             :
                                 this.state.tariffs.map(el => {
                                     return (

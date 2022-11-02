@@ -24,12 +24,11 @@ const MapManager = (props) => {
     function handleRemoveButtonActive(isRemoveButtonActive) {
         setRemoveButtonActive(isRemoveButtonActive);
     }
-    let panel = props.isCadaster ? null : <SidePanel isCadaster={isCadaster} mapId={props.mapId} categoriesProto={categoriesProto} pinType={pinType} handlePinTypeChange={handlePinTypeChange} isRemoveButtonActive={isRemoveButtonActive} handleRemoveButtonActive={handleRemoveButtonActive} />
     return (
 
         <div style={{ height: "100%" }}>
-            {panel}
-            <DTMap sendProductArea={props.sendProductArea} figureInitData={props.figureInitData} removeFigureInfo={props.removeFigureInfo} sendFigureInfo={props.sendFigureInfo} figuresProto={figuresProto} pinType={pinType} isRemoveButtonActive={isRemoveButtonActive} />
+            <SidePanel isCadaster={props.isCadaster} mapId={props.mapId} categoriesProto={categoriesProto} pinType={pinType} handlePinTypeChange={handlePinTypeChange} isRemoveButtonActive={isRemoveButtonActive} handleRemoveButtonActive={handleRemoveButtonActive} />
+            <DTMap isCadaster={props.isCadaster} sendProductArea={props.sendProductArea} figureInitData={props.figureInitData} removeFigureInfo={props.removeFigureInfo} sendFigureInfo={props.sendFigureInfo} figuresProto={figuresProto} pinType={pinType} isRemoveButtonActive={isRemoveButtonActive} />
             <GrpcContainer mapId={props.mapId} handleFigureCategoriesProto={handleFigureCategoriesProto} handleFiguresProto={handleFiguresProto} />
         </div>
 

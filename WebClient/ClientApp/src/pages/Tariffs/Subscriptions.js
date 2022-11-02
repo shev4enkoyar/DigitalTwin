@@ -7,6 +7,7 @@ import { ThemeContextConsumer } from '../../components/ThemeContext.js';
 import { ClientRoutes } from "../../util/ClientRoutes";
 import '../pages.css';
 import CardForTariffs from './components/insideCardForBody/InsideCardForTariffs';
+import {LoadingFragment} from "../../util/LoadingFragment";
 class Subscriptions extends Component {
     constructor(props) {
         super(props);
@@ -86,16 +87,7 @@ class Subscriptions extends Component {
     ]
 
     render() {
-        let content = this.state.loading
-            ?
-            <ThemeContextConsumer>
-                {context =>
-                (
-                    <p className={context.theme} style={{ color: "#FFF" }}><em>Loading...</em></p>
-                )
-                }
-            </ThemeContextConsumer>
-            :
+        let content =
             Object.entries(this.state.tariffs).map(([el, props]) =>
                 <>
                     <ThemeContextConsumer>
@@ -142,34 +134,36 @@ class Subscriptions extends Component {
             )
         return (
             <ThemeContextConsumer>{context => (
-                <Container className={context.theme + "Gray " + "body_style"} style={{ "minWidth": '100%' }}>
-                    <Row>
-                        <Col className="col">
-                            <CardForBody styleForCard={{ position: 'relative', width: "fit-content" }} className="signUpWidth text-center" classForContB=" centerCard" >
-                                <p className="textOpenSansForHistTar">
-                                    Продлить/отменить подписки
-                                </p>
-                                {
-                                    content
-                                }
-                                <Button className="my-3 btn-primary" onClick={() => window.location.replace(ClientRoutes.PREFIX + ClientRoutes.SUBSCRIPTIONS_ALL)}>
-                                    <img style={{ width: "35px", height: "35px" }} className="icon"
-                                        src="https://www.svgrepo.com/show/274451/add.svg" />
-                                    {" Добавить подписку"}
-                                </Button>
+                this.state.loading
+                    ?   <LoadingFragment fullscreen={true}/>
+                    :   <Container className={context.theme + "Gray " + "body_style"} style={{ "minWidth": '100%' }}>
+                            <Row>
+                                <Col className="col">
+                                    <CardForBody styleForCard={{ position: 'relative', width: "fit-content" }} className="signUpWidth text-center" classForContB=" centerCard" >
+                                        <p className="textOpenSansForHistTar">
+                                            Продлить/отменить подписки
+                                        </p>
+                                        {
+                                            content
+                                        }
+                                        <Button className="my-3 btn-primary" onClick={() => window.location.replace(ClientRoutes.PREFIX + ClientRoutes.SUBSCRIPTIONS_ALL)}>
+                                            <img style={{ width: "35px", height: "35px" }} className="icon"
+                                                src="https://www.svgrepo.com/show/274451/add.svg" />
+                                            {" Добавить подписку"}
+                                        </Button>
 
-                            </CardForBody>
-                        </Col>
-                        <Col className="col p-0">
-                            <CardForBody styleForCard={{ position: 'relative', padding: '3%' }} className="signUpWidth">
-                                <Container className="ContForHistoryTariff p-0 contForReactTable">
-                                    <BootstrapTable classes={context.theme + " HistoryTableText "} keyField='num' data={this.historyTariffs} columns={this.headerForTariffs} />
-                                    {/*<TableForTariffs textForTable="История подписок" classNamesTD="ForBox" headersForTable={this.headerForTariffs} contentsForTable={this.historyTariffs} />*/}
-                                </Container>
-                            </CardForBody>
-                        </Col>
-                    </Row>
-                </ Container>
+                                    </CardForBody>
+                                </Col>
+                                <Col className="col p-0">
+                                    <CardForBody styleForCard={{ position: 'relative', padding: '3%' }} className="signUpWidth">
+                                        <Container className="ContForHistoryTariff p-0 contForReactTable">
+                                            <BootstrapTable classes={context.theme + " HistoryTableText "} keyField='num' data={this.historyTariffs} columns={this.headerForTariffs} />
+                                            {/*<TableForTariffs textForTable="История подписок" classNamesTD="ForBox" headersForTable={this.headerForTariffs} contentsForTable={this.historyTariffs} />*/}
+                                        </Container>
+                                    </CardForBody>
+                                </Col>
+                            </Row>
+                        </ Container>
             )}
             </ThemeContextConsumer>
         );

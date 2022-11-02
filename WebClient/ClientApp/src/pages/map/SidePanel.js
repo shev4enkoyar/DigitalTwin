@@ -58,9 +58,14 @@ const SidePanel = (props) => {
     }
     let categoriesButtons = props.categoriesProto !== null
         ?
-        props.categoriesProto.map((el, index) => {
+        props.categoriesProto.filter(el => {
+            if (props.isCadaster)
+                if (el.isUnique)
+                    return false;
+            return true;
+        }).map((el, index) => {
             return (
-                <li style={{ listStyleType: "none" }} key={index}>
+                <li style={{ listStyleType: "none" }} key={index} className="mt-3">
                     <button style={buttonStyle} onClick={() => {
                         setPopupChildren(popupChildrenContent(el))
                         setPopupStyle({ margin: 20 + (index + 1) * 32 + "px 50px" });

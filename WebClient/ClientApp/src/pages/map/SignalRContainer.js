@@ -2,10 +2,12 @@ import { HubConnectionBuilder, JsonHubProtocol } from "@microsoft/signalr";
 import React, { useEffect, useState } from "react";
 import ServerLinks from "../../util/ServerLinks";
 import MapManager from "./MapManager";
+import {LoadingFragment} from "../../util/LoadingFragment";
 const SignalRContainer = (props) => {
     const [connection, setConnection] = useState(null);
     const [figureInitData, setFigureInitData] = useState(null);
     const [isCadaster, setCadaster] = useState(false);
+    const [isLoading, setLoading] = useState(true);
 
     useEffect(() => {
         const newConnection = new HubConnectionBuilder()
@@ -19,6 +21,7 @@ const SignalRContainer = (props) => {
         })
         newConnection.on('ReciveIfCadaster', message => {
             setCadaster(message);
+            setLoading(false);
         })
         setConnection(newConnection);
         newConnection.start().then(() => {
@@ -70,7 +73,7 @@ const SignalRContainer = (props) => {
     }
 
 
-    return <MapManager sendProductArea={sendProductArea} mapId={props.mapId} isCadaster={isCadaster} figureInitData={figureInitData} removeFigureInfo={removeFigureInfo} sendFigureInfo={sendFigureInfo}> </ MapManager>
+    return isLoading ? <LoadingFragment/> : <MapManager sendProductArea={sendProductArea} mapId={props.mapId} isCadaster={isCadaster} figureInitData={figureInitData} removeFigureInfo={removeFigureInfo} sendFigureInfo={sendFigureInfo}> </ MapManager>
 }
 
 export default SignalRContainer;

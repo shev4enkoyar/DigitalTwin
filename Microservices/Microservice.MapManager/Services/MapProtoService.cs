@@ -37,7 +37,6 @@ namespace Microservice.MapManager.Services
             {
                 ModelId = request.ModelId
             };
-
             _dbContext.Add(map);
             _dbContext.SaveChanges();
 
@@ -47,11 +46,11 @@ namespace Microservice.MapManager.Services
                 {
                     MapId = map.Id,
                     Points = Rosreestr.GetCoordinatesByCadastre(request.Cadaster),
-                    CategoryId = _dbContext.FigureCategories.FirstOrDefault(x => x.FigureType.Equals("polygon")).Id
+                    CategoryId = _dbContext.FigureCategories.FirstOrDefault(x => x.FigureType.Type.Equals("polygon")).Id
                 };
 
                 _dbContext.Figures.Add(cadastreFigure);
-                map.IsCadaster = true;
+                map.Cadaster = request.Cadaster;
                 _dbContext.Update(map);
                 _dbContext.SaveChanges();
             }

@@ -21,6 +21,7 @@ RUN apt install python3-distutils -y
 RUN python get-pip.py
 RUN rm get-pip.py
 RUN pip install rosreestr2coord
+RUN apt install ffmpeg libsm6 libxext6  -y
 
 FROM mcr.microsoft.com/dotnet/sdk:3.1 AS build
 WORKDIR /src

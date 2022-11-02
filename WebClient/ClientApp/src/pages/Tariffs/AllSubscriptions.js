@@ -7,6 +7,7 @@ import { ThemeContextConsumer } from "../../components/ThemeContext";
 import { functionalConverter } from "../../util/functionalConverter";
 import './../../pages/pages.css';
 import './Subscriptions.css';
+import {LoadingFragment} from "../../util/LoadingFragment";
 
 class AllSubscriptions extends Component {
 
@@ -20,16 +21,7 @@ class AllSubscriptions extends Component {
     }
 
     render() {
-        let content = this.state.loading
-            ?
-            <ThemeContextConsumer>
-                {
-                    context => (
-                        <p className={context.theme} style={{ color: "#FFF" }}><em>Loading...</em></p>
-                    )
-                }
-            </ThemeContextConsumer>
-            :
+        let content =
             this.state.tariffs.map(el => {
                 return (
                     <ThemeContextConsumer>
@@ -77,29 +69,27 @@ class AllSubscriptions extends Component {
         return (
             <ThemeContextConsumer>
                 {context => (
-                    <Container className={context.theme + "Gray d-flex justify-content-center w-100"} fluid>
-                        <Row className={context.theme + "Gray mt-3"}>
-                            {content}
-                        </Row>
-
-
-                        <Modal animation={false} centered className="subscriptions" show={this.state.modal} onHide={() => { this.setState({ modal: false }) }}>
-                            <Modal.Header style={{ border: "none" }}>
-                                <Modal.Title>Оформить подписку</Modal.Title>
-                            </Modal.Header>
-                            <Modal.Body>Оформить подписку "{this.state.currentTariff}"</Modal.Body>
-                            <Modal.Footer style={{ border: "none" }}>
-                                <Button className="grey_button" onClick={() => { this.setState({ modal: false }) }}>
-                                    Отменить
-                                </Button>
-                                <Button className="green_button" onClick={() => { this.setState({ modal: false }) }}>
-                                    Подтвердить
-                                </Button>
-                            </Modal.Footer>
-                        </Modal>
-
-
-                    </Container>
+                    this.state.loading
+                        ?   <LoadingFragment fullscreen={true}/>
+                        :   <Container className={context.theme + "Gray d-flex justify-content-center w-100"} fluid>
+                                <Row className={context.theme + "Gray mt-3"}>
+                                    {content}
+                                </Row>
+                                <Modal animation={false} centered className="subscriptions" show={this.state.modal} onHide={() => { this.setState({ modal: false }) }}>
+                                    <Modal.Header style={{ border: "none" }}>
+                                        <Modal.Title>Оформить подписку</Modal.Title>
+                                    </Modal.Header>
+                                    <Modal.Body>Оформить подписку "{this.state.currentTariff}"</Modal.Body>
+                                    <Modal.Footer style={{ border: "none" }}>
+                                        <Button className="grey_button" onClick={() => { this.setState({ modal: false }) }}>
+                                            Отменить
+                                        </Button>
+                                        <Button className="green_button" onClick={() => { this.setState({ modal: false }) }}>
+                                            Подтвердить
+                                        </Button>
+                                    </Modal.Footer>
+                                </Modal>
+                            </Container>
                 )
                 }
             </ThemeContextConsumer>

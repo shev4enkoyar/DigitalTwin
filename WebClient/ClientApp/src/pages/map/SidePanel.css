@@ -17,3 +17,7 @@
     width: 100%;
     height: 100%;
 }
+
+.iconMapPin{
+    filter: invert(52%) sepia(94%) saturate(390%) hue-rotate(2deg) brightness(95%) contrast(94%);
+}

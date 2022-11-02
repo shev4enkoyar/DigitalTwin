@@ -11,6 +11,7 @@ import SensorsIoT from "../../components/sideBarDashboard/SensorsIoT";
 import SideBarDashboard from "../../components/sideBarDashboard/SideBarDashboard";
 import { IconButton } from "../../components/sideBarDashboard/util/IconButton";
 import SignalRContainer from "./SignalRContainer";
+import {LoadingFragment} from "../../util/LoadingFragment";
 
 class MapMain extends Component {
 
@@ -37,7 +38,7 @@ class MapMain extends Component {
         return (
             this.state.loading
                 ?
-                <p><em>Loading...</em></p>
+                <LoadingFragment/>
                 :
                 <div style={{ height: "100%" }}>
                     <SideBarDashboard block={false} icons={this.iconsSideBarDashboard}></SideBarDashboard>

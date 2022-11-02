@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import authService from './api-authorization/AuthorizeService';
+import {LoadingFragment} from "../util/LoadingFragment";
 
 export class FetchData extends Component {
   static displayName = FetchData.name;
@@ -40,7 +41,7 @@ export class FetchData extends Component {
 
   render() {
     let contents = this.state.loading
-      ? <p><em>Loading...</em></p>
+      ? <LoadingFragment/>
       : FetchData.renderForecastsTable(this.state.forecasts);
 
     return (

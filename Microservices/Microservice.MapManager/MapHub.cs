@@ -2,9 +2,7 @@
 using Microservice.MapManager.DAL;
 using Microservice.MapManager.DAL.Models;
 using Microsoft.AspNetCore.SignalR;
-using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -49,7 +47,7 @@ namespace Microservice.MapManager
                 _dbContext.SaveChanges();
                 Clients.Caller.Recive(model.Id);
             }
-            
+
             return Task.CompletedTask;
         }
 
@@ -57,7 +55,7 @@ namespace Microservice.MapManager
         /// Deleting a figure by its ID
         /// </summary>
         /// <param name="figureId">ID figure</param>
-        public Task RemoveFigure(int figureId) 
+        public Task RemoveFigure(int figureId)
         {
             var figure = _dbContext.Figures.FirstOrDefault(x => x.Id == figureId);
             if (figure != null)
@@ -85,8 +83,9 @@ namespace Microservice.MapManager
         public async Task SendMapId(int mapId)
         {
             MapId = mapId;
-            var map = _dbContext.Maps.Where(x => x.Id == mapId).FirstOrDefault();
-            await Clients.Caller.ReciveIfCadaster(map.IsCadaster);
+
+            bool isCadasterExist = !string.IsNullOrEmpty(_dbContext.Maps.FirstOrDefault(x => x.Id == mapId).Cadaster);
+            await Clients.Caller.ReciveIfCadaster(isCadasterExist);
         }
         #endregion
     }

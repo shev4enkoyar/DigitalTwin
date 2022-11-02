@@ -177,24 +177,26 @@ const DTMap = (props) => {
     }
 
     const configurePolygon = (polygon, customFigure) => {
-        polygon.on('dblclick', function () {
-            polygon.toggleEdit();
-        });
-        polygon.on('editable:disable', function () {
-            /*if (figures.length > 1 && customFigure.isUnique)
-                addIntersectionPolygon();*/
-            sendFigure(customFigure);
-        });
-        polygon.on('editable:enable', function () {
-            if (polygonsIntersect.length > 0){
-                removeAllIntersectionPolygons();
-            }
-        })
-        figures.push(customFigure);
+        if (!props.isCadaster){
+            polygon.on('dblclick', function () {
+                polygon.toggleEdit();
+            });
+            polygon.on('editable:disable', function () {
+                /*if (figures.length > 1 && customFigure.isUnique)
+                    addIntersectionPolygon();*/
+                sendFigure(customFigure);
+            });
+            polygon.on('editable:enable', function () {
+                if (polygonsIntersect.length > 0){
+                    removeAllIntersectionPolygons();
+                }
+            })
+            figures.push(customFigure);
+        }
     }
 
     const addMarker = (points, options) => {
-        let maker = L.marker(points, {icon: new L.Icon({iconUrl: 'https://www.svgrepo.com/show/425042/boat-sailing-ship.svg'})}).addTo(map.leafletElement);
+        let maker = L.marker(points, {icon: new L.Icon({iconUrl: 'https://www.svgrepo.com/show/73697/pin.svg', iconSize: [24, 24], className: "iconMapPin"})}).addTo(map.leafletElement);
         configureCustomMarker(maker, options);
     }
 
@@ -313,7 +315,7 @@ const DTMap = (props) => {
           zoom={5}
           maxZoom={17}
           fullscreenControl={true}
-          editable={true}
+          editable={!props.isCadaster}
          ref={setMap}
         >
           <TileLayer

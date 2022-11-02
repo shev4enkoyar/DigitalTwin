@@ -5,6 +5,7 @@ import Input from '../../../components/input/Input';
 import BaseCard from "./BaseCard";
 import './CardsForDashboard.css';
 import {Col, Container,Row } from "reactstrap";
+import {LoadingFragment} from "../../../util/LoadingFragment";
 class CultureCard extends Component{
      cult = ["Введите наименование культуры...", "Рис", "Овес"]
      sortForCult = ["Введите сорт культуры...", "cc"]
@@ -29,7 +30,7 @@ class CultureCard extends Component{
         return (
             this.state.loading
                 ?
-                    <p style={{color: "#FFF"}}><em>Loading...</em></p>
+                    <LoadingFragment/>
                 :
                 <BaseCard className="widForCult" visible={this.props.visible} hText="Статус тех.карты" descr="Требуется добавить данные о культуре!" notifyColor="#DC3545" off={this.props.off}>
                         <Container className="p-0 d-flex flex-wrap" style={{ display: 'flex', flexWrap: 'wrap' }}>
