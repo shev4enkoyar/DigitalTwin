@@ -1,7 +1,7 @@
 ﻿import { ThemeContextConsumer } from './../../components/ThemeContext';
 import './ElementStep.css';
 import React from "react";
-import { Container } from "reactstrap/lib";
+import { Container } from "reactstrap";
 const ElementStep = (props) => {
     
     return (
