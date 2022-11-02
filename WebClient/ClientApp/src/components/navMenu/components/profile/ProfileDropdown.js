@@ -11,7 +11,7 @@ import {Link} from "react-router-dom";
 import {ClientRoutes} from "../../../../util/ClientRoutes";
 import {ThemeContextConsumer} from "../../../ThemeContext";
 
-function ProfileDropDown({ direction, ...args }) {
+function ProfileDropdown({ direction, ...args }) {
     const GetFunctional = async () => {
         const token = await authService.getAccessToken();
         const response = await fetch('api/functional/get_all', {
@@ -111,4 +111,4 @@ function ProfileDropDown({ direction, ...args }) {
 
 }
 
-export default ProfileDropDown;
+export default ProfileDropdown;

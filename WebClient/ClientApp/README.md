@@ -1397,7 +1397,7 @@ Supported overrides:
  - [`coverageThreshold`](https://facebook.github.io/jest/docs/en/configuration.html#coveragethreshold-object)
  - [`snapshotSerializers`](https://facebook.github.io/jest/docs/en/configuration.html#snapshotserializers-array-string)
 
-ProfileDropDown package.json:
+ProfileDropdown package.json:
 
 ```json
 {
@@ -1891,7 +1891,7 @@ Then run the `firebase init` command from your project’s root. You need to cho
     You can create multiple project aliases by running firebase use --add,
     but for now we'll just set up a default project.
 
-    ? What Firebase project do you want to associate as default? ProfileDropDown app (example-app-fd690)
+    ? What Firebase project do you want to associate as default? ProfileDropdown app (example-app-fd690)
 
     === Database Setup
 

@@ -3,10 +3,11 @@ import { NavItem, NavLink } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import authService from './AuthorizeService';
 import { ApplicationPaths } from './ApiAuthorizationConstants';
-import ProfileDropDown from "../navMenu/components/profile/ProfileDropDown";
+import ProfileDropdown from "../navMenu/components/profile/ProfileDropdown";
 import { ThemeContextConsumer } from '../ThemeContext';
 import ThemeToggler from "../navMenu/components/ThemeToggler";
-import NotificationDropDown from "../navMenu/components/notification/NotificationDropDown";
+import NotificationDropdown from "../navMenu/components/notification/NotificationDropdown";
+import AnonymousDropdown from "../navMenu/components/AnonymousDropdown";
 export class LoginMenu extends Component {
     constructor(props) {
         super(props);
@@ -51,8 +52,8 @@ export class LoginMenu extends Component {
             <ThemeContextConsumer>{
                     context => (
                         <Fragment>
-                            <NotificationDropDown/>
-                            <ProfileDropDown direction="down" />
+                            <NotificationDropdown/>
+                            <ProfileDropdown direction="down" />
                         </Fragment>
                         )
                 }
@@ -65,13 +66,7 @@ export class LoginMenu extends Component {
             <ThemeContextConsumer>{
                 context=>(
                     <Fragment>
-                        <ThemeToggler />
-                        <NavItem>
-                            <NavLink className={context.theme} tag={Link} to={registerPath}>Зарегистрироваться</NavLink>
-                        </NavItem>
-                        <NavItem>
-                            <NavLink className={context.theme} tag={Link} to={loginPath}>Войти</NavLink>
-                        </NavItem>
+                        <AnonymousDropdown/>
                     </Fragment>
                 )
             }

@@ -12,7 +12,7 @@ import {Button} from "rsuite";
 import {ClientRoutes} from "../../../../util/ClientRoutes";
 import {ThemeContextConsumer} from "../../../ThemeContext";
 
-function NotificationDropDown({ direction, ...args }) {
+function NotificationDropdown({ direction, ...args }) {
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const [notifications, setNotifications] = useState(null);
 
@@ -104,4 +104,4 @@ function NotificationDropDown({ direction, ...args }) {
 }
 
 
-export default NotificationDropDown;
+export default NotificationDropdown;

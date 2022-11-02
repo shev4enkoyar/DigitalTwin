@@ -34,8 +34,7 @@ export class NavMenu extends Component {
             <NavbarBrand className={context.theme + (this.props.Gray ? "Gray " : " ")} tag={Link} to="/">AgroDigitalTwin</NavbarBrand>
               <ul style={{flexDirection: "inherit"}} className="navbar-nav flex-grow">
                 <ThemeToggler />
-                <LoginMenu>
-                </LoginMenu>
+                <LoginMenu/>
               </ul>
           </Container>
         </Navbar>
