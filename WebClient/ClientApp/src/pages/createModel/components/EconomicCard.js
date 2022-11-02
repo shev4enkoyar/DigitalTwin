@@ -1,7 +1,8 @@
 ﻿import React from "react";
-import { Button, Container } from "reactstrap/lib";
 import authService from "../../../components/api-authorization/AuthorizeService";
 import {Container} from "reactstrap";
+import BaseCard from "./BaseCard";
+import Input from "../../../components/input/Input";
 const EconomicCard = (props) => {
     const CreateTechCard = async (digitalModel) => {
         const token = await authService.getAccessToken();

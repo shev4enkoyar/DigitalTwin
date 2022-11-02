@@ -40,7 +40,6 @@ namespace Microservice.DashboardManager
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGrpcService<GreeterService>();
                 endpoints.MapGrpcService<DigitalModelProtoService>();
                 endpoints.MapGrpcService<ProductProtoService>();
                 endpoints.MapGrpcService<SubscriptionClientProtoService>();
