@@ -8,6 +8,13 @@ services:
     build:
       context: .
       dockerfile: Microservices/Microservice.DashboardManager/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=init02564221
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
+    volumes:
+      - ~/.aspnet/https:/https:ro
 
   microservice.mapmanager:
     image: ${DOCKER_REGISTRY-}microservicemapmanager
@@ -16,6 +23,13 @@ services:
     build:
       context: .
       dockerfile: Microservices/Microservice.MapManager/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=init02564221
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
+    volumes:
+      - ~/.aspnet/https:/https:ro
 
 
   microservice.subscriptionmanager:
@@ -25,4 +39,11 @@ services:
     build:
       context: .
       dockerfile: Microservices/Microservice.SubscriptionManager/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=init02564221
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
+    volumes:
+      - ~/.aspnet/https:/https:ro
 
