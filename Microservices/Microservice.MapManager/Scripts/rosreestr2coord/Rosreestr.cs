@@ -12,6 +12,7 @@ namespace TestReestr.Scripts.rosreestr2coord
 {
     public static class Rosreestr
     {
+        private static string PythonPath { get; } = "C:/Users/Nastya/AppData/Local/Programs/Python/Python310/python.exe";
         /// <summary>
         /// The method allows you to get the coordinates of the cadastral object by cadastral number
         /// </summary>
@@ -27,13 +28,14 @@ namespace TestReestr.Scripts.rosreestr2coord
             ProcessStartInfo start = new ProcessStartInfo();
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
-                start.FileName = "C:/Python310/python.exe";
+                start.FileName = PythonPath;
             }
             else
             {
                 //TODO linux path
                 start.FileName = "python.exe";
             }
+
             start.Arguments = args;
             start.UseShellExecute = false;// Do not use OS shell
             start.CreateNoWindow = true; // We don't need new window
