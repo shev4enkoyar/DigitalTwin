@@ -1,13 +1,10 @@
 ﻿using Grpc.Core;
 using Grpc.Net.Client;
 using Microsoft.Extensions.Configuration;
-using System.Net.Http;
-using System.Security.Claims;
-using System;
-using System.Threading.Tasks;
-using Microservice.DashboardManager.Protos;
-using System.Collections;
+using Shared;
 using System.Linq;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace Microservice.DashboardManager.Services
 {
@@ -27,8 +24,7 @@ namespace Microservice.DashboardManager.Services
                 ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
             };
 
-            using var channel = GrpcChannel.ForAddress(
-                Configuration.GetSection("gRPCConnections")["Micriservices.SubscriptionManager"],
+            using var channel = GrpcChannel.ForAddress(ServicesIP.Subscription,
                 new GrpcChannelOptions { HttpHandler = httpHandler }
             );
 
@@ -63,8 +59,7 @@ namespace Microservice.DashboardManager.Services
                 ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
             };
 
-            using var channel = GrpcChannel.ForAddress(
-                Configuration.GetSection("gRPCConnections")["Micriservices.SubscriptionManager"],
+            using var channel = GrpcChannel.ForAddress(ServicesIP.Subscription,
                 new GrpcChannelOptions { HttpHandler = httpHandler }
             );
 
@@ -99,20 +94,19 @@ namespace Microservice.DashboardManager.Services
                 ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
             };
 
-            using var channel = GrpcChannel.ForAddress(
-                Configuration.GetSection("gRPCConnections")["Micriservices.SubscriptionManager"],
+            using var channel = GrpcChannel.ForAddress(ServicesIP.Subscription,
                 new GrpcChannelOptions { HttpHandler = httpHandler }
             );
 
             var client = new SubscriptionService.SubscriptionServiceClient(channel);
-            var reply = client.AddSubscription(new AddSubscriptionRequest 
-            { 
-                ActivatedData = request.ActivatedData, 
+            var reply = client.AddSubscription(new AddSubscriptionRequest
+            {
+                ActivatedData = request.ActivatedData,
                 ExpirationData = request.ExpirationData,
                 SubscriptionId = request.SubscriptionId,
                 ModelId = request.ModelId
             });
-       
+
             return Task.FromResult(new AddClientSubscriptionReply { Status = reply.Status });
         }
 
@@ -123,8 +117,7 @@ namespace Microservice.DashboardManager.Services
                 ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
             };
 
-            using var channel = GrpcChannel.ForAddress(
-                Configuration.GetSection("gRPCConnections")["Micriservices.SubscriptionManager"],
+            using var channel = GrpcChannel.ForAddress(ServicesIP.Subscription,
                 new GrpcChannelOptions { HttpHandler = httpHandler }
             );
 

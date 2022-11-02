@@ -43,7 +43,7 @@ namespace Microservice.DashboardManager.Services
             };
             using var channel = GrpcChannel.ForAddress("https://localhost:49165", new GrpcChannelOptions { HttpHandler = httpHandler });
             var client = new MapService.MapServiceClient(channel);
-            if ((request.Cadastre == null && request.CategoryName != null) || 
+            if ((request.Cadastre == null && request.CategoryName != null) ||
                 (request.Cadastre != null && request.CategoryName == null))
             {
                 return Task.FromResult(new ModelReply { Status = "cadaster error" });

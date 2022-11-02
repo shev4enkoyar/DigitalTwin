@@ -19,7 +19,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Protobuf Include="Protos\greet.proto" GrpcServices="Server" />
     <Protobuf Include="Protos\mapProto.proto" GrpcServices="Server" />
 	<Protobuf Include="Protos\productProto.proto" GrpcServices="Server" />
 	<Protobuf Include="Protos\digitalModelProto.proto" GrpcServices="Server" />
@@ -49,6 +48,10 @@
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.17.0" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="5.0.10" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Shared\Shared.csproj" />
   </ItemGroup>
 
 </Project>

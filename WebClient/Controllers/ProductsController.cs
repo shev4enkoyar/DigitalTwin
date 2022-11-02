@@ -4,6 +4,7 @@ using Microservice.WebClient.Protos;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Shared;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -28,7 +29,7 @@ namespace WebClient.Controllers
             {
                 ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
             };
-            using var channel = GrpcChannel.ForAddress(Configuration.GetSection("gRPCConnections")["Micriservices.DashboardManager"],
+            using var channel = GrpcChannel.ForAddress(ServicesIP.Dashboard,
                 new GrpcChannelOptions { HttpHandler = httpHandler });
 
             var client = new ProductService.ProductServiceClient(channel);

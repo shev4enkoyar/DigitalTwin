@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
+using Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +20,7 @@ using WebClient.Util;
 
 namespace WebClient.Controllers
 {
-    
+
     [ApiController]
     [Route("api/subscriptions")]
     public class SubscriptionsController : ControllerBase
@@ -43,8 +44,7 @@ namespace WebClient.Controllers
                 ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
             };
 
-            using var channel = GrpcChannel.ForAddress(
-                Configuration.GetSection("gRPCConnections")["Micriservices.DashboardManager"],
+            using var channel = GrpcChannel.ForAddress(ServicesIP.Dashboard,
                 new GrpcChannelOptions { HttpHandler = httpHandler }
             );
 
@@ -58,7 +58,7 @@ namespace WebClient.Controllers
                 }
             }
             List<FullSubscriptionModel> result = new List<FullSubscriptionModel>();
-            foreach (var subscription in response.Subscriptions) 
+            foreach (var subscription in response.Subscriptions)
             {
                 List<string> functions = new List<string>();
                 foreach (var id in subscription.FunctionalAccess.Split(";"))
@@ -72,7 +72,7 @@ namespace WebClient.Controllers
 
         [Authorize]
         [HttpGet("activate/{modelId}")]
-        public async Task<IActionResult> ActivateSubscription(int modelId, int days, int subscriptionId) 
+        public async Task<IActionResult> ActivateSubscription(int modelId, int days, int subscriptionId)
         {
             //TODO REDO
             var httpHandler = new HttpClientHandler()
@@ -80,27 +80,26 @@ namespace WebClient.Controllers
                 ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
             };
 
-            using var channel = GrpcChannel.ForAddress(
-                Configuration.GetSection("gRPCConnections")["Micriservices.DashboardManager"],
+            using var channel = GrpcChannel.ForAddress(ServicesIP.Dashboard,
                 new GrpcChannelOptions { HttpHandler = httpHandler }
             );
 
             var client = new SubscriptionClientService.SubscriptionClientServiceClient(channel);
             var reply = await client.AddClientSubscriptionAsync(new AddClientSubscriptionRequest
             {
-                ActivatedData =  DateTime.Now.ToString(),
+                ActivatedData = DateTime.Now.ToString(),
                 ExpirationData = DateTime.Now.AddDays(days).ToString(),
                 SubscriptionId = subscriptionId,
                 ModelId = modelId
             });
-            if(reply.Status.Equals("ok"))
+            if (reply.Status.Equals("ok"))
                 return Ok();
             return BadRequest(reply.Status);
         }
 
         [Authorize]
         [HttpGet("update")]
-        public async Task<IActionResult> UpdateActivatedSubscription(int days, int subscriptionId) 
+        public async Task<IActionResult> UpdateActivatedSubscription(int days, int subscriptionId)
         {
             //TODO REDO
             var httpHandler = new HttpClientHandler()
@@ -108,8 +107,7 @@ namespace WebClient.Controllers
                 ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
             };
 
-            using var channel = GrpcChannel.ForAddress(
-                Configuration.GetSection("gRPCConnections")["Micriservices.DashboardManager"],
+            using var channel = GrpcChannel.ForAddress(ServicesIP.Dashboard,
                 new GrpcChannelOptions { HttpHandler = httpHandler }
             );
 
@@ -138,8 +136,7 @@ namespace WebClient.Controllers
                 ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
             };
 
-            using var channel = GrpcChannel.ForAddress(
-                Configuration.GetSection("gRPCConnections")["Micriservices.DashboardManager"],
+            using var channel = GrpcChannel.ForAddress(ServicesIP.Dashboard,
                 new GrpcChannelOptions { HttpHandler = httpHandler }
             );
 
@@ -177,8 +174,7 @@ namespace WebClient.Controllers
             if (user == null || user.CompanyId.ToString() == null)
                 return null;
 
-            using var channel = GrpcChannel.ForAddress(
-                Configuration.GetSection("gRPCConnections")["Micriservices.DashboardManager"],
+            using var channel = GrpcChannel.ForAddress(ServicesIP.Dashboard,
                 new GrpcChannelOptions { HttpHandler = httpHandler }
             );
 

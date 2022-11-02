@@ -6,6 +6,7 @@ using System;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using Microservice.WebClient.Protos;
+using Shared;
 
 namespace WebClient.Controllers
 {
@@ -29,8 +30,7 @@ namespace WebClient.Controllers
                 ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
             };
 
-            using var channel = GrpcChannel.ForAddress(
-                Configuration.GetSection("gRPCConnections")["Micriservices.MapManager"],
+            using var channel = GrpcChannel.ForAddress(ServicesIP.Map,
                 new GrpcChannelOptions { HttpHandler = httpHandler }
             );
 
@@ -39,7 +39,7 @@ namespace WebClient.Controllers
             {
                 Cadaster = cadaster
             });
-            if(reply.Status.Equals("ok"))
+            if (reply.Status.Equals("ok"))
                 return Ok();
             return NotFound();
         }

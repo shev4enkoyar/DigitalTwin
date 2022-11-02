@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Shared;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -40,8 +41,7 @@ namespace WebClient.Controllers
             if (userId == null)
                 return null;
             var user = await _userManager.FindByIdAsync(userId);
-            using var channel = GrpcChannel.ForAddress(
-                Configuration.GetSection("gRPCConnections")["Micriservices.DashboardManager"],
+            using var channel = GrpcChannel.ForAddress(ServicesIP.Dashboard,
                 new GrpcChannelOptions { HttpHandler = httpHandler }
             );
 
@@ -79,7 +79,7 @@ namespace WebClient.Controllers
                     Name = name,
                     ProductId = productId,
                     CompanyId = user.CompanyId.ToString()
-                    
+
                 };
             else
                 request = new ModelRequest
@@ -91,8 +91,7 @@ namespace WebClient.Controllers
                     CategoryName = categoryName
                 };
 
-            using var channel = GrpcChannel.ForAddress(
-                Configuration.GetSection("gRPCConnections")["Micriservices.DashboardManager"],
+            using var channel = GrpcChannel.ForAddress(ServicesIP.Dashboard,
                 new GrpcChannelOptions { HttpHandler = httpHandler });
 
             ModelReply reply = new DigitalModelService.DigitalModelServiceClient(channel).PushDigitalModels(request);
