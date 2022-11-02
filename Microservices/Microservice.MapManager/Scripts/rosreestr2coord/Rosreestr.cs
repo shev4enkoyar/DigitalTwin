@@ -12,7 +12,11 @@ namespace TestReestr.Scripts.rosreestr2coord
 {
     public static class Rosreestr
     {
-        private static string PythonPath { get; } = "C:/Users/Nastya/AppData/Local/Programs/Python/Python310/python.exe";
+        private static string ScriptPath { get; } = "/usr/local/bin/rosreestr2coord";
+        /*
+         * Denchick: "C:/Python310/python.exe"
+         * Nastya: "C:/Users/Nastya/AppData/Local/Programs/Python/Python310/python.exe"
+         */
         /// <summary>
         /// The method allows you to get the coordinates of the cadastral object by cadastral number
         /// </summary>
@@ -26,16 +30,7 @@ namespace TestReestr.Scripts.rosreestr2coord
         private static string RunPython(string args)
         {
             ProcessStartInfo start = new ProcessStartInfo();
-            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-            {
-                start.FileName = PythonPath;
-            }
-            else
-            {
-                //TODO linux path
-                start.FileName = "python.exe";
-            }
-
+            start.FileName = ScriptPath;
             start.Arguments = args;
             start.UseShellExecute = false;// Do not use OS shell
             start.CreateNoWindow = true; // We don't need new window
@@ -50,11 +45,12 @@ namespace TestReestr.Scripts.rosreestr2coord
                     return result;
                 }
             }
+            
         }
 
         private static string ParseResult(string cadastre)
         {
-            if (RunPython($"-m rosreestr2coord -c {cadastre}").Contains("geojson"))
+            if (RunPython($"-c {cadastre}").Contains("geojson"))
             {
                 string path = Path.Combine(Directory.GetCurrentDirectory(), "output", "geojson", $"{cadastre.Replace(":", "_")}.geojson");
                 Root cadastreObject;

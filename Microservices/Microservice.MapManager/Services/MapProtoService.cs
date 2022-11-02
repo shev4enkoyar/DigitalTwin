@@ -47,7 +47,7 @@ namespace Microservice.MapManager.Services
                 {
                     MapId = map.Id,
                     Points = Rosreestr.GetCoordinatesByCadastre(request.Cadaster),
-                    CategoryId = _dbContext.FigureCategories.FirstOrDefault(x => x.Name.Equals(request.CategoryName)).Id
+                    CategoryId = _dbContext.FigureCategories.FirstOrDefault(x => x.FigureType.Equals("polygon")).Id
                 };
 
                 _dbContext.Figures.Add(cadastreFigure);

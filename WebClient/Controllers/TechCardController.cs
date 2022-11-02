@@ -73,7 +73,7 @@ namespace WebClient.Controllers
             var user = await _userManager.FindByIdAsync(userId);
             //TODO REDO
             ModelRequest request;
-            if (cadaster == null && categoryName == null)
+            if (cadaster == null || categoryName == null)
                 request = new ModelRequest
                 {
                     Name = name,
