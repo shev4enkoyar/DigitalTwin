@@ -24,7 +24,7 @@ namespace Microservice.DashboardManager.Services
                 ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
             };
 
-            using var channel = GrpcChannel.ForAddress(ServicesIP.Subscription,
+            using var channel = GrpcChannel.ForAddress(MicroservicesIP.Subscription,
                 new GrpcChannelOptions { HttpHandler = httpHandler }
             );
 
@@ -59,7 +59,7 @@ namespace Microservice.DashboardManager.Services
                 ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
             };
 
-            using var channel = GrpcChannel.ForAddress(ServicesIP.Subscription,
+            using var channel = GrpcChannel.ForAddress(MicroservicesIP.Subscription,
                 new GrpcChannelOptions { HttpHandler = httpHandler }
             );
 
@@ -94,7 +94,7 @@ namespace Microservice.DashboardManager.Services
                 ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
             };
 
-            using var channel = GrpcChannel.ForAddress(ServicesIP.Subscription,
+            using var channel = GrpcChannel.ForAddress(MicroservicesIP.Subscription,
                 new GrpcChannelOptions { HttpHandler = httpHandler }
             );
 
@@ -117,7 +117,7 @@ namespace Microservice.DashboardManager.Services
                 ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
             };
 
-            using var channel = GrpcChannel.ForAddress(ServicesIP.Subscription,
+            using var channel = GrpcChannel.ForAddress(MicroservicesIP.Subscription,
                 new GrpcChannelOptions { HttpHandler = httpHandler }
             );
 
