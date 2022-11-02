@@ -30,7 +30,7 @@ namespace WebClient.Controllers
                 ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
             };
 
-            using var channel = GrpcChannel.ForAddress(MicroservicesIP.Map,
+            using var channel = GrpcChannel.ForAddress(MicroservicesIP.External.Map,
                 new GrpcChannelOptions { HttpHandler = httpHandler }
             );
 

@@ -42,7 +42,7 @@ namespace Microservice.DashboardManager.Services
             {
                 ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
             };
-            using var channel = GrpcChannel.ForAddress(MicroservicesIP.Map, new GrpcChannelOptions { HttpHandler = httpHandler });
+            using var channel = GrpcChannel.ForAddress(MicroservicesIP.DockerServices.Map, new GrpcChannelOptions { HttpHandler = httpHandler });
             var client = new MapService.MapServiceClient(channel);
             if ((request.Cadastre == null && request.CategoryName != null) ||
                 (request.Cadastre != null && request.CategoryName == null))

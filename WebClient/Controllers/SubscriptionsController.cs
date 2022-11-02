@@ -44,7 +44,7 @@ namespace WebClient.Controllers
                 ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
             };
 
-            using var channel = GrpcChannel.ForAddress(MicroservicesIP.Dashboard,
+            using var channel = GrpcChannel.ForAddress(MicroservicesIP.External.Dashboard,
                 new GrpcChannelOptions { HttpHandler = httpHandler }
             );
 
@@ -80,7 +80,7 @@ namespace WebClient.Controllers
                 ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
             };
 
-            using var channel = GrpcChannel.ForAddress(MicroservicesIP.Dashboard,
+            using var channel = GrpcChannel.ForAddress(MicroservicesIP.External.Dashboard,
                 new GrpcChannelOptions { HttpHandler = httpHandler }
             );
 
@@ -107,7 +107,7 @@ namespace WebClient.Controllers
                 ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
             };
 
-            using var channel = GrpcChannel.ForAddress(MicroservicesIP.Dashboard,
+            using var channel = GrpcChannel.ForAddress(MicroservicesIP.External.Dashboard,
                 new GrpcChannelOptions { HttpHandler = httpHandler }
             );
 
@@ -136,7 +136,7 @@ namespace WebClient.Controllers
                 ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
             };
 
-            using var channel = GrpcChannel.ForAddress(MicroservicesIP.Dashboard,
+            using var channel = GrpcChannel.ForAddress(MicroservicesIP.External.Dashboard,
                 new GrpcChannelOptions { HttpHandler = httpHandler }
             );
 
@@ -174,7 +174,7 @@ namespace WebClient.Controllers
             if (user == null || user.CompanyId.ToString() == null)
                 return null;
 
-            using var channel = GrpcChannel.ForAddress(MicroservicesIP.Dashboard,
+            using var channel = GrpcChannel.ForAddress(MicroservicesIP.External.Dashboard,
                 new GrpcChannelOptions { HttpHandler = httpHandler }
             );
 

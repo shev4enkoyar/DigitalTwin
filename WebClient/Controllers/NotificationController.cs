@@ -4,7 +4,6 @@ using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
-using System.Threading.Tasks;
 using WebClient.Data;
 using WebClient.Models;
 
@@ -23,7 +22,7 @@ namespace WebClient.Controllers
         }
 
         [HttpGet("get_all")]
-        public async Task<string> GetUserNotifications()
+        public string GetUserNotifications()
         {
             string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             IEnumerable<Notification> notifications = _dbContext.Notifications.Where(x => x.UserId == userId).ToList();
