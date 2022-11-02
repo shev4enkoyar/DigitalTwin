@@ -9,7 +9,7 @@ import authService from "../../../api-authorization/AuthorizeService";
 import { ThemeContextConsumer } from "../../../ThemeContext";
 import { NotificationType } from "./util/NotificationType";
 
-function NotificationDropDown({ direction, ...args }) {
+function NotificationDropdown({ direction, ...args }) {
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const [notifications, setNotifications] = useState(null);
 
@@ -101,4 +101,4 @@ function NotificationDropDown({ direction, ...args }) {
 }
 
 
-export default NotificationDropDown;
+export default NotificationDropdown;

@@ -24,24 +24,23 @@ export class NavMenu extends Component {
         });
     }
 
-    render() {
-        return (
-            <ThemeContextConsumer>{
-                context => (
-                    <header className={context.theme + (this.props.Gray ? "Gray " : " " + context.theme + "ForInsideCardShadow ")}>
-                        <Navbar className="navbar-expand-sm navbar-toggleable-sm ng-white box-shadow  " dark>
-                            <Container >
-                                <NavbarBrand className={context.theme + (this.props.Gray ? "Gray " : " ")} tag={Link} to="/">AgroDigitalTwin</NavbarBrand>
-                                <ul style={{ flexDirection: "inherit" }} className="navbar-nav flex-grow">
-                                    <ThemeToggler />
-                                    <LoginMenu>
-                                    </LoginMenu>
-                                </ul>
-                            </Container>
-                        </Navbar>
-                    </header>)
-            }
-            </ThemeContextConsumer>
-        );
-    }
+  render () {
+      return (
+     <ThemeContextConsumer>{
+     context => (
+       <header className={context.theme + (this.props.Gray ? "Gray " : " " + context.theme +"ForInsideCardShadow ")}>
+        <Navbar className="navbar-expand-sm navbar-toggleable-sm ng-white box-shadow  " dark>
+          <Container >
+            <NavbarBrand className={context.theme + (this.props.Gray ? "Gray " : " ")} tag={Link} to="/">AgroDigitalTwin</NavbarBrand>
+              <ul style={{flexDirection: "inherit"}} className="navbar-nav flex-grow">
+                <ThemeToggler />
+                <LoginMenu/>
+              </ul>
+          </Container>
+        </Navbar>
+      </header>)
+      }
+     </ThemeContextConsumer>
+    );
+  }
 }
