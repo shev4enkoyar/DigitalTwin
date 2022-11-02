@@ -2,7 +2,6 @@
 import Input from '../../components/input/Input.js';
 import Combobox from '../../components/combobox/ComboBox.js';
 import CardForBody from '../../components/cardForBody/CardForBody.js';
-import {Button} from "reactstrap/lib";
 const CardNameModel = (props) => {
     const isPred = ["Да", "Нет",]
 
@@ -14,9 +13,9 @@ const CardNameModel = (props) => {
                 </h5>
                 <Input value={props.values.name} onInput={(event) => { var reg = /^[0-9A-Za-zА-Яа-я]*$/i.test(event.target.value); if (reg) props.setStatus({ name: event.target.value.trim() }) }} className="input" classNameP="textForSign" Label="Наименование модели" placeholder="Введите наименование..." />
                 <Combobox onChange={(empty) => { props.setStatus({ pred: empty }) }} className="FormControlSelect minWForCombobox" classTextCombobox="textForSign" textCombobox="Был ли ранее предшественник?" options={isPred} />
-                <Button onClick={() => { if (props.values.name) props.onClick() }} className="btn btn-primary " style={{ width: "190px" }}>
+                <button onClick={() => { if (props.values.name) props.onClick() }} className="btn btn-primary" style={{ width: "190px" }}>
                     Далее
-                </Button>
+                </button>
                 <div className="text-center">
                     <a style={{ color: '#F5CA5D', textDecoration: 'auto', fontSize: '85%' }} href="/models">
                         Вернуться к моделям

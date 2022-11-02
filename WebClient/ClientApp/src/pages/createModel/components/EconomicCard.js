@@ -3,7 +3,7 @@ import BaseCard from "./BaseCard";
 import Input from "../../../components/input/Input";
 import React from "react";
 import authService from "../../../components/api-authorization/AuthorizeService";
-import {Button, Container} from "reactstrap/lib";
+import {Container} from "reactstrap";
 const EconomicCard = (props) => {
     const CreateTechCard = async (digitalModel) => {
         const token = await authService.getAccessToken();
@@ -39,10 +39,10 @@ const EconomicCard = (props) => {
                 <Input Label="Работник на га" classNameP="textForSign12" className="inpCreateForDashCard" contClass="contForInpDashE" value={props.values.workerN} onInput={(event) => { var reg = /^([0-9]*)$/i.test(event.target.value); if (reg) props.setStatus({ workerN: event.target.value.trim() }) }} />
             </Container>
             <Container className="contButton">
-                <Button onClick={() => { props.Back() }} className="btn btn-primary m-2">
+                <button onClick={() => { props.Back() }} className="btn btn-primary m-2">
                     Назад
-                </Button>
-                <Button className="btn btn-primary my-2"  onClick={() => {
+                </button>
+                <button className="btn btn-primary my-2"  onClick={() => {
                     let digitalModel = {
                         Name: props.data.at(0).name,
                         UserId: -1,
@@ -57,7 +57,7 @@ const EconomicCard = (props) => {
                         color: "#fff", textDecoration: 'none'}} href="/models">
                             Создать модель
                     </a>
-                </Button>
+                </button>
             </Container>
         </BaseCard>
     )

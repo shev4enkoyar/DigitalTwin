@@ -3,7 +3,7 @@ import './CardsForDashboard.css';
 import BaseCard from "./BaseCard";
 import React, {Component} from "react";
 import authService from "../../../components/api-authorization/AuthorizeService";
-import {Button, Container} from "reactstrap/lib";
+import {Container, Row} from "reactstrap";
 class FieldCard extends Component{
     constructor(props) {
         super(props);
@@ -11,14 +11,7 @@ class FieldCard extends Component{
     }
     render() {
         return (
-            <BaseCard className="widForCult" visible={this.props.visible} off={this.props.statusOff} hText="Статус тех.карты" descr="Требуется добавить данные о поле!" notifyColor="#DC3545"
-                      isBut={
-                          <Button className="blueBut ButAllMini" >
-                              <a href="/map">
-                                  <img style={{ width: "25px", height: "25px" }} className="icon" src="https://img.icons8.com/small/344/map.png" />
-                              </a>
-                          </Button>
-                      }>
+            <BaseCard className="widForCult" visible={this.props.visible} off={this.props.statusOff} hText="Статус тех.карты" descr="Требуется добавить данные о поле!" notifyColor="#DC3545">
                 {
                     this.state.error == null
                         ?
@@ -40,31 +33,33 @@ class FieldCard extends Component{
                     />
                 </Container>
                 <Container className="contButton">
-                    <Button onClick={() => { this.props.Back() }} className="btn m-2" style={{ width: "190px" }} >
-                        Назад
-                    </Button>
-                    <Button className="btn btn-primary m-2"
-                            style={{ width: "190px" }}
-                            onClick={() => {
-                                this.props.onClick()
+                    <Row className="mx-2">
+                        <button onClick={() => { this.props.Back() }} className="btn btn-primary mr-2 my-2" style={{ width: "max-content" }} >
+                            Назад
+                        </button>
+                        <button className="btn btn-primary ml-2 my-2"
+                            style={{ width: "max-content" }}
+                            onClick={async () => {
+                                let cadaster = this.props.values.kad;
+                                let validate = await this.validateCadaster(cadaster);
+                                debugger;
+                                if (validate)
+                                    this.props.onClick()
+                                else
+                                    this.setState({ error: "Кадастровый номер не найден" })
                             }}
-                    >
-                        Пропустить
-                    </Button>
-                    <Button className="btn btn-primary m-2"
-                        style={{ width: "190px" }}
-                        onClick={async () => {
-                            let cadaster = this.props.values.kad;
-                            let validate = await this.validateCadaster(cadaster);
-                            debugger;
-                            if (validate)
-                                this.props.onClick()
-                            else
-                                this.setState({ error: "Кадастровый номер не найден" })
+                        >
+                            Далее
+                        </button>
+                    </Row>
+                    <button className="btn btn-primary m-2"
+                        style={{ width: "max-content" }}
+                        onClick={() => {
+                            this.props.onClick()
                         }}
                     >
-                        Далее
-                    </Button>
+                        Пропустить
+                    </button>
                 </Container>
             </BaseCard>
         )

@@ -1,7 +1,7 @@
 ﻿import './CardsForDashboard.css';
 import React from "react";
 import BaseCard from "./BaseCard";
-import { Button, Container } from "reactstrap/lib";
+import { Container, Row } from "reactstrap";
 const TransportCard = (props) => {
     const warning = () => {
         if ((props.values.zasev.length > 0) && (props.values.obrabotka.length > 0) && (props.values.sbor.length > 0)) {
@@ -17,20 +17,22 @@ const TransportCard = (props) => {
     return (
         <BaseCard className="widForCardWithTable" visible={props.visible} off={props.off} hText="Статус тех.карты" descr={warning()} notifyColor="#DC3545" >
             <Container style={{ display: 'flex', justifyContent: 'center', padding: '0px', margin: '0px 0px 0.5rem 0px', width: '100%' }}>
-                <Button onClick={() => { props.setStatus({ isActive: true }) }} className="btn btn-warning my-2" style={{ width: "190px" }} >
+                <button onClick={() => { props.setStatus({ isActive: true }) }} className="btn btn-warning my-2" style={{ width: "190px" }} >
                     Выбрать
-                </Button>
+                </button>
             </Container>
             <Container className="contButtonBCard">
-                <Button onClick={() => { props.Back() }} className="btn btn-primary m-2" style={{ width: "25%" }} >
-                    Назад
-                </Button>
-                <Button className="btn m-2" style={{ width: "32%" }} onClick={() => { props.onClick() }}>
+                <Row className="mx-2">
+                    <button onClick={() => { props.Back() }} className="btn btn-primary mr-2 my-2" style={{ width: "max-content" }} >
+                        Назад
+                    </button>
+                    <button className="btn btn-primary ml-2 my-2" style={{ width: "max-content" }} onClick={() => { console.log(props.values.zasev.length, props.values.obrabotka.length, props.values.sbor.length); if ((props.values.zasev.length>0) && (props.values.obrabotka.length>0) && (props.values.sbor.length>0)) props.onClick() }}>
+                        Далее
+                    </button>
+                </Row>
+                <button className="btn btn-primary m-2" style={{ width: "max-content" }} onClick={() => { props.onClick() }}>
                     Пропустить
-                </Button>
-                <Button className="btn btn-primary m-2" style={{ width: "25%" }} onClick={() => { console.log(props.values.zasev.length, props.values.obrabotka.length, props.values.sbor.length); if ((props.values.zasev.length>0) && (props.values.obrabotka.length>0) && (props.values.sbor.length>0)) props.onClick() }}>
-                    Далее
-                </Button>
+                </button>
             </Container>
         </BaseCard>
     )
