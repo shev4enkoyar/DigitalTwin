@@ -9,9 +9,9 @@ namespace Shared
     {
         public static class DockerServices
         {
-            private static readonly string dashboard = "https://microservice.dashboardmanager:49162";
-            private static readonly string map = "https://microservice.mapmanager:49165";
-            private static readonly string subscription = "https://microservice.subscriptionmanager:49169";
+            private static readonly string dashboard = "microservice.dashboardmanager";
+            private static readonly string map = "microservice.mapmanager";
+            private static readonly string subscription = "microservice.subscriptionmanager";
             private static readonly string internetOfThings = "https://localhost:49165";  //TODO TEST!!!
 
             #region Properties
