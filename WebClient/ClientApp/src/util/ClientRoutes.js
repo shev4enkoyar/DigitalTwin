@@ -9,5 +9,6 @@ export const ClientRoutes = {
     DASHBOARD: 'dashboard',
     MAP: 'map',
     RECOMMENDATIONS: 'recommendation',
-    COMPANY_INVITE: 'inviteCompany'
+    COMPANY_INVITE: 'inviteCompany',
+    IOTPAGE:'iot'
 }

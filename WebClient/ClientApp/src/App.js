@@ -13,6 +13,7 @@ import CreateModel from "./pages/createModel/CreateModel";
 import { Dashboard } from "./pages/Dashboard";
 import DashboardEmpty from "./pages/dashboardEmpty/DashboardEmpty";
 import Home from './pages/home/Home.js';
+import IotPage from './pages/iotPage/IotPage';
 import MapMain from "./pages/map/MapMain";
 import Models from "./pages/models/Models";
 import Recommendations from "./pages/Recommendations";
@@ -40,6 +41,7 @@ export default class App extends Component {
                     <AuthorizeRoute path={ClientRoutes.PREFIX + ClientRoutes.SUBSCRIPTIONS_ALL} component={AllSubscriptions} />
                     <AuthorizeRoute path={ClientRoutes.PREFIX + ClientRoutes.RECOMMENDATIONS} component={Recommendations} />
                     <AuthorizeRoute path={ClientRoutes.PREFIX + ClientRoutes.DASHBOARD + ClientRoutes.SUFFIX_MODEL_ID} component={Dashboard} />
+                    <AuthorizeRoute path={ClientRoutes.PREFIX + ClientRoutes.IOTPAGE } component={IotPage} />
                     <AuthorizeRoute path={ClientRoutes.PREFIX + ClientRoutes.MAP + ClientRoutes.SUFFIX_MODEL_ID} component={MapMain} />
                     <AuthorizeRouteWithPermission path={ClientRoutes.PREFIX + ClientRoutes.REGISTER_COMPANY} component={CreateCompany} name={ClientRoutes.REGISTER_COMPANY} />
                     <AuthorizeRouteWithPermission path={ClientRoutes.PREFIX + ClientRoutes.COMPANY_INVITE} component={CompanyInvite} name={ClientRoutes.COMPANY_INVITE} />
