@@ -9,7 +9,7 @@
     pointer-events: none;
     transition: 0.5s;
     margin-top: 45px;
-    justify-content: flex-end;
+    justify-content: center;
 }
 .containerForPop.active {
     z-index: 100;
