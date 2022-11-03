@@ -14,14 +14,22 @@ export class Dashboard extends Component {
 
 
     iconsLeftBar = [
-        new IconButton("#/", "Главная панель", <HomePanel_Icon />),
-        new IconButton("/map/" + this.props.match.params.modelId, "Карта", <Map_Icon />),
-        new IconButton("#nogo", "Документы", <DocIcon />),
-        new IconButton("#nogo", "Датчики IoT", <SensorsIoT />),
-        new IconButton("/recom", "Рекомендации", <RecIcon />),
-        new IconButton("#nogo", "История цен", <HistoryPriceIcon />),
-        new IconButton("#nogo", "График работ", <GraphicIcon />),
-        new IconButton("/models", "Вернуться к выбору модели", <BackIn_Icon />)
+        new IconButton("#/", "Главная панель", 
+            <img style={{ width: "25px", height: "25px", margin: "7px 0px 0px" }} className="icon" src="https://img.icons8.com/windows/344/home.png" />),
+        new IconButton("/map/" + this.props.match.params.modelId, "Карта", 
+            <img style={{ width: "25px", height: "25px", margin: "7px 0px 0px"  }} className="icon" src="https://img.icons8.com/small/344/map.png" />),
+        new IconButton("#nogo", "Документы",
+            <img style={{ width: "25px", height: "25px", margin: "7px 0px 0px" }} className="icon" src="https://img.icons8.com/ios/344/document--v1.png" />),
+        new IconButton("#nogo", "Датчики IoT", 
+            <img style={{ width: "25px", height: "25px", margin: "7px 0px 0px" }} className="icon" src="https://img.icons8.com/windows/344/sensor.png" />),
+        new IconButton("/recom", "Рекомендации", 
+            <img style={{ width: "25px", height: "25px", margin: "7px 0px 0px" }} className="icon" src="https://img.icons8.com/ios-glyphs/344/task.png" />),
+        new IconButton("#nogo", "История цен", 
+            <img style={{ width: "25px", height: "25px", margin: "7px 0px 0px" }} className="icon" src="https://img.icons8.com/material-outlined/344/ruble.png" />),
+        new IconButton("#nogo", "График работ", 
+            <img style={{ width: "25px", height: "25px", margin: "7px 0px 0px"  }} className="icon" src="https://img.icons8.com/ios/344/rebalance-portfolio.png" />),
+        new IconButton("/models", "Вернуться к выбору модели",
+            <img style={{ width: "25px", height: "25px", margin: "7px 0px 0px"  }} className="icon" src="https://img.icons8.com/ios/344/logout-rounded--v1.png" />)
     ];
 
 
