@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Microservice.InternetOfThingsManager.Controllers
 {
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class SensorController : ControllerBase
     {
