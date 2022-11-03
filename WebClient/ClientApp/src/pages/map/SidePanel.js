@@ -5,57 +5,54 @@ import './SidePanel.css';
 import SidePanelCanvas from "./SidePanelCanvas";
 import FiguresTypes from "./util/FiguresTypes";
 import PinType from "./util/PinType";
+import {
+    Container,
+    Form,
+    FormGroup,
+    Input
+} from "reactstrap";
+import {ButtonDropdown} from "./components/ButtonDropdown";
 
 const SidePanel = (props) => {
 
-    const [isActive, setActive] = useState(false);
-    const [popupStyle, setPopupStyle] = useState(null);
-    const [popupChildren, setPopupChildren] = useState(null);
-    const handleActiveChange = () => {
-        setActive(!isActive);
-    }
     const popupChildrenContent = (el) => {
         let points = "";
         return (
-            <>
-                <h5 style={{ marginBottom: "10px" }}>Укажите координаты<br /> через запятую:</h5>
-                {/*<Form.Group style={{ margin: "0 5px"}} className="mb-3" controlId="formBasicEmail">
-                    <Form.Control onChange={(event) => points = event.target.value} placeholder="Введите координаты" />
-                    <Form.Text className="text-muted">
-                        Пример ввода:<br/> 25.33245,12.555663,12.22345,12.555667
-                    </Form.Text>
-                </Form.Group>*/}
-                <Button onClick={() => {
-                    if (points === "")
-                        alert("Точки не указаны!")
-                    else
-                        changePinTypeWithPoints(el, points);
-                }}>
-                    Создать элемент
-                </Button>
-                <p>или</p>
-                <Button onClick={() => {
-                    if (props.pinType.category === el.id && el.type === FiguresTypes.MARKER)
-                        changePinTypeToDefault();
-                    else
-                        changePinType(el);
-                    setActive(false);
-                }
-                }>
-                    Указать на карте
-                </Button>
-            </>
+            <div className="py-3">
+                <h5 className="text-center" style={{ marginBottom: "10px" }}>Укажите координаты<br /> через запятую:</h5>
+                <Form>
+                    <FormGroup style={{ margin: "0 5px"}} className="mb-1" controlId="formBasicEmail">
+                        <Input onChange={(event) => points = event.target.value} placeholder="Введите координаты" />
+                        <p className="text-muted">
+                            <em>Пример ввода:<br/> 25.33245, 12.555663, 12.22345, 12.555667</em>
+                        </p>
+                    </FormGroup>
+                </Form>
+                <Container className="text-center">
+                    <Button color="primary" onClick={() => {
+                        if (points === "")
+                            alert("Точки не указаны!")
+                        else
+                            changePinTypeWithPoints(el, points);
+                    }}>
+                        Создать элемент
+                    </Button>
+                    <p className="my-0">или</p>
+                    <Button color="primary" onClick={() => {
+                        if (props.pinType.category === el.id && el.type === FiguresTypes.MARKER)
+                            changePinTypeToDefault();
+                        else
+                            changePinType(el);
+                        setActive(false);
+                    }
+                    }>
+                        Указать на карте
+                    </Button>
+                </Container>
+            </div>
         );
     }
-    const buttonStyle = {
-        backgroundColor: "transparent",
-        backgroundRepeat: "no-repeat",
-        border: "none",
-        cursor: "pointer",
-        overflow: "hidden",
-        outline: "none",
-        width: "fit-content"
-    }
+
     let categoriesButtons = props.categoriesProto !== null
         ?
         props.categoriesProto.filter(el => {
@@ -66,24 +63,14 @@ const SidePanel = (props) => {
         }).map((el, index) => {
             return (
                 <li style={{ listStyleType: "none" }} key={index} className="mt-3">
-                    <button style={buttonStyle} onClick={() => {
-                        setPopupChildren(popupChildrenContent(el))
-                        setPopupStyle({ margin: 20 + (index + 1) * 32 + "px 50px" });
-                        handleActiveChange();
-                    }} >
-                        <img style={{ height: "30px" }} src={el.icon} alt={"Logo"} className='icon' />
-                    </button>
+                    <ButtonDropdown el={el}>
+                        {popupChildrenContent(el)}
+                    </ButtonDropdown>
                 </li>
             )
         })
         :
         null;
-
-    const RenderCategoriesPopUp = () => {
-        return <PopUpWithBlurCanvas styleFlex={popupStyle} isActive={isActive} handleActiveChange={handleActiveChange} >
-            {popupChildren}
-        </PopUpWithBlurCanvas>
-    }
 
     return (
         <SidePanelCanvas>
@@ -91,8 +78,6 @@ const SidePanel = (props) => {
                 {
                     categoriesButtons
                 }
-                <RenderCategoriesPopUp />
-
                 <li style={{ marginTop: '80%', listStyleType: "none" }}>
                     <button className="mapSidebarButton" onClick={() => {
                         handleRemoveButtonActive();
