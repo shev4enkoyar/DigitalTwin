@@ -43,7 +43,6 @@ const SidePanel = (props) => {
                             changePinTypeToDefault();
                         else
                             changePinType(el);
-                        setActive(false);
                     }
                     }>
                         Указать на карте
