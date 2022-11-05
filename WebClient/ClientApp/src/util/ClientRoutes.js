@@ -10,5 +10,6 @@ export const ClientRoutes = {
     MAP: 'map',
     RECOMMENDATIONS: 'recommendation',
     COMPANY_INVITE: 'inviteCompany',
-    IOTPAGE:'iot'
+    IOTPAGE: 'iot',
+    DOCS: 'docs',
 }
