@@ -90,7 +90,7 @@ namespace WebClient.Areas.Identity.Pages.Account
                         protocol: Request.Scheme);
 
                     await _emailSender.SendEmailAsync(Input.Email, "Подтвердите вашу почту",
-                        $"Пожалуйста, подтвердите свой аккаунт <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>нажав здесь</a>.");
+                        $"Пожалуйста, подтвердите свой аккаунт <a href={HtmlEncoder.Default.Encode(callbackUrl)}>нажав здесь</a>.");
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {

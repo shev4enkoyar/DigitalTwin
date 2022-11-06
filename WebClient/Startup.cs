@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -10,6 +11,7 @@ using WebClient.Data;
 using WebClient.Hubs;
 using WebClient.Interface;
 using WebClient.Models;
+using WebClient.Services;
 using IConfiguration = Microsoft.Extensions.Configuration.IConfiguration;
 
 namespace WebClient
@@ -29,6 +31,11 @@ namespace WebClient
             {
                 options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"));
             });
+
+            //Email
+            services.AddTransient<IEmailSender, EmailSender>();
+            services.Configure<AuthMessageSenderOptions>(Configuration);
+            //
 
             services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddRoles<ApplicationRole>()
