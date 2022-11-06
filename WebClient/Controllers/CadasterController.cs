@@ -1,18 +1,17 @@
 ﻿using Grpc.Net.Client;
+using Microservice.WebClient.Protos;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Net.Http;
-using System;
-using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
-using Microservice.WebClient.Protos;
 using Shared;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace WebClient.Controllers
 {
     [Authorize]
     [ApiController]
-    [Route("api/cadaster")]
+    [Route("api/[controller]")]
     public class CadasterController : ControllerBase
     {
         public IConfiguration Configuration { get; }

@@ -12,7 +12,7 @@ namespace WebClient.Controllers
 {
     [Authorize]
     [ApiController]
-    [Route("api/roles")]
+    [Route("api/[controller]")]
     public class RolesController : ControllerBase
     {
         private readonly RoleManager<ApplicationRole> _roleManager;

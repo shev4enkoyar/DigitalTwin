@@ -20,9 +20,8 @@ using WebClient.Util;
 
 namespace WebClient.Controllers
 {
-
     [ApiController]
-    [Route("api/subscriptions")]
+    [Route("api/[controller]")]
     public class SubscriptionsController : ControllerBase
     {
         private readonly UserManager<ApplicationUser> _userManager;

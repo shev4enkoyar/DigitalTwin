@@ -12,8 +12,8 @@ using System.Threading.Tasks;
 namespace WebClient.Controllers
 {
     [Authorize]
-    [Route("api/products")]
-    public class ProductsController
+    [Route("api/[controller]")]
+    public class ProductsController : ControllerBase
     {
         public IConfiguration Configuration { get; }
 

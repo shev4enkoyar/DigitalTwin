@@ -17,7 +17,7 @@ namespace WebClient.Controllers
 {
     [Authorize]
     [ApiController]
-    [Route("api/techcard")]
+    [Route("api/[controller]")]
     public class TechCardController : ControllerBase
     {
         public IConfiguration Configuration { get; }

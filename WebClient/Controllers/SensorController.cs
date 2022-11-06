@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace WebClient.Controllers
@@ -10,21 +9,12 @@ namespace WebClient.Controllers
     public class SensorController : ControllerBase
     {
         [HttpPost("send/{sensorId}")]
-        public IActionResult Send(string sensorId, [FromBody] string content)
+        public IActionResult Send(string sensorId, [FromBody] Root content)
         {
             if (!Guid.TryParse(sensorId, out Guid sensorGuid))
-            {
                 return BadRequest($"Parsing sensorId ({sensorId}) to GUID not successful");
-            }
-            try
-            {
-                Root sensorJson = JsonSerializer.Deserialize<Root>(content);
-            }
-            catch (JsonException)
-            {
-                return BadRequest("Invalid JSON");
-            }
-            return Ok();
+
+            return Ok(content);
         }
     }
 

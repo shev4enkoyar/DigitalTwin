@@ -11,7 +11,7 @@ namespace WebClient.Controllers
 {
     [Authorize]
     [ApiController]
-    [Route("api/notification")]
+    [Route("api/[controller]")]
     public class NotificationController : ControllerBase
     {
         private readonly ApplicationDbContext _dbContext;

@@ -12,7 +12,7 @@ namespace WebClient.Controllers
 {
     [Authorize]
     [ApiController]
-    [Route("api/functional")]
+    [Route("api/[controller]")]
     public class FunctionalController : ControllerBase
     {
         private readonly UserManager<ApplicationUser> _userManager;
@@ -36,7 +36,7 @@ namespace WebClient.Controllers
                 return null;
             var userRoles = _dbContext.UserRoles.Where(x => x.UserId == userId).ToList();
             var roles = userRoles.Select(x => _roleManager.FindByIdAsync(x.RoleId).Result).ToList();
-            
+
             List<string> functions = new List<string>();
             foreach (var item in roles)
                 foreach (var functionId in item.FunctionalAccess.Split(";"))

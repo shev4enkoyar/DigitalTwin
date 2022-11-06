@@ -18,7 +18,7 @@ namespace WebClient.Controllers
 {
     [Authorize]
     [ApiController]
-    [Route("api/company")]
+    [Route("api/[controller]")]
     public class CompanyController : ControllerBase
     {
         private readonly UserManager<ApplicationUser> _userManager;
