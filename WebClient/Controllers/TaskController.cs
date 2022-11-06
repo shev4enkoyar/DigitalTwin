@@ -23,7 +23,7 @@ namespace WebClient.Controllers
             _dbContext = dbContext;
         }
 
-        [HttpGet("get_all")]
+        [HttpGet("get_all/{modelId}")]
         public string GetAllByModelId(int modelId)
         {
             #region Test data
