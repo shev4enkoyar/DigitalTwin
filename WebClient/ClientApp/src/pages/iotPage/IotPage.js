@@ -34,15 +34,46 @@ class IotPage extends Component {
                     <>
                         <SideBarDashboard icons={this.iconsLeftBar} />
                         <Container className={context.theme + "Gray " + "p-0 flex-wrap position-absolute d-flex "} style={{ width: '86%', marginLeft: '11%', marginRight:'3%' }}>
-                            <Row className="h-100 w-100 m-0 flex-column">
+                            <Row className="h-100 w-100 m-0">
+                                <Col className="col-md-3 col d-flex">
+                                    <CardForBody styleForCard={{ minWidth: '100%', margin:'20px' }} classForContB="d-flex flex-column align-items-center" styleTextForCard={{ padding: '5%', minWidth: '100%' }}>
+                                        <h5 style={{ fontFamily: 'Bitter', margin: '10px 0px 0px 0px' }} className="d-flex text-center">
+                                            Сенсоры
+                                        </h5>
+                                        <button className="btn btn-primary my-3">
+                                            Добавить новый
+                                        </button>
+                                        <label className="m-0 text-center" style={{ border: '#4A4A4A solid 1px', padding: '5%', width:'inherit'} }>
+                                            Наименование 1
+                                        </label>
+                                        <label className="m-0 text-center" style={{ border: '#4A4A4A solid 1px', padding: '5%', width: 'inherit' }}>
+                                            Наименование 2
+                                        </label>
+                                        <label className="m-0 text-center" style={{ border: '#4A4A4A solid 1px', padding: '5%', width: 'inherit' }}>
+                                            Наименование 3
+                                        </label>
+                                        <label className="m-0 text-center" style={{ border: '#4A4A4A solid 1px', padding: '5%', width: 'inherit' }}>
+                                            Наименование 4
+                                        </label>
+                                        <label className="m-0 text-center" style={{ border: '#4A4A4A solid 1px', padding: '5%', width: 'inherit' }}>
+                                            Наименование 5
+                                        </label>
+                                        <label className="m-0 text-center" style={{ border: '#4A4A4A solid 1px', padding: '5%', width: 'inherit' }}>
+                                            Наименование 6
+                                        </label>
+                                        <label className="m-0 text-center" style={{ border: '#4A4A4A solid 1px', padding: '5%', width: 'inherit' }}>
+                                            Наименование 7
+                                        </label>
+                                    </CardForBody>
+                                </Col>
                                 <Col className="col-md-6 col d-flex">
-                                    <CardForBody styleForCard={{ minWidth: '100%' }} classForContB="d-flex flex-column align-items-center" styleTextForCard={{ padding: '5%', minWidth: '100%' }}>
-                                        <h5 style={{ fontFamily: 'Bitter', margin: '10px 0px 30px 0px' }} className="d-flex text-center">
+                                    <CardForBody styleForCard={{ minWidth: '100%', margin: '20px' }} classForContB="d-flex flex-column align-items-center" styleTextForCard={{ padding: '1%', minWidth: '100%' }}>
+                                        <h5 style={{ fontFamily: 'Bitter', margin: '10px 0px 30px 0px', width:'100%' }} className="d-flex text-left">
                                             Подключить новый сенсор
                                         </h5>
                                         <Input classNameP="textForSign16" className="input" Label="Псевдоним устройства"></Input>
-                                        <button className="btn btn-primary mt-4" style={{ width: "190px" }}>
-                                            Подключить
+                                        <button className="btn btn-primary mt-4">
+                                            Добавить
                                         </button>
                                     </CardForBody>
                                 </Col>
