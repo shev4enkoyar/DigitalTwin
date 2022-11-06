@@ -24,3 +24,12 @@ services:
     build:
       context: .
       dockerfile: Microservices/Microservice.SubscriptionManager/Dockerfile
+
+  microservice.modeltaskmanager:
+    image: ${DOCKER_REGISTRY-}microservicemodeltaskmanager
+    ports:
+      - "49171:49171"
+    build:
+      context: .
+      dockerfile: Microservices/Microservice.ModelTaskManager/Microservice.ModelTaskManager/Dockerfile
+

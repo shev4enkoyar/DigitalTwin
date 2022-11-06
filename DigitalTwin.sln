@@ -19,7 +19,9 @@ Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-co
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared", "Shared\Shared.csproj", "{0A75E37E-EA35-4BAA-952C-E5F756A1769C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microservice.InternetOfThingsManager", "Microservices\Microservice.InternetOfThingsManager\Microservice.InternetOfThingsManager.csproj", "{2C5B1651-12F1-4568-880A-26351DAF49D6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microservice.InternetOfThingsManager", "Microservices\Microservice.InternetOfThingsManager\Microservice.InternetOfThingsManager.csproj", "{2C5B1651-12F1-4568-880A-26351DAF49D6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microservice.ModelTaskManager", "Microservices\Microservice.ModelTaskManager\Microservice.ModelTaskManager\Microservice.ModelTaskManager.csproj", "{477A761B-5772-4594-97C7-DDA66E4231E8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,6 +61,10 @@ Global
 		{2C5B1651-12F1-4568-880A-26351DAF49D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2C5B1651-12F1-4568-880A-26351DAF49D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2C5B1651-12F1-4568-880A-26351DAF49D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{477A761B-5772-4594-97C7-DDA66E4231E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{477A761B-5772-4594-97C7-DDA66E4231E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{477A761B-5772-4594-97C7-DDA66E4231E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{477A761B-5772-4594-97C7-DDA66E4231E8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -69,6 +75,7 @@ Global
 		{E7605C2E-AF4B-47A3-BE9F-24BF8262A268} = {53CD2FDA-5656-4122-8BBA-9E4C1FF7FC26}
 		{F6DA0046-A163-4D05-AB55-CB14BABE4232} = {53CD2FDA-5656-4122-8BBA-9E4C1FF7FC26}
 		{2C5B1651-12F1-4568-880A-26351DAF49D6} = {53CD2FDA-5656-4122-8BBA-9E4C1FF7FC26}
+		{477A761B-5772-4594-97C7-DDA66E4231E8} = {53CD2FDA-5656-4122-8BBA-9E4C1FF7FC26}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2D3AD7F4-ACE4-4A36-8E93-E122D0824CF2}

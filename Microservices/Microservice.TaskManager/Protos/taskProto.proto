@@ -1,0 +1,26 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "Microservice.ModelTaskManager.Protos";
+
+package taskProto;
+
+
+service TaskService {
+  rpc GetTasks (SendRequest) returns (stream SendReply);
+}
+
+message SendRequest {
+	int32 modelId = 1;
+}
+message SendReply {
+   repeated ModelTask tasks = 1;
+}
+
+message ModelTask {
+  int32 id = 1;
+  string StartDate = 2;
+  string EndDate = 3;
+  string TaskType = 4;
+  bool IsComplete = 5;
+  int32 Progress = 6;
+}
