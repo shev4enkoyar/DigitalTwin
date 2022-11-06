@@ -11,7 +11,7 @@ import {
     FormGroup,
     Input
 } from "reactstrap";
-import {ButtonDropdown} from "./components/ButtonDropdown";
+import { ButtonDropdown } from "./components/ButtonDropdown";
 
 const SidePanel = (props) => {
 
@@ -21,10 +21,10 @@ const SidePanel = (props) => {
             <div className="py-3">
                 <h5 className="text-center" style={{ marginBottom: "10px" }}>Укажите координаты<br /> через запятую:</h5>
                 <Form>
-                    <FormGroup style={{ margin: "0 5px"}} className="mb-1" controlId="formBasicEmail">
+                    <FormGroup style={{ margin: "0 5px" }} className="mb-1" controlId="formBasicEmail">
                         <Input onChange={(event) => points = event.target.value} placeholder="Введите координаты" />
                         <p className="text-muted">
-                            <em>Пример ввода:<br/> 25.33245, 12.555663, 12.22345, 12.555667</em>
+                            <em>Пример ввода:<br /> 25.33245, 12.555663, 12.22345, 12.555667</em>
                         </p>
                     </FormGroup>
                 </Form>
@@ -43,7 +43,6 @@ const SidePanel = (props) => {
                             changePinTypeToDefault();
                         else
                             changePinType(el);
-                        setActive(false);
                     }
                     }>
                         Указать на карте
