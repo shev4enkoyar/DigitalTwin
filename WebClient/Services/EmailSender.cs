@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using System;
 using System.Net;
@@ -10,9 +12,11 @@ namespace WebClient.Services
     public class EmailSender : IEmailSender
     {
         public AuthMessageSenderOptions SenderConfig { get; }
-        public EmailSender(IOptions<AuthMessageSenderOptions> optionsAccessor)
+        public IConfiguration Configuration { get; }
+        public EmailSender(IOptions<AuthMessageSenderOptions> optionsAccessor, IConfiguration configuration)
         {
             SenderConfig = optionsAccessor.Value;
+            Configuration = configuration;
         }
 
         public Task SendEmailAsync(string email, string subject, string message)
@@ -27,14 +31,14 @@ namespace WebClient.Services
             {
                 SmtpClient smtp = new SmtpClient
                 {
-                    Host = SenderConfig.Host,
-                    Port = SenderConfig.IntPort,
-                    Credentials = new NetworkCredential(SenderConfig.Email_User, SenderConfig.Email_Passwort),
+                    Host = Configuration.GetSection("Email").GetValue<string>("Host"),
+                    Port = Configuration.GetSection("Email").GetValue<int>("Port"),
+                    Credentials = new NetworkCredential(Configuration.GetSection("Email").GetValue<string>("Email"), Configuration.GetSection("Email").GetValue<string>("Token")),
                     EnableSsl = true
                 };
                 MailMessage email_Message = new MailMessage();
                 email_Message.To.Add(new MailAddress(email_to));
-                email_Message.From = new MailAddress(SenderConfig.Display_From_Email_Address, SenderConfig.Display_From_Name);
+                email_Message.From = new MailAddress(Configuration.GetSection("Email").GetValue<string>("DisplayFromEmail"), Configuration.GetSection("Email").GetValue<string>("DisplayFromName"));
                 email_Message.Subject = subject;
                 email_Message.Body = message;
                 email_Message.IsBodyHtml = true;
@@ -42,24 +46,9 @@ namespace WebClient.Services
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error EmailSender.cs error:" + ex.InnerException);
+                Console.WriteLine($"Error EmailSender.cs error:{ex.InnerException}\n{SenderConfig.Host}\n{SenderConfig.IntPort}\n{SenderConfig.Email_User}\n");
                 return Task.FromException(ex);
             }
         }
-
-        /*public Task SendEmailAsync(string email, string subject, string htmlMessage)
-        {
-            SmtpClient client = new SmtpClient
-            {
-                Port = int.Parse(Configuration.GetSection("Email")["Port"]),
-                Host = Configuration.GetSection("Email")["Host"],
-                EnableSsl = true,
-                DeliveryMethod = SmtpDeliveryMethod.Network,
-                UseDefaultCredentials = false,
-                Credentials = new NetworkCredential(Configuration.GetSection("Email")["Sender"], Configuration.GetSection("Email")["Token"])
-            };
-
-            return client.SendMailAsync(Configuration.GetSection("Email")["Sender"], email, subject, htmlMessage);
-        }*/
     }
 }
