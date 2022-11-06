@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { Modal } from "reactstrap";
-import { Button, Col, Container, Row } from "reactstrap/lib";
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, Label, Input, FormGroup } from 'reactstrap';
+import { Col, Container, Row } from "reactstrap/lib";
 import authService from "../../components/api-authorization/AuthorizeService";
 import CardForBody from "../../components/cardForBody/CardForBody";
 import { ThemeContextConsumer } from "../../components/ThemeContext";
@@ -13,11 +13,74 @@ class AllSubscriptions extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { tariffs: [], loading: true, modal: false, currentTariff: "" };
+        this.state = {
+            tariffs: [], loading: true, modal: false, currentTariff: "", errors: {} };
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     componentDidMount() {
         this.GetAllTariffsData();
+    }
+
+    Toggle () {
+        this.setState({
+            modal: !this.state.modal
+        })
+    }
+
+    handleValidation (fields) {
+        let errors = {};
+        let formIsValid = true;
+
+        if (!fields["name"]) {
+            formIsValid = false;
+            errors["name"] = "Все поля должны быть заполнены";
+        }
+
+        if (typeof fields["name"] !== "undefined") {
+            if (!fields["name"].match(/^[ЁёА-я]+$/)) {
+                formIsValid = false;
+                errors["name"] = "Использованы недопустимые символы";
+            }
+        }
+
+        if (!fields["email"]) {
+            formIsValid = false;
+            errors["email"] = "Все поля должны быть заполнены";
+        }
+
+        if (typeof fields["email"] !== "undefined") {
+            let lastAtPos = fields["email"].lastIndexOf("@");
+            let lastDotPos = fields["email"].lastIndexOf(".");
+
+            if (
+                !(
+                    lastAtPos < lastDotPos &&
+                    lastAtPos > 0 &&
+                    fields["email"].indexOf("@@") == -1 &&
+                    lastDotPos > 2 &&
+                    fields["email"].length - lastDotPos > 2
+                )
+            ) {
+                formIsValid = false;
+                errors["email"] = "Не кеорректный email";
+            }
+        }
+
+        this.setState({ errors: errors });
+        return formIsValid;
+    }
+
+
+    handleSubmit(event) {
+        event.preventDefault()
+        let fields = {}
+        fields.name = event.target[0].value
+        fields.email = event.target[1].value
+        if (this.handleValidation(fields)) {
+            fields.subscription = this.state.currentTariff
+            console.log(fields)
+        } 
     }
 
     render() {
@@ -26,20 +89,20 @@ class AllSubscriptions extends Component {
                 return (
                     <ThemeContextConsumer>
                         {context => (
-                            <Col lg={4} xl={3} className="mb-5 d-flex justify-content-center p-0">
+                            <Col lg={4} className="mb-5 d-flex justify-content-center p-0">
                                 <CardForBody styleForCard={{ width: "fit-content", height: "100%", padding: "0 5%" }}>
                                     <h3 className={context.theme + " text-center mt-4"} style={{ color: "#fff" }}>
                                         {el.name}
                                     </h3>
                                     <Container className="text-center">
-                                        <Button className="my-4 blue_button" style={{ whiteSpace: "nowrap" }} onClick={() => { this.setState({ currentTariff: el.name }, this.setState({ modal: true })) }}>
+                                        <Button className="my-4 blue_button" style={{ whiteSpace: "nowrap" }} onClick={() => { this.setState({ currentTariff: el.name }, this.Toggle()) }}>
                                             <img style={{ width: "30px", height: "30px" }} className="icon"
                                                 src="https://www.svgrepo.com/show/274451/add.svg" />
                                             {" Оформить подписку"}
                                         </Button>
                                     </Container>
                                     <Container>
-                                        <p style={{ color: "#FFF", fontSize: "0.7rem" }} className="text-center mb-4"><em>Подписка не продлевается автоматически</em></p>
+                                        <p style={{ color: "#FFF", fontSize: "0.7rem" }} className={context.theme + " text-center"} ><em>Подписка не продлевается автоматически</em></p>
                                     </Container>
                                     <Container>
                                         {el.functions.map(func => {
@@ -72,23 +135,44 @@ class AllSubscriptions extends Component {
                     this.state.loading
                         ?   <LoadingFragment fullscreen={true}/>
                         :   <Container className={context.theme + "Gray d-flex justify-content-center w-100"} fluid>
-                                <Row className={context.theme + "Gray mt-3"}>
+                            <Row className={context.theme + "Gray mt-3 d-flex justify-content-center"}>
                                     {content}
                                 </Row>
-                                <Modal animation={false} centered className="subscriptions" show={this.state.modal} onHide={() => { this.setState({ modal: false }) }}>
-                                    <Modal.Header style={{ border: "none" }}>
-                                        <Modal.Title>Оформить подписку</Modal.Title>
-                                    </Modal.Header>
-                                    <Modal.Body>Оформить подписку "{this.state.currentTariff}"</Modal.Body>
-                                    <Modal.Footer style={{ border: "none" }}>
-                                        <Button className="grey_button" onClick={() => { this.setState({ modal: false }) }}>
-                                            Отменить
-                                        </Button>
-                                        <Button className="green_button" onClick={() => { this.setState({ modal: false }) }}>
-                                            Подтвердить
-                                        </Button>
-                                    </Modal.Footer>
-                                </Modal>
+                            <Modal isOpen={this.state.modal} toggle={() => { this.Toggle() }} contentClassName={context.theme + " Gray subscriptions"}>
+                                <ModalHeader toggle={() => { this.Toggle() }} className={context.theme + " Gray"}>Оформить подписку "{this.state.currentTariff}"</ModalHeader>
+                                <ModalBody>
+                                    <Form onSubmit={this.handleSubmit}>
+                                        <FormGroup>
+                                            <Label for="name">
+                                                Имя
+                                            </Label>
+                                            <Input
+                                                id="name"
+                                                name="name"
+                                                type="text"
+                                            />
+                                            <span style={{ color: "red" }}>{this.state.errors["name"]}</span>
+                                        </FormGroup>
+                                        <FormGroup>
+                                            <Label for="email">
+                                                Email
+                                            </Label>
+                                            <Input
+                                                id="email"
+                                                name="email"
+                                                type="email"
+                                            />
+                                            <span style={{ color: "red" }}>{this.state.errors["email"]}</span>
+                                        </FormGroup>
+                                    <Button color="primary" type="submit">
+                                        Оформить подписку
+                                    </Button>{' '}
+                                         <Button color="secondary" onClick={() => { this.Toggle() }}>
+                                        Отменить
+                                    </Button>
+                                    </Form>
+                                </ModalBody>
+                            </Modal>
                             </Container>
                 )
                 }

@@ -12,7 +12,7 @@ class IotPage extends Component {
             <img style={{ width: "25px", height: "25px", margin:"7px 0px 0px" }} className="icon" src="https://img.icons8.com/windows/344/home.png" />),
         new IconButton("/map/" + this.props.match.params.modelId, "Карта",
             <img style={{ width: "25px", height: "25px", margin: "7px 0px 0px" }} className="icon" src="https://img.icons8.com/small/344/map.png" />),
-        new IconButton("#nogo", "Документы",
+        new IconButton("/docs", "Документы",
             <img style={{ width: "25px", height: "25px", margin: "7px 0px 0px" }} className="icon" src="https://img.icons8.com/ios/344/document--v1.png" />),
         new IconButton("#nogo", "Датчики IoT",
             <img style={{ width: "25px", height: "25px", margin: "7px 0px 0px" }} className="icon" src="https://img.icons8.com/windows/344/sensor.png" />),
@@ -38,21 +38,9 @@ class IotPage extends Component {
                                 <Col className="col-md-6 col d-flex">
                                     <CardForBody styleForCard={{ minWidth: '100%' }} classForContB="d-flex flex-column align-items-center" styleTextForCard={{ padding: '5%', minWidth: '100%' }}>
                                         <h5 style={{ fontFamily: 'Bitter', margin: '10px 0px 30px 0px' }} className="d-flex text-center">
-                                            Подключить шлюз
+                                            Подключить новый сенсор
                                         </h5>
-                                        <Input classNameP="textForSign16" className="input" Label="Путь подключения шлюза"></Input>
-                                        <Input classNameP="textForSign16" className="input" Label="Токен авторизации"></Input>
-                                        <button className="btn btn-primary mt-4" style={{ width: "190px" }}>
-                                            Подключить
-                                        </button>
-                                    </CardForBody>
-                                </Col>
-                                <Col className="col-md-6 col d-flex">
-                                    <CardForBody styleForCard={{ minWidth: '100%' }} classForContB="d-flex flex-column align-items-center" styleTextForCard={{ padding: '5%', minWidth: '100%' }}>
-                                        <h5 style={{ fontFamily: 'Bitter', margin: '10px 0px 30px 0px' }} className="d-flex text-center">
-                                            Подключить по HTTP
-                                        </h5>
-                                        <Input classNameP="textForSign16" className="input" Label="Путь подключения шлюза"></Input>
+                                        <Input classNameP="textForSign16" className="input" Label="Псевдоним устройства"></Input>
                                         <button className="btn btn-primary mt-4" style={{ width: "190px" }}>
                                             Подключить
                                         </button>

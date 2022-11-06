@@ -1,0 +1,59 @@
+﻿version: '3.4'
+
+services:
+  microservice.dashboardmanager:
+    image: ${DOCKER_REGISTRY-}microservicedashboardmanager
+    ports:
+      - "49162:49162"
+    build:
+      context: .
+      dockerfile: Microservices/Microservice.DashboardManager/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=init02564221
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
+    volumes:
+      - ~/.aspnet/https:/https:ro
+    networks:
+      - micronetwork
+
+  microservice.mapmanager:
+    image: ${DOCKER_REGISTRY-}microservicemapmanager
+    ports:
+      - "49165:49165"
+    build:
+      context: .
+      dockerfile: Microservices/Microservice.MapManager/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=init02564221
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
+    volumes:
+      - ~/.aspnet/https:/https:ro
+    networks:
+      - micronetwork
+
+
+  microservice.subscriptionmanager:
+    image: ${DOCKER_REGISTRY-}microservicesubscriptionmanager
+    ports:
+      - "49169:49169"
+    build:
+      context: .
+      dockerfile: Microservices/Microservice.SubscriptionManager/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=init02564221
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
+    volumes:
+      - ~/.aspnet/https:/https:ro
+    networks:
+      - micronetwork
+
+networks:
+  micronetwork:
+    external: false
+    name: micronetwork

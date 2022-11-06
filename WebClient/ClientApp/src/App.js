@@ -19,6 +19,7 @@ import Models from "./pages/models/Models";
 import Recommendations from "./pages/Recommendations";
 import AllSubscriptions from "./pages/Tariffs/AllSubscriptions";
 import Subscriptions from "./pages/Tariffs/Subscriptions";
+import Docs from "./pages/Docs/Docs";
 import { ClientRoutes } from "./util/ClientRoutes";
 
 export default class App extends Component {
@@ -41,7 +42,8 @@ export default class App extends Component {
                     <AuthorizeRoute path={ClientRoutes.PREFIX + ClientRoutes.SUBSCRIPTIONS_ALL} component={AllSubscriptions} />
                     <AuthorizeRoute path={ClientRoutes.PREFIX + ClientRoutes.RECOMMENDATIONS} component={Recommendations} />
                     <AuthorizeRoute path={ClientRoutes.PREFIX + ClientRoutes.DASHBOARD + ClientRoutes.SUFFIX_MODEL_ID} component={Dashboard} />
-                    <AuthorizeRoute path={ClientRoutes.PREFIX + ClientRoutes.IOTPAGE } component={IotPage} />
+                    <AuthorizeRoute path={ClientRoutes.PREFIX + ClientRoutes.IOTPAGE} component={IotPage} />
+                    <AuthorizeRoute path={ClientRoutes.PREFIX + ClientRoutes.DOCS} component={Docs} />
                     <AuthorizeRoute path={ClientRoutes.PREFIX + ClientRoutes.MAP + ClientRoutes.SUFFIX_MODEL_ID} component={MapMain} />
                     <AuthorizeRouteWithPermission path={ClientRoutes.PREFIX + ClientRoutes.REGISTER_COMPANY} component={CreateCompany} name={ClientRoutes.REGISTER_COMPANY} />
                     <AuthorizeRouteWithPermission path={ClientRoutes.PREFIX + ClientRoutes.COMPANY_INVITE} component={CompanyInvite} name={ClientRoutes.COMPANY_INVITE} />
