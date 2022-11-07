@@ -5,6 +5,9 @@ services:
     image: ${DOCKER_REGISTRY-}microservicedashboardmanager
     ports:
       - "49162:49162"
+    networks:
+      vpcbr:
+        ipv4_address: 10.5.0.5
     build:
       context: .
       dockerfile: Microservices/Microservice.DashboardManager/Dockerfile
@@ -13,6 +16,9 @@ services:
     image: ${DOCKER_REGISTRY-}microservicemapmanager
     ports:
       - "49165:49165"
+    networks:
+      vpcbr:
+        ipv4_address: 10.5.0.6
     build:
       context: .
       dockerfile: Microservices/Microservice.MapManager/Dockerfile
@@ -21,6 +27,9 @@ services:
     image: ${DOCKER_REGISTRY-}microservicesubscriptionmanager
     ports:
       - "49169:49169"
+    networks:
+      vpcbr:
+        ipv4_address: 10.5.0.7
     build:
       context: .
       dockerfile: Microservices/Microservice.SubscriptionManager/Dockerfile
@@ -29,7 +38,18 @@ services:
     image: ${DOCKER_REGISTRY-}microservicemodeltaskmanager
     ports:
       - "49171:49171"
+    networks:
+      vpcbr:
+        ipv4_address: 10.5.0.8
     build:
       context: .
       dockerfile: Microservices/Microservice.ModelTaskManager/Microservice.ModelTaskManager/Dockerfile
 
+networks:
+  vpcbr:
+    external: true
+    driver: bridge
+    ipam:
+     config:
+       - subnet: 10.5.0.0/16
+     
