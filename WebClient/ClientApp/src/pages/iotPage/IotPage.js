@@ -10,14 +10,14 @@ class IotPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            chosen: -2, isAdded: false, sensors: [
+            chosen: -2, newName:"",newFunc:[], isAdded: false, sensors: [
                 { id: 1, name: "Наименование 1", func: [1, 2], link: "temp", dateAdd:"21.08.2020" },
-                { id: 2, name: "Наименование 2", func: [1, 2], link: "temp", dateAdd: "21.08.2020" },
-                { id: 3, name: "Наименование 3", func: [1, 2], link: "temp", dateAdd: "21.08.2020" },
-                { id: 4, name: "Наименование 4", func: [1, 2], link: "temp", dateAdd: "21.08.2020" },
-                { id: 5, name: "Наименование 5", func: [1, 2], link: "temp", dateAdd: "21.08.2020" },
-                { id: 6, name: "Наименование 6", func: [1, 2], link: "temp", dateAdd: "21.08.2020" },
-                { id: 7, name: "Наименование 7", func: [1, 2], link: "temp", dateAdd: "21.08.2020" }
+                { id: 2, name: "Наименование 2", func: [2, 3], link: "temp", dateAdd: "21.08.2020" },
+                { id: 3, name: "Наименование 3", func: [3, 4], link: "temp", dateAdd: "21.08.2020" },
+                { id: 4, name: "Наименование 4", func: [4, 5], link: "temp", dateAdd: "21.08.2020" },
+                { id: 5, name: "Наименование 5", func: [5, 6], link: "temp", dateAdd: "21.08.2020" },
+                { id: 6, name: "Наименование 6", func: [6, 7], link: "temp", dateAdd: "21.08.2020" },
+                { id: 7, name: "Наименование 7", func: [7, 8], link: "temp", dateAdd: "21.08.2020" }
             ]
         }
     };
@@ -50,6 +50,9 @@ class IotPage extends Component {
             isAdded:true
         })
     }
+    handleNewName=(value)=>{
+        this.setState({ newName: value })
+}
     functName = [
         {
             id: 1,
@@ -117,11 +120,11 @@ class IotPage extends Component {
                                     </CardForBody>
                                 </Col>
                                 <Col className="col-md-8 col d-flex">
-                                    <CardForBody disabled={(!(this.state.chosen === -1 && this.state.isAdded===false))} styleForCard={{ minWidth: '100%', margin: '20px' }} classForContB="d-flex flex-column align-items-center" styleTextForCard={{ padding: '1%', minWidth: '100%' }}>
+                                    <CardForBody styleForCard={{ minWidth: '100%', margin: '20px' }} classForContB="d-flex flex-column align-items-center" styleTextForCard={{ padding: '1%', minWidth: '100%' }}>
                                         <h5 style={{ fontFamily: 'Bitter', margin: '10px 0px 30px 0px', width:'100%' }} className="d-flex text-left">
                                             Подключить новый сенсор
                                         </h5>
-                                        <Input value={this.state.chosen > 0 ? this.state.sensors.find(sensor => sensor.id === this.state.chosen).name:""} classNameP="textForSign16" className="input" Label="Псевдоним устройства" styleContainer={{ minWidth: '20%', width: '50%' }} />
+                                        <Input disabled={(!(this.state.chosen === -1 && this.state.isAdded === false))} value={this.state.chosen > 0 ? this.state.sensors.find(sensor => sensor.id === this.state.chosen).name : this.state.newName} onInput={(event) => { if ((this.state.chosen === -1 && this.state.isAdded === false)) this.handleNewName(event.target.value.trim()) }} classNameP="textForSign16" className="input" Label="Псевдоним устройства" styleContainer={{ minWidth: '20%', width: '50%' }} />
                                         <Container className="d-flex p-0" style={{ minWidth: '20%', width: '50%'} }>
                                             <p style={{ fontFamily: 'Open Sans', fontSize: '12px', width: '100%' }}>
                                                 Дата добавления: 
@@ -135,7 +138,7 @@ class IotPage extends Component {
                                                 this.functName.map(
                                                     functName =>
                                                         <Col className="d-flex justify-content-center m-2">
-                                                            <input checked={this.state.chosen > 0 ? this.state.sensors.find(sensor => sensor.id === this.state.chosen).func.includes(functName.id) : false} type="checkbox" />
+                                                            <input disabled={(!(this.state.chosen === -1 && this.state.isAdded === false))} checked={this.state.chosen > 0 ? this.state.sensors.find(sensor => sensor.id === this.state.chosen).func.includes(functName.id) : null} type="checkbox"/>
                                                         <p style={{ fontFamily: 'Open Sans', fontSize: '14px', color: '#616161', width:'max-content' }} className="m-0 ml-1">
                                                                 {functName.name}
                                                         </p>
@@ -151,7 +154,7 @@ class IotPage extends Component {
                                                 Инструкция по добавлению устройств
                                             </a>
                                         </div>
-                                        <Input classNameP="textForSign16" className="input" Label="Ссылка для добавления" hidden={this.state.isAdded === false}/>
+                                        <Input disabled={(!(this.state.chosen === -1 && this.state.isAdded === false))} value={this.state.chosen > 0 ? this.state.sensors.find(sensor => sensor.id === this.state.chosen).name : this.state.newName} onInput={(event) => { if ((this.state.chosen === -1 && this.state.isAdded === false)) this.handleNewName(event.target.value.trim()) }} classNameP="textForSign16" className="input" Label="Ссылка для добавления" hidden={this.state.isAdded === false} />
                                     </CardForBody>
                                 </Col>
                             </Row>
