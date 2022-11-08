@@ -7,6 +7,20 @@ import { IconButton } from "../../components/sideBarDashboard/util/IconButton";
 import { ThemeContextConsumer } from "../../components/ThemeContext";
 import '../pages.css';
 class IotPage extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            chosen: -2, isAdded: false, sensors: [
+                { id: 1, name: "Наименование 1", func: [1, 2], link: "temp", dateAdd:"21.08.2020" },
+                { id: 2, name: "Наименование 2", func: [1, 2], link: "temp", dateAdd: "21.08.2020" },
+                { id: 3, name: "Наименование 3", func: [1, 2], link: "temp", dateAdd: "21.08.2020" },
+                { id: 4, name: "Наименование 4", func: [1, 2], link: "temp", dateAdd: "21.08.2020" },
+                { id: 5, name: "Наименование 5", func: [1, 2], link: "temp", dateAdd: "21.08.2020" },
+                { id: 6, name: "Наименование 6", func: [1, 2], link: "temp", dateAdd: "21.08.2020" },
+                { id: 7, name: "Наименование 7", func: [1, 2], link: "temp", dateAdd: "21.08.2020" }
+            ]
+        }
+    };
     iconsLeftBar = [
         new IconButton("#/", "Главная панель",
             <img style={{ width: "25px", height: "25px", margin:"7px 0px 0px" }} className="icon" src="https://img.icons8.com/windows/344/home.png" />),
@@ -25,6 +39,55 @@ class IotPage extends Component {
         new IconButton("/models", "Вернуться к выбору модели",
             <img style={{ width: "25px", height: "25px", margin: "7px 0px 0px" }} className="icon" src="https://img.icons8.com/ios/344/logout-rounded--v1.png" />)
     ];
+    handleBlocked = (value) => {
+        this.setState({
+            chosen: value,
+            isAdded:false
+        })
+    };
+    handleAdded = () => {
+        this.setState({
+            isAdded:true
+        })
+    }
+    functName = [
+        {
+            id: 1,
+            name: 'Функционал 1'
+        },
+        {
+            id: 2,
+            name: 'Функционал 1'
+        },
+        {
+            id: 3,
+            name: 'Функционал 1'
+        },
+        {
+            id: 4,
+            name: 'Функционал 2'
+        },
+        {
+            id: 5,
+            name: 'Функционал 2'
+        },
+        {
+            id: 6,
+            name: 'Функционал 2'
+        },
+        {
+            id: 7,
+            name: 'Функционал 3'
+        },
+        {
+            id: 8,
+            name: 'Функционал 3'
+        },
+        {
+            id: 9,
+            name: 'Функционал 3'
+        }
+    ];
     render() {
 
 
@@ -40,41 +103,55 @@ class IotPage extends Component {
                                         <h5 style={{ fontFamily: 'Bitter', margin: '10px 0px 0px 0px' }} className="d-flex text-center">
                                             Сенсоры
                                         </h5>
-                                        <button className="btn btn-primary my-3">
+                                        <button className="btn btn-primary my-3" onClick={() => { this.handleBlocked(-1) }}>
                                             Добавить новый
                                         </button>
-                                        <label className="m-0 text-center" style={{ border: '#4A4A4A solid 1px', padding: '5%', width:'inherit'} }>
-                                            Наименование 1
-                                        </label>
-                                        <label className="m-0 text-center" style={{ border: '#4A4A4A solid 1px', padding: '5%', width: 'inherit' }}>
-                                            Наименование 2
-                                        </label>
-                                        <label className="m-0 text-center" style={{ border: '#4A4A4A solid 1px', padding: '5%', width: 'inherit' }}>
-                                            Наименование 3
-                                        </label>
-                                        <label className="m-0 text-center" style={{ border: '#4A4A4A solid 1px', padding: '5%', width: 'inherit' }}>
-                                            Наименование 4
-                                        </label>
-                                        <label className="m-0 text-center" style={{ border: '#4A4A4A solid 1px', padding: '5%', width: 'inherit' }}>
-                                            Наименование 5
-                                        </label>
-                                        <label className="m-0 text-center" style={{ border: '#4A4A4A solid 1px', padding: '5%', width: 'inherit' }}>
-                                            Наименование 6
-                                        </label>
-                                        <label className="m-0 text-center" style={{ border: '#4A4A4A solid 1px', padding: '5%', width: 'inherit' }}>
-                                            Наименование 7
-                                        </label>
+                                        {
+                                            this.state.sensors.map(
+                                                sensor =>
+                                                    <label onClick={() => {this.handleBlocked(sensor.id) }} className="m-0 text-center" style={{ border: '#4A4A4A solid 1px', padding: '5%', width: 'inherit' }}>
+                                                        {sensor.name}
+                                                    </label>
+                                            )
+                                        }
                                     </CardForBody>
                                 </Col>
-                                <Col className="col-md-6 col d-flex">
-                                    <CardForBody styleForCard={{ minWidth: '100%', margin: '20px' }} classForContB="d-flex flex-column align-items-center" styleTextForCard={{ padding: '1%', minWidth: '100%' }}>
+                                <Col className="col-md-8 col d-flex">
+                                    <CardForBody disabled={(!(this.state.chosen === -1 && this.state.isAdded===false))} styleForCard={{ minWidth: '100%', margin: '20px' }} classForContB="d-flex flex-column align-items-center" styleTextForCard={{ padding: '1%', minWidth: '100%' }}>
                                         <h5 style={{ fontFamily: 'Bitter', margin: '10px 0px 30px 0px', width:'100%' }} className="d-flex text-left">
                                             Подключить новый сенсор
                                         </h5>
-                                        <Input classNameP="textForSign16" className="input" Label="Псевдоним устройства"></Input>
-                                        <button className="btn btn-primary mt-4">
+                                        <Input value={this.state.chosen > 0 ? this.state.sensors.find(sensor => sensor.id === this.state.chosen).name:""} classNameP="textForSign16" className="input" Label="Псевдоним устройства" styleContainer={{ minWidth: '20%', width: '50%' }} />
+                                        <Container className="d-flex p-0" style={{ minWidth: '20%', width: '50%'} }>
+                                            <p style={{ fontFamily: 'Open Sans', fontSize: '12px', width: '100%' }}>
+                                                Дата добавления: 
+                                            </p>
+                                            <p style={{ fontFamily: 'Open Sans', fontSize: '12px', width: '100%' }} className="d-flex justify-content-end">
+                                                {this.state.chosen < 0 ? (new Date()).toLocaleDateString() : this.state.sensors.find(sensor => sensor.id === this.state.chosen).dateAdd}
+                                             </p>
+                                        </Container>
+                                        <Row className="align-items-center" style={{ width: '83%' }}>
+                                            {
+                                                this.functName.map(
+                                                    functName =>
+                                                        <Col className="d-flex justify-content-center m-2">
+                                                            <input checked={this.state.chosen > 0 ? this.state.sensors.find(sensor => sensor.id === this.state.chosen).func.includes(functName.id) : false} type="checkbox" />
+                                                        <p style={{ fontFamily: 'Open Sans', fontSize: '14px', color: '#616161', width:'max-content' }} className="m-0 ml-1">
+                                                                {functName.name}
+                                                        </p>
+                                                    </Col>
+                                                )
+                                            }
+                                        </Row>
+                                        <button className="btn btn-primary mt-5" hidden={(!(this.state.chosen === -1 && this.state.isAdded === false))} onClick={this.handleAdded}>
                                             Добавить
                                         </button>
+                                        <div className="text-center" hidden={(!(this.state.chosen === -1 && this.state.isAdded === false))} >
+                                            <a style={{ color: '#F5CA5D', textDecoration: 'auto', fontSize: '85%' }} href="/models">
+                                                Инструкция по добавлению устройств
+                                            </a>
+                                        </div>
+                                        <Input classNameP="textForSign16" className="input" Label="Ссылка для добавления" hidden={this.state.isAdded === false}/>
                                     </CardForBody>
                                 </Col>
                             </Row>
