@@ -16,7 +16,7 @@ class Recommendations extends Component {
             <img style={{ width: "25px", height: "25px", margin: "7px 0px 0px"  }} className="icon" src="https://img.icons8.com/ios/344/document--v1.png" />),
         new IconButton("#nogo", "Датчики IoT",
             <img style={{ width: "25px", height: "25px", margin: "7px 0px 0px"  }} className="icon" src="https://img.icons8.com/windows/344/sensor.png" />),
-        new IconButton("/recom", "Рекомендации",
+        new IconButton("/recommendation", "Рекомендации",
             <img style={{ width: "25px", height: "25px", margin: "7px 0px 0px"  }} className="icon" src="https://img.icons8.com/ios-glyphs/344/task.png" />),
         new IconButton("#nogo", "История цен",
             <img style={{ width: "25px", height: "25px", margin: "7px 0px 0px" }} className="icon" src="https://img.icons8.com/material-outlined/344/ruble.png" />),
