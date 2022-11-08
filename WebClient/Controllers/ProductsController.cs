@@ -1,13 +1,13 @@
-﻿using Grpc.Core;
-using Grpc.Net.Client;
-using Microservice.WebClient.Protos;
+﻿
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
 using Shared;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
+using WebClient.Models.SubModels;
 
 namespace WebClient.Controllers
 {
@@ -25,22 +25,17 @@ namespace WebClient.Controllers
         [HttpGet]
         public async Task<IEnumerable<ProductProto>> Get()
         {
-            var httpHandler = new HttpClientHandler
-            {
-                ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
-            };
-            using var channel = GrpcChannel.ForAddress(MicroservicesIP.External.Dashboard,
-                new GrpcChannelOptions { HttpHandler = httpHandler });
+            HttpClient client = MicroservicesIP.GatewayHttpClient;
 
-            var client = new ProductService.ProductServiceClient(channel);
-
-            using var call = client.GetProducts(new ProductRequest());
-            ProductReply response = null;
-            while (await call.ResponseStream.MoveNext())
+            IEnumerable<ProductProto> result = null;
+            HttpResponseMessage response = await client.GetAsync($"api/model/get_products");
+            if (response.IsSuccessStatusCode)
             {
-                response = call.ResponseStream.Current;
+                var json = await response.Content.ReadAsStringAsync();
+                result = JsonConvert.DeserializeObject<IEnumerable<ProductProto>>(json);
+
             }
-            return response.Products;
+            return result;
         }
     }
 }

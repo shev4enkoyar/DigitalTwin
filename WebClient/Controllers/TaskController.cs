@@ -1,6 +1,5 @@
 ﻿using Grpc.Core;
 using Grpc.Net.Client;
-using Microservice.WebClient.Protos;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -9,10 +8,12 @@ using Shared;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using WebClient.Data;
 using WebClient.Models;
+using WebClient.Models.SubModels;
 
 namespace WebClient.Controllers
 {
@@ -24,27 +25,17 @@ namespace WebClient.Controllers
         [HttpGet("get_all/{modelId}")]
         public async Task<IEnumerable<ModelTask>> GetAllByModelId(int modelId)
         {
+            HttpClient client = MicroservicesIP.GatewayHttpClient;
 
-            var httpHandler = new HttpClientHandler()
+            IEnumerable<ModelTask> result = null;
+            HttpResponseMessage response = await client.GetAsync($"api/task/get_all/{modelId}");
+            if (response.IsSuccessStatusCode)
             {
-                ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
-            };
+                var json = await response.Content.ReadAsStringAsync();
+                result = JsonConvert.DeserializeObject<IEnumerable<ModelTask>>(json);
 
-            using var channel = GrpcChannel.ForAddress(MicroservicesIP.External.ModelTask,
-                new GrpcChannelOptions { HttpHandler = httpHandler }
-            );
-
-            SendReply response = null;
-            //TODO REDO
-            using (var call = new ModelTaskService.ModelTaskServiceClient(channel)
-                .GetTasks(new SendRequest { ModelId = modelId }))
-            {
-                while (await call.ResponseStream.MoveNext())
-                {
-                    response = call.ResponseStream.Current;
-                }
             }
-            return response.Tasks;
+            return result;
         }
     }
 

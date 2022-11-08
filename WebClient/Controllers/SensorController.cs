@@ -1,6 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Shared;
 using System;
+using System.Net.Http.Headers;
+using System.Net.Http;
+using System.Security.Claims;
 using System.Text.Json.Serialization;
+using System.Xml.Linq;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+using System.Text;
 
 namespace WebClient.Controllers
 {
@@ -9,12 +18,23 @@ namespace WebClient.Controllers
     public class SensorController : ControllerBase
     {
         [HttpPost("send/{sensorId}")]
-        public IActionResult Send(string sensorId, [FromBody] Root content)
+        public async Task<IActionResult> SendAsync(string sensorId, [FromBody] Root content)
         {
             if (!Guid.TryParse(sensorId, out Guid sensorGuid))
                 return BadRequest($"Parsing sensorId ({sensorId}) to GUID not successful");
 
-            return Ok(content);
+            HttpClient client = MicroservicesIP.GatewayHttpClient;
+
+            var contentSend = new StringContent(JsonConvert.SerializeObject(content), Encoding.UTF8, "application/json");
+
+            HttpResponseMessage response = await client.PostAsync(
+                    $"api/sensor", contentSend
+                    );
+
+            if (response.IsSuccessStatusCode)
+                return Ok(content);
+
+            return BadRequest();
         }
     }
 

@@ -9,15 +9,7 @@
     <DefaultItemExcludes>$(DefaultItemExcludes);$(SpaRoot)node_modules\**</DefaultItemExcludes>
     <UserSecretsId>32582cc9-8468-4d30-9a26-222d89a4707d</UserSecretsId>
     
-  </PropertyGroup>
-
-    <ItemGroup>
-	    <Protobuf Include="Protos\productProto.proto" GrpcServices="Client" />
-	    <Protobuf Include="Protos\digitalModelProto.proto" GrpcServices="Client" />
-	    <Protobuf Include="Protos\subscriptionClientProto.proto" GrpcServices="Client" />
-		<Protobuf Include="Protos\taskProto.proto" GrpcServices="Client" />
-	    <Protobuf Include="Protos\testCadasterProto.proto" GrpcServices="Client" />
-    </ItemGroup>	
+  </PropertyGroup>	
 	
   <ItemGroup>
     <PackageReference Include="Google.Protobuf" Version="3.21.8" />
@@ -59,20 +51,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Protos\digitalModelProto.proto" />
-    <None Remove="Protos\subscriptionClientProto.proto" />
-    <None Remove="Protos\taskProto.proto" />
-    <None Remove="Protos\testCadasterProto.proto" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Shared\Shared.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="Protos\productProto.proto">
-      <GrpcServices>Server</GrpcServices>
-    </None>
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

@@ -1,14 +1,9 @@
-﻿using Grpc.Core;
-using Grpc.Net.Client;
-using Microservice.DashboardManager;
-using Microservice.DashboardManager.Protos;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using Shared;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -16,6 +11,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using WebClient.Data;
 using WebClient.Models;
+using WebClient.Models.SubModels;
 using WebClient.Util;
 
 namespace WebClient.Controllers
@@ -38,26 +34,21 @@ namespace WebClient.Controllers
         [HttpGet("get_all")]
         public async Task<IEnumerable<FullSubscriptionModel>> GetAllSubscriptions()
         {
-            var httpHandler = new HttpClientHandler()
-            {
-                ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
-            };
+            HttpClient client = MicroservicesIP.GatewayHttpClient;
 
-            using var channel = GrpcChannel.ForAddress(MicroservicesIP.External.Dashboard,
-                new GrpcChannelOptions { HttpHandler = httpHandler }
-            );
-
-            SubscriptionsClientReply response = null;
-            //TODO REDO
-            using (var call = new SubscriptionClientService.SubscriptionClientServiceClient(channel).GetAllClientSubscriptions(new AllClientSubscriptionsRequest()))
+            IEnumerable<SubscriptionClientProto> reply = null;
+            HttpResponseMessage response = await client.GetAsync($"api/subscription/get_all");
+            if (response.IsSuccessStatusCode)
             {
-                while (await call.ResponseStream.MoveNext())
-                {
-                    response = call.ResponseStream.Current;
-                }
+                var json = await response.Content.ReadAsStringAsync();
+                reply = JsonConvert.DeserializeObject<IEnumerable<SubscriptionClientProto>>(json);
             }
+
+            if (reply == null)
+                return null;
+
             List<FullSubscriptionModel> result = new List<FullSubscriptionModel>();
-            foreach (var subscription in response.Subscriptions)
+            foreach (var subscription in reply)
             {
                 List<string> functions = new List<string>();
                 foreach (var id in subscription.FunctionalAccess.Split(";"))
@@ -73,27 +64,15 @@ namespace WebClient.Controllers
         [HttpGet("activate/{modelId}")]
         public async Task<IActionResult> ActivateSubscription(int modelId, int days, int subscriptionId)
         {
-            //TODO REDO
-            var httpHandler = new HttpClientHandler()
-            {
-                ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
-            };
+            HttpClient client = MicroservicesIP.GatewayHttpClient;
 
-            using var channel = GrpcChannel.ForAddress(MicroservicesIP.External.Dashboard,
-                new GrpcChannelOptions { HttpHandler = httpHandler }
-            );
+            HttpResponseMessage response = await client.GetAsync(
+                    $"api/subscription/activate/{modelId}?days={days}&subscriptionId={subscriptionId}"
+                    );
 
-            var client = new SubscriptionClientService.SubscriptionClientServiceClient(channel);
-            var reply = await client.AddClientSubscriptionAsync(new AddClientSubscriptionRequest
-            {
-                ActivatedData = DateTime.Now.ToString(),
-                ExpirationData = DateTime.Now.AddDays(days).ToString(),
-                SubscriptionId = subscriptionId,
-                ModelId = modelId
-            });
-            if (reply.Status.Equals("ok"))
+            if (response.IsSuccessStatusCode)
                 return Ok();
-            return BadRequest(reply.Status);
+            return BadRequest();
         }
 
         [Authorize]
@@ -101,93 +80,41 @@ namespace WebClient.Controllers
         public async Task<IActionResult> UpdateActivatedSubscription(int days, int subscriptionId)
         {
             //TODO REDO
-            var httpHandler = new HttpClientHandler()
-            {
-                ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
-            };
+            HttpClient client = MicroservicesIP.GatewayHttpClient;
 
-            using var channel = GrpcChannel.ForAddress(MicroservicesIP.External.Dashboard,
-                new GrpcChannelOptions { HttpHandler = httpHandler }
-            );
+            HttpResponseMessage response = await client.GetAsync(
+                    $"api/subscription/update?days={days}&subscriptionId={subscriptionId}"
+                    );
 
-            var client = new SubscriptionClientService.SubscriptionClientServiceClient(channel);
-            var reply = await client.UpdateClientSubscriptionAsync(new UpdateClientSubscriptionRequest
-            {
-                ActivatedSubscriptionId = subscriptionId,
-                Days = days
-            });
-            if (reply.Status.Equals("ok"))
+            if (response.IsSuccessStatusCode)
                 return Ok();
-            return BadRequest(reply.Status);
+            return BadRequest();
         }
 
         [Authorize]
         [HttpGet("get_all_by_company")]
         public async Task<string> GetAllSubscriptionsByCompany()
         {
-            var models = GetAllModelsAsync().Result;
-            if (models == null)
-                return null;
-
-            //TODO REDO
-            var httpHandler = new HttpClientHandler()
-            {
-                ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
-            };
-
-            using var channel = GrpcChannel.ForAddress(MicroservicesIP.External.Dashboard,
-                new GrpcChannelOptions { HttpHandler = httpHandler }
-            );
-
-            Dictionary<string, List<string>> modelSubscriptions = new Dictionary<string, List<string>>();
-            foreach (var model in models)
-            {
-                SubscriptionsClientReply response = null;
-                using (var call = new SubscriptionClientService.SubscriptionClientServiceClient(channel).GetActivatedClientSubscriptions(new ActivatedClientSubscriptionsRequest { ModelId = model.Id }))
-                {
-                    while (await call.ResponseStream.MoveNext())
-                    {
-                        response = call.ResponseStream.Current;
-                    }
-                }
-                List<string> subscriptions = new List<string>();
-                foreach (var item in response.Subscriptions)
-                {
-                    subscriptions.Add(item.Name);
-                }
-                modelSubscriptions.Add(model.Name, subscriptions);
-            }
-            return JsonConvert.SerializeObject(modelSubscriptions);
-        }
-
-        private async Task<IEnumerable<ModelProto>> GetAllModelsAsync()
-        {
-            var httpHandler = new HttpClientHandler()
-            {
-                ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
-            };
-
             string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (userId == null)
+                return null;
             var user = await _userManager.FindByIdAsync(userId);
 
-            if (user == null || user.CompanyId.ToString() == null)
-                return null;
+            string companyId = user.CompanyId.ToString();
 
-            using var channel = GrpcChannel.ForAddress(MicroservicesIP.External.Dashboard,
-                new GrpcChannelOptions { HttpHandler = httpHandler }
-            );
+            HttpClient client = MicroservicesIP.GatewayHttpClient;
 
-            GetModelsReply response = null;
-            //TODO REDO
-            using (var call = new DigitalModelService.DigitalModelServiceClient(channel).GetDigitalModels(new GetModelsRequest { CompanyId = user.CompanyId.ToString() }))
+            Dictionary<string, List<string>> result = null;
+            HttpResponseMessage response = await client.GetAsync(
+                $"api/subscription/get_models_with_subscriptions/{companyId}"
+                );
+            if (response.IsSuccessStatusCode)
             {
-                while (await call.ResponseStream.MoveNext())
-                {
-                    Console.WriteLine(call.ResponseStream.Current.Models);
-                    response = call.ResponseStream.Current;
-                }
+                var json = await response.Content.ReadAsStringAsync();
+                result = JsonConvert.DeserializeObject<Dictionary<string, List<string>>>(json);
+
             }
-            return response.Models;
+            return JsonConvert.SerializeObject(result);
         }
     }
 }

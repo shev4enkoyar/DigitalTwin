@@ -35,7 +35,7 @@ namespace Microservice.InternetOfThingsManager.Services
             return Task.FromResult(new AddSensorReply() { Link = GenerateLink(request.SensorGuid) });
         }
 
-        private string GenerateLink(string sensorGuid) => $"{MicroservicesIP.DockerServices.InternetOfThings.TrimEnd('/')}/sensor/send/{sensorGuid}";
+        private string GenerateLink(string sensorGuid) => $"{MicroservicesIP.External.InternetOfThings.TrimEnd('/')}/sensor/send/{sensorGuid}";
 
         public override Task<RemoveSensorReply> RemoveSensor(RemoveSensorRequest request, ServerCallContext context)
         {

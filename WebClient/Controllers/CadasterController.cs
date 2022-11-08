@@ -1,11 +1,13 @@
 ﻿using Grpc.Net.Client;
-using Microservice.WebClient.Protos;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Shared;
+using System;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace WebClient.Controllers
 {
@@ -24,21 +26,13 @@ namespace WebClient.Controllers
         [HttpGet("validate/{cadaster}")]
         public async Task<IActionResult> ValidateCadaster(string cadaster)
         {
-            var httpHandler = new HttpClientHandler()
-            {
-                ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
-            };
+            HttpClient client = MicroservicesIP.GatewayHttpClient;
 
-            using var channel = GrpcChannel.ForAddress(MicroservicesIP.External.Map,
-                new GrpcChannelOptions { HttpHandler = httpHandler }
-            );
+            HttpResponseMessage response = await client.GetAsync(
+                    $"api/model/validate_cadaster/{cadaster}"
+                    );
 
-            var client = new CadasterService.CadasterServiceClient(channel);
-            var reply = await client.TestCadasterAsync(new TestCadasterRequest
-            {
-                Cadaster = cadaster
-            });
-            if (reply.Status.Equals("ok"))
+            if (response.IsSuccessStatusCode)
                 return Ok();
             return NotFound();
         }

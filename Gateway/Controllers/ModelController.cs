@@ -2,12 +2,16 @@
 using Grpc.Core;
 using Grpc.Net.Client;
 using Microservice.DashboardManager.Protos;
+using Microservice.MapManager.Protos;
 using Microservice.WebClient.Protos;
 using Microsoft.AspNetCore.Mvc;
 using Shared;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading.Tasks;
 
+
+//DONE
 namespace Gateway.Controllers
 {
     [Route("api/[controller]")]
@@ -67,32 +71,42 @@ namespace Gateway.Controllers
         [HttpGet("create")]
         public bool CreateDigitalModel(string companyId, int productId, string name, string cadaster = null, string categoryName = null)
         {
-            //TODO REDO
             ModelRequest request;
-            if (cadaster == null || categoryName == null)
-                request = new ModelRequest
-                {
-                    Name = name,
-                    ProductId = productId,
-                    CompanyId = companyId
-                };
-            else
-                request = new ModelRequest
-                {
-                    Name = name,
-                    ProductId = productId,
-                    CompanyId = companyId,
-                    Cadastre = cadaster,
-                    CategoryName = categoryName
-                };
+            request = new ModelRequest
+            {
+                Name = name,
+                ProductId = productId,
+                CompanyId = companyId
+            };
 
             using var channel = GrpcChannel.ForAddress(MicroservicesIP.External.Dashboard,
                 new GrpcChannelOptions { HttpHandler = MicroservicesIP.DefaultHttpHandler });
 
             ModelReply reply = new DigitalModelService.DigitalModelServiceClient(channel).PushDigitalModels(request);
-            if (reply.Status.Equals("ok"))
+           
+            int mapId = AddMap(reply.ModelId, cadaster, categoryName);
+            reply = new DigitalModelService.DigitalModelServiceClient(channel).UpdateMapDigitalModel(new UpdateModelRequest() { MapId = mapId, ModelId = reply.ModelId });
+            
+            if(reply.Status.Equals("ok"))
                 return true;
             return false;
+        }
+
+        private int AddMap(int modelId, string cadaster = null, string categoryName = null)
+        {
+            var httpHandler = new HttpClientHandler()
+            {
+                ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+            };
+            using var channel = GrpcChannel.ForAddress(MicroservicesIP.External.Map, new GrpcChannelOptions { HttpHandler = httpHandler });
+            var client = new MapService.MapServiceClient(channel);
+            if ((cadaster == null && categoryName != null) ||
+                (cadaster != null && categoryName == null))
+            {
+                return -1;
+            }
+            var reply = client.GetMapId(new GetMapIdRequest { ModelId = modelId, Cadaster = cadaster, CategoryName = categoryName });
+            return reply.MapId;
         }
     }
 }

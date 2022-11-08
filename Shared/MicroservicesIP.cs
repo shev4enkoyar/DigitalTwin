@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.Http;
+using System.Net.Http.Headers;
 
 namespace Shared
 {
@@ -8,7 +9,28 @@ namespace Shared
     /// </summary>
     public static class MicroservicesIP
     {
+        private static readonly string gateway = "http://localhost:5100";
+        private static readonly HttpClient gatewayIP;
+
         #region Properties
+
+        /// <summary>Gateway IP</summary>
+        /// <value>https://localhost:5100</value>
+        /// <exception cref="ArgumentNullException"/>
+        public static string GatewayIP => CheckEmptyIP(gateway);
+
+        public static HttpClient GatewayHttpClient
+        {
+            get
+            {
+                HttpClient client = new HttpClient();
+                client.BaseAddress = new Uri(MicroservicesIP.GatewayIP);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(
+                    new MediaTypeWithQualityHeaderValue("application/json"));
+                return client;
+            }
+        }
 
         public static HttpClientHandler DefaultHttpHandler => new HttpClientHandler()
         {
@@ -16,40 +38,10 @@ namespace Shared
         };
 
         #endregion
-        public static class DockerServices
-        {
-            private static readonly string dashboard = "https://host.docker.internal:49162/";
-            private static readonly string map = "https://host.docker.internal:49165/";
-            private static readonly string subscription = "https://host.docker.internal:49169/";
-            private static readonly string internetOfThings = "https://localhost:49165";  //TODO TEST!!!
-
-            #region Properties
-
-            /// <summary>DashboardManager IP</summary>
-            /// <value>https://microservice.dashboardmanager:49162</value>
-            /// <exception cref="ArgumentNullException"/>
-            public static string Dashboard => CheckEmptyIP(dashboard);
-
-            /// <summary>MapManager IP</summary>
-            /// <value>https://microservice.mapmanager:49165</value>
-            /// <exception cref="ArgumentNullException"/>
-            public static string Map => CheckEmptyIP(map);
-
-            /// <summary>SubscriptionManager IP</summary>
-            /// <value>https://microservice.subscriptionmanager:49169</value>
-            /// <exception cref="ArgumentNullException"/>
-            public static string Subscription => CheckEmptyIP(subscription);
-
-            /// <summary>InternetOfThingsManager IP</summary>
-            /// <value>https://localhost:49165</value>
-            /// <exception cref="ArgumentNullException"/>
-            public static string InternetOfThings => CheckEmptyIP(internetOfThings);
-
-            #endregion
-        }
 
         public static class External
         {
+
             private static readonly string dashboard = "https://localhost:49162";
             private static readonly string map = "https://localhost:49165";
             private static readonly string modelTask = "https://localhost:49171";

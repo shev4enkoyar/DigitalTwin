@@ -27,8 +27,6 @@ namespace Microservice.DashboardManager.Services
 
         public override Task<ModelReply> PushDigitalModels(ModelRequest request, ServerCallContext context)
         {
-            //TODO TEST EXAMPLE NEED REFACTOR
-
             var model = new DigitalModel
             {
                 Name = request.Name,
@@ -37,23 +35,16 @@ namespace Microservice.DashboardManager.Services
             };
             _dbContext.DigitalModels.Add(model);
             _dbContext.SaveChanges();
-            //TODO here address where  
-            var httpHandler = new HttpClientHandler()
-            {
-                ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
-            };
-            using var channel = GrpcChannel.ForAddress(MicroservicesIP.DockerServices.Map, new GrpcChannelOptions { HttpHandler = httpHandler });
-            var client = new MapService.MapServiceClient(channel);
-            if ((request.Cadastre == null && request.CategoryName != null) ||
-                (request.Cadastre != null && request.CategoryName == null))
-            {
-                return Task.FromResult(new ModelReply { Status = "cadaster error" });
-            }
-            var reply = client.GetMapId(new GetMapIdRequest { ModelId = model.Id, Cadaster = request.Cadastre, CategoryName = request.CategoryName });
-            model.MapId = reply.MapId;
+            return Task.FromResult(new ModelReply { Status = "ok", ModelId = model.Id });
+        }
+
+        public override Task<ModelReply> UpdateMapDigitalModel(UpdateModelRequest request, ServerCallContext context)
+        {
+            var model = _dbContext.DigitalModels.FirstOrDefault(x => x.Id == request.ModelId);
+            model.MapId = request.MapId;
             _dbContext.Update(model);
             _dbContext.SaveChanges();
-            return Task.FromResult(new ModelReply { Status = "ok" });
+            return Task.FromResult(new ModelReply { Status = "ok", ModelId = model.Id });
         }
 
         public override async Task GetDigitalModels(GetModelsRequest request, IServerStreamWriter<GetModelsReply> responseStream, ServerCallContext context)

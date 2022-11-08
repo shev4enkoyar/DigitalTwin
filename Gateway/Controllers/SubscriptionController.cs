@@ -1,10 +1,9 @@
 ﻿using Gateway.Controllers.Base;
-using Gateway.Models.SubModels;
 using Grpc.Core;
 using Grpc.Net.Client;
 using Microservice.DashboardManager;
+using Microservice.SubscriptionManager;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 using Shared;
 using System;
 using System.Collections.Generic;
@@ -22,32 +21,31 @@ namespace Gateway.Controllers
         /// </summary>
         /// <returns>Listing all subscriptions</returns>
         [HttpGet("get_all")]
-        public async Task<IEnumerable<FullSubscriptionModel>> GetAllSubscriptions()
+        public async Task<IEnumerable<SubscriptionProto>> GetAllSubscriptions()
         {
-            using var channel = GrpcChannel.ForAddress(MicroservicesIP.External.Dashboard,
-                new GrpcChannelOptions { HttpHandler = MicroservicesIP.DefaultHttpHandler }
+            var httpHandler = new HttpClientHandler()
+            {
+                ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+            };
+
+            using var channel = GrpcChannel.ForAddress(MicroservicesIP.External.Subscription,
+                new GrpcChannelOptions { HttpHandler = httpHandler }
             );
 
-            SubscriptionsClientReply response = null;
-            //TODO REDO
-            using (var call = new SubscriptionClientService.SubscriptionClientServiceClient(channel).GetAllClientSubscriptions(new AllClientSubscriptionsRequest()))
+            SubscriptionsReply response = null;
+
+            using (var call = new SubscriptionService.SubscriptionServiceClient(channel).GetAllSubscriptions(new AllSubscriptionsRequest()))
             {
                 while (await call.ResponseStream.MoveNext())
                 {
                     response = call.ResponseStream.Current;
                 }
             }
-            List<FullSubscriptionModel> result = new List<FullSubscriptionModel>();
-            foreach (var subscription in response.Subscriptions)
-            {
-                List<string> functions = new List<string>();
-                foreach (var id in subscription.FunctionalAccess.Split(";"))
-                {
-                    // TODO Делать на WebClient functions.Add(_dbContext.Functionals.FirstOrDefault(x => x.Id == int.Parse(id)).Name);
-                }
-                result.Add(new FullSubscriptionModel { Id = subscription.Id, Functions = functions, Name = subscription.Name, Price = subscription.Price });
-            }
-            return result;
+            if (response == null)
+                return null;
+            return response.Subscriptions;
+
+
         }
 
         /// <summary>
@@ -60,13 +58,17 @@ namespace Gateway.Controllers
         [HttpGet("activate/{modelId}")]
         public async Task<IActionResult> ActivateSubscription(int modelId, int days, int subscriptionId)
         {
-            //TODO REDO
-            using var channel = GrpcChannel.ForAddress(MicroservicesIP.External.Dashboard,
-                new GrpcChannelOptions { HttpHandler = MicroservicesIP.DefaultHttpHandler }
+            var httpHandler = new HttpClientHandler()
+            {
+                ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+            };
+
+            using var channel = GrpcChannel.ForAddress(MicroservicesIP.External.Subscription,
+                new GrpcChannelOptions { HttpHandler = httpHandler }
             );
 
-            var client = new SubscriptionClientService.SubscriptionClientServiceClient(channel);
-            var reply = await client.AddClientSubscriptionAsync(new AddClientSubscriptionRequest
+            var client = new SubscriptionService.SubscriptionServiceClient(channel);
+            var reply = client.AddSubscription(new AddSubscriptionRequest
             {
                 ActivatedData = DateTime.Now.ToString(),
                 ExpirationData = DateTime.Now.AddDays(days).ToString(),
@@ -87,13 +89,17 @@ namespace Gateway.Controllers
         [HttpGet("update")]
         public async Task<IActionResult> UpdateActivatedSubscription(int days, int subscriptionId)
         {
-            //TODO REDO
-            using var channel = GrpcChannel.ForAddress(MicroservicesIP.External.Dashboard,
-                new GrpcChannelOptions { HttpHandler = MicroservicesIP.DefaultHttpHandler }
+            var httpHandler = new HttpClientHandler()
+            {
+                ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+            };
+
+            using var channel = GrpcChannel.ForAddress(MicroservicesIP.External.Subscription,
+                new GrpcChannelOptions { HttpHandler = httpHandler }
             );
 
-            var client = new SubscriptionClientService.SubscriptionClientServiceClient(channel);
-            var reply = await client.UpdateClientSubscriptionAsync(new UpdateClientSubscriptionRequest
+            var client = new SubscriptionService.SubscriptionServiceClient(channel);
+            var reply = client.UpdateSubscription(new UpdateSubscriptionRequest
             {
                 ActivatedSubscriptionId = subscriptionId,
                 Days = days
@@ -109,22 +115,26 @@ namespace Gateway.Controllers
         /// <param name="companyId">Company Id</param>
         /// <returns>Dictionary Model Name:Subscription List</returns>
         [HttpGet("get_models_with_subscriptions/{companyId}")]
-        public async Task<string> GetAllModelsSubscriptions(string companyId)
+        public async Task<Dictionary<string, List<string>>> GetAllModelsSubscriptions(string companyId)
         {
             var models = GetModelsByCompanyId(companyId).Result;
             if (models == null)
                 return null;
 
-            //TODO REDO
-            using var channel = GrpcChannel.ForAddress(MicroservicesIP.External.Dashboard,
-                new GrpcChannelOptions { HttpHandler = MicroservicesIP.DefaultHttpHandler }
+            var httpHandler = new HttpClientHandler()
+            {
+                ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+            };
+
+            using var channel = GrpcChannel.ForAddress(MicroservicesIP.External.Subscription,
+                new GrpcChannelOptions { HttpHandler = httpHandler }
             );
 
             Dictionary<string, List<string>> modelSubscriptions = new Dictionary<string, List<string>>();
             foreach (var model in models)
             {
-                SubscriptionsClientReply response = null;
-                using (var call = new SubscriptionClientService.SubscriptionClientServiceClient(channel).GetActivatedClientSubscriptions(new ActivatedClientSubscriptionsRequest { ModelId = model.Id }))
+                SubscriptionsReply response = null;
+                using (var call = new SubscriptionService.SubscriptionServiceClient(channel).GetActivatedSubscriptions(new ActivatedSubscriptionsRequest { ModelId = model.Id }))
                 {
                     while (await call.ResponseStream.MoveNext())
                     {
@@ -138,7 +148,8 @@ namespace Gateway.Controllers
                 }
                 modelSubscriptions.Add(model.Name, subscriptions);
             }
-            return JsonConvert.SerializeObject(modelSubscriptions);
+            return modelSubscriptions;
         }
     }
+
 }
