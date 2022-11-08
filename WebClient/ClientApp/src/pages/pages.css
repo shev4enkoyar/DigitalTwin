@@ -157,3 +157,7 @@ body {
 .contForReactTable {
     overflow-x: auto;
 }
+.nameIot:hover {
+    background-color: #ffff;
+    color: #212026;
+}

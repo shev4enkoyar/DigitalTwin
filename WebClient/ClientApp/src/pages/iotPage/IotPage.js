@@ -112,7 +112,7 @@ class IotPage extends Component {
                                         {
                                             this.state.sensors.map(
                                                 sensor =>
-                                                    <label onClick={() => {this.handleBlocked(sensor.id) }} className="m-0 text-center" style={{ border: '#4A4A4A solid 1px', padding: '5%', width: 'inherit' }}>
+                                                    <label onClick={() => {this.handleBlocked(sensor.id) }} className="m-0 text-center nameIot" style={{ border: '#4A4A4A solid 1px', padding: '5%', width: 'inherit' }}>
                                                         {sensor.name}
                                                     </label>
                                             )
