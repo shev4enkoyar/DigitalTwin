@@ -1,0 +1,49 @@
+syntax = "proto3";
+
+option csharp_namespace = "Microservice.DashboardManager";
+
+package subscriptionClientProto;
+
+service SubscriptionClientService {
+  rpc GetAllClientSubscriptions (AllClientSubscriptionsRequest) returns (stream SubscriptionsClientReply);
+  rpc GetActivatedClientSubscriptions (ActivatedClientSubscriptionsRequest) returns (stream SubscriptionsClientReply);
+  rpc AddClientSubscription (AddClientSubscriptionRequest) returns (AddClientSubscriptionReply);
+  rpc UpdateClientSubscription (UpdateClientSubscriptionRequest) returns (UpdateClientSubscriptionReply);
+}
+
+message AllClientSubscriptionsRequest {
+
+}
+message ActivatedClientSubscriptionsRequest {
+	int32 modelId = 1;
+}
+message SubscriptionsClientReply {
+   repeated SubscriptionClientProto subscriptions = 1;
+}
+
+message AddClientSubscriptionRequest {
+    string activatedData = 1;
+    string expirationData = 2;
+    int32 subscriptionId = 3;
+    int32 modelId = 4;
+}
+
+message AddClientSubscriptionReply {
+    string status = 1;
+}
+
+message UpdateClientSubscriptionRequest {
+    int32 activatedSubscriptionId = 1;
+    int32 days = 2;
+}
+
+message UpdateClientSubscriptionReply {
+    string status = 1;
+}
+
+message SubscriptionClientProto {
+  int32 id = 1;
+  string name = 2;
+  string price = 3;
+  string functionalAccess = 4;
+}

@@ -1,37 +1,27 @@
 ﻿using Grpc.Core;
 using Grpc.Net.Client;
 using Microservice.WebClient.Protos;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 using Shared;
-using System;
 using System.Collections.Generic;
-using System.Net.Http;
-using System.Security.Claims;
 using System.Threading.Tasks;
-using WebClient.Data;
-using WebClient.Models;
 
-namespace WebClient.Controllers
+namespace Gateway.Controllers
 {
-    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class TaskController : ControllerBase
     {
+        /// <summary>
+        /// Method to get all tasks by model ID
+        /// </summary>
+        /// <param name="modelId">Model Id</param>
+        /// <returns>Enumerating Model Tasks</returns>
         [HttpGet("get_all/{modelId}")]
         public async Task<IEnumerable<ModelTask>> GetAllByModelId(int modelId)
         {
-
-            var httpHandler = new HttpClientHandler()
-            {
-                ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
-            };
-
             using var channel = GrpcChannel.ForAddress(MicroservicesIP.External.ModelTask,
-                new GrpcChannelOptions { HttpHandler = httpHandler }
+                new GrpcChannelOptions { HttpHandler = MicroservicesIP.DefaultHttpHandler }
             );
 
             SendReply response = null;

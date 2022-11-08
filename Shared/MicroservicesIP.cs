@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net.Http;
 
 namespace Shared
 {
@@ -7,6 +8,14 @@ namespace Shared
     /// </summary>
     public static class MicroservicesIP
     {
+        #region Properties
+
+        public static HttpClientHandler DefaultHttpHandler => new HttpClientHandler()
+        {
+            ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+        };
+
+        #endregion
         public static class DockerServices
         {
             private static readonly string dashboard = "https://host.docker.internal:49162/";

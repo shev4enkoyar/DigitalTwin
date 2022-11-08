@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Google.Protobuf" Version="3.21.9" />
+    <PackageReference Include="Grpc.Net.Client" Version="2.49.0" />
+    <PackageReference Include="Grpc.Tools" Version="2.50.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Shared\Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Protobuf Include="Protos\digitalModelProto.proto" GrpcServices="Client" />
+    <Protobuf Include="Protos\productProto.proto" GrpcServices="Client" />
+    <Protobuf Include="Protos\subscriptionClientProto.proto" GrpcServices="Client" />
+    <Protobuf Include="Protos\taskProto.proto" GrpcServices="Client" />
+    <Protobuf Include="Protos\testCadasterProto.proto" GrpcServices="Client" />
+  </ItemGroup>
+
+
+</Project>

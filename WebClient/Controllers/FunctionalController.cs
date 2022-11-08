@@ -29,12 +29,11 @@ namespace WebClient.Controllers
         [HttpGet("get_all")]
         public async Task<IEnumerable<string>> GetFunctional()
         {
-            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var user = await _userManager.FindByIdAsync(userId);
+            var user = await _userManager.FindByIdAsync(User.FindFirstValue(ClaimTypes.NameIdentifier));
             //TODO Yarick, imagine something better pls
             if (user == null)
                 return null;
-            var userRoles = _dbContext.UserRoles.Where(x => x.UserId == userId).ToList();
+            var userRoles = _dbContext.UserRoles.Where(x => x.UserId == user.Id).ToList();
             var roles = userRoles.Select(x => _roleManager.FindByIdAsync(x.RoleId).Result).ToList();
 
             List<string> functions = new List<string>();
