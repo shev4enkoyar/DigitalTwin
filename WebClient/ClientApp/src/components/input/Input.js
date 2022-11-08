@@ -3,7 +3,7 @@ import { Container } from "reactstrap/lib";
 import './Input.css';
 function Input(props) {
     return (
-        <Container className={props.contClass+ " px-0"}>
+        <Container className={props.contClass + " px-0"} style={props.styleContainer} hidden={props.hidden}>
             <p className={props.classNameP}>
                 {props.Label}
             </p>
