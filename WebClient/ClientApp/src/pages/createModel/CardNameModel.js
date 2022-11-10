@@ -16,7 +16,7 @@ const CardNameModel = (props) => {
                     <div>
                         &nbsp;
                     </div>
-                    <p className="nameModel text-danger m-0" />
+                    <p className="nameModel text-warning m-0" />
                 </Input>
                 <Combobox onChange={(empty) => { props.setStatus({ pred: empty }) }} className="FormControlSelect minWForCombobox" classTextCombobox="textForSign" textCombobox="Был ли ранее предшественник?" options={isPred} />
                 <button onClick={() => { if (props.values.name) props.onClick() }} className="btn btn-primary" style={{ width: "190px" }}>

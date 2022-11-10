@@ -129,7 +129,7 @@ class IotPage extends Component {
                                                 <div>
                                                     &nbsp;
                                                 </div>
-                                                <p className="hintIot text-danger m-0"/>
+                                                <p className="hintIot text-warning  m-0"/>
                                             </Input>
                                         </Container>
                                         <Container className="d-flex p-0" style={{ minWidth: '20%', width: '50%' }}>
