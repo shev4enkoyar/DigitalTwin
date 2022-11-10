@@ -112,7 +112,7 @@ class IotPage extends Component {
                                         {
                                             this.state.sensors.map(
                                                 sensor =>
-                                                    <label onClick={() => {this.handleBlocked(sensor.id) }} className="m-0 text-center nameIot" style={{ border: '#4A4A4A solid 1px', padding: '5%', width: 'inherit' }}>
+                                                    <label onClick={() => { this.handleBlocked(sensor.id) }} className={"nameIot" + context.theme +" m-0 text-center "} style={{ border: '#4A4A4A solid 1px', padding: '5%', width: 'inherit' }}>
                                                         {sensor.name}
                                                     </label>
                                             )
@@ -124,8 +124,15 @@ class IotPage extends Component {
                                         <h5 style={{ fontFamily: 'Bitter', margin: '10px 0px 30px 0px', width:'100%' }} className="d-flex text-left">
                                             Подключить новый сенсор
                                         </h5>
-                                        <Input disabled={(!(this.state.chosen === -1 && this.state.isAdded === false))} value={this.state.chosen > 0 ? this.state.sensors.find(sensor => sensor.id === this.state.chosen).name : this.state.newName} onInput={(event) => { if ((this.state.chosen === -1 && this.state.isAdded === false)) this.handleNewName(event.target.value.trim()) }} classNameP="textForSign16" className="input" Label="Псевдоним устройства" styleContainer={{ minWidth: '20%', width: '50%' }} />
-                                        <Container className="d-flex p-0" style={{ minWidth: '20%', width: '50%'} }>
+                                        <Container>
+                                            <Input disabled={(!(this.state.chosen === -1 && this.state.isAdded === false))} value={this.state.chosen > 0 ? this.state.sensors.find(sensor => sensor.id === this.state.chosen).name : this.state.newName} onInput={(event) => { if ((this.state.chosen === -1 && this.state.isAdded === false)) this.handleNewName(event.target.value.trim()) }} classNameP="textForSign16" className="input" Label="Псевдоним устройства" styleContainer={{ minWidth: '20%', width: '50%' }}>
+                                                <div>
+                                                    &nbsp;
+                                                </div>
+                                                <p className="hintIot text-danger m-0"/>
+                                            </Input>
+                                        </Container>
+                                        <Container className="d-flex p-0" style={{ minWidth: '20%', width: '50%' }}>
                                             <p style={{ fontFamily: 'Open Sans', fontSize: '12px', width: '100%' }}>
                                                 Дата добавления: 
                                             </p>
