@@ -2,6 +2,7 @@
 import Input from '../../components/input/Input.js';
 import Combobox from '../../components/combobox/ComboBox.js';
 import CardForBody from '../../components/cardForBody/CardForBody.js';
+import './../pages.css';
 const CardNameModel = (props) => {
     const isPred = ["Да", "Нет",]
 
@@ -11,7 +12,12 @@ const CardNameModel = (props) => {
                 <h5 style={{ fontFamily: 'Open Sans', margin: '10px 0px 30px 0px' }} className="d-flex text-center">
                     Формирование технологической карты
                 </h5>
-                <Input value={props.values.name} onInput={(event) => { var reg = /^[0-9A-Za-zА-Яа-я]*$/i.test(event.target.value); if (reg) props.setStatus({ name: event.target.value.trim() }) }} className="input" classNameP="textForSign" Label="Наименование модели" placeholder="Введите наименование..." />
+                <Input value={props.values.name} onInput={(event) => { var reg = /^[0-9A-Za-zА-Яа-я]*$/i.test(event.target.value); if (reg) props.setStatus({ name: event.target.value.trim() }) }} className="input" classNameP="textForSign" Label="Наименование модели" placeholder="Введите наименование..." >
+                    <div>
+                        &nbsp;
+                    </div>
+                    <p className="nameModel text-danger m-0" />
+                </Input>
                 <Combobox onChange={(empty) => { props.setStatus({ pred: empty }) }} className="FormControlSelect minWForCombobox" classTextCombobox="textForSign" textCombobox="Был ли ранее предшественник?" options={isPred} />
                 <button onClick={() => { if (props.values.name) props.onClick() }} className="btn btn-primary" style={{ width: "190px" }}>
                     Далее
