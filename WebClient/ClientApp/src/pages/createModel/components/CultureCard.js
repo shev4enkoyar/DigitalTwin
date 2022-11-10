@@ -21,7 +21,9 @@ class CultureCard extends Component{
     }
     constructor(props) {
         super(props);
-        this.state = { cultureNames: [], cultureSort: [], productData: [], loading: true, errors: { fracEr: "\n", normEr: "\n", gustEr: "\n", totalEr: "\n" } };
+        this.state = {
+            cultureNames: [], cultureSort: [], productData: [], loading: true, errors: {
+                fracEr: "", normEr: "", gustEr: "", totalEr: "" } };
     }
     componentDidMount() {
         this.GetProducts();
@@ -50,13 +52,13 @@ class CultureCard extends Component{
                                         this.setState({ cultureSort: sort });
                                     }}
                             />
-                            <text className="m-0 text-danger p-0" style={{ fontSize: '14px', fontFamily: 'Open Sans' }}>
-                                {`${this.state.errors.fracEr}`}
-                            </text>
+                            <p className="m-0 text-danger p-0" style={{ fontSize: '14px', fontFamily: 'Open Sans' }}>
+                                {this.state.errors.fracEr}
+                            </p>
                             <Input Label="Фракция" classNameP="textForSign12" className="inpCreateForDashCard" contClass="contForInpDashE" value={this.props.values.frac} onInput={(event) => { let reg = /^[0-9A-Za-zА-Яа-я]*$/i.test(event.target.value); if (reg) { this.props.setStatus({ frac: event.target.value.trim() }); this.errorForInp({ fracEr: "" }); }  else this.errorForInp({fracEr: "Вводите только числа и буквы" }) }} />
-                            <text className="m-0 text-danger p-0" style={{ fontSize: '14px', fontFamily: 'Open Sans' }}>
-                                {`${this.state.errors.normEr}`}
-                            </text>
+                            <p className="m-0 text-danger p-0" style={{ fontSize: '14px', fontFamily: 'Open Sans' }}>
+                                {this.state.errors.normEr}
+                            </p>
                             <Input Label="Норма высева" classNameP="textForSign12" className="inpCreateForDashCard" contClass="contForInpDashE" onInput={(event) => { var reg = /^(0|([1-9][0-9]{0,5}))?(\.|(\.[0-9]{1,5}))?$/i.test(event.target.value); if (reg) { this.props.setStatus({ norm: event.target.value.trim() }); this.errorForInp({ normEr: "" }); } else this.errorForInp({ normEr: "Вводите только целые или дробные числа" }) }} value={this.props.values.norm} />
                             </Col>
                             <Col className="px-1">
@@ -68,13 +70,13 @@ class CultureCard extends Component{
                                         })
                                     }}
                             />
-                            <text className="m-0 text-danger p-0" style={{ fontSize: '14px', fontFamily: 'Open Sans' }}>
-                                {`${this.state.errors.gustEr}`}
-                            </text>
+                            <p className="m-0 text-danger p-0" style={{ fontSize: '14px', fontFamily: 'Open Sans' }}>
+                                {this.state.errors.gustEr}
+                            </p>
                             <Input Label="Густота" classNameP="textForSign12" className="inpCreateForDashCard" contClass="contForInpDashE" onInput={(event) => { var reg = /^(0|([1-9][0-9]{0,5}))?(\.|(\.[0-9]{1,5}))?$/i.test(event.target.value); if (reg) { this.props.setStatus({ gust: event.target.value.trim() }); this.errorForInp({ gustEr: "" }); } else this.errorForInp({ gustEr: "Вводите только целые или дробные числа" }) }} value={this.props.values.gust} />
-                            <text className="m-0 text-danger p-0" style={{ fontSize: '14px', fontFamily: 'Open Sans' }}>
-                                {`${this.state.errors.totalEr}`}
-                            </text>
+                            <p className="m-0 text-danger p-0" style={{ fontSize: '14px', fontFamily: 'Open Sans' }}>
+                                {this.state.errors.totalEr}
+                            </p>
                             <Input Label="Вес этапов" classNameP="textForSign12" className="inpCreateForDashCard" contClass="contForInpDashE" onInput={(event) => { var reg = /^(0|([1-9][0-9]{0,5}))?(\.|(\.[0-9]{1,5}))?$/i.test(event.target.value); if (reg) { this.props.setStatus({ total: event.target.value.trim() }); this.errorForInp({ totalEr: "" }); } else this.errorForInp({ totalEr: "Вводите только целые или дробные числа" }) }} value={this.props.values.total} />
                             </Col>
                     </Container>
