@@ -57,7 +57,7 @@ class CreateModel extends Component {
                         <div className={ context.theme + "Gray"+" d-flex justify-content-center w-100 h-100 position-absolute mt-2 "}>
                             <TransportSelect setStatus={(v) => { this.setStatus(v, 4) }} values={this.state.children[4]} handleActiveChanged={this.handleActiveChanged} />
                             <WorkerSelect setStatus={(v) => { this.setStatus(v, 5) }} values={this.state.children[5]} handleActiveChanged={this.handleActiveChanged} />
-                            <Container className={context.theme +"Step d-flex p-0 m-0"} style={{ backgroundColor: '#302F38', borderRadius: '3px', border: '1px solid #000', maxHeight: '65px', }}>{
+                            <Container className={context.theme +"Step d-flex p-0 m-0 position-absolute"} style={{ backgroundColor: '#302F38', borderRadius: '3px', border: '1px solid #000', maxHeight: '65px', }}>{
                                 this.steps.map((value, index) =>
                                     <ElementStep active={this.state.children[index].visible} key={index} progress={this.handleIsProgress() >= index} numberStep={index + 1} nameCard={value} />
                                 )}
