@@ -157,7 +157,34 @@ body {
 .contForReactTable {
     overflow-x: auto;
 }
-.nameIot:hover {
+.nameIotdark:hover {
     background-color: #ffff;
     color: #212026;
 }
+.nameIotlight:hover {
+    background-color: #EEEEEE;
+    color: #212026;
+}
+.hintIot{
+    margin: 0px 0px 7px!important;
+    font-size: 16px;
+    font-family: 'Open Sans';
+}
+.hintIot:hover:after {
+    content: "Псевдоним не влияет на работу IoT" !important;
+}
+.hintIot:after {
+    content: "?" !important;
+}
+.nameModel {
+    margin: 0px 0px 7px !important;
+    font-size: 14px;
+    font-family: 'Open Sans';
+}
+    .nameModel:hover:after {
+        content: "Наименование не влияет на работу модели" !important;
+    }
+
+    .nameModel:after {
+        content: "?" !important;
+    }
