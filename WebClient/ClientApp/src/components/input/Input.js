@@ -10,7 +10,7 @@ function Input(props) {
                 </p>
                 {props.children}
             </Container>
-            <input onChange={props.onChange} onInput={props.onInput} value={props.value} className={props.className} placeholder={props.placeholder}/>
+            <input onChange={props.onChange} onInput={props.onInput} disabled={props.disabled} readOnly={props.readOnly} value={props.value} className={props.className} placeholder={props.placeholder}/>
         </Container>
 
     );

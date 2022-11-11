@@ -33,13 +33,13 @@ class DashboardClassic extends Component {
                                 <Row className="m-5 justify-content-around">
                                     <Col className="col col-md-2 p-1 d-flex flex-column align-items-center mx-2">
                                         {Object.entries(this.state.first).map(([key, value]) => 
-                                            <Input disabled classNameP={context.theme + "Gray textForSign14 text-white my-0 mx-1 text-right"} className="input fixWidthInp" Label={this.headers[key]} contClass="d-flex align-items-center my-1 mx-0 justify-content-end" value={value} ></Input>
+                                            <Input disabled classNameP={context.theme + "Gray textForSign14 text-white my-0 mx-1 text-right"} className="input fixWidthInp" Label={this.headers[key]} contClass="d-flex align-items-center my-1 mx-0 justify-content-end" value={value} readOnly={true}></Input>
                                         )
                                         }
                                     </Col>
                                     <Col className="col col-md-2 p-1 d-flex flex-column align-items-center mx-2">
                                         {Object.entries(this.state.second).map(([key, value]) => 
-                                            <Input disabled classNameP={context.theme + "Gray textForSign14 text-white my-0 mx-1 text-right"} className="input fixWidthInp" Label={this.headers[key]} contClass="d-flex align-items-center my-1 mx-0 justify-content-end" value={value}></Input>
+                                            <Input disabled classNameP={context.theme + "Gray textForSign14 text-white my-0 mx-1 text-right"} className="input fixWidthInp" Label={this.headers[key]} contClass="d-flex align-items-center my-1 mx-0 justify-content-end" value={value} readOnly={true}></Input>
                                         )
                                         }
                                     </Col>
