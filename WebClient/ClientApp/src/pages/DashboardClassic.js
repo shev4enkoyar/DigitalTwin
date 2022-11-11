@@ -4,19 +4,15 @@ import { Col, Container, Row } from "reactstrap";
 import Input from '../components/input/Input';
 import './pages.css';
 import { ThemeContextConsumer } from '../components/ThemeContext';
-const selectRowProp = {
-    mode: 'checkbox',
-    clickToSelect: true,
-    unselectable: [2],
-    selected: [1],
-};
+
 class DashboardClassic extends Component {
     constructor(props) {
         super(props);
         this.state = {
             first: { cult: "Пшеница", sort: "Екатерина", square: 22.00, norma: 0.0 }, second: { frac: 0, thic: 0, harv: 18, weight: 20 }, third: { gros: 396, fund: 1461.4, labor: 1.58, cost: 7307, price: 12420 },
-            works: [{ name: "Уборка прямое комбайнирование", period: 9, amount: 22,  refAmount: 27, track: "Донн-", tire: "ЖВН - 7",  drivers: 1,  workers: 5 }, 
-                    { name: "Транспортировка зерна поле - ток", period: 9, amount: 36, refAmount: 65, track: "Урал", tire: "ПТС - 9", drivers: 1, workers: 3 }]
+            works: {name: "Уборка прямое комбайнирование", period: 9, amount: 22,  refAmount: 27, track: "Донн-", tire: "ЖВН - 7",  drivers: 1,  workers: 5 }, 
+                //{ name: "Транспортировка зерна поле - ток", period: 9, amount: 36, refAmount: 65, track: "Урал", tire: "ПТС - 9", drivers: 1, workers: 3 }
+            
         }
     }
     headers = {
@@ -37,13 +33,13 @@ class DashboardClassic extends Component {
                                 <Row className="m-5 justify-content-around">
                                     <Col className="col col-md-2 p-1 d-flex flex-column align-items-center mx-2">
                                         {Object.entries(this.state.first).map(([key, value]) => 
-                                            <Input classNameP={context.theme + "Gray textForSign14 text-white my-0 mx-1 text-right"} className="input fixWidthInp" Label={this.headers[key]} contClass="d-flex align-items-center my-1 mx-0 justify-content-end" value={value} ></Input>
+                                            <Input disabled classNameP={context.theme + "Gray textForSign14 text-white my-0 mx-1 text-right"} className="input fixWidthInp" Label={this.headers[key]} contClass="d-flex align-items-center my-1 mx-0 justify-content-end" value={value} ></Input>
                                         )
                                         }
                                     </Col>
                                     <Col className="col col-md-2 p-1 d-flex flex-column align-items-center mx-2">
                                         {Object.entries(this.state.second).map(([key, value]) => 
-                                            <Input classNameP={context.theme + "Gray textForSign14 text-white my-0 mx-1 text-right"} className="input fixWidthInp" Label={this.headers[key]} contClass="d-flex align-items-center my-1 mx-0 justify-content-end" value={value}></Input>
+                                            <Input disabled classNameP={context.theme + "Gray textForSign14 text-white my-0 mx-1 text-right"} className="input fixWidthInp" Label={this.headers[key]} contClass="d-flex align-items-center my-1 mx-0 justify-content-end" value={value}></Input>
                                         )
                                         }
                                     </Col>
@@ -53,7 +49,7 @@ class DashboardClassic extends Component {
                                 </Row>
                                 <Row className="m-5">
                                     <Col className="contForReactTable p-1 d-flex align-items-center mx-2">
-                                        <BootstrapTable classes={context.theme + "Gray textBitter"} keyField="name" data={[this.state.works,]} columns={this.workHeaders} />
+                                    <BootstrapTable classes={context.theme + "Gray textBitter"} keyField="name" data={[this.state.works,]} columns={this.workHeaders} />
                                     </Col>
                                 </Row>
                             </Container>
