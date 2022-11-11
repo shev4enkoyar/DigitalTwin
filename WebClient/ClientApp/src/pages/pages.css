@@ -154,6 +154,13 @@ body {
     border-style: hidden !important;
     min-width: max-content;
 }
+.textBitter {
+    font-family: 'Bitter';
+    font-size: 14px;
+    padding: 0px;
+    color: white;
+    min-width: max-content;
+}
 .contForReactTable {
     overflow-x: auto;
 }

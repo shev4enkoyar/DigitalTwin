@@ -5,6 +5,10 @@
     background: #EEEEEE;
     border:0px;
 }
+.fixWidthInp {
+    width: max-content;
+    max-width: 60%;
+}
 .textForSign12{
 font-size: 12px;
 margin: 7px 0px !important;
