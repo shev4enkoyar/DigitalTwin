@@ -5,11 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Protos\mapProto.proto" />
-    <None Remove="Protos\subscriptionProto.proto" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Google.Protobuf" Version="3.21.9" />
     <PackageReference Include="Grpc.Net.Client" Version="2.49.0" />
     <PackageReference Include="Grpc.Tools" Version="2.50.0">
@@ -25,6 +20,7 @@
 
   <ItemGroup>
     <Protobuf Include="Protos\digitalModelProto.proto" GrpcServices="Client" />
+	  <Protobuf Include="Protos\influenceCalculationProto.proto" GrpcServices="Client" />
     <Protobuf Include="Protos\mapProto.proto" GrpcServices="Client" />
     <Protobuf Include="Protos\productProto.proto" GrpcServices="Client" />
     <Protobuf Include="Protos\subscriptionProto.proto" GrpcServices="Client" />

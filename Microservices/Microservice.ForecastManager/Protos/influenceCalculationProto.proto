@@ -1,0 +1,48 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "Microservice.ForecastManager.Protos";
+
+package influenceCalculationProto;
+
+
+service InfluenceCalculationService {
+  rpc GetOverallInfluence (OverallInfluenceRequest) returns (OverallInfluenceReply);
+  rpc GetWeatherInfluenceInfluence (WeatherInfluenceRequest) returns (WeatherInfluenceReply);
+  rpc GetTaskInfluence (TaskInfluenceRequest) returns (TaskInfluenceReply);
+}
+
+message OverallInfluenceRequest {
+	repeated int32 dons = 1;
+	repeated int32 dots = 2;
+	double g = 3;
+	double gtcOptinal = 4;
+	int32 averageTemperature = 5;
+	repeated int32 maxAirTemperature = 6;
+	repeated int32 minAirTemperature = 7;
+	repeated int32 precipitationAmount = 8;
+}
+message OverallInfluenceReply {
+   double result = 1; 
+}
+
+message WeatherInfluenceRequest {
+	double g = 1;
+	int32 averageTemperature = 2;
+	repeated int32 maxAirTemperature = 3;
+	repeated int32 minAirTemperature = 4;
+	repeated int32 precipitationAmount = 5;
+	double gtcOptinal = 6;
+}
+
+message WeatherInfluenceReply {
+   double result = 1; 
+}
+
+message TaskInfluenceRequest {
+	repeated int32 dons = 1;
+	repeated int32 dots = 2;
+}
+
+message TaskInfluenceReply {
+   double result = 1; 
+}

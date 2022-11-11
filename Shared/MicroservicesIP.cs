@@ -10,12 +10,11 @@ namespace Shared
     public static class MicroservicesIP
     {
         private static readonly string gateway = "http://localhost:5100";
-        private static readonly HttpClient gatewayIP;
 
         #region Properties
 
         /// <summary>Gateway IP</summary>
-        /// <value>https://localhost:5100</value>
+        /// <value>http://localhost:5100</value>
         /// <exception cref="ArgumentNullException"/>
         public static string GatewayIP => CheckEmptyIP(gateway);
 
@@ -45,6 +44,7 @@ namespace Shared
             private static readonly string dashboard = "https://localhost:49162";
             private static readonly string map = "https://localhost:49165";
             private static readonly string modelTask = "https://localhost:49171";
+            private static readonly string forecast = "https://localhost:49173";
             private static readonly string subscription = "https://localhost:49169"; // OLD https://host.docker.internal:49169/
             private static readonly string image = null;
             private static readonly string internetOfThings = "https://localhost:49165";  //TODO TEST!!!
@@ -80,6 +80,11 @@ namespace Shared
             /// <value>https://localhost:49171</value>
             /// <exception cref="ArgumentNullException"/>
             public static string ModelTask => CheckEmptyIP(modelTask);
+
+            /// <summary>ForecastManager IP</summary>
+            /// <value>https://localhost:49173</value>
+            /// <exception cref="ArgumentNullException"/>
+            public static string Forecast => CheckEmptyIP(forecast);
 
             #endregion
         }

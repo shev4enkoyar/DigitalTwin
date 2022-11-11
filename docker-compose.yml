@@ -33,3 +33,12 @@ services:
       context: .
       dockerfile: Microservices/Microservice.ModelTaskManager/Microservice.ModelTaskManager/Dockerfile
 
+
+  microservice.forecastmanager:
+    image: ${DOCKER_REGISTRY-}microserviceforecastmanager
+    ports:
+      - "49173:49173"
+    build:
+      context: .
+      dockerfile: Microservices/Microservice.ForecastManager/Dockerfile
+
