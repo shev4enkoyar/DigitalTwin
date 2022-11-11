@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using System;
+using System.Collections.Generic;
 
 namespace Microservice.DashboardManager.DAL.Models
 {
@@ -29,5 +30,7 @@ namespace Microservice.DashboardManager.DAL.Models
         //Relationships
 
         public virtual Product Product { get; set; }
+
+        public virtual List<ModelTransport> ModelTransports { get; set; }
     }
 }
