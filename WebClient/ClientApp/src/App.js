@@ -12,7 +12,6 @@ import { CreateCompany } from "./pages/createCompany/CreateCompany";
 import CreateModel from "./pages/createModel/CreateModel";
 import { Dashboard } from "./pages/Dashboard";
 import DashboardEmpty from "./pages/dashboardEmpty/DashboardEmpty";
-import DashboardClassic from './pages/DashboardClassic';
 import Home from './pages/home/Home.js';
 import IotPage from './pages/iotPage/IotPage';
 import MapMain from "./pages/map/MapMain";
@@ -43,7 +42,6 @@ export default class App extends Component {
                     <AuthorizeRoute path={ClientRoutes.PREFIX + ClientRoutes.SUBSCRIPTIONS_ALL} component={AllSubscriptions} />
                     <AuthorizeRoute path={ClientRoutes.PREFIX + ClientRoutes.RECOMMENDATIONS} component={Recommendations} />
                     <AuthorizeRoute path={ClientRoutes.PREFIX + ClientRoutes.DASHBOARD + ClientRoutes.SUFFIX_MODEL_ID} component={Dashboard} />
-                    <AuthorizeRoute path={ClientRoutes.PREFIX + ClientRoutes.DASHBOARDCLASSIC} component={DashboardClassic} />
                     <AuthorizeRoute path={ClientRoutes.PREFIX + ClientRoutes.IOTPAGE} component={IotPage} />
                     <AuthorizeRoute path={ClientRoutes.PREFIX + ClientRoutes.DOCS} component={Docs} />
                     <AuthorizeRoute path={ClientRoutes.PREFIX + ClientRoutes.MAP + ClientRoutes.SUFFIX_MODEL_ID} component={MapMain} />
