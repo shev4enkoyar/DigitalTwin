@@ -5,10 +5,10 @@ import Combobox from '../../../components/combobox/ComboBox';
 import BaseCard from "./BaseCard";
 import './CardsForDashboard.css';
 const ChemistryCard = (props) => {
-    const chem = ["Выберите хим.средство...", "аа", "=="]
-    const pest = ["Выберите пестициды...", "аа"]
-    const ud = ["Выберите удобрения...", "==", "аа"]
-    const xxx = ["Выберите тип почвы ...", "аа"]
+    const chem = ["Выберите хим.средство...", "1", "2"]
+    const pest = ["Выберите пестициды...", "1"]
+    const ud = ["Выберите удобрения...", "1", "2"]
+    const xxx = ["Выберите тип почвы ...", "1"]
     const isFull = () => {
         if (props.values === null || props.values === undefined) {
         }
