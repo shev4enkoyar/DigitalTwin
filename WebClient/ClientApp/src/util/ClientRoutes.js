@@ -7,6 +7,7 @@ export const ClientRoutes = {
     SUBSCRIPTIONS:  'activatedSubscriptions',
     SUBSCRIPTIONS_ALL: 'allSubscriptions',
     DASHBOARD: 'dashboard',
+    DASHBOARDCLASSIC: 'dashboardClassic',
     MAP: 'map',
     RECOMMENDATIONS: 'recommendation',
     COMPANY_INVITE: 'inviteCompany',
