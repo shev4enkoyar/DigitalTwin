@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+option csharp_namespace = "Microservice.WeatherManager.Protos";
+
+package weatherProto;
+
+service WeatherService {
+	rpc GetWeather (Request) returns (stream WeatherReply);
+}
+
+message Request {
+	int32 modelId = 1;
+	double lat = 2;
+	double lng = 3;
+}
+message WeatherReply {
+   repeated WeatherProto weathers = 1;
+}
+
+message WeatherProto {
+  string date = 1;
+  double temperature = 2;
+  double precipitation = 3;
+  double soilMoisture = 4;
+}

@@ -12,8 +12,8 @@ namespace Gateway.Controllers
     [ApiController]
     public class CalculationController : ControllerBase
     {
-        [HttpPost("get_task_influence/{modelId}")]
-        public async Task<double> GetTaskInfluenceByModelAsync(string modelId)
+        [HttpGet("get_task_influence/{modelId}")]
+        public async Task<double> GetTaskInfluenceByModelAsync(int modelId)
         {
             using var channel = GrpcChannel.ForAddress(MicroservicesIP.External.Forecast,
                 new GrpcChannelOptions { HttpHandler = MicroservicesIP.DefaultHttpHandler }
@@ -32,8 +32,8 @@ namespace Gateway.Controllers
             return 0;
         }
 
-        [HttpPost("get_weather_influence/{modelId}")]
-        public async Task<double> GetWeatherInfluenceByModelAsync(string modelId)
+        [HttpGet("get_weather_influence/{modelId}")]
+        public async Task<double> GetWeatherInfluenceByModelAsync(int modelId)
         {
 
             double g = 0.7; // калибровочный коэффициент, хз где его брать, по идее у каждой культуры свой
@@ -63,8 +63,8 @@ namespace Gateway.Controllers
             return 0;
         }
 
-        [HttpPost("get_overall_influence/{modelId}")]
-        public async Task<double> GetOverallInfluenceByModelAsync(string modelId)
+        [HttpGet("get_overall_influence/{modelId}")]
+        public async Task<double> GetOverallInfluenceByModelAsync(int modelId)
         {
             int[] dons = new int[5] { 1, 1, 0, 1, 1 };
             int[] dots = new int[5] { 0, 0, 1, 1, 1 };

@@ -29,8 +29,8 @@ namespace Microservice.WeatherManager.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<string>("ModelId")
-                        .HasColumnType("text");
+                    b.Property<int>("ModelId")
+                        .HasColumnType("integer");
 
                     b.Property<double>("PrecipitationAvg")
                         .HasColumnType("double precision");

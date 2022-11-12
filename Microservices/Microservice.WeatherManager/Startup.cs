@@ -36,6 +36,7 @@ namespace Microservice.WeatherManager
             }
 
             app.UseRouting();
+            app.UseGrpcWeb();
 
             app.UseEndpoints(endpoints =>
             {
