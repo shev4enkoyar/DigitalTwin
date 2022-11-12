@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Microservices", "Microservices", "{53CD2FDA-5656-4122-8BBA-9E4C1FF7FC26}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microservice.SubscriptionManager", "Microservices\Microservice.SubscriptionManager\Microservice.SubscriptionManager.csproj", "{1756F762-38AD-40D8-9C2C-0AD0994F13F9}"
+	ProjectSection(ProjectDependencies) = postProject
+		{347E7C74-D6FA-4F0B-A44A-5A4A47529003} = {347E7C74-D6FA-4F0B-A44A-5A4A47529003}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microservice.DashboardManager", "Microservices\Microservice.DashboardManager\Microservice.DashboardManager.csproj", "{FE45B39C-C0C9-4673-B447-BC6C288F4FA7}"
 EndProject
@@ -27,7 +30,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gateway", "Gateway\Gateway.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microservice.ForecastManager", "Microservices\Microservice.ForecastManager\Microservice.ForecastManager.csproj", "{C75655C9-BA89-4AC5-91E4-2DCB6E303327}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microservice.WeatherManager", "Microservices\Microservice.WeatherManager\Microservice.WeatherManager.csproj", "{85142B40-A929-43C1-996E-F222E964BBE6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microservice.WeatherManager", "Microservices\Microservice.WeatherManager\Microservice.WeatherManager.csproj", "{85142B40-A929-43C1-996E-F222E964BBE6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

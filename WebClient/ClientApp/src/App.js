@@ -22,6 +22,7 @@ import AllSubscriptions from "./pages/Tariffs/AllSubscriptions";
 import Subscriptions from "./pages/Tariffs/Subscriptions";
 import Docs from "./pages/Docs/Docs";
 import { ClientRoutes } from "./util/ClientRoutes";
+import GanttMain from './pages/gant/gant_main';
 
 export default class App extends Component {
     static displayName = App.name;
@@ -47,6 +48,9 @@ export default class App extends Component {
                     <AuthorizeRoute path={ClientRoutes.PREFIX + ClientRoutes.IOTPAGE} component={IotPage} />
                     <AuthorizeRoute path={ClientRoutes.PREFIX + ClientRoutes.DOCS} component={Docs} />
                     <AuthorizeRoute path={ClientRoutes.PREFIX + ClientRoutes.MAP + ClientRoutes.SUFFIX_MODEL_ID} component={MapMain} />
+
+                    <AuthorizeRoute path={ClientRoutes.PREFIX + ClientRoutes.GANT} component={GanttMain} />
+
                     <AuthorizeRouteWithPermission path={ClientRoutes.PREFIX + ClientRoutes.REGISTER_COMPANY} component={CreateCompany} name={ClientRoutes.REGISTER_COMPANY} />
                     <AuthorizeRouteWithPermission path={ClientRoutes.PREFIX + ClientRoutes.COMPANY_INVITE} component={CompanyInvite} name={ClientRoutes.COMPANY_INVITE} />
                     <AuthorizeRouteWithPermission path={ClientRoutes.PREFIX + ClientRoutes.MODELS} component={Models} name={ClientRoutes.MODELS} />
