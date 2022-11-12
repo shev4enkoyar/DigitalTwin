@@ -11,13 +11,12 @@ class IotPage extends Component {
         super(props);
         this.state = {
             chosen: -2, newName:"",newFunc:[], isAdded: false, sensors: [
-                { id: 1, name: "Наименование 1", func: [1, 2], link: "temp", dateAdd:"21.08.2020" },
-                { id: 2, name: "Наименование 2", func: [2, 3], link: "temp", dateAdd: "21.08.2020" },
-                { id: 3, name: "Наименование 3", func: [3, 4], link: "temp", dateAdd: "21.08.2020" },
-                { id: 4, name: "Наименование 4", func: [4, 5], link: "temp", dateAdd: "21.08.2020" },
-                { id: 5, name: "Наименование 5", func: [5, 6], link: "temp", dateAdd: "21.08.2020" },
-                { id: 6, name: "Наименование 6", func: [6, 7], link: "temp", dateAdd: "21.08.2020" },
-                { id: 7, name: "Наименование 7", func: [7, 8], link: "temp", dateAdd: "21.08.2020" }
+                { id: 1, name: "IoT 001", func: [1, 3], link: "temp", dateAdd:"21.08.2020" },
+                { id: 2, name: "IoT 002", func: [2, 3], link: "temp", dateAdd: "23.07.2021" },
+                { id: 3, name: "IoT 003", func: [2, 4], link: "temp", dateAdd: "15.05.2020" },
+                { id: 4, name: "IoT 004", func: [1, 5], link: "temp", dateAdd: "18.09.2020" },
+                { id: 5, name: "IoT 005", func: [3, 4], link: "temp", dateAdd: "24.10.2020" },
+                { id: 6, name: "IoT 006", func: [1, 4], link: "temp", dateAdd: "21.12.2020" }
             ]
         }
     };
@@ -56,40 +55,24 @@ class IotPage extends Component {
     functName = [
         {
             id: 1,
-            name: 'Функционал 1'
+            name: 'Температура воздуха'
         },
         {
             id: 2,
-            name: 'Функционал 1'
+            name: 'Влажность воздуха'
         },
         {
             id: 3,
-            name: 'Функционал 1'
+            name: 'Атмосферное давление'
         },
         {
             id: 4,
-            name: 'Функционал 2'
+            name: 'Температура почвы'
         },
         {
             id: 5,
-            name: 'Функционал 2'
+            name: 'Влажность почвы'
         },
-        {
-            id: 6,
-            name: 'Функционал 2'
-        },
-        {
-            id: 7,
-            name: 'Функционал 3'
-        },
-        {
-            id: 8,
-            name: 'Функционал 3'
-        },
-        {
-            id: 9,
-            name: 'Функционал 3'
-        }
     ];
     render() {
 
