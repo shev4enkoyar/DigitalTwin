@@ -11,6 +11,10 @@ namespace Microservice.DashboardManager.DAL
         public DbSet<Product> Products { get; set; }
 
         public DbSet<DigitalModel> DigitalModels { get; set; }
+
+        public DbSet<ModelTransport> ModelTransports { get; set; }
+
+        public DbSet<Transport> Transports { get; set; }
         #endregion
 
         public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)

@@ -18,6 +18,12 @@ namespace Microservice.DashboardManager.DAL.Models
         [Required]
         public string Code { get; set; }
 
+        [Required]
+        public int SoilMoistureMin { get; set; }
+
+        [Required]
+        public int SoilMoistureMax { get; set; }
+
         public decimal? CurrentPrice { get; set; }
 
         //Relationships

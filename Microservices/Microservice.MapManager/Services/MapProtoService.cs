@@ -2,6 +2,9 @@
 using Microservice.MapManager.DAL;
 using Microservice.MapManager.DAL.Models;
 using Microservice.MapManager.Protos;
+using Microsoft.AspNetCore.Server.IIS.Core;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.Linq;
 using System.Threading.Tasks;
 using TestReestr.Scripts.rosreestr2coord;
@@ -30,6 +33,22 @@ namespace Microservice.MapManager.Services
                 MapId = mapId,
             });
         }
+        public override Task<GetMapCenterReply> GetMapCenter(GetMapCenterRequest request, ServerCallContext context)
+        {
+            var map = _dbContext.Maps.Include(x => x.Figures).FirstOrDefault(x => x.ModelId == request.ModelId);
+            if (map == null)
+                return Task.FromResult(new GetMapCenterReply());
+
+            var figure = map.Figures.FirstOrDefault();
+            if (figure == null)
+                return Task.FromResult(new GetMapCenterReply());
+
+            string[] points = figure.Points.Split(',');
+
+            return Task.FromResult(new GetMapCenterReply() { Lat = double.Parse(points[0]), Lng = double.Parse(points[1]) });
+
+        }
+
 
         private int CreateMap(GetMapIdRequest request)
         {

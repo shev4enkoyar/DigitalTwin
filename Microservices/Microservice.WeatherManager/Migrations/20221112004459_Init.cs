@@ -14,7 +14,7 @@ namespace Microservice.WeatherManager.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    ModelId = table.Column<string>(type: "text", nullable: true),
+                    ModelId = table.Column<int>(type: "integer", nullable: false),
                     Date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     TemperatureAvg = table.Column<double>(type: "double precision", nullable: false),
                     PrecipitationAvg = table.Column<double>(type: "double precision", nullable: false),

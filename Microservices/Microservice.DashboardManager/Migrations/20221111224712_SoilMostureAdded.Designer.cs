@@ -3,15 +3,17 @@ using System;
 using Microservice.DashboardManager.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Microservice.DashboardManager.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20221111224712_SoilMostureAdded")]
+    partial class SoilMostureAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -47,28 +49,6 @@ namespace Microservice.DashboardManager.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("DigitalModels");
-                });
-
-            modelBuilder.Entity("Microservice.DashboardManager.DAL.Models.ModelTransport", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<int>("DigitalModelId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("TransportId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DigitalModelId");
-
-                    b.HasIndex("TransportId");
-
-                    b.ToTable("ModelTransports");
                 });
 
             modelBuilder.Entity("Microservice.DashboardManager.DAL.Models.Product", b =>
@@ -129,30 +109,6 @@ namespace Microservice.DashboardManager.Migrations
                     b.ToTable("ProductPriceHistory");
                 });
 
-            modelBuilder.Entity("Microservice.DashboardManager.DAL.Models.Transport", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<string>("Brand")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Staff")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Transports");
-                });
-
             modelBuilder.Entity("Microservice.DashboardManager.DAL.Models.DigitalModel", b =>
                 {
                     b.HasOne("Microservice.DashboardManager.DAL.Models.Product", "Product")
@@ -162,25 +118,6 @@ namespace Microservice.DashboardManager.Migrations
                         .IsRequired();
 
                     b.Navigation("Product");
-                });
-
-            modelBuilder.Entity("Microservice.DashboardManager.DAL.Models.ModelTransport", b =>
-                {
-                    b.HasOne("Microservice.DashboardManager.DAL.Models.DigitalModel", "DigitalModel")
-                        .WithMany("ModelTransports")
-                        .HasForeignKey("DigitalModelId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Microservice.DashboardManager.DAL.Models.Transport", "Transport")
-                        .WithMany("ModelTransports")
-                        .HasForeignKey("TransportId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("DigitalModel");
-
-                    b.Navigation("Transport");
                 });
 
             modelBuilder.Entity("Microservice.DashboardManager.DAL.Models.ProductPriceHistory", b =>
@@ -194,21 +131,11 @@ namespace Microservice.DashboardManager.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("Microservice.DashboardManager.DAL.Models.DigitalModel", b =>
-                {
-                    b.Navigation("ModelTransports");
-                });
-
             modelBuilder.Entity("Microservice.DashboardManager.DAL.Models.Product", b =>
                 {
                     b.Navigation("DigitalModels");
 
                     b.Navigation("ProductPriceHistory");
-                });
-
-            modelBuilder.Entity("Microservice.DashboardManager.DAL.Models.Transport", b =>
-                {
-                    b.Navigation("ModelTransports");
                 });
 #pragma warning restore 612, 618
         }

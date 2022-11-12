@@ -3,12 +3,12 @@ using Microservice.WeatherManager.DAL;
 using Microservice.WeatherManager.DAL.Models;
 using Microservice.WeatherManager.Protos;
 using Microservice.WeatherManager.Util.JsonModels;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace Microservice.WeatherManager.Services
@@ -43,15 +43,17 @@ namespace Microservice.WeatherManager.Services
             }
 
             HttpClient client = new HttpClient();
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json")); ;
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-            HttpResponseMessage response = await client.GetAsync($"{weatherBase}{latlng}&{attributes}&{dates}");
+            /*HttpResponseMessage response = await client.GetAsync($"{weatherBase}{latlng}&{attributes}&{dates}");*/
+            HttpResponseMessage response = await client.GetAsync("https://api.open-meteo.com/v1/forecast?latitude=60.06&longitude=30.46&hourly=temperature_2m,precipitation,soil_moisture_0_1cm&start_date=2022-10-12&end_date=2022-11-12");
             HourlyWeather.Root jsonWeather;
             if (response.IsSuccessStatusCode)
             {
-                jsonWeather = JsonConvert.DeserializeObject<HourlyWeather.Root>(await response.Content.ReadAsStringAsync());
+                var content = response.Content.ReadAsStringAsync().Result;
+                jsonWeather = JsonSerializer.Deserialize<HourlyWeather.Root>(content);
 
-                int lastHour = 23;
+                int lastRow = 23;
                 List<double> temperaturs = new List<double>();
                 List<double> precipitations = new List<double>();
                 List<double> soilMoistures = new List<double>();
@@ -60,8 +62,9 @@ namespace Microservice.WeatherManager.Services
                     temperaturs.Add(jsonWeather.Hourly.Temperature2m[i]);
                     precipitations.Add(jsonWeather.Hourly.Precipitation[i]);
                     soilMoistures.Add(jsonWeather.Hourly.SoilMoisture01cm[i]);
-                    if (i == lastHour)
+                    if (i == lastRow)
                     {
+                        lastRow += 24;
                         _dbContext.Add(new Weather
                         {
                             ModelId = request.ModelId,
@@ -85,7 +88,9 @@ namespace Microservice.WeatherManager.Services
 
         private bool IsWeatherUpdated(int modelId)
         {
-            return _dbContext.Weathers.Any(x => x.ModelId.Equals(modelId) && x.Date.Equals(DateTime.UtcNow));
+            DateTime curDate = DateTime.UtcNow;
+            DateTime dbDate = ConvertFromJsonDate(curDate);
+            return _dbContext.Weathers.Any(x => x.ModelId.Equals(modelId) && x.Date.Equals(dbDate));
         }
 
         private IEnumerable<WeatherProto> GetProtoWeathers(int modelId)

@@ -10,7 +10,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Microservice.WeatherManager.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20221111222419_Init")]
+    [Migration("20221112004459_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -31,8 +31,8 @@ namespace Microservice.WeatherManager.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<string>("ModelId")
-                        .HasColumnType("text");
+                    b.Property<int>("ModelId")
+                        .HasColumnType("integer");
 
                     b.Property<double>("PrecipitationAvg")
                         .HasColumnType("double precision");

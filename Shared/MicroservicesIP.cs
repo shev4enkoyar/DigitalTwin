@@ -45,6 +45,7 @@ namespace Shared
             private static readonly string map = "https://localhost:49165";
             private static readonly string modelTask = "https://localhost:49171";
             private static readonly string forecast = "https://localhost:49173";
+            private static readonly string weather = "https://localhost:49175";
             private static readonly string subscription = "https://localhost:49169"; // OLD https://host.docker.internal:49169/
             private static readonly string image = null;
             private static readonly string internetOfThings = "https://localhost:49165";  //TODO TEST!!!
@@ -85,6 +86,11 @@ namespace Shared
             /// <value>https://localhost:49173</value>
             /// <exception cref="ArgumentNullException"/>
             public static string Forecast => CheckEmptyIP(forecast);
+
+            /// <summary>WeatherManager IP</summary>
+            /// <value>https://localhost:49175</value>
+            /// <exception cref="ArgumentNullException"/>
+            public static string Weather => CheckEmptyIP(weather);
 
             #endregion
         }
