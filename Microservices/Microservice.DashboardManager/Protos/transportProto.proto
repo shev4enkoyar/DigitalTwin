@@ -1,0 +1,23 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "Microservice.DashboardManager";
+
+package transportProto;
+
+service TransportService {
+  rpc GetAllTransport (GetAllTransportRequest) returns (stream GetAllTransportReply);
+}
+
+message GetAllTransportRequest {
+}
+
+message GetAllTransportReply {
+   repeated TransportProto transports = 1;
+}
+
+message TransportProto {
+  int32 id = 1;
+    string name = 2;
+    string brand = 3;
+    string staff = 4;
+}
