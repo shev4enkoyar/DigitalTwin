@@ -12,5 +12,5 @@ export const ClientRoutes = {
     COMPANY_INVITE: 'inviteCompany',
     IOTPAGE: 'iot',
     DOCS: 'docs',
-    GANT: 'gant'
+    GANT: 'gantmain'
 }

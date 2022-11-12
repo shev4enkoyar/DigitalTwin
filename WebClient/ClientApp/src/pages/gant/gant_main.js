@@ -1,20 +1,34 @@
-﻿import React, { Component } from 'react';
-import { Col, Container, Row } from "reactstrap";
-import CardForBody from '../../components/cardForBody/CardForBody';
-import Input from '../../components/input/Input';
-import SideBarDashboard from "../../components/sideBarDashboard/SideBarDashboard";
+﻿import React, { useState, useEffect } from 'react'
+import { Col, Container, Row, Modal, ModalHeader, ModalBody, Form, Label, Input, FormText } from "reactstrap";
+
+import BackIn_Icon from "../../components/sideBarDashboard/BackInModel_Icon";
+import DocIcon from "../../components/sideBarDashboard/DocIcon";
+import GraphicIcon from "../../components/sideBarDashboard/GraficIcon";
+import HistoryPriceIcon from "../../components/sideBarDashboard/HistoryPriceIcon";
+import HomePanel_Icon from "../../components/sideBarDashboard/HomePanel_Icon";
+import Map_Icon from "../../components/sideBarDashboard/Map_Icon";
+import RecIcon from "../../components/sideBarDashboard/RecIcon";
+import SensorsIoT from "../../components/sideBarDashboard/SensorsIoT";
 import { IconButton } from "../../components/sideBarDashboard/util/IconButton";
-import { ThemeContextConsumer } from "../../components/ThemeContext";
-import '../pages.css';
 
 
 
-export default function GanttMain() {
 
-    iconsLeftBar = [
-        new IconButton("#/", "Главная панель",
+import GantGraph from "../../components/gant/gant_component";
+import SideBarDashboard from "../../components/sideBarDashboard/SideBarDashboard";
+
+
+
+function GanttMain(props) {
+
+    const [showModal, setModal] = useState(false);
+    const [object, setObject] = useState([]);
+
+
+    let iconsLeftBar = [
+        new IconButton("/dashboard", "Главная панель",
             <img style={{ width: "25px", height: "25px", margin: "7px 0px 0px" }} className="icon" src="https://img.icons8.com/windows/344/home.png" />),
-        new IconButton("/map/" + this.props.match.params.modelId, "Карта",
+        new IconButton("/map/" + props.match.params.modelId, "Карта",
             <img style={{ width: "25px", height: "25px", margin: "7px 0px 0px" }} className="icon" src="https://img.icons8.com/small/344/map.png" />),
         new IconButton("/docs", "Документы",
             <img style={{ width: "25px", height: "25px", margin: "7px 0px 0px" }} className="icon" src="https://img.icons8.com/ios/344/document--v1.png" />),
@@ -30,6 +44,33 @@ export default function GanttMain() {
             <img style={{ width: "25px", height: "25px", margin: "7px 0px 0px" }} className="icon" src="https://img.icons8.com/ios/344/logout-rounded--v1.png" />)
     ];
 
+    function giveParent(task) {
+        setObject(task)
+        setModal(true)
+    }
 
+
+    return <>
+        <SideBarDashboard icons={iconsLeftBar} />
+        <Container fluid style={{ height: "100%", padding: "0", margin: "0" }}>
+            <GantGraph giveParent={giveParent} />
+        </Container>
+        <Modal isOpen={showModal} toggle={() => {setModal(false)}}>
+            <ModalHeader>Изменить задачу</ModalHeader>
+            <ModalBody>
+                <Form>
+                    {/*<FormGroup>
+                        <div>
+                        <Label>Техника</Label>
+                        <Input/>
+                        </div>
+                    </FormGroup>*/}
+                </Form>
+            </ModalBody>
+        </Modal>
+        
+    </>
 
 }
+
+export default GanttMain;

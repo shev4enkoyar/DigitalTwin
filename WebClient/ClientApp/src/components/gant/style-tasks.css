@@ -1,0 +1,18 @@
+﻿@import "gantt-task-react/dist/index.css";
+
+
+._35nLX {
+    fill: #ffffff;
+    fill-opacity: 0.5
+}
+
+
+._2dZTy:nth-child(even) {
+    fill: #ffffff;
+    fill-opacity: 0.1
+}
+
+._2dZTy:nth-child(odd) {
+    fill: #ffffff;
+    fill-opacity: 0.5
+}
