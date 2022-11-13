@@ -44,6 +44,7 @@ namespace Microservice.DashboardManager.DAL
             #region Product
             modelBuilder.Entity<Product>().HasData(new Product
             {
+                Id = 1,
                 Name = "Картофель;Спиридон",
                 Code = "4",
                 CurrentPrice = 0,
@@ -52,6 +53,7 @@ namespace Microservice.DashboardManager.DAL
                 TypeId = 1,
             }, new Product
             {
+                Id = 2,
                 Name = "Кукуруза;Кубанский101МВ",
                 Code = "5",
                 CurrentPrice = 0,
@@ -60,6 +62,7 @@ namespace Microservice.DashboardManager.DAL
                 TypeId = 2
             }, new Product
             {
+                Id = 3,
                 Name = "Яровая пшеница;Эритросперум65",
                 Code = "3",
                 CurrentPrice = 0,
@@ -68,6 +71,7 @@ namespace Microservice.DashboardManager.DAL
                 TypeId = 2
             }, new Product
             {
+                Id = 4,
                 Name = "Озимая пшеница;Скипетр",
                 Code = "1",
                 CurrentPrice = 0,

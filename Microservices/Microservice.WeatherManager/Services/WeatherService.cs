@@ -23,11 +23,10 @@ namespace Microservice.WeatherManager.Services
 
         public override async Task GetWeather(Request request, IServerStreamWriter<WeatherReply> responseStream, ServerCallContext context)
         {
-            //TODO Использовать переменные, а не статичную ссылку
             string weatherBase = "https://api.open-meteo.com/v1/forecast?";
             string latlng = $"latitude={request.Lat}&longitude={request.Lng}";
             string attributes = $"hourly=temperature_2m,precipitation,soil_moisture_0_1cm";
-            string dates = $"start_date={DateTime.UtcNow.AddDays(-30):yyyy’-‘MM’-‘dd}&end_date={DateTime.UtcNow:yyyy’-‘MM’-‘dd}";
+            string dates = $"start_date={DateTime.UtcNow.AddDays(-30):yyyy-MM-dd}&end_date={DateTime.UtcNow:yyyy-MM-dd}";
             WeatherReply reply = new WeatherReply();
             if (IsWeatherUpdated(request.ModelId))
             {
@@ -46,8 +45,8 @@ namespace Microservice.WeatherManager.Services
             HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-            /*HttpResponseMessage response = await client.GetAsync($"{weatherBase}{latlng}&{attributes}&{dates}");*/
-            HttpResponseMessage response = await client.GetAsync("https://api.open-meteo.com/v1/forecast?latitude=60.06&longitude=30.46&hourly=temperature_2m,precipitation,soil_moisture_0_1cm&start_date=2022-10-12&end_date=2022-11-12");
+            HttpResponseMessage response = await client.GetAsync($"{weatherBase}{latlng}&{attributes}&{dates}");
+            //HttpResponseMessage response = await client.GetAsync("https://api.open-meteo.com/v1/forecast?latitude=60.06&longitude=30.46&hourly=temperature_2m,precipitation,soil_moisture_0_1cm&start_date=2022-10-12&end_date=2022-11-12");
             HourlyWeather.Root jsonWeather;
             if (response.IsSuccessStatusCode)
             {

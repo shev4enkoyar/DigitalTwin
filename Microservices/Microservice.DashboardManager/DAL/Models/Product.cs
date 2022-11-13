@@ -9,7 +9,6 @@ namespace Microservice.DashboardManager.DAL.Models
     [Index(nameof(Name), IsUnique = true)]
     public class Product
     {
-        [Required]
         public int Id { get; set; }
 
         [Required]

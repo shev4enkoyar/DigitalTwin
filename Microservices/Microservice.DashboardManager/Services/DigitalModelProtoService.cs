@@ -56,20 +56,20 @@ namespace Microservice.DashboardManager.Services
 
         private IEnumerable<ModelProto> GetProtoModels(string userId)
         {
-            return DbContext.DigitalModels
-                .Include(x => x.Product)
-                .Where(x => x.CompanyId.ToString().Equals(userId))
-                .Select(x => new ModelProto()
-                {
-                    Id = x.Id,
-                    Name = x.Name,
-                    CompanyId = x.CompanyId.ToString(),
-                    ProductName = x.Product.Name,
-                    ProductCode = x.Product.Code,
-                    ProductCurrentPrice = x.Product.CurrentPrice.ToString(),
-                    MapId = x.MapId.Value
-                })
-                .ToList();
+            var some = DbContext.DigitalModels.Include(x => x.Product);
+            var some2 = some.Where(x => x.CompanyId.ToString().Equals(userId));
+            var some3 = some2.Select(x => new ModelProto()
+            {
+                Id = x.Id,
+                Name = x.Name,
+                CompanyId = x.CompanyId.ToString(),
+                ProductName = x.Product.Name,
+                ProductCode = x.Product.Code,
+                ProductCurrentPrice = x.Product.CurrentPrice.ToString(),
+                MapId = x.MapId.Value
+            });
+            var some4 = some3.ToList();
+            return some4;
         }
     }
 }
