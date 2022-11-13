@@ -40,8 +40,26 @@ namespace Gateway.Controllers
 
     static class TaskTypes
     {
-        public static string Sowing = "Засев";
-        public static string Treatment = "Обработка";
-        public static string Harvesting = "Сбор";
+        /// <summary>
+        /// Высев
+        /// </summary>
+        static class Sowing
+        {
+            
+        }
+        /// <summary>
+        /// Обработка
+        /// </summary>
+        static class Treatment
+        {
+
+        }
+        /// <summary>
+        /// Сбор
+        /// </summary>
+        static class Harvesting
+        {
+
+        }
     }
 }

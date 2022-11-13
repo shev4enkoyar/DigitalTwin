@@ -58,9 +58,6 @@ namespace Microservice.TaskManager.Services
             };
             var result = new List<ModelTask>() { task1, task2, task3, task4 };
             return result;
-
         }
     }
-
-
 }

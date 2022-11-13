@@ -24,12 +24,14 @@ namespace Microservice.DashboardManager.DAL.Models
         [Required]
         public int SoilMoistureMax { get; set; }
 
+        [ForeignKey(nameof(ProductType))]
+        public int TypeId { get; set; }
+
         public decimal? CurrentPrice { get; set; }
 
         //Relationships
-        
         public virtual List<DigitalModel> DigitalModels { get; set; }
-
         public virtual List<ProductPriceHistory> ProductPriceHistory { get; set; }
+        public virtual ProductType ProductType { get; set; }
     }
 }
