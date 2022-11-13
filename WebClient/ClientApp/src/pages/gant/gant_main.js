@@ -25,13 +25,13 @@ function GanttMain(props) {
     const [showModal, setModal] = useState(false);
     const [object, setObject] = useState([]);
 
-    let {modelId} = useParams()
+    //let {modelId} = useParams()
 
 
     let iconsLeftBar = [
         new IconButton("/dashboard", "Главная панель",
             <img style={{ width: "25px", height: "25px", margin: "7px 0px 0px" }} className="icon" src="https://img.icons8.com/windows/344/home.png" />),
-        new IconButton("/map/" + props.match.params.modelId, "Карта",
+        new IconButton("/map/", "Карта",
             <img style={{ width: "25px", height: "25px", margin: "7px 0px 0px" }} className="icon" src="https://img.icons8.com/small/344/map.png" />),
         new IconButton("/docs", "Документы",
             <img style={{ width: "25px", height: "25px", margin: "7px 0px 0px" }} className="icon" src="https://img.icons8.com/ios/344/document--v1.png" />),
@@ -54,9 +54,9 @@ function GanttMain(props) {
 
 
     return <>
-        <SideBarDashboard icons={iconsLeftBar} />
+        {props.height ? null : <SideBarDashboard icons={iconsLeftBar} />}
         <Container fluid style={{ height: "100%", padding: "0", margin: "0" }}>
-            <GantGraph giveParent={giveParent} />
+            <GantGraph giveParent={giveParent} height={props.height? props.height : null} />
         </Container>
         <Modal isOpen={showModal} toggle={() => {setModal(false)}}>
             <ModalHeader>Изменить задачу</ModalHeader>

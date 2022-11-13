@@ -8,6 +8,7 @@ import "./style-tasks.css";
 function GantGraph(props) {
 
     const [tasks, setNewTasks] = useState([])
+    const [curDate, setDate] = useState(new Date(new Date().setDate(new Date().getDate() - 12)))
 
     let windowInnerHeight = window.innerHeight
     let addingTasks = (windowInnerHeight-250)/50 
@@ -22,12 +23,13 @@ function GantGraph(props) {
     },[tasks])
 
     async function getTasks() {
-        const token = await authService.getAccessToken();
+        //tasks request//
+
+        /*const token = await authService.getAccessToken();
         const response = await fetch('api/task/get_all/22', {
             headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
         });
         const data = await response.json();
-        console.log(data);
         let new_tasks = [];
         for (let d of data) {
             let task = {}
@@ -40,21 +42,76 @@ function GantGraph(props) {
             task.isDisabled = true
             task.styles = { progressColor: '#ffbb54', progressSelectedColor: '#ff9e0d' }
             new_tasks.push(task)
-        }
+        }*/
 
-         if (new_tasks.length < addingTasks) {
-            for (let i = 0; i < (addingTasks); i++) {
-                new_tasks.push({
-                    start: new Date(2020, 1, 1),
-                    end: new Date(2020, 1, 1),
-                    name: '',
-                    id: '',
-                    type: '',
-                    progress: 45,
-                    isDisabled: true,
-                    styles: { progressColor: '#ffbb54', progressSelectedColor: '#ff9e0d' },
-                })
+        let new_tasks = [
+            {
+                start: new Date(2022, 9, 20),
+                end: new Date(2022, 10, 1),
+                name: 'Загрузка семян',
+                id: '1',
+                type: 'task',
+                progress: 100,
+                isDisabled: true,
+                styles: { progressColor: '#ffbb54', progressSelectedColor: '#ff9e0d' },
+            },
+            {
+                start: new Date(2022, 9, 29),
+                end: new Date(2022, 10, 9),
+                name: 'Транспортировка семян',
+                id: '2',
+                type: 'task',
+                progress: 100,
+                isDisabled: false,
+                styles: { progressColor: '#ffbb54', progressSelectedColor: '#ff9e0d' },
+            },
+            {
+                start: new Date(2022, 10, 5),
+                end: new Date(2022, 10, 17),
+                name: 'Посев',
+                id: '3',
+                type: 'task',
+                progress: 78,
+                isDisabled: false,
+                styles: { progressColor: '#ffbb54', progressSelectedColor: '#ff9e0d' },
+            },
+            {
+                start: new Date(2022, 10, 11),
+                end: new Date(2022, 10, 23),
+                name: 'Прикатывание продукции',
+                id: '4',
+                type: 'task',
+                progress: 13,
+                isDisabled: false,
+                styles: { progressColor: '#ffbb54', progressSelectedColor: '#ff9e0d' },
+            },
+            {
+                start: new Date(2022, 10, 17),
+                end: new Date(2022, 10, 29),
+                name: 'Боронование',
+                id: '5',
+                type: 'task',
+                progress: 0,
+                isDisabled: false,
+                styles: { progressColor: '#ffbb54', progressSelectedColor: '#ff9e0d' },
+            },
+        ];
 
+        if (!props.height) {
+            if (new_tasks.length < addingTasks) {
+                for (let i = 0; i < (addingTasks); i++) {
+                    new_tasks.push({
+                        start: new_tasks[0].start,
+                        end: new_tasks[0].start,
+                        name: '',
+                        id: 100 + i,
+                        type: 'task',
+                        progress: 0,
+                        isDisabled: true,
+                        styles: { progressColor: 'none', progressSelectedColor: 'none', backgroundColor: 'none', backgroundSelectedColor: 'none' },
+                    })
+
+                }
             }
         }
 
@@ -62,48 +119,6 @@ function GantGraph(props) {
         setNewTasks(new_tasks);
     }
 
-    /*function getTasks() {
-        let new_tasks: Task[] = [
-            {
-                start: new Date(2020, 1, 20),
-                end: new Date(2020, 1, 20),
-                name: '',
-                id: '',
-                type: '',
-                progress: 45,
-                isDisabled: true,
-                styles: { progressColor: '#ffbb54', progressSelectedColor: '#ff9e0d' },
-            },
-            {
-                start: new Date(2020, 1, 1),
-                end: new Date(2020, 1, 15),
-                name: 'Idea',
-                id: 'Task 0',
-                type: 'task',
-                progress: 45,
-                isDisabled: false,
-                styles: { progressColor: '#ffbb54', progressSelectedColor: '#ff9e0d' },
-            }
-        ];
-
-        if (new_tasks.length < addingTasks) {
-            for (let i = 0; i < (addingTasks); i++) {
-                new_tasks.push({
-                        start: new Date(2020, 1, 1),
-                        end: new Date(2020, 1, 1),
-                        name: '',
-                        id: '',
-                        type: '',
-                        progress: 45,
-                        isDisabled: true,
-                        styles: { progressColor: '#ffbb54', progressSelectedColor: '#ff9e0d' },
-                    })
-
-            }
-        }
-        setNewTasks(new_tasks)
-        
-    }*/
 
     const ClickedQuest = (task) => {
         console.log(props)
@@ -118,7 +133,9 @@ function GantGraph(props) {
         <Gantt
                 tasks={tasks}
                 listCellWidth={""}
-                onDoubleClick={ClickedQuest}
+                locale={"RU"}
+                onClick={props.height ? null : ClickedQuest}
+                viewDate={curDate}
             />
          }
         </Container>

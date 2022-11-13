@@ -15,15 +15,13 @@ class Docs extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            docs: [{ "name": "Отчет", "type": "doc", "link": "https://somepath_to_doc" },
-            { "name": "Отчет", "type": "xls", "link": "https://somepath_to_doc" },
-            { "name": "Отчет", "type": "doc", "link": "https://somepath_to_doc" },
-            { "name": "Отчет", "type": "xls", "link": "https://somepath_to_doc" },
-            { "name": "Отчет", "type": "xls", "link": "https://somepath_to_doc" },
-            { "name": "Отчет", "type": "xls", "link": "https://somepath_to_doc" },
-            { "name": "Отчет", "type": "xls", "link": "https://somepath_to_doc" },
-            { "name": "Отчет", "type": "doc", "link": "https://somepath_to_doc" },
-            { "name": "Отчет", "type": "pdf", "link": "https://somepath_to_doc" },], loading: false,
+            docs: [{ "name": "Отчет о рекомендации по культуре 2022", "type": "doc", "link": "https://somepath_to_doc" },
+                { "name": "Отчет о плановой урожайности 2022", "type": "xls", "link": "https://somepath_to_doc" },
+                { "name": "Технологическая карта 2022", "type": "doc", "link": "https://somepath_to_doc" },
+                { "name": "Отчет о выполнении мероприятий 2022", "type": "xls", "link": "https://somepath_to_doc" },
+                { "name": "Отчет о нарушении 2022", "type": "xls", "link": "https://somepath_to_doc" },
+                { "name": "Финансовый отчет 2022", "type": "xls", "link": "https://somepath_to_doc" },
+            ], loading: false,
             icons: [
                 { "doc": "https://www.svgrepo.com/show/255810/doc.svg" },
                 { "xls": "https://www.svgrepo.com/show/255829/xls.svg" },
@@ -64,13 +62,13 @@ class Docs extends Component {
                 return (
                     <ThemeContextConsumer>
                         {context => (
-                            <CardForBody styleForCard={{ width: "fit-content", height: "fit-content", cursor: "pointer", margin: "10px" }}>
+                            <CardForBody styleForCard={{ width: "150px", height: "150px", cursor: "pointer", margin: "10px" }}>
                                     <Container className="text-center mt-4">
                                         <img style={{ width: "50px", height: "50px" }}
                                             src={el.type === "doc" ? "https://www.svgrepo.com/show/255810/doc.svg" : el.type === "xls" ? "https://www.svgrepo.com/show/255829/xls.svg" : "https://www.svgrepo.com/show/255818/pdf.svg"} />
 
                                     </Container>
-                                    <h4 className={context.theme + " text-center mt-4"} style={{ color: "#fff", fontSize: "18px"}}>
+                                    <h4 className={context.theme + " text-center mt-4"} style={{ color: "#fff", fontSize: "12px"}}>
                                         {el.name}
                                         {this.state.icons.doc}
                                     </h4>

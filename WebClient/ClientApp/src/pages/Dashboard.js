@@ -1,4 +1,5 @@
-import React, { Component } from "react";
+import React, { Component, useEffect, useState } from "react";
+import { Gantt, Task, EventOption } from 'gantt-task-react';
 import { Col, Container, Row } from "reactstrap/lib";
 import CardForBody from "../components/cardForBody/CardForBody";
 import { ThemeContextConsumer } from "../components/ThemeContext";
@@ -16,7 +17,8 @@ import { DashboardClassic } from "./DashboardClassic.js";
 import { NavLink } from 'react-router-dom';
 import { withRouter, WithRouter } from 'react-router';
 import './Dashboard.css';
-
+import "../components/gant/style-tasks.css";
+import GanttMain from "./gant/gant_main";
 
 const StatusCard = (props) => {
     return (
@@ -67,6 +69,9 @@ export class Dashboard extends Component {
 
     }
 
+    giveParent() {
+        console.log(hey);
+    }
 
 
     iconsLeftBar = [
@@ -141,12 +146,13 @@ export class Dashboard extends Component {
                                             </StatusCard>
                                         </Row>
                                         <Row className={context.theme + "Gray mt-3 ml-5"} style={{ width: "90%" }}>
-                                            <Col md={6} lg={9} style={{ minHeight: "50vh" }} className="ml-0 mb-3">
-                                                <CardForBody styleForCard={{ width: "100%", height: "100%", margin: "0" }}>
-                                                    <h3>Диаграмма Ганта</h3>
+                                            <Col md={6} lg={9} style={{ minHeight: "40vh" }} className="ml-0 mb-3 d-none d-lg-flex">
+                                                <CardForBody styleForCard={{ width: "100%", height: "100%", margin: "0", padding: "0" }}>
+                                                    <h3>График работ</h3>
+                                                    <GanttMain height={"no"} />
                                                 </CardForBody>
                                             </Col>
-                                            <Col md={6} lg={3} style={{ minHeight: "50vh" }} className="mr-0 mb-3">
+                                            <Col md={6} lg={3} style={{ minHeight: "40vh" }} className="mr-0 mb-3">
                                                 <CardForBody styleForCard={{ width: "100%", height: "100%", margin: "0" }}>
                                                     <h3 className="events">Прошедие события</h3>
                                                     {events}
