@@ -113,7 +113,7 @@ class CultureCard extends Component{
             }
             return 0;
         });
-        data.forEach(el => cultureNameTemp.add(el.name.split(' ')[0]));
+        data.forEach(el => cultureNameTemp.add(el.name.split(';')[0]));
         this.setState({ productData: data, cultureNames: Array.from(cultureNameTemp), loading: false});
     }
 
