@@ -1,6 +1,6 @@
 ﻿import React from "react";
 import authService from "../../../components/api-authorization/AuthorizeService";
-import {Container} from "reactstrap";
+import {Container, Row} from "reactstrap";
 import BaseCard from "./BaseCard";
 import Input from "../../../components/input/Input";
 const EconomicCard = (props) => {
@@ -23,25 +23,33 @@ const EconomicCard = (props) => {
             });
         return await response.text();
     }
-    const isFull = () => {
-        if (this.props.values === null || this.props.values === undefined) {
+    const warning = () => {
+        if ((props.values.eZasev.length > 0) && (props.values.eObrabotka.length > 0) && (props.values.eSbor.length > 0)) {
+            return "Данные об экономических показателях сохранены";
         }
-        return !Object.keys(this.props.values).map(val => this.props.values[val]).some(function (value, index, array) { return (value === false || value === 0 || value === "" || value === undefined) })
+        else {
+            return (((props.values.eZasev.length > 0) ? "" : "Требуется добавить работы по засеву\n") + ((props.values.eObrabotka.length > 0) ? "" : "Требуется добавить работы по обработке\n") + ((props.values.eSbor.length > 0) ? "" : "Требуется добавить работы по сбору\n"))
+        }
     }
     return (
-        <BaseCard visible={props.visible} hText="Статус тех.карты" descr="Требуется добавить данные экономических показателей!" notifyColor="#DC3545">
-            <Container>
-                <Input Label="Наименование работы по высеву" classNameP="textForSign12" className="inpCreateForDashCard" contClass="contForInpDashE" value={props.values.vys} onInput={(event) => { props.setStatus({ vys: event.target.value.trim() }) }} />
-                <Input Label="Наименование работы по обработке" classNameP="textForSign12" className="inpCreateForDashCard" contClass="contForInpDashE" value={props.values.obr} onInput={(event) => {props.setStatus({ obr: event.target.value.trim() }) }} />
-                <Input Label="Наименование работы по сбору урожая" classNameP="textForSign12" className="inpCreateForDashCard" contClass="contForInpDashE" value={props.values.sbor} onInput={(event) => { props.setStatus({ sbor: event.target.value.trim() }) }} />
-                <Input Label="Длительность (период)" classNameP="textForSign12" className="inpCreateForDashCard" contClass="contForInpDashE" value={props.values.period} onInput={(event) => { props.setStatus({ period: event.target.value.trim() }) }} />
-                <Input Label="Работник на га" classNameP="textForSign12" className="inpCreateForDashCard" contClass="contForInpDashE" value={props.values.workerN} onInput={(event) => { var reg = /^([0-9]*)$/i.test(event.target.value); if (reg) props.setStatus({ workerN: event.target.value.trim() }) }} />
-            </Container>
-            <Container className="contButton">
-                <button onClick={() => { props.Back() }} className="btn btn-primary m-2">
-                    Назад
+        <BaseCard className="widForCardWithTable" visible={props.visible} off={props.off} hText="Статус тех.карты" descr={warning()} notifyColor="#DC3545" >
+            <Container style={{ display: 'flex', justifyContent: 'center', padding: '0px', margin: '0px 0px 0.5rem 0px', width: '100%' }}>
+                <button onClick={() => { props.setStatus({ isActive: true }) }} className="btn btn-warning my-2" style={{ width: "190px" }} >
+                    Выбрать
                 </button>
-                <button className="btn btn-primary my-2"  onClick={() => {
+            </Container>
+            <Container className="contButtonBCard">
+                <Row className="mx-2">
+                    <button onClick={() => { props.Back() }} className="btn btn-primary mr-2 my-2">
+                        Назад
+                    </button>
+                    <button className="btn btn-primary ml-2 my-2" style={{ width: "max-content" }} onClick={() => { props.onClick() }}>
+                        <a style={{ color: "#fff", textDecoration: 'none'}} href="/models">
+                            Пропустить
+                        </a>
+                    </button>
+                </Row>
+                <button className="btn btn-primary m-2"  onClick={() => {
                     let digitalModel = {
                         Name: props.data.at(0).name,
                         UserId: -1,
