@@ -1,5 +1,6 @@
 ﻿import React, { Component } from 'react';
 import { Col, Container, Row } from "reactstrap";
+import BootstrapTable from 'react-bootstrap-table-next';
 import CardForBody from '../../components/cardForBody/CardForBody';
 import Input from '../../components/input/Input';
 import SideBarDashboard from "../../components/sideBarDashboard/SideBarDashboard";
@@ -11,12 +12,11 @@ class IotPage extends Component {
         super(props);
         this.state = {
             chosen: -2, newName:"",newFunc:[], isAdded: false, sensors: [
-                { id: 1, name: "IoT 001", func: [1, 3], link: "temp", dateAdd:"21.08.2020" },
-                { id: 2, name: "IoT 002", func: [2, 3], link: "temp", dateAdd: "23.07.2021" },
-                { id: 3, name: "IoT 003", func: [2, 4], link: "temp", dateAdd: "15.05.2020" },
-                { id: 4, name: "IoT 004", func: [1, 5], link: "temp", dateAdd: "18.09.2020" },
-                { id: 5, name: "IoT 005", func: [3, 4], link: "temp", dateAdd: "24.10.2020" },
-                { id: 6, name: "IoT 006", func: [1, 4], link: "temp", dateAdd: "21.12.2020" }
+                { id: 1, status: "online", color:"success", name: "IoT 001", func: [1, 3], link: "temp", dateAdd:"21.08.2020" },
+                { id: 2, status: "ofline", color: "danger", name: "IoT 002", func: [2, 4], link: "temp", dateAdd: "15.05.2020" },
+                { id: 3, status: "online", color: "success", name: "IoT 003", func: [1, 5], link: "temp", dateAdd: "18.09.2020" },
+                { id: 4, status: "online", color: "success", name: "IoT 004", func: [3, 4], link: "temp", dateAdd: "24.10.2020" },
+                { id: 5, status: "online", color: "success", name: "IoT 005", func: [1, 4], link: "temp", dateAdd: "21.12.2020" }
             ]
         }
     };
@@ -51,27 +51,53 @@ class IotPage extends Component {
     }
     handleNewName=(value)=>{
         this.setState({ newName: value })
-}
+    }
+    zag = [
+        {
+            dataField: name,
+            text: 'Температура воздуха',
+        },
+        {
+            dataField: name,
+            text: 'Влажность воздуха',
+        },
+        {
+            dataField: name,
+            text: 'Атмосферное давление',
+        },
+        {
+            dataField: name,
+            text: 'Температура почвы',
+        }, {
+            dataField: name,
+            text: 'Влажность почвы',
+        }
+    ];
     functName = [
         {
             id: 1,
-            name: 'Температура воздуха'
+            name: 'Температура воздуха',
+            g:"30°С"
         },
         {
             id: 2,
-            name: 'Влажность воздуха'
+            name: 'Влажность воздуха',
+            g: "25кг/м^3"
         },
         {
             id: 3,
-            name: 'Атмосферное давление'
+            name: 'Атмосферное давление',
+            g: "760мм рт.ст."
         },
         {
             id: 4,
-            name: 'Температура почвы'
+            name: 'Температура почвы',
+            g: "10°С"
         },
         {
             id: 5,
-            name: 'Влажность почвы'
+            name: 'Влажность почвы',
+            g: "54%"
         },
     ];
     render() {
@@ -104,9 +130,14 @@ class IotPage extends Component {
                                 </Col>
                                 <Col className="col-md-8 col d-flex">
                                     <CardForBody styleForCard={{ minWidth: '100%', margin: '20px' }} classForContB="d-flex flex-column align-items-center" styleTextForCard={{ padding: '1%', minWidth: '100%' }}>
-                                        <h5 style={{ fontFamily: 'Bitter', margin: '10px 0px 30px 0px', width:'100%' }} className="d-flex text-left">
-                                            Подключить новый сенсор
-                                        </h5>
+                                        <Container className="d-flex">
+                                            <h5 style={{ fontFamily: 'Bitter', margin: '10px 0px 30px 0px', width: '100%' }} className="d-flex text-left">
+                                                Подключить новый сенсор
+                                            </h5>
+                                            <p className={"text-" + (this.state.chosen > 0 ? this.state.sensors.find(sensor => sensor.id === this.state.chosen).color : "") }>
+                                                {this.state.chosen > 0 ? this.state.sensors.find(sensor => sensor.id === this.state.chosen).status : ""}
+                                            </p>
+                                        </Container>
                                         <Container>
                                             <Input disabled={(!(this.state.chosen === -1 && this.state.isAdded === false))} value={this.state.chosen > 0 ? this.state.sensors.find(sensor => sensor.id === this.state.chosen).name : this.state.newName} onInput={(event) => { if ((this.state.chosen === -1 && this.state.isAdded === false)) this.handleNewName(event.target.value.trim()) }} classNameP="textForSign16" className="input" Label="Псевдоним устройства" styleContainer={{ minWidth: '20%', width: '50%' }}>
                                                 <div>
@@ -123,19 +154,26 @@ class IotPage extends Component {
                                                 {this.state.chosen < 0 ? (new Date()).toLocaleDateString() : this.state.sensors.find(sensor => sensor.id === this.state.chosen).dateAdd}
                                              </p>
                                         </Container>
-                                        <Row className="align-items-center" style={{ width: '83%' }}>
-                                            {
-                                                this.functName.map(
-                                                    functName =>
-                                                        <Col className="d-flex justify-content-center m-2">
-                                                            <input disabled={(!(this.state.chosen === -1 && this.state.isAdded === false))} checked={this.state.chosen > 0 ? this.state.sensors.find(sensor => sensor.id === this.state.chosen).func.includes(functName.id) : null} type="checkbox"/>
-                                                        <p style={{ fontFamily: 'Open Sans', fontSize: '14px', color: '#616161', width:'max-content' }} className="m-0 ml-1">
-                                                                {functName.name}
-                                                        </p>
-                                                    </Col>
-                                                )
-                                            }
-                                        </Row>
+
+                                        {this.state.chosen > 0 && this.state.sensors.find(sensor => sensor.id === this.state.chosen).status === "ofline" ?
+                                            <p className="text-danger">
+                                                Нарушена связь или проблемы с питанием
+                                            </p>
+                                            :
+                                            <Row className="align-items-center" style={{ width: '83%' }}>
+                                                {
+                                                    this.functName.map(
+                                                        functName =>
+                                                            <Col className="d-flex justify-content-center m-2">
+                                                                <input disabled={(!(this.state.chosen === -1 && this.state.isAdded === false))} checked={this.state.chosen > 0 ? this.state.sensors.find(sensor => sensor.id === this.state.chosen).func.includes(functName.id) : null} type="checkbox" />
+                                                                <p style={{ fontFamily: 'Open Sans', fontSize: '14px', color: '#616161', width: 'max-content' }} className="m-0 ml-1">
+                                                                    {functName.name}
+                                                                </p>
+                                                            </Col>
+                                                    )
+                                                }
+                                            </Row> 
+                                        }
                                         <button className="btn btn-primary mt-5" hidden={(!(this.state.chosen === -1 && this.state.isAdded === false))} onClick={this.handleAdded}>
                                             Добавить
                                         </button>
