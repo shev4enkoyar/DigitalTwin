@@ -16,6 +16,9 @@ namespace Microservice.WeatherManager.Util.JsonModels
             [JsonPropertyName("precipitation")]
             public List<double> Precipitation { get; set; }
 
+            [JsonPropertyName("evapotranspiration")]
+            public List<double> Evapotranspiration { get; set; }
+
             [JsonPropertyName("soil_moisture_0_1cm")]
             public List<double> SoilMoisture01cm { get; set; }
         }
@@ -30,6 +33,9 @@ namespace Microservice.WeatherManager.Util.JsonModels
 
             [JsonPropertyName("precipitation")]
             public string Precipitation { get; set; }
+
+            [JsonPropertyName("evapotranspiration")]
+            public string Evapotranspiration { get; set; }
 
             [JsonPropertyName("soil_moisture_0_1cm")]
             public string SoilMoisture01cm { get; set; }

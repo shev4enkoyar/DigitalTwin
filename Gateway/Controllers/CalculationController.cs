@@ -1,7 +1,13 @@
-﻿using Grpc.Net.Client;
+﻿using Grpc.Core;
+using Grpc.Net.Client;
 using Microservice.ForecastManager.Protos;
+using Microservice.MapManager.Protos;
+using Microservice.WeatherManager.Protos;
 using Microsoft.AspNetCore.Mvc;
 using Shared;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -9,7 +15,7 @@ namespace Gateway.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CalculationController : ControllerBase
+    public class CalculationController : WeatherControllerBase
     {
         [HttpGet("get_task_influence/{modelId}")]
         public async Task<double> GetTaskInfluenceByModelAsync(int modelId)
@@ -100,5 +106,46 @@ namespace Gateway.Controllers
                 return reply.Result;
             return 0;
         }
+
+        [HttpGet("get_evapotranspiration/{modelId}")]
+        public async Task<double> GetEvapotranspiration(int modelId)
+        {
+            var weather = await GetWeather(modelId);
+
+            using var channel = GrpcChannel.ForAddress(MicroservicesIP.External.Forecast,
+                new GrpcChannelOptions { HttpHandler = MicroservicesIP.DefaultHttpHandler }
+            );
+
+            var client = new InfluenceCalculationService.InfluenceCalculationServiceClient(channel);
+            var request = new EvapotranspirationRequest()
+            {
+                Rn = 12,
+                G = 42.131231,
+                P = 3.2133,
+                T = 4.23,
+                U = 5.3123,
+                Ea = 6.23213,
+                Es = 7.213123,
+                Svpk = 8.321312,
+                Ra = 9.2112323312,
+                Rs = 10.2132133123123,
+            };
+
+            var reply = client.GetEvapotranspiration(request);
+
+            if (reply != null)
+            {
+                DateTime currentDate = ConvertFromJsonDate(DateTime.UtcNow);
+                return weather.FirstOrDefault(x => DateTime.ParseExact(x.Date, "MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(currentDate)).Evapotranspiration;
+            }
+            return 0;
+        }
+
+        private DateTime ConvertFromJsonDate(DateTime jsonDate)
+        {
+            return new DateTime(jsonDate.Year, jsonDate.Month, jsonDate.Day);
+        }
+
+
     }
 }

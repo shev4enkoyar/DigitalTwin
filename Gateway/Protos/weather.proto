@@ -22,4 +22,5 @@ message WeatherProto {
   double temperature = 2;
   double precipitation = 3;
   double soilMoisture = 4;
+  double evapotranspiration = 5;
 }

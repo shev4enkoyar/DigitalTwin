@@ -24,5 +24,7 @@ namespace Microservice.WeatherManager.DAL.Models
         /// Units in m³/m³
         /// </summary>
         public double SoilMoistureAvg { get; set; }
+
+        public double EvapotranspirationAvg { get; set; }
     }
 }

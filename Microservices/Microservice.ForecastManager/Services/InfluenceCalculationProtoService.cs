@@ -50,5 +50,26 @@ namespace Microservice.ForecastManager.Services
                         request.GtcOptinal)
             });
         }
+
+        public override Task<EvapotranspirationReply> GetEvapotranspiration(EvapotranspirationRequest request, ServerCallContext context)
+        {
+            return Task.FromResult(new EvapotranspirationReply
+            {
+                Result = ForecastCalculation.GetEvapotranspiration(
+                        request.Rn,
+                        request.G,
+                        request.P,
+                        request.T,
+                        request.U,
+                        request.Es,
+                        request.Ea,
+                        request.Svpk,
+                        request.Ra,
+                        request.Rs
+                    )
+            });
+        }
+
+
     }
 }

@@ -30,8 +30,9 @@
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="5.0.10" />
   </ItemGroup>
 
+
   <ItemGroup>
-    <Protobuf Include="Protos\influenceCalculationProto.proto" GrpcServices="Server" />
+	  <Protobuf Include="Protos\influenceCalculationProto.proto" GrpcServices="Server" />
   </ItemGroup>
 
 </Project>

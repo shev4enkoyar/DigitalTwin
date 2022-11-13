@@ -9,6 +9,7 @@ service InfluenceCalculationService {
   rpc GetOverallInfluence (OverallInfluenceRequest) returns (OverallInfluenceReply);
   rpc GetWeatherInfluenceInfluence (WeatherInfluenceRequest) returns (WeatherInfluenceReply);
   rpc GetTaskInfluence (TaskInfluenceRequest) returns (TaskInfluenceReply);
+  rpc GetEvapotranspiration (EvapotranspirationRequest) returns (EvapotranspirationReply);
 }
 
 message OverallInfluenceRequest {
@@ -44,5 +45,21 @@ message TaskInfluenceRequest {
 }
 
 message TaskInfluenceReply {
+   double result = 1; 
+}
+
+message EvapotranspirationRequest {
+	double rn = 1;
+    double g = 2;
+	double p = 3;
+	double t = 4;
+	double u = 5;
+	double ea = 6;
+	double es = 7;
+	double svpk = 8;
+	double ra = 9;
+	double rs = 10;
+}
+message EvapotranspirationReply {
    double result = 1; 
 }
