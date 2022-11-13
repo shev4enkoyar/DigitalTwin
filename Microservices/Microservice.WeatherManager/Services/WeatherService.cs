@@ -15,14 +15,15 @@ namespace Microservice.WeatherManager.Services
 {
     public class WeatherService : Protos.WeatherService.WeatherServiceBase
     {
-        private readonly ApplicationContext _dbContext;
+        private readonly ApplicationContext DbContext;
         public WeatherService(ApplicationContext dbContext)
         {
-            _dbContext = dbContext;
+            DbContext = dbContext;
         }
 
         public override async Task GetWeather(Request request, IServerStreamWriter<WeatherReply> responseStream, ServerCallContext context)
         {
+            //TODO Использовать переменные, а не статичную ссылку
             string weatherBase = "https://api.open-meteo.com/v1/forecast?";
             string latlng = $"latitude={request.Lat}&longitude={request.Lng}";
             string attributes = $"hourly=temperature_2m,precipitation,soil_moisture_0_1cm";
@@ -36,10 +37,10 @@ namespace Microservice.WeatherManager.Services
                 return;
             }
 
-            if (_dbContext.Weathers.Any(x => x.ModelId.Equals(request.ModelId)))
+            if (DbContext.Weathers.Any(x => x.ModelId.Equals(request.ModelId)))
             {
-                _dbContext.RemoveRange(_dbContext.Weathers.Where(x => x.ModelId.Equals(request.ModelId)));
-                _dbContext.SaveChanges();
+                DbContext.RemoveRange(DbContext.Weathers.Where(x => x.ModelId.Equals(request.ModelId)));
+                DbContext.SaveChanges();
             }
 
             HttpClient client = new HttpClient();
@@ -65,7 +66,7 @@ namespace Microservice.WeatherManager.Services
                     if (i == lastRow)
                     {
                         lastRow += 24;
-                        _dbContext.Add(new Weather
+                        DbContext.Add(new Weather
                         {
                             ModelId = request.ModelId,
                             Date = ConvertFromJsonDate(DateTime.Parse(jsonWeather.Hourly.Time[i])),
@@ -75,10 +76,8 @@ namespace Microservice.WeatherManager.Services
                         });
                     }
                 }
-                _dbContext.SaveChanges();
+                DbContext.SaveChanges();
             }
-
-
 
             reply.Weathers.AddRange(GetProtoWeathers(request.ModelId));
 
@@ -88,24 +87,22 @@ namespace Microservice.WeatherManager.Services
 
         private bool IsWeatherUpdated(int modelId)
         {
-            DateTime curDate = DateTime.UtcNow;
-            DateTime dbDate = ConvertFromJsonDate(curDate);
-            return _dbContext.Weathers.Any(x => x.ModelId.Equals(modelId) && x.Date.Equals(dbDate));
+            DateTime dbDate = ConvertFromJsonDate(DateTime.UtcNow);
+            return DbContext.Weathers.Any(x => x.ModelId.Equals(modelId) && x.Date.Equals(dbDate));
         }
 
         private IEnumerable<WeatherProto> GetProtoWeathers(int modelId)
         {
-            return _dbContext.Weathers
-                        .Where(x => x.ModelId.Equals(modelId))
-                        .Select(x => new WeatherProto()
-                        {
-                            Date = x.Date.ToShortDateString(),
-                            Temperature = x.TemperatureAvg,
-                            Precipitation = x.PrecipitationAvg,
-                            SoilMoisture = x.SoilMoistureAvg
-                        })
-                        .ToList();
-
+            return DbContext.Weathers
+                .Where(x => x.ModelId.Equals(modelId))
+                .Select(x => new WeatherProto()
+                {
+                    Date = x.Date.ToShortDateString(),
+                    Temperature = x.TemperatureAvg,
+                    Precipitation = x.PrecipitationAvg,
+                    SoilMoisture = x.SoilMoistureAvg
+                })
+                .ToList();
         }
 
         private DateTime ConvertFromJsonDate(DateTime jsonDate)

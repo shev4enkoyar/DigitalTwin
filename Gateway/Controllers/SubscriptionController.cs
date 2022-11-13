@@ -1,13 +1,11 @@
 ﻿using Gateway.Controllers.Base;
 using Grpc.Core;
 using Grpc.Net.Client;
-using Microservice.DashboardManager;
 using Microservice.SubscriptionManager;
 using Microsoft.AspNetCore.Mvc;
 using Shared;
 using System;
 using System.Collections.Generic;
-using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace Gateway.Controllers
@@ -23,13 +21,8 @@ namespace Gateway.Controllers
         [HttpGet("get_all")]
         public async Task<IEnumerable<SubscriptionProto>> GetAllSubscriptions()
         {
-            var httpHandler = new HttpClientHandler()
-            {
-                ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
-            };
-
             using var channel = GrpcChannel.ForAddress(MicroservicesIP.External.Subscription,
-                new GrpcChannelOptions { HttpHandler = httpHandler }
+                new GrpcChannelOptions { HttpHandler = MicroservicesIP.DefaultHttpHandler }
             );
 
             SubscriptionsReply response = null;
@@ -56,15 +49,10 @@ namespace Gateway.Controllers
         /// <param name="subscriptionId">Subscription Id</param>
         /// <returns>HTTP code 200 or error</returns>
         [HttpGet("activate/{modelId}")]
-        public async Task<IActionResult> ActivateSubscription(int modelId, int days, int subscriptionId)
+        public IActionResult ActivateSubscription(int modelId, int days, int subscriptionId)
         {
-            var httpHandler = new HttpClientHandler()
-            {
-                ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
-            };
-
             using var channel = GrpcChannel.ForAddress(MicroservicesIP.External.Subscription,
-                new GrpcChannelOptions { HttpHandler = httpHandler }
+                new GrpcChannelOptions { HttpHandler = MicroservicesIP.DefaultHttpHandler }
             );
 
             var client = new SubscriptionService.SubscriptionServiceClient(channel);
@@ -87,15 +75,10 @@ namespace Gateway.Controllers
         /// <param name="subscriptionId">Subscription Id</param>
         /// <returns>HTTP code 200 or error</returns>
         [HttpGet("update")]
-        public async Task<IActionResult> UpdateActivatedSubscription(int days, int subscriptionId)
+        public IActionResult UpdateActivatedSubscription(int days, int subscriptionId)
         {
-            var httpHandler = new HttpClientHandler()
-            {
-                ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
-            };
-
             using var channel = GrpcChannel.ForAddress(MicroservicesIP.External.Subscription,
-                new GrpcChannelOptions { HttpHandler = httpHandler }
+                new GrpcChannelOptions { HttpHandler = MicroservicesIP.DefaultHttpHandler }
             );
 
             var client = new SubscriptionService.SubscriptionServiceClient(channel);
@@ -121,13 +104,8 @@ namespace Gateway.Controllers
             if (models == null)
                 return null;
 
-            var httpHandler = new HttpClientHandler()
-            {
-                ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
-            };
-
             using var channel = GrpcChannel.ForAddress(MicroservicesIP.External.Subscription,
-                new GrpcChannelOptions { HttpHandler = httpHandler }
+                new GrpcChannelOptions { HttpHandler = MicroservicesIP.DefaultHttpHandler }
             );
 
             Dictionary<string, List<string>> modelSubscriptions = new Dictionary<string, List<string>>();
@@ -151,5 +129,4 @@ namespace Gateway.Controllers
             return modelSubscriptions;
         }
     }
-
 }

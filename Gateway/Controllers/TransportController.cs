@@ -22,7 +22,7 @@ namespace Gateway.Controllers
             GetAllTransportReply response = null;
             //TODO REDO
             using (var call = new TransportService.TransportServiceClient(channel)
-                .GetAllTransport(new GetAllTransportRequest {}))
+                .GetAllTransport(new GetAllTransportRequest { }))
             {
                 while (await call.ResponseStream.MoveNext())
                 {

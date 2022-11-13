@@ -2,8 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Shared;
-using System;
-using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -19,15 +17,12 @@ namespace WebClient.Controllers
         {
             HttpClient client = MicroservicesIP.GatewayHttpClient;
 
-            HttpResponseMessage response = await client.GetAsync(
-                    $"api/calculation/get_overall_influence/{modelId}"
-                    );
+            HttpResponseMessage response = await client.GetAsync($"api/calculation/get_overall_influence/{modelId}");
             double result = 0;
             if (response.IsSuccessStatusCode)
             {
                 var json = await response.Content.ReadAsStringAsync();
                 result = JsonConvert.DeserializeObject<double>(json);
-
             }
             return result;
         }
@@ -37,15 +32,12 @@ namespace WebClient.Controllers
         {
             HttpClient client = MicroservicesIP.GatewayHttpClient;
 
-            HttpResponseMessage response = await client.GetAsync(
-                    $"api/calculation/get_task_influence/{modelId}"
-                    );
+            HttpResponseMessage response = await client.GetAsync($"api/calculation/get_task_influence/{modelId}");
             double result = 0;
             if (response.IsSuccessStatusCode)
             {
                 var json = await response.Content.ReadAsStringAsync();
                 result = JsonConvert.DeserializeObject<double>(json);
-
             }
             return result;
         }
@@ -55,15 +47,12 @@ namespace WebClient.Controllers
         {
             HttpClient client = MicroservicesIP.GatewayHttpClient;
 
-            HttpResponseMessage response = await client.GetAsync(
-                    $"api/calculation/get_weather_influence/{modelId}"
-                    );
+            HttpResponseMessage response = await client.GetAsync($"api/calculation/get_weather_influence/{modelId}");
             double result = 0;
             if (response.IsSuccessStatusCode)
             {
                 var json = await response.Content.ReadAsStringAsync();
                 result = JsonConvert.DeserializeObject<double>(json);
-
             }
             return result;
         }

@@ -1,11 +1,10 @@
-﻿using System.Linq;
-using System;
+﻿using System;
+using System.Linq;
 
 namespace Microservice.ForecastManager.Calculations
 {
     public static class InfluenceCalculation
     {
-
         /// <summary>
         /// общее влияние на урожай. Чем ближе к 1, тем лучше
         /// </summary>
@@ -23,19 +22,22 @@ namespace Microservice.ForecastManager.Calculations
         {
             double result = GetSoilInfluence(); // первоначальное влияние почвы на культуру
 
-            if (dons.Length != dots.Length || !(maxAirTemperature.Length == minAirTemperature.Length && minAirTemperature.Length == precipitationAmount.Length))
+            if (!dons.Length.Equals(dots.Length)
+                || !(maxAirTemperature.Length.Equals(minAirTemperature.Length)
+                    && minAirTemperature.Length.Equals(precipitationAmount.Length)))
                 throw new Exception("days count not equal");
 
             for (int i = 0; i < dots.Length; i++)
             {
-                result *= 1 + GetTaskInfluencePerDay(dons[i], dots[i])
-                    - GetWeatherInfluence(g,averageTemperature, maxAirTemperature[0..i], minAirTemperature[0..i], precipitationAmount[0..i], gtcOptinal);
+                result *= 1
+                    + GetTaskInfluencePerDay(dons[i], dots[i])
+                    - GetWeatherInfluence(g, averageTemperature, maxAirTemperature[0..i], minAirTemperature[0..i], precipitationAmount[0..i], gtcOptinal);
             }
 
             return result;
         }
 
-      
+
         /// <summary>
         /// первоначальное влияние почвы на культуру. Зависит от содержания почвы и насколько оно подходит для выбранной культуры. 1 - это круто
         /// </summary>
@@ -45,7 +47,7 @@ namespace Microservice.ForecastManager.Calculations
             return 1;
         }
 
-       
+
         /// <summary>
         /// влияние погоды (осадков) на урожай (видимо, всегда влияет плохо, потому с минусом). Чем ближе к нулю, тем лучше
         /// </summary>
@@ -61,6 +63,7 @@ namespace Microservice.ForecastManager.Calculations
         // ГТК - отражает текущий уровень влагообеспечённости территории
         private static double GetHydrothermalCoefficiens(int averageTemperature, int[] maxAirTemperature, int[] minAirTemperature, int[] precipitationAmount)
         {
+            //TODO Что такое 10. Нужно занести в переменную
             if (averageTemperature < 10)
                 return 0;
             if (!(maxAirTemperature.Length == minAirTemperature.Length && minAirTemperature.Length == precipitationAmount.Length))
@@ -108,7 +111,7 @@ namespace Microservice.ForecastManager.Calculations
 
 
 
-     
+
         /// <summary>
         /// 
         /// </summary>

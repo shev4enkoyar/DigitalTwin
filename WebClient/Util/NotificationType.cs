@@ -3,6 +3,6 @@
 	public static class NotificationType
 	{
 		public static string Statement { get; } = "Statement";
-        public static string Invite { get; } = "Invite"; 
+		public static string Invite { get; } = "Invite";
 	}
 }

@@ -17,7 +17,7 @@ namespace Microservice.MapManager
         {
             _configuration = configuration;
         }
-     
+
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationContext>(options =>

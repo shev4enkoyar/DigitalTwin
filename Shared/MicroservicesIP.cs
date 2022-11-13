@@ -22,8 +22,10 @@ namespace Shared
         {
             get
             {
-                HttpClient client = new HttpClient();
-                client.BaseAddress = new Uri(MicroservicesIP.GatewayIP);
+                HttpClient client = new HttpClient
+                {
+                    BaseAddress = new Uri(GatewayIP)
+                };
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(
                     new MediaTypeWithQualityHeaderValue("application/json"));
@@ -40,15 +42,14 @@ namespace Shared
 
         public static class External
         {
-
             private static readonly string dashboard = "https://localhost:49162";
             private static readonly string map = "https://localhost:49165";
             private static readonly string modelTask = "https://localhost:49171";
             private static readonly string forecast = "https://localhost:49173";
             private static readonly string weather = "https://localhost:49175";
-            private static readonly string subscription = "https://localhost:49169"; // OLD https://host.docker.internal:49169/
+            private static readonly string subscription = "https://localhost:49169";
             private static readonly string image = null;
-            private static readonly string internetOfThings = "https://localhost:49165";  //TODO TEST!!!
+            private static readonly string internetOfThings = "https://localhost:49165";
 
             #region Properties
 
@@ -95,11 +96,15 @@ namespace Shared
             #endregion
         }
 
+        #region Methods
+
         private static string CheckEmptyIP(string ip)
         {
             if (string.IsNullOrEmpty(ip))
                 throw new ArgumentException("Empty IP");
             return ip;
         }
+
+        #endregion
     }
 }

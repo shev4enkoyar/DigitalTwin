@@ -8,24 +8,25 @@ namespace Microservice.DashboardManager.Services
 {
     public class TransportProtoService : TransportService.TransportServiceBase
     {
-        private readonly ApplicationContext _dbContext;
+        private ApplicationContext DbContext { get; }
 
         public TransportProtoService(ApplicationContext dbContext)
         {
-            _dbContext = dbContext;
+            DbContext = dbContext;
         }
 
         public override async Task GetAllTransport(GetAllTransportRequest request, IServerStreamWriter<GetAllTransportReply> responseStream, ServerCallContext context)
         {
             GetAllTransportReply transportReply = new GetAllTransportReply();
             transportReply.Transports.AddRange(GetProtoTransport());
+
             await responseStream.WriteAsync(transportReply);
             await Task.FromResult(transportReply);
         }
 
         private IEnumerable<TransportProto> GetProtoTransport()
         {
-            return _dbContext.Transports
+            return DbContext.Transports
                 .Select(x => new TransportProto()
                 {
                     Id = x.Id,

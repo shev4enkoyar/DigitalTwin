@@ -7,11 +7,8 @@ using Microservice.WebClient.Protos;
 using Microsoft.AspNetCore.Mvc;
 using Shared;
 using System.Collections.Generic;
-using System.Net.Http;
 using System.Threading.Tasks;
 
-
-//DONE
 namespace Gateway.Controllers
 {
     [Route("api/[controller]")]
@@ -83,22 +80,18 @@ namespace Gateway.Controllers
                 new GrpcChannelOptions { HttpHandler = MicroservicesIP.DefaultHttpHandler });
 
             ModelReply reply = new DigitalModelService.DigitalModelServiceClient(channel).PushDigitalModels(request);
-           
+
             int mapId = AddMap(reply.ModelId, cadaster, categoryName);
             reply = new DigitalModelService.DigitalModelServiceClient(channel).UpdateMapDigitalModel(new UpdateModelRequest() { MapId = mapId, ModelId = reply.ModelId });
-            
-            if(reply.Status.Equals("ok"))
+
+            if (reply.Status.Equals("ok"))
                 return true;
             return false;
         }
 
         private int AddMap(int modelId, string cadaster = null, string categoryName = null)
         {
-            var httpHandler = new HttpClientHandler()
-            {
-                ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
-            };
-            using var channel = GrpcChannel.ForAddress(MicroservicesIP.External.Map, new GrpcChannelOptions { HttpHandler = httpHandler });
+            using var channel = GrpcChannel.ForAddress(MicroservicesIP.External.Map, new GrpcChannelOptions { HttpHandler = MicroservicesIP.DefaultHttpHandler });
             var client = new MapService.MapServiceClient(channel);
             if ((cadaster == null && categoryName != null) ||
                 (cadaster != null && categoryName == null))

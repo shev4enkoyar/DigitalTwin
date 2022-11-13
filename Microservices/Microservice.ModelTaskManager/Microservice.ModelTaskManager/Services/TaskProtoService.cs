@@ -1,7 +1,5 @@
 ﻿using Grpc.Core;
 using Microservice.ModelTaskManager.Protos;
-using Microsoft.AspNetCore.Mvc.Routing;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -14,6 +12,7 @@ namespace Microservice.TaskManager.Services
         {
             SendReply taskReply = new SendReply();
             taskReply.Tasks.AddRange(GetProtoTasks(request.ModelId));
+
             await responseStream.WriteAsync(taskReply);
             await Task.FromResult(taskReply);
         }

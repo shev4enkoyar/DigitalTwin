@@ -1,18 +1,10 @@
-﻿using Grpc.Core;
-using Grpc.Net.Client;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Shared;
-using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Security.Claims;
 using System.Threading.Tasks;
-using WebClient.Data;
-using WebClient.Models;
 using WebClient.Models.SubModels;
 
 namespace WebClient.Controllers

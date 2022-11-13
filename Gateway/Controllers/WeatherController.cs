@@ -24,12 +24,13 @@ namespace Gateway.Controllers
 
             var client = new MapService.MapServiceClient(channel);
             var reply = await client.GetMapCenterAsync(new GetMapCenterRequest() { ModelId = modelId });
-            
+
 
             return await GetWeatherAsync(reply.Lat, reply.Lng, modelId);
         }
 
-        private async Task<IEnumerable<WeatherProto>> GetWeatherAsync(double lat, double lng, int modelId) {
+        private async Task<IEnumerable<WeatherProto>> GetWeatherAsync(double lat, double lng, int modelId)
+        {
             using var channel = GrpcChannel.ForAddress(MicroservicesIP.External.Weather,
                 new GrpcChannelOptions { HttpHandler = MicroservicesIP.DefaultHttpHandler }
             );

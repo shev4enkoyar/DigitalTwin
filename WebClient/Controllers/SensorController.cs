@@ -1,15 +1,11 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using Shared;
 using System;
-using System.Net.Http.Headers;
 using System.Net.Http;
-using System.Security.Claims;
-using System.Text.Json.Serialization;
-using System.Xml.Linq;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
 using System.Text;
+using System.Text.Json.Serialization;
+using System.Threading.Tasks;
 
 namespace WebClient.Controllers
 {

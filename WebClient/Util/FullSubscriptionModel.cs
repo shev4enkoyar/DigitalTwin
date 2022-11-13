@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using WebClient.Models;
+﻿using System.Collections.Generic;
 
 namespace WebClient.Util
 {
@@ -11,6 +8,5 @@ namespace WebClient.Util
         public string Name { get; set; }
         public string Price { get; set; }
         public IEnumerable<string> Functions { get; set; }
-   
     }
 }

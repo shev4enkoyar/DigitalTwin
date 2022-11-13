@@ -10,16 +10,18 @@ namespace Microservice.ForecastManager.Services
     {
         public override Task<OverallInfluenceReply> GetOverallInfluence(OverallInfluenceRequest request, ServerCallContext context)
         {
-            return Task.FromResult(new OverallInfluenceReply {
-                Result = InfluenceCalculation.GetOverallInfluence(
-                    request.Dons.ToArray(), 
-                    request.Dots.ToArray(),
-                    request.G, request.GtcOptinal, 
-                    request.AverageTemperature, 
-                    request.MaxAirTemperature.ToArray(), 
-                    request.MinAirTemperature.ToArray(),
-                    request.PrecipitationAmount.ToArray()
-                    ) 
+            return Task.FromResult(new OverallInfluenceReply
+            {
+                Result = InfluenceCalculation
+                    .GetOverallInfluence(
+                        request.Dons.ToArray(),
+                        request.Dots.ToArray(),
+                        request.G,
+                        request.GtcOptinal,
+                        request.AverageTemperature,
+                        request.MaxAirTemperature.ToArray(),
+                        request.MinAirTemperature.ToArray(),
+                        request.PrecipitationAmount.ToArray())
             });
         }
 
@@ -27,10 +29,10 @@ namespace Microservice.ForecastManager.Services
         {
             return Task.FromResult(new TaskInfluenceReply
             {
-                Result = InfluenceCalculation.GetTaskInfluence(
-                    request.Dons.ToArray(),
-                    request.Dots.ToArray()
-                    )
+                Result = InfluenceCalculation
+                    .GetTaskInfluence(
+                        request.Dons.ToArray(),
+                        request.Dots.ToArray())
             });
         }
 
@@ -38,14 +40,14 @@ namespace Microservice.ForecastManager.Services
         {
             return Task.FromResult(new WeatherInfluenceReply
             {
-                Result = InfluenceCalculation.GetWeatherInfluence(
-                    request.G, 
-                    request.AverageTemperature,
-                    request.MaxAirTemperature.ToArray(),
-                    request.MinAirTemperature.ToArray(),
-                    request.PrecipitationAmount.ToArray(),
-                    request.GtcOptinal
-                    )
+                Result = InfluenceCalculation
+                    .GetWeatherInfluence(
+                        request.G,
+                        request.AverageTemperature,
+                        request.MaxAirTemperature.ToArray(),
+                        request.MinAirTemperature.ToArray(),
+                        request.PrecipitationAmount.ToArray(),
+                        request.GtcOptinal)
             });
         }
     }

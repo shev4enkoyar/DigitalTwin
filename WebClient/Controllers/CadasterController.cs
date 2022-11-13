@@ -1,13 +1,9 @@
-﻿using Grpc.Net.Client;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Shared;
-using System;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Threading.Tasks;
-using System.Xml.Linq;
 
 namespace WebClient.Controllers
 {
@@ -28,9 +24,7 @@ namespace WebClient.Controllers
         {
             HttpClient client = MicroservicesIP.GatewayHttpClient;
 
-            HttpResponseMessage response = await client.GetAsync(
-                    $"api/model/validate_cadaster/{cadaster}"
-                    );
+            HttpResponseMessage response = await client.GetAsync($"api/model/validate_cadaster/{cadaster}");
 
             if (response.IsSuccessStatusCode)
                 return Ok();

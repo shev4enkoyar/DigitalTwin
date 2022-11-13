@@ -2,7 +2,6 @@
 using Microservice.ForecastManager.Protos;
 using Microsoft.AspNetCore.Mvc;
 using Shared;
-using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -27,7 +26,7 @@ namespace Gateway.Controllers
             request.Dons.AddRange(dons);
             request.Dots.AddRange(dots);
             var reply = await client.GetTaskInfluenceAsync(request);
-            if(reply != null)
+            if (reply != null)
                 return reply.Result;
             return 0;
         }
@@ -49,14 +48,16 @@ namespace Gateway.Controllers
             );
 
             var client = new InfluenceCalculationService.InfluenceCalculationServiceClient(channel);
-            var request = new WeatherInfluenceRequest();
-            request.AverageTemperature = averageTemperature;
+            var request = new WeatherInfluenceRequest
+            {
+                AverageTemperature = averageTemperature
+            };
             request.MaxAirTemperature.AddRange(maxAirTemperature);
             request.MinAirTemperature.AddRange(minAirTemperature);
             request.PrecipitationAmount.AddRange(precipitationAmount);
             request.G = g;
-            request.GtcOptinal = gtcOptinal; 
-           
+            request.GtcOptinal = gtcOptinal;
+
             var reply = await client.GetWeatherInfluenceInfluenceAsync(request);
             if (reply != null)
                 return reply.Result;
@@ -81,8 +82,11 @@ namespace Gateway.Controllers
             );
 
             var client = new InfluenceCalculationService.InfluenceCalculationServiceClient(channel);
-            var request = new OverallInfluenceRequest();
-            request.AverageTemperature = averageTemperature;
+
+            var request = new OverallInfluenceRequest
+            {
+                AverageTemperature = averageTemperature
+            };
             request.MaxAirTemperature.AddRange(maxAirTemperature);
             request.MinAirTemperature.AddRange(minAirTemperature);
             request.PrecipitationAmount.AddRange(precipitationAmount);
@@ -90,6 +94,7 @@ namespace Gateway.Controllers
             request.GtcOptinal = gtcOptinal;
             request.Dons.AddRange(dons);
             request.Dots.AddRange(dots);
+
             var reply = await client.GetOverallInfluenceAsync(request);
             if (reply != null)
                 return reply.Result;

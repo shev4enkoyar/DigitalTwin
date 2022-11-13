@@ -6,8 +6,6 @@ using Shared;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-
-//DONE
 namespace Gateway.Controllers
 {
     [ApiController]
