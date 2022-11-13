@@ -47,7 +47,7 @@ export default class App extends Component {
                     <AuthorizeRoute path={ClientRoutes.PREFIX + ClientRoutes.DOCS} component={Docs} />
                     <AuthorizeRoute path={ClientRoutes.PREFIX + ClientRoutes.MAP + ClientRoutes.SUFFIX_MODEL_ID} component={MapMain} />
 
-                    <AuthorizeRoute path={ClientRoutes.PREFIX + ClientRoutes.GANT} component={GanttMain} />
+                    <AuthorizeRoute path={ClientRoutes.PREFIX + ClientRoutes.GANT + ClientRoutes.SUFFIX_MODEL_ID} component={GanttMain} />
 
                     <AuthorizeRouteWithPermission path={ClientRoutes.PREFIX + ClientRoutes.REGISTER_COMPANY} component={CreateCompany} name={ClientRoutes.REGISTER_COMPANY} />
                     <AuthorizeRouteWithPermission path={ClientRoutes.PREFIX + ClientRoutes.COMPANY_INVITE} component={CompanyInvite} name={ClientRoutes.COMPANY_INVITE} />

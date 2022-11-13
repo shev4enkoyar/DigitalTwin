@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, Label, Input, FormGroup } from 'reactstrap';
+import { NotificationContainer, NotificationManager } from 'react-notifications';
 import { Col, Container, Row } from "reactstrap/lib";
 import authService from "../../components/api-authorization/AuthorizeService";
 import CardForBody from "../../components/cardForBody/CardForBody";
 import { ThemeContextConsumer } from "../../components/ThemeContext";
 import { functionalConverter } from "../../util/functionalConverter";
+import Combobox from '../../components/combobox/ComboBox.js';
 import './../../pages/pages.css';
 import './Subscriptions.css';
 import {LoadingFragment} from "../../util/LoadingFragment";
@@ -14,12 +16,13 @@ class AllSubscriptions extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            tariffs: [], loading: true, modal: false, currentTariff: "", errors: {} };
+            tariffs: [], loading: true, models: [], modal: false, currentTariff: {}, errors: {} };
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     componentDidMount() {
         this.GetAllTariffsData();
+        this.GetModels();
     }
 
     Toggle () {
@@ -28,43 +31,22 @@ class AllSubscriptions extends Component {
         })
     }
 
-    handleValidation (fields) {
+    CreteNotification() {
+        NotificationManager.info("Ваш запрос принят. Вся дальнейшая информация будет направлена по электронной почте.", "", 3000);
+    }
+
+    handleValidation(fields) {
         let errors = {};
         let formIsValid = true;
 
-        if (!fields["name"]) {
+        if (!fields["model"].match(/^[0-9]+$/) || fields["model"] == null) {
             formIsValid = false;
-            errors["name"] = "Все поля должны быть заполнены";
+            errors["model"] = "Поле необходимо заполнить";
         }
 
-        if (typeof fields["name"] !== "undefined") {
-            if (!fields["name"].match(/^[ЁёА-я]+$/)) {
-                formIsValid = false;
-                errors["name"] = "Использованы недопустимые символы";
-            }
-        }
-
-        if (!fields["email"]) {
+        if (!fields["duration"].match(/^[0-9]+$/) || fields["duration"] == null) {
             formIsValid = false;
-            errors["email"] = "Все поля должны быть заполнены";
-        }
-
-        if (typeof fields["email"] !== "undefined") {
-            let lastAtPos = fields["email"].lastIndexOf("@");
-            let lastDotPos = fields["email"].lastIndexOf(".");
-
-            if (
-                !(
-                    lastAtPos < lastDotPos &&
-                    lastAtPos > 0 &&
-                    fields["email"].indexOf("@@") == -1 &&
-                    lastDotPos > 2 &&
-                    fields["email"].length - lastDotPos > 2
-                )
-            ) {
-                formIsValid = false;
-                errors["email"] = "Не кеорректный email";
-            }
+            errors["duration"] = "Поле необходимо заполнить";
         }
 
         this.setState({ errors: errors });
@@ -72,14 +54,16 @@ class AllSubscriptions extends Component {
     }
 
 
-    handleSubmit(event) {
-        event.preventDefault()
+    handleSubmit (event) {
+        event.preventDefault();
         let fields = {}
-        fields.name = event.target[0].value
-        fields.email = event.target[1].value
+            fields.model = event.target[0].value;
+            fields.duration = event.target[1].value;
         if (this.handleValidation(fields)) {
-            fields.subscription = this.state.currentTariff
+            fields.subscription = this.state.currentTariff.id;
             console.log(fields)
+            this.setState({ modal: false })
+            this.CreteNotification()
         } 
     }
 
@@ -95,7 +79,7 @@ class AllSubscriptions extends Component {
                                         {el.name}
                                     </h3>
                                     <Container className="text-center">
-                                        <Button className="my-4 blue_button" style={{ whiteSpace: "nowrap" }} onClick={() => { this.setState({ currentTariff: el.name }, this.Toggle()) }}>
+                                        <Button className="my-2 blue_button" style={{ whiteSpace: "nowrap" }} onClick={() => { this.setState({ currentTariff: { id: el.id, name:el.name } }, this.Toggle()) }}>
                                             <img style={{ width: "30px", height: "30px" }} className="icon"
                                                 src="https://www.svgrepo.com/show/274451/add.svg" />
                                             {" Оформить подписку"}
@@ -112,7 +96,7 @@ class AllSubscriptions extends Component {
                                                 null
                                                 :
                                                 (
-                                                    <Row className="justify-content-between" style={{ padding: "0 5%" }}>
+                                                    <Row className="justify-content-between" style={{ padding: "2% 5%" }}>
                                                         <Col className="col-1">
                                                             <p style={{ fontSize: "20px" }}>&#10003;</p>
                                                         </Col>
@@ -129,50 +113,68 @@ class AllSubscriptions extends Component {
                     </ThemeContextConsumer>
                 )
             });
+            let options =
+                this.state.models.map(el => {
+                    return (
+                        <option value={el.id}>{el.name}</option>
+                    )
+                });
+
         return (
             <ThemeContextConsumer>
                 {context => (
                     this.state.loading
                         ?   <LoadingFragment fullscreen={true}/>
                         :   <Container className={context.theme + "Gray d-flex justify-content-center w-100"} fluid>
-                            <Row className={context.theme + "Gray mt-3 d-flex justify-content-center"}>
+                            <Row className={context.theme + "Gray mt-3 d-flex"}>
                                     {content}
                                 </Row>
-                            <Modal isOpen={this.state.modal} toggle={() => { this.Toggle() }} contentClassName={context.theme + " Gray subscriptions"}>
-                                <ModalHeader toggle={() => { this.Toggle() }} className={context.theme + " Gray"}>Оформить подписку "{this.state.currentTariff}"</ModalHeader>
+                            {this.state.models && <Modal isOpen={this.state.modal} toggle={() => { this.Toggle() }} contentClassName={context.theme + " Gray subscriptions"}>
+                                <ModalHeader toggle={() => { this.Toggle() }} className={context.theme + " Gray"}>Оформить подписку "{this.state.currentTariff.name}"</ModalHeader>
                                 <ModalBody>
+                                   
                                     <Form onSubmit={this.handleSubmit}>
                                         <FormGroup>
-                                            <Label for="name">
-                                                Имя
+                                            <Label for="model">
+                                                Модель
                                             </Label>
                                             <Input
-                                                id="name"
-                                                name="name"
-                                                type="text"
-                                            />
-                                            <span style={{ color: "red" }}>{this.state.errors["name"]}</span>
+                                                id="model"
+                                                name="model"
+                                                type="select"
+                                            >
+                                                <option disabled selected>Выберите модель</option>
+                                                {options}
+                                            </Input>
+                                            <span style={{ color: "red" }}>{this.state.errors["model"]}</span>
                                         </FormGroup>
                                         <FormGroup>
-                                            <Label for="email">
-                                                Email
+                                            <Label for="duration">
+                                                Срок подписки
                                             </Label>
                                             <Input
-                                                id="email"
-                                                name="email"
-                                                type="email"
-                                            />
-                                            <span style={{ color: "red" }}>{this.state.errors["email"]}</span>
+                                                id="duration"
+                                                name="duration"
+                                                type="select"
+                                            >   
+                                                <option disabled selected>Выберите длительность</option>
+                                                <option value="1">1 месяц</option>
+                                                <option value="3">3 месяца</option>
+                                                <option value="6">6 месяцев</option>
+                                                <option value="12">12 месяцев</option>
+                                            </Input>
+                                            <span style={{ color: "red" }}>{this.state.errors["duration"]}</span>
                                         </FormGroup>
-                                    <Button color="primary" type="submit">
-                                        Оформить подписку
-                                    </Button>{' '}
-                                         <Button color="secondary" onClick={() => { this.Toggle() }}>
-                                        Отменить
-                                    </Button>
+                                        <Button color="primary" type="submit">
+                                            Оформить подписку
+                                        </Button>{' '}
+                                        <Button color="secondary" onClick={() => { this.Toggle() }}>
+                                            Отменить
+                                        </Button>
                                     </Form>
                                 </ModalBody>
-                            </Modal>
+                            </Modal>}
+                            <NotificationContainer />
                             </Container>
                 )
                 }
@@ -195,7 +197,26 @@ class AllSubscriptions extends Component {
             }
             return 0;
         });
-        this.setState({ tariffs: data, loading: false });
+        this.setState({ tariffs: data});
+    }
+
+    async GetModels() {
+        const token = await authService.getAccessToken();
+        const response = await fetch('api/techcard/get_all', {
+            headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
+        });
+        const data = await response.json();
+        data.sort((a, b) => {
+            if (a.id < b.id) {
+                return -1;
+            }
+            if (a.id > b.id) {
+                return 1;
+            }
+            return 0;
+        });
+        console.log(data);
+        this.setState({ models: data, loading: false });
     }
 }
 

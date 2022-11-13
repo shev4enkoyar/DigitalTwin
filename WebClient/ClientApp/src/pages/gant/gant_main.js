@@ -1,4 +1,5 @@
 ﻿import React, { useState, useEffect } from 'react'
+import { useParams } from 'react-router';
 import { Col, Container, Row, Modal, ModalHeader, ModalBody, Form, Label, Input, FormText } from "reactstrap";
 
 import BackIn_Icon from "../../components/sideBarDashboard/BackInModel_Icon";
@@ -23,6 +24,8 @@ function GanttMain(props) {
 
     const [showModal, setModal] = useState(false);
     const [object, setObject] = useState([]);
+
+    let {modelId} = useParams()
 
 
     let iconsLeftBar = [

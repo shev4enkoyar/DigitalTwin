@@ -6,21 +6,21 @@ import {
 
 const items = [
     {
-        src: 'https://picsum.photos/id/123/1200/400',
-        altText: 'Хороший слайд',
-        caption: 'Очень хороший',
+        src: '/images/slide1-1200x400.png',
+        altText: 'Изображение участка поля',
+        //caption: 'Очень хороший',
         key: 1,
     },
     {
-        src: 'https://picsum.photos/id/456/1200/400',
-        altText: 'Мега хороший слайд',
-        caption: 'Мега хороший',
+        src: '/images/slide2-1200x400.jpg',
+        altText: 'Рекомендации',
+        //caption: 'Мега хороший',
         key: 2,
     },
     {
-        src: 'https://picsum.photos/id/678/1200/400',
-        altText: 'Приятный слайд',
-        caption: 'Да-да',
+        src: '/images/slide3-1200x400.jpg',
+        altText: 'Технологическая карта',
+        //caption: 'Да-да',
         key: 3,
     },
 ];

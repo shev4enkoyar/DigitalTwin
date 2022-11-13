@@ -32,24 +32,6 @@ class Docs extends Component {
         };
     }
 
-    docs = [
-        { "name": "Отчет", "type": "doc", "link": "https://somepath_to_doc" },
-        { "name": "Отчет", "type": "xls", "link": "https://somepath_to_doc" },
-        { "name": "Отчет", "type": "doc", "link": "https://somepath_to_doc" },
-        { "name": "Отчет", "type": "xls", "link": "https://somepath_to_doc" },
-        { "name": "Отчет", "type": "doc", "link": "https://somepath_to_doc" },
-        { "name": "Отчет", "type": "pdf", "link": "https://somepath_to_doc" },
-    ]
-
-
-    /* componentDidMount() {
-         this.setState({
-             docs: docs
-         }, this.setState({
-                 loading: false
-         }))
-         //this.GetAllTariffsData();
-     }*/
 
     iconsSideBarDashboard = [
         new IconButton("/dashboard/" + this.props.match.params.modelId, "Главная панель",
@@ -82,8 +64,7 @@ class Docs extends Component {
                 return (
                     <ThemeContextConsumer>
                         {context => (
-                            <Col md={3} className="mb-5 d-flex justify-content-center p-0">
-                                <CardForBody styleForCard={{ width: "fit-content", height: "100%", padding: "0 5%", cursor: "pointer" }}>
+                            <CardForBody styleForCard={{ width: "fit-content", height: "fit-content", cursor: "pointer", margin: "10px" }}>
                                     <Container className="text-center mt-4">
                                         <img style={{ width: "50px", height: "50px" }}
                                             src={el.type === "doc" ? "https://www.svgrepo.com/show/255810/doc.svg" : el.type === "xls" ? "https://www.svgrepo.com/show/255829/xls.svg" : "https://www.svgrepo.com/show/255818/pdf.svg"} />
@@ -94,7 +75,6 @@ class Docs extends Component {
                                         {this.state.icons.doc}
                                     </h4>
                                 </CardForBody>
-                            </Col>
                         )}
                     </ThemeContextConsumer>
                 )
@@ -106,7 +86,7 @@ class Docs extends Component {
                         ? <LoadingFragment fullscreen={true} />
                         : <Container className={context.theme + "Gray d-flex justify-content-center w-100"} fluid>
                             <SideBarDashboard block={false} icons={this.iconsSideBarDashboard}></SideBarDashboard>
-                            <Row className={context.theme + "Gray mt-3 ml-5 d-flex justify-content-between w-90"}>
+                            <Row className={context.theme + "Gray mt-3 ml-5 d-flex"} style={{width: "90%"}}>
                                 {content}
                             </Row>
                         </Container>

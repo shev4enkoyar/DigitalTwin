@@ -5,7 +5,7 @@ import Input from '../components/input/Input';
 import './pages.css';
 import { ThemeContextConsumer } from '../components/ThemeContext';
 
-const DashboardClassic = (props) => {
+export const DashboardClassic = (props) => {
     const state = {
         first: { cult: "Пшеница", sort: "Екатерина", square: 22.00, norma: 0.0 }, second: { frac: 0, thic: 0, harv: 18, weight: 20 }, third: { gros: 396, fund: 1461.4, labor: 1.58, cost: 7307, price: 12420 },
         works: [{ name: "Уборка прямое комбайнирование", period: 9, amount: 22, refAmount: 27, track: "Донн-", tire: "ЖВН - 7", drivers: 1, workers: 5 },
@@ -22,9 +22,6 @@ const DashboardClassic = (props) => {
             {
                 context => (
                     <Container className="d-flex flex-column" style={{ maxWidth: '100%' }}>
-                        <h2 className={context.theme + "Gray text-white font-weight-lighter mx-5 my-2"}>
-                            Технологическая карта
-                        </h2>
                         <Row className="m-5 justify-content-around">
                             <Col className="col col-md-2 p-1 d-flex flex-column align-items-center mx-2">
                                 {Object.entries(state.first).map(([key, value]) =>
@@ -52,4 +49,4 @@ const DashboardClassic = (props) => {
             }
         </ThemeContextConsumer>
     )
-}; export default DashboardClassic;
+}; 
