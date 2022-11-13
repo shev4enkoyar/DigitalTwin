@@ -4,12 +4,12 @@ import './../../../pages/pages.css';
 import Combobox from './../../../components/combobox/ComboBox';
 import Input from './../../../components/input/Input';
 import BootstrapTable from 'react-bootstrap-table-next';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ThemeContextConsumer } from '../../../components/ThemeContext';
 import { Button, Col, Container, Row } from "reactstrap";
 const TabForTransportSelect = (props) => {
-    const transport = ["Выберите транспорт...", "Трактор",]
-    const markaTrans = ["Выберите марку транспорта...", "1213",]
+    const transport = ["Выберите транспорт...", "Сеялка", "Самоходная косилка", "Зерноуборочный комбайн", "Автомобиль"]
+    const markaTrans = ["Выберите марку транспорта...", "K-700", "CC-6", "МасДон", "Дон-1500", "Камаз 5320",]
     const [useAddTransp, setUseAddTransp] = useState
         (
             { transp: "Выберите транспорт...", markTransp: "Выберите марку транспорта...", countTransp: "" }
