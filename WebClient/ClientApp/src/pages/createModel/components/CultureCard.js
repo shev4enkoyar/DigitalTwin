@@ -46,8 +46,8 @@ class CultureCard extends Component{
                                         let sort = [];
                                         sort.push("Введите сорт культуры...");
                                         this.state.productData.forEach(el => {
-                                            if (el.name.split(' ')[0] === empty)
-                                                sort.push(el.name.split(' ')[1]);
+                                            if (el.name.split(';')[0] === empty)
+                                                sort.push(el.name.split(';')[1]);
                                         });
                                         this.setState({ cultureSort: sort });
                                     }}
