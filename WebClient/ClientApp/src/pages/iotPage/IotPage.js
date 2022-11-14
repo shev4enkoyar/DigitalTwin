@@ -52,27 +52,7 @@ class IotPage extends Component {
     handleNewName=(value)=>{
         this.setState({ newName: value })
     }
-    zag = [
-        {
-            dataField: name,
-            text: 'Температура воздуха',
-        },
-        {
-            dataField: name,
-            text: 'Влажность воздуха',
-        },
-        {
-            dataField: name,
-            text: 'Атмосферное давление',
-        },
-        {
-            dataField: name,
-            text: 'Температура почвы',
-        }, {
-            dataField: name,
-            text: 'Влажность почвы',
-        }
-    ];
+
     functName = [
         {
             id: 1,

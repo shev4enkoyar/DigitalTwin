@@ -69,9 +69,7 @@ export class Dashboard extends Component {
 
     }
 
-    giveParent() {
-        console.log(hey);
-    }
+
 
 
     iconsLeftBar = [
