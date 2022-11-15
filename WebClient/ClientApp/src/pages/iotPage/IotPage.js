@@ -145,7 +145,7 @@ class IotPage extends Component {
                                                     this.functName.map(
                                                         functName =>
                                                             <Col className="d-flex justify-content-center m-2">
-                                                                <input disabled={(!(this.state.chosen === -1 && this.state.isAdded === false))} checked={this.state.chosen > 0 ? this.state.sensors.find(sensor => sensor.id === this.state.chosen).func.includes(functName.id) : null} type="checkbox" />
+                                                                <input disabled={(!(this.state.chosen === -1 && this.state.isAdded === false))} className="position-relative" style={{left:"0px"}} checked={this.state.chosen > 0 ? this.state.sensors.find(sensor => sensor.id === this.state.chosen).func.includes(functName.id) : null} type="checkbox" />
                                                                 <p style={{ fontFamily: 'Open Sans', fontSize: '14px', color: '#616161', width: 'max-content' }} className="m-0 ml-1">
                                                                     {functName.name}
                                                                 </p>
