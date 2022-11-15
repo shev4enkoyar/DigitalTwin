@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Shared
 {
@@ -33,10 +35,18 @@ namespace Shared
             }
         }
 
-        public static HttpClientHandler DefaultHttpHandler => new HttpClientHandler()
+        public static HttpClientHandler DefaultHttpHandler
         {
-            ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
-        };
+            get
+            {
+                var cert = new X509Certificate2("/etc/ssl/private/agrodigitaltwin/agrocert.pfx", "init02564221");
+                var httpHandler = new HttpClientHandler() {
+                    ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+                };
+                httpHandler.ClientCertificates.Add(cert);
+                return httpHandler;
+            }
+        }
 
         #endregion
 

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Shared;
 using System;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 
 namespace Gateway.Controllers.Base
@@ -25,7 +26,7 @@ namespace Gateway.Controllers.Base
             using var channel = GrpcChannel.ForAddress(MicroservicesIP.External.Dashboard,
                 new GrpcChannelOptions { HttpHandler = MicroservicesIP.DefaultHttpHandler }
             );
-
+            
             GetModelsReply response = null;
             using (var call = new DigitalModelService.DigitalModelServiceClient(channel)
                 .GetDigitalModels(new GetModelsRequest { CompanyId = companyId }))
