@@ -8,6 +8,8 @@ services:
     build:
       context: .
       dockerfile: Microservices/Microservice.DashboardManager/Dockerfile
+    volumes:
+       - /etc/ssl/private/agrodigitaltwin:/etc/ssl/private/agrodigitaltwin
 
   microservice.mapmanager:
     image: ${DOCKER_REGISTRY-}microservicemapmanager
