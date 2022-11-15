@@ -40,7 +40,7 @@ namespace WebClient.Controllers
             HttpClient client = MicroservicesIP.GatewayHttpClient;
 
             IEnumerable<ModelProto> result = null;
-            HttpResponseMessage response = await client.GetAsync($"get_models/{companyId}");
+            HttpResponseMessage response = await client.GetAsync($"api/model/get_models/{companyId}");
             if (response.IsSuccessStatusCode)
             {
                 var json = await response.Content.ReadAsStringAsync();
