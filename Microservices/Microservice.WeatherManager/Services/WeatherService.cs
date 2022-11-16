@@ -15,6 +15,7 @@ namespace Microservice.WeatherManager.Services
 {
     public class WeatherService : Protos.WeatherService.WeatherServiceBase
     {
+        private int RowsInDay { get; } = 24;
         private readonly ApplicationContext DbContext;
         public WeatherService(ApplicationContext dbContext)
         {
@@ -49,8 +50,7 @@ namespace Microservice.WeatherManager.Services
             HourlyWeather.Root jsonWeather;
             if (response.IsSuccessStatusCode)
             {
-                var content = response.Content.ReadAsStringAsync().Result;
-                jsonWeather = JsonSerializer.Deserialize<HourlyWeather.Root>(content);
+                jsonWeather = JsonSerializer.Deserialize<HourlyWeather.Root>(response.Content.ReadAsStringAsync().Result);
 
                 int lastRow = 23;
                 List<double> temperaturs = new List<double>();
@@ -65,7 +65,7 @@ namespace Microservice.WeatherManager.Services
                     evapotranspirations.Add(jsonWeather.Hourly.Evapotranspiration[i]);
                     if (i == lastRow)
                     {
-                        lastRow += 24;
+                        lastRow += RowsInDay;
                         DbContext.Add(new Weather
                         {
                             ModelId = request.ModelId,
