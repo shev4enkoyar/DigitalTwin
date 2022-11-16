@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Protos\file.proto" />
     <None Remove="Protos\transportProto.proto" />
     <None Remove="Protos\weather.proto" />
   </ItemGroup>
@@ -25,6 +26,7 @@
 
   <ItemGroup>
     <Protobuf Include="Protos\digitalModelProto.proto" GrpcServices="Client" />
+    <Protobuf Include="Protos\file.proto" GrpcServices="Client" />
 	  <Protobuf Include="Protos\influenceCalculationProto.proto" GrpcServices="Client" />
     <Protobuf Include="Protos\mapProto.proto" GrpcServices="Client" />
     <Protobuf Include="Protos\productProto.proto" GrpcServices="Client" />

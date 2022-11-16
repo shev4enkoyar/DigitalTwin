@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+option csharp_namespace = "Microservice.FileManager.Protos";
+
+package fileProto;
+
+service FileService {
+    rpc GetPageFiles (PageFileRequest) returns (stream GetPageFileReply);
+    rpc AddPageFile (FullPageFile) returns (PageFileStatus);
+    rpc RemovePageFile (RemovePageRequest) returns (PageFileStatus);
+}
+
+message PageFileRequest {
+	int32 modelId = 1;
+	string sectionName = 2;
+}
+
+message GetPageFileReply {
+   repeated PageFileProto files = 1;
+}
+
+message PageFileProto {
+  string name = 1;
+  string fileGuid = 2;
+  string extension = 3;
+  string link = 4;
+  string date = 5;
+}
+
+message FullPageFile {
+  int32 modelId = 1;
+  string name = 2;
+  string extension = 3;
+  string sectionName = 4;
+  string link = 5;
+}
+
+message RemovePageRequest {
+  int32 modelId = 1;
+  string fileGuid = 2;
+}
+
+message PageFileStatus {
+  string fileGuid = 1;
+  bool status = 2;
+}

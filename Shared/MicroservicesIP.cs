@@ -43,6 +43,7 @@ namespace Shared
         public static class External
         {
             private static readonly string dashboard = "https://localhost:49162";
+            private static readonly string files = null;
             private static readonly string map = "https://localhost:49165";
             private static readonly string modelTask = "https://localhost:49171";
             private static readonly string forecast = "https://localhost:49173";
@@ -57,6 +58,11 @@ namespace Shared
             /// <value>https://localhost:49162</value>
             /// <exception cref="ArgumentNullException"/>
             public static string Dashboard => CheckEmptyIP(dashboard);
+
+            /// <summary>DashboardManager IP</summary>
+            /// <value>null</value>
+            /// <exception cref="ArgumentNullException"/>
+            public static string Files => CheckEmptyIP(files);
 
             /// <summary>MapManager IP</summary>
             /// <value>https://localhost:49165</value>
