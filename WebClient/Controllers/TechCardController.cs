@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using WebClient.Controllers.Base;
 using WebClient.Models;
 using WebClient.Models.SubModels;
 
@@ -16,7 +17,7 @@ namespace WebClient.Controllers
     [Authorize]
     [ApiController]
     [Route("api/[controller]")]
-    public class TechCardController : ControllerBase
+    public class TechCardController : CustomControllerBase
     {
         public IConfiguration Configuration { get; }
         private readonly UserManager<ApplicationUser> _userManager;
@@ -37,17 +38,13 @@ namespace WebClient.Controllers
 
             string companyId = user.CompanyId.ToString();
 
-            HttpClient client = MicroservicesIP.GatewayHttpClient;
-
             IEnumerable<ModelProto> result = null;
-            HttpResponseMessage response = await client.GetAsync($"api/model/get_models/{companyId}");
+            HttpResponseMessage response = await ConnectionClient.GetAsync($"api/model/get_models/{companyId}");
             if (response.IsSuccessStatusCode)
             {
                 var json = await response.Content.ReadAsStringAsync();
                 result = JsonConvert.DeserializeObject<IEnumerable<ModelProto>>(json);
-
             }
-
             return result;
         }
 
@@ -60,11 +57,8 @@ namespace WebClient.Controllers
             var user = await _userManager.FindByIdAsync(userId);
             string companyId = user.CompanyId.ToString();
 
-            HttpClient client = MicroservicesIP.GatewayHttpClient;
-
-            HttpResponseMessage response = await client.GetAsync(
-                    $"api/model/create?companyId={companyId}&productId={productId}&name={name}&cadaster={cadaster}&categoryName={categoryName}"
-                    );
+            HttpResponseMessage response = await ConnectionClient.GetAsync($"api/model/create?companyId={companyId}&" +
+                $"productId={productId}&name={name}&cadaster={cadaster}&categoryName={categoryName}");
 
             if (response.IsSuccessStatusCode)
                 return Ok();
