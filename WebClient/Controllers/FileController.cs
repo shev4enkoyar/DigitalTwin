@@ -1,25 +1,23 @@
 ﻿using Microservice.FileManager.Protos;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using Shared;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
+using WebClient.Controllers.Base;
 
 namespace WebClient.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class FileController : ControllerBase
+    public class FileController : CustomControllerBase
     {
         public async Task<IEnumerable<PageFileProto>> GetAllPagesAsync(int modelId, string sectionName)
         {
-            HttpClient client = MicroservicesIP.GatewayHttpClient;
-
             IEnumerable<PageFileProto> result = null;
-            HttpResponseMessage response = await client.GetAsync($"api/file/get_pages?modelId={modelId}&sectionName={sectionName}");
+            HttpResponseMessage response = await ConnectionClient.GetAsync($"api/file/get_pages?modelId={modelId}&sectionName={sectionName}");
             if (response.IsSuccessStatusCode)
             {
                 var json = response.Content.ReadAsStringAsync().Result;

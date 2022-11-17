@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using WebClient.Controllers.Base;
 using WebClient.Data;
 using WebClient.Models;
 
@@ -13,7 +14,7 @@ namespace WebClient.Controllers
     [Authorize]
     [ApiController]
     [Route("api/[controller]")]
-    public class FunctionalController : ControllerBase
+    public class FunctionalController : CustomControllerBase
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ApplicationDbContext _dbContext;

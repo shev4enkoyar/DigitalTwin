@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
+using WebClient.Controllers.Base;
 using WebClient.Data;
 using WebClient.Models;
 
@@ -12,7 +13,7 @@ namespace WebClient.Controllers
     [Authorize]
     [ApiController]
     [Route("api/[controller]")]
-    public class NotificationController : ControllerBase
+    public class NotificationController : CustomControllerBase
     {
         private readonly ApplicationDbContext _dbContext;
 

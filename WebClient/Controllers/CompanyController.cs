@@ -8,6 +8,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using WebClient.Clients;
+using WebClient.Controllers.Base;
 using WebClient.Data;
 using WebClient.Hubs;
 using WebClient.Interface;
@@ -19,7 +20,7 @@ namespace WebClient.Controllers
     [Authorize]
     [ApiController]
     [Route("api/[controller]")]
-    public class CompanyController : ControllerBase
+    public class CompanyController : CustomControllerBase
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<ApplicationRole> _roleManager;

@@ -1,9 +1,10 @@
 ﻿using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.AspNetCore.Mvc;
+using WebClient.Controllers.Base;
 
 namespace WebClient.Controllers
 {
-    public class OidcConfigurationController : Controller
+    public class OidcConfigurationController : CustomControllerBase
     {
         public IClientRequestParametersProvider ClientRequestParametersProvider { get; }
 
