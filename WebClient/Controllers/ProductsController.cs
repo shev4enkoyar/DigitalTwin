@@ -2,17 +2,17 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
-using Shared;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
+using WebClient.Controllers.Base;
 using WebClient.Models.SubModels;
 
 namespace WebClient.Controllers
 {
     [Authorize]
     [Route("api/[controller]")]
-    public class ProductsController : ControllerBase
+    public class ProductsController : CustomControllerBase
     {
         public IConfiguration Configuration { get; }
 
@@ -24,15 +24,12 @@ namespace WebClient.Controllers
         [HttpGet]
         public async Task<IEnumerable<ProductProto>> Get()
         {
-            HttpClient client = MicroservicesIP.GatewayHttpClient;
-
             IEnumerable<ProductProto> result = null;
-            HttpResponseMessage response = await client.GetAsync($"api/model/get_products");
+            HttpResponseMessage response = await ConnectionClient.GetAsync($"api/model/get_products");
             if (response.IsSuccessStatusCode)
             {
                 var json = await response.Content.ReadAsStringAsync();
                 result = JsonConvert.DeserializeObject<IEnumerable<ProductProto>>(json);
-
             }
             return result;
         }

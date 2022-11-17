@@ -21,7 +21,7 @@ namespace WebClient.Controllers
     [Authorize]
     [ApiController]
     [Route("api/[controller]")]
-    public class TaskController : ControllerBase
+    public class TaskController : CustomControllerBase
     {
         private readonly RoleManager<ApplicationRole> _roleManager;
         private readonly UserManager<ApplicationUser> _userManager;
@@ -38,15 +38,12 @@ namespace WebClient.Controllers
         [HttpGet("get_all/{modelId}")]
         public async Task<IEnumerable<ModelTask>> GetAllByModelId(int modelId)
         {
-            HttpClient client = MicroservicesIP.GatewayHttpClient;
-
             IEnumerable<ModelTask> result = null;
-            HttpResponseMessage response = await client.GetAsync($"api/task/get_all/{modelId}");
+            HttpResponseMessage response = await ConnectionClient.GetAsync($"api/task/get_all/{modelId}");
             if (response.IsSuccessStatusCode)
             {
                 var json = await response.Content.ReadAsStringAsync();
                 result = JsonConvert.DeserializeObject<IEnumerable<ModelTask>>(json);
-
             }
             return result;
         }
@@ -120,45 +117,36 @@ namespace WebClient.Controllers
 
         private async Task<ModelTask> GetTaskById(int taskId)
         {
-            HttpClient client = MicroservicesIP.GatewayHttpClient;
-
             ModelTask result = null;
-            HttpResponseMessage response = await client.GetAsync($"api/task/get_task_by_id/{taskId}");
+            HttpResponseMessage response = await ConnectionClient.GetAsync($"api/task/get_task_by_id/{taskId}");
             if (response.IsSuccessStatusCode)
             {
                 var json = await response.Content.ReadAsStringAsync();
                 result = JsonConvert.DeserializeObject<ModelTask>(json);
-
             }
             return result;
         }
 
         private async Task<IEnumerable<DetailProto>> GetDetailsDataByTaskId(int taskId)
         {
-            HttpClient client = MicroservicesIP.GatewayHttpClient;
-
             IEnumerable<DetailProto> result = null;
-            HttpResponseMessage response = await client.GetAsync($"api/task/get_details/{taskId}");
+            HttpResponseMessage response = await ConnectionClient.GetAsync($"api/task/get_details/{taskId}");
             if (response.IsSuccessStatusCode)
             {
                 var json = await response.Content.ReadAsStringAsync();
                 result = JsonConvert.DeserializeObject<IEnumerable<DetailProto>>(json);
-
             }
             return result;
         }
 
         private async Task<TransportProto> GetTransportById(int transportId)
         {
-            HttpClient client = MicroservicesIP.GatewayHttpClient;
-
             TransportProto result = null;
-            HttpResponseMessage response = await client.GetAsync($"api/transport/get_by_id/{transportId}");
+            HttpResponseMessage response = await ConnectionClient.GetAsync($"api/transport/get_by_id/{transportId}");
             if (response.IsSuccessStatusCode)
             {
                 var json = await response.Content.ReadAsStringAsync();
                 result = JsonConvert.DeserializeObject<TransportProto>(json);
-
             }
             return result;
         }

@@ -3,12 +3,12 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
-using Shared;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using WebClient.Controllers.Base;
 using WebClient.Data;
 using WebClient.Models;
 using WebClient.Models.SubModels;
@@ -18,7 +18,7 @@ namespace WebClient.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class SubscriptionsController : ControllerBase
+    public class SubscriptionsController : CustomControllerBase
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ApplicationDbContext _dbContext;
@@ -34,10 +34,8 @@ namespace WebClient.Controllers
         [HttpGet("get_all")]
         public async Task<IEnumerable<FullSubscriptionModel>> GetAllSubscriptions()
         {
-            HttpClient client = MicroservicesIP.GatewayHttpClient;
-
             IEnumerable<SubscriptionClientProto> reply = null;
-            HttpResponseMessage response = await client.GetAsync($"api/subscription/get_all");
+            HttpResponseMessage response = await ConnectionClient.GetAsync($"api/subscription/get_all");
             if (response.IsSuccessStatusCode)
             {
                 var json = await response.Content.ReadAsStringAsync();
@@ -64,11 +62,8 @@ namespace WebClient.Controllers
         [HttpGet("activate/{modelId}")]
         public async Task<IActionResult> ActivateSubscription(int modelId, int days, int subscriptionId)
         {
-            HttpClient client = MicroservicesIP.GatewayHttpClient;
-
-            HttpResponseMessage response = await client.GetAsync(
-                    $"api/subscription/activate/{modelId}?days={days}&subscriptionId={subscriptionId}"
-                    );
+            HttpResponseMessage response = await ConnectionClient.GetAsync(
+                    $"api/subscription/activate/{modelId}?days={days}&subscriptionId={subscriptionId}");
 
             if (response.IsSuccessStatusCode)
                 return Ok();
@@ -79,12 +74,8 @@ namespace WebClient.Controllers
         [HttpGet("update")]
         public async Task<IActionResult> UpdateActivatedSubscription(int days, int subscriptionId)
         {
-            //TODO REDO
-            HttpClient client = MicroservicesIP.GatewayHttpClient;
-
-            HttpResponseMessage response = await client.GetAsync(
-                    $"api/subscription/update?days={days}&subscriptionId={subscriptionId}"
-                    );
+            HttpResponseMessage response = await ConnectionClient.GetAsync(
+                    $"api/subscription/update?days={days}&subscriptionId={subscriptionId}");
 
             if (response.IsSuccessStatusCode)
                 return Ok();
@@ -102,17 +93,13 @@ namespace WebClient.Controllers
 
             string companyId = user.CompanyId.ToString();
 
-            HttpClient client = MicroservicesIP.GatewayHttpClient;
-
             Dictionary<string, List<string>> result = null;
-            HttpResponseMessage response = await client.GetAsync(
-                $"api/subscription/get_models_with_subscriptions/{companyId}"
-                );
+            HttpResponseMessage response = await ConnectionClient.GetAsync(
+                $"api/subscription/get_models_with_subscriptions/{companyId}");
             if (response.IsSuccessStatusCode)
             {
                 var json = await response.Content.ReadAsStringAsync();
                 result = JsonConvert.DeserializeObject<Dictionary<string, List<string>>>(json);
-
             }
             return JsonConvert.SerializeObject(result);
         }
