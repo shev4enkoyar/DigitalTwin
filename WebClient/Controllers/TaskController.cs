@@ -7,9 +7,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
-using System.Security.Policy;
 using System.Threading.Tasks;
 using WebClient.Models.SubModels;
+using WebClient.Util;
 
 namespace WebClient.Controllers
 {
@@ -35,7 +35,7 @@ namespace WebClient.Controllers
         }
 
         [HttpGet("get_details/{taskId}")]
-        public async Task<Root> GetDetailsByTaskId(int taskId)
+        public async Task<TaskJson.Root> GetDetailsByTaskId(int taskId)
         {
             ModelTask task = await GetTaskById(taskId);
             List<TransportProto> transports = new List<TransportProto>();
@@ -46,24 +46,28 @@ namespace WebClient.Controllers
             }
             IEnumerable<DetailProto> detailsDb = await GetDetailsDataByTaskId(taskId);
 
-            Resources resources = new Resources() {
+            TaskJson.Resources resources = new TaskJson.Resources()
+            {
                 personal = transports.Select(x => x.Staff).ToList(),
                 transport = transports.Select(x => $"{x.Name} {x.Brand}").ToList()
             };
-            Details details = new Details() { 
+            TaskJson.Details details = new TaskJson.Details()
+            {
                 dates = detailsDb.Select(x => x.Date).ToList(),
                 status = detailsDb.Select(x => x.Status).ToList(),
-                Expenses = detailsDb.Select(x => new Expense() 
-                { 
-                    Fuel = x.Fuel.IsNullOrEmpty() 
-                    ? new Fuel() { price = null, num = null } 
-                    : new Fuel() { num = double.Parse(x.Fuel.Split(";")[0]), price = double.Parse(x.Fuel.Split(";")[1]) },
+                Expenses = detailsDb.Select(x => new TaskJson.Expense()
+                {
+                    Fuel = x.Fuel.IsNullOrEmpty()
+                    ? new TaskJson.Fuel() { price = null, num = null }
+                    : new TaskJson.Fuel() { num = double.Parse(x.Fuel.Split(";")[0]), price = double.Parse(x.Fuel.Split(";")[1]) },
                     SomeInfo = x.SomeInfo.IsNullOrEmpty()
-                    ? new SomeInfo() {  price = null, num = null }
-                    : new SomeInfo() { num = double.Parse(x.SomeInfo.Split(";")[0]), price = double.Parse(x.SomeInfo.Split(";")[1]) }
+                    ? new TaskJson.SomeInfo() { price = null, num = null }
+                    : new TaskJson.SomeInfo() { num = double.Parse(x.SomeInfo.Split(";")[0]), price = double.Parse(x.SomeInfo.Split(";")[1]) }
                 }).ToList()
             };
-            Root root = new Root() {
+            // TODO change role
+            TaskJson.Root root = new TaskJson.Root()
+            {
                 taskId = taskId,
                 taskName = task.Name,
                 curDate = DateTime.UtcNow.ToShortDateString(),
@@ -74,7 +78,8 @@ namespace WebClient.Controllers
             return root;
         }
 
-        private async Task<ModelTask> GetTaskById(int taskId) {
+        private async Task<ModelTask> GetTaskById(int taskId)
+        {
             HttpClient client = MicroservicesIP.GatewayHttpClient;
 
             ModelTask result = null;
@@ -117,55 +122,5 @@ namespace WebClient.Controllers
             }
             return result;
         }
-
-        public class Details
-        {
-            public List<string> dates { get; set; }
-            public List<string> status { get; set; }
-            public List<Expense> Expenses { get; set; }
-        }
-
-        public class Expense
-        {
-            public Fuel Fuel { get; set; }
-            public SomeInfo SomeInfo { get; set; }
-        }
-
-        public class Fuel
-        {
-            public double? num { get; set; }
-            public double? price { get; set; }
-        }
-
-        public class Resources
-        {
-            public List<string> transport { get; set; }
-            public List<string> personal { get; set; }
-        }
-
-        public class Root
-        {
-            public int taskId { get; set; }
-            public string taskName { get; set; }
-            public string curDate { get; set; }
-            public string role { get; set; }
-            public Resources Resources { get; set; }
-            public Details Details { get; set; }
-        }
-
-        public class SomeInfo
-        {
-            public double? num { get; set; }
-            public double? price { get; set; }
-        }
-    }
-
-    
-
-    static class TaskTypes
-    {
-        public static string Sowing = "Засев";
-        public static string Treatment = "Обработка";
-        public static string Harvesting = "Сбор";
     }
 }
