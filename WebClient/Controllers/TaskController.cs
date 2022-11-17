@@ -7,10 +7,12 @@ using Newtonsoft.Json;
 using Shared;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net.Http;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using WebClient.Controllers.Base;
 using WebClient.Data;
 using WebClient.Models;
 using WebClient.Models.SubModels;
@@ -88,7 +90,7 @@ namespace WebClient.Controllers
             {
                 taskId = taskId,
                 taskName = task.Name,
-                curDate = DateTime.UtcNow.ToShortDateString(),
+                curDate = DateTime.UtcNow.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture),
                 role = roleName,
                 Resources = resources,
                 Details = details
