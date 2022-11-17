@@ -1,7 +1,7 @@
 ﻿@page
 @model RegisterConfirmationModel
 @{
-    ViewData["Title"] = "Подтверждение регистрации";
+    ViewData["Title"] = "Регистрация в AgroDigitalTwin";
     string theme;
     string themeGray;
     if (!(Request.Cookies.TryGetValue("ThemeSave", out theme)))
@@ -10,20 +10,28 @@
     }
     themeGray = theme + "Gray";
 }
-
-<h1 class="@themeGray text-white">@ViewData["Title"]</h1>
-@{
-    if (@Model.DisplayConfirmAccountLink)
-    {
-<p class="@themeGray text-white">
-    This app does not currently have a real email sender registered, see <a href="https://aka.ms/aspaccountconf">these docs</a> for how to configure a real email sender.
-    Normally this would be emailed: <a id="confirm-link" href="@Model.EmailConfirmationUrl">Click here to confirm your account</a>
-</p>
-    }
-    else
-    {
-<p class="@themeGray text-white">
-        Пожалуйста, проверьте свою электронную почту, чтобы подтвердить свою учетную запись.
-</p>
-    }
-}
+<div class="d-flex justify-content-center">
+    <div class="@theme card d-flex align-items-center p-3 my-5" style="width:40%">
+        <img width="80px" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHg9IjBweCIgeT0iMHB4Igp3aWR0aD0iMzAiIGhlaWdodD0iMzAiCnZpZXdCb3g9IjAgMCAzMCAzMCI+CiAgICA8cGF0aCBkPSJNIDE1IDMgQyA4LjM3MyAzIDMgOC4zNzMgMyAxNSBDIDMgMjEuNjI3IDguMzczIDI3IDE1IDI3IEMgMjEuNjI3IDI3IDI3IDIxLjYyNyAyNyAxNSBDIDI3IDEyLjgyMDYyMyAyNi40MDk5OTcgMTAuNzgzMTM4IDI1LjM5NDUzMSA5LjAyMTQ4NDQgTCAxNC4xNDY0ODQgMjAuMjY3NTc4IEMgMTMuOTU5NDg0IDIwLjQ1NDU3OCAxMy43MDU0NTMgMjAuNTYwNTQ3IDEzLjQzOTQ1MyAyMC41NjA1NDcgQyAxMy4xNzQ0NTMgMjAuNTYwNTQ3IDEyLjkxOTQyMiAyMC40NTU1NzggMTIuNzMyNDIyIDIwLjI2NzU3OCBMIDguMjc5Mjk2OSAxNS44MTQ0NTMgQyA3Ljg4ODI5NjkgMTUuNDIzNDUzIDcuODg4Mjk2OSAxNC43OTEzOTEgOC4yNzkyOTY5IDE0LjQwMDM5MSBDIDguNjcwMjk2OSAxNC4wMDkzOTEgOS4zMDIzNTk0IDE0LjAwOTM5MSA5LjY5MzM1OTQgMTQuNDAwMzkxIEwgMTMuNDM5NDUzIDE4LjE0NjQ4NCBMIDI0LjI0MDIzNCA3LjM0NTcwMzEgQyAyMi4wMzkyMzQgNC42OTA3MDMxIDE4LjcxOCAzIDE1IDMgeiBNIDI0LjI0MDIzNCA3LjM0NTcwMzEgQyAyNC42NzE4ODQgNy44NjYyODA4IDI1LjA1Mzc0MyA4LjQzMDA1MTYgMjUuMzk0NTMxIDkuMDE5NTMxMiBMIDI3LjcwNzAzMSA2LjcwNzAzMTIgQyAyOC4wOTgwMzEgNi4zMTUwMzEyIDI4LjA5ODAzMSA1LjY4Mzk2ODggMjcuNzA3MDMxIDUuMjkyOTY4OCBDIDI3LjMxNjAzMSA0LjkwMTk2ODcgMjYuNjgzOTY5IDQuOTAxOTY4OCAyNi4yOTI5NjkgNS4yOTI5Njg4IEwgMjQuMjQwMjM0IDcuMzQ1NzAzMSB6Ij48L3BhdGg+Cjwvc3ZnPg==" fill="#16D002" />
+        <h4 style="fontFamily:Open Sans" class="@themeGray text-white text-center">@ViewData["Title"]</h4>
+        @{
+            if (@Model.DisplayConfirmAccountLink)
+                {
+                <p style="font-family:'Open Sans'; color:#DDDDDD; font-size:15px" class="@themeGray text-center p-2">
+                        В настоящее время в этом приложении не зарегистрирован реальный отправитель электронной почты<a href="https://aka.ms/aspaccountconf">эти документы</a> о том, как настроить реального отправителя электронной почты.
+                        Обычно это отправляется по электронной почте: <a id="confirm-link" href="@Model.EmailConfirmationUrl">Нажмите здесь, чтобы подтвердить свою учетную запись</a>
+                 </p>
+                }
+            else
+                {
+                <p style="font-family:'Open Sans'; color:#DDDDDD; font-size:15px" class="@themeGray text-center p-2">
+                Для завершения регистрации перейдите по ссылке в письме.
+                Письмо придет на указанный почтовый адрес в течение пары минут.
+                </p>
+                <p style="font-family:'Open Sans'; color:#DDDDDD; font-size:13px" class="@themeGray text-center px-2">
+                 Через 10 секунд вы будете автоматически перенаправлены на главную
+                </p>
+                }
+        }
+    </div>
+</div>
