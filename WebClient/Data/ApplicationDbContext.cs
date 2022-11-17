@@ -33,7 +33,7 @@ namespace WebClient.Data
             {
                 Name = "Maintainer",
                 NormalizedName = "MAINTAINER",
-                FunctionalAccess = "1;2",
+                FunctionalAccess = "1;2;3;4;5;6;7;8;9;10",
                 TranslatedName = "Владелец компании",
                 Description = ""
             },
@@ -41,9 +41,25 @@ namespace WebClient.Data
             {
                 Name = "Admin",
                 NormalizedName = "ADMIN",
-                FunctionalAccess = "1;2;3;4;5;6;7;8;9",
+                FunctionalAccess = "1;2;3;4;5;6;7;8;9;10",
                 TranslatedName = "Администратор",
                 Description = "Danger for using"
+            },
+            new ApplicationRole
+            {
+                Name = "Agronomist",
+                NormalizedName = "AGRONOMIST",
+                FunctionalAccess = "1;6;7;8;10",
+                TranslatedName = "Агроном",
+                Description = ""
+            },
+            new ApplicationRole
+            {
+                Name = "Economist",
+                NormalizedName = "ECONOMIST",
+                FunctionalAccess = "1;4;5;6;10",
+                TranslatedName = "Экономист",
+                Description = ""
             });
             #endregion
 
@@ -101,9 +117,15 @@ namespace WebClient.Data
                 Id = 9,
                 Name = "inviteCompany",
                 Description = "Приглашение в компанию"
+            },
+            new Functional
+            {
+                Id = 10,
+                Name = "workDiagrame",
+                Description = "График работ"
             });
-            #endregion
 
+            #endregion
             #endregion
         }
     }

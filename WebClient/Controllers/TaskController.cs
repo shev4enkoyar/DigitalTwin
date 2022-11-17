@@ -1,13 +1,18 @@
 ﻿using IdentityServer4.Extensions;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using WebClient.Data;
+using WebClient.Models;
 using WebClient.Models.SubModels;
 using WebClient.Util;
 
@@ -18,6 +23,18 @@ namespace WebClient.Controllers
     [Route("api/[controller]")]
     public class TaskController : ControllerBase
     {
+        private readonly RoleManager<ApplicationRole> _roleManager;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly ApplicationDbContext _dbContext;
+        private List<string> RoleNamesWithAccess { get; } = new List<string> { "AGRONOMIST", "ECONOMIST" };
+
+        public TaskController(RoleManager<ApplicationRole> roleManager, UserManager<ApplicationUser> userManager, ApplicationDbContext dbContext)
+        {
+            _roleManager = roleManager;
+            _userManager = userManager;
+            _dbContext = dbContext;
+        }
+
         [HttpGet("get_all/{modelId}")]
         public async Task<IEnumerable<ModelTask>> GetAllByModelId(int modelId)
         {
@@ -65,17 +82,40 @@ namespace WebClient.Controllers
                     : new TaskJson.SomeInfo() { num = double.Parse(x.SomeInfo.Split(";")[0]), price = double.Parse(x.SomeInfo.Split(";")[1]) }
                 }).ToList()
             };
-            // TODO change role
+
+            string roleName = GetUserRoleName().Result;
+            if (roleName == null)
+                return null;
+
             TaskJson.Root root = new TaskJson.Root()
             {
                 taskId = taskId,
                 taskName = task.Name,
                 curDate = DateTime.UtcNow.ToShortDateString(),
-                role = "temp",
+                role = roleName,
                 Resources = resources,
                 Details = details
             };
             return root;
+        }
+
+        private async Task<string> GetUserRoleName()
+        {
+            foreach (var role in await GetUserRoles())
+            {
+                if (RoleNamesWithAccess.Any(x => x.Equals(role.NormalizedName)))
+                    return role.NormalizedName;
+            }
+            return null;
+        }
+
+        private async Task<IEnumerable<ApplicationRole>> GetUserRoles()
+        {
+            var user = await _userManager.FindByIdAsync(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            if (user == null)
+                return null;
+            var userRoles = _dbContext.UserRoles.Where(x => x.UserId == user.Id).ToList();
+            return userRoles.Select(x => _roleManager.FindByIdAsync(x.RoleId).Result).ToList();
         }
 
         private async Task<ModelTask> GetTaskById(int taskId)
