@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
+using WebClient.Controllers.Base;
 using WebClient.Data;
 using WebClient.Models;
 using WebClient.Util;
@@ -13,7 +14,7 @@ namespace WebClient.Controllers
     [Authorize]
     [ApiController]
     [Route("api/[controller]")]
-    public class RolesController : ControllerBase
+    public class RolesController : CustomControllerBase
     {
         private readonly RoleManager<ApplicationRole> _roleManager;
         private readonly ApplicationDbContext _dbContext;
