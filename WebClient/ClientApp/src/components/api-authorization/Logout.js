@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import { ThemeContextConsumer } from '../ThemeContext';
 import { ApplicationPaths, LogoutActions, QueryParameterNames } from './ApiAuthorizationConstants';
 import authService, { AuthenticationResultStatus } from './AuthorizeService';
-
+import '../../pages/pages.css';
 // The main responsibility of this component is to handle the user's logout process.
 // This is the starting point for the logout process, which is usually initiated when a
 // user clicks on the logout button on the LoginMenu component.
@@ -31,7 +32,7 @@ export class Logout extends Component {
                 this.processLogoutCallback();
                 break;
             case LogoutActions.LoggedOut:
-                this.setState({ isReady: true, message: "You successfully logged out!" });
+                this.setState({ isReady: true, message: "Вы успешно вышли из системы!" });
                 break;
             default:
                 throw new Error(`Invalid action '${action}'`);
@@ -46,16 +47,16 @@ export class Logout extends Component {
             return <div></div>
         }
         if (!!message) {
-            return (<div>{message}</div>);
+            return (<ThemeContextConsumer>{context => (< div style={{ fontSize:'24px' }} className={context.theme + "Gray text-white text-center my-3"}> {message}</div>)}</ThemeContextConsumer>);
         } else {
             const action = this.props.action;
             switch (action) {
                 case LogoutActions.Logout:
-                    return (<div>Processing logout</div>);
+                    return (<div>Обработка выхода из системы</div>);
                 case LogoutActions.LogoutCallback:
-                    return (<div>Processing logout callback</div>);
+                    return (<div>Обработка обратного вызова выхода из системы</div>);
                 case LogoutActions.LoggedOut:
-                    return (<div>{message}</div>);
+                    return (<ThemeContextConsumer>{context => (< div style={{ fontSize: '24px' }} className={context.theme +"Gray text-white text-center my-3"}> {message}</div>)}</ThemeContextConsumer>);
                 default:
                     throw new Error(`Invalid action '${action}'`);
             }
@@ -80,7 +81,7 @@ export class Logout extends Component {
                     throw new Error("Invalid authentication result status.");
             }
         } else {
-            this.setState({ message: "You successfully logged out!" });
+            this.setState({ message: "Вы успешно вышли из системы!" });
         }
     }
 
