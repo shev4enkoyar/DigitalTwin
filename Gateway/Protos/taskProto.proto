@@ -9,12 +9,12 @@ service ModelTaskService {
   rpc GetTasks (SendRequest) returns (stream SendReply);
   rpc GetTaskById (GetTaskByIdRequest) returns (GetTaskByIdReply);
   rpc GetTaskDetails (GetTaskRequest) returns (stream GetTaskReply);
+  rpc UpdateDetail (UpdateDetailRequest) returns (UpdateDetailReply);
 }
 
 message SendRequest {
 	int32 modelId = 1;
 }
-
 message SendReply {
    repeated ModelTask tasks = 1;
 }
@@ -49,4 +49,16 @@ message DetailProto {
   string Status = 3;
   string Fuel = 4;
   string SomeInfo = 5;
+}
+
+message UpdateDetailRequest {
+   int32 ModelId = 1;
+   int32 TaskId = 2;
+   string Date = 3;
+   string Status = 4;
+   string Fuel = 5;
+   string SomeInfo = 6;
+}
+message UpdateDetailReply {
+   string status = 1;
 }

@@ -3,6 +3,7 @@ using Microservice.ModelTaskManager.DAL;
 using Microservice.ModelTaskManager.Protos;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -47,7 +48,27 @@ namespace Microservice.TaskManager.Services
                 TaskType = task.Type,
                 TransportList = task.TransportList
             };
-            return Task.FromResult(new GetTaskByIdReply() { Task = modelTask});
+            return Task.FromResult(new GetTaskByIdReply() { Task = modelTask });
+        }
+
+        public override Task<UpdateDetailReply> UpdateDetail(UpdateDetailRequest request, ServerCallContext context)
+        {
+            var details = _dbContext.Details.Where(x => x.TaskId == request.TaskId).ToList();
+            var detail = details.FirstOrDefault(x => x.Date.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(request.Date));
+            if (detail == null)
+                return Task.FromResult(new UpdateDetailReply() { Status = "Not found" });
+            if(request.Status != "" || request.Status == null)
+                detail.Status = request.Status;
+
+            if (request.Fuel != "" || request.Fuel == null)
+                detail.Fuel = request.Fuel;
+
+            if (request.SomeInfo != "" || request.SomeInfo == null)
+                detail.SomeInfo = request.SomeInfo;
+
+            _dbContext.Update(detail);
+            _dbContext.SaveChanges();
+            return Task.FromResult(new UpdateDetailReply() { Status = "ok" });
         }
 
         private IEnumerable<DetailProto> GetProtoDetails(int taskId)
@@ -74,6 +95,8 @@ namespace Microservice.TaskManager.Services
                 Name = x.Name
             }).ToList();
         }
+
+
 
     }
 }

@@ -49,6 +49,37 @@ namespace WebClient.Controllers
             }
             return result;
         }
+        [HttpGet("update_detail/{modelId}")]
+        public async Task<ActionResult> UpdateDetailByModelId(int modelId, int taskId, string date, string status, string fuel, string someInfo )
+        {
+            string result = null;
+            HttpResponseMessage response = null;
+            string roleName = GetUserRoleName().Result;
+            if (roleName == null)
+                return BadRequest("No permission");
+
+            switch (roleName)
+            {
+                case "AGRONOMIST":
+                    response = await ConnectionClient.GetAsync
+                        ($"api/task/update_detail/{modelId}?taskId={taskId}&date={date}&status={status}");
+                    break;
+                case "ECONOMIST":
+                    response = await ConnectionClient.GetAsync
+                        ($"api/task/update_detail/{modelId}?taskId={taskId}&date={date}&fuel={fuel}&someInfo={someInfo}");
+                    break;
+                default:
+                    return BadRequest("No permission");
+            }
+            if (response.IsSuccessStatusCode)
+            {
+                var json = await response.Content.ReadAsStringAsync();
+                result = JsonConvert.DeserializeObject<string>(json);
+            }
+            if(result.Equals("ok"))
+                return Ok();
+            return BadRequest();
+        }
 
         [HttpGet("get_details/{taskId}")]
         public async Task<TaskJson.Root> GetDetailsByTaskId(int taskId)

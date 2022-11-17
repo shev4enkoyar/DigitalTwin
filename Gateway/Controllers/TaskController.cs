@@ -36,6 +36,18 @@ namespace Gateway.Controllers
             return response.Tasks;
         }
 
+        [HttpGet("update_detail/{modelId}")]
+        public async Task<string> UpdateDetailByModelId(int modelId, int taskId, string date, string status = "", string fuel = "", string someInfo = "")
+        {
+            using var channel = GrpcChannel.ForAddress(MicroservicesIP.External.ModelTask,
+                new GrpcChannelOptions { HttpHandler = MicroservicesIP.DefaultHttpHandler }
+            );
+            var client = new ModelTaskService.ModelTaskServiceClient(channel);
+            var reply = await client
+                .UpdateDetailAsync(new UpdateDetailRequest{ ModelId = modelId, TaskId = taskId, Status = status, Fuel = fuel, Date = date, SomeInfo = someInfo });
+            return reply.Status;
+        }
+
         [HttpGet("get_details/{taskId}")]
         public async Task<IEnumerable<DetailProto>> GetDetailsByTaskId(int taskId)
         {
