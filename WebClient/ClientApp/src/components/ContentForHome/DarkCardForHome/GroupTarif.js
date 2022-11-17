@@ -16,23 +16,7 @@ class GroupTarif extends Component{
         this.GetAllTariffsData();
     }
 
-    tariffs = [
-        {
-            name: "Прогнозирование урожайности",
-            cost: "5000 руб/год",
-            possibility: ["Возможность 1","Возможность 2","Возможность 3","Возможность 4","Возможность 5"]
-        },
-        {
-            name: "Прогнозирование нештатных ситуаций",
-            cost: "10000 руб/год",
-            possibility: ["Возможность 1", "Возможность 2", "Возможность 3", "Возможность 4", "Возможность 5"]
-        },
-        {
-            name: "Поддержка принятия решений",
-            cost: "15000 руб/год",
-            possibility: ["Возможность 1", "Возможность 2", "Возможность 3", "Возможность 4", "Возможность 5"]
-        }
-    ]
+
     render(){
         return (
             <ThemeContextConsumer>{context => (
@@ -52,9 +36,9 @@ class GroupTarif extends Component{
                                             <h5 className={context.theme.light}>
                                                 {el.name}
                                             </h5>
-                                            <p className={context.theme.light}>
+                                            {/*<p className={context.theme.light}>
                                                 <em>{el.price + " руб/месяц"}</em>
-                                            </p>
+                                            </p>*/}
                                             <ul  id="tarifUL">
                                                 {
                                                     el.functions.map(functional => {
