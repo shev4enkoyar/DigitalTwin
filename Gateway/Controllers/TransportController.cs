@@ -20,7 +20,6 @@ namespace Gateway.Controllers
             );
 
             GetAllTransportReply response = null;
-            //TODO REDO
             using (var call = new TransportService.TransportServiceClient(channel)
                 .GetAllTransport(new GetAllTransportRequest { }))
             {
@@ -30,6 +29,17 @@ namespace Gateway.Controllers
                 }
             }
             return response.Transports;
+        }
+
+        [HttpGet("get_by_id/{transportId}")]
+        public async Task<TransportProto> GetTaskById(int transportId)
+        {
+            using var channel = GrpcChannel.ForAddress(MicroservicesIP.External.Dashboard,
+                new GrpcChannelOptions { HttpHandler = MicroservicesIP.DefaultHttpHandler }
+            );
+            var client = new TransportService.TransportServiceClient(channel);
+            var reply = await client.GetTransportByIdAsync(new GetTransportByIdRequest {  Id =  transportId});
+            return reply.Transport;
         }
 
     }

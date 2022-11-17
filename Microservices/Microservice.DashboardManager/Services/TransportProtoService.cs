@@ -24,6 +24,18 @@ namespace Microservice.DashboardManager.Services
             await Task.FromResult(transportReply);
         }
 
+        public override Task<GetTransportByIdReply> GetTransportById(GetTransportByIdRequest request, ServerCallContext context)
+        {
+            var transport = DbContext.Transports.FirstOrDefault(x => x.Id == request.Id);
+            TransportProto transportProto = new TransportProto() {
+                 Id = transport.Id,
+                 Brand = transport.Brand,
+                 Name = transport.Name,
+                 Staff = transport.Staff
+            };
+            return Task.FromResult(new GetTransportByIdReply() { Transport = transportProto });
+        }
+
         private IEnumerable<TransportProto> GetProtoTransport()
         {
             return DbContext.Transports

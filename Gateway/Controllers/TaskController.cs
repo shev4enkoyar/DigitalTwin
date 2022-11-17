@@ -25,7 +25,6 @@ namespace Gateway.Controllers
             );
 
             SendReply response = null;
-            //TODO REDO
             using (var call = new ModelTaskService.ModelTaskServiceClient(channel)
                 .GetTasks(new SendRequest { ModelId = modelId }))
             {
@@ -35,6 +34,36 @@ namespace Gateway.Controllers
                 }
             }
             return response.Tasks;
+        }
+
+        [HttpGet("get_details/{taskId}")]
+        public async Task<IEnumerable<DetailProto>> GetDetailsByTaskId(int taskId)
+        {
+            using var channel = GrpcChannel.ForAddress(MicroservicesIP.External.ModelTask,
+                new GrpcChannelOptions { HttpHandler = MicroservicesIP.DefaultHttpHandler }
+            );
+
+            GetTaskReply response = null;
+            using (var call = new ModelTaskService.ModelTaskServiceClient(channel)
+                .GetTaskDetails(new GetTaskRequest { TaskId = taskId }))
+            {
+                while (await call.ResponseStream.MoveNext())
+                {
+                    response = call.ResponseStream.Current;
+                }
+            }
+            return response.Details;
+        }
+
+        [HttpGet("get_task_by_id/{taskId}")]
+        public async Task<ModelTask> GetTaskById(int taskId)
+        {
+            using var channel = GrpcChannel.ForAddress(MicroservicesIP.External.ModelTask,
+                new GrpcChannelOptions { HttpHandler = MicroservicesIP.DefaultHttpHandler }
+            );
+            var client = new ModelTaskService.ModelTaskServiceClient(channel);
+            var reply = await client.GetTaskByIdAsync(new GetTaskByIdRequest{  TaskId = taskId });
+            return reply.Task;
         }
     }
 

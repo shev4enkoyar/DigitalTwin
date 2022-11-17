@@ -6,6 +6,7 @@ package transportProto;
 
 service TransportService {
   rpc GetAllTransport (GetAllTransportRequest) returns (stream GetAllTransportReply);
+  rpc GetTransportById (GetTransportByIdRequest) returns (GetTransportByIdReply);
 }
 
 message GetAllTransportRequest {
@@ -14,6 +15,15 @@ message GetAllTransportRequest {
 message GetAllTransportReply {
    repeated TransportProto transports = 1;
 }
+
+message GetTransportByIdRequest {
+    int32 id = 1;
+}
+
+message GetTransportByIdReply {
+   TransportProto transport = 1;
+}
+
 
 message TransportProto {
   int32 id = 1;

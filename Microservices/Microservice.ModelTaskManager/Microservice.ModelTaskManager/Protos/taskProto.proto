@@ -7,6 +7,8 @@ package taskProto;
 
 service ModelTaskService {
   rpc GetTasks (SendRequest) returns (stream SendReply);
+  rpc GetTaskById (GetTaskByIdRequest) returns (GetTaskByIdReply);
+  rpc GetTaskDetails (GetTaskRequest) returns (stream GetTaskReply);
 }
 
 message SendRequest {
@@ -16,11 +18,34 @@ message SendReply {
    repeated ModelTask tasks = 1;
 }
 
+message GetTaskByIdRequest {
+	int32 taskId = 1;
+}
+message GetTaskByIdReply {
+   ModelTask task = 1;
+}
+
 message ModelTask {
   int32 id = 1;
   string StartDate = 2;
   string EndDate = 3;
   string TaskType = 4;
-  bool IsComplete = 5;
-  int32 Progress = 6;
+  bool isComplete = 5;
+  string Name = 6;
+  string TransportList = 7;
+}
+
+message GetTaskRequest {
+	int32 taskId = 1;
+}
+message GetTaskReply {
+   repeated DetailProto details = 1;
+}
+
+message DetailProto {
+  int32 id = 1;
+  string Date = 2;
+  string Status = 3;
+  string Fuel = 4;
+  string SomeInfo = 5;
 }
