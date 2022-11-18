@@ -81,104 +81,120 @@ namespace Microservice.DashboardManager.DAL
             });
             #endregion
 
+            #region Transport
             modelBuilder.Entity<Transport>().HasData(new Transport() 
             {
                  Id = 1,
                  Name = "Трактор + Дисковая борона",
                  Brand = "К-700, БДТ-7",
-                 Staff = "Тракторист - 1"
+                 StaffName = "Тракторист",
+                 StaffNum = "1"
             },
             new Transport()
             {
                 Id = 2,
                 Name = "Сеялка",
                 Brand = "К-700, СС-6",
-                Staff = "Тракторист - 1;Водитель автом. - 1"
+                StaffName = "Тракторист;Водитель автом.",
+                StaffNum = "1;1"
             },
             new Transport()
             {
                 Id = 3,
                 Name = "Опрыскиватель",
                 Brand = "МТЗ-82, ОП-2000 ",
-                Staff = "Тракторист -1, Водитель автом. - 1"
+                StaffName = "Тракторист;Водитель автом.",
+                StaffNum = "1;1"
             },
             new Transport()
             {
-                Id = 1,
+                Id = 4,
                 Name = "Самоходная косилка",
                 Brand = "МасДон",
-                Staff = "Тракторист -1"
+                StaffName = "Тракторист",
+                StaffNum = "1"
             },
             new Transport()
             {
-                Id = 1,
+                Id = 6,
                 Name = "Зерноуборочный комбайн",
                 Brand = "Дон-1500",
-                Staff = "Тракторист -1, Водитель автом. - 1"
+                StaffName = "Тракторист;Водитель автом.",
+                StaffNum = "1;1"
             },
             new Transport()
             {
-                Id = 1,
+                Id = 7,
                 Name = "Автомобиль",
                 Brand = "Камаз 5320",
-                Staff = ""
+                StaffName = "Водитель автом.",
+                StaffNum = "1"
             },
             new Transport()
             {
-                Id = 1,
+                Id = 8,
                 Name = "Очиститель зерна",
                 Brand = "ОВС-25",
-                Staff = ""
+                StaffName = "Рабочий;Водитель автом.",
+                StaffNum = "2;1"
             },
             new Transport()
             {
-                Id = 1,
+                Id = 9,
                 Name = "Сушилка",
                 Brand = "СС-19",
-                Staff = ""
+                StaffName = "Оператор;Рабочий",
+                StaffNum = "1;2"
             },
             new Transport()
             {
-                Id = 1,
+                Id = 10,
                 Name = "Тактор + плуг",
                 Brand = "МТЗ-1221, ПН-5",
-                Staff = ""
+                StaffName = "Тракторист",
+                StaffNum = "1"
             },
             new Transport()
             {
-                Id = 1,
+                Id = 11,
                 Name = "Трактор + активная борона",
                 Brand = "МТЗ1221, ПН03-310",
-                Staff = ""
+                StaffName = "Тракторист",
+                StaffNum = "1"
             },
             new Transport()
             {
-                Id = 1,
+                Id = 12,
                 Name = "Трактор + культиватор",
                 Brand = "МТЗ-82, КРН-4.2",
-                Staff = ""
+                StaffName = "Тракторист",
+                StaffNum = "1"
             },
             new Transport()
             {
-                Id = 1,
+                Id = 13,
                 Name = "Трактор + сажалка",
                 Brand = "МТЗ-82, Л-207",
-                Staff = ""
+                StaffName = "Тракторист;Рабочий",
+                StaffNum = "1;1"
             },
             new Transport()
             {
-                Id = 1,
+                Id = 14,
                 Name = "Трактор + копатель",
                 Brand = "МТЗ-82, КСТ-1.4",
-                Staff = ""
+                StaffName = "Тракторист",
+                StaffNum = "1"
             },
             new Transport()
             {
-                Id = 1,
+                Id = 15,
                 Name = "Трактор + прицеп",
                 Brand = "МТЗ-82, 2ПТС-4",
-                Staff = ""
+                StaffName = "Тракторист",
+                StaffNum = "1"
             });
+            #endregion
         }
     }
 }
