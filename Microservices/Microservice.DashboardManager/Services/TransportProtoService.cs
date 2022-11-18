@@ -27,12 +27,21 @@ namespace Microservice.DashboardManager.Services
         public override Task<GetTransportByIdReply> GetTransportById(GetTransportByIdRequest request, ServerCallContext context)
         {
             var transport = DbContext.Transports.FirstOrDefault(x => x.Id == request.Id);
+            if (transport == null)
+                return null;
+            var staffNames = transport.StaffName.Split(";");
+            var staffNums = transport.StaffNum.Split(";");
+            string staff = "";
+            for (int i = 0; i < staffNames.Length; i++)
+            {
+                staff += $"{staffNames[i]} - {staffNums[i]};";
+            }
             TransportProto transportProto = new TransportProto()
             {
                 Id = transport.Id,
                 Brand = transport.Brand,
                 Name = transport.Name,
-                Staff = $"{transport.StaffName} - {transport.StaffNum}"
+                Staff = staff
             };
             return Task.FromResult(new GetTransportByIdReply() { Transport = transportProto });
         }
