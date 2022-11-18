@@ -11,11 +11,11 @@ namespace Microservice.TaskManager.Services
 {
     public class TaskProtoService : ModelTaskService.ModelTaskServiceBase
     {
-        private ApplicationContext _dbContext { get; }
+        private ApplicationContext DbContext { get; }
 
         public TaskProtoService(ApplicationContext dbContext)
         {
-            _dbContext = dbContext;
+            DbContext = dbContext;
         }
 
         public override async Task GetTasks(SendRequest request, IServerStreamWriter<SendReply> responseStream, ServerCallContext context)
@@ -38,7 +38,7 @@ namespace Microservice.TaskManager.Services
 
         public override Task<GetTaskByIdReply> GetTaskById(GetTaskByIdRequest request, ServerCallContext context)
         {
-            var task = _dbContext.Tasks.FirstOrDefault(x => x.Id == request.TaskId);
+            var task = DbContext.Tasks.FirstOrDefault(x => x.Id == request.TaskId);
             ModelTask modelTask = new ModelTask()
             {
                 Id = task.Id,
@@ -53,11 +53,11 @@ namespace Microservice.TaskManager.Services
 
         public override Task<UpdateDetailReply> UpdateDetail(UpdateDetailRequest request, ServerCallContext context)
         {
-            var details = _dbContext.Details.Where(x => x.TaskId == request.TaskId).ToList();
+            var details = DbContext.Details.Where(x => x.TaskId == request.TaskId).ToList();
             var detail = details.FirstOrDefault(x => x.Date.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(request.Date));
             if (detail == null)
                 return Task.FromResult(new UpdateDetailReply() { Status = "Not found" });
-            if(request.Status != "" || request.Status == null)
+            if (request.Status != "" || request.Status == null)
                 detail.Status = request.Status;
 
             if (request.Fuel != "" || request.Fuel == null)
@@ -66,14 +66,14 @@ namespace Microservice.TaskManager.Services
             if (request.SomeInfo != "" || request.SomeInfo == null)
                 detail.SomeInfo = request.SomeInfo;
 
-            _dbContext.Update(detail);
-            _dbContext.SaveChanges();
+            DbContext.Update(detail);
+            DbContext.SaveChanges();
             return Task.FromResult(new UpdateDetailReply() { Status = "ok" });
         }
 
         private IEnumerable<DetailProto> GetProtoDetails(int taskId)
         {
-            return _dbContext.Details.Where(x => x.TaskId == taskId).Select(x => new DetailProto()
+            return DbContext.Details.Where(x => x.TaskId == taskId).Select(x => new DetailProto()
             {
                 Id = x.Id,
                 Date = x.Date.ToShortDateString(),
@@ -85,7 +85,7 @@ namespace Microservice.TaskManager.Services
 
         private IEnumerable<ModelTask> GetProtoTasks(int modelId)
         {
-            return _dbContext.Tasks.Include(x => x.Details).Select(x => new ModelTask()
+            return DbContext.Tasks.Include(x => x.Details).Select(x => new ModelTask()
             {
                 Id = x.Id,
                 StartDate = x.StartDate.ToShortDateString(),
