@@ -50,7 +50,7 @@ namespace WebClient.Controllers
             return result;
         }
         [HttpGet("update_detail/{modelId}")]
-        public async Task<ActionResult> UpdateDetailByModelId(int modelId, int taskId, string date, string status, string fuel, string someInfo )
+        public async Task<ActionResult> UpdateDetailByModelId(int modelId, int taskId, string date, string status = "", string fuel = "", string seeds = "", string fertilizers = "", string pesticides = "")
         {
             string result = null;
             HttpResponseMessage response = null;
@@ -66,7 +66,7 @@ namespace WebClient.Controllers
                     break;
                 case "ECONOMIST":
                     response = await ConnectionClient.GetAsync
-                        ($"api/task/update_detail/{modelId}?taskId={taskId}&date={date}&fuel={fuel}&someInfo={someInfo}");
+                        ($"api/task/update_detail/{modelId}?taskId={taskId}&date={date}&fuel={fuel}&seeds={seeds}&fertilizers={fertilizers}&Pesticides={pesticides}");
                     break;
                 default:
                     return BadRequest("No permission");
@@ -109,9 +109,15 @@ namespace WebClient.Controllers
                     : x.Fuel.Split("/")
                       .Select(y => new TaskJson.Fuel() { Num = double.Parse(y.Split(";")[0]), Price = double.Parse(y.Split(";")[1]) })
                       .ToList(),
-                    Seeds = x.SomeInfo.IsNullOrEmpty()
+                    Seeds = x.Seeds.IsNullOrEmpty()
                     ? new TaskJson.Seeds() { Price = null, Num = null }
-                    : new TaskJson.Seeds() { Num = double.Parse(x.SomeInfo.Split(";")[0]), Price = double.Parse(x.SomeInfo.Split(";")[1]) }
+                    : new TaskJson.Seeds() { Num = double.Parse(x.Seeds.Split(";")[0]), Price = double.Parse(x.Seeds.Split(";")[1]) },
+                    Fertilizers = x.Fertilizers.IsNullOrEmpty()
+                    ? new TaskJson.Fertilizers() { Price = null, Num = null }
+                    : new TaskJson.Fertilizers() { Num = double.Parse(x.Fertilizers.Split(";")[0]), Price = double.Parse(x.Fertilizers.Split(";")[1]) },
+                    Pesticides = x.Pesticides.IsNullOrEmpty()
+                    ? new TaskJson.Pesticides() { Price = null, Num = null }
+                    : new TaskJson.Pesticides() { Num = double.Parse(x.Pesticides.Split(";")[0]), Price = double.Parse(x.Pesticides.Split(";")[1]) },
                 }).ToList()
             };
 
