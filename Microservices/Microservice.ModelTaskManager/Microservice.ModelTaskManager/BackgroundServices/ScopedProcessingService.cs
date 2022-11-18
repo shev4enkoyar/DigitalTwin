@@ -16,7 +16,8 @@ namespace Microservice.ModelTaskManager.BackgroundServices
 
     internal class ScopedProcessingService : IScopedProcessingService
     {
-        private readonly ILogger _logger;
+        private readonly int additionalMinutes = 15;
+        private readonly ILogger<ScopedProcessingService> _logger;
         private readonly ApplicationContext _dbContext;
 
         public ScopedProcessingService(ILogger<ScopedProcessingService> logger, ApplicationContext dbContext)
@@ -27,6 +28,9 @@ namespace Microservice.ModelTaskManager.BackgroundServices
 
         public async Task DoWork(CancellationToken stoppingToken)
         {
+            _logger.LogInformation("Started background service \"StatusDateUpdater\"");
+            await Task.Delay(TimeSpan.FromSeconds(GetSecondsUntilMidnight()), stoppingToken);
+            _logger.LogInformation("Background service \"StatusDateUpdater\" is working");
             while (!stoppingToken.IsCancellationRequested)
             {
                 ChangeStatus();
@@ -35,6 +39,16 @@ namespace Microservice.ModelTaskManager.BackgroundServices
             }
 
             _logger.LogCritical("Backgroud service has been stopped!");
+        }
+
+        private int GetSecondsUntilMidnight()
+        {
+            DateTime now = DateTime.UtcNow;
+            int hours = 23 - now.Hour;
+            int minutes = 59 - now.Minute;
+            int seconds = 59 - now.Second;
+            int secondsTillMidnight = hours * 3600 + (minutes + additionalMinutes) * 60 + seconds;
+            return secondsTillMidnight;
         }
 
         private void ChangeStatus()
