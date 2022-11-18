@@ -38,7 +38,7 @@ namespace Microservice.ModelTaskManager
 
             app.UseEndpoints(endpoints =>
             {
-                /*endpoints.MapGrpcService<TaskProtoService>();*/
+                endpoints.MapGrpcService<TaskProtoService>();
             });
         }
     }

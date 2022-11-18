@@ -80,15 +80,15 @@ namespace Microservice.TaskManager.Services
 
         private IEnumerable<DetailProto> GetProtoDetails(int taskId)
         {
-            return DbContext.Details.Where(x => x.TaskId == taskId).Select(x => new DetailProto()
+            return DbContext.Details.Where(x => x.TaskId == taskId).OrderBy(x => x.Date).Select(x => new DetailProto()
             {
                 Id = x.Id,
                 Date = x.Date.ToShortDateString(),
-                Fuel = x.Fuel,
-                Seeds = x.Seeds,
-                Fertilizers = x.Fertilizers,
-                Pesticides = x.Pesticides,
-                Status = x.Status
+                Fuel = string.IsNullOrEmpty(x.Fuel) ? "" : x.Fuel,
+                Seeds = string.IsNullOrEmpty(x.Seeds) ? "" : x.Seeds,
+                Fertilizers = string.IsNullOrEmpty(x.Fertilizers) ? "" : x.Fertilizers,
+                Pesticides = string.IsNullOrEmpty(x.Pesticides) ? "" : x.Pesticides,
+                Status = string.IsNullOrEmpty(x.Status) ? "" : x.Status
             }).ToList();
         }
 
