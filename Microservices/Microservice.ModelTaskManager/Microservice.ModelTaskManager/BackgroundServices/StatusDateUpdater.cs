@@ -1,5 +1,6 @@
 ﻿using Microservice.ModelTaskManager.DAL;
 using Microservice.ModelTaskManager.DAL.Models;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
@@ -12,14 +13,14 @@ namespace Microservice.ModelTaskManager.BackgroundServices
 {
     public class StatusDateUpdater : BackgroundService
     {
-        private ApplicationContext DbContext { get; }
+        private readonly IDbContextFactory<ApplicationContext> _contextFactory;
         private readonly ILogger<StatusDateUpdater> _logger;
         private readonly int additionalMinutes = 15;
 
-        public StatusDateUpdater(ApplicationContext dbContext, ILogger<StatusDateUpdater> logger)
+        public StatusDateUpdater(ILogger<StatusDateUpdater> logger, IDbContextFactory<ApplicationContext> contextFactory)
         {
-            DbContext = dbContext;
             _logger = logger;
+            _contextFactory = contextFactory;
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -49,14 +50,16 @@ namespace Microservice.ModelTaskManager.BackgroundServices
 
         private void ChangeStatus()
         {
+            using var context = _contextFactory.CreateDbContext();
             DateTime currDate = DateConverter(DateTime.UtcNow);
-            IEnumerable<Detail> rowsForUpdate = DbContext.Details
+            IEnumerable<Detail> rowsForUpdate = context.Details
                 .Where(x => x.Date.Equals(currDate) && x.Status.Equals("passive"))
                 .ToList()
                 .Select(x => { x.Status = "active"; return x; });
 
-            DbContext.Details.UpdateRange(rowsForUpdate);
-            DbContext.SaveChanges();
+            context.Details.UpdateRange(rowsForUpdate);
+            context.SaveChanges();
+
         }
 
         private DateTime DateConverter(DateTime date)

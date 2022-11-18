@@ -21,13 +21,15 @@ namespace Microservice.ModelTaskManager
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddHostedService<StatusDateUpdater>();
+
             services.AddDbContext<ApplicationContext>(options =>
             {
                 options.UseNpgsql(_configuration.GetConnectionString("DefaultConnection"));
             });
+
             services.AddGrpc();
 
-            services.AddHostedService<StatusDateUpdater>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
