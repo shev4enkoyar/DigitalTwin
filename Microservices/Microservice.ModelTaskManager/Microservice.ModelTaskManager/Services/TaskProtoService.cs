@@ -2,6 +2,7 @@
 using Microservice.ModelTaskManager.DAL;
 using Microservice.ModelTaskManager.Protos;
 using Microsoft.EntityFrameworkCore;
+using Shared;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -99,7 +100,7 @@ namespace Microservice.TaskManager.Services
                 Id = x.Id,
                 StartDate = x.StartDate.ToShortDateString(),
                 EndDate = x.EndDate.ToShortDateString(),
-                IsComplete = x.Details.Where(x => x.Status.Equals("done")).Count() / x.Details.Count >= 0.8,
+                IsComplete = x.Details.Where(x => x.Status.Equals(TaskStatusEnum.Done)).Count() / x.Details.Count >= 0.8,
                 TaskType = x.Type,
                 Name = x.Name
             }).ToList();

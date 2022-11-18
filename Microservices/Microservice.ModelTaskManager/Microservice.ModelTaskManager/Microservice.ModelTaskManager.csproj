@@ -34,6 +34,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Shared\Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
 	  <Protobuf Include="Protos\taskProto.proto" GrpcServices="Server" />
   </ItemGroup>
 

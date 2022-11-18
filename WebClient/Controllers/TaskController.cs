@@ -53,11 +53,11 @@ namespace WebClient.Controllers
         public async Task<ActionResult> UpdateDetailByModelId(int modelId, int taskId, string date, string status = "", string fuel = "", string seeds = "", string fertilizers = "", string pesticides = "")
         {
             string result = null;
-            HttpResponseMessage response = null;
             string roleName = GetUserRoleName().Result;
             if (roleName == null)
                 return BadRequest("No permission");
 
+            HttpResponseMessage response;
             switch (roleName)
             {
                 case "AGRONOMIST":
@@ -76,7 +76,7 @@ namespace WebClient.Controllers
                 var json = await response.Content.ReadAsStringAsync();
                 result = JsonConvert.DeserializeObject<string>(json);
             }
-            if(result.Equals("ok"))
+            if (result.Equals("ok"))
                 return Ok();
             return BadRequest();
         }

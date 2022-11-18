@@ -1,6 +1,7 @@
 ﻿using Microservice.ModelTaskManager.DAL;
 using Microservice.ModelTaskManager.DAL.Models;
 using Microsoft.Extensions.Logging;
+using Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -55,7 +56,7 @@ namespace Microservice.ModelTaskManager.BackgroundServices
         {
             DateTime currDate = DateConverter(DateTime.UtcNow);
             IEnumerable<Detail> rowsForUpdate = _dbContext.Details
-                .Where(x => x.Date.Equals(currDate) && x.Status.Equals("passive"))
+                .Where(x => x.Date.Equals(currDate) && x.Status.Equals(TaskStatusEnum.Passive))
                 .ToList()
                 .Select(x => { x.Status = "active"; return x; });
 

@@ -1,14 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Shared
+﻿namespace Shared
 {
     public static class TaskStatusEnum
     {
-        /*public static string Done = "done";
-        public static string Done = "done";
-        public static string Done = "done";
-        public static string Done = "done";*/
+        /// <summary>
+        /// Выполнен
+        /// </summary>
+        public static string Done { get; } = "done";
+
+        /// <summary>
+        /// Выполнен с опозданием
+        /// </summary>
+        public static string Late { get; } = "late";
+
+        /// <summary>
+        /// Не выполнен
+        /// </summary>
+        public static string Undone { get; } = "undone";
+
+        /// <summary>
+        /// Доступный для выбора день, без статуса
+        /// </summary>
+        public static string Active { get; } = "active";
+
+        /// <summary>
+        /// Не доступный день, без статуса
+        /// </summary>
+        public static string Passive { get; } = "passive";
     }
 }
