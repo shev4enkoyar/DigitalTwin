@@ -1,3 +1,4 @@
+using Microservice.ModelTaskManager.BackgroundServices;
 using Microservice.ModelTaskManager.DAL;
 using Microservice.TaskManager.Services;
 using Microsoft.AspNetCore.Builder;
@@ -25,6 +26,8 @@ namespace Microservice.ModelTaskManager
                 options.UseNpgsql(_configuration.GetConnectionString("DefaultConnection"));
             });
             services.AddGrpc();
+
+            services.AddHostedService<StatusDateUpdater>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -38,7 +41,7 @@ namespace Microservice.ModelTaskManager
 
             app.UseEndpoints(endpoints =>
             {
-                /*endpoints.MapGrpcService<TaskProtoService>();*/
+                endpoints.MapGrpcService<TaskProtoService>();
             });
         }
     }
