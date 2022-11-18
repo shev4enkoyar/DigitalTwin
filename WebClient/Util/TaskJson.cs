@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace WebClient.Util
 {
@@ -6,43 +7,95 @@ namespace WebClient.Util
     {
         public class Details
         {
-            public List<string> dates { get; set; }
-            public List<string> status { get; set; }
+            [JsonPropertyName("dates")]
+            public List<string> Dates { get; set; }
+
+            [JsonPropertyName("status")]
+            public List<string> Status { get; set; }
+
+            [JsonPropertyName("Expenses")]
             public List<Expense> Expenses { get; set; }
         }
 
         public class Expense
         {
-            public Fuel Fuel { get; set; }
-            public SomeInfo SomeInfo { get; set; }
+            [JsonPropertyName("Fuel")]
+            public List<Fuel> Fuel { get; set; }
+
+            [JsonPropertyName("Seeds")]
+            public Seeds Seeds { get; set; }
+
+            [JsonPropertyName("Fertilizers")]
+            public Fertilizers Fertilizers { get; set; }
+
+            [JsonPropertyName("Pesticides")]
+            public Pesticides Pesticides { get; set; }
+        }
+
+        public class Fertilizers
+        {
+            [JsonPropertyName("num")]
+            public double? Num { get; set; }
+
+            [JsonPropertyName("price")]
+            public double? Price { get; set; }
         }
 
         public class Fuel
         {
-            public double? num { get; set; }
-            public double? price { get; set; }
+            [JsonPropertyName("num")]
+            public double? Num { get; set; }
+
+            [JsonPropertyName("price")]
+            public double? Price { get; set; }
+        }
+
+        public class Pesticides
+        {
+            [JsonPropertyName("num")]
+            public double? Num { get; set; }
+
+            [JsonPropertyName("price")]
+            public double? Price { get; set; }
         }
 
         public class Resources
         {
-            public List<string> transport { get; set; }
-            public List<string> personal { get; set; }
+            [JsonPropertyName("transport")]
+            public List<string> Transport { get; set; }
+
+            [JsonPropertyName("personal")]
+            public List<string> Personal { get; set; }
         }
 
         public class Root
         {
-            public int taskId { get; set; }
-            public string taskName { get; set; }
-            public string curDate { get; set; }
-            public string role { get; set; }
+            [JsonPropertyName("taskId")]
+            public int TaskId { get; set; }
+
+            [JsonPropertyName("taskName")]
+            public string TaskName { get; set; }
+
+            [JsonPropertyName("curDate")]
+            public string CurDate { get; set; }
+
+            [JsonPropertyName("role")]
+            public string Role { get; set; }
+
+            [JsonPropertyName("Resources")]
             public Resources Resources { get; set; }
+
+            [JsonPropertyName("Details")]
             public Details Details { get; set; }
         }
 
-        public class SomeInfo
+        public class Seeds
         {
-            public double? num { get; set; }
-            public double? price { get; set; }
+            [JsonPropertyName("num")]
+            public double? Num { get; set; }
+
+            [JsonPropertyName("price")]
+            public double? Price { get; set; }
         }
     }
 }
