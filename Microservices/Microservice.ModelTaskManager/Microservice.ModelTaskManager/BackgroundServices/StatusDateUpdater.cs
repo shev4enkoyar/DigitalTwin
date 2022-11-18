@@ -1,11 +1,7 @@
-﻿using Microservice.ModelTaskManager.DAL;
-using Microservice.ModelTaskManager.DAL.Models;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using Task = System.Threading.Tasks.Task;
 
@@ -13,14 +9,14 @@ namespace Microservice.ModelTaskManager.BackgroundServices
 {
     public class StatusDateUpdater : BackgroundService
     {
-        private readonly IDbContextFactory<ApplicationContext> _contextFactory;
+        public IServiceProvider Services { get; }
         private readonly ILogger<StatusDateUpdater> _logger;
         private readonly int additionalMinutes = 15;
 
-        public StatusDateUpdater(ILogger<StatusDateUpdater> logger, IDbContextFactory<ApplicationContext> contextFactory)
+        public StatusDateUpdater(Logger<StatusDateUpdater> logger, IServiceProvider services)
         {
             _logger = logger;
-            _contextFactory = contextFactory;
+            Services = services;
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -28,14 +24,17 @@ namespace Microservice.ModelTaskManager.BackgroundServices
             _logger.LogInformation("Started background service \"StatusDateUpdater\"");
             await Task.Delay(TimeSpan.FromSeconds(GetSecondsUntilMidnight()), stoppingToken);
 
-            while (!stoppingToken.IsCancellationRequested)
-            {
-                ChangeStatus();
-                _logger.LogInformation("The statuses of the current date have been updated");
-                await Task.Delay(TimeSpan.FromDays(1), stoppingToken);
-            }
+            await ChangeStatus(stoppingToken);
+        }
 
-            _logger.LogCritical("Backgroud service has been stopped!");
+        private async Task ChangeStatus(CancellationToken stoppingToken)
+        {
+            _logger.LogInformation("Background service \"StatusDateUpdater\" is working");
+
+            using var scope = Services.CreateScope();
+            var scopedProcessingService = scope.ServiceProvider.GetRequiredService<IScopedProcessingService>();
+
+            await scopedProcessingService.DoWork(stoppingToken);
         }
 
         private int GetSecondsUntilMidnight()
@@ -46,25 +45,6 @@ namespace Microservice.ModelTaskManager.BackgroundServices
             int seconds = 59 - now.Second;
             int secondsTillMidnight = hours * 3600 + (minutes + additionalMinutes) * 60 + seconds;
             return secondsTillMidnight;
-        }
-
-        private void ChangeStatus()
-        {
-            using var context = _contextFactory.CreateDbContext();
-            DateTime currDate = DateConverter(DateTime.UtcNow);
-            IEnumerable<Detail> rowsForUpdate = context.Details
-                .Where(x => x.Date.Equals(currDate) && x.Status.Equals("passive"))
-                .ToList()
-                .Select(x => { x.Status = "active"; return x; });
-
-            context.Details.UpdateRange(rowsForUpdate);
-            context.SaveChanges();
-
-        }
-
-        private DateTime DateConverter(DateTime date)
-        {
-            return new DateTime(date.Year, date.Month, date.Day);
         }
     }
 }

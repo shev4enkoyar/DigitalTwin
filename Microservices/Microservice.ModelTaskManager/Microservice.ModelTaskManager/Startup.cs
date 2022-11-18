@@ -22,6 +22,7 @@ namespace Microservice.ModelTaskManager
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddHostedService<StatusDateUpdater>();
+            services.AddScoped<IScopedProcessingService, ScopedProcessingService>();
 
             services.AddDbContext<ApplicationContext>(options =>
             {
