@@ -15,7 +15,10 @@ namespace Microservice.DashboardManager.DAL.Models
         public string Brand { get; set; }
 
         [Required]
-        public string Staff { get; set; }
+        public string StaffName { get; set; }
+
+        [Required]
+        public string StaffNum { get; set; }
 
         //Relationships
 
