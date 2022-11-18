@@ -57,14 +57,21 @@ namespace Microservice.TaskManager.Services
             var detail = details.FirstOrDefault(x => x.Date.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(request.Date));
             if (detail == null)
                 return Task.FromResult(new UpdateDetailReply() { Status = "Not found" });
+
             if (request.Status != "" || request.Status == null)
                 detail.Status = request.Status;
 
             if (request.Fuel != "" || request.Fuel == null)
                 detail.Fuel = request.Fuel;
 
-            if (request.SomeInfo != "" || request.SomeInfo == null)
-                detail.SomeInfo = request.SomeInfo;
+            if (request.Seeds != "" || request.Seeds == null)
+                detail.Seeds = request.Seeds;
+
+            if (request.Pesticides != "" || request.Pesticides == null)
+                detail.Pesticides = request.Pesticides;
+
+            if (request.Fertilizers != "" || request.Fertilizers == null)
+                detail.Fertilizers = request.Fertilizers;
 
             DbContext.Update(detail);
             DbContext.SaveChanges();
@@ -78,7 +85,9 @@ namespace Microservice.TaskManager.Services
                 Id = x.Id,
                 Date = x.Date.ToShortDateString(),
                 Fuel = x.Fuel,
-                SomeInfo = x.SomeInfo,
+                Seeds = x.Seeds,
+                Fertilizers = x.Fertilizers,
+                Pesticides = x.Pesticides,
                 Status = x.Status
             }).ToList();
         }

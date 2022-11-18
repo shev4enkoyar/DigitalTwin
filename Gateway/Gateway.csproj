@@ -31,7 +31,7 @@
     <Protobuf Include="Protos\mapProto.proto" GrpcServices="Client" />
     <Protobuf Include="Protos\productProto.proto" GrpcServices="Client" />
     <Protobuf Include="Protos\subscriptionProto.proto" GrpcServices="Client" />
-    <Protobuf Include="Protos\taskProto.proto" GrpcServices="Client" />
+	  <Protobuf Include="Protos\taskProto.proto" GrpcServices="Client" />
     <Protobuf Include="Protos\testCadasterProto.proto" GrpcServices="Client" />
     <Protobuf Include="Protos\transportProto.proto" GrpcServices="Client" />
     <Protobuf Include="Protos\weather.proto" GrpcServices="Client" />

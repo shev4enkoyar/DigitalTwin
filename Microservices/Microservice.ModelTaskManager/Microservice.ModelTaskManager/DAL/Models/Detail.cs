@@ -19,7 +19,7 @@ namespace Microservice.ModelTaskManager.DAL.Models
         /// <summary>
         /// Перечисление топлива. Зависит от количества транспорта на задаче
         /// </summary>
-        /// <example>литр;цена,литр;цена</example>
+        /// <example>литр;цена/литр;цена</example>
         [Required]
         public string Fuel { get; set; }
 

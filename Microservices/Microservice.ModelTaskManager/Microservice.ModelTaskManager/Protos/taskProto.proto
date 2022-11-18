@@ -48,7 +48,9 @@ message DetailProto {
   string Date = 2;
   string Status = 3;
   string Fuel = 4;
-  string SomeInfo = 5;
+  string Seeds = 5;
+  string Fertilizers = 6;
+   string Pesticides = 7;
 }
 
 message UpdateDetailRequest {
@@ -57,7 +59,9 @@ message UpdateDetailRequest {
    string Date = 3;
    string Status = 4;
    string Fuel = 5;
-   string SomeInfo = 6;
+   string Seeds = 6;
+   string Fertilizers = 7;
+   string Pesticides = 8;
 }
 message UpdateDetailReply {
    string status = 1;

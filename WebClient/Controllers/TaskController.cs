@@ -95,21 +95,23 @@ namespace WebClient.Controllers
 
             TaskJson.Resources resources = new TaskJson.Resources()
             {
-                personal = transports.Select(x => x.Staff).ToList(),
-                transport = transports.Select(x => $"{x.Name} {x.Brand}").ToList()
+                Personal = transports.Select(x => x.Staff).ToList(),
+                Transport = transports.Select(x => $"{x.Name} {x.Brand}").ToList()
             };
             TaskJson.Details details = new TaskJson.Details()
             {
-                dates = detailsDb.Select(x => x.Date).ToList(),
-                status = detailsDb.Select(x => x.Status).ToList(),
+                Dates = detailsDb.Select(x => x.Date).ToList(),
+                Status = detailsDb.Select(x => x.Status).ToList(),
                 Expenses = detailsDb.Select(x => new TaskJson.Expense()
                 {
                     Fuel = x.Fuel.IsNullOrEmpty()
-                    ? new TaskJson.Fuel() { price = null, num = null }
-                    : new TaskJson.Fuel() { num = double.Parse(x.Fuel.Split(";")[0]), price = double.Parse(x.Fuel.Split(";")[1]) },
-                    SomeInfo = x.SomeInfo.IsNullOrEmpty()
-                    ? new TaskJson.SomeInfo() { price = null, num = null }
-                    : new TaskJson.SomeInfo() { num = double.Parse(x.SomeInfo.Split(";")[0]), price = double.Parse(x.SomeInfo.Split(";")[1]) }
+                    ? new List<TaskJson.Fuel>() { new TaskJson.Fuel() { Num = null, Price = null } }
+                    : x.Fuel.Split("/")
+                      .Select(y => new TaskJson.Fuel() { Num = double.Parse(y.Split(";")[0]), Price = double.Parse(y.Split(";")[1]) })
+                      .ToList(),
+                    Seeds = x.SomeInfo.IsNullOrEmpty()
+                    ? new TaskJson.Seeds() { Price = null, Num = null }
+                    : new TaskJson.Seeds() { Num = double.Parse(x.SomeInfo.Split(";")[0]), Price = double.Parse(x.SomeInfo.Split(";")[1]) }
                 }).ToList()
             };
 
@@ -119,10 +121,10 @@ namespace WebClient.Controllers
 
             TaskJson.Root root = new TaskJson.Root()
             {
-                taskId = taskId,
-                taskName = task.Name,
-                curDate = DateTime.UtcNow.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture),
-                role = roleName,
+                TaskId = taskId,
+                TaskName = task.Name,
+                CurDate = DateTime.UtcNow.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture),
+                Role = roleName,
                 Resources = resources,
                 Details = details
             };
