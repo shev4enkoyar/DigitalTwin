@@ -80,6 +80,105 @@ namespace Microservice.DashboardManager.DAL
                 TypeId = 2
             });
             #endregion
+
+            modelBuilder.Entity<Transport>().HasData(new Transport() 
+            {
+                 Id = 1,
+                 Name = "Трактор + Дисковая борона",
+                 Brand = "К-700, БДТ-7",
+                 Staff = "Тракторист - 1"
+            },
+            new Transport()
+            {
+                Id = 2,
+                Name = "Сеялка",
+                Brand = "К-700, СС-6",
+                Staff = "Тракторист - 1;Водитель автом. - 1"
+            },
+            new Transport()
+            {
+                Id = 3,
+                Name = "Опрыскиватель",
+                Brand = "МТЗ-82, ОП-2000 ",
+                Staff = "Тракторист -1, Водитель автом. - 1"
+            },
+            new Transport()
+            {
+                Id = 1,
+                Name = "Самоходная косилка",
+                Brand = "МасДон",
+                Staff = "Тракторист -1"
+            },
+            new Transport()
+            {
+                Id = 1,
+                Name = "Зерноуборочный комбайн",
+                Brand = "Дон-1500",
+                Staff = "Тракторист -1, Водитель автом. - 1"
+            },
+            new Transport()
+            {
+                Id = 1,
+                Name = "Автомобиль",
+                Brand = "Камаз 5320",
+                Staff = ""
+            },
+            new Transport()
+            {
+                Id = 1,
+                Name = "Очиститель зерна",
+                Brand = "ОВС-25",
+                Staff = ""
+            },
+            new Transport()
+            {
+                Id = 1,
+                Name = "Сушилка",
+                Brand = "СС-19",
+                Staff = ""
+            },
+            new Transport()
+            {
+                Id = 1,
+                Name = "Тактор + плуг",
+                Brand = "МТЗ-1221, ПН-5",
+                Staff = ""
+            },
+            new Transport()
+            {
+                Id = 1,
+                Name = "Трактор + активная борона",
+                Brand = "МТЗ1221, ПН03-310",
+                Staff = ""
+            },
+            new Transport()
+            {
+                Id = 1,
+                Name = "Трактор + культиватор",
+                Brand = "МТЗ-82, КРН-4.2",
+                Staff = ""
+            },
+            new Transport()
+            {
+                Id = 1,
+                Name = "Трактор + сажалка",
+                Brand = "МТЗ-82, Л-207",
+                Staff = ""
+            },
+            new Transport()
+            {
+                Id = 1,
+                Name = "Трактор + копатель",
+                Brand = "МТЗ-82, КСТ-1.4",
+                Staff = ""
+            },
+            new Transport()
+            {
+                Id = 1,
+                Name = "Трактор + прицеп",
+                Brand = "МТЗ-82, 2ПТС-4",
+                Staff = ""
+            });
         }
     }
 }
