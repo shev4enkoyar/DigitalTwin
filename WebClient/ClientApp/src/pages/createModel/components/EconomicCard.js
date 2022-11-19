@@ -43,11 +43,6 @@ const EconomicCard = (props) => {
                     <button onClick={() => { props.Back() }} className="btn btn-primary mr-2 my-2">
                         Назад
                     </button>
-                    <button className="btn btn-primary ml-2 my-2" style={{ width: "max-content" }} onClick={() => { props.onClick() }}>
-                        <a style={{ color: "#fff", textDecoration: 'none'}} href="/models">
-                            Пропустить
-                        </a>
-                    </button>
                 </Row>
                 <button className="btn btn-primary m-2"  onClick={() => {
                     let digitalModel = {
