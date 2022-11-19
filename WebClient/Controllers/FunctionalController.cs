@@ -58,6 +58,9 @@ namespace WebClient.Controllers
             foreach (int modelId in modelIds)
             {
                 var functionalIds = await GetFunctionalIdsFromSubscriptions(modelId);
+                if (functionalIds == null)
+                    continue;
+
                 functionalAccessIds
                     .Intersect(functionalIds)
                     .ToList()
