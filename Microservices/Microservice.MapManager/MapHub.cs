@@ -84,7 +84,12 @@ namespace Microservice.MapManager
         {
             MapId = mapId;
 
-            bool isCadasterExist = !string.IsNullOrEmpty(_dbContext.Maps.FirstOrDefault(x => x.Id == mapId).Cadaster);
+            var map = _dbContext.Maps.FirstOrDefault(x => x.Id == mapId);
+            if (map == null) {
+                await Clients.Caller.ReciveIfCadaster(false);
+                return;
+            }
+            bool isCadasterExist = !string.IsNullOrEmpty(map.Cadaster);
             await Clients.Caller.ReciveIfCadaster(isCadasterExist);
         }
         #endregion

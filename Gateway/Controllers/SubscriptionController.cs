@@ -128,5 +128,23 @@ namespace Gateway.Controllers
             }
             return modelSubscriptions;
         }
+
+        [HttpGet("get_activated_subscription/{modelId}")]
+        public async Task<IEnumerable<SubscriptionProto>> GetActivatedSubscription(int modelId) 
+        {
+            using var channel = GrpcChannel.ForAddress(MicroservicesIP.External.Subscription,
+                new GrpcChannelOptions { HttpHandler = MicroservicesIP.DefaultHttpHandler }
+            );
+            SubscriptionsReply response = null;
+            using (var call = new SubscriptionService.SubscriptionServiceClient(channel).GetActivatedSubscriptions(new ActivatedSubscriptionsRequest { ModelId = modelId }))
+            {
+                while (await call.ResponseStream.MoveNext())
+                {
+                    response = call.ResponseStream.Current;
+                }
+            }
+
+            return response.Subscriptions;
+        }
     }
 }

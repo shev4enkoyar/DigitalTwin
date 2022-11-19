@@ -41,14 +41,14 @@ export default class App extends Component {
                     <AuthorizeRoute path={ApplicationPaths.IdentityManagePath} component={ApiAuthorizationRoutes} />
                     <AuthorizeRoute path={ClientRoutes.PREFIX + ClientRoutes.SUBSCRIPTIONS} component={Subscriptions} />
                     <AuthorizeRoute path={ClientRoutes.PREFIX + ClientRoutes.SUBSCRIPTIONS_ALL} component={AllSubscriptions} />
-                    <AuthorizeRoute path={ClientRoutes.PREFIX + ClientRoutes.RECOMMENDATIONS} component={Recommendations} />
-                    <AuthorizeRoute path={ClientRoutes.PREFIX + ClientRoutes.DASHBOARD + ClientRoutes.SUFFIX_MODEL_ID} component={Dashboard} />
-                    <AuthorizeRoute path={ClientRoutes.PREFIX + ClientRoutes.IOTPAGE} component={IotPage} />
-                    <AuthorizeRoute path={ClientRoutes.PREFIX + ClientRoutes.DOCS} component={Docs} />
-                    <AuthorizeRoute path={ClientRoutes.PREFIX + ClientRoutes.MAP + ClientRoutes.SUFFIX_MODEL_ID} component={MapMain} />
 
                     <AuthorizeRoute path={ClientRoutes.PREFIX + ClientRoutes.GANT + ClientRoutes.SUFFIX_MODEL_ID} component={GanttMain} />
 
+                    <AuthorizeRouteWithPermission path={ClientRoutes.PREFIX + ClientRoutes.RECOMMENDATIONS + ClientRoutes.SUFFIX_MODEL_ID} component={Recommendations } name={ClientRoutes.RECOMMENDATIONS} />
+                    <AuthorizeRouteWithPermission path={ClientRoutes.PREFIX + ClientRoutes.IOTPAGE + ClientRoutes.SUFFIX_MODEL_ID} component={IotPage } name={ClientRoutes.IOTPAGE} />
+                    <AuthorizeRouteWithPermission path={ClientRoutes.PREFIX + ClientRoutes.DOCS + ClientRoutes.SUFFIX_MODEL_ID} component={Docs } name={ClientRoutes.DOCS} />
+                    <AuthorizeRouteWithPermission path={ClientRoutes.PREFIX + ClientRoutes.DASHBOARD + ClientRoutes.SUFFIX_MODEL_ID} component={Dashboard } name={ClientRoutes.DASHBOARD} />
+                    <AuthorizeRouteWithPermission path={ClientRoutes.PREFIX + ClientRoutes.MAP + ClientRoutes.SUFFIX_MODEL_ID} component={MapMain } name={ClientRoutes.MAP} />
                     <AuthorizeRouteWithPermission path={ClientRoutes.PREFIX + ClientRoutes.REGISTER_COMPANY} component={CreateCompany} name={ClientRoutes.REGISTER_COMPANY} />
                     <AuthorizeRouteWithPermission path={ClientRoutes.PREFIX + ClientRoutes.COMPANY_INVITE} component={CompanyInvite} name={ClientRoutes.COMPANY_INVITE} />
                     <AuthorizeRouteWithPermission path={ClientRoutes.PREFIX + ClientRoutes.MODELS} component={Models} name={ClientRoutes.MODELS} />

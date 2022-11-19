@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Redirect, Route } from 'react-router-dom'
 import { ApplicationPaths, QueryParameterNames } from './ApiAuthorizationConstants'
 import authService from './AuthorizeService'
+import { withRouter } from "react-router";
 
 export default class AuthorizeRouteWithPermission extends Component {
     constructor(props) {
@@ -25,6 +26,9 @@ export default class AuthorizeRouteWithPermission extends Component {
     }
 
      checkPermission(functional){
+        let currentId = window.location.href.split('/')[4];
+        if (currentId != undefined && currentId != null)
+            functional += "/" + currentId;
         let data = this.state.functional;
         if (data.includes(functional))
             return true;
