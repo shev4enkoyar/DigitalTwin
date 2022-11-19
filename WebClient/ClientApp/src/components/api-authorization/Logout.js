@@ -3,6 +3,7 @@ import { ThemeContextConsumer } from '../ThemeContext';
 import { ApplicationPaths, LogoutActions, QueryParameterNames } from './ApiAuthorizationConstants';
 import authService, { AuthenticationResultStatus } from './AuthorizeService';
 import '../../pages/pages.css';
+import CardForBody from '../cardForBody/CardForBody';
 // The main responsibility of this component is to handle the user's logout process.
 // This is the starting point for the logout process, which is usually initiated when a
 // user clicks on the logout button on the LoginMenu component.
@@ -47,7 +48,7 @@ export class Logout extends Component {
             return <div></div>
         }
         if (!!message) {
-            return (<ThemeContextConsumer>{context => (< div style={{ fontSize:'24px' }} className={context.theme + "Gray text-white text-center my-3"}> {message}</div>)}</ThemeContextConsumer>);
+            return (<ThemeContextConsumer > {context => (<CardForBody className={context.theme + "Gray text-white text-center my-3 card d-flex align-items-center p-3 my-5 justify-content-center"} > {message}</CardForBody>)}</ThemeContextConsumer>);
         } else {
             const action = this.props.action;
             switch (action) {
@@ -56,7 +57,7 @@ export class Logout extends Component {
                 case LogoutActions.LogoutCallback:
                     return (<div>Обработка обратного вызова выхода из системы</div>);
                 case LogoutActions.LoggedOut:
-                    return (<ThemeContextConsumer>{context => (< div style={{ fontSize: '24px' }} className={context.theme +"Gray text-white text-center my-3"}> {message}</div>)}</ThemeContextConsumer>);
+                    return (<ThemeContextConsumer>{context => (<CardForBody className={context.theme + "Gray text-white text-center my-3 card d-flex align-items-center p-3 my-5 justify-content-center"} > {message}</CardForBody>)}</ThemeContextConsumer>);
                 default:
                     throw new Error(`Invalid action '${action}'`);
             }
