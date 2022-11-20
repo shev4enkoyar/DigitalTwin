@@ -98,19 +98,19 @@ namespace WebClient.Data
             {
                 Id = 6,
                 Name = "dashboard",
-                Description = "Технологическая карта"
+                Description = "Модель. Технологическая карта"
             },
             new Functional
             {
                 Id = 7,
                 Name = "map",
-                Description = "Карта"
+                Description = "Модель. Карта"
             },
             new Functional
             {
                 Id = 8,
                 Name = "recommendation",
-                Description = "Рекомендательная система"
+                Description = "Модель. Рекомендательная система"
             },
             new Functional
             {
@@ -122,7 +122,19 @@ namespace WebClient.Data
             {
                 Id = 10,
                 Name = "workDiagrame",
-                Description = "График работ"
+                Description = "Модель. График работ"
+            },
+            new Functional
+            {
+                Id = 11,
+                Name = "docs",
+                Description = "Модель. Документы"
+            },
+            new Functional
+            {
+                Id = 12,
+                Name = "iot",
+                Description = "Модель. IoT"
             });
 
             #endregion
