@@ -4,6 +4,25 @@ import BaseCard from "./BaseCard";
 import { Container, Row } from "reactstrap";
 import authService from "../../../components/api-authorization/AuthorizeService";
 const WorkerCard = (props) => {
+    const CreateTechCard = async (digitalModel) => {
+        const token = await authService.getAccessToken();
+        let response = null;
+        if (digitalModel.Cadaster === "" && digitalModel.CategoryName === "")
+            await fetch(`api/techcard/create?name=${digitalModel.Name}&productId=${digitalModel.ProductId}`, {
+                headers: !token ? {} :
+                    {
+                        'Authorization': `Bearer ${token}`,
+                    }
+            });
+        else
+            await fetch(`api/techcard/create?name=${digitalModel.Name}&productId=${digitalModel.ProductId}&cadaster=${digitalModel.Cadaster}&categoryName=${digitalModel.CategoryName}`, {
+                headers: !token ? {} :
+                    {
+                        'Authorization': `Bearer ${token}`,
+                    }
+            });
+        return await response.text();
+    }
     const warning = () => {
         if ((props.values.rZasev.length > 0) && (props.values.rObrabotka.length > 0) && (props.values.rSbor.length > 0)) {
             return "Данные о работниках сохранены";
@@ -36,7 +55,6 @@ const WorkerCard = (props) => {
                         CategoryName: props.data.at(2).cult + " " + props.data.at(2).sort
                     };
                     CreateTechCard(digitalModel);
-                    props.onClick();
                 }}>
                     <a style={{
                         color: "#fff", textDecoration: 'none'
