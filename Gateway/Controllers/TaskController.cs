@@ -42,6 +42,16 @@ namespace Gateway.Controllers
             using var channel = GrpcChannel.ForAddress(MicroservicesIP.External.ModelTask,
                 new GrpcChannelOptions { HttpHandler = MicroservicesIP.DefaultHttpHandler }
             );
+            if (status == null)
+                status = "";
+            if (fuel == null)
+                fuel = "";
+            if (seeds == null)
+                seeds = "";
+            if (fertilizers == null)
+                fertilizers = "";
+            if (pesticides == null)
+                pesticides = "";
             var client = new ModelTaskService.ModelTaskServiceClient(channel);
             var reply = await client
                 .UpdateDetailAsync(new UpdateDetailRequest{ ModelId = modelId, TaskId = taskId, Status = status, Fuel = fuel, Date = date, Seeds = seeds, Fertilizers = fertilizers, Pesticides = pesticides});

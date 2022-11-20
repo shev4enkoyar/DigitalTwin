@@ -56,7 +56,7 @@ namespace WebClient.Controllers
             string roleName = GetUserRoleName().Result;
             if (roleName == null)
                 return BadRequest("No permission");
-
+            
             HttpResponseMessage response;
             switch (roleName)
             {
