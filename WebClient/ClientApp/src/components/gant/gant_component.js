@@ -2,6 +2,7 @@
 import { Container } from "reactstrap";
 import { Gantt, Task, EventOption } from 'gantt-task-react';
 import authService from "../../components/api-authorization/AuthorizeService";
+import { ThemeContextConsumer } from "../ThemeContext";
 import "./style-tasks.css";
 
 
@@ -25,25 +26,28 @@ function GantGraph(props) {
     async function getTasks() {
         //tasks request//
 
-        /*const token = await authService.getAccessToken();
-        const response = await fetch('api/task/get_all/22', {
+        const token = await authService.getAccessToken();
+        //const response = await fetch(`api/task/get_all/${props.modelId}`, {
+        const response = await fetch(`api/task/get_all/24`, {
             headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
         });
         const data = await response.json();
+        
         let new_tasks = [];
+        
         for (let d of data) {
             let task = {}
             task.start = new Date(d.startDate)
             task.end = new Date(d.endDate)
-            task.name = d.taskType
+            task.name = d.name
             task.id = d.id
             task.progress = d.progress
             task.type = 'task'
             task.isDisabled = true
             task.styles = { progressColor: '#ffbb54', progressSelectedColor: '#ff9e0d' }
             new_tasks.push(task)
-        }*/
-
+        }
+        /*
         let new_tasks = [
             {
                 start: new Date(2022, 9, 20),
@@ -96,6 +100,7 @@ function GantGraph(props) {
                 styles: { progressColor: '#ffbb54', progressSelectedColor: '#ff9e0d' },
             },
         ];
+        */
 
         if (!props.height) {
             if (new_tasks.length < addingTasks) {
@@ -121,24 +126,26 @@ function GantGraph(props) {
 
 
     const ClickedQuest = (task) => {
-        console.log(props)
-        props.giveParent(task)
+        props.getTask(task)
     }
 
 
     return (
-        <Container fluid style={{margin:"0", padding:"0"}}>
-            {console.log('render')}
-        {tasks.length>0 &&
-        <Gantt
-                tasks={tasks}
-                listCellWidth={""}
-                locale={"RU"}
-                onClick={props.height ? null : ClickedQuest}
-                viewDate={curDate}
-            />
-         }
-        </Container>
+        <ThemeContextConsumer>
+            {context => (
+                <Container fluid style={{ margin: "0", padding: "0" }} className={context.theme}>
+                    {console.log('render')}
+                    {tasks.length > 0 &&
+                        <Gantt
+                            tasks={tasks}
+                            listCellWidth={""}
+                            locale={"RU"}
+                            onClick={(e) => { props.height ? null : ClickedQuest(e) }}
+                            viewDate={curDate}
+                        />
+                    }
+                </Container>)}
+        </ThemeContextConsumer>
     );
 
 

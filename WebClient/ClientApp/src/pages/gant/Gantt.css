@@ -1,0 +1,25 @@
+﻿#menuitem{
+    width: 30px;
+    height: 30px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+    margin: 5px
+}
+
+.border {
+    border: 1px solid blue
+}
+
+.task {
+    background-color: #212026;
+    color: white;
+}
+
+.task .modal-header, .modal-footer {
+    border: none;
+}
+
+.white {
+    color: white;
+}
