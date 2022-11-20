@@ -30,7 +30,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microservice.ForecastManage
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microservice.WeatherManager", "Microservices\Microservice.WeatherManager\Microservice.WeatherManager.csproj", "{85142B40-A929-43C1-996E-F222E964BBE6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microservice.FileManager", "Microservices\Microservice.FileManager\Microservice.FileManager.csproj", "{773C2DCE-90FB-4338-BD22-4AA8579BE2D6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microservice.FileManager", "Microservices\Microservice.FileManager\Microservice.FileManager.csproj", "{773C2DCE-90FB-4338-BD22-4AA8579BE2D6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

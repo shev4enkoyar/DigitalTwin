@@ -8,6 +8,7 @@ service FileService {
     rpc GetPageFiles (PageFileRequest) returns (stream GetPageFileReply);
     rpc AddPageFile (FullPageFile) returns (PageFileStatus);
     rpc RemovePageFile (RemovePageRequest) returns (PageFileStatus);
+    rpc CreateTechCsv (stream CsvFileRequest) returns (CsvFileReply);
 }
 
 message PageFileRequest {
@@ -43,4 +44,33 @@ message RemovePageRequest {
 message PageFileStatus {
   string fileGuid = 1;
   bool status = 2;
+}
+
+message CsvFileRequest {
+    string cultura = 1;
+    string sort = 2;
+    double area = 3;
+    double seedingRate = 4;
+    double fraction = 5;
+    double density = 6;
+    double harvest = 7;
+    double weightStages = 8;
+    repeated CsvFileTaskData taskData = 9;
+}
+
+message CsvFileTaskData {
+    string name = 1;
+    string deadline = 2;
+    double physicalHectares = 3;
+    double standartHectares = 4;
+    string transportName = 5;
+    double staffTractorDriverNum = 6;
+    double staffWorkerNum = 7;
+}
+
+message CsvFileReply {
+    string link = 1;
+    string name = 2;
+    string extension = 3;
+    string sectionName = 4;
 }

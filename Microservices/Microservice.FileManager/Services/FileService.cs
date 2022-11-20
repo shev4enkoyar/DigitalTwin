@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microservice.FileManager.Util;
 
 namespace Microservice.FileManager.Services
 {
@@ -21,13 +22,12 @@ namespace Microservice.FileManager.Services
 
         public override async Task GetPageFiles(PageFileRequest request, IServerStreamWriter<GetPageFileReply> responseStream, ServerCallContext context)
         {
-            GetPageFileReply pageFileReply = new GetPageFileReply();
+            var pageFileReply = new GetPageFileReply();
 
-            IEnumerable<PageFileProto> protoFiles;
-            if (request.SectionName.ToUpper().Equals("ALL"))
-                protoFiles = GetProtoPageFiles(request.ModelId);
-            else
-                protoFiles = GetProtoPageFiles(request.ModelId, request.SectionName);
+            var protoFiles = request.SectionName.ToUpper().Equals("ALL")
+                ? GetProtoPageFiles(request.ModelId)
+                : GetProtoPageFiles(request.ModelId, request.SectionName);
+
             pageFileReply.Files.AddRange(protoFiles);
 
             await responseStream.WriteAsync(pageFileReply);
@@ -73,7 +73,7 @@ namespace Microservice.FileManager.Services
             if (section == null)
                 return Task.FromResult(new PageFileStatus() { Status = false });
 
-            Paper newFile = new Paper()
+            var newFile = new Paper()
             {
                 CreateDate = DateTime.UtcNow,
                 ModelId = request.ModelId,
@@ -91,12 +91,12 @@ namespace Microservice.FileManager.Services
 
         public override Task<PageFileStatus> RemovePageFile(RemovePageRequest request, ServerCallContext context)
         {
-            PageFileStatus fileStatus = new PageFileStatus()
+            var fileStatus = new PageFileStatus()
             {
                 Status = false
             };
 
-            if (!Guid.TryParse(request.FileGuid, out Guid fileGuid))
+            if (!Guid.TryParse(request.FileGuid, out var fileGuid))
                 return Task.FromResult(fileStatus);
 
             if (!RemovePageFile(request.ModelId, fileGuid))
@@ -116,6 +116,75 @@ namespace Microservice.FileManager.Services
             DbContext.Papers.Remove(file);
             DbContext.SaveChanges();
             return true;
+        }
+
+        public override Task<CsvFileReply> CreateTechCsv(IAsyncStreamReader<CsvFileRequest> requestStream, ServerCallContext context)
+        {
+            string cultura = requestStream.Current.Cultura;
+            string sort = requestStream.Current.Sort;
+            double area = requestStream.Current.Area;
+            double seedingRate = requestStream.Current.SeedingRate;
+            double fraction = requestStream.Current.Fraction;
+            double density = requestStream.Current.Density;
+            double harvest = requestStream.Current.Harvest;
+            double weightStages = requestStream.Current.WeightStages;
+
+            var request = new CsvFileRequest();
+            var grpcTaskData = request.TaskData.ToList();
+            var taskData = new List<TechCardCsvData>
+            {
+                new TechCardCsvData()
+                {
+                    First = "Культура",
+                    Second = cultura,
+                    Third = "Фракция",
+                    Fourth = fraction.ToString()
+                },
+                new TechCardCsvData()
+                {
+                    First = "Сорт",
+                    Second = sort,
+                    Third = "Густота",
+                    Fourth = density.ToString()
+                },
+                new TechCardCsvData()
+                {
+                    First = "Площадь",
+                    Second = area.ToString(),
+                    Third = "Урожай",
+                    Fourth = harvest.ToString()
+                },
+                new TechCardCsvData()
+                {
+                    First = "Норма высева",
+                    Second = seedingRate.ToString(),
+                    Third = "Вес этапов",
+                    Fourth = weightStages.ToString()
+                },
+                new TechCardCsvData() { Third = "Объем работ", Fifth = "Состав агрегата", Sixth = "Обслуживающий персонал" },
+                new TechCardCsvData() { First = "Наименование работы", Second = "Агро сроки проведения работ", Third = "В физических га", Fourth = "В эталонных га", Fifth = "Транспорт", Sixth = "Трактористов", Seventh = "Рабочие" }
+            };
+            taskData.AddRange(grpcTaskData.Select(x =>
+                new TechCardCsvData()
+                {
+                    First = x.Name,
+                    Second = x.Deadline,
+                    Third = x.PhysicalHectares.ToString(),
+                    Fourth = x.StandartHectares.ToString(),
+                    Fifth = x.TransportName,
+                    Sixth = x.StaffTractorDriverNum.ToString(),
+                    Seventh = x.StaffWorkerNum.ToString()
+                }));
+
+            var fileName = DocumentCreator.CreateCsvDocument(taskData).Result;
+            var reply = new CsvFileReply()
+            {
+                Link = $"api/file/download/document/{fileName}",
+                Name = "Технологическая карта",
+                Extension = "csv",
+                SectionName = "all"
+            };
+            return Task.FromResult(reply);
         }
     }
 }
