@@ -1,8 +1,28 @@
 ﻿import './CardsForDashboard.css';
 import React from "react";
 import BaseCard from "./BaseCard";
-import {Container,Row } from "reactstrap";
-const TransportCard = (props) => {
+import { Container, Row } from "reactstrap";
+import authService from "../../../components/api-authorization/AuthorizeService";
+const WorkerCard = (props) => {
+    const CreateTechCard = async (digitalModel) => {
+        const token = await authService.getAccessToken();
+        let response = null;
+        if (digitalModel.Cadaster === "" && digitalModel.CategoryName === "")
+            await fetch(`api/techcard/create?name=${digitalModel.Name}&productId=${digitalModel.ProductId}`, {
+                headers: !token ? {} :
+                    {
+                        'Authorization': `Bearer ${token}`,
+                    }
+            });
+        else
+            await fetch(`api/techcard/create?name=${digitalModel.Name}&productId=${digitalModel.ProductId}&cadaster=${digitalModel.Cadaster}&categoryName=${digitalModel.CategoryName}`, {
+                headers: !token ? {} :
+                    {
+                        'Authorization': `Bearer ${token}`,
+                    }
+            });
+        return await response.text();
+    }
     const warning = () => {
         if ((props.values.rZasev.length > 0) && (props.values.rObrabotka.length > 0) && (props.values.rSbor.length > 0)) {
             return "Данные о работниках сохранены";
@@ -25,15 +45,25 @@ const TransportCard = (props) => {
                     <button onClick={() => { props.Back() }} className="btn btn-primary my-2 mr-2" style={{ width: "max-content" }} >
                         Назад
                     </button>
-                    <button className="btn btn-primary my-2 ml-2" style={{ width: "max-content" }} onClick={() => { console.log(props.values.rZasev.length, props.values.rObrabotka.length, props.values.rSbor.length); if ((props.values.rZasev.length > 0) && (props.values.rObrabotka.length > 0) && (props.values.rSbor.length > 0)) props.onClick() }}>
-                        Далее
-                    </button>
                 </Row>
-                <button className="btn btn-primary m-2" style={{ width: "max-content" }} onClick={() => { props.onClick() }}>
-                    Пропустить
+                <button className="btn btn-primary m-2" onClick={() => {
+                    let digitalModel = {
+                        Name: props.data.at(0).name,
+                        UserId: -1,
+                        ProductId: props.data.at(2).productId,
+                        Cadaster: props.data.at(3).kad,
+                        CategoryName: props.data.at(2).cult + " " + props.data.at(2).sort
+                    };
+                    CreateTechCard(digitalModel);
+                }}>
+                    <a style={{
+                        color: "#fff", textDecoration: 'none'
+                    }} href="/models">
+                        Создать модель
+                    </a>
                 </button>
             </Container>
         </BaseCard>
     )
 }
-export default TransportCard;
+export default WorkerCard;

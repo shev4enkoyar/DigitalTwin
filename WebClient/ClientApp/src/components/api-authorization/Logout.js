@@ -43,12 +43,14 @@ export class Logout extends Component {
     }
 
     render() {
+
         const { isReady, message } = this.state;
+        
         if (!isReady) {
             return <div></div>
         }
         if (!!message) {
-            return (<ThemeContextConsumer > {context => (<CardForBody className={context.theme + "Gray text-white text-center my-3 card d-flex align-items-center p-3 my-5 justify-content-center"} > {message}</CardForBody>)}</ThemeContextConsumer>);
+            return (<div style={{ height: '70%' }} className="d-flex flex-column align-items-center"><CardForBody className="d-flex" classForContB="d-flex flex-column align-items-center justify-content-center p-5" styleTextForCard={{ fontSize: '24px' }} styleForCard={{ width: 'max-content' }}> {message}</CardForBody></div>);
         } else {
             const action = this.props.action;
             switch (action) {
@@ -57,7 +59,7 @@ export class Logout extends Component {
                 case LogoutActions.LogoutCallback:
                     return (<div>Обработка обратного вызова выхода из системы</div>);
                 case LogoutActions.LoggedOut:
-                    return (<ThemeContextConsumer>{context => (<CardForBody className={context.theme + "Gray text-white text-center my-3 card d-flex align-items-center p-3 my-5 justify-content-center"} > {message}</CardForBody>)}</ThemeContextConsumer>);
+                    return (<div style={{  height: '70%' }} className="d-flex flex-column align-items-center"><CardForBody className="d-flex" classForContB="d-flex flex-column align-items-center justify-content-center p-5" styleTextForCard={{ fontSize: '24px' }} styleForCard={{width: 'max-content' }}> {message}</CardForBody></div>);
                 default:
                     throw new Error(`Invalid action '${action}'`);
             }
