@@ -16,8 +16,11 @@ namespace Microservice.FileManager
             {
                 HasHeaderRecord = false
             };
+            var dirPath = Path.Combine("/", "root", "Project", "Files", "documents");
+            if (!Directory.Exists(dirPath))
+                Directory.CreateDirectory(dirPath);
 
-            var filePath = Path.Combine("/", "root", "Project", "Files", "documents", $"{Guid.NewGuid()}.csv");
+            var filePath = Path.Combine(dirPath, $"{Guid.NewGuid()}.csv");
             await using var streamWriter = File.CreateText(filePath);
             await using var csvWriter = new CsvWriter(streamWriter, csvConfig);
             {
