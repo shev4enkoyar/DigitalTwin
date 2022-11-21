@@ -12,7 +12,7 @@ namespace Microservice.FileManager
     {
         public static async Task<string> CreateCsvDocument<T>(List<T> dataList)
         {
-            var csvConfig = new CsvConfiguration(new CultureInfo("ru-RU"))
+            var csvConfig = new CsvConfiguration(CultureInfo.InvariantCulture)
             {
                 HasHeaderRecord = false
             };
