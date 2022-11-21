@@ -5,10 +5,11 @@
     <UserSecretsId>afff83c1-32b1-4f17-87c4-1eb7d0b7a501</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerfileContext>..\..</DockerfileContext>
+    <DockerComposeProjectPath>..\..\docker-compose.dcproj</DockerComposeProjectPath>
   </PropertyGroup>
 
   <ItemGroup>
-    <Protobuf Include="Protos\file.proto" GrpcServices="Server" />
+	  <Protobuf Include="Protos\file.proto" GrpcServices="Server" />
   </ItemGroup>
 
   <ItemGroup>

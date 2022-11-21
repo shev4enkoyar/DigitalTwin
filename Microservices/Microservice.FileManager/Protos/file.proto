@@ -8,7 +8,7 @@ service FileService {
     rpc GetPageFiles (PageFileRequest) returns (stream GetPageFileReply);
     rpc AddPageFile (FullPageFile) returns (PageFileStatus);
     rpc RemovePageFile (RemovePageRequest) returns (PageFileStatus);
-    rpc CreateTechCsv (stream CsvFileRequest) returns (CsvFileReply);
+    rpc CreateTechCsv (CsvFileRequest) returns (CsvFileReply);
 }
 
 message PageFileRequest {

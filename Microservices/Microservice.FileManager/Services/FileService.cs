@@ -118,16 +118,25 @@ namespace Microservice.FileManager.Services
             return true;
         }
 
-        public override Task<CsvFileReply> CreateTechCsv(IAsyncStreamReader<CsvFileRequest> requestStream, ServerCallContext context)
+        public override Task<CsvFileReply> CreateTechCsv(CsvFileRequest requestStream, ServerCallContext context)
         {
-            string cultura = requestStream.Current.Cultura;
+            /*string cultura = requestStream.Current.Cultura;
             string sort = requestStream.Current.Sort;
             double area = requestStream.Current.Area;
             double seedingRate = requestStream.Current.SeedingRate;
             double fraction = requestStream.Current.Fraction;
             double density = requestStream.Current.Density;
             double harvest = requestStream.Current.Harvest;
-            double weightStages = requestStream.Current.WeightStages;
+            double weightStages = requestStream.Current.WeightStages;*/
+
+            string cultura = requestStream.Cultura;
+            string sort = requestStream.Sort;
+            double area = requestStream.Area;
+            double seedingRate = requestStream.SeedingRate;
+            double fraction = requestStream.Fraction;
+            double density = requestStream.Density;
+            double harvest = requestStream.Harvest;
+            double weightStages = requestStream.WeightStages;
 
             var request = new CsvFileRequest();
             var grpcTaskData = request.TaskData.ToList();

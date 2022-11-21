@@ -43,7 +43,7 @@ namespace Shared
         public static class External
         {
             private static readonly string dashboard = "https://localhost:49162";
-            private static readonly string files = null;
+            private static readonly string files = "https://localhost:49177";
             private static readonly string map = "https://localhost:49165";
             private static readonly string modelTask = "https://localhost:49171";
             private static readonly string forecast = "https://localhost:49173";

@@ -51,3 +51,12 @@ services:
       context: .
       dockerfile: Microservices/Microservice.WeatherManager/Dockerfile
 
+
+  microservice.filemanager:
+    image: ${DOCKER_REGISTRY-}microservicefilemanager
+    ports:
+      - "49177:49177"
+    build:
+      context: .
+      dockerfile: Microservices/Microservice.FileManager/Dockerfile
+
