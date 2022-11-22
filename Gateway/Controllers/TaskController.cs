@@ -33,7 +33,7 @@ namespace Gateway.Controllers
                     response = call.ResponseStream.Current;
                 }
             }
-            return response.Tasks;
+            return response?.Tasks;
         }
 
         [HttpGet("update_detail/{modelId}")]
@@ -42,19 +42,14 @@ namespace Gateway.Controllers
             using var channel = GrpcChannel.ForAddress(MicroservicesIP.External.ModelTask,
                 new GrpcChannelOptions { HttpHandler = MicroservicesIP.DefaultHttpHandler }
             );
-            if (status == null)
-                status = "";
-            if (fuel == null)
-                fuel = "";
-            if (seeds == null)
-                seeds = "";
-            if (fertilizers == null)
-                fertilizers = "";
-            if (pesticides == null)
-                pesticides = "";
+            status ??= "";
+            fuel ??= "";
+            seeds ??= "";
+            fertilizers ??= "";
+            pesticides ??= "";
             var client = new ModelTaskService.ModelTaskServiceClient(channel);
             var reply = await client
-                .UpdateDetailAsync(new UpdateDetailRequest{ ModelId = modelId, TaskId = taskId, Status = status, Fuel = fuel, Date = date, Seeds = seeds, Fertilizers = fertilizers, Pesticides = pesticides});
+                .UpdateDetailAsync(new UpdateDetailRequest { ModelId = modelId, TaskId = taskId, Status = status, Fuel = fuel, Date = date, Seeds = seeds, Fertilizers = fertilizers, Pesticides = pesticides });
             return reply.Status;
         }
 
@@ -74,7 +69,7 @@ namespace Gateway.Controllers
                     response = call.ResponseStream.Current;
                 }
             }
-            return response.Details;
+            return response?.Details;
         }
 
         [HttpGet("get_task_by_id/{taskId}")]
@@ -84,33 +79,8 @@ namespace Gateway.Controllers
                 new GrpcChannelOptions { HttpHandler = MicroservicesIP.DefaultHttpHandler }
             );
             var client = new ModelTaskService.ModelTaskServiceClient(channel);
-            var reply = await client.GetTaskByIdAsync(new GetTaskByIdRequest{  TaskId = taskId });
+            var reply = await client.GetTaskByIdAsync(new GetTaskByIdRequest { TaskId = taskId });
             return reply.Task;
-        }
-    }
-
-    static class TaskTypes
-    {
-        /// <summary>
-        /// Высев
-        /// </summary>
-        static class Sowing
-        {
-            
-        }
-        /// <summary>
-        /// Обработка
-        /// </summary>
-        static class Treatment
-        {
-
-        }
-        /// <summary>
-        /// Сбор
-        /// </summary>
-        static class Harvesting
-        {
-
         }
     }
 }

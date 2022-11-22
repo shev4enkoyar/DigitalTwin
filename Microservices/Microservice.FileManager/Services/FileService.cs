@@ -2,12 +2,12 @@
 using Microservice.FileManager.DAL;
 using Microservice.FileManager.DAL.Models;
 using Microservice.FileManager.Protos;
+using Microservice.FileManager.Util;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microservice.FileManager.Util;
 
 namespace Microservice.FileManager.Services
 {
@@ -128,7 +128,7 @@ namespace Microservice.FileManager.Services
             double density = csvRequest.Density;
             double harvest = csvRequest.Harvest;
             double weightStages = csvRequest.WeightStages;
-            
+
             var grpcTaskData = csvRequest.TaskData.ToList();
             var taskData = new List<TechCardCsvData>
             {
@@ -160,11 +160,11 @@ namespace Microservice.FileManager.Services
                     Third = "Вес этапов",
                     Fourth = weightStages.ToString()
                 },
-                new TechCardCsvData() { Third = "Объем работ", Fifth = "Состав агрегата", Sixth = "Обслуживающий персонал" },
-                new TechCardCsvData() { First = "Наименование работы", Second = "Агро сроки проведения работ", Third = "В физических га", Fourth = "В эталонных га", Fifth = "Транспорт", Sixth = "Трактористов", Seventh = "Рабочие" }
+                new TechCardCsvData { Third = "Объем работ", Fifth = "Состав агрегата", Sixth = "Обслуживающий персонал" },
+                new TechCardCsvData { First = "Наименование работы", Second = "Агро сроки проведения работ", Third = "В физических га", Fourth = "В эталонных га", Fifth = "Транспорт", Sixth = "Трактористов", Seventh = "Рабочие" }
             };
             taskData.AddRange(grpcTaskData.Select(x =>
-                new TechCardCsvData()
+                new TechCardCsvData
                 {
                     First = x.Name,
                     Second = x.Deadline,
@@ -176,7 +176,7 @@ namespace Microservice.FileManager.Services
                 }));
 
             var fileName = DocumentCreator.CreateCsvDocument(taskData).Result;
-            var reply = new CsvFileReply()
+            var reply = new CsvFileReply
             {
                 Link = $"api/file/download/document/{fileName}",
                 Name = "Технологическая карта",
