@@ -9,7 +9,7 @@ namespace WebClient.Interface
 
         public List<string> GetUserConnections(string userId)
         {
-            var connection = new List<string>();
+            List<string> connection;
             lock (UserConnectionMapLocker)
             {
                 connection = UserConnectionMap[userId];
@@ -35,14 +35,12 @@ namespace WebClient.Interface
             {
                 foreach (var userId in UserConnectionMap.Keys)
                 {
-                    if (UserConnectionMap.ContainsKey(userId))
-                    {
-                        if (UserConnectionMap[userId].Contains(connectionId))
-                        {
-                            UserConnectionMap[userId].Remove(connectionId);
-                            break;
-                        }
-                    }
+                    if (!UserConnectionMap.ContainsKey(userId))
+                        continue;
+                    if (!UserConnectionMap[userId].Contains(connectionId))
+                        continue;
+                    UserConnectionMap[userId].Remove(connectionId);
+                    break;
                 }
             }
         }

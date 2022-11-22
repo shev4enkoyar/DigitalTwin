@@ -25,7 +25,7 @@ namespace WebClient.Controllers
         [HttpGet("get_all")]
         public string GetUserNotifications()
         {
-            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             IEnumerable<Notification> notifications = _dbContext.Notifications.Where(x => x.UserId == userId).ToList();
             return JsonConvert.SerializeObject(notifications);
         }

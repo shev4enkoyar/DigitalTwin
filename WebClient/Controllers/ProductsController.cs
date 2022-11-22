@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using System.Collections.Generic;
-using System.Net.Http;
 using System.Threading.Tasks;
 using WebClient.Controllers.Base;
 using WebClient.Models.SubModels;
@@ -24,13 +23,11 @@ namespace WebClient.Controllers
         [HttpGet]
         public async Task<IEnumerable<ProductProto>> Get()
         {
-            IEnumerable<ProductProto> result = null;
-            HttpResponseMessage response = await ConnectionClient.GetAsync($"api/model/get_products");
-            if (response.IsSuccessStatusCode)
-            {
-                var json = await response.Content.ReadAsStringAsync();
-                result = JsonConvert.DeserializeObject<IEnumerable<ProductProto>>(json);
-            }
+            var response = await ConnectionClient.GetAsync($"api/model/get_products");
+            if (!response.IsSuccessStatusCode)
+                return null;
+            var json = await response.Content.ReadAsStringAsync();
+            var result = JsonConvert.DeserializeObject<IEnumerable<ProductProto>>(json);
             return result;
         }
     }

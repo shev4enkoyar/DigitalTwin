@@ -12,7 +12,7 @@ namespace WebClient.Controllers.Base
         {
             get
             {
-                HttpClient client = new HttpClient
+                var client = new HttpClient
                 {
                     BaseAddress = new Uri(MicroservicesIP.GatewayIP)
                 };

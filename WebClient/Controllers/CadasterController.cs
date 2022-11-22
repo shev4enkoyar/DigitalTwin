@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-using System.Net.Http;
 using System.Threading.Tasks;
 using WebClient.Controllers.Base;
 
@@ -22,7 +21,7 @@ namespace WebClient.Controllers
         [HttpGet("validate/{cadaster}")]
         public async Task<IActionResult> ValidateCadaster(string cadaster)
         {
-            HttpResponseMessage response = await ConnectionClient.GetAsync($"api/model/validate_cadaster/{cadaster}");
+            var response = await ConnectionClient.GetAsync($"api/model/validate_cadaster/{cadaster}");
 
             if (response.IsSuccessStatusCode)
                 return Ok();

@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using WebClient.Controllers.Base;
-using WebClient.Models.SubModels;
 
 namespace WebClient.Controllers
 {
@@ -67,9 +66,7 @@ namespace WebClient.Controllers
         private async Task<bool> CreateTechCardDocumentAsync(int modelId)
         {
             var response = await ConnectionClient.GetAsync($"api/file/create?modelId={modelId}");
-            if (!response.IsSuccessStatusCode)
-                return false;
-            return true;
+            return response.IsSuccessStatusCode;
         }
     }
 }

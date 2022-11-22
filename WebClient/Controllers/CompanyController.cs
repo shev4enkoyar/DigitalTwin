@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -44,7 +43,7 @@ namespace WebClient.Controllers
             {
                 return BadRequest("Company already exists!");
             }
-            Company createdCompany = new Company()
+            var createdCompany = new Company()
             {
                 CompanyName = name,
                 CompanyINN = inn,
@@ -53,8 +52,8 @@ namespace WebClient.Controllers
             };
 
             await _dbContext.Companies.AddAsync(createdCompany);
-            _dbContext.SaveChanges();
-            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            await _dbContext.SaveChangesAsync();
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var user = await _userManager.FindByIdAsync(userId);
             user.CompanyId = createdCompany.Id;
             await _userManager.UpdateAsync(user);
@@ -64,11 +63,8 @@ namespace WebClient.Controllers
         [HttpGet("get_id")]
         public async Task<string> GetCompanyId()
         {
-            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var user = await _userManager.FindByIdAsync(userId);
-            if (user.CompanyId.ToString() == null)
-                return "0";
-
             return user.CompanyId.ToString();
         }
 
@@ -90,25 +86,23 @@ namespace WebClient.Controllers
 
             var companyInvite = new CompanyInvite { RolesId = rolesId, UserId = user.Id, CompanyId = (Guid)companyId };
             _dbContext.Add(companyInvite);
-            _dbContext.SaveChanges();
+            await _dbContext.SaveChangesAsync();
             var notification = new Notification()
             {
-                Message = $"Вас пригласили в компанию \"{_dbContext.Companies.Find(currentUser.CompanyId).CompanyName}\".{Environment.NewLine}" +
+                Message = $"Вас пригласили в компанию \"{(await _dbContext.Companies.FindAsync(currentUser.CompanyId)).CompanyName}\".{Environment.NewLine}" +
                 $"Для того чтобы принять приглашение кликните по уведомлению.",
-                Type = NotificationType.Invite.ToString(),
+                Type = NotificationType.Invite,
                 RedirectLink = $"api/company/acceptingInvite/{companyInvite.Id}?isAccept=true;api/company/acceptingInvite/{companyInvite.Id}?isAccept=false",
                 UserId = user.Id
             };
             _dbContext.Add(notification);
-            _dbContext.SaveChanges();
+            await _dbContext.SaveChangesAsync();
 
             var connections = _userConnectionManager.GetUserConnections(user.Id);
-            if (connections != null && connections.Count > 0)
+            if (connections == null || connections.Count <= 0) return Ok();
+            foreach (var connectionId in connections)
             {
-                foreach (var connectionId in connections)
-                {
-                    await _notificationHub.Clients.Client(connectionId).Recive(new Notification { });
-                }
+                await _notificationHub.Clients.Client(connectionId).Recive(new Notification());
             }
             return Ok();
         }
@@ -116,27 +110,24 @@ namespace WebClient.Controllers
         [HttpGet("acceptingInvite/{id}")]
         public async Task<IActionResult> AcceptingInvite(int id, bool isAccept)
         {
-            CompanyInvite invite = _dbContext.CompanyInvites.Find(id);
+            var invite = await _dbContext.CompanyInvites.FindAsync(id);
             if (invite == null)
                 return BadRequest("Прилашение не найдено");
-            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (isAccept)
-            {
-                var user = await _userManager.FindByIdAsync(userId);
-                user.CompanyId = invite.CompanyId;
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (!isAccept) return Ok();
+            var user = await _userManager.FindByIdAsync(userId);
+            user.CompanyId = invite.CompanyId;
 
-                List<string> rolesId = new List<string>();
-                foreach (var item in invite.RolesId.Split(";"))
-                    if (!string.IsNullOrEmpty(item))
-                        rolesId.Add(item);
+            var rolesId = invite.RolesId.Split(";")
+                .Where(item => !string.IsNullOrEmpty(item))
+                .ToList();
 
-                var roles = rolesId.Select(x => _roleManager.FindByIdAsync(x).Result.Name);
-                await _userManager.AddToRolesAsync(user, roles);
-                _dbContext.Update(user);
-                _dbContext.RemoveRange(_dbContext.CompanyInvites.Where(x => x.UserId.Equals(userId)));
-                _dbContext.RemoveRange(_dbContext.Notifications.Where(x => (x.UserId.Equals(userId)) && (x.Type.Equals(NotificationType.Invite))));
-                _dbContext.SaveChanges();
-            }
+            var roles = rolesId.Select(x => _roleManager.FindByIdAsync(x).Result.Name);
+            await _userManager.AddToRolesAsync(user, roles);
+            _dbContext.Update(user);
+            _dbContext.RemoveRange(_dbContext.CompanyInvites.Where(x => x.UserId.Equals(userId)));
+            _dbContext.RemoveRange(_dbContext.Notifications.Where(x => (x.UserId.Equals(userId)) && (x.Type.Equals(NotificationType.Invite))));
+            await _dbContext.SaveChangesAsync();
             return Ok();
         }
     }

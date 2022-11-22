@@ -23,25 +23,25 @@ namespace WebClient.Services
             return Execute(subject, message, email);
         }
 
-        public Task Execute(string subject, string message, string email_to)
+        public Task Execute(string subject, string message, string emailTo)
         {
-            if (email_to == null) return Task.FromException(null);  //todo <bool>=false
+            if (emailTo == null) return Task.FromException(null!);
             try
             {
-                SmtpClient smtp = new SmtpClient
+                var smtp = new SmtpClient
                 {
                     Host = Configuration.GetSection("Email").GetValue<string>("Host"),
                     Port = Configuration.GetSection("Email").GetValue<int>("Port"),
                     Credentials = new NetworkCredential(Configuration.GetSection("Email").GetValue<string>("Email"), Configuration.GetSection("Email").GetValue<string>("Token")),
                     EnableSsl = true
                 };
-                MailMessage email_Message = new MailMessage();
-                email_Message.To.Add(new MailAddress(email_to));
-                email_Message.From = new MailAddress(Configuration.GetSection("Email").GetValue<string>("DisplayFromEmail"), Configuration.GetSection("Email").GetValue<string>("DisplayFromName"));
-                email_Message.Subject = subject;
-                email_Message.Body = message;
-                email_Message.IsBodyHtml = true;
-                return smtp.SendMailAsync(email_Message);
+                var emailMessage = new MailMessage();
+                emailMessage.To.Add(new MailAddress(emailTo));
+                emailMessage.From = new MailAddress(Configuration.GetSection("Email").GetValue<string>("DisplayFromEmail"), Configuration.GetSection("Email").GetValue<string>("DisplayFromName"));
+                emailMessage.Subject = subject;
+                emailMessage.Body = message;
+                emailMessage.IsBodyHtml = true;
+                return smtp.SendMailAsync(emailMessage);
             }
             catch (Exception ex)
             {

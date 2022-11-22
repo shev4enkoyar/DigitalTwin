@@ -29,16 +29,14 @@ namespace WebClient.Controllers
         public string GetAllRoles()
         {
             var roles = _roleManager.Roles.ToList();
-            if (roles == null)
-                return null;
 
-            List<FullRoleModel> result = new List<FullRoleModel>();
+            var result = new List<FullRoleModel>();
             foreach (var role in roles)
             {
-                List<string> functional = new List<string>();
+                var functional = new List<string>();
                 foreach (var item in role.FunctionalAccess.Split(';'))
                 {
-                    string name = _dbContext.Functionals.FirstOrDefault(x => x.Id == int.Parse(item)).Name;
+                    var name = _dbContext.Functionals.FirstOrDefault(x => x.Id == int.Parse(item))?.Name;
                     if (name == null)
                         functional.Add("");
                     functional.Add(name);
