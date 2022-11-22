@@ -1,19 +1,17 @@
 ﻿using Grpc.Core;
 using Grpc.Net.Client;
+using Microservice.DashboardManager;
 using Microservice.FileManager.Protos;
+using Microservice.MapManager.Protos;
 using Microservice.WebClient.Protos;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Formatters;
 using Shared;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Linq;
 using System;
-using Microservice.DashboardManager;
-using System.Collections;
-using System.Text;
-using Microservice.MapManager.Protos;
+using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Gateway.Controllers
 {
@@ -36,7 +34,7 @@ namespace Gateway.Controllers
             {
                 response = call.ResponseStream.Current;
             }
-            return response.Files;
+            return response?.Files;
         }
 
         [HttpGet("add_page")]
@@ -77,21 +75,21 @@ namespace Gateway.Controllers
         }
 
         [HttpGet("create")]
-        public async Task<CsvFileReply> CreateAsync(int modelId)
+        public Task<CsvFileReply> CreateAsync(int modelId)
         {
             using var channel = GrpcChannel.ForAddress(MicroservicesIP.External.Files,
                 new GrpcChannelOptions { HttpHandler = MicroservicesIP.DefaultHttpHandler });
 
             var clientFile = new FileService.FileServiceClient(channel);
-  
-          
-            List<CsvFileTaskData> taskData = GetTasksByModelId(modelId).Result
+
+
+            var taskData = GetTasksByModelId(modelId).Result
                 .Select(x =>
                 {
-                    var transportData = x.TransportList.Split(';').Select(x => GetTransportById(int.Parse(x.Trim()))).ToList();
-                    
-                    StringBuilder transports = new StringBuilder();
-                    transportData.ForEach(x => transports.Append($"{x.Brand} "));
+                    var transportData = x.TransportList.Split(';').Select(s => GetTransportById(int.Parse(s.Trim()))).ToList();
+
+                    var transports = new StringBuilder();
+                    transportData.ForEach(transportProto => transports.Append($"{transportProto.Brand} "));
 
                     double tractorDriverNum = 0;
                     double staffWorkerNum = 0;
@@ -99,8 +97,8 @@ namespace Gateway.Controllers
                     {
                         var gradesAndCounts = y.Staff.Split('/');
                         var grade = gradesAndCounts[0].Trim().Split(";");
-                        var workerCounts = gradesAndCounts[1].Trim().Split(";").Select(y => double.Parse(y.Trim())).ToArray();
-                        for (int i = 0; i < grade.Length; i++)
+                        var workerCounts = gradesAndCounts[1].Trim().Split(";").Select(s => double.Parse(s.Trim())).ToArray();
+                        for (var i = 0; i < grade.Length; i++)
                         {
                             if (grade[i].Trim().Equals("Тракторист"))
                                 tractorDriverNum += workerCounts[i];
@@ -125,8 +123,8 @@ namespace Gateway.Controllers
             var csvRequest = new CsvFileRequest()
             {
                 ModelId = modelId,
-                Cultura = productData[0], 
-                Sort = productData[1], 
+                Cultura = productData[0],
+                Sort = productData[1],
                 Area = GetProductAreaByMapId(modelId).Result,
                 Density = 11.1, // RANDOM
                 Fraction = 12.3, // RANDOM
@@ -138,7 +136,7 @@ namespace Gateway.Controllers
 
             var response = clientFile.CreateTechCsv(csvRequest);
 
-            return response;
+            return Task.FromResult(response);
         }
 
         private async Task<IEnumerable<ModelTask>> GetTasksByModelId(int modelId)
@@ -156,7 +154,7 @@ namespace Gateway.Controllers
                     response = call.ResponseStream.Current;
                 }
             }
-            return response.Tasks;
+            return response?.Tasks;
         }
 
         private TransportProto GetTransportById(int transportId)
