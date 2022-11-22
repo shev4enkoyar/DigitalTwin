@@ -32,7 +32,7 @@ namespace Gateway.Controllers
         }
 
         [HttpGet("get_by_id/{transportId}")]
-        public async Task<TransportProto> GetTaskById(int transportId)
+        public async Task<TransportProto> GetTransportyId(int transportId)
         {
             using var channel = GrpcChannel.ForAddress(MicroservicesIP.External.Dashboard,
                 new GrpcChannelOptions { HttpHandler = MicroservicesIP.DefaultHttpHandler }

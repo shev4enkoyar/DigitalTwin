@@ -75,6 +75,14 @@ namespace Microservice.MapManager.Services
             }
             return map.Id;
         }
+
+        public override Task<GetMapAreaReply> GetMapArea(GetMapAreaRequest request, ServerCallContext context)
+        {
+            var map = _dbContext.Maps.FirstOrDefault(x => x.ModelId == request.ModelId);
+            if (map == null)
+                return Task.FromResult(new GetMapAreaReply() { Area = 0 });
+            return Task.FromResult(new GetMapAreaReply() { Area = double.Parse(map.ProductArea) });
+        }
     }
 }
 

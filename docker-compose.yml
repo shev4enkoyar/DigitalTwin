@@ -56,6 +56,8 @@ services:
     image: ${DOCKER_REGISTRY-}microservicefilemanager
     ports:
       - "49177:49177"
+    volumes:
+      - ./docs:/root/
     build:
       context: .
       dockerfile: Microservices/Microservice.FileManager/Dockerfile

@@ -30,6 +30,11 @@ namespace Microservice.FileManager.DAL
             {
                 Id = 2,
                 Name = "Экономика"
+            },
+            new Section
+            {
+                Id = 3,
+                Name = "Все"
             });
         }
     }

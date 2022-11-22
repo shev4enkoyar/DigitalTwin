@@ -6,6 +6,7 @@ package productProto;
 
 service ProductService {
   rpc GetProducts (ProductRequest) returns (stream ProductReply);
+  rpc GetProductByModelId (GetProductByModelIdRequest) returns (GetProductByModelIdReply);
 }
 
 message ProductRequest {
@@ -19,4 +20,11 @@ message ProductProto {
   string name = 2;
   string code = 3;
   string currentPrice = 4; 
+}
+
+message GetProductByModelIdRequest {
+	int32 modelId = 1;
+}
+message GetProductByModelIdReply {
+   string name = 1;
 }

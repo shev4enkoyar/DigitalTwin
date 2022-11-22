@@ -118,25 +118,16 @@ namespace Microservice.FileManager.Services
             return true;
         }
 
-        public override Task<CsvFileReply> CreateTechCsv(CsvFileRequest requestStream, ServerCallContext context)
+        public override Task<CsvFileReply> CreateTechCsv(CsvFileRequest csvRequest, ServerCallContext context)
         {
-            /*string cultura = requestStream.Current.Cultura;
-            string sort = requestStream.Current.Sort;
-            double area = requestStream.Current.Area;
-            double seedingRate = requestStream.Current.SeedingRate;
-            double fraction = requestStream.Current.Fraction;
-            double density = requestStream.Current.Density;
-            double harvest = requestStream.Current.Harvest;
-            double weightStages = requestStream.Current.WeightStages;*/
-
-            string cultura = requestStream.Cultura;
-            string sort = requestStream.Sort;
-            double area = requestStream.Area;
-            double seedingRate = requestStream.SeedingRate;
-            double fraction = requestStream.Fraction;
-            double density = requestStream.Density;
-            double harvest = requestStream.Harvest;
-            double weightStages = requestStream.WeightStages;
+            string cultura = csvRequest.Cultura;
+            string sort = csvRequest.Sort;
+            double area = csvRequest.Area;
+            double seedingRate = csvRequest.SeedingRate;
+            double fraction = csvRequest.Fraction;
+            double density = csvRequest.Density;
+            double harvest = csvRequest.Harvest;
+            double weightStages = csvRequest.WeightStages;
 
             var request = new CsvFileRequest();
             var grpcTaskData = request.TaskData.ToList();
@@ -191,8 +182,19 @@ namespace Microservice.FileManager.Services
                 Link = $"api/file/download/document/{fileName}",
                 Name = "Технологическая карта",
                 Extension = "csv",
-                SectionName = "all"
+                SectionName = "Все"
             };
+
+            DbContext.Papers.Add(new Paper()
+            {
+                CreateDate = new DateTime(DateTime.UtcNow.Year, DateTime.UtcNow.Month, DateTime.UtcNow.Day),
+                Extension = "csv",
+                Name = "Технологическая карта",
+                Link = $"api/file/download/document/{fileName}",
+                ModelId = csvRequest.ModelId,
+                SectionId = 3
+            });
+            DbContext.SaveChanges();
             return Task.FromResult(reply);
         }
     }

@@ -1,11 +1,18 @@
 ﻿using Grpc.Core;
 using Grpc.Net.Client;
 using Microservice.FileManager.Protos;
+using Microservice.WebClient.Protos;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Shared;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Linq;
+using System;
+using Microservice.DashboardManager;
+using System.Collections;
+using System.Text;
+using Microservice.MapManager.Protos;
 
 namespace Gateway.Controllers
 {
@@ -69,31 +76,126 @@ namespace Gateway.Controllers
         }
 
         [HttpGet("create")]
-        public CsvFileReply Create(int modelId, string fileGuid)
+        public async Task<CsvFileReply> CreateAsync(int modelId)
         {
             //TODO Change IP route
             using var channel = GrpcChannel.ForAddress(MicroservicesIP.External.Files,
                 new GrpcChannelOptions { HttpHandler = MicroservicesIP.DefaultHttpHandler });
 
-            var client = new FileService.FileServiceClient(channel);
-            var taskData = new List<CsvFileTaskData>() 
-            { 
-                new CsvFileTaskData() { Deadline = "11/12/2000", Name = "some", PhysicalHectares = 15, StaffTractorDriverNum = 16, StaffWorkerNum = 3, StandartHectares = 20, TransportName = "some machine" },
-                new CsvFileTaskData() { Deadline = "11/13/2000", Name = "some1", PhysicalHectares = 15, StaffTractorDriverNum = 16, StaffWorkerNum = 3, StandartHectares = 20, TransportName = "some machine" }
-            };
-            var response = client.CreateTechCsv(new CsvFileRequest()
+
+
+            var clientFile = new FileService.FileServiceClient(channel);
+            //HACK 11122233330844 КАРТА RUBEN STIKE 13/12. ВОРЫ, НЕ БЕРИТЕ!
+            StringBuilder stringBuilder = new StringBuilder();
+            var test = GetTasksByModelId(modelId).Result;
+            var test2 = test.Select(x => x.TransportList.Split(';'));
+            List<CsvFileTaskData> taskData = GetTasksByModelId(modelId).Result
+                .Select(x =>
+                {
+                    var transportData = x.TransportList.Split(';').Select(x =>
+                    {
+                        stringBuilder.AppendLine(x);
+                        return GetTransportById(int.Parse(x.Trim())).Result;
+                    });
+
+                    StringBuilder transports = new StringBuilder();
+                    transportData.Select(x => transports.Append($"{x.Brand} "));
+
+                    double tractorDriverNum = 0;
+                    double staffWorkerNum = 0;
+                    //TODO ЗАМЕНИТЬ '-' НА '/'
+                    transportData.ToList().ForEach(y =>
+                    {
+                        var gradesAndCounts = y.Staff.Split('-');
+                        var grade = gradesAndCounts[0].Trim().Split(";");
+                        var workerCounts = gradesAndCounts[1].Trim().Split(";").Select(y => double.Parse(y)).ToArray();
+                        for (int i = 0; i < grade.Length; i++)
+                        {
+                            if (grade[i].Trim().Equals("Тракторист"))
+                                tractorDriverNum += workerCounts[i];
+                            else
+                                staffWorkerNum += workerCounts[i];
+                        }
+                    });
+
+                    return new CsvFileTaskData()
+                    {
+                        Deadline = (DateTime.Parse(x.EndDate) - DateTime.Parse(x.StartDate)).Days.ToString(),
+                        Name = x.Name,
+                        PhysicalHectares = 15, // Отредактировать статичную часть
+                        StandartHectares = 20, // Отредактировать статичную часть
+                        StaffTractorDriverNum = tractorDriverNum,
+                        StaffWorkerNum = staffWorkerNum,
+                        TransportName = transports.ToString(),
+                    };
+                }).ToList();
+
+            var productData = GetProductByMapId(modelId).Result.Split(';');
+            var csvRequest = new CsvFileRequest()
             {
-                Area = 12.4,
-                Cultura = "test",
-                Density = 11.1,
-                Fraction = 12.3,
-                Harvest = 11.3,
-                SeedingRate = 11,
-                Sort = "some",
-                WeightStages = 11
-            });
+                ModelId = modelId,
+                Cultura = productData[0], // Dashboard
+                Sort = productData[1], // Dashboard
+                Area = GetProductAreaByMapId(modelId).Result,
+                Density = 11.1, // RANDOM
+                Fraction = 12.3, // RANDOM
+                Harvest = 11.3, // RANDOM
+                SeedingRate = 11, // RANDOM
+                WeightStages = 11, // RANDOM
+            };
+            csvRequest.TaskData.AddRange(taskData);
+
+            var response = clientFile.CreateTechCsv(csvRequest);
 
             return response;
+        }
+
+        private async Task<IEnumerable<ModelTask>> GetTasksByModelId(int modelId)
+        {
+            using var channel = GrpcChannel.ForAddress(MicroservicesIP.External.ModelTask,
+                new GrpcChannelOptions { HttpHandler = MicroservicesIP.DefaultHttpHandler }
+            );
+
+            SendReply response = null;
+            using (var call = new ModelTaskService.ModelTaskServiceClient(channel)
+                .GetTasks(new SendRequest { ModelId = modelId }))
+            {
+                while (await call.ResponseStream.MoveNext())
+                {
+                    response = call.ResponseStream.Current;
+                }
+            }
+            return response.Tasks;
+        }
+
+        private async Task<TransportProto> GetTransportById(int transportId)
+        {
+            using var channel = GrpcChannel.ForAddress(MicroservicesIP.External.Dashboard,
+                new GrpcChannelOptions { HttpHandler = MicroservicesIP.DefaultHttpHandler }
+            );
+            var client = new TransportService.TransportServiceClient(channel);
+            var reply = await client.GetTransportByIdAsync(new GetTransportByIdRequest { Id = transportId });
+            return reply.Transport;
+        }
+
+        private async Task<double> GetProductAreaByMapId(int modelId)
+        {
+            using var channel = GrpcChannel.ForAddress(MicroservicesIP.External.Map,
+                new GrpcChannelOptions { HttpHandler = MicroservicesIP.DefaultHttpHandler }
+            );
+            var client = new MapService.MapServiceClient(channel);
+            var reply = await client.GetMapAreaAsync(new GetMapAreaRequest { ModelId = modelId });
+            return reply.Area;
+        }
+
+        private async Task<string> GetProductByMapId(int modelId)
+        {
+            using var channel = GrpcChannel.ForAddress(MicroservicesIP.External.Dashboard,
+                new GrpcChannelOptions { HttpHandler = MicroservicesIP.DefaultHttpHandler }
+            );
+            var client = new ProductService.ProductServiceClient(channel);
+            var reply = await client.GetProductByModelIdAsync(new GetProductByModelIdRequest { ModelId = modelId });
+            return reply.Name;
         }
     }
 }

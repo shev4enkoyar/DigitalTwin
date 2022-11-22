@@ -56,6 +56,7 @@ message CsvFileRequest {
     double harvest = 7;
     double weightStages = 8;
     repeated CsvFileTaskData taskData = 9;
+    int32 modelId = 10;
 }
 
 message CsvFileTaskData {

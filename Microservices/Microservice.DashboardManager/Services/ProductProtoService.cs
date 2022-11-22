@@ -1,5 +1,6 @@
 ﻿using Grpc.Core;
 using Microservice.DashboardManager.DAL;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -35,5 +36,16 @@ namespace Microservice.DashboardManager.Services
                     CurrentPrice = x.CurrentPrice.ToString()
                 });
         }
+
+        public override Task<GetProductByModelIdReply> GetProductByModelId(GetProductByModelIdRequest request, ServerCallContext context) =>
+            Task.FromResult(new GetProductByModelIdReply()
+            {
+                Name = GetProductByModelId(request.ModelId)
+            });
+
+        private string GetProductByModelId(int modelId) =>
+            DbContext.DigitalModels
+            .Include(x => x.Product)
+            .FirstOrDefault(x => x.Id.Equals(modelId)).Product.Name;
     }
 }

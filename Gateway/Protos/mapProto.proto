@@ -7,6 +7,7 @@ package mapProto;
 service MapService {
   rpc GetMapId (GetMapIdRequest) returns (GetMapIdReply);
   rpc GetMapCenter (GetMapCenterRequest) returns (GetMapCenterReply);
+  rpc GetMapArea (GetMapAreaRequest) returns (GetMapAreaReply);
 }
 
 message GetMapIdRequest {
@@ -24,4 +25,11 @@ message GetMapCenterRequest {
 message GetMapCenterReply {
     double lat = 1;
 	double lng = 2;
+}
+
+message GetMapAreaRequest {
+	int32 modelId = 1;
+}
+message GetMapAreaReply {
+    double area = 1;
 }

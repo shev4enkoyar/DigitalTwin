@@ -20,13 +20,14 @@ namespace Microservice.FileManager
             if (!Directory.Exists(dirPath))
                 Directory.CreateDirectory(dirPath);
 
-            var filePath = Path.Combine(dirPath, $"{Guid.NewGuid()}.csv");
+            var fileName = $"{Guid.NewGuid()}.csv";
+            var filePath = Path.Combine(dirPath, fileName);
             await using var streamWriter = File.CreateText(filePath);
             await using var csvWriter = new CsvWriter(streamWriter, csvConfig);
             {
                 await csvWriter.WriteRecordsAsync(dataList);
             }
-            return filePath;
+            return fileName;
         }
     }
 }

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using WebClient.Controllers.Base;
+using WebClient.Models.SubModels;
 
 namespace WebClient.Controllers
 {
@@ -15,6 +16,8 @@ namespace WebClient.Controllers
     {
         public async Task<IEnumerable<PageFileProto>> GetAllPagesAsync(int modelId, string sectionName)
         {
+            await CreateDocuments("techcard", modelId);
+
             var response = await ConnectionClient.GetAsync($"api/file/get_pages?modelId={modelId}&sectionName={sectionName}");
             if (!response.IsSuccessStatusCode) return null;
 
@@ -24,11 +27,10 @@ namespace WebClient.Controllers
         }
 
         [HttpGet("download/document/{guidFile}")]
-        public IActionResult DownloadDocument(string guidFile, string extension)
+        public IActionResult DownloadDocument(string guidFile)
         {
-            const string windowsPath = @"C:\ProgramData\document";
-            //const string stlinuxPath = @"/root/Project/Files/documents";
-            var byteArray = GetDocumentByteArray(Path.Combine(windowsPath, guidFile + extension));
+            var dirPath = Path.Combine("/", "root", "Project", "Files", "documents");
+            var byteArray = GetDocumentByteArray(Path.Combine(dirPath, guidFile));
             if (byteArray == null)
                 return BadRequest();
 
@@ -51,15 +53,22 @@ namespace WebClient.Controllers
         }
 
 
-        public bool CreateDocument(string documentType)
+        private async Task<bool> CreateDocuments(string documentType, int modelId)
         {
             switch (documentType)
             {
                 case "techcard":
-                    break;
+                    return await CreateTechCardDocumentAsync(modelId);
                 default:
                     return false;
             }
+        }
+
+        private async Task<bool> CreateTechCardDocumentAsync(int modelId)
+        {
+            var response = await ConnectionClient.GetAsync($"api/file/create?modelId={modelId}");
+            if (!response.IsSuccessStatusCode)
+                return false;
             return true;
         }
     }

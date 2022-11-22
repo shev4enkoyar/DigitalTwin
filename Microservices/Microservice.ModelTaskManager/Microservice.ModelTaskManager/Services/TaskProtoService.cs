@@ -102,7 +102,8 @@ namespace Microservice.TaskManager.Services
                 EndDate = x.EndDate.ToShortDateString(),
                 IsComplete = x.Details.Where(x => x.Status.Equals(TaskStatusEnum.Done)).Count() / x.Details.Count >= 0.8,
                 TaskType = x.Type,
-                Name = x.Name
+                Name = x.Name,
+                TransportList = x.TransportList
             }).ToList();
         }
 
