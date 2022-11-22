@@ -84,40 +84,8 @@ namespace Gateway.Controllers
 
 
             var taskData = GetTasksByModelId(modelId).Result
-                .Select(x =>
-                {
-                    var transportData = x.TransportList.Split(';').Select(s => GetTransportById(int.Parse(s.Trim()))).ToList();
-
-                    var transports = new StringBuilder();
-                    transportData.ForEach(transportProto => transports.Append($"{transportProto.Brand} "));
-
-                    double tractorDriverNum = 0;
-                    double staffWorkerNum = 0;
-                    transportData.ForEach(y =>
-                    {
-                        var gradesAndCounts = y.Staff.Split('/');
-                        var grade = gradesAndCounts[0].Trim().Split(";");
-                        var workerCounts = gradesAndCounts[1].Trim().Split(";").Select(s => double.Parse(s.Trim())).ToArray();
-                        for (var i = 0; i < grade.Length; i++)
-                        {
-                            if (grade[i].Trim().Equals("Тракторист"))
-                                tractorDriverNum += workerCounts[i];
-                            else
-                                staffWorkerNum += workerCounts[i];
-                        }
-                    });
-
-                    return new CsvFileTaskData()
-                    {
-                        Deadline = (DateTime.ParseExact(x.EndDate, "MM/dd/yyyy", CultureInfo.CurrentCulture) - DateTime.ParseExact(x.StartDate, "MM/dd/yyyy", CultureInfo.CurrentCulture)).TotalDays.ToString(),
-                        Name = x.Name,
-                        PhysicalHectares = 15, // Отредактировать статичную часть
-                        StandartHectares = 20, // Отредактировать статичную часть
-                        StaffTractorDriverNum = tractorDriverNum,
-                        StaffWorkerNum = staffWorkerNum,
-                        TransportName = transports.ToString(),
-                    };
-                }).ToList();
+                .Select(x => GetCsvFileTaskDataByModelTask(x))
+                .ToList();
 
             var productData = GetProductByMapId(modelId).Result.Split(';');
             var csvRequest = new CsvFileRequest()
@@ -137,6 +105,41 @@ namespace Gateway.Controllers
             var response = clientFile.CreateTechCsv(csvRequest);
 
             return Task.FromResult(response);
+        }
+
+        private CsvFileTaskData GetCsvFileTaskDataByModelTask(ModelTask modelTask)
+        {
+            var transportData = modelTask.TransportList.Split(';').Select(s => GetTransportById(int.Parse(s.Trim()))).ToList();
+
+            var transports = new StringBuilder();
+            transportData.ForEach(transportProto => transports.Append($"{transportProto.Brand} "));
+
+            double tractorDriverNum = 0;
+            double staffWorkerNum = 0;
+            transportData.ForEach(y =>
+            {
+                var gradesAndCounts = y.Staff.Split('/');
+                var grade = gradesAndCounts[0].Trim().Split(";");
+                var workerCounts = gradesAndCounts[1].Trim().Split(";").Select(s => double.Parse(s.Trim())).ToArray();
+                for (var i = 0; i < grade.Length; i++)
+                {
+                    if (grade[i].Trim().Equals("Тракторист"))
+                        tractorDriverNum += workerCounts[i];
+                    else
+                        staffWorkerNum += workerCounts[i];
+                }
+            });
+
+            return new CsvFileTaskData()
+            {
+                Deadline = (DateTime.ParseExact(modelTask.EndDate, "MM/dd/yyyy", CultureInfo.CurrentCulture) - DateTime.ParseExact(modelTask.StartDate, "MM/dd/yyyy", CultureInfo.CurrentCulture)).TotalDays.ToString(),
+                Name = modelTask.Name,
+                PhysicalHectares = 15, // Отредактировать статичную часть
+                StandartHectares = 20, // Отредактировать статичную часть
+                StaffTractorDriverNum = tractorDriverNum,
+                StaffWorkerNum = staffWorkerNum,
+                TransportName = transports.ToString(),
+            };
         }
 
         private async Task<IEnumerable<ModelTask>> GetTasksByModelId(int modelId)
