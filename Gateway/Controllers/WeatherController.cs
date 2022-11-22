@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Gateway.Controllers.Base;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Gateway.Controllers
 {

@@ -1,22 +1,21 @@
-﻿using Gateway.Controllers.Base;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Grpc.Core;
 using Grpc.Net.Client;
 using Microservice.MapManager.Protos;
 using Microservice.WeatherManager.Protos;
 using Microsoft.AspNetCore.Mvc;
 using Shared;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace Gateway.Controllers
+namespace Gateway.Controllers.Base
 {
     public class WeatherControllerBase : CompanyModelsControllerBase
     {
         [HttpGet("get_weather/{modelId}")]
         public async Task<IEnumerable<WeatherProto>> GetWeather(int modelId)
         {
-            if (TryGetLatLng(modelId, out double lat, out double lng))
+            if (TryGetLatLng(modelId, out var lat, out var lng))
             {
                 return await GetWeatherData(lat, lng, modelId);
             }
@@ -37,7 +36,7 @@ namespace Gateway.Controllers
                 response = call.ResponseStream.Current;
             }
 
-            return response.Weathers.ToList();
+            return response?.Weathers.ToList();
         }
 
         private bool TryGetLatLng(int modelId, out double lat, out double lng)

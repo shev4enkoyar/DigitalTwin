@@ -33,7 +33,7 @@ namespace Gateway.Controllers
             {
                 response = call.ResponseStream.Current;
             }
-            return response.Products;
+            return response?.Products;
         }
 
         /// <summary>

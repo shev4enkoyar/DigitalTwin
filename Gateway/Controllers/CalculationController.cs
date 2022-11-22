@@ -1,15 +1,12 @@
-﻿using Grpc.Core;
-using Grpc.Net.Client;
+﻿using Grpc.Net.Client;
 using Microservice.ForecastManager.Protos;
-using Microservice.MapManager.Protos;
-using Microservice.WeatherManager.Protos;
 using Microsoft.AspNetCore.Mvc;
 using Shared;
 using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
+using Gateway.Controllers.Base;
 
 namespace Gateway.Controllers
 {
@@ -24,8 +21,8 @@ namespace Gateway.Controllers
                 new GrpcChannelOptions { HttpHandler = MicroservicesIP.DefaultHttpHandler }
             );
 
-            int[] dons = new int[5] { 1, 1, 0, 1, 1 };
-            int[] dots = new int[5] { 0, 0, 1, 1, 1 };
+            var dons = new[] { 1, 1, 0, 1, 1 };
+            var dots = new[] { 0, 0, 1, 1, 1 };
 
             var client = new InfluenceCalculationService.InfluenceCalculationServiceClient(channel);
             var request = new TaskInfluenceRequest();
@@ -41,13 +38,13 @@ namespace Gateway.Controllers
         public async Task<double> GetWeatherInfluenceByModelAsync(int modelId)
         {
 
-            double g = 0.7; // калибровочный коэффициент, хз где его брать, по идее у каждой культуры свой
+            const double g = 0.7; // калибровочный коэффициент, хз где его брать, по идее у каждой культуры свой
             double gtcOptinal = 1; // оптимальный гтк для данной культуры. Либо вводится челом, либо можно нагуглить
-            int[] temperatureByMonth = new int[30] { 10, 20, 4, 30, 0, 10, 20, 4, 30, 0, 10, 20, 4, 30, 0, 10, 20, 4, 30, 0, 10, 20, 4, 30, 0, 10, 20, 4, 30, 0 };
-            int averageTemperature = (int)temperatureByMonth.Average(); // нужно для осадков
-            int[] maxAirTemperature = new int[5] { 15, 25, 6, 31, 2 };
-            int[] minAirTemperature = new int[5] { 7, 15, 3, 26, -3 };
-            int[] precipitationAmount = new int[5] { 7, 15, 3, 26, -3 };
+            var temperatureByMonth = new[] { 10, 20, 4, 30, 0, 10, 20, 4, 30, 0, 10, 20, 4, 30, 0, 10, 20, 4, 30, 0, 10, 20, 4, 30, 0, 10, 20, 4, 30, 0 };
+            var averageTemperature = (int)temperatureByMonth.Average(); // нужно для осадков
+            var maxAirTemperature = new[] { 15, 25, 6, 31, 2 };
+            var minAirTemperature = new[] { 7, 15, 3, 26, -3 };
+            var precipitationAmount = new[] { 7, 15, 3, 26, -3 };
 
             using var channel = GrpcChannel.ForAddress(MicroservicesIP.External.Forecast,
                 new GrpcChannelOptions { HttpHandler = MicroservicesIP.DefaultHttpHandler }
@@ -73,15 +70,15 @@ namespace Gateway.Controllers
         [HttpGet("get_overall_influence/{modelId}")]
         public async Task<double> GetOverallInfluenceByModelAsync(int modelId)
         {
-            int[] dons = new int[5] { 1, 1, 0, 1, 1 };
-            int[] dots = new int[5] { 0, 0, 1, 1, 1 };
-            double g = 0.7; // калибровочный коэффициент, хз где его брать, по идее у каждой культуры свой
+            var dons = new[] { 1, 1, 0, 1, 1 };
+            var dots = new[] { 0, 0, 1, 1, 1 };
+            var g = 0.7; // калибровочный коэффициент, хз где его брать, по идее у каждой культуры свой
             double gtcOptinal = 1; // оптимальный гтк для данной культуры. Либо вводится челом, либо можно нагуглить
-            int[] temperatureByMonth = new int[30] { 10, 20, 4, 30, 0, 10, 20, 4, 30, 0, 10, 20, 4, 30, 0, 10, 20, 4, 30, 0, 10, 20, 4, 30, 0, 10, 20, 4, 30, 0 };
-            int averageTemperature = (int)temperatureByMonth.Average(); // нужно для осадков
-            int[] maxAirTemperature = new int[5] { 15, 25, 6, 31, 2 };
-            int[] minAirTemperature = new int[5] { 7, 15, 3, 26, -3 };
-            int[] precipitationAmount = new int[5] { 7, 15, 3, 26, -3 };
+            var temperatureByMonth = new[] { 10, 20, 4, 30, 0, 10, 20, 4, 30, 0, 10, 20, 4, 30, 0, 10, 20, 4, 30, 0, 10, 20, 4, 30, 0, 10, 20, 4, 30, 0 };
+            var averageTemperature = (int)temperatureByMonth.Average(); // нужно для осадков
+            var maxAirTemperature = new[] { 15, 25, 6, 31, 2 };
+            var minAirTemperature = new[] { 7, 15, 3, 26, -3 };
+            var precipitationAmount = new[] { 7, 15, 3, 26, -3 };
 
             using var channel = GrpcChannel.ForAddress(MicroservicesIP.External.Forecast,
                 new GrpcChannelOptions { HttpHandler = MicroservicesIP.DefaultHttpHandler }
@@ -133,15 +130,12 @@ namespace Gateway.Controllers
 
             var reply = client.GetEvapotranspiration(request);
 
-            if (reply != null)
-            {
-                DateTime currentDate = ConvertFromJsonDate(DateTime.UtcNow);
-                return weather.FirstOrDefault(x => DateTime.ParseExact(x.Date, "MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(currentDate)).Evapotranspiration;
-            }
-            return 0;
+            if (reply == null) return 0;
+            var currentDate = ConvertFromJsonDate(DateTime.UtcNow);
+            return weather.FirstOrDefault(x => DateTime.ParseExact(x.Date, "MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(currentDate))!.Evapotranspiration;
         }
 
-        private DateTime ConvertFromJsonDate(DateTime jsonDate)
+        private static DateTime ConvertFromJsonDate(DateTime jsonDate)
         {
             return new DateTime(jsonDate.Year, jsonDate.Month, jsonDate.Day);
         }

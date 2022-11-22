@@ -36,7 +36,7 @@ namespace Gateway.Controllers.Base
                     response = call.ResponseStream.Current;
                 }
             }
-            return response.Models;
+            return response?.Models;
         }
     }
 }
