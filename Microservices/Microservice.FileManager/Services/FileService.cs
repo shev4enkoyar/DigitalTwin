@@ -128,9 +128,8 @@ namespace Microservice.FileManager.Services
             double density = csvRequest.Density;
             double harvest = csvRequest.Harvest;
             double weightStages = csvRequest.WeightStages;
-
-            var request = new CsvFileRequest();
-            var grpcTaskData = request.TaskData.ToList();
+            
+            var grpcTaskData = csvRequest.TaskData.ToList();
             var taskData = new List<TechCardCsvData>
             {
                 new TechCardCsvData()

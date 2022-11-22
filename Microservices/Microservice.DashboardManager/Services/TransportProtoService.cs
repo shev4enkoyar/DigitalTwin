@@ -29,13 +29,9 @@ namespace Microservice.DashboardManager.Services
             var transport = DbContext.Transports.FirstOrDefault(x => x.Id == request.Id);
             if (transport == null)
                 return null;
-            var staffNames = transport.StaffName.Split(";");
-            var staffNums = transport.StaffNum.Split(";");
-            string staff = "";
-            for (int i = 0; i < staffNames.Length; i++)
-            {
-                staff += $"{staffNames[i]} - {staffNums[i]};";
-            }
+            var staffNames = transport.StaffName;
+            var staffNums = transport.StaffNum;
+            string staff = $"{staffNames} - {staffNums}";
             TransportProto transportProto = new TransportProto()
             {
                 Id = transport.Id,
@@ -54,7 +50,7 @@ namespace Microservice.DashboardManager.Services
                     Id = x.Id,
                     Name = x.Name,
                     Brand = x.Brand,
-                    Staff = $"{x.StaffName} - {x.StaffNum}"
+                    Staff = $"{x.StaffName}/{x.StaffNum}"
                 });
         }
     }

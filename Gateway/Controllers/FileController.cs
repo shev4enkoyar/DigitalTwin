@@ -13,6 +13,7 @@ using Microservice.DashboardManager;
 using System.Collections;
 using System.Text;
 using Microservice.MapManager.Protos;
+using System.Globalization;
 
 namespace Gateway.Controllers
 {
@@ -78,37 +79,27 @@ namespace Gateway.Controllers
         [HttpGet("create")]
         public async Task<CsvFileReply> CreateAsync(int modelId)
         {
-            //TODO Change IP route
             using var channel = GrpcChannel.ForAddress(MicroservicesIP.External.Files,
                 new GrpcChannelOptions { HttpHandler = MicroservicesIP.DefaultHttpHandler });
 
-
-
             var clientFile = new FileService.FileServiceClient(channel);
-            //HACK 11122233330844 КАРТА RUBEN STIKE 13/12. ВОРЫ, НЕ БЕРИТЕ!
-            StringBuilder stringBuilder = new StringBuilder();
-            var test = GetTasksByModelId(modelId).Result;
-            var test2 = test.Select(x => x.TransportList.Split(';'));
+  
+          
             List<CsvFileTaskData> taskData = GetTasksByModelId(modelId).Result
                 .Select(x =>
                 {
-                    var transportData = x.TransportList.Split(';').Select(x =>
-                    {
-                        stringBuilder.AppendLine(x);
-                        return GetTransportById(int.Parse(x.Trim())).Result;
-                    });
-
+                    var transportData = x.TransportList.Split(';').Select(x => GetTransportById(int.Parse(x.Trim()))).ToList();
+                    
                     StringBuilder transports = new StringBuilder();
-                    transportData.Select(x => transports.Append($"{x.Brand} "));
+                    transportData.ForEach(x => transports.Append($"{x.Brand} "));
 
                     double tractorDriverNum = 0;
                     double staffWorkerNum = 0;
-                    //TODO ЗАМЕНИТЬ '-' НА '/'
-                    transportData.ToList().ForEach(y =>
+                    transportData.ForEach(y =>
                     {
-                        var gradesAndCounts = y.Staff.Split('-');
+                        var gradesAndCounts = y.Staff.Split('/');
                         var grade = gradesAndCounts[0].Trim().Split(";");
-                        var workerCounts = gradesAndCounts[1].Trim().Split(";").Select(y => double.Parse(y)).ToArray();
+                        var workerCounts = gradesAndCounts[1].Trim().Split(";").Select(y => double.Parse(y.Trim())).ToArray();
                         for (int i = 0; i < grade.Length; i++)
                         {
                             if (grade[i].Trim().Equals("Тракторист"))
@@ -120,7 +111,7 @@ namespace Gateway.Controllers
 
                     return new CsvFileTaskData()
                     {
-                        Deadline = (DateTime.Parse(x.EndDate) - DateTime.Parse(x.StartDate)).Days.ToString(),
+                        Deadline = (DateTime.ParseExact(x.EndDate, "MM/dd/yyyy", CultureInfo.CurrentCulture) - DateTime.ParseExact(x.StartDate, "MM/dd/yyyy", CultureInfo.CurrentCulture)).TotalDays.ToString(),
                         Name = x.Name,
                         PhysicalHectares = 15, // Отредактировать статичную часть
                         StandartHectares = 20, // Отредактировать статичную часть
@@ -134,8 +125,8 @@ namespace Gateway.Controllers
             var csvRequest = new CsvFileRequest()
             {
                 ModelId = modelId,
-                Cultura = productData[0], // Dashboard
-                Sort = productData[1], // Dashboard
+                Cultura = productData[0], 
+                Sort = productData[1], 
                 Area = GetProductAreaByMapId(modelId).Result,
                 Density = 11.1, // RANDOM
                 Fraction = 12.3, // RANDOM
@@ -168,13 +159,13 @@ namespace Gateway.Controllers
             return response.Tasks;
         }
 
-        private async Task<TransportProto> GetTransportById(int transportId)
+        private TransportProto GetTransportById(int transportId)
         {
             using var channel = GrpcChannel.ForAddress(MicroservicesIP.External.Dashboard,
                 new GrpcChannelOptions { HttpHandler = MicroservicesIP.DefaultHttpHandler }
             );
             var client = new TransportService.TransportServiceClient(channel);
-            var reply = await client.GetTransportByIdAsync(new GetTransportByIdRequest { Id = transportId });
+            var reply = client.GetTransportById(new GetTransportByIdRequest { Id = transportId });
             return reply.Transport;
         }
 
