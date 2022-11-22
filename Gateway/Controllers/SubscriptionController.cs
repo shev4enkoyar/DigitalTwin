@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Shared;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Gateway.Controllers
@@ -108,7 +109,7 @@ namespace Gateway.Controllers
                 new GrpcChannelOptions { HttpHandler = MicroservicesIP.DefaultHttpHandler }
             );
 
-            Dictionary<string, List<string>> modelSubscriptions = new Dictionary<string, List<string>>();
+            var modelSubscriptions = new Dictionary<string, List<string>>();
             foreach (var model in models)
             {
                 SubscriptionsReply response = null;
@@ -119,18 +120,14 @@ namespace Gateway.Controllers
                         response = call.ResponseStream.Current;
                     }
                 }
-                List<string> subscriptions = new List<string>();
-                foreach (var item in response.Subscriptions)
-                {
-                    subscriptions.Add(item.Name);
-                }
+                var subscriptions = response?.Subscriptions.Select(item => item.Name).ToList();
                 modelSubscriptions.Add(model.Name, subscriptions);
             }
             return modelSubscriptions;
         }
 
         [HttpGet("get_activated_subscription/{modelId}")]
-        public async Task<IEnumerable<SubscriptionProto>> GetActivatedSubscription(int modelId) 
+        public async Task<IEnumerable<SubscriptionProto>> GetActivatedSubscription(int modelId)
         {
             using var channel = GrpcChannel.ForAddress(MicroservicesIP.External.Subscription,
                 new GrpcChannelOptions { HttpHandler = MicroservicesIP.DefaultHttpHandler }
@@ -144,7 +141,7 @@ namespace Gateway.Controllers
                 }
             }
 
-            return response.Subscriptions;
+            return response?.Subscriptions;
         }
     }
 }

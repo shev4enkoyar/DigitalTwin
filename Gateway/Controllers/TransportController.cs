@@ -21,24 +21,24 @@ namespace Gateway.Controllers
 
             GetAllTransportReply response = null;
             using (var call = new TransportService.TransportServiceClient(channel)
-                .GetAllTransport(new GetAllTransportRequest { }))
+                .GetAllTransport(new GetAllTransportRequest()))
             {
                 while (await call.ResponseStream.MoveNext())
                 {
                     response = call.ResponseStream.Current;
                 }
             }
-            return response.Transports;
+            return response?.Transports;
         }
 
-        [HttpGet("get_by_id/{transportId}")]
+        [HttpGet("get_by_id/{transportId:int}")]
         public async Task<TransportProto> GetTransportyId(int transportId)
         {
             using var channel = GrpcChannel.ForAddress(MicroservicesIP.External.Dashboard,
                 new GrpcChannelOptions { HttpHandler = MicroservicesIP.DefaultHttpHandler }
             );
             var client = new TransportService.TransportServiceClient(channel);
-            var reply = await client.GetTransportByIdAsync(new GetTransportByIdRequest {  Id =  transportId});
+            var reply = await client.GetTransportByIdAsync(new GetTransportByIdRequest { Id = transportId });
             return reply.Transport;
         }
 
