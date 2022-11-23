@@ -4,10 +4,12 @@ import { Gantt, Task, EventOption } from 'gantt-task-react';
 import authService from "../../components/api-authorization/AuthorizeService";
 import { ThemeContextConsumer } from "../ThemeContext";
 import "./style-tasks.css";
+import {useParams} from "react-router-dom";
 
 
 function GantGraph(props) {
 
+    let {modelId} = useParams()
     const [tasks, setNewTasks] = useState([])
     const [curDate, setDate] = useState(new Date(new Date().setDate(new Date().getDate() - 12)))
 
@@ -28,7 +30,7 @@ function GantGraph(props) {
 
         const token = await authService.getAccessToken();
         //const response = await fetch(`api/task/get_all/${props.modelId}`, {
-        const response = await fetch(`api/task/get_all/24`, {
+        const response = await fetch(`api/task/get_all/${modelId}`, {
             headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
         });
         const data = await response.json();

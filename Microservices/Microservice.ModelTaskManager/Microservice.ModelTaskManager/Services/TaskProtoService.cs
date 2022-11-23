@@ -95,7 +95,7 @@ namespace Microservice.TaskManager.Services
 
         private IEnumerable<ModelTask> GetProtoTasks(int modelId)
         {
-            return DbContext.Tasks.Include(x => x.Details).Select(x => new ModelTask()
+            return DbContext.Tasks.Include(x => x.Details).Where(x => x.ModelId == modelId).Select(x => new ModelTask()
             {
                 Id = x.Id,
                 StartDate = x.StartDate.ToShortDateString(),

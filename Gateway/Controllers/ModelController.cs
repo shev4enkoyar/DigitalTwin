@@ -3,9 +3,11 @@ using Grpc.Core;
 using Grpc.Net.Client;
 using Microservice.DashboardManager.Protos;
 using Microservice.MapManager.Protos;
+using Microservice.SubscriptionManager;
 using Microservice.WebClient.Protos;
 using Microsoft.AspNetCore.Mvc;
 using Shared;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -84,6 +86,25 @@ namespace Gateway.Controllers
             int mapId = AddMap(reply.ModelId, cadaster, categoryName);
             reply = new DigitalModelService.DigitalModelServiceClient(channel).UpdateMapDigitalModel(new UpdateModelRequest() { MapId = mapId, ModelId = reply.ModelId });
 
+            if (reply.Status.Equals("ok")) 
+            {
+                return AddDefaultSubscription(reply.ModelId);
+            }
+                
+            return false;
+        }
+
+        private bool AddDefaultSubscription(int modelId)
+        {
+            using var channel = GrpcChannel.ForAddress(MicroservicesIP.External.Subscription, new GrpcChannelOptions { HttpHandler = MicroservicesIP.DefaultHttpHandler });
+            var client = new SubscriptionService.SubscriptionServiceClient(channel);
+            var reply = client.AddSubscription(new AddSubscriptionRequest
+            {
+                ModelId = modelId,
+                SubscriptionId = 3,
+                ActivatedData = DateTime.UtcNow.ToShortDateString(),
+                ExpirationData = DateTime.UtcNow.AddDays(30).ToShortDateString()
+            });
             if (reply.Status.Equals("ok"))
                 return true;
             return false;

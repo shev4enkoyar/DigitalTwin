@@ -42,8 +42,7 @@ export default class App extends Component {
                     <AuthorizeRoute path={ClientRoutes.PREFIX + ClientRoutes.SUBSCRIPTIONS} component={Subscriptions} />
                     <AuthorizeRoute path={ClientRoutes.PREFIX + ClientRoutes.SUBSCRIPTIONS_ALL} component={AllSubscriptions} />
 
-                    <AuthorizeRoute path={ClientRoutes.PREFIX + ClientRoutes.GANT + ClientRoutes.SUFFIX_MODEL_ID} component={GanttMain} />
-
+                    <AuthorizeRouteWithPermission path={ClientRoutes.PREFIX + ClientRoutes.GANT + ClientRoutes.SUFFIX_MODEL_ID} component={GanttMain } name={ClientRoutes.GANT} />
                     <AuthorizeRouteWithPermission path={ClientRoutes.PREFIX + ClientRoutes.RECOMMENDATIONS + ClientRoutes.SUFFIX_MODEL_ID} component={Recommendations } name={ClientRoutes.RECOMMENDATIONS} />
                     <AuthorizeRouteWithPermission path={ClientRoutes.PREFIX + ClientRoutes.IOTPAGE + ClientRoutes.SUFFIX_MODEL_ID} component={IotPage } name={ClientRoutes.IOTPAGE} />
                     <AuthorizeRouteWithPermission path={ClientRoutes.PREFIX + ClientRoutes.DOCS + ClientRoutes.SUFFIX_MODEL_ID} component={Docs } name={ClientRoutes.DOCS} />
