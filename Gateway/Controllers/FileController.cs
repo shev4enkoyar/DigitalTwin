@@ -23,8 +23,8 @@ namespace Gateway.Controllers
         public async Task<IEnumerable<PageFileProto>> GetAllPageFiles(int modelId, string sectionName)
         {
             //TODO Change IP route
-            using var channel = GrpcChannel.ForAddress(MicroservicesIP.External.Files,
-                new GrpcChannelOptions { HttpHandler = MicroservicesIP.DefaultHttpHandler });
+            using var channel = GrpcChannel.ForAddress(MicroservicesIp.External.Files,
+                new GrpcChannelOptions { HttpHandler = MicroservicesIp.DefaultHttpHandler });
 
             var client = new FileService.FileServiceClient(channel);
 
@@ -41,8 +41,8 @@ namespace Gateway.Controllers
         public bool AddPageFile(int modelId, string name, string link, string extension, string sectionName)
         {
             //TODO Change IP route
-            using var channel = GrpcChannel.ForAddress(MicroservicesIP.External.Files,
-                new GrpcChannelOptions { HttpHandler = MicroservicesIP.DefaultHttpHandler });
+            using var channel = GrpcChannel.ForAddress(MicroservicesIp.External.Files,
+                new GrpcChannelOptions { HttpHandler = MicroservicesIp.DefaultHttpHandler });
 
             var client = new FileService.FileServiceClient(channel);
             var call = client.AddPageFile(new FullPageFile()
@@ -61,8 +61,8 @@ namespace Gateway.Controllers
         public bool RemovePageFile(int modelId, string fileGuid)
         {
             //TODO Change IP route
-            using var channel = GrpcChannel.ForAddress(MicroservicesIP.External.Files,
-                new GrpcChannelOptions { HttpHandler = MicroservicesIP.DefaultHttpHandler });
+            using var channel = GrpcChannel.ForAddress(MicroservicesIp.External.Files,
+                new GrpcChannelOptions { HttpHandler = MicroservicesIp.DefaultHttpHandler });
 
             var client = new FileService.FileServiceClient(channel);
             var call = client.RemovePageFile(new RemovePageRequest()
@@ -77,8 +77,8 @@ namespace Gateway.Controllers
         [HttpGet("create")]
         public Task<CsvFileReply> CreateAsync(int modelId)
         {
-            using var channel = GrpcChannel.ForAddress(MicroservicesIP.External.Files,
-                new GrpcChannelOptions { HttpHandler = MicroservicesIP.DefaultHttpHandler });
+            using var channel = GrpcChannel.ForAddress(MicroservicesIp.External.Files,
+                new GrpcChannelOptions { HttpHandler = MicroservicesIp.DefaultHttpHandler });
 
             var clientFile = new FileService.FileServiceClient(channel);
 
@@ -144,8 +144,8 @@ namespace Gateway.Controllers
 
         private async Task<IEnumerable<ModelTask>> GetTasksByModelId(int modelId)
         {
-            using var channel = GrpcChannel.ForAddress(MicroservicesIP.External.ModelTask,
-                new GrpcChannelOptions { HttpHandler = MicroservicesIP.DefaultHttpHandler }
+            using var channel = GrpcChannel.ForAddress(MicroservicesIp.External.ModelTask,
+                new GrpcChannelOptions { HttpHandler = MicroservicesIp.DefaultHttpHandler }
             );
 
             SendReply response = null;
@@ -162,8 +162,8 @@ namespace Gateway.Controllers
 
         private TransportProto GetTransportById(int transportId)
         {
-            using var channel = GrpcChannel.ForAddress(MicroservicesIP.External.Dashboard,
-                new GrpcChannelOptions { HttpHandler = MicroservicesIP.DefaultHttpHandler }
+            using var channel = GrpcChannel.ForAddress(MicroservicesIp.External.Dashboard,
+                new GrpcChannelOptions { HttpHandler = MicroservicesIp.DefaultHttpHandler }
             );
             var client = new TransportService.TransportServiceClient(channel);
             var reply = client.GetTransportById(new GetTransportByIdRequest { Id = transportId });
@@ -172,8 +172,8 @@ namespace Gateway.Controllers
 
         private async Task<double> GetProductAreaByMapId(int modelId)
         {
-            using var channel = GrpcChannel.ForAddress(MicroservicesIP.External.Map,
-                new GrpcChannelOptions { HttpHandler = MicroservicesIP.DefaultHttpHandler }
+            using var channel = GrpcChannel.ForAddress(MicroservicesIp.External.Map,
+                new GrpcChannelOptions { HttpHandler = MicroservicesIp.DefaultHttpHandler }
             );
             var client = new MapService.MapServiceClient(channel);
             var reply = await client.GetMapAreaAsync(new GetMapAreaRequest { ModelId = modelId });
@@ -182,8 +182,8 @@ namespace Gateway.Controllers
 
         private async Task<string> GetProductByMapId(int modelId)
         {
-            using var channel = GrpcChannel.ForAddress(MicroservicesIP.External.Dashboard,
-                new GrpcChannelOptions { HttpHandler = MicroservicesIP.DefaultHttpHandler }
+            using var channel = GrpcChannel.ForAddress(MicroservicesIp.External.Dashboard,
+                new GrpcChannelOptions { HttpHandler = MicroservicesIp.DefaultHttpHandler }
             );
             var client = new ProductService.ProductServiceClient(channel);
             var reply = await client.GetProductByModelIdAsync(new GetProductByModelIdRequest { ModelId = modelId });

@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace WebClient.Models.SubModels
+﻿namespace WebClient.Models.SubModels
 {
     public class TransportProto
     {

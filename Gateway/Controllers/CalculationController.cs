@@ -17,8 +17,8 @@ namespace Gateway.Controllers
         [HttpGet("get_task_influence/{modelId}")]
         public async Task<double> GetTaskInfluenceByModelAsync(int modelId)
         {
-            using var channel = GrpcChannel.ForAddress(MicroservicesIP.External.Forecast,
-                new GrpcChannelOptions { HttpHandler = MicroservicesIP.DefaultHttpHandler }
+            using var channel = GrpcChannel.ForAddress(MicroservicesIp.External.Forecast,
+                new GrpcChannelOptions { HttpHandler = MicroservicesIp.DefaultHttpHandler }
             );
 
             var dons = new[] { 1, 1, 0, 1, 1 };
@@ -46,8 +46,8 @@ namespace Gateway.Controllers
             var minAirTemperature = new[] { 7, 15, 3, 26, -3 };
             var precipitationAmount = new[] { 7, 15, 3, 26, -3 };
 
-            using var channel = GrpcChannel.ForAddress(MicroservicesIP.External.Forecast,
-                new GrpcChannelOptions { HttpHandler = MicroservicesIP.DefaultHttpHandler }
+            using var channel = GrpcChannel.ForAddress(MicroservicesIp.External.Forecast,
+                new GrpcChannelOptions { HttpHandler = MicroservicesIp.DefaultHttpHandler }
             );
 
             var client = new InfluenceCalculationService.InfluenceCalculationServiceClient(channel);
@@ -80,8 +80,8 @@ namespace Gateway.Controllers
             var minAirTemperature = new[] { 7, 15, 3, 26, -3 };
             var precipitationAmount = new[] { 7, 15, 3, 26, -3 };
 
-            using var channel = GrpcChannel.ForAddress(MicroservicesIP.External.Forecast,
-                new GrpcChannelOptions { HttpHandler = MicroservicesIP.DefaultHttpHandler }
+            using var channel = GrpcChannel.ForAddress(MicroservicesIp.External.Forecast,
+                new GrpcChannelOptions { HttpHandler = MicroservicesIp.DefaultHttpHandler }
             );
 
             var client = new InfluenceCalculationService.InfluenceCalculationServiceClient(channel);
@@ -109,8 +109,8 @@ namespace Gateway.Controllers
         {
             var weather = await GetWeather(modelId);
 
-            using var channel = GrpcChannel.ForAddress(MicroservicesIP.External.Forecast,
-                new GrpcChannelOptions { HttpHandler = MicroservicesIP.DefaultHttpHandler }
+            using var channel = GrpcChannel.ForAddress(MicroservicesIp.External.Forecast,
+                new GrpcChannelOptions { HttpHandler = MicroservicesIp.DefaultHttpHandler }
             );
 
             var client = new InfluenceCalculationService.InfluenceCalculationServiceClient(channel);

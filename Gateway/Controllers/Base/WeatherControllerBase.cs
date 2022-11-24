@@ -24,8 +24,8 @@ namespace Gateway.Controllers.Base
 
         private async Task<IEnumerable<WeatherProto>> GetWeatherData(double lat, double lng, int modelId)
         {
-            using var channel = GrpcChannel.ForAddress(MicroservicesIP.External.Weather,
-                new GrpcChannelOptions { HttpHandler = MicroservicesIP.DefaultHttpHandler }
+            using var channel = GrpcChannel.ForAddress(MicroservicesIp.External.Weather,
+                new GrpcChannelOptions { HttpHandler = MicroservicesIp.DefaultHttpHandler }
             );
 
             var client = new WeatherService.WeatherServiceClient(channel);
@@ -43,8 +43,8 @@ namespace Gateway.Controllers.Base
         {
             lat = 0;
             lng = 0;
-            using var channel = GrpcChannel.ForAddress(MicroservicesIP.External.Map,
-                new GrpcChannelOptions { HttpHandler = MicroservicesIP.DefaultHttpHandler }
+            using var channel = GrpcChannel.ForAddress(MicroservicesIp.External.Map,
+                new GrpcChannelOptions { HttpHandler = MicroservicesIp.DefaultHttpHandler }
             );
 
             var client = new MapService.MapServiceClient(channel);

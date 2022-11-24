@@ -8,11 +8,18 @@ using WebClient.Models.SubModels;
 
 namespace WebClient.Controllers
 {
+    /// <summary>
+    /// Vehicle Interaction Controller
+    /// </summary>
     [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class TransportController : CustomControllerBase
     {
+        /// <summary>
+        /// Getting all transport
+        /// </summary>
+        /// <returns>List of transports</returns>
         [HttpGet("get_all")]
         public async Task<IEnumerable<TransportProto>> GetAllTransport()
         {

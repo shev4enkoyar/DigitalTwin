@@ -1,5 +1,8 @@
 ﻿namespace WebClient.Services
 {
+    /// <summary>
+    /// Mail Sending Authentication Parameters Class
+    /// </summary>
     public class AuthMessageSenderOptions
     {
         public string Host { get; set; }

@@ -9,13 +9,24 @@ using WebClient.Controllers.Base;
 
 namespace WebClient.Controllers
 {
+    /// <summary>
+    /// Technological map file management controller
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class FileController : CustomControllerBase
     {
+        /// <summary>
+        /// Receiving a listing of technological map documents
+        /// </summary>
+        /// <param name="modelId">Model Id</param>
+        /// <param name="sectionName">Name section</param>
+        /// <returns>technological map documents</returns>
         public async Task<IEnumerable<PageFileProto>> GetAllPagesAsync(int modelId, string sectionName)
         {
-            await CreateDocuments("techcard", modelId);
+            if (!await CreateDocuments("techcard", modelId))
+                return null;
+
 
             var response = await ConnectionClient.GetAsync($"api/file/get_pages?modelId={modelId}&sectionName={sectionName}");
             if (!response.IsSuccessStatusCode) return null;
@@ -25,6 +36,10 @@ namespace WebClient.Controllers
             return result;
         }
 
+        /// <summary>
+        /// File download method
+        /// </summary>
+        /// <param name="guidFile">File Id</param>
         [HttpGet("download/document/{guidFile}")]
         public IActionResult DownloadDocument(string guidFile)
         {
@@ -54,13 +69,11 @@ namespace WebClient.Controllers
 
         private async Task<bool> CreateDocuments(string documentType, int modelId)
         {
-            switch (documentType)
+            return documentType switch
             {
-                case "techcard":
-                    return await CreateTechCardDocumentAsync(modelId);
-                default:
-                    return false;
-            }
+                "techcard" => await CreateTechCardDocumentAsync(modelId),
+                _ => false
+            };
         }
 
         private async Task<bool> CreateTechCardDocumentAsync(int modelId)

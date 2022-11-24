@@ -7,24 +7,41 @@ using System.Linq;
 using WebClient.Controllers.Base;
 using WebClient.Data;
 using WebClient.Models;
-using WebClient.Util;
+using WebClient.Models.SubModels;
 
 namespace WebClient.Controllers
 {
+    /// <summary>
+    /// User Role Controller
+    /// </summary>
     [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class RolesController : CustomControllerBase
     {
+        /// <summary>
+        /// Role management property
+        /// </summary>
         private readonly RoleManager<ApplicationRole> _roleManager;
+
+        /// <summary>
+        /// Database access property
+        /// </summary>
         private readonly ApplicationDbContext _dbContext;
 
+        /// <summary>
+        /// Dependency injection constructor
+        /// </summary>
         public RolesController(ApplicationDbContext dbContext, RoleManager<ApplicationRole> roleManager)
         {
             _dbContext = dbContext;
             _roleManager = roleManager;
         }
 
+        /// <summary>
+        /// Method for getting all roles
+        /// </summary>
+        /// <returns>Enumeration of roles and functionality</returns>
         [HttpGet("get_all")]
         public string GetAllRoles()
         {

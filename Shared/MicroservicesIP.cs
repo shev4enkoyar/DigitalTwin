@@ -1,37 +1,21 @@
 ﻿using System;
 using System.Net.Http;
-using System.Net.Http.Headers;
 
 namespace Shared
 {
     /// <summary>
     /// Class containing microservices IP
     /// </summary>
-    public static class MicroservicesIP
+    public static class MicroservicesIp
     {
-        private static readonly string gateway = "http://localhost:5100";
+        private const string ConstGatewayIp = "http://localhost:5100";
 
         #region Properties
 
         /// <summary>Gateway IP</summary>
         /// <value>http://localhost:5100</value>
         /// <exception cref="ArgumentNullException"/>
-        public static string GatewayIP => CheckEmptyIP(gateway);
-
-        public static HttpClient GatewayHttpClient
-        {
-            get
-            {
-                HttpClient client = new HttpClient
-                {
-                    BaseAddress = new Uri(GatewayIP)
-                };
-                client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Accept.Add(
-                    new MediaTypeWithQualityHeaderValue("application/json"));
-                return client;
-            }
-        }
+        public static string GatewayIp => CheckEmptyIp(ConstGatewayIp);
 
         public static HttpClientHandler DefaultHttpHandler => new HttpClientHandler()
         {
@@ -42,69 +26,73 @@ namespace Shared
 
         public static class External
         {
-            private static readonly string dashboard = "https://localhost:49162";
-            private static readonly string files = "https://localhost:49177";
-            private static readonly string map = "https://localhost:49165";
-            private static readonly string modelTask = "https://localhost:49171";
-            private static readonly string forecast = "https://localhost:49173";
-            private static readonly string weather = "https://localhost:49175";
-            private static readonly string subscription = "https://localhost:49169";
-            private static readonly string image = null;
-            private static readonly string internetOfThings = "https://localhost:49165";
+            #region Constants
+
+            private const string DashboardIp = "https://localhost:49162";
+            private const string FilesIp = "https://localhost:49177";
+            private const string MapIp = "https://localhost:49165";
+            private const string ModelTaskIp = "https://localhost:49171";
+            private const string ForecastIp = "https://localhost:49173";
+            private const string WeatherIp = "https://localhost:49175";
+            private const string SubscriptionIp = "https://localhost:49169";
+            private const string ImageIp = "";
+            private const string InternetOfThingsIp = "https://localhost:49165";
+
+            #endregion
 
             #region Properties
 
             /// <summary>DashboardManager IP</summary>
             /// <value>https://localhost:49162</value>
             /// <exception cref="ArgumentNullException"/>
-            public static string Dashboard => CheckEmptyIP(dashboard);
+            public static string Dashboard => CheckEmptyIp(DashboardIp);
 
             /// <summary>DashboardManager IP</summary>
             /// <value>null</value>
             /// <exception cref="ArgumentNullException"/>
-            public static string Files => CheckEmptyIP(files);
+            public static string Files => CheckEmptyIp(FilesIp);
 
             /// <summary>MapManager IP</summary>
             /// <value>https://localhost:49165</value>
             /// <exception cref="ArgumentNullException"/>
-            public static string Map => CheckEmptyIP(map);
+            public static string Map => CheckEmptyIp(MapIp);
 
             /// <summary>SubscriptionManager IP</summary>
             /// <value>https://localhost:49169/</value>
             /// <exception cref="ArgumentNullException"/>
-            public static string Subscription => CheckEmptyIP(subscription);
+            public static string Subscription => CheckEmptyIp(SubscriptionIp);
 
             /// <summary>ImageManager IP</summary>
             /// <value>exception</value>
             /// <exception cref="ArgumentNullException"/>
-            public static string Image => CheckEmptyIP(image);
+            public static string Image => CheckEmptyIp(ImageIp);
 
             /// <summary>InternetOfThingsManager IP</summary>
             /// <value>https://localhost:49165</value>
             /// <exception cref="ArgumentNullException"/>
-            public static string InternetOfThings => CheckEmptyIP(internetOfThings);
+            public static string InternetOfThings => CheckEmptyIp(InternetOfThingsIp);
 
             /// <summary>ModelTaskManager IP</summary>
             /// <value>https://localhost:49171</value>
             /// <exception cref="ArgumentNullException"/>
-            public static string ModelTask => CheckEmptyIP(modelTask);
+            public static string ModelTask => CheckEmptyIp(ModelTaskIp);
 
             /// <summary>ForecastManager IP</summary>
             /// <value>https://localhost:49173</value>
             /// <exception cref="ArgumentNullException"/>
-            public static string Forecast => CheckEmptyIP(forecast);
+            public static string Forecast => CheckEmptyIp(ForecastIp);
 
             /// <summary>WeatherManager IP</summary>
             /// <value>https://localhost:49175</value>
             /// <exception cref="ArgumentNullException"/>
-            public static string Weather => CheckEmptyIP(weather);
+            public static string Weather => CheckEmptyIp(WeatherIp);
 
             #endregion
         }
 
         #region Methods
 
-        private static string CheckEmptyIP(string ip)
+        private static string CheckEmptyIp(string ip)
         {
             if (string.IsNullOrEmpty(ip))
                 throw new ArgumentException("Empty IP");

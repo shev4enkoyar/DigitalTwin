@@ -10,8 +10,8 @@ using WebClient.Data;
 namespace WebClient.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221117194223_AddData")]
-    partial class AddData
+    [Migration("20221124001117_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -318,7 +318,7 @@ namespace WebClient.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<string>("CompanyINN")
+                    b.Property<string>("CompanyInn")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -417,19 +417,19 @@ namespace WebClient.Migrations
                         new
                         {
                             Id = 6,
-                            Description = "Технологическая карта",
+                            Description = "Модель. Технологическая карта",
                             Name = "dashboard"
                         },
                         new
                         {
                             Id = 7,
-                            Description = "Карта",
+                            Description = "Модель. Карта",
                             Name = "map"
                         },
                         new
                         {
                             Id = 8,
-                            Description = "Рекомендательная система",
+                            Description = "Модель. Рекомендательная система",
                             Name = "recommendation"
                         },
                         new
@@ -441,8 +441,20 @@ namespace WebClient.Migrations
                         new
                         {
                             Id = 10,
-                            Description = "График работ",
+                            Description = "Модель. График работ",
                             Name = "workDiagrame"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Description = "Модель. Документы",
+                            Name = "docs"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Description = "Модель. IoT",
+                            Name = "iot"
                         });
                 });
 
@@ -499,8 +511,8 @@ namespace WebClient.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "2ffe9aac-b9e0-40bb-88c0-143bdb5db3cf",
-                            ConcurrencyStamp = "1f836953-44d3-4217-b68f-eaeb8b4bde35",
+                            Id = "12b0c87c-184d-4b03-93a3-c4fdd83726d0",
+                            ConcurrencyStamp = "485b6cb8-96a5-4fcd-9529-c69cfd3a5ecd",
                             Name = "Maintainer",
                             NormalizedName = "MAINTAINER",
                             Description = "",
@@ -509,8 +521,8 @@ namespace WebClient.Migrations
                         },
                         new
                         {
-                            Id = "4d3ca0ea-d459-4022-b5a6-086310043ffc",
-                            ConcurrencyStamp = "f1756dea-fd23-4a7c-919e-4b307a164408",
+                            Id = "38d9b73e-3942-4991-ad3f-bff6557e293d",
+                            ConcurrencyStamp = "df5f4e8b-256c-4442-8cba-00157fc0c6ae",
                             Name = "Admin",
                             NormalizedName = "ADMIN",
                             Description = "Danger for using",
@@ -519,8 +531,8 @@ namespace WebClient.Migrations
                         },
                         new
                         {
-                            Id = "f1167ddd-81e5-42da-80a6-812e33818a72",
-                            ConcurrencyStamp = "2c2e1cc7-de00-43ea-92db-2d474a09448a",
+                            Id = "1ce76864-0e60-4772-858c-55c051ac235c",
+                            ConcurrencyStamp = "fdc7c0f0-f2c0-4bc8-8a23-616387d536d7",
                             Name = "Agronomist",
                             NormalizedName = "AGRONOMIST",
                             Description = "",
@@ -529,8 +541,8 @@ namespace WebClient.Migrations
                         },
                         new
                         {
-                            Id = "29223f9b-ab10-4f1e-8482-e0d8e147e25f",
-                            ConcurrencyStamp = "526651fd-0b33-4bd2-8df6-3647c822660f",
+                            Id = "3338ca78-e648-4975-8b8d-d6478ac7fbba",
+                            ConcurrencyStamp = "d8c280b1-e5b7-42ee-aa7b-e93411c1e9a9",
                             Name = "Economist",
                             NormalizedName = "ECONOMIST",
                             Description = "",
@@ -607,15 +619,15 @@ namespace WebClient.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("WebClient.Models.ApplicationUser", "ApplicationUser")
+                    b.HasOne("WebClient.Models.ApplicationUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("ApplicationUser");
-
                     b.Navigation("Company");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("WebClient.Models.Notification", b =>

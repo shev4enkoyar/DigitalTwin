@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace WebClient.Util
+namespace WebClient.Models.SubModels
 {
     public class FullSubscriptionModel
     {

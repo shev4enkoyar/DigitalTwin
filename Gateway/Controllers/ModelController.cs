@@ -22,8 +22,8 @@ namespace Gateway.Controllers
         [HttpGet("get_products")]
         public async Task<IEnumerable<ProductProto>> GetAllProducts()
         {
-            using var channel = GrpcChannel.ForAddress(MicroservicesIP.External.Dashboard,
-                new GrpcChannelOptions { HttpHandler = MicroservicesIP.DefaultHttpHandler });
+            using var channel = GrpcChannel.ForAddress(MicroservicesIp.External.Dashboard,
+                new GrpcChannelOptions { HttpHandler = MicroservicesIp.DefaultHttpHandler });
 
             var client = new ProductService.ProductServiceClient(channel);
 
@@ -44,8 +44,8 @@ namespace Gateway.Controllers
         [HttpGet("validate_cadaster/{cadaster}")]
         public async Task<bool> ValidateCadasterAsync(string cadasterNum)
         {
-            using var channel = GrpcChannel.ForAddress(MicroservicesIP.External.Map,
-                new GrpcChannelOptions { HttpHandler = MicroservicesIP.DefaultHttpHandler }
+            using var channel = GrpcChannel.ForAddress(MicroservicesIp.External.Map,
+                new GrpcChannelOptions { HttpHandler = MicroservicesIp.DefaultHttpHandler }
             );
 
             var client = new CadasterService.CadasterServiceClient(channel);
@@ -76,8 +76,8 @@ namespace Gateway.Controllers
                 CompanyId = companyId
             };
 
-            using var channel = GrpcChannel.ForAddress(MicroservicesIP.External.Dashboard,
-                new GrpcChannelOptions { HttpHandler = MicroservicesIP.DefaultHttpHandler });
+            using var channel = GrpcChannel.ForAddress(MicroservicesIp.External.Dashboard,
+                new GrpcChannelOptions { HttpHandler = MicroservicesIp.DefaultHttpHandler });
 
             ModelReply reply = new DigitalModelService.DigitalModelServiceClient(channel).PushDigitalModels(request);
 
@@ -91,7 +91,7 @@ namespace Gateway.Controllers
 
         private int AddMap(int modelId, string cadaster = null, string categoryName = null)
         {
-            using var channel = GrpcChannel.ForAddress(MicroservicesIP.External.Map, new GrpcChannelOptions { HttpHandler = MicroservicesIP.DefaultHttpHandler });
+            using var channel = GrpcChannel.ForAddress(MicroservicesIp.External.Map, new GrpcChannelOptions { HttpHandler = MicroservicesIp.DefaultHttpHandler });
             var client = new MapService.MapServiceClient(channel);
             if ((cadaster == null && categoryName != null) ||
                 (cadaster != null && categoryName == null))

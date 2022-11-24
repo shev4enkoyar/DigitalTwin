@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using WebClient.Models;
 
-namespace WebClient.Util
+namespace WebClient.Models.SubModels
 {
     public class FullRoleModel
     {

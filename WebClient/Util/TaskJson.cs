@@ -3,6 +3,9 @@ using System.Text.Json.Serialization;
 
 namespace WebClient.Util
 {
+    /// <summary>
+    /// JSON representation of the task classes
+    /// </summary>
     public class TaskJson
     {
         public class Details
@@ -19,8 +22,8 @@ namespace WebClient.Util
 
         public class Expense
         {
-            [JsonPropertyName("Fuel")]
-            public List<Fuel> Fuel { get; set; }
+            [JsonPropertyName("Fuels")]
+            public List<Fuel> Fuels { get; set; }
 
             [JsonPropertyName("Seeds")]
             public Seeds Seeds { get; set; }

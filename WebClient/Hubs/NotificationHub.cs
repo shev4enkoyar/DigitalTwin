@@ -6,6 +6,7 @@ using WebClient.Interface;
 
 namespace WebClient.Hubs
 {
+    //TODO Что это за код?
     /*
      Use example
      [HttpPost]
@@ -29,6 +30,7 @@ namespace WebClient.Hubs
         {
             _userConnectionManager = userConnectionManager;
         }
+
         public string GetConnectionId()
         {
             var httpContext = this.Context.GetHttpContext();
@@ -38,7 +40,7 @@ namespace WebClient.Hubs
             return Context.ConnectionId;
         }
 
-        public async override Task OnDisconnectedAsync(Exception exception)
+        public override async Task OnDisconnectedAsync(Exception exception)
         {
             var connectionId = Context.ConnectionId;
             _userConnectionManager.RemoveUserConnection(connectionId);

@@ -16,17 +16,42 @@ using WebClient.Util;
 
 namespace WebClient.Controllers
 {
+    /// <summary>
+    /// Company management controller
+    /// </summary>
     [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class CompanyController : CustomControllerBase
     {
+        /// <summary>
+        /// User management property
+        /// </summary>
         private readonly UserManager<ApplicationUser> _userManager;
+
+        /// <summary>
+        /// Role management property
+        /// </summary>
         private readonly RoleManager<ApplicationRole> _roleManager;
+
+        /// <summary>
+        /// Database access property
+        /// </summary>
         private readonly ApplicationDbContext _dbContext;
+
+        /// <summary>
+        /// SignalR connection
+        /// </summary>
         private readonly IUserConnectionManager _userConnectionManager;
+
+        /// <summary>
+        /// SignalR hub for notification
+        /// </summary>
         private readonly IHubContext<NotificationHub, INotificationClient> _notificationHub;
 
+        /// <summary>
+        /// Dependency injection constructor
+        /// </summary>
         public CompanyController(ApplicationDbContext dbContext, UserManager<ApplicationUser> userManager, IUserConnectionManager userConnectionManager, IHubContext<NotificationHub, INotificationClient> notificationHub, RoleManager<ApplicationRole> roleManager)
         {
             _dbContext = dbContext;
@@ -36,17 +61,25 @@ namespace WebClient.Controllers
             _roleManager = roleManager;
         }
 
+        /// <summary>
+        /// Company Formation Method
+        /// </summary>
+        /// <param name="name">Company name</param>
+        /// <param name="inn">Company Inn</param>
+        /// <param name="supervisorName">Supervisor name</param>
+        /// <param name="contractId">contract num</param>
+        /// <returns>Status 200 if successful, otherwise 400</returns>
         [HttpGet("create")]
         public async Task<IActionResult> CreateCompany(string name, string inn, string supervisorName, string contractId)
         {
-            if (_dbContext.Companies.Any(x => x.CompanyINN == inn))
+            if (_dbContext.Companies.Any(x => x.CompanyInn == inn))
             {
                 return BadRequest("Company already exists!");
             }
             var createdCompany = new Company()
             {
                 CompanyName = name,
-                CompanyINN = inn,
+                CompanyInn = inn,
                 SupervisorName = supervisorName,
                 ContractId = contractId
             };
@@ -60,6 +93,10 @@ namespace WebClient.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// Method for getting current user's company
+        /// </summary>
+        /// <returns>Company Id</returns>
         [HttpGet("get_id")]
         public async Task<string> GetCompanyId()
         {
@@ -68,10 +105,15 @@ namespace WebClient.Controllers
             return user.CompanyId.ToString();
         }
 
+        /// <summary>
+        /// Method for inviting a user to a company
+        /// </summary>
+        /// <param name="email">User email</param>
+        /// <param name="rolesId">Roles Id</param>
+        /// <returns>Status 200 if successful</returns>
         [HttpGet("invite")]
         public async Task<IActionResult> CompanyInvite(string email, string rolesId)
         {
-            // agrodigitaltwin.com/acceptingInvite/{id}?isAccept=true
             var currentUser = await _userManager.FindByIdAsync(User.FindFirstValue(ClaimTypes.NameIdentifier));
             var companyId = currentUser.CompanyId;
             if (companyId == null)
@@ -91,7 +133,7 @@ namespace WebClient.Controllers
             {
                 Message = $"Вас пригласили в компанию \"{(await _dbContext.Companies.FindAsync(currentUser.CompanyId)).CompanyName}\".{Environment.NewLine}" +
                 $"Для того чтобы принять приглашение кликните по уведомлению.",
-                Type = NotificationType.Invite,
+                Type = NotificationTypesEnum.Invite,
                 RedirectLink = $"api/company/acceptingInvite/{companyInvite.Id}?isAccept=true;api/company/acceptingInvite/{companyInvite.Id}?isAccept=false",
                 UserId = user.Id
             };
@@ -107,6 +149,12 @@ namespace WebClient.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// Method of accepting an invitation to a company
+        /// </summary>
+        /// <param name="id">Invite Id</param>
+        /// <param name="isAccept">Acceptance or Rejection</param>
+        /// <returns>Status 200 if successful</returns>
         [HttpGet("acceptingInvite/{id}")]
         public async Task<IActionResult> AcceptingInvite(int id, bool isAccept)
         {
@@ -126,7 +174,7 @@ namespace WebClient.Controllers
             await _userManager.AddToRolesAsync(user, roles);
             _dbContext.Update(user);
             _dbContext.RemoveRange(_dbContext.CompanyInvites.Where(x => x.UserId.Equals(userId)));
-            _dbContext.RemoveRange(_dbContext.Notifications.Where(x => (x.UserId.Equals(userId)) && (x.Type.Equals(NotificationType.Invite))));
+            _dbContext.RemoveRange(_dbContext.Notifications.Where(x => (x.UserId.Equals(userId)) && (x.Type.Equals(NotificationTypesEnum.Invite))));
             await _dbContext.SaveChangesAsync();
             return Ok();
         }

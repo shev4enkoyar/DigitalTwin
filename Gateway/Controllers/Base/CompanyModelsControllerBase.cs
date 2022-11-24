@@ -22,8 +22,8 @@ namespace Gateway.Controllers.Base
         [HttpGet("get_models/{companyId}")]
         public async Task<IEnumerable<ModelProto>> GetModelsByCompanyId(string companyId)
         {
-            using var channel = GrpcChannel.ForAddress(MicroservicesIP.External.Dashboard,
-                new GrpcChannelOptions { HttpHandler = MicroservicesIP.DefaultHttpHandler }
+            using var channel = GrpcChannel.ForAddress(MicroservicesIp.External.Dashboard,
+                new GrpcChannelOptions { HttpHandler = MicroservicesIp.DefaultHttpHandler }
             );
 
             GetModelsReply response = null;

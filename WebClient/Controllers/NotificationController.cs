@@ -10,18 +10,31 @@ using WebClient.Models;
 
 namespace WebClient.Controllers
 {
+    /// <summary>
+    /// User notification management controller
+    /// </summary>
     [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class NotificationController : CustomControllerBase
     {
+        /// <summary>
+        /// Database access property
+        /// </summary>
         private readonly ApplicationDbContext _dbContext;
 
+        /// <summary>
+        /// Dependency injection constructor
+        /// </summary>
         public NotificationController(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
         }
 
+        /// <summary>
+        /// User Notification Receive Method
+        /// </summary>
+        /// <returns>Notification object</returns>
         [HttpGet("get_all")]
         public string GetUserNotifications()
         {

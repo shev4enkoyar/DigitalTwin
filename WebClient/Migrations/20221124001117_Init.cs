@@ -32,7 +32,7 @@ namespace WebClient.Migrations
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     CompanyName = table.Column<string>(type: "text", nullable: false),
-                    CompanyINN = table.Column<string>(type: "text", nullable: false),
+                    CompanyInn = table.Column<string>(type: "text", nullable: false),
                     SupervisorName = table.Column<string>(type: "text", nullable: false),
                     ContractId = table.Column<string>(type: "text", nullable: true)
                 },
@@ -281,8 +281,10 @@ namespace WebClient.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Description", "Discriminator", "FunctionalAccess", "Name", "NormalizedName", "TranslatedName" },
                 values: new object[,]
                 {
-                    { "926eea56-05ce-4a9c-922a-68943ab904fc", "cce904b0-b55f-473f-b019-9eb0077901ef", "", "ApplicationRole", "1;2", "Maintainer", "MAINTAINER", "Владелец компании" },
-                    { "a8a110a6-8fe6-42f7-b2eb-33b71a880100", "6b18b7c6-cea5-4858-bc7e-5f10b112dac6", "Danger for using", "ApplicationRole", "1;2;3;4;5;6;7;8;9", "Admin", "ADMIN", "Администратор" }
+                    { "12b0c87c-184d-4b03-93a3-c4fdd83726d0", "485b6cb8-96a5-4fcd-9529-c69cfd3a5ecd", "", "ApplicationRole", "1;2;3;4;5;6;7;8;9;10", "Maintainer", "MAINTAINER", "Владелец компании" },
+                    { "38d9b73e-3942-4991-ad3f-bff6557e293d", "df5f4e8b-256c-4442-8cba-00157fc0c6ae", "Danger for using", "ApplicationRole", "1;2;3;4;5;6;7;8;9;10", "Admin", "ADMIN", "Администратор" },
+                    { "1ce76864-0e60-4772-858c-55c051ac235c", "fdc7c0f0-f2c0-4bc8-8a23-616387d536d7", "", "ApplicationRole", "1;6;7;8;10", "Agronomist", "AGRONOMIST", "Агроном" },
+                    { "3338ca78-e648-4975-8b8d-d6478ac7fbba", "d8c280b1-e5b7-42ee-aa7b-e93411c1e9a9", "", "ApplicationRole", "1;4;5;6;10", "Economist", "ECONOMIST", "Экономист" }
                 });
 
             migrationBuilder.InsertData(
@@ -295,10 +297,13 @@ namespace WebClient.Migrations
                     { 3, "Регистрация компании", "registerCompany" },
                     { 4, "Активированные подписки", "activatedSubscriptions" },
                     { 5, "Оформление подписок", "allSubscriptions" },
-                    { 6, "Технологическая карта", "dashboard" },
-                    { 7, "Карта", "map" },
-                    { 8, "Рекомендательная система", "recommendation" },
-                    { 9, "Приглашение в компанию", "inviteCompany" }
+                    { 6, "Модель. Технологическая карта", "dashboard" },
+                    { 7, "Модель. Карта", "map" },
+                    { 8, "Модель. Рекомендательная система", "recommendation" },
+                    { 9, "Приглашение в компанию", "inviteCompany" },
+                    { 10, "Модель. График работ", "workDiagrame" },
+                    { 11, "Модель. Документы", "docs" },
+                    { 12, "Модель. IoT", "iot" }
                 });
 
             migrationBuilder.CreateIndex(

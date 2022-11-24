@@ -13,15 +13,32 @@ using WebClient.Models.SubModels;
 
 namespace WebClient.Controllers
 {
+    /// <summary>
+    /// User functionality management controller
+    /// </summary>
     [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class FunctionalController : CustomControllerBase
     {
+        /// <summary>
+        /// Database access property
+        /// </summary>
         private readonly ApplicationDbContext _dbContext;
+
+        /// <summary>
+        /// User management property
+        /// </summary>
         private readonly UserManager<ApplicationUser> _userManager;
+
+        /// <summary>
+        /// Role management property
+        /// </summary>
         private readonly RoleManager<ApplicationRole> _roleManager;
 
+        /// <summary>
+        /// Dependency injection constructor
+        /// </summary>
         public FunctionalController(UserManager<ApplicationUser> userManage, ApplicationDbContext dbContext, RoleManager<ApplicationRole> roleManager)
         {
             _dbContext = dbContext;
@@ -29,6 +46,10 @@ namespace WebClient.Controllers
             _roleManager = roleManager;
         }
 
+        /// <summary>
+        /// Method for getting the functionality of the current user
+        /// </summary>
+        /// <returns>Function enumeration</returns>
         [HttpGet("get_all")]
         public async Task<IEnumerable<string>> GetFunctional()
         {
