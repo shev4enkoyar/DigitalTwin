@@ -4,6 +4,7 @@ using Microservice.SubscriptionManager.DAL.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -43,8 +44,8 @@ namespace Microservice.SubscriptionManager.Services
             {
                 ModelId = request.ModelId,
                 SubscriptionId = request.SubscriptionId,
-                ActivatedData = DateTime.Parse(request.ActivatedData),
-                ExpirationData = DateTime.Parse(request.ExpirationData)
+                ActivatedData = DateTime.ParseExact(request.ActivatedData, "dd.MM.yyyy", CultureInfo.InvariantCulture),
+                ExpirationData = DateTime.ParseExact(request.ExpirationData, "dd.MM.yyyy", CultureInfo.InvariantCulture)
             });
             DbContext.SaveChanges();
 
