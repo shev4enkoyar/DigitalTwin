@@ -19,4 +19,7 @@ RUN dotnet publish "Microservice.DashboardManager.csproj" -c Release -o /app/pub
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+COPY ["/etc/ssl/private/agrodigitaltwin/localhost.pfx", "/https/servercert.pfx"]
+COPY ["/etc/ssl/private/agrodigitaltwin/localhost.crt", "/usr/local/share/ca-certificates/cacert.crt"]
+RUN update-ca-certificates
 ENTRYPOINT ["dotnet", "Microservice.DashboardManager.dll"]
