@@ -12,9 +12,7 @@ services:
       - ASPNETCORE_URLS=https://0.0.0.0:49162
       - ASPNETCORE_HTTPS_PORT=49162
       - ASPNETCORE_Kestrel__Certificates__Default__Password=
-      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/servercert.pfx
-    volumes:
-      - /etc/ssl/private/agrodigitaltwin:/etc/ssl/private/agrodigitaltwin
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/localhost.pfx
 
   microservice.mapmanager:
     image: ${DOCKER_REGISTRY-}microservicemapmanager
@@ -23,6 +21,11 @@ services:
     build:
       context: .
       dockerfile: Microservices/Microservice.MapManager/Dockerfile
+    environment:
+      - ASPNETCORE_URLS=https://0.0.0.0:49165
+      - ASPNETCORE_HTTPS_PORT=49165
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/localhost.pfx
 
   microservice.subscriptionmanager:
     image: ${DOCKER_REGISTRY-}microservicesubscriptionmanager
@@ -31,6 +34,11 @@ services:
     build:
       context: .
       dockerfile: Microservices/Microservice.SubscriptionManager/Dockerfile
+    environment:
+      - ASPNETCORE_URLS=https://0.0.0.0:49169
+      - ASPNETCORE_HTTPS_PORT=49169
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/localhost.pfx
 
   microservice.modeltaskmanager:
     image: ${DOCKER_REGISTRY-}microservicemodeltaskmanager
@@ -39,6 +47,11 @@ services:
     build:
       context: .
       dockerfile: Microservices/Microservice.ModelTaskManager/Microservice.ModelTaskManager/Dockerfile
+    environment:
+      - ASPNETCORE_URLS=https://0.0.0.0:49171
+      - ASPNETCORE_HTTPS_PORT=49171
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/localhost.pfx
 
 
   microservice.forecastmanager:
@@ -48,6 +61,11 @@ services:
     build:
       context: .
       dockerfile: Microservices/Microservice.ForecastManager/Dockerfile
+    environment:
+      - ASPNETCORE_URLS=https://0.0.0.0:49173
+      - ASPNETCORE_HTTPS_PORT=49173
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/localhost.pfx
 
 
   microservice.weathermanager:
@@ -57,6 +75,11 @@ services:
     build:
       context: .
       dockerfile: Microservices/Microservice.WeatherManager/Dockerfile
+    environment:
+      - ASPNETCORE_URLS=https://0.0.0.0:49175
+      - ASPNETCORE_HTTPS_PORT=49175
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/localhost.pfx
 
 
   microservice.filemanager:
@@ -68,4 +91,9 @@ services:
     build:
       context: .
       dockerfile: Microservices/Microservice.FileManager/Dockerfile
+    environment:
+      - ASPNETCORE_URLS=https://0.0.0.0:49177
+      - ASPNETCORE_HTTPS_PORT=49177
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/localhost.pfx
 

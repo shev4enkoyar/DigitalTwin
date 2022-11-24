@@ -5,6 +5,19 @@ WORKDIR /app
 EXPOSE 80
 EXPOSE 443
 
+# Update apt packages
+RUN apt update
+RUN apt upgrade -y
+
+RUN apt install git -y
+RUN git clone https://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@github.com/shev4enkoyar/agrodigitaltwinCerts.git
+
+RUN mkdir -p /https
+RUN cp /app/agrodigitaltwinCerts/localhost.crt /usr/local/share/ca-certificates/
+RUN cp /app/agrodigitaltwinCerts/localhost.pfx /https/
+RUN update-ca-certificates
+
+
 FROM mcr.microsoft.com/dotnet/sdk:3.1 AS build
 WORKDIR /src
 COPY ["Microservices/Microservice.ModelTaskManager/Microservice.ModelTaskManager/Microservice.ModelTaskManager.csproj", "Microservices/Microservice.ModelTaskManager/Microservice.ModelTaskManager/"]

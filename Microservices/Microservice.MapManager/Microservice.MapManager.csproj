@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="appsettings.json~RF4a1a7d5f.TMP" />
     <None Remove="Services\FigureCategoryProtoService.cs~RF78cc0e9.TMP" />
   </ItemGroup>
 

@@ -9,6 +9,15 @@ EXPOSE 443
 RUN apt update
 RUN apt upgrade -y
 
+RUN apt install git -y
+RUN git clone https://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@github.com/shev4enkoyar/agrodigitaltwinCerts.git
+
+RUN mkdir -p /https
+RUN cp /app/agrodigitaltwinCerts/localhost.crt /usr/local/share/ca-certificates/
+RUN cp /app/agrodigitaltwinCerts/localhost.pfx /https/
+RUN update-ca-certificates
+
+
 RUN apt install python3.7 -y
 # Add 3.7 to the available alternatives
 RUN update-alternatives --install /usr/bin/python python /usr/bin/python3.7 1
