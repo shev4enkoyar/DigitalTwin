@@ -11,6 +11,9 @@ using System.Threading.Tasks;
 
 namespace Gateway.Controllers
 {
+    /// <summary>
+    /// Model subscriber interaction controller
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class SubscriptionController : CompanyModelsControllerBase
@@ -35,11 +38,7 @@ namespace Gateway.Controllers
                     response = call.ResponseStream.Current;
                 }
             }
-            if (response == null)
-                return null;
-            return response.Subscriptions;
-
-
+            return response?.Subscriptions;
         }
 
         /// <summary>
@@ -49,7 +48,7 @@ namespace Gateway.Controllers
         /// <param name="days">Num days to update</param>
         /// <param name="subscriptionId">Subscription Id</param>
         /// <returns>HTTP code 200 or error</returns>
-        [HttpGet("activate/{modelId}")]
+        [HttpGet("activate/{modelId:int}")]
         public IActionResult ActivateSubscription(int modelId, int days, int subscriptionId)
         {
             using var channel = GrpcChannel.ForAddress(MicroservicesIp.External.Subscription,
@@ -126,7 +125,12 @@ namespace Gateway.Controllers
             return modelSubscriptions;
         }
 
-        [HttpGet("get_activated_subscription/{modelId}")]
+        /// <summary>
+        /// Method for getting a list of activated model subscriptions
+        /// </summary>
+        /// <param name="modelId">Model Id</param>
+        /// <returns>Enumerating Subscription Objects</returns>
+        [HttpGet("get_activated_subscription/{modelId:int}")]
         public async Task<IEnumerable<SubscriptionProto>> GetActivatedSubscription(int modelId)
         {
             using var channel = GrpcChannel.ForAddress(MicroservicesIp.External.Subscription,

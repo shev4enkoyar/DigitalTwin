@@ -10,10 +10,7 @@ namespace Shared
             ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
         };
 
-        public static DateTime ConvertFromJsonDate(DateTime jsonDate)
-        {
-            return new DateTime(jsonDate.Year, jsonDate.Month, jsonDate.Day);
-        }
+        public static DateTime ConvertFromJsonDate(DateTime jsonDate) => new DateTime(jsonDate.Year, jsonDate.Month, jsonDate.Day);
 
     }
 }

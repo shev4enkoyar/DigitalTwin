@@ -10,10 +10,18 @@ using Gateway.Controllers.Base;
 
 namespace Gateway.Controllers
 {
+    /// <summary>
+    /// 
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class CalculationController : WeatherControllerBase
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="modelId">Model Id</param>
+        /// <returns></returns>
         [HttpGet("get_task_influence/{modelId:int}")]
         public async Task<double> GetTaskInfluenceByModelAsync(int modelId)
         {
@@ -34,10 +42,14 @@ namespace Gateway.Controllers
             return 0;
         }
 
-        [HttpGet("get_weather_influence/{modelId}")]
+        /// <summary>
+        /// Weather Influence Method
+        /// </summary>
+        /// <param name="modelId">Model Id</param>
+        /// <returns>Significance of weather influence</returns>
+        [HttpGet("get_weather_influence/{modelId:int}")]
         public async Task<double> GetWeatherInfluenceByModelAsync(int modelId)
         {
-
             const double g = 0.7; // калибровочный коэффициент, хз где его брать, по идее у каждой культуры свой
             double gtcOptinal = 1; // оптимальный гтк для данной культуры. Либо вводится челом, либо можно нагуглить
             var temperatureByMonth = new[] { 10, 20, 4, 30, 0, 10, 20, 4, 30, 0, 10, 20, 4, 30, 0, 10, 20, 4, 30, 0, 10, 20, 4, 30, 0, 10, 20, 4, 30, 0 };
@@ -67,6 +79,11 @@ namespace Gateway.Controllers
             return 0;
         }
 
+        /// <summary>
+        /// Method for obtaining the total influence on the model
+        /// </summary>
+        /// <param name="modelId"></param>
+        /// <returns>Overall Influence</returns>
         [HttpGet("get_overall_influence/{modelId:int}")]
         public async Task<double> GetOverallInfluenceByModelAsync(int modelId)
         {
@@ -104,6 +121,11 @@ namespace Gateway.Controllers
             return 0;
         }
 
+        /// <summary>
+        /// Method for obtaining the evapotranspiration value
+        /// </summary>
+        /// <param name="modelId">Model Id</param>
+        /// <returns>Evapotranspiration value</returns>
         [HttpGet("get_evapotranspiration/{modelId}")]
         public async Task<double> GetEvapotranspiration(int modelId)
         {
@@ -134,8 +156,5 @@ namespace Gateway.Controllers
             var currentDate = SharedTools.ConvertFromJsonDate(DateTime.UtcNow);
             return weather.FirstOrDefault(x => DateTime.ParseExact(x.Date, "MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(currentDate))!.Evapotranspiration;
         }
-
-
-
     }
 }

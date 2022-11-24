@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace Gateway.Controllers
 {
+    /// <summary>
+    /// Controller for interaction with technological map tasks
+    /// </summary>
     [ApiController]
     [Route("api/[controller]")]
     public class TaskController : ControllerBase
@@ -17,7 +20,7 @@ namespace Gateway.Controllers
         /// </summary>
         /// <param name="modelId">Model Id</param>
         /// <returns>Enumerating Model Tasks</returns>
-        [HttpGet("get_all/{modelId}")]
+        [HttpGet("get_all/{modelId:int}")]
         public async Task<IEnumerable<ModelTask>> GetAllByModelId(int modelId)
         {
             using var channel = GrpcChannel.ForAddress(MicroservicesIp.External.ModelTask,
@@ -36,7 +39,19 @@ namespace Gateway.Controllers
             return response?.Tasks;
         }
 
-        [HttpGet("update_detail/{modelId}")]
+        /// <summary>
+        /// Task information update method
+        /// </summary>
+        /// <param name="modelId">Model Id</param>
+        /// <param name="taskId">Task Id</param>
+        /// <param name="date">Date task</param>
+        /// <param name="status">Day status</param>
+        /// <param name="fuel">Fuel on day</param>
+        /// <param name="seeds">Seeds on day</param>
+        /// <param name="fertilizers">Fertilizers on day</param>
+        /// <param name="pesticides">Pesticides on day</param>
+        /// <returns>Status 200 if successful, otherwise 400</returns>
+        [HttpGet("update_detail/{modelId:int}")]
         public async Task<string> UpdateDetailByModelId(int modelId, int taskId, string date, string status = "", string fuel = "", string seeds = "", string fertilizers = "", string pesticides = "")
         {
             using var channel = GrpcChannel.ForAddress(MicroservicesIp.External.ModelTask,
@@ -53,6 +68,11 @@ namespace Gateway.Controllers
             return reply.Status;
         }
 
+        /// <summary>
+        /// Method for obtaining detailed information on a task
+        /// </summary>
+        /// <param name="taskId">Task Id</param>
+        /// <returns>Detailed Information Object</returns>
         [HttpGet("get_details/{taskId}")]
         public async Task<IEnumerable<DetailProto>> GetDetailsByTaskId(int taskId)
         {
@@ -72,6 +92,11 @@ namespace Gateway.Controllers
             return response?.Details;
         }
 
+        /// <summary>
+        /// Method for getting the task object by its Id
+        /// </summary>
+        /// <param name="taskId">Task Id</param>
+        /// <returns>Model task object</returns>
         [HttpGet("get_task_by_id/{taskId}")]
         public async Task<ModelTask> GetTaskById(int taskId)
         {

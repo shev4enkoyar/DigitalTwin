@@ -8,10 +8,18 @@ using System.Threading.Tasks;
 
 namespace Gateway.Controllers
 {
+    /// <summary>
+    /// Vehicle Interaction Controller
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class TransportController : ControllerBase
     {
+        /// <summary>
+        /// Getting all vehicles on a specific model
+        /// </summary>
+        /// <param name="modelId">Model Id</param>
+        /// <returns>Enumeration of transport objects</returns>
         [HttpGet("get_all")]
         public async Task<IEnumerable<TransportProto>> GetAllByModelId(int modelId)
         {
@@ -31,6 +39,11 @@ namespace Gateway.Controllers
             return response?.Transports;
         }
 
+        /// <summary>
+        /// Method for getting transport by its Id
+        /// </summary>
+        /// <param name="transportId">Transport Id</param>
+        /// <returns>Transport model</returns>
         [HttpGet("get_by_id/{transportId:int}")]
         public async Task<TransportProto> GetTransportyId(int transportId)
         {

@@ -15,14 +15,22 @@ using System.Threading.Tasks;
 
 namespace Gateway.Controllers
 {
+    /// <summary>
+    /// File Level Interaction Controller
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class FileController : ControllerBase
     {
+        /// <summary>
+        /// Method for getting enumeration of model documents
+        /// </summary>
+        /// <param name="modelId">Model Id</param>
+        /// <param name="sectionName">File section</param>
+        /// <returns>Enumeration of documents</returns>
         [HttpGet("get_pages")]
         public async Task<IEnumerable<PageFileProto>> GetAllPageFiles(int modelId, string sectionName)
         {
-            //TODO Change IP route
             using var channel = GrpcChannel.ForAddress(MicroservicesIp.External.Files,
                 new GrpcChannelOptions { HttpHandler = SharedTools.GetDefaultHttpHandler });
 
@@ -37,10 +45,18 @@ namespace Gateway.Controllers
             return response?.Files;
         }
 
+        /// <summary>
+        /// Method for adding a file to the system
+        /// </summary>
+        /// <param name="modelId">Model Id</param>
+        /// <param name="name">File name</param>
+        /// <param name="link">File link</param>
+        /// <param name="extension">File extension</param>
+        /// <param name="sectionName">Section file</param>
+        /// <returns>True if everything is successful, otherwise False</returns>
         [HttpGet("add_page")]
         public bool AddPageFile(int modelId, string name, string link, string extension, string sectionName)
         {
-            //TODO Change IP route
             using var channel = GrpcChannel.ForAddress(MicroservicesIp.External.Files,
                 new GrpcChannelOptions { HttpHandler = SharedTools.GetDefaultHttpHandler });
 
@@ -57,6 +73,12 @@ namespace Gateway.Controllers
             return call.Status;
         }
 
+        /// <summary>
+        /// Method for deleting a document from a layer of files
+        /// </summary>
+        /// <param name="modelId">Model Id</param>
+        /// <param name="fileGuid">File Id</param>
+        /// <returns>True if everything is successful, otherwise False</returns>
         [HttpGet("remove_page")]
         public bool RemovePageFile(int modelId, string fileGuid)
         {
@@ -74,6 +96,11 @@ namespace Gateway.Controllers
             return call.Status;
         }
 
+        /// <summary>
+        /// csv file creation method
+        /// </summary>
+        /// <param name="modelId">Model Id</param>
+        /// <returns>Created csv object</returns>
         [HttpGet("create")]
         public Task<CsvFileReply> CreateAsync(int modelId)
         {

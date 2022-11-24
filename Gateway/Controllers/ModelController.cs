@@ -13,6 +13,9 @@ using System.Threading.Tasks;
 
 namespace Gateway.Controllers
 {
+    /// <summary>
+    /// Controller for interaction with technological maps
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class ModelController : CompanyModelsControllerBase
