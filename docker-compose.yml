@@ -8,6 +8,13 @@ services:
     build:
       context: .
       dockerfile: Microservices/Microservice.DashboardManager/Dockerfile
+    environment:
+      - ASPNETCORE_URLS=https://0.0.0.0:49162
+      - ASPNETCORE_HTTPS_PORT=49162
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/servercert.pfx
+    volumes:
+      - /etc/ssl/private/agrodigitaltwin:/etc/ssl/private/agrodigitaltwin
 
   microservice.mapmanager:
     image: ${DOCKER_REGISTRY-}microservicemapmanager
