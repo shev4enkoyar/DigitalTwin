@@ -14,11 +14,11 @@ namespace Gateway.Controllers
     [ApiController]
     public class CalculationController : WeatherControllerBase
     {
-        [HttpGet("get_task_influence/{modelId}")]
+        [HttpGet("get_task_influence/{modelId:int}")]
         public async Task<double> GetTaskInfluenceByModelAsync(int modelId)
         {
             using var channel = GrpcChannel.ForAddress(MicroservicesIp.External.Forecast,
-                new GrpcChannelOptions { HttpHandler = MicroservicesIp.DefaultHttpHandler }
+                new GrpcChannelOptions { HttpHandler = SharedTools.GetDefaultHttpHandler }
             );
 
             var dons = new[] { 1, 1, 0, 1, 1 };
@@ -47,7 +47,7 @@ namespace Gateway.Controllers
             var precipitationAmount = new[] { 7, 15, 3, 26, -3 };
 
             using var channel = GrpcChannel.ForAddress(MicroservicesIp.External.Forecast,
-                new GrpcChannelOptions { HttpHandler = MicroservicesIp.DefaultHttpHandler }
+                new GrpcChannelOptions { HttpHandler = SharedTools.GetDefaultHttpHandler }
             );
 
             var client = new InfluenceCalculationService.InfluenceCalculationServiceClient(channel);
@@ -67,7 +67,7 @@ namespace Gateway.Controllers
             return 0;
         }
 
-        [HttpGet("get_overall_influence/{modelId}")]
+        [HttpGet("get_overall_influence/{modelId:int}")]
         public async Task<double> GetOverallInfluenceByModelAsync(int modelId)
         {
             var dons = new[] { 1, 1, 0, 1, 1 };
@@ -81,7 +81,7 @@ namespace Gateway.Controllers
             var precipitationAmount = new[] { 7, 15, 3, 26, -3 };
 
             using var channel = GrpcChannel.ForAddress(MicroservicesIp.External.Forecast,
-                new GrpcChannelOptions { HttpHandler = MicroservicesIp.DefaultHttpHandler }
+                new GrpcChannelOptions { HttpHandler = SharedTools.GetDefaultHttpHandler }
             );
 
             var client = new InfluenceCalculationService.InfluenceCalculationServiceClient(channel);
@@ -110,7 +110,7 @@ namespace Gateway.Controllers
             var weather = await GetWeather(modelId);
 
             using var channel = GrpcChannel.ForAddress(MicroservicesIp.External.Forecast,
-                new GrpcChannelOptions { HttpHandler = MicroservicesIp.DefaultHttpHandler }
+                new GrpcChannelOptions { HttpHandler = SharedTools.GetDefaultHttpHandler }
             );
 
             var client = new InfluenceCalculationService.InfluenceCalculationServiceClient(channel);
@@ -131,14 +131,10 @@ namespace Gateway.Controllers
             var reply = client.GetEvapotranspiration(request);
 
             if (reply == null) return 0;
-            var currentDate = ConvertFromJsonDate(DateTime.UtcNow);
+            var currentDate = SharedTools.ConvertFromJsonDate(DateTime.UtcNow);
             return weather.FirstOrDefault(x => DateTime.ParseExact(x.Date, "MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(currentDate))!.Evapotranspiration;
         }
 
-        private static DateTime ConvertFromJsonDate(DateTime jsonDate)
-        {
-            return new DateTime(jsonDate.Year, jsonDate.Month, jsonDate.Day);
-        }
 
 
     }

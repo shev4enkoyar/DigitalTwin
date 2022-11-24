@@ -24,7 +24,7 @@ namespace Gateway.Controllers
         {
             //TODO Change IP route
             using var channel = GrpcChannel.ForAddress(MicroservicesIp.External.Files,
-                new GrpcChannelOptions { HttpHandler = MicroservicesIp.DefaultHttpHandler });
+                new GrpcChannelOptions { HttpHandler = SharedTools.GetDefaultHttpHandler });
 
             var client = new FileService.FileServiceClient(channel);
 
@@ -42,7 +42,7 @@ namespace Gateway.Controllers
         {
             //TODO Change IP route
             using var channel = GrpcChannel.ForAddress(MicroservicesIp.External.Files,
-                new GrpcChannelOptions { HttpHandler = MicroservicesIp.DefaultHttpHandler });
+                new GrpcChannelOptions { HttpHandler = SharedTools.GetDefaultHttpHandler });
 
             var client = new FileService.FileServiceClient(channel);
             var call = client.AddPageFile(new FullPageFile()
@@ -62,7 +62,7 @@ namespace Gateway.Controllers
         {
             //TODO Change IP route
             using var channel = GrpcChannel.ForAddress(MicroservicesIp.External.Files,
-                new GrpcChannelOptions { HttpHandler = MicroservicesIp.DefaultHttpHandler });
+                new GrpcChannelOptions { HttpHandler = SharedTools.GetDefaultHttpHandler });
 
             var client = new FileService.FileServiceClient(channel);
             var call = client.RemovePageFile(new RemovePageRequest()
@@ -78,7 +78,7 @@ namespace Gateway.Controllers
         public Task<CsvFileReply> CreateAsync(int modelId)
         {
             using var channel = GrpcChannel.ForAddress(MicroservicesIp.External.Files,
-                new GrpcChannelOptions { HttpHandler = MicroservicesIp.DefaultHttpHandler });
+                new GrpcChannelOptions { HttpHandler = SharedTools.GetDefaultHttpHandler });
 
             var clientFile = new FileService.FileServiceClient(channel);
 
@@ -145,7 +145,7 @@ namespace Gateway.Controllers
         private async Task<IEnumerable<ModelTask>> GetTasksByModelId(int modelId)
         {
             using var channel = GrpcChannel.ForAddress(MicroservicesIp.External.ModelTask,
-                new GrpcChannelOptions { HttpHandler = MicroservicesIp.DefaultHttpHandler }
+                new GrpcChannelOptions { HttpHandler = SharedTools.GetDefaultHttpHandler }
             );
 
             SendReply response = null;
@@ -163,7 +163,7 @@ namespace Gateway.Controllers
         private TransportProto GetTransportById(int transportId)
         {
             using var channel = GrpcChannel.ForAddress(MicroservicesIp.External.Dashboard,
-                new GrpcChannelOptions { HttpHandler = MicroservicesIp.DefaultHttpHandler }
+                new GrpcChannelOptions { HttpHandler = SharedTools.GetDefaultHttpHandler }
             );
             var client = new TransportService.TransportServiceClient(channel);
             var reply = client.GetTransportById(new GetTransportByIdRequest { Id = transportId });
@@ -173,7 +173,7 @@ namespace Gateway.Controllers
         private async Task<double> GetProductAreaByMapId(int modelId)
         {
             using var channel = GrpcChannel.ForAddress(MicroservicesIp.External.Map,
-                new GrpcChannelOptions { HttpHandler = MicroservicesIp.DefaultHttpHandler }
+                new GrpcChannelOptions { HttpHandler = SharedTools.GetDefaultHttpHandler }
             );
             var client = new MapService.MapServiceClient(channel);
             var reply = await client.GetMapAreaAsync(new GetMapAreaRequest { ModelId = modelId });
@@ -183,7 +183,7 @@ namespace Gateway.Controllers
         private async Task<string> GetProductByMapId(int modelId)
         {
             using var channel = GrpcChannel.ForAddress(MicroservicesIp.External.Dashboard,
-                new GrpcChannelOptions { HttpHandler = MicroservicesIp.DefaultHttpHandler }
+                new GrpcChannelOptions { HttpHandler = SharedTools.GetDefaultHttpHandler }
             );
             var client = new ProductService.ProductServiceClient(channel);
             var reply = await client.GetProductByModelIdAsync(new GetProductByModelIdRequest { ModelId = modelId });

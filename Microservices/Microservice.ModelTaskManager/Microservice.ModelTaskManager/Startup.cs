@@ -1,6 +1,6 @@
 using Microservice.ModelTaskManager.BackgroundServices;
 using Microservice.ModelTaskManager.DAL;
-using Microservice.TaskManager.Services;
+using Microservice.ModelTaskManager.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;

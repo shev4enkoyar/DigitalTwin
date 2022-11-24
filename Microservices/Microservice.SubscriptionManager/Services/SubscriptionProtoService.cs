@@ -22,7 +22,7 @@ namespace Microservice.SubscriptionManager.Services
         public override async Task GetAllSubscriptions(AllSubscriptionsRequest request, IServerStreamWriter<SubscriptionsReply> responseStream, ServerCallContext context)
         {
 
-            SubscriptionsReply subscriptionsReply = new SubscriptionsReply();
+            var subscriptionsReply = new SubscriptionsReply();
             subscriptionsReply.Subscriptions.AddRange(GetProtoSubscriptions());
 
             await responseStream.WriteAsync(subscriptionsReply);
@@ -31,7 +31,7 @@ namespace Microservice.SubscriptionManager.Services
 
         public override async Task GetActivatedSubscriptions(ActivatedSubscriptionsRequest request, IServerStreamWriter<SubscriptionsReply> responseStream, ServerCallContext context)
         {
-            SubscriptionsReply subscriptionsReply = new SubscriptionsReply();
+            var subscriptionsReply = new SubscriptionsReply();
             subscriptionsReply.Subscriptions.AddRange(GetProtoSubscriptions(request.ModelId));
 
             await responseStream.WriteAsync(subscriptionsReply);
@@ -54,7 +54,7 @@ namespace Microservice.SubscriptionManager.Services
 
         public override Task<UpdateSubscriptionReply> UpdateSubscription(UpdateSubscriptionRequest request, ServerCallContext context)
         {
-            ActivatedSubscription subscription = DbContext.ActivatedSubscriptions.FirstOrDefault(x => x.Id == request.ActivatedSubscriptionId);
+            var subscription = DbContext.ActivatedSubscriptions.FirstOrDefault(x => x.Id == request.ActivatedSubscriptionId);
             if (subscription == null)
                 return Task.FromResult(new UpdateSubscriptionReply { Status = "no such subscription" });
             subscription.ExpirationData = subscription.ExpirationData.AddDays(request.Days);

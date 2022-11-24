@@ -21,7 +21,7 @@ namespace WebClient.Controllers
 
             var contentSend = new StringContent(JsonConvert.SerializeObject(content), Encoding.UTF8, "application/json");
 
-            HttpResponseMessage response = await ConnectionClient.PostAsync(
+            var response = await ConnectionClient.PostAsync(
                     $"api/sensor", contentSend);
 
             if (response.IsSuccessStatusCode)

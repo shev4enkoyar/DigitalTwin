@@ -17,7 +17,7 @@ namespace Microservice.ModelTaskManager.BackgroundServices
 
     internal class ScopedProcessingService : IScopedProcessingService
     {
-        private readonly int additionalMinutes = 15;
+        private const int AdditionalMinutes = 15;
         private readonly ILogger<ScopedProcessingService> _logger;
         private readonly ApplicationContext _dbContext;
 
@@ -44,29 +44,24 @@ namespace Microservice.ModelTaskManager.BackgroundServices
 
         private int GetSecondsUntilMidnight()
         {
-            DateTime now = DateTime.UtcNow;
-            int hours = 23 - now.Hour;
-            int minutes = 59 - now.Minute;
-            int seconds = 59 - now.Second;
-            int secondsTillMidnight = hours * 3600 + (minutes + additionalMinutes) * 60 + seconds;
+            var now = DateTime.UtcNow;
+            var hours = 23 - now.Hour;
+            var minutes = 59 - now.Minute;
+            var seconds = 59 - now.Second;
+            var secondsTillMidnight = hours * 3600 + (minutes + AdditionalMinutes) * 60 + seconds;
             return secondsTillMidnight;
         }
 
         private void ChangeStatus()
         {
-            DateTime currDate = DateConverter(DateTime.UtcNow);
-            IEnumerable<Detail> rowsForUpdate = _dbContext.Details
+            var currDate = SharedTools.ConvertFromJsonDate(DateTime.UtcNow);
+            var rowsForUpdate = _dbContext.Details
                 .Where(x => x.Date.Equals(currDate) && x.Status.Equals(TaskStatusEnum.Passive))
                 .ToList()
                 .Select(x => { x.Status = "active"; return x; });
 
             _dbContext.Details.UpdateRange(rowsForUpdate);
             _dbContext.SaveChanges();
-        }
-
-        private DateTime DateConverter(DateTime date)
-        {
-            return new DateTime(date.Year, date.Month, date.Day);
         }
     }
 }

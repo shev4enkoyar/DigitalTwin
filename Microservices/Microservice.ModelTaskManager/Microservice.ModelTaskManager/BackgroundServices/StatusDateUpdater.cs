@@ -27,7 +27,5 @@ namespace Microservice.ModelTaskManager.BackgroundServices
 
             await scopedProcessingService.DoWork(stoppingToken);
         }
-
-
     }
 }

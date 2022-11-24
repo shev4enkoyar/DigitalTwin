@@ -23,7 +23,7 @@ namespace Gateway.Controllers.Base
         public async Task<IEnumerable<ModelProto>> GetModelsByCompanyId(string companyId)
         {
             using var channel = GrpcChannel.ForAddress(MicroservicesIp.External.Dashboard,
-                new GrpcChannelOptions { HttpHandler = MicroservicesIp.DefaultHttpHandler }
+                new GrpcChannelOptions { HttpHandler = SharedTools.GetDefaultHttpHandler }
             );
 
             GetModelsReply response = null;

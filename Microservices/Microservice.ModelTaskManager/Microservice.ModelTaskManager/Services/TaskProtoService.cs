@@ -1,14 +1,14 @@
-﻿using Grpc.Core;
+﻿using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Threading.Tasks;
+using Grpc.Core;
 using Microservice.ModelTaskManager.DAL;
 using Microservice.ModelTaskManager.Protos;
 using Microsoft.EntityFrameworkCore;
 using Shared;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace Microservice.TaskManager.Services
+namespace Microservice.ModelTaskManager.Services
 {
     public class TaskProtoService : ModelTaskService.ModelTaskServiceBase
     {
@@ -21,7 +21,7 @@ namespace Microservice.TaskManager.Services
 
         public override async Task GetTasks(SendRequest request, IServerStreamWriter<SendReply> responseStream, ServerCallContext context)
         {
-            SendReply taskReply = new SendReply();
+            var taskReply = new SendReply();
             taskReply.Tasks.AddRange(GetProtoTasks(request.ModelId));
 
             await responseStream.WriteAsync(taskReply);
@@ -30,7 +30,7 @@ namespace Microservice.TaskManager.Services
 
         public override async Task GetTaskDetails(GetTaskRequest request, IServerStreamWriter<GetTaskReply> responseStream, ServerCallContext context)
         {
-            GetTaskReply taskReply = new GetTaskReply();
+            var taskReply = new GetTaskReply();
             taskReply.Details.AddRange(GetProtoDetails(request.TaskId));
 
             await responseStream.WriteAsync(taskReply);
@@ -40,7 +40,10 @@ namespace Microservice.TaskManager.Services
         public override Task<GetTaskByIdReply> GetTaskById(GetTaskByIdRequest request, ServerCallContext context)
         {
             var task = DbContext.Tasks.FirstOrDefault(x => x.Id == request.TaskId);
-            ModelTask modelTask = new ModelTask()
+            if (task == null)
+                return null;
+
+            var modelTask = new ModelTask
             {
                 Id = task.Id,
                 Name = task.Name,
@@ -95,20 +98,17 @@ namespace Microservice.TaskManager.Services
 
         private IEnumerable<ModelTask> GetProtoTasks(int modelId)
         {
-            return DbContext.Tasks.Include(x => x.Details).Where(x => x.ModelId == modelId).Select(x => new ModelTask()
+            return DbContext.Tasks.Include(x => x.Details).Where(x => x.ModelId == modelId).Select(x => new ModelTask
             {
                 Id = x.Id,
                 StartDate = x.StartDate.ToShortDateString(),
                 EndDate = x.EndDate.ToShortDateString(),
-                IsComplete = x.Details.Where(x => x.Status.Equals(TaskStatusEnum.Done)).Count() / x.Details.Count >= 0.8,
+                IsComplete = x.Details.Count(detail => detail.Status.Equals(TaskStatusEnum.Done)) / x.Details.Count >= 0.8,
                 TaskType = x.Type,
                 Name = x.Name,
                 TransportList = x.TransportList
             }).ToList();
         }
-
-
-
     }
 }
 

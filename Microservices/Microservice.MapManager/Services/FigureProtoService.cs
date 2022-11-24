@@ -18,7 +18,7 @@ namespace Microservice.MapManager.Services
         }
         public override async Task GetFigures(SendRequest request, IServerStreamWriter<SendReply> responseStream, ServerCallContext context)
         {
-            SendReply sendReply = new SendReply();
+            var sendReply = new SendReply();
             sendReply.Figures.AddRange(GetProtoFigures(request.MapId));
             await responseStream.WriteAsync(sendReply);
             await Task.FromResult(sendReply);

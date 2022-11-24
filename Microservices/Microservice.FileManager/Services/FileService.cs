@@ -120,14 +120,14 @@ namespace Microservice.FileManager.Services
 
         public override Task<CsvFileReply> CreateTechCsv(CsvFileRequest csvRequest, ServerCallContext context)
         {
-            string cultura = csvRequest.Cultura;
-            string sort = csvRequest.Sort;
-            double area = csvRequest.Area;
-            double seedingRate = csvRequest.SeedingRate;
-            double fraction = csvRequest.Fraction;
-            double density = csvRequest.Density;
-            double harvest = csvRequest.Harvest;
-            double weightStages = csvRequest.WeightStages;
+            var cultura = csvRequest.Cultura;
+            var sort = csvRequest.Sort;
+            var area = csvRequest.Area;
+            var seedingRate = csvRequest.SeedingRate;
+            var fraction = csvRequest.Fraction;
+            var density = csvRequest.Density;
+            var harvest = csvRequest.Harvest;
+            var weightStages = csvRequest.WeightStages;
 
             var grpcTaskData = csvRequest.TaskData.ToList();
             var taskData = new List<TechCardCsvData>

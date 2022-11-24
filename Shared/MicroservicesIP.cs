@@ -17,11 +17,6 @@ namespace Shared
         /// <exception cref="ArgumentNullException"/>
         public static string GatewayIp => CheckEmptyIp(ConstGatewayIp);
 
-        public static HttpClientHandler DefaultHttpHandler => new HttpClientHandler()
-        {
-            ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
-        };
-
         #endregion
 
         public static class External

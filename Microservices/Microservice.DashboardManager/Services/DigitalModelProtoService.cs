@@ -21,7 +21,7 @@ namespace Microservice.DashboardManager.Services
 
         public override Task<ModelReply> PushDigitalModels(ModelRequest request, ServerCallContext context)
         {
-            DigitalModel model = new DigitalModel
+            var model = new DigitalModel
             {
                 Name = request.Name,
                 CompanyId = Guid.Parse(request.CompanyId),
@@ -36,7 +36,7 @@ namespace Microservice.DashboardManager.Services
 
         public override Task<ModelReply> UpdateMapDigitalModel(UpdateModelRequest request, ServerCallContext context)
         {
-            DigitalModel model = DbContext.DigitalModels.FirstOrDefault(x => x.Id == request.ModelId);
+            var model = DbContext.DigitalModels.FirstOrDefault(x => x.Id == request.ModelId);
             model.MapId = request.MapId;
 
             DbContext.Update(model);
@@ -47,7 +47,7 @@ namespace Microservice.DashboardManager.Services
 
         public override async Task GetDigitalModels(GetModelsRequest request, IServerStreamWriter<GetModelsReply> responseStream, ServerCallContext context)
         {
-            GetModelsReply modelsReply = new GetModelsReply();
+            var modelsReply = new GetModelsReply();
             modelsReply.Models.AddRange(GetProtoModels(request.CompanyId));
 
             await responseStream.WriteAsync(modelsReply);
@@ -56,20 +56,19 @@ namespace Microservice.DashboardManager.Services
 
         private IEnumerable<ModelProto> GetProtoModels(string userId)
         {
-            var some = DbContext.DigitalModels.Include(x => x.Product);
-            var some2 = some.Where(x => x.CompanyId.ToString().Equals(userId));
-            var some3 = some2.Select(x => new ModelProto()
-            {
-                Id = x.Id,
-                Name = x.Name,
-                CompanyId = x.CompanyId.ToString(),
-                ProductName = x.Product.Name,
-                ProductCode = x.Product.Code,
-                ProductCurrentPrice = x.Product.CurrentPrice.ToString(),
-                MapId = x.MapId.Value
-            });
-            var some4 = some3.ToList();
-            return some4;
+            return DbContext.DigitalModels
+                .Include(x => x.Product)
+                .Where(x => x.CompanyId.ToString().Equals(userId))
+                .Select(x => new ModelProto 
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    CompanyId = x.CompanyId.ToString(),
+                    ProductName = x.Product.Name,
+                    ProductCode = x.Product.Code,
+                    ProductCurrentPrice = x.Product.CurrentPrice.ToString(),
+                    MapId = x.MapId.Value
+                }).ToList();
         }
     }
 }

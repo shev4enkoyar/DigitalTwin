@@ -1,6 +1,4 @@
-﻿using Microservice.MapManager.DAL.Models;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace Microservice.MapManager.Clients
 {

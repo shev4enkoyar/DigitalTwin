@@ -28,7 +28,7 @@ namespace Microservice.MapManager
         /// <returns>When adding a figure its ID will be returned</returns>
         public Task SendFigure(FigureInfo figure)
         {
-            Figure model = new Figure()
+            var model = new Figure()
             {
                 MapId = figure.MapId,
                 CategoryId = figure.CategoryId,
@@ -58,25 +58,21 @@ namespace Microservice.MapManager
         public Task RemoveFigure(int figureId)
         {
             var figure = _dbContext.Figures.FirstOrDefault(x => x.Id == figureId);
-            if (figure != null)
-            {
-                _dbContext.Figures.Remove(figure);
-                _dbContext.SaveChanges();
-            }
+            if (figure == null) return null;
+            _dbContext.Figures.Remove(figure);
+            _dbContext.SaveChanges();
             return Task.CompletedTask;
         }
 
         public Task SendProductArea(string productArea)
         {
-            if (productArea != null)
-            {
-                var map = _dbContext.Maps.FirstOrDefault(x => x.Id == MapId);
-                if (map == null)
-                    return Task.CompletedTask;
-                map.ProductArea = productArea;
-                _dbContext.Maps.Update(map);
-                _dbContext.SaveChanges();
-            }
+            if (productArea == null) return null;
+            var map = _dbContext.Maps.FirstOrDefault(x => x.Id == MapId);
+            if (map == null)
+                return Task.CompletedTask;
+            map.ProductArea = productArea;
+            _dbContext.Maps.Update(map);
+            _dbContext.SaveChanges();
             return Task.CompletedTask;
         }
 
@@ -89,7 +85,7 @@ namespace Microservice.MapManager
                 await Clients.Caller.ReciveIfCadaster(false);
                 return;
             }
-            bool isCadasterExist = !string.IsNullOrEmpty(map.Cadaster);
+            var isCadasterExist = !string.IsNullOrEmpty(map.Cadaster);
             await Clients.Caller.ReciveIfCadaster(isCadasterExist);
         }
         #endregion

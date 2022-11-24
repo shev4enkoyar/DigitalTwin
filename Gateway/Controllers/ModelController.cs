@@ -25,7 +25,7 @@ namespace Gateway.Controllers
         public async Task<IEnumerable<ProductProto>> GetAllProducts()
         {
             using var channel = GrpcChannel.ForAddress(MicroservicesIp.External.Dashboard,
-                new GrpcChannelOptions { HttpHandler = MicroservicesIp.DefaultHttpHandler });
+                new GrpcChannelOptions { HttpHandler = SharedTools.GetDefaultHttpHandler });
 
             var client = new ProductService.ProductServiceClient(channel);
 
@@ -43,19 +43,17 @@ namespace Gateway.Controllers
         /// </summary>
         /// <param name="cadasterNum">Cadastral number</param>
         /// <returns>True if a parcel with a cadastral number is found otherwise false</returns>
-        [HttpGet("validate_cadaster/{cadaster}")]
+        [HttpGet("validate_cadaster/{cadasterNum}")]
         public async Task<bool> ValidateCadasterAsync(string cadasterNum)
         {
             using var channel = GrpcChannel.ForAddress(MicroservicesIp.External.Map,
-                new GrpcChannelOptions { HttpHandler = MicroservicesIp.DefaultHttpHandler }
+                new GrpcChannelOptions { HttpHandler = SharedTools.GetDefaultHttpHandler }
             );
 
             var client = new CadasterService.CadasterServiceClient(channel);
             var reply = await client.TestCadasterAsync(new TestCadasterRequest { Cadaster = cadasterNum });
 
-            if (reply.Status.Equals("ok"))
-                return true;
-            return false;
+            return reply.Status.Equals("ok");
         }
 
         /// <summary>
@@ -70,8 +68,7 @@ namespace Gateway.Controllers
         [HttpGet("create")]
         public bool CreateDigitalModel(string companyId, int productId, string name, string cadaster = null, string categoryName = null)
         {
-            ModelRequest request;
-            request = new ModelRequest
+            var request = new ModelRequest
             {
                 Name = name,
                 ProductId = productId,
@@ -79,24 +76,19 @@ namespace Gateway.Controllers
             };
 
             using var channel = GrpcChannel.ForAddress(MicroservicesIp.External.Dashboard,
-                new GrpcChannelOptions { HttpHandler = MicroservicesIp.DefaultHttpHandler });
+                new GrpcChannelOptions { HttpHandler = SharedTools.GetDefaultHttpHandler });
 
-            ModelReply reply = new DigitalModelService.DigitalModelServiceClient(channel).PushDigitalModels(request);
+            var reply = new DigitalModelService.DigitalModelServiceClient(channel).PushDigitalModels(request);
 
-            int mapId = AddMap(reply.ModelId, cadaster, categoryName);
+            var mapId = AddMap(reply.ModelId, cadaster, categoryName);
             reply = new DigitalModelService.DigitalModelServiceClient(channel).UpdateMapDigitalModel(new UpdateModelRequest() { MapId = mapId, ModelId = reply.ModelId });
 
-            if (reply.Status.Equals("ok")) 
-            {
-                return AddDefaultSubscription(reply.ModelId);
-            }
-                
-            return false;
+            return reply.Status.Equals("ok") && AddDefaultSubscription(reply.ModelId);
         }
 
         private bool AddDefaultSubscription(int modelId)
         {
-            using var channel = GrpcChannel.ForAddress(MicroservicesIP.External.Subscription, new GrpcChannelOptions { HttpHandler = MicroservicesIP.DefaultHttpHandler });
+            using var channel = GrpcChannel.ForAddress(MicroservicesIp.External.Subscription, new GrpcChannelOptions { HttpHandler = SharedTools.GetDefaultHttpHandler });
             var client = new SubscriptionService.SubscriptionServiceClient(channel);
             var reply = client.AddSubscription(new AddSubscriptionRequest
             {
@@ -105,14 +97,12 @@ namespace Gateway.Controllers
                 ActivatedData = DateTime.UtcNow.ToShortDateString(),
                 ExpirationData = DateTime.UtcNow.AddDays(30).ToShortDateString()
             });
-            if (reply.Status.Equals("ok"))
-                return true;
-            return false;
+            return reply.Status.Equals("ok");
         }
 
         private int AddMap(int modelId, string cadaster = null, string categoryName = null)
         {
-            using var channel = GrpcChannel.ForAddress(MicroservicesIp.External.Map, new GrpcChannelOptions { HttpHandler = MicroservicesIp.DefaultHttpHandler });
+            using var channel = GrpcChannel.ForAddress(MicroservicesIp.External.Map, new GrpcChannelOptions { HttpHandler = SharedTools.GetDefaultHttpHandler });
             var client = new MapService.MapServiceClient(channel);
             if ((cadaster == null && categoryName != null) ||
                 (cadaster != null && categoryName == null))

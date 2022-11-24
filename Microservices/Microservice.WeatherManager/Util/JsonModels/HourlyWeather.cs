@@ -3,6 +3,9 @@ using System.Text.Json.Serialization;
 
 namespace Microservice.WeatherManager.Util.JsonModels
 {
+    /// <summary>
+    /// Weather api json deserialization class
+    /// </summary>
     public class HourlyWeather
     {
         public class Hourly

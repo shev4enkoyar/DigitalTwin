@@ -16,7 +16,7 @@ namespace Gateway.Controllers
         public async Task<IEnumerable<TransportProto>> GetAllByModelId(int modelId)
         {
             using var channel = GrpcChannel.ForAddress(MicroservicesIp.External.Dashboard,
-                new GrpcChannelOptions { HttpHandler = MicroservicesIp.DefaultHttpHandler }
+                new GrpcChannelOptions { HttpHandler = SharedTools.GetDefaultHttpHandler }
             );
 
             GetAllTransportReply response = null;
@@ -35,7 +35,7 @@ namespace Gateway.Controllers
         public async Task<TransportProto> GetTransportyId(int transportId)
         {
             using var channel = GrpcChannel.ForAddress(MicroservicesIp.External.Dashboard,
-                new GrpcChannelOptions { HttpHandler = MicroservicesIp.DefaultHttpHandler }
+                new GrpcChannelOptions { HttpHandler = SharedTools.GetDefaultHttpHandler }
             );
             var client = new TransportService.TransportServiceClient(channel);
             var reply = await client.GetTransportByIdAsync(new GetTransportByIdRequest { Id = transportId });

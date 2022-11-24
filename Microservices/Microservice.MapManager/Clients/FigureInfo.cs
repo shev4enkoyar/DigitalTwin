@@ -1,8 +1,4 @@
-﻿using Microservice.MapManager.DAL.Models;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-
-namespace Microservice.MapManager.Clients
+﻿namespace Microservice.MapManager.Clients
 {
     public class FigureInfo
     {

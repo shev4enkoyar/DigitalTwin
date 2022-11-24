@@ -21,7 +21,7 @@ namespace Gateway.Controllers
         public async Task<IEnumerable<ModelTask>> GetAllByModelId(int modelId)
         {
             using var channel = GrpcChannel.ForAddress(MicroservicesIp.External.ModelTask,
-                new GrpcChannelOptions { HttpHandler = MicroservicesIp.DefaultHttpHandler }
+                new GrpcChannelOptions { HttpHandler = SharedTools.GetDefaultHttpHandler }
             );
 
             SendReply response = null;
@@ -40,7 +40,7 @@ namespace Gateway.Controllers
         public async Task<string> UpdateDetailByModelId(int modelId, int taskId, string date, string status = "", string fuel = "", string seeds = "", string fertilizers = "", string pesticides = "")
         {
             using var channel = GrpcChannel.ForAddress(MicroservicesIp.External.ModelTask,
-                new GrpcChannelOptions { HttpHandler = MicroservicesIp.DefaultHttpHandler }
+                new GrpcChannelOptions { HttpHandler = SharedTools.GetDefaultHttpHandler }
             );
             status ??= "";
             fuel ??= "";
@@ -57,7 +57,7 @@ namespace Gateway.Controllers
         public async Task<IEnumerable<DetailProto>> GetDetailsByTaskId(int taskId)
         {
             using var channel = GrpcChannel.ForAddress(MicroservicesIp.External.ModelTask,
-                new GrpcChannelOptions { HttpHandler = MicroservicesIp.DefaultHttpHandler }
+                new GrpcChannelOptions { HttpHandler = SharedTools.GetDefaultHttpHandler }
             );
 
             GetTaskReply response = null;
@@ -76,7 +76,7 @@ namespace Gateway.Controllers
         public async Task<ModelTask> GetTaskById(int taskId)
         {
             using var channel = GrpcChannel.ForAddress(MicroservicesIp.External.ModelTask,
-                new GrpcChannelOptions { HttpHandler = MicroservicesIp.DefaultHttpHandler }
+                new GrpcChannelOptions { HttpHandler = SharedTools.GetDefaultHttpHandler }
             );
             var client = new ModelTaskService.ModelTaskServiceClient(channel);
             var reply = await client.GetTaskByIdAsync(new GetTaskByIdRequest { TaskId = taskId });

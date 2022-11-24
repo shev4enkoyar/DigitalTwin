@@ -10,13 +10,24 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text.Json;
 using System.Threading.Tasks;
+using Shared;
 
 namespace Microservice.WeatherManager.Services
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class WeatherService : Protos.WeatherService.WeatherServiceBase
     {
+        /// <summary>
+        /// 
+        /// </summary>
         private int RowsInDay { get; } = 24;
-        private readonly ApplicationContext DbContext;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private ApplicationContext DbContext { get; }
         public WeatherService(ApplicationContext dbContext)
         {
             DbContext = dbContext;
@@ -24,11 +35,11 @@ namespace Microservice.WeatherManager.Services
 
         public override async Task GetWeather(Request request, IServerStreamWriter<WeatherReply> responseStream, ServerCallContext context)
         {
-            string weatherBase = "https://api.open-meteo.com/v1/forecast?";
-            string latlng = $"latitude={request.Lat}&longitude={request.Lng}";
-            string attributes = $"hourly=temperature_2m,precipitation,evapotranspiration,soil_moisture_0_1cm";
-            string dates = $"start_date={DateTime.UtcNow.AddDays(-30):yyyy-MM-dd}&end_date={DateTime.UtcNow:yyyy-MM-dd}";
-            WeatherReply reply = new WeatherReply();
+            const string weatherBase = "https://api.open-meteo.com/v1/forecast?";
+            var latLng = $"latitude={request.Lat}&longitude={request.Lng}";
+            var attributes = $"hourly=temperature_2m,precipitation,evapotranspiration,soil_moisture_0_1cm";
+            var dates = $"start_date={DateTime.UtcNow.AddDays(-30):yyyy-MM-dd}&end_date={DateTime.UtcNow:yyyy-MM-dd}";
+            var reply = new WeatherReply();
             if (IsWeatherUpdated(request.ModelId))
             {
                 reply.Weathers.AddRange(GetProtoWeathers(request.ModelId));
@@ -40,24 +51,23 @@ namespace Microservice.WeatherManager.Services
             if (DbContext.Weathers.Any(x => x.ModelId.Equals(request.ModelId)))
             {
                 DbContext.RemoveRange(DbContext.Weathers.Where(x => x.ModelId.Equals(request.ModelId)));
-                DbContext.SaveChanges();
+                await DbContext.SaveChangesAsync();
             }
 
-            HttpClient client = new HttpClient();
+            var client = new HttpClient();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-            HttpResponseMessage response = await client.GetAsync($"{weatherBase}{latlng}&{attributes}&{dates}");
-            HourlyWeather.Root jsonWeather;
+            var response = await client.GetAsync($"{weatherBase}{latLng}&{attributes}&{dates}");
             if (response.IsSuccessStatusCode)
             {
-                jsonWeather = JsonSerializer.Deserialize<HourlyWeather.Root>(response.Content.ReadAsStringAsync().Result);
+                var jsonWeather = JsonSerializer.Deserialize<HourlyWeather.Root>(response.Content.ReadAsStringAsync().Result);
 
-                int lastRow = 23;
-                List<double> temperaturs = new List<double>();
-                List<double> precipitations = new List<double>();
-                List<double> soilMoistures = new List<double>();
-                List<double> evapotranspirations = new List<double>();
-                for (int i = 0; i < jsonWeather.Hourly.Time.Count; i++)
+                var lastRow = 23;
+                var temperaturs = new List<double>();
+                var precipitations = new List<double>();
+                var soilMoistures = new List<double>();
+                var evapotranspirations = new List<double>();
+                for (var i = 0; i < jsonWeather.Hourly.Time.Count; i++)
                 {
                     temperaturs.Add(jsonWeather.Hourly.Temperature2m[i]);
                     precipitations.Add(jsonWeather.Hourly.Precipitation[i]);
@@ -69,7 +79,7 @@ namespace Microservice.WeatherManager.Services
                         DbContext.Add(new Weather
                         {
                             ModelId = request.ModelId,
-                            Date = ConvertFromJsonDate(DateTime.Parse(jsonWeather.Hourly.Time[i])),
+                            Date = SharedTools.ConvertFromJsonDate(DateTime.Parse(jsonWeather.Hourly.Time[i])),
                             TemperatureAvg = temperaturs.Average(),
                             PrecipitationAvg = precipitations.Average(),
                             SoilMoistureAvg = soilMoistures.Average(),
@@ -77,7 +87,7 @@ namespace Microservice.WeatherManager.Services
                         });
                     }
                 }
-                DbContext.SaveChanges();
+                await DbContext.SaveChangesAsync();
             }
 
             reply.Weathers.AddRange(GetProtoWeathers(request.ModelId));
@@ -88,7 +98,7 @@ namespace Microservice.WeatherManager.Services
 
         private bool IsWeatherUpdated(int modelId)
         {
-            DateTime dbDate = ConvertFromJsonDate(DateTime.UtcNow);
+            var dbDate = SharedTools.ConvertFromJsonDate(DateTime.UtcNow);
             return DbContext.Weathers.Any(x => x.ModelId.Equals(modelId) && x.Date.Equals(dbDate));
         }
 
@@ -105,11 +115,6 @@ namespace Microservice.WeatherManager.Services
                     Evapotranspiration = x.EvapotranspirationAvg
                 })
                 .ToList();
-        }
-
-        private DateTime ConvertFromJsonDate(DateTime jsonDate)
-        {
-            return new DateTime(jsonDate.Year, jsonDate.Month, jsonDate.Day);
         }
     }
 }

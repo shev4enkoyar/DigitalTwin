@@ -39,13 +39,11 @@ namespace Microservice.InternetOfThingsManager.Services
 
         public override Task<RemoveSensorReply> RemoveSensor(RemoveSensorRequest request, ServerCallContext context)
         {
-            RemoveSensorReply reply = new RemoveSensorReply() { IsDeleteComplete = false };
-            Sensor sensor = _dbContext.Sensors.FirstOrDefault(x => x.Id.Equals(Guid.Parse(request.SensorGuid)));
-            if (sensor != null)
-            {
-                _dbContext.Sensors.Remove(sensor);
-                reply.IsDeleteComplete = true;
-            }
+            var reply = new RemoveSensorReply() { IsDeleteComplete = false };
+            var sensor = _dbContext.Sensors.FirstOrDefault(x => x.Id.Equals(Guid.Parse(request.SensorGuid)));
+            if (sensor == null) return Task.FromResult(reply);
+            _dbContext.Sensors.Remove(sensor);
+            reply.IsDeleteComplete = true;
             return Task.FromResult(reply);
         }
     }

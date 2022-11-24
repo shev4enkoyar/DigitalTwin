@@ -23,7 +23,7 @@ namespace Gateway.Controllers
         public async Task<IEnumerable<SubscriptionProto>> GetAllSubscriptions()
         {
             using var channel = GrpcChannel.ForAddress(MicroservicesIp.External.Subscription,
-                new GrpcChannelOptions { HttpHandler = MicroservicesIp.DefaultHttpHandler }
+                new GrpcChannelOptions { HttpHandler = SharedTools.GetDefaultHttpHandler }
             );
 
             SubscriptionsReply response = null;
@@ -53,7 +53,7 @@ namespace Gateway.Controllers
         public IActionResult ActivateSubscription(int modelId, int days, int subscriptionId)
         {
             using var channel = GrpcChannel.ForAddress(MicroservicesIp.External.Subscription,
-                new GrpcChannelOptions { HttpHandler = MicroservicesIp.DefaultHttpHandler }
+                new GrpcChannelOptions { HttpHandler = SharedTools.GetDefaultHttpHandler }
             );
 
             var client = new SubscriptionService.SubscriptionServiceClient(channel);
@@ -79,7 +79,7 @@ namespace Gateway.Controllers
         public IActionResult UpdateActivatedSubscription(int days, int subscriptionId)
         {
             using var channel = GrpcChannel.ForAddress(MicroservicesIp.External.Subscription,
-                new GrpcChannelOptions { HttpHandler = MicroservicesIp.DefaultHttpHandler }
+                new GrpcChannelOptions { HttpHandler = SharedTools.GetDefaultHttpHandler }
             );
 
             var client = new SubscriptionService.SubscriptionServiceClient(channel);
@@ -106,7 +106,7 @@ namespace Gateway.Controllers
                 return null;
 
             using var channel = GrpcChannel.ForAddress(MicroservicesIp.External.Subscription,
-                new GrpcChannelOptions { HttpHandler = MicroservicesIp.DefaultHttpHandler }
+                new GrpcChannelOptions { HttpHandler = SharedTools.GetDefaultHttpHandler }
             );
 
             var modelSubscriptions = new Dictionary<string, List<string>>();
@@ -130,7 +130,7 @@ namespace Gateway.Controllers
         public async Task<IEnumerable<SubscriptionProto>> GetActivatedSubscription(int modelId)
         {
             using var channel = GrpcChannel.ForAddress(MicroservicesIp.External.Subscription,
-                new GrpcChannelOptions { HttpHandler = MicroservicesIp.DefaultHttpHandler }
+                new GrpcChannelOptions { HttpHandler = SharedTools.GetDefaultHttpHandler }
             );
             SubscriptionsReply response = null;
             using (var call = new SubscriptionService.SubscriptionServiceClient(channel).GetActivatedSubscriptions(new ActivatedSubscriptionsRequest { ModelId = modelId }))

@@ -18,7 +18,7 @@ namespace Microservice.DashboardManager.Services
 
         public override async Task GetProducts(ProductRequest request, IServerStreamWriter<ProductReply> responseStream, ServerCallContext context)
         {
-            ProductReply productReply = new ProductReply();
+            var productReply = new ProductReply();
             productReply.Products.AddRange(GetProtoProducts());
 
             await responseStream.WriteAsync(productReply);
@@ -46,6 +46,7 @@ namespace Microservice.DashboardManager.Services
         private string GetProductByModelId(int modelId) =>
             DbContext.DigitalModels
             .Include(x => x.Product)
-            .FirstOrDefault(x => x.Id.Equals(modelId)).Product.Name;
+            .FirstOrDefault(x => x.Id.Equals(modelId))
+            ?.Product.Name;
     }
 }

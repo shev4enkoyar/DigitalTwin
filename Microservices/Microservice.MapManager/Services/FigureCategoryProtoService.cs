@@ -19,7 +19,7 @@ namespace Microservice.MapManager.Services
 
         public override async Task GetFigureCategories(FigureCategoryRequest request, IServerStreamWriter<FigureCategoryReply> responseStream, ServerCallContext context)
         {
-            FigureCategoryReply reply = new FigureCategoryReply();
+            var reply = new FigureCategoryReply();
             reply.FigureCategories.AddRange(GetProtoFigureCategories());
             await responseStream.WriteAsync(reply);
             await Task.FromResult(reply);

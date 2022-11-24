@@ -17,7 +17,7 @@ namespace Microservice.DashboardManager.Services
 
         public override async Task GetAllTransport(GetAllTransportRequest request, IServerStreamWriter<GetAllTransportReply> responseStream, ServerCallContext context)
         {
-            GetAllTransportReply transportReply = new GetAllTransportReply();
+            var transportReply = new GetAllTransportReply();
             transportReply.Transports.AddRange(GetProtoTransport());
 
             await responseStream.WriteAsync(transportReply);
@@ -31,8 +31,8 @@ namespace Microservice.DashboardManager.Services
                 return null;
             var staffNames = transport.StaffName;
             var staffNums = transport.StaffNum;
-            string staff = $"{staffNames} - {staffNums}";
-            TransportProto transportProto = new TransportProto()
+            var staff = $"{staffNames} - {staffNums}";
+            var transportProto = new TransportProto()
             {
                 Id = transport.Id,
                 Brand = transport.Brand,

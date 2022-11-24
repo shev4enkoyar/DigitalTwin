@@ -9,10 +9,9 @@ namespace Microservice.MapManager.Services
     {
         public override Task<TestCadasterReply> TestCadaster(TestCadasterRequest request, ServerCallContext context)
         {
-            if (Rosreestr.GetCoordinatesByCadastre(request.Cadaster) != null)
-                return Task.FromResult(new TestCadasterReply() { Status = "ok" });
-
-            return Task.FromResult(new TestCadasterReply() { Status = "error" });
+            return Task.FromResult(Rosreestr.GetCoordinatesByCadastre(request.Cadaster) != null 
+                ? new TestCadasterReply { Status = "ok" } 
+                : new TestCadasterReply { Status = "error" });
         }
     }
 }
