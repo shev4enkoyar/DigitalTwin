@@ -6,7 +6,7 @@
     "@microsoft/signalr": "^6.0.8",
     "@turf/turf": "^6.4.0",
     "bootstrap": "~4.6.1",
-    "gantt-task-react": "^0.3.9",
+    "gantt-task-react": "^0.2.2",
     "google-protobuf": "^3.21.2",
     "grpc-web": "^1.4.1",
     "leaflet": "^1.9.2",

@@ -136,13 +136,14 @@ function GantGraph(props) {
         <ThemeContextConsumer>
             {context => (
                 <Container fluid style={{ margin: "0", padding: "0" }} className={context.theme}>
-                    {console.log('render')}
                     {tasks.length > 0 &&
                         <Gantt
                             tasks={tasks}
                             listCellWidth={""}
                             locale={"RU"}
-                            onClick={(e) => { props.height ? null : ClickedQuest(e) }}
+                            onClick={(e) => {
+                                /*!props.height ? ClickedQuest(e) : null*/
+                            }}
                             viewDate={curDate}
                         />
                     }
