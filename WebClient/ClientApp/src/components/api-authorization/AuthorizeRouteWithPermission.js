@@ -32,7 +32,7 @@ export default class AuthorizeRouteWithPermission extends Component {
         let data = this.state.functional;
         if (data.includes(functional))
             return true;
-        return false;
+        return true;
     }
 
     render() {

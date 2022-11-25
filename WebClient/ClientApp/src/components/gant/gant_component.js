@@ -142,7 +142,7 @@ function GantGraph(props) {
                             listCellWidth={""}
                             locale={"RU"}
                             onClick={(e) => {
-                                /*!props.height ? ClickedQuest(e) : null*/
+                                !props.height ? ClickedQuest(e) : null
                             }}
                             viewDate={curDate}
                         />

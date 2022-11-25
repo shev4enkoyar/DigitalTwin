@@ -144,7 +144,7 @@ const TaskModal = (props) => {
         let index = name.slice(4)
         console.log("index",index)
         fuel[index][type] = value
-        setFuel([...fuel, obj])
+        setFuel([...fuel])
     }
 
     function onExpenseChange(name, value, type) {
@@ -215,14 +215,14 @@ const TaskModal = (props) => {
         }
         //console.log(`api/task/update_detail/${props.modelId}?taskId=${props.task.taskId}&date=${props.task.curDate}&fuel=${fuel_str}&seeds=${ceeds_str}&fertilizers=${fertilizers_str}&Pesticides=${pesticides_str}`)
         if (valid) {
-            console.log(formError)
-            const token = await authService.getAccessToken();
+            console.log("valid", valid)
+            /*const token = await authService.getAccessToken();
             const response = await fetch(`api/task/update_detail/${props.modelId}?taskId=${props.task.taskId}&date=${props.task.curDate}&fuel=${fuel_str}&seeds=${ceeds_str}&fertilizers=${fertilizers_str}&Pesticides=${pesticides_str}`, {
                 headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
             });
             if (response.ok) {
                 props.setModal(false)
-            }
+            }*/
         }
     }
 
@@ -311,7 +311,7 @@ const TaskModal = (props) => {
                                             </>
                                     : props.task.role == "ECONOMIST" ?
                                                 <>
-                                            {status[currentDay] == "done" && props.task.Details.Expenses[currentDay].Fuel[0].num == 0 || status[currentDay] == "late" && props.task.Details.Expenses[currentDay].Fuel[0].num == 0 ?
+                                            {status[currentDay] == "done" && props.task.Details.Expenses[currentDay].Fuels[0].num !== 0 || status[currentDay] == "late" && props.task.Details.Expenses[currentDay].Fuels[0].num == 0 ?
                                                         <>
                                                             <h3 style={{ fontSize: "18px" }}>Затраты</h3>
                                                             <Form>
