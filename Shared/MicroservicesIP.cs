@@ -8,7 +8,7 @@ namespace Shared
     /// </summary>
     public static class MicroservicesIp
     {
-        private const string ConstGatewayIp = "https://localhost:5101";
+        private const string ConstGatewayIp = "http://localhost:5100";
 
         #region Properties
 
