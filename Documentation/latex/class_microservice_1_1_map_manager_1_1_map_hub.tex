@@ -1,0 +1,65 @@
+\hypertarget{class_microservice_1_1_map_manager_1_1_map_hub}{}\doxysection{Microservice.\+Map\+Manager.\+Map\+Hub Class Reference}
+\label{class_microservice_1_1_map_manager_1_1_map_hub}\index{Microservice.MapManager.MapHub@{Microservice.MapManager.MapHub}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_microservice_1_1_map_manager_1_1_map_hub_a5961a6c3ca5707548b1ce8110e7fc914}\label{class_microservice_1_1_map_manager_1_1_map_hub_a5961a6c3ca5707548b1ce8110e7fc914}} 
+{\bfseries Map\+Hub} (\mbox{\hyperlink{class_microservice_1_1_map_manager_1_1_d_a_l_1_1_application_context}{Application\+Context}} db\+Context)
+\item 
+\mbox{\Hypertarget{class_microservice_1_1_map_manager_1_1_map_hub_a8925a0f74d67cc308713eb3900bf6d84}\label{class_microservice_1_1_map_manager_1_1_map_hub_a8925a0f74d67cc308713eb3900bf6d84}} 
+override async Task {\bfseries On\+Connected\+Async} ()
+\item 
+\mbox{\Hypertarget{class_microservice_1_1_map_manager_1_1_map_hub_a513dce63b48395b1b65de4ad625b8782}\label{class_microservice_1_1_map_manager_1_1_map_hub_a513dce63b48395b1b65de4ad625b8782}} 
+override Task {\bfseries On\+Disconnected\+Async} (Exception exception)
+\item 
+Task \mbox{\hyperlink{class_microservice_1_1_map_manager_1_1_map_hub_a598f0d2da577d04a20b253020075f6a1}{Send\+Figure}} (\mbox{\hyperlink{class_microservice_1_1_map_manager_1_1_clients_1_1_figure_info}{Figure\+Info}} figure)
+\begin{DoxyCompactList}\small\item\em Send figure to the server for add or update.  \end{DoxyCompactList}\item 
+Task \mbox{\hyperlink{class_microservice_1_1_map_manager_1_1_map_hub_a74d912758e374a87f20a5486731868e9}{Remove\+Figure}} (int figure\+Id)
+\begin{DoxyCompactList}\small\item\em Deleting a figure by its ID  \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_microservice_1_1_map_manager_1_1_map_hub_a8407adea06f7bd2c88a59b0f5e738299}\label{class_microservice_1_1_map_manager_1_1_map_hub_a8407adea06f7bd2c88a59b0f5e738299}} 
+Task {\bfseries Send\+Product\+Area} (string product\+Area)
+\item 
+\mbox{\Hypertarget{class_microservice_1_1_map_manager_1_1_map_hub_ad753a214b8265f344e65bcb157d401ef}\label{class_microservice_1_1_map_manager_1_1_map_hub_ad753a214b8265f344e65bcb157d401ef}} 
+async Task {\bfseries Send\+Map\+Id} (int map\+Id)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_microservice_1_1_map_manager_1_1_map_hub_a74d912758e374a87f20a5486731868e9}\label{class_microservice_1_1_map_manager_1_1_map_hub_a74d912758e374a87f20a5486731868e9}} 
+\index{Microservice.MapManager.MapHub@{Microservice.MapManager.MapHub}!RemoveFigure@{RemoveFigure}}
+\index{RemoveFigure@{RemoveFigure}!Microservice.MapManager.MapHub@{Microservice.MapManager.MapHub}}
+\doxysubsubsection{\texorpdfstring{RemoveFigure()}{RemoveFigure()}}
+{\footnotesize\ttfamily Task Microservice.\+Map\+Manager.\+Map\+Hub.\+Remove\+Figure (\begin{DoxyParamCaption}\item[{int}]{figure\+Id }\end{DoxyParamCaption})}
+
+
+
+Deleting a figure by its ID  
+
+
+\begin{DoxyParams}{Parameters}
+{\em figure\+Id} & ID figure\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_microservice_1_1_map_manager_1_1_map_hub_a598f0d2da577d04a20b253020075f6a1}\label{class_microservice_1_1_map_manager_1_1_map_hub_a598f0d2da577d04a20b253020075f6a1}} 
+\index{Microservice.MapManager.MapHub@{Microservice.MapManager.MapHub}!SendFigure@{SendFigure}}
+\index{SendFigure@{SendFigure}!Microservice.MapManager.MapHub@{Microservice.MapManager.MapHub}}
+\doxysubsubsection{\texorpdfstring{SendFigure()}{SendFigure()}}
+{\footnotesize\ttfamily Task Microservice.\+Map\+Manager.\+Map\+Hub.\+Send\+Figure (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_microservice_1_1_map_manager_1_1_clients_1_1_figure_info}{Figure\+Info}}}]{figure }\end{DoxyParamCaption})}
+
+
+
+Send figure to the server for add or update.  
+
+
+\begin{DoxyParams}{Parameters}
+{\em figure} & Figure for add or update\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+When adding a figure its ID will be returned
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Source/shev4enkoyar/\+Digital\+Twin/\+Microservices/\+Microservice.\+Map\+Manager/Map\+Hub.\+cs\end{DoxyCompactItemize}

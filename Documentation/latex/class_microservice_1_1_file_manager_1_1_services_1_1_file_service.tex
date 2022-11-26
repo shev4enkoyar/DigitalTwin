@@ -1,0 +1,84 @@
+\hypertarget{class_microservice_1_1_file_manager_1_1_services_1_1_file_service}{}\doxysection{Microservice.\+File\+Manager.\+Services.\+File\+Service Class Reference}
+\label{class_microservice_1_1_file_manager_1_1_services_1_1_file_service}\index{Microservice.FileManager.Services.FileService@{Microservice.FileManager.Services.FileService}}
+
+
+grpc service for interacting with the file layer of the application   
+
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_microservice_1_1_file_manager_1_1_services_1_1_file_service_ae826b8e7eb5de2fb8330ecadea66bdac}\label{class_microservice_1_1_file_manager_1_1_services_1_1_file_service_ae826b8e7eb5de2fb8330ecadea66bdac}} 
+{\bfseries File\+Service} (\mbox{\hyperlink{class_microservice_1_1_file_manager_1_1_d_a_l_1_1_application_context}{Application\+Context}} db\+Context)
+\begin{DoxyCompactList}\small\item\em Dependency injection constructor  \end{DoxyCompactList}\item 
+override async Task \mbox{\hyperlink{class_microservice_1_1_file_manager_1_1_services_1_1_file_service_a95041c1a7f739aa275710f337e73be24}{Get\+Page\+Files}} (\mbox{\hyperlink{class_microservice_1_1_file_manager_1_1_protos_1_1_page_file_request}{Page\+File\+Request}} request, IServer\+Stream\+Writer$<$ \mbox{\hyperlink{class_microservice_1_1_file_manager_1_1_protos_1_1_get_page_file_reply}{Get\+Page\+File\+Reply}} $>$ response\+Stream, Server\+Call\+Context context)
+\begin{DoxyCompactList}\small\item\em Method for getting all model documentation files  \end{DoxyCompactList}\item 
+override Task$<$ \mbox{\hyperlink{class_microservice_1_1_file_manager_1_1_protos_1_1_page_file_status}{Page\+File\+Status}} $>$ \mbox{\hyperlink{class_microservice_1_1_file_manager_1_1_services_1_1_file_service_afaebb9eb6dfb1500dc840909658bd53c}{Add\+Page\+File}} (\mbox{\hyperlink{class_microservice_1_1_file_manager_1_1_protos_1_1_full_page_file}{Full\+Page\+File}} request, Server\+Call\+Context context)
+\begin{DoxyCompactList}\small\item\em Method for adding a file to the file indexing database  \end{DoxyCompactList}\item 
+override Task$<$ \mbox{\hyperlink{class_microservice_1_1_file_manager_1_1_protos_1_1_page_file_status}{Page\+File\+Status}} $>$ \mbox{\hyperlink{class_microservice_1_1_file_manager_1_1_services_1_1_file_service_afc9f3c4ca70dd8a2e5c69e2332e1d493}{Remove\+Page\+File}} (\mbox{\hyperlink{class_microservice_1_1_file_manager_1_1_protos_1_1_remove_page_request}{Remove\+Page\+Request}} request, Server\+Call\+Context context)
+\begin{DoxyCompactList}\small\item\em Method for deleting a file from the file indexing database  \end{DoxyCompactList}\item 
+override Task$<$ \mbox{\hyperlink{class_microservice_1_1_file_manager_1_1_protos_1_1_csv_file_reply}{Csv\+File\+Reply}} $>$ \mbox{\hyperlink{class_microservice_1_1_file_manager_1_1_services_1_1_file_service_a1d16d7bfacf9d9a1eac003ef8ec642a3}{Create\+Tech\+Csv}} (\mbox{\hyperlink{class_microservice_1_1_file_manager_1_1_protos_1_1_csv_file_request}{Csv\+File\+Request}} csv\+Request, Server\+Call\+Context context)
+\begin{DoxyCompactList}\small\item\em Method for creating a technological map document  \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+grpc service for interacting with the file layer of the application  
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_microservice_1_1_file_manager_1_1_services_1_1_file_service_afaebb9eb6dfb1500dc840909658bd53c}\label{class_microservice_1_1_file_manager_1_1_services_1_1_file_service_afaebb9eb6dfb1500dc840909658bd53c}} 
+\index{Microservice.FileManager.Services.FileService@{Microservice.FileManager.Services.FileService}!AddPageFile@{AddPageFile}}
+\index{AddPageFile@{AddPageFile}!Microservice.FileManager.Services.FileService@{Microservice.FileManager.Services.FileService}}
+\doxysubsubsection{\texorpdfstring{AddPageFile()}{AddPageFile()}}
+{\footnotesize\ttfamily override Task$<$ \mbox{\hyperlink{class_microservice_1_1_file_manager_1_1_protos_1_1_page_file_status}{Page\+File\+Status}} $>$ Microservice.\+File\+Manager.\+Services.\+File\+Service.\+Add\+Page\+File (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_microservice_1_1_file_manager_1_1_protos_1_1_full_page_file}{Full\+Page\+File}}}]{request,  }\item[{Server\+Call\+Context}]{context }\end{DoxyParamCaption})}
+
+
+
+Method for adding a file to the file indexing database  
+
+\begin{DoxyReturn}{Returns}
+Method execution status
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_microservice_1_1_file_manager_1_1_services_1_1_file_service_a1d16d7bfacf9d9a1eac003ef8ec642a3}\label{class_microservice_1_1_file_manager_1_1_services_1_1_file_service_a1d16d7bfacf9d9a1eac003ef8ec642a3}} 
+\index{Microservice.FileManager.Services.FileService@{Microservice.FileManager.Services.FileService}!CreateTechCsv@{CreateTechCsv}}
+\index{CreateTechCsv@{CreateTechCsv}!Microservice.FileManager.Services.FileService@{Microservice.FileManager.Services.FileService}}
+\doxysubsubsection{\texorpdfstring{CreateTechCsv()}{CreateTechCsv()}}
+{\footnotesize\ttfamily override Task$<$ \mbox{\hyperlink{class_microservice_1_1_file_manager_1_1_protos_1_1_csv_file_reply}{Csv\+File\+Reply}} $>$ Microservice.\+File\+Manager.\+Services.\+File\+Service.\+Create\+Tech\+Csv (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_microservice_1_1_file_manager_1_1_protos_1_1_csv_file_request}{Csv\+File\+Request}}}]{csv\+Request,  }\item[{Server\+Call\+Context}]{context }\end{DoxyParamCaption})}
+
+
+
+Method for creating a technological map document  
+
+\begin{DoxyReturn}{Returns}
+Technological map document object
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_microservice_1_1_file_manager_1_1_services_1_1_file_service_a95041c1a7f739aa275710f337e73be24}\label{class_microservice_1_1_file_manager_1_1_services_1_1_file_service_a95041c1a7f739aa275710f337e73be24}} 
+\index{Microservice.FileManager.Services.FileService@{Microservice.FileManager.Services.FileService}!GetPageFiles@{GetPageFiles}}
+\index{GetPageFiles@{GetPageFiles}!Microservice.FileManager.Services.FileService@{Microservice.FileManager.Services.FileService}}
+\doxysubsubsection{\texorpdfstring{GetPageFiles()}{GetPageFiles()}}
+{\footnotesize\ttfamily override async Task Microservice.\+File\+Manager.\+Services.\+File\+Service.\+Get\+Page\+Files (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_microservice_1_1_file_manager_1_1_protos_1_1_page_file_request}{Page\+File\+Request}}}]{request,  }\item[{IServer\+Stream\+Writer$<$ \mbox{\hyperlink{class_microservice_1_1_file_manager_1_1_protos_1_1_get_page_file_reply}{Get\+Page\+File\+Reply}} $>$}]{response\+Stream,  }\item[{Server\+Call\+Context}]{context }\end{DoxyParamCaption})}
+
+
+
+Method for getting all model documentation files  
+
+\begin{DoxyReturn}{Returns}
+Enumeration of Documentation Objects
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_microservice_1_1_file_manager_1_1_services_1_1_file_service_afc9f3c4ca70dd8a2e5c69e2332e1d493}\label{class_microservice_1_1_file_manager_1_1_services_1_1_file_service_afc9f3c4ca70dd8a2e5c69e2332e1d493}} 
+\index{Microservice.FileManager.Services.FileService@{Microservice.FileManager.Services.FileService}!RemovePageFile@{RemovePageFile}}
+\index{RemovePageFile@{RemovePageFile}!Microservice.FileManager.Services.FileService@{Microservice.FileManager.Services.FileService}}
+\doxysubsubsection{\texorpdfstring{RemovePageFile()}{RemovePageFile()}}
+{\footnotesize\ttfamily override Task$<$ \mbox{\hyperlink{class_microservice_1_1_file_manager_1_1_protos_1_1_page_file_status}{Page\+File\+Status}} $>$ Microservice.\+File\+Manager.\+Services.\+File\+Service.\+Remove\+Page\+File (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_microservice_1_1_file_manager_1_1_protos_1_1_remove_page_request}{Remove\+Page\+Request}}}]{request,  }\item[{Server\+Call\+Context}]{context }\end{DoxyParamCaption})}
+
+
+
+Method for deleting a file from the file indexing database  
+
+\begin{DoxyReturn}{Returns}
+Method execution status
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Source/shev4enkoyar/\+Digital\+Twin/\+Microservices/\+Microservice.\+File\+Manager/\+Services/File\+Service.\+cs\end{DoxyCompactItemize}

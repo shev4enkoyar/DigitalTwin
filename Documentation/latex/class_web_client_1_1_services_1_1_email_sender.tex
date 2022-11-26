@@ -1,0 +1,57 @@
+\hypertarget{class_web_client_1_1_services_1_1_email_sender}{}\doxysection{Web\+Client.\+Services.\+Email\+Sender Class Reference}
+\label{class_web_client_1_1_services_1_1_email_sender}\index{WebClient.Services.EmailSender@{WebClient.Services.EmailSender}}
+
+
+A class that implements the IEmail\+Sender interface for sending emails   
+
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_web_client_1_1_services_1_1_email_sender_a9cdbc103cb7f9250b188f34a9eaee033}\label{class_web_client_1_1_services_1_1_email_sender_a9cdbc103cb7f9250b188f34a9eaee033}} 
+{\bfseries Email\+Sender} (IOptions$<$ \mbox{\hyperlink{class_web_client_1_1_services_1_1_auth_message_sender_options}{Auth\+Message\+Sender\+Options}} $>$ options\+Accessor, IConfiguration configuration)
+\begin{DoxyCompactList}\small\item\em Dependency injection constructor  \end{DoxyCompactList}\item 
+Task \mbox{\hyperlink{class_web_client_1_1_services_1_1_email_sender_a497fd8c9bd5be9b0e15e98bcbbac999f}{Send\+Email\+Async}} (string email, string subject, string message)
+\begin{DoxyCompactList}\small\item\em Method for sending mail  \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_web_client_1_1_services_1_1_email_sender_a9f59eefc5d378a84b997787df6af7974}\label{class_web_client_1_1_services_1_1_email_sender_a9f59eefc5d378a84b997787df6af7974}} 
+\mbox{\hyperlink{class_web_client_1_1_services_1_1_auth_message_sender_options}{Auth\+Message\+Sender\+Options}} {\bfseries Sender\+Config}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Mail Sending Authentication Settings Property  \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_web_client_1_1_services_1_1_email_sender_acf3f40140f76e2b1837638d837637c58}\label{class_web_client_1_1_services_1_1_email_sender_acf3f40140f76e2b1837638d837637c58}} 
+IConfiguration {\bfseries Configuration}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Property for getting data from a configuration file  \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A class that implements the IEmail\+Sender interface for sending emails  
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_web_client_1_1_services_1_1_email_sender_a497fd8c9bd5be9b0e15e98bcbbac999f}\label{class_web_client_1_1_services_1_1_email_sender_a497fd8c9bd5be9b0e15e98bcbbac999f}} 
+\index{WebClient.Services.EmailSender@{WebClient.Services.EmailSender}!SendEmailAsync@{SendEmailAsync}}
+\index{SendEmailAsync@{SendEmailAsync}!WebClient.Services.EmailSender@{WebClient.Services.EmailSender}}
+\doxysubsubsection{\texorpdfstring{SendEmailAsync()}{SendEmailAsync()}}
+{\footnotesize\ttfamily Task Web\+Client.\+Services.\+Email\+Sender.\+Send\+Email\+Async (\begin{DoxyParamCaption}\item[{string}]{email,  }\item[{string}]{subject,  }\item[{string}]{message }\end{DoxyParamCaption})}
+
+
+
+Method for sending mail  
+
+
+\begin{DoxyParams}{Parameters}
+{\em email} & Email address where the mail will be sent\\
+\hline
+{\em subject} & Email subject\\
+\hline
+{\em message} & The content that will be in the mail\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The task of sending an email
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Source/shev4enkoyar/\+Digital\+Twin/\+Web\+Client/\+Services/Email\+Sender.\+cs\end{DoxyCompactItemize}

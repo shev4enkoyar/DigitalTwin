@@ -1,0 +1,43 @@
+\hypertarget{class_microservice_1_1_file_manager_1_1_protos_1_1_file_service_1_1_file_service_base}{}\doxysection{Microservice.\+File\+Manager.\+Protos.\+File\+Service.\+File\+Service\+Base Class Reference}
+\label{class_microservice_1_1_file_manager_1_1_protos_1_1_file_service_1_1_file_service_base}\index{Microservice.FileManager.Protos.FileService.FileServiceBase@{Microservice.FileManager.Protos.FileService.FileServiceBase}}
+
+
+Base class for server-\/side implementations of File\+Service  
+
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_microservice_1_1_file_manager_1_1_protos_1_1_file_service_1_1_file_service_base_a06c227249794cbb5bcfd011bf6c3f331}\label{class_microservice_1_1_file_manager_1_1_protos_1_1_file_service_1_1_file_service_base_a06c227249794cbb5bcfd011bf6c3f331}} 
+virtual global\+::\+System.\+Threading.\+Tasks.\+Task {\bfseries Get\+Page\+Files} (global\+::\+Microservice.\+File\+Manager.\+Protos.\+Page\+File\+Request request, grpc\+::\+IServer\+Stream\+Writer$<$ global\+::\+Microservice.\+File\+Manager.\+Protos.\+Get\+Page\+File\+Reply $>$ response\+Stream, grpc\+::\+Server\+Call\+Context context)
+\item 
+\mbox{\Hypertarget{class_microservice_1_1_file_manager_1_1_protos_1_1_file_service_1_1_file_service_base_acbd6d3b3df186257a6df45e118d8c13f}\label{class_microservice_1_1_file_manager_1_1_protos_1_1_file_service_1_1_file_service_base_acbd6d3b3df186257a6df45e118d8c13f}} 
+virtual global\+::\+System.\+Threading.\+Tasks.\+Task$<$ global\+::\+Microservice.\+File\+Manager.\+Protos.\+Page\+File\+Status $>$ {\bfseries Add\+Page\+File} (global\+::\+Microservice.\+File\+Manager.\+Protos.\+Full\+Page\+File request, grpc\+::\+Server\+Call\+Context context)
+\item 
+\mbox{\Hypertarget{class_microservice_1_1_file_manager_1_1_protos_1_1_file_service_1_1_file_service_base_a6b2195ca0a0cf9449a972d1b42906a3d}\label{class_microservice_1_1_file_manager_1_1_protos_1_1_file_service_1_1_file_service_base_a6b2195ca0a0cf9449a972d1b42906a3d}} 
+virtual global\+::\+System.\+Threading.\+Tasks.\+Task$<$ global\+::\+Microservice.\+File\+Manager.\+Protos.\+Page\+File\+Status $>$ {\bfseries Remove\+Page\+File} (global\+::\+Microservice.\+File\+Manager.\+Protos.\+Remove\+Page\+Request request, grpc\+::\+Server\+Call\+Context context)
+\item 
+\mbox{\Hypertarget{class_microservice_1_1_file_manager_1_1_protos_1_1_file_service_1_1_file_service_base_a49cc00dbc0cc647169a658109c48551b}\label{class_microservice_1_1_file_manager_1_1_protos_1_1_file_service_1_1_file_service_base_a49cc00dbc0cc647169a658109c48551b}} 
+virtual global\+::\+System.\+Threading.\+Tasks.\+Task$<$ global\+::\+Microservice.\+File\+Manager.\+Protos.\+Csv\+File\+Reply $>$ {\bfseries Create\+Tech\+Csv} (global\+::\+Microservice.\+File\+Manager.\+Protos.\+Csv\+File\+Request request, grpc\+::\+Server\+Call\+Context context)
+\item 
+\mbox{\Hypertarget{class_microservice_1_1_file_manager_1_1_protos_1_1_file_service_1_1_file_service_base_a06c227249794cbb5bcfd011bf6c3f331}\label{class_microservice_1_1_file_manager_1_1_protos_1_1_file_service_1_1_file_service_base_a06c227249794cbb5bcfd011bf6c3f331}} 
+virtual global\+::\+System.\+Threading.\+Tasks.\+Task {\bfseries Get\+Page\+Files} (global\+::\+Microservice.\+File\+Manager.\+Protos.\+Page\+File\+Request request, grpc\+::\+IServer\+Stream\+Writer$<$ global\+::\+Microservice.\+File\+Manager.\+Protos.\+Get\+Page\+File\+Reply $>$ response\+Stream, grpc\+::\+Server\+Call\+Context context)
+\item 
+\mbox{\Hypertarget{class_microservice_1_1_file_manager_1_1_protos_1_1_file_service_1_1_file_service_base_acbd6d3b3df186257a6df45e118d8c13f}\label{class_microservice_1_1_file_manager_1_1_protos_1_1_file_service_1_1_file_service_base_acbd6d3b3df186257a6df45e118d8c13f}} 
+virtual global\+::\+System.\+Threading.\+Tasks.\+Task$<$ global\+::\+Microservice.\+File\+Manager.\+Protos.\+Page\+File\+Status $>$ {\bfseries Add\+Page\+File} (global\+::\+Microservice.\+File\+Manager.\+Protos.\+Full\+Page\+File request, grpc\+::\+Server\+Call\+Context context)
+\item 
+\mbox{\Hypertarget{class_microservice_1_1_file_manager_1_1_protos_1_1_file_service_1_1_file_service_base_a6b2195ca0a0cf9449a972d1b42906a3d}\label{class_microservice_1_1_file_manager_1_1_protos_1_1_file_service_1_1_file_service_base_a6b2195ca0a0cf9449a972d1b42906a3d}} 
+virtual global\+::\+System.\+Threading.\+Tasks.\+Task$<$ global\+::\+Microservice.\+File\+Manager.\+Protos.\+Page\+File\+Status $>$ {\bfseries Remove\+Page\+File} (global\+::\+Microservice.\+File\+Manager.\+Protos.\+Remove\+Page\+Request request, grpc\+::\+Server\+Call\+Context context)
+\item 
+\mbox{\Hypertarget{class_microservice_1_1_file_manager_1_1_protos_1_1_file_service_1_1_file_service_base_a49cc00dbc0cc647169a658109c48551b}\label{class_microservice_1_1_file_manager_1_1_protos_1_1_file_service_1_1_file_service_base_a49cc00dbc0cc647169a658109c48551b}} 
+virtual global\+::\+System.\+Threading.\+Tasks.\+Task$<$ global\+::\+Microservice.\+File\+Manager.\+Protos.\+Csv\+File\+Reply $>$ {\bfseries Create\+Tech\+Csv} (global\+::\+Microservice.\+File\+Manager.\+Protos.\+Csv\+File\+Request request, grpc\+::\+Server\+Call\+Context context)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Base class for server-\/side implementations of File\+Service 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Source/shev4enkoyar/\+Digital\+Twin/\+Microservices/\+Microservice.\+File\+Manager/obj/\+Debug/netcoreapp3.\+1/\+Protos/File\+Grpc.\+cs\item 
+D\+:/\+Source/shev4enkoyar/\+Digital\+Twin/\+Microservices/\+Microservice.\+File\+Manager/obj/\+Release/netcoreapp3.\+1/\+Protos/File\+Grpc.\+cs\end{DoxyCompactItemize}

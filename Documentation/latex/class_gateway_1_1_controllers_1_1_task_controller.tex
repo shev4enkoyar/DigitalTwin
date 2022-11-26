@@ -1,0 +1,115 @@
+\hypertarget{class_gateway_1_1_controllers_1_1_task_controller}{}\doxysection{Gateway.\+Controllers.\+Task\+Controller Class Reference}
+\label{class_gateway_1_1_controllers_1_1_task_controller}\index{Gateway.Controllers.TaskController@{Gateway.Controllers.TaskController}}
+
+
+Controller for interaction with technological map tasks   
+
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+async Task$<$ IEnumerable$<$ \mbox{\hyperlink{class_microservice_1_1_web_client_1_1_protos_1_1_model_task}{Model\+Task}} $>$ $>$ \mbox{\hyperlink{class_gateway_1_1_controllers_1_1_task_controller_a6c7bf84f32093477f136e2c339dac341}{Get\+All\+By\+Model\+Id}} (int model\+Id)
+\begin{DoxyCompactList}\small\item\em Method to get all tasks by model ID  \end{DoxyCompactList}\item 
+async Task$<$ string $>$ \mbox{\hyperlink{class_gateway_1_1_controllers_1_1_task_controller_a1851792ea188b5f19e120b49635d580b}{Update\+Detail\+By\+Model\+Id}} (int model\+Id, int task\+Id, string date, string status=\char`\"{}\char`\"{}, string fuel=\char`\"{}\char`\"{}, string seeds=\char`\"{}\char`\"{}, string fertilizers=\char`\"{}\char`\"{}, string pesticides=\char`\"{}\char`\"{})
+\begin{DoxyCompactList}\small\item\em Task information update method  \end{DoxyCompactList}\item 
+async Task$<$ IEnumerable$<$ \mbox{\hyperlink{class_microservice_1_1_web_client_1_1_protos_1_1_detail_proto}{Detail\+Proto}} $>$ $>$ \mbox{\hyperlink{class_gateway_1_1_controllers_1_1_task_controller_a4f5f63129d72619f50ae863ab50c38ab}{Get\+Details\+By\+Task\+Id}} (int task\+Id)
+\begin{DoxyCompactList}\small\item\em Method for obtaining detailed information on a task  \end{DoxyCompactList}\item 
+async Task$<$ \mbox{\hyperlink{class_microservice_1_1_web_client_1_1_protos_1_1_model_task}{Model\+Task}} $>$ \mbox{\hyperlink{class_gateway_1_1_controllers_1_1_task_controller_a15825fdc4c64ebcbd1052f15fd8e3cd8}{Get\+Task\+By\+Id}} (int task\+Id)
+\begin{DoxyCompactList}\small\item\em Method for getting the task object by its Id  \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Controller for interaction with technological map tasks  
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_gateway_1_1_controllers_1_1_task_controller_a6c7bf84f32093477f136e2c339dac341}\label{class_gateway_1_1_controllers_1_1_task_controller_a6c7bf84f32093477f136e2c339dac341}} 
+\index{Gateway.Controllers.TaskController@{Gateway.Controllers.TaskController}!GetAllByModelId@{GetAllByModelId}}
+\index{GetAllByModelId@{GetAllByModelId}!Gateway.Controllers.TaskController@{Gateway.Controllers.TaskController}}
+\doxysubsubsection{\texorpdfstring{GetAllByModelId()}{GetAllByModelId()}}
+{\footnotesize\ttfamily async Task$<$ IEnumerable$<$ \mbox{\hyperlink{class_microservice_1_1_web_client_1_1_protos_1_1_model_task}{Model\+Task}} $>$ $>$ Gateway.\+Controllers.\+Task\+Controller.\+Get\+All\+By\+Model\+Id (\begin{DoxyParamCaption}\item[{int}]{model\+Id }\end{DoxyParamCaption})}
+
+
+
+Method to get all tasks by model ID  
+
+
+\begin{DoxyParams}{Parameters}
+{\em model\+Id} & Model Id\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Enumerating Model Tasks
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_gateway_1_1_controllers_1_1_task_controller_a4f5f63129d72619f50ae863ab50c38ab}\label{class_gateway_1_1_controllers_1_1_task_controller_a4f5f63129d72619f50ae863ab50c38ab}} 
+\index{Gateway.Controllers.TaskController@{Gateway.Controllers.TaskController}!GetDetailsByTaskId@{GetDetailsByTaskId}}
+\index{GetDetailsByTaskId@{GetDetailsByTaskId}!Gateway.Controllers.TaskController@{Gateway.Controllers.TaskController}}
+\doxysubsubsection{\texorpdfstring{GetDetailsByTaskId()}{GetDetailsByTaskId()}}
+{\footnotesize\ttfamily async Task$<$ IEnumerable$<$ \mbox{\hyperlink{class_microservice_1_1_web_client_1_1_protos_1_1_detail_proto}{Detail\+Proto}} $>$ $>$ Gateway.\+Controllers.\+Task\+Controller.\+Get\+Details\+By\+Task\+Id (\begin{DoxyParamCaption}\item[{int}]{task\+Id }\end{DoxyParamCaption})}
+
+
+
+Method for obtaining detailed information on a task  
+
+
+\begin{DoxyParams}{Parameters}
+{\em task\+Id} & Task Id\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Detailed Information Object
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_gateway_1_1_controllers_1_1_task_controller_a15825fdc4c64ebcbd1052f15fd8e3cd8}\label{class_gateway_1_1_controllers_1_1_task_controller_a15825fdc4c64ebcbd1052f15fd8e3cd8}} 
+\index{Gateway.Controllers.TaskController@{Gateway.Controllers.TaskController}!GetTaskById@{GetTaskById}}
+\index{GetTaskById@{GetTaskById}!Gateway.Controllers.TaskController@{Gateway.Controllers.TaskController}}
+\doxysubsubsection{\texorpdfstring{GetTaskById()}{GetTaskById()}}
+{\footnotesize\ttfamily async Task$<$ \mbox{\hyperlink{class_microservice_1_1_web_client_1_1_protos_1_1_model_task}{Model\+Task}} $>$ Gateway.\+Controllers.\+Task\+Controller.\+Get\+Task\+By\+Id (\begin{DoxyParamCaption}\item[{int}]{task\+Id }\end{DoxyParamCaption})}
+
+
+
+Method for getting the task object by its Id  
+
+
+\begin{DoxyParams}{Parameters}
+{\em task\+Id} & Task Id\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Model task object
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_gateway_1_1_controllers_1_1_task_controller_a1851792ea188b5f19e120b49635d580b}\label{class_gateway_1_1_controllers_1_1_task_controller_a1851792ea188b5f19e120b49635d580b}} 
+\index{Gateway.Controllers.TaskController@{Gateway.Controllers.TaskController}!UpdateDetailByModelId@{UpdateDetailByModelId}}
+\index{UpdateDetailByModelId@{UpdateDetailByModelId}!Gateway.Controllers.TaskController@{Gateway.Controllers.TaskController}}
+\doxysubsubsection{\texorpdfstring{UpdateDetailByModelId()}{UpdateDetailByModelId()}}
+{\footnotesize\ttfamily async Task$<$ string $>$ Gateway.\+Controllers.\+Task\+Controller.\+Update\+Detail\+By\+Model\+Id (\begin{DoxyParamCaption}\item[{int}]{model\+Id,  }\item[{int}]{task\+Id,  }\item[{string}]{date,  }\item[{string}]{status = {\ttfamily \char`\"{}\char`\"{}},  }\item[{string}]{fuel = {\ttfamily \char`\"{}\char`\"{}},  }\item[{string}]{seeds = {\ttfamily \char`\"{}\char`\"{}},  }\item[{string}]{fertilizers = {\ttfamily \char`\"{}\char`\"{}},  }\item[{string}]{pesticides = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})}
+
+
+
+Task information update method  
+
+
+\begin{DoxyParams}{Parameters}
+{\em model\+Id} & Model Id\\
+\hline
+{\em task\+Id} & Task Id\\
+\hline
+{\em date} & Date task\\
+\hline
+{\em status} & Day status\\
+\hline
+{\em fuel} & Fuel on day\\
+\hline
+{\em seeds} & Seeds on day\\
+\hline
+{\em fertilizers} & Fertilizers on day\\
+\hline
+{\em pesticides} & Pesticides on day\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Status 200 if successful, otherwise 400
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Source/shev4enkoyar/\+Digital\+Twin/\+Gateway/\+Controllers/Task\+Controller.\+cs\end{DoxyCompactItemize}

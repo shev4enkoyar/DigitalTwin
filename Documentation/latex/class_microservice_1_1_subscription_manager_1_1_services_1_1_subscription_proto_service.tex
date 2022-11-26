@@ -1,0 +1,84 @@
+\hypertarget{class_microservice_1_1_subscription_manager_1_1_services_1_1_subscription_proto_service}{}\doxysection{Microservice.\+Subscription\+Manager.\+Services.\+Subscription\+Proto\+Service Class Reference}
+\label{class_microservice_1_1_subscription_manager_1_1_services_1_1_subscription_proto_service}\index{Microservice.SubscriptionManager.Services.SubscriptionProtoService@{Microservice.SubscriptionManager.Services.SubscriptionProtoService}}
+
+
+g\+RPC service that allows you to interact with the functionality of subscriptions   
+
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_microservice_1_1_subscription_manager_1_1_services_1_1_subscription_proto_service_afca44373d48177e7f5f588f4ad261ceb}\label{class_microservice_1_1_subscription_manager_1_1_services_1_1_subscription_proto_service_afca44373d48177e7f5f588f4ad261ceb}} 
+{\bfseries Subscription\+Proto\+Service} (\mbox{\hyperlink{class_microservice_1_1_subscription_manager_1_1_d_a_l_1_1_application_context}{Application\+Context}} db\+Context)
+\begin{DoxyCompactList}\small\item\em Dependency injection constructor  \end{DoxyCompactList}\item 
+override async Task \mbox{\hyperlink{class_microservice_1_1_subscription_manager_1_1_services_1_1_subscription_proto_service_abf79dd7970680db06d8ed1fd4fae02be}{Get\+All\+Subscriptions}} (\mbox{\hyperlink{class_microservice_1_1_subscription_manager_1_1_all_subscriptions_request}{All\+Subscriptions\+Request}} request, IServer\+Stream\+Writer$<$ \mbox{\hyperlink{class_microservice_1_1_subscription_manager_1_1_subscriptions_reply}{Subscriptions\+Reply}} $>$ response\+Stream, Server\+Call\+Context context)
+\begin{DoxyCompactList}\small\item\em Method to get all possible subscriptions  \end{DoxyCompactList}\item 
+override async Task \mbox{\hyperlink{class_microservice_1_1_subscription_manager_1_1_services_1_1_subscription_proto_service_a32ee5c966cbe7c656ce26461532c226a}{Get\+Activated\+Subscriptions}} (\mbox{\hyperlink{class_microservice_1_1_subscription_manager_1_1_activated_subscriptions_request}{Activated\+Subscriptions\+Request}} request, IServer\+Stream\+Writer$<$ \mbox{\hyperlink{class_microservice_1_1_subscription_manager_1_1_subscriptions_reply}{Subscriptions\+Reply}} $>$ response\+Stream, Server\+Call\+Context context)
+\begin{DoxyCompactList}\small\item\em Method for getting an enumeration of activated subscriptions  \end{DoxyCompactList}\item 
+override Task$<$ \mbox{\hyperlink{class_microservice_1_1_subscription_manager_1_1_add_subscription_reply}{Add\+Subscription\+Reply}} $>$ \mbox{\hyperlink{class_microservice_1_1_subscription_manager_1_1_services_1_1_subscription_proto_service_a2868212f0a7068933e44fb5bcf0fedb6}{Add\+Subscription}} (\mbox{\hyperlink{class_microservice_1_1_subscription_manager_1_1_add_subscription_request}{Add\+Subscription\+Request}} request, Server\+Call\+Context context)
+\begin{DoxyCompactList}\small\item\em Model Subscription Add Method  \end{DoxyCompactList}\item 
+override Task$<$ \mbox{\hyperlink{class_microservice_1_1_subscription_manager_1_1_update_subscription_reply}{Update\+Subscription\+Reply}} $>$ \mbox{\hyperlink{class_microservice_1_1_subscription_manager_1_1_services_1_1_subscription_proto_service_abba6bcaab934afd77455ad42a87b5198}{Update\+Subscription}} (\mbox{\hyperlink{class_microservice_1_1_subscription_manager_1_1_update_subscription_request}{Update\+Subscription\+Request}} request, Server\+Call\+Context context)
+\begin{DoxyCompactList}\small\item\em The method that updates the subscription to the model  \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+g\+RPC service that allows you to interact with the functionality of subscriptions  
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_microservice_1_1_subscription_manager_1_1_services_1_1_subscription_proto_service_a2868212f0a7068933e44fb5bcf0fedb6}\label{class_microservice_1_1_subscription_manager_1_1_services_1_1_subscription_proto_service_a2868212f0a7068933e44fb5bcf0fedb6}} 
+\index{Microservice.SubscriptionManager.Services.SubscriptionProtoService@{Microservice.SubscriptionManager.Services.SubscriptionProtoService}!AddSubscription@{AddSubscription}}
+\index{AddSubscription@{AddSubscription}!Microservice.SubscriptionManager.Services.SubscriptionProtoService@{Microservice.SubscriptionManager.Services.SubscriptionProtoService}}
+\doxysubsubsection{\texorpdfstring{AddSubscription()}{AddSubscription()}}
+{\footnotesize\ttfamily override Task$<$ \mbox{\hyperlink{class_microservice_1_1_subscription_manager_1_1_add_subscription_reply}{Add\+Subscription\+Reply}} $>$ Microservice.\+Subscription\+Manager.\+Services.\+Subscription\+Proto\+Service.\+Add\+Subscription (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_microservice_1_1_subscription_manager_1_1_add_subscription_request}{Add\+Subscription\+Request}}}]{request,  }\item[{Server\+Call\+Context}]{context }\end{DoxyParamCaption})}
+
+
+
+Model Subscription Add Method  
+
+\begin{DoxyReturn}{Returns}
+Method execution status
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_microservice_1_1_subscription_manager_1_1_services_1_1_subscription_proto_service_a32ee5c966cbe7c656ce26461532c226a}\label{class_microservice_1_1_subscription_manager_1_1_services_1_1_subscription_proto_service_a32ee5c966cbe7c656ce26461532c226a}} 
+\index{Microservice.SubscriptionManager.Services.SubscriptionProtoService@{Microservice.SubscriptionManager.Services.SubscriptionProtoService}!GetActivatedSubscriptions@{GetActivatedSubscriptions}}
+\index{GetActivatedSubscriptions@{GetActivatedSubscriptions}!Microservice.SubscriptionManager.Services.SubscriptionProtoService@{Microservice.SubscriptionManager.Services.SubscriptionProtoService}}
+\doxysubsubsection{\texorpdfstring{GetActivatedSubscriptions()}{GetActivatedSubscriptions()}}
+{\footnotesize\ttfamily override async Task Microservice.\+Subscription\+Manager.\+Services.\+Subscription\+Proto\+Service.\+Get\+Activated\+Subscriptions (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_microservice_1_1_subscription_manager_1_1_activated_subscriptions_request}{Activated\+Subscriptions\+Request}}}]{request,  }\item[{IServer\+Stream\+Writer$<$ \mbox{\hyperlink{class_microservice_1_1_subscription_manager_1_1_subscriptions_reply}{Subscriptions\+Reply}} $>$}]{response\+Stream,  }\item[{Server\+Call\+Context}]{context }\end{DoxyParamCaption})}
+
+
+
+Method for getting an enumeration of activated subscriptions  
+
+\begin{DoxyReturn}{Returns}
+Enumeration Active Subscriptions
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_microservice_1_1_subscription_manager_1_1_services_1_1_subscription_proto_service_abf79dd7970680db06d8ed1fd4fae02be}\label{class_microservice_1_1_subscription_manager_1_1_services_1_1_subscription_proto_service_abf79dd7970680db06d8ed1fd4fae02be}} 
+\index{Microservice.SubscriptionManager.Services.SubscriptionProtoService@{Microservice.SubscriptionManager.Services.SubscriptionProtoService}!GetAllSubscriptions@{GetAllSubscriptions}}
+\index{GetAllSubscriptions@{GetAllSubscriptions}!Microservice.SubscriptionManager.Services.SubscriptionProtoService@{Microservice.SubscriptionManager.Services.SubscriptionProtoService}}
+\doxysubsubsection{\texorpdfstring{GetAllSubscriptions()}{GetAllSubscriptions()}}
+{\footnotesize\ttfamily override async Task Microservice.\+Subscription\+Manager.\+Services.\+Subscription\+Proto\+Service.\+Get\+All\+Subscriptions (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_microservice_1_1_subscription_manager_1_1_all_subscriptions_request}{All\+Subscriptions\+Request}}}]{request,  }\item[{IServer\+Stream\+Writer$<$ \mbox{\hyperlink{class_microservice_1_1_subscription_manager_1_1_subscriptions_reply}{Subscriptions\+Reply}} $>$}]{response\+Stream,  }\item[{Server\+Call\+Context}]{context }\end{DoxyParamCaption})}
+
+
+
+Method to get all possible subscriptions  
+
+\begin{DoxyReturn}{Returns}
+Listing all possible subscriptions
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_microservice_1_1_subscription_manager_1_1_services_1_1_subscription_proto_service_abba6bcaab934afd77455ad42a87b5198}\label{class_microservice_1_1_subscription_manager_1_1_services_1_1_subscription_proto_service_abba6bcaab934afd77455ad42a87b5198}} 
+\index{Microservice.SubscriptionManager.Services.SubscriptionProtoService@{Microservice.SubscriptionManager.Services.SubscriptionProtoService}!UpdateSubscription@{UpdateSubscription}}
+\index{UpdateSubscription@{UpdateSubscription}!Microservice.SubscriptionManager.Services.SubscriptionProtoService@{Microservice.SubscriptionManager.Services.SubscriptionProtoService}}
+\doxysubsubsection{\texorpdfstring{UpdateSubscription()}{UpdateSubscription()}}
+{\footnotesize\ttfamily override Task$<$ \mbox{\hyperlink{class_microservice_1_1_subscription_manager_1_1_update_subscription_reply}{Update\+Subscription\+Reply}} $>$ Microservice.\+Subscription\+Manager.\+Services.\+Subscription\+Proto\+Service.\+Update\+Subscription (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_microservice_1_1_subscription_manager_1_1_update_subscription_request}{Update\+Subscription\+Request}}}]{request,  }\item[{Server\+Call\+Context}]{context }\end{DoxyParamCaption})}
+
+
+
+The method that updates the subscription to the model  
+
+\begin{DoxyReturn}{Returns}
+Method execution status
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Source/shev4enkoyar/\+Digital\+Twin/\+Microservices/\+Microservice.\+Subscription\+Manager/\+Services/Subscription\+Proto\+Service.\+cs\end{DoxyCompactItemize}

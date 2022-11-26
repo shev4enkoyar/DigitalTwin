@@ -1,0 +1,71 @@
+\hypertarget{class_web_client_1_1_controllers_1_1_tech_card_controller}{}\doxysection{Web\+Client.\+Controllers.\+Tech\+Card\+Controller Class Reference}
+\label{class_web_client_1_1_controllers_1_1_tech_card_controller}\index{WebClient.Controllers.TechCardController@{WebClient.Controllers.TechCardController}}
+
+
+Controller for interaction with the technological map   
+
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_web_client_1_1_controllers_1_1_tech_card_controller_a47b3b84b72a39283c6b17e3d6a9b3579}\label{class_web_client_1_1_controllers_1_1_tech_card_controller_a47b3b84b72a39283c6b17e3d6a9b3579}} 
+{\bfseries Tech\+Card\+Controller} (IConfiguration configuration, User\+Manager$<$ \mbox{\hyperlink{class_web_client_1_1_models_1_1_application_user}{Application\+User}} $>$ user\+Manager)
+\begin{DoxyCompactList}\small\item\em Dependency injection constructor  \end{DoxyCompactList}\item 
+async Task$<$ IEnumerable$<$ \mbox{\hyperlink{class_web_client_1_1_models_1_1_sub_models_1_1_model_proto}{Model\+Proto}} $>$ $>$ \mbox{\hyperlink{class_web_client_1_1_controllers_1_1_tech_card_controller_a8f5435835e5b9bbc70676bc112408dd7}{Get\+Digital\+Models}} ()
+\begin{DoxyCompactList}\small\item\em Retrieval Method of technological maps list  \end{DoxyCompactList}\item 
+async Task$<$ IAction\+Result $>$ \mbox{\hyperlink{class_web_client_1_1_controllers_1_1_tech_card_controller_a43f0bfec78b47f118fc8eaa63e0f2e6e}{Create\+Digital\+Model}} (int product\+Id, string name, string cadaster=null, string category\+Name=null)
+\end{DoxyCompactItemize}
+\doxysubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_web_client_1_1_controllers_1_1_tech_card_controller_ac90646e6dcd5300d917afa52e9db0e9b}\label{class_web_client_1_1_controllers_1_1_tech_card_controller_ac90646e6dcd5300d917afa52e9db0e9b}} 
+IConfiguration {\bfseries Configuration}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Property for getting data from a configuration file  \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Controller for interaction with the technological map  
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_web_client_1_1_controllers_1_1_tech_card_controller_a43f0bfec78b47f118fc8eaa63e0f2e6e}\label{class_web_client_1_1_controllers_1_1_tech_card_controller_a43f0bfec78b47f118fc8eaa63e0f2e6e}} 
+\index{WebClient.Controllers.TechCardController@{WebClient.Controllers.TechCardController}!CreateDigitalModel@{CreateDigitalModel}}
+\index{CreateDigitalModel@{CreateDigitalModel}!WebClient.Controllers.TechCardController@{WebClient.Controllers.TechCardController}}
+\doxysubsubsection{\texorpdfstring{CreateDigitalModel()}{CreateDigitalModel()}}
+{\footnotesize\ttfamily async Task$<$ IAction\+Result $>$ Web\+Client.\+Controllers.\+Tech\+Card\+Controller.\+Create\+Digital\+Model (\begin{DoxyParamCaption}\item[{int}]{product\+Id,  }\item[{string}]{name,  }\item[{string}]{cadaster = {\ttfamily null},  }\item[{string}]{category\+Name = {\ttfamily null} }\end{DoxyParamCaption})}
+
+
+
+
+
+
+\begin{DoxyParams}{Parameters}
+{\em product\+Id} & Product Id\\
+\hline
+{\em name} & Technological map name\\
+\hline
+{\em cadaster} & Cadaster number\\
+\hline
+{\em category\+Name} & Category name\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Status 200 if everything went well, otherwise 400 or 401
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_web_client_1_1_controllers_1_1_tech_card_controller_a8f5435835e5b9bbc70676bc112408dd7}\label{class_web_client_1_1_controllers_1_1_tech_card_controller_a8f5435835e5b9bbc70676bc112408dd7}} 
+\index{WebClient.Controllers.TechCardController@{WebClient.Controllers.TechCardController}!GetDigitalModels@{GetDigitalModels}}
+\index{GetDigitalModels@{GetDigitalModels}!WebClient.Controllers.TechCardController@{WebClient.Controllers.TechCardController}}
+\doxysubsubsection{\texorpdfstring{GetDigitalModels()}{GetDigitalModels()}}
+{\footnotesize\ttfamily async Task$<$ IEnumerable$<$ \mbox{\hyperlink{class_web_client_1_1_models_1_1_sub_models_1_1_model_proto}{Model\+Proto}} $>$ $>$ Web\+Client.\+Controllers.\+Tech\+Card\+Controller.\+Get\+Digital\+Models (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Retrieval Method of technological maps list  
+
+\begin{DoxyReturn}{Returns}
+List of technological maps of the company
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Source/shev4enkoyar/\+Digital\+Twin/\+Web\+Client/\+Controllers/Tech\+Card\+Controller.\+cs\end{DoxyCompactItemize}

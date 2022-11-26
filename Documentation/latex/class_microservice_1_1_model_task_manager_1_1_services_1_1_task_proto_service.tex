@@ -1,0 +1,84 @@
+\hypertarget{class_microservice_1_1_model_task_manager_1_1_services_1_1_task_proto_service}{}\doxysection{Microservice.\+Model\+Task\+Manager.\+Services.\+Task\+Proto\+Service Class Reference}
+\label{class_microservice_1_1_model_task_manager_1_1_services_1_1_task_proto_service}\index{Microservice.ModelTaskManager.Services.TaskProtoService@{Microservice.ModelTaskManager.Services.TaskProtoService}}
+
+
+g\+RPC service for interacting with model tasks   
+
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_microservice_1_1_model_task_manager_1_1_services_1_1_task_proto_service_aed2b9e2d61ee8d3c460ed75bdaf349ae}\label{class_microservice_1_1_model_task_manager_1_1_services_1_1_task_proto_service_aed2b9e2d61ee8d3c460ed75bdaf349ae}} 
+{\bfseries Task\+Proto\+Service} (\mbox{\hyperlink{class_microservice_1_1_model_task_manager_1_1_d_a_l_1_1_application_context}{Application\+Context}} db\+Context)
+\begin{DoxyCompactList}\small\item\em Dependency injection constructor  \end{DoxyCompactList}\item 
+override async Task \mbox{\hyperlink{class_microservice_1_1_model_task_manager_1_1_services_1_1_task_proto_service_af104d654107e5bc9f9cf75098f892dc4}{Get\+Tasks}} (\mbox{\hyperlink{class_microservice_1_1_model_task_manager_1_1_protos_1_1_send_request}{Send\+Request}} request, IServer\+Stream\+Writer$<$ \mbox{\hyperlink{class_microservice_1_1_model_task_manager_1_1_protos_1_1_send_reply}{Send\+Reply}} $>$ response\+Stream, Server\+Call\+Context context)
+\begin{DoxyCompactList}\small\item\em Method to get all model tasks  \end{DoxyCompactList}\item 
+override async Task \mbox{\hyperlink{class_microservice_1_1_model_task_manager_1_1_services_1_1_task_proto_service_a2ba300eea51d324822b88cac71413e56}{Get\+Task\+Details}} (\mbox{\hyperlink{class_microservice_1_1_model_task_manager_1_1_protos_1_1_get_task_request}{Get\+Task\+Request}} request, IServer\+Stream\+Writer$<$ \mbox{\hyperlink{class_microservice_1_1_model_task_manager_1_1_protos_1_1_get_task_reply}{Get\+Task\+Reply}} $>$ response\+Stream, Server\+Call\+Context context)
+\begin{DoxyCompactList}\small\item\em Method for getting detailed information about a task  \end{DoxyCompactList}\item 
+override Task$<$ \mbox{\hyperlink{class_microservice_1_1_model_task_manager_1_1_protos_1_1_get_task_by_id_reply}{Get\+Task\+By\+Id\+Reply}} $>$ \mbox{\hyperlink{class_microservice_1_1_model_task_manager_1_1_services_1_1_task_proto_service_a5b2475c2772028c99a88f61343a96b06}{Get\+Task\+By\+Id}} (\mbox{\hyperlink{class_microservice_1_1_model_task_manager_1_1_protos_1_1_get_task_by_id_request}{Get\+Task\+By\+Id\+Request}} request, Server\+Call\+Context context)
+\begin{DoxyCompactList}\small\item\em Getting a task by its Id  \end{DoxyCompactList}\item 
+override Task$<$ \mbox{\hyperlink{class_microservice_1_1_model_task_manager_1_1_protos_1_1_update_detail_reply}{Update\+Detail\+Reply}} $>$ \mbox{\hyperlink{class_microservice_1_1_model_task_manager_1_1_services_1_1_task_proto_service_ae7cd800d2f020049b63b9b34037b33bb}{Update\+Detail}} (\mbox{\hyperlink{class_microservice_1_1_model_task_manager_1_1_protos_1_1_update_detail_request}{Update\+Detail\+Request}} request, Server\+Call\+Context context)
+\begin{DoxyCompactList}\small\item\em Task detail update method  \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+g\+RPC service for interacting with model tasks  
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_microservice_1_1_model_task_manager_1_1_services_1_1_task_proto_service_a5b2475c2772028c99a88f61343a96b06}\label{class_microservice_1_1_model_task_manager_1_1_services_1_1_task_proto_service_a5b2475c2772028c99a88f61343a96b06}} 
+\index{Microservice.ModelTaskManager.Services.TaskProtoService@{Microservice.ModelTaskManager.Services.TaskProtoService}!GetTaskById@{GetTaskById}}
+\index{GetTaskById@{GetTaskById}!Microservice.ModelTaskManager.Services.TaskProtoService@{Microservice.ModelTaskManager.Services.TaskProtoService}}
+\doxysubsubsection{\texorpdfstring{GetTaskById()}{GetTaskById()}}
+{\footnotesize\ttfamily override Task$<$ \mbox{\hyperlink{class_microservice_1_1_model_task_manager_1_1_protos_1_1_get_task_by_id_reply}{Get\+Task\+By\+Id\+Reply}} $>$ Microservice.\+Model\+Task\+Manager.\+Services.\+Task\+Proto\+Service.\+Get\+Task\+By\+Id (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_microservice_1_1_model_task_manager_1_1_protos_1_1_get_task_by_id_request}{Get\+Task\+By\+Id\+Request}}}]{request,  }\item[{Server\+Call\+Context}]{context }\end{DoxyParamCaption})}
+
+
+
+Getting a task by its Id  
+
+\begin{DoxyReturn}{Returns}
+Task object
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_microservice_1_1_model_task_manager_1_1_services_1_1_task_proto_service_a2ba300eea51d324822b88cac71413e56}\label{class_microservice_1_1_model_task_manager_1_1_services_1_1_task_proto_service_a2ba300eea51d324822b88cac71413e56}} 
+\index{Microservice.ModelTaskManager.Services.TaskProtoService@{Microservice.ModelTaskManager.Services.TaskProtoService}!GetTaskDetails@{GetTaskDetails}}
+\index{GetTaskDetails@{GetTaskDetails}!Microservice.ModelTaskManager.Services.TaskProtoService@{Microservice.ModelTaskManager.Services.TaskProtoService}}
+\doxysubsubsection{\texorpdfstring{GetTaskDetails()}{GetTaskDetails()}}
+{\footnotesize\ttfamily override async Task Microservice.\+Model\+Task\+Manager.\+Services.\+Task\+Proto\+Service.\+Get\+Task\+Details (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_microservice_1_1_model_task_manager_1_1_protos_1_1_get_task_request}{Get\+Task\+Request}}}]{request,  }\item[{IServer\+Stream\+Writer$<$ \mbox{\hyperlink{class_microservice_1_1_model_task_manager_1_1_protos_1_1_get_task_reply}{Get\+Task\+Reply}} $>$}]{response\+Stream,  }\item[{Server\+Call\+Context}]{context }\end{DoxyParamCaption})}
+
+
+
+Method for getting detailed information about a task  
+
+\begin{DoxyReturn}{Returns}
+Task Detail Object
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_microservice_1_1_model_task_manager_1_1_services_1_1_task_proto_service_af104d654107e5bc9f9cf75098f892dc4}\label{class_microservice_1_1_model_task_manager_1_1_services_1_1_task_proto_service_af104d654107e5bc9f9cf75098f892dc4}} 
+\index{Microservice.ModelTaskManager.Services.TaskProtoService@{Microservice.ModelTaskManager.Services.TaskProtoService}!GetTasks@{GetTasks}}
+\index{GetTasks@{GetTasks}!Microservice.ModelTaskManager.Services.TaskProtoService@{Microservice.ModelTaskManager.Services.TaskProtoService}}
+\doxysubsubsection{\texorpdfstring{GetTasks()}{GetTasks()}}
+{\footnotesize\ttfamily override async Task Microservice.\+Model\+Task\+Manager.\+Services.\+Task\+Proto\+Service.\+Get\+Tasks (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_microservice_1_1_model_task_manager_1_1_protos_1_1_send_request}{Send\+Request}}}]{request,  }\item[{IServer\+Stream\+Writer$<$ \mbox{\hyperlink{class_microservice_1_1_model_task_manager_1_1_protos_1_1_send_reply}{Send\+Reply}} $>$}]{response\+Stream,  }\item[{Server\+Call\+Context}]{context }\end{DoxyParamCaption})}
+
+
+
+Method to get all model tasks  
+
+\begin{DoxyReturn}{Returns}
+Enumerating Model Tasks
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_microservice_1_1_model_task_manager_1_1_services_1_1_task_proto_service_ae7cd800d2f020049b63b9b34037b33bb}\label{class_microservice_1_1_model_task_manager_1_1_services_1_1_task_proto_service_ae7cd800d2f020049b63b9b34037b33bb}} 
+\index{Microservice.ModelTaskManager.Services.TaskProtoService@{Microservice.ModelTaskManager.Services.TaskProtoService}!UpdateDetail@{UpdateDetail}}
+\index{UpdateDetail@{UpdateDetail}!Microservice.ModelTaskManager.Services.TaskProtoService@{Microservice.ModelTaskManager.Services.TaskProtoService}}
+\doxysubsubsection{\texorpdfstring{UpdateDetail()}{UpdateDetail()}}
+{\footnotesize\ttfamily override Task$<$ \mbox{\hyperlink{class_microservice_1_1_model_task_manager_1_1_protos_1_1_update_detail_reply}{Update\+Detail\+Reply}} $>$ Microservice.\+Model\+Task\+Manager.\+Services.\+Task\+Proto\+Service.\+Update\+Detail (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_microservice_1_1_model_task_manager_1_1_protos_1_1_update_detail_request}{Update\+Detail\+Request}}}]{request,  }\item[{Server\+Call\+Context}]{context }\end{DoxyParamCaption})}
+
+
+
+Task detail update method  
+
+\begin{DoxyReturn}{Returns}
+Method execution status
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Source/shev4enkoyar/\+Digital\+Twin/\+Microservices/\+Microservice.\+Model\+Task\+Manager/\+Microservice.\+Model\+Task\+Manager/\+Services/Task\+Proto\+Service.\+cs\end{DoxyCompactItemize}

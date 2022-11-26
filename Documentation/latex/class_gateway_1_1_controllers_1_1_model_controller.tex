@@ -1,0 +1,84 @@
+\hypertarget{class_gateway_1_1_controllers_1_1_model_controller}{}\doxysection{Gateway.\+Controllers.\+Model\+Controller Class Reference}
+\label{class_gateway_1_1_controllers_1_1_model_controller}\index{Gateway.Controllers.ModelController@{Gateway.Controllers.ModelController}}
+
+
+Controller for interaction with technological maps   
+
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+async Task$<$ IEnumerable$<$ \mbox{\hyperlink{class_microservice_1_1_web_client_1_1_protos_1_1_product_proto}{Product\+Proto}} $>$ $>$ \mbox{\hyperlink{class_gateway_1_1_controllers_1_1_model_controller_a5c165a131b644ff84fa474481b246282}{Get\+All\+Products}} ()
+\begin{DoxyCompactList}\small\item\em Method for getting all products  \end{DoxyCompactList}\item 
+async Task$<$ bool $>$ \mbox{\hyperlink{class_gateway_1_1_controllers_1_1_model_controller_ac97200de7aaf243579fedb5ac282c770}{Validate\+Cadaster\+Async}} (string cadaster\+Num)
+\begin{DoxyCompactList}\small\item\em Method for checking the existence of a plot with a given cadastral number  \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_gateway_1_1_controllers_1_1_model_controller_add4bf72691240f2668fc338d54e481e6}{Create\+Digital\+Model}} (string company\+Id, int product\+Id, string name, string cadaster=null, string category\+Name=null)
+\begin{DoxyCompactList}\small\item\em Method for creating a new model with given parameters  \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Controller for interaction with technological maps  
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_gateway_1_1_controllers_1_1_model_controller_add4bf72691240f2668fc338d54e481e6}\label{class_gateway_1_1_controllers_1_1_model_controller_add4bf72691240f2668fc338d54e481e6}} 
+\index{Gateway.Controllers.ModelController@{Gateway.Controllers.ModelController}!CreateDigitalModel@{CreateDigitalModel}}
+\index{CreateDigitalModel@{CreateDigitalModel}!Gateway.Controllers.ModelController@{Gateway.Controllers.ModelController}}
+\doxysubsubsection{\texorpdfstring{CreateDigitalModel()}{CreateDigitalModel()}}
+{\footnotesize\ttfamily bool Gateway.\+Controllers.\+Model\+Controller.\+Create\+Digital\+Model (\begin{DoxyParamCaption}\item[{string}]{company\+Id,  }\item[{int}]{product\+Id,  }\item[{string}]{name,  }\item[{string}]{cadaster = {\ttfamily null},  }\item[{string}]{category\+Name = {\ttfamily null} }\end{DoxyParamCaption})}
+
+
+
+Method for creating a new model with given parameters  
+
+
+\begin{DoxyParams}{Parameters}
+{\em company\+Id} & Company Id\\
+\hline
+{\em product\+Id} & Product Id\\
+\hline
+{\em name} & Name\\
+\hline
+{\em cadaster} & Cadaster number\\
+\hline
+{\em category\+Name} & Category name\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the model was successfully created otherwise false
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_gateway_1_1_controllers_1_1_model_controller_a5c165a131b644ff84fa474481b246282}\label{class_gateway_1_1_controllers_1_1_model_controller_a5c165a131b644ff84fa474481b246282}} 
+\index{Gateway.Controllers.ModelController@{Gateway.Controllers.ModelController}!GetAllProducts@{GetAllProducts}}
+\index{GetAllProducts@{GetAllProducts}!Gateway.Controllers.ModelController@{Gateway.Controllers.ModelController}}
+\doxysubsubsection{\texorpdfstring{GetAllProducts()}{GetAllProducts()}}
+{\footnotesize\ttfamily async Task$<$ IEnumerable$<$ \mbox{\hyperlink{class_microservice_1_1_web_client_1_1_protos_1_1_product_proto}{Product\+Proto}} $>$ $>$ Gateway.\+Controllers.\+Model\+Controller.\+Get\+All\+Products (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Method for getting all products  
+
+\begin{DoxyReturn}{Returns}
+Enumerable of products
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_gateway_1_1_controllers_1_1_model_controller_ac97200de7aaf243579fedb5ac282c770}\label{class_gateway_1_1_controllers_1_1_model_controller_ac97200de7aaf243579fedb5ac282c770}} 
+\index{Gateway.Controllers.ModelController@{Gateway.Controllers.ModelController}!ValidateCadasterAsync@{ValidateCadasterAsync}}
+\index{ValidateCadasterAsync@{ValidateCadasterAsync}!Gateway.Controllers.ModelController@{Gateway.Controllers.ModelController}}
+\doxysubsubsection{\texorpdfstring{ValidateCadasterAsync()}{ValidateCadasterAsync()}}
+{\footnotesize\ttfamily async Task$<$ bool $>$ Gateway.\+Controllers.\+Model\+Controller.\+Validate\+Cadaster\+Async (\begin{DoxyParamCaption}\item[{string}]{cadaster\+Num }\end{DoxyParamCaption})}
+
+
+
+Method for checking the existence of a plot with a given cadastral number  
+
+
+\begin{DoxyParams}{Parameters}
+{\em cadaster\+Num} & Cadastral number\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if a parcel with a cadastral number is found otherwise false
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Source/shev4enkoyar/\+Digital\+Twin/\+Gateway/\+Controllers/Model\+Controller.\+cs\end{DoxyCompactItemize}

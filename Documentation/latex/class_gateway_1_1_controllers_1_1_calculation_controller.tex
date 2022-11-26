@@ -1,0 +1,101 @@
+\hypertarget{class_gateway_1_1_controllers_1_1_calculation_controller}{}\doxysection{Gateway.\+Controllers.\+Calculation\+Controller Class Reference}
+\label{class_gateway_1_1_controllers_1_1_calculation_controller}\index{Gateway.Controllers.CalculationController@{Gateway.Controllers.CalculationController}}
+
+
+Controller for calculating recommendation data   
+
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+async Task$<$ double $>$ \mbox{\hyperlink{class_gateway_1_1_controllers_1_1_calculation_controller_a7ae1e52e7320ac196a91b88056b95742}{Get\+Task\+Influence\+By\+Model\+Async}} (int model\+Id)
+\begin{DoxyCompactList}\small\item\em Method for obtaining the influence of tasks on the model  \end{DoxyCompactList}\item 
+async Task$<$ double $>$ \mbox{\hyperlink{class_gateway_1_1_controllers_1_1_calculation_controller_aeb51c3e084a287ff279af27a2839ce3d}{Get\+Weather\+Influence\+By\+Model\+Async}} (int model\+Id)
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_gateway_1_1_controllers_1_1_weather}{Weather}} Influence Method  \end{DoxyCompactList}\item 
+async Task$<$ double $>$ \mbox{\hyperlink{class_gateway_1_1_controllers_1_1_calculation_controller_ad0e0733514082e09d9bc73423113ef4f}{Get\+Overall\+Influence\+By\+Model\+Async}} (int model\+Id)
+\begin{DoxyCompactList}\small\item\em Method for obtaining the total influence on the model  \end{DoxyCompactList}\item 
+async Task$<$ double $>$ \mbox{\hyperlink{class_gateway_1_1_controllers_1_1_calculation_controller_a2cde06abd3c889f03fd67a8c9d5c26f2}{Get\+Evapotranspiration}} (int model\+Id)
+\begin{DoxyCompactList}\small\item\em Method for obtaining the evapotranspiration value  \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Controller for calculating recommendation data  
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_gateway_1_1_controllers_1_1_calculation_controller_a2cde06abd3c889f03fd67a8c9d5c26f2}\label{class_gateway_1_1_controllers_1_1_calculation_controller_a2cde06abd3c889f03fd67a8c9d5c26f2}} 
+\index{Gateway.Controllers.CalculationController@{Gateway.Controllers.CalculationController}!GetEvapotranspiration@{GetEvapotranspiration}}
+\index{GetEvapotranspiration@{GetEvapotranspiration}!Gateway.Controllers.CalculationController@{Gateway.Controllers.CalculationController}}
+\doxysubsubsection{\texorpdfstring{GetEvapotranspiration()}{GetEvapotranspiration()}}
+{\footnotesize\ttfamily async Task$<$ double $>$ Gateway.\+Controllers.\+Calculation\+Controller.\+Get\+Evapotranspiration (\begin{DoxyParamCaption}\item[{int}]{model\+Id }\end{DoxyParamCaption})}
+
+
+
+Method for obtaining the evapotranspiration value  
+
+
+\begin{DoxyParams}{Parameters}
+{\em model\+Id} & Model Id\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Evapotranspiration value
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_gateway_1_1_controllers_1_1_calculation_controller_ad0e0733514082e09d9bc73423113ef4f}\label{class_gateway_1_1_controllers_1_1_calculation_controller_ad0e0733514082e09d9bc73423113ef4f}} 
+\index{Gateway.Controllers.CalculationController@{Gateway.Controllers.CalculationController}!GetOverallInfluenceByModelAsync@{GetOverallInfluenceByModelAsync}}
+\index{GetOverallInfluenceByModelAsync@{GetOverallInfluenceByModelAsync}!Gateway.Controllers.CalculationController@{Gateway.Controllers.CalculationController}}
+\doxysubsubsection{\texorpdfstring{GetOverallInfluenceByModelAsync()}{GetOverallInfluenceByModelAsync()}}
+{\footnotesize\ttfamily async Task$<$ double $>$ Gateway.\+Controllers.\+Calculation\+Controller.\+Get\+Overall\+Influence\+By\+Model\+Async (\begin{DoxyParamCaption}\item[{int}]{model\+Id }\end{DoxyParamCaption})}
+
+
+
+Method for obtaining the total influence on the model  
+
+
+\begin{DoxyParams}{Parameters}
+{\em model\+Id} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Overall Influence
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_gateway_1_1_controllers_1_1_calculation_controller_a7ae1e52e7320ac196a91b88056b95742}\label{class_gateway_1_1_controllers_1_1_calculation_controller_a7ae1e52e7320ac196a91b88056b95742}} 
+\index{Gateway.Controllers.CalculationController@{Gateway.Controllers.CalculationController}!GetTaskInfluenceByModelAsync@{GetTaskInfluenceByModelAsync}}
+\index{GetTaskInfluenceByModelAsync@{GetTaskInfluenceByModelAsync}!Gateway.Controllers.CalculationController@{Gateway.Controllers.CalculationController}}
+\doxysubsubsection{\texorpdfstring{GetTaskInfluenceByModelAsync()}{GetTaskInfluenceByModelAsync()}}
+{\footnotesize\ttfamily async Task$<$ double $>$ Gateway.\+Controllers.\+Calculation\+Controller.\+Get\+Task\+Influence\+By\+Model\+Async (\begin{DoxyParamCaption}\item[{int}]{model\+Id }\end{DoxyParamCaption})}
+
+
+
+Method for obtaining the influence of tasks on the model  
+
+
+\begin{DoxyParams}{Parameters}
+{\em model\+Id} & Model Id\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Influence value
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_gateway_1_1_controllers_1_1_calculation_controller_aeb51c3e084a287ff279af27a2839ce3d}\label{class_gateway_1_1_controllers_1_1_calculation_controller_aeb51c3e084a287ff279af27a2839ce3d}} 
+\index{Gateway.Controllers.CalculationController@{Gateway.Controllers.CalculationController}!GetWeatherInfluenceByModelAsync@{GetWeatherInfluenceByModelAsync}}
+\index{GetWeatherInfluenceByModelAsync@{GetWeatherInfluenceByModelAsync}!Gateway.Controllers.CalculationController@{Gateway.Controllers.CalculationController}}
+\doxysubsubsection{\texorpdfstring{GetWeatherInfluenceByModelAsync()}{GetWeatherInfluenceByModelAsync()}}
+{\footnotesize\ttfamily async Task$<$ double $>$ Gateway.\+Controllers.\+Calculation\+Controller.\+Get\+Weather\+Influence\+By\+Model\+Async (\begin{DoxyParamCaption}\item[{int}]{model\+Id }\end{DoxyParamCaption})}
+
+
+
+\mbox{\hyperlink{class_gateway_1_1_controllers_1_1_weather}{Weather}} Influence Method  
+
+
+\begin{DoxyParams}{Parameters}
+{\em model\+Id} & Model Id\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Significance of weather influence
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Source/shev4enkoyar/\+Digital\+Twin/\+Gateway/\+Controllers/Calculation\+Controller.\+cs\end{DoxyCompactItemize}
