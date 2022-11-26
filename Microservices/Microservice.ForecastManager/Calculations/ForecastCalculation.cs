@@ -2,12 +2,15 @@
 
 namespace Microservice.ForecastManager.Calculations
 {
+    /// <summary>
+    /// Class for calculating Evapotranspiration
+    /// </summary>
     public static class ForecastCalculation
     {
         /// <summary>
         /// Method for obtaining the evaporation of the soil moisture
         /// </summary>
-        /// <param name="rn">Чистая радиация на поверхности урожая? Net radiation at the crop surfacce</param> Да, рил. Я ж говорил, что формула ебнутая.
+        /// <param name="rn">Чистая радиация на поверхности урожая</param>
         /// <param name="g">Плотность теплового потока почвы?</param>
         /// <param name="p">Атмосферное давление</param>
         /// <param name="t">Среднесуточная температура воздуха на высоте 2 м</param>

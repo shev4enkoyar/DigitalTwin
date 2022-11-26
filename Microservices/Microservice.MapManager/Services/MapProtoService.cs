@@ -9,15 +9,27 @@ using TestReestr.Scripts.rosreestr2coord;
 
 namespace Microservice.MapManager.Services
 {
+    /// <summary>
+    /// GRPS service for working with a map
+    /// </summary>
     public class MapProtoService : MapService.MapServiceBase
     {
+        /// <summary>
+        /// Database access property
+        /// </summary>
         private readonly ApplicationContext _dbContext;
 
+        /// <summary>
+        /// Dependency injection constructor
+        /// </summary>
         public MapProtoService(ApplicationContext dbContext)
         {
             _dbContext = dbContext;
         }
-
+        /// <summary>
+        /// method to get id or create map
+        /// </summary>
+        /// <returns>map id</returns>
         public override Task<GetMapIdReply> GetMapId(GetMapIdRequest request, ServerCallContext context)
         {
             var mapId = _dbContext.Maps.Any(x => x.ModelId == request.ModelId)
@@ -29,6 +41,10 @@ namespace Microservice.MapManager.Services
                 MapId = mapId,
             });
         }
+        /// <summary>
+        /// method for getting the coordinates of the center of the culture polygon on the map
+        /// </summary>
+        /// <returns>the coordinates of the center</returns>
         public override Task<GetMapCenterReply> GetMapCenter(GetMapCenterRequest request, ServerCallContext context)
         {
             var map = _dbContext.Maps.Include(x => x.Figures).FirstOrDefault(x => x.ModelId == request.ModelId);
@@ -69,7 +85,10 @@ namespace Microservice.MapManager.Services
             _dbContext.SaveChanges();
             return map.Id;
         }
-
+        /// <summary>
+        /// method to get culture polygon area on map
+        /// </summary>
+        /// <returns>culture polygon area</returns>
         public override Task<GetMapAreaReply> GetMapArea(GetMapAreaRequest request, ServerCallContext context)
         {
             var map = _dbContext.Maps.FirstOrDefault(x => x.ModelId == request.ModelId);

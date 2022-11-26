@@ -1,9 +1,7 @@
 ﻿using Microservice.ModelTaskManager.DAL;
-using Microservice.ModelTaskManager.DAL.Models;
 using Microsoft.Extensions.Logging;
 using Shared;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using Task = System.Threading.Tasks.Task;

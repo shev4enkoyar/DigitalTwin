@@ -10,15 +10,28 @@ using Shared;
 
 namespace Microservice.ModelTaskManager.Services
 {
+    /// <summary>
+    /// gRPC service for interacting with model tasks
+    /// </summary>
     public class TaskProtoService : ModelTaskService.ModelTaskServiceBase
     {
+        /// <summary>
+        /// Database access property
+        /// </summary>
         private ApplicationContext DbContext { get; }
 
+        /// <summary>
+        /// Dependency injection constructor
+        /// </summary>
         public TaskProtoService(ApplicationContext dbContext)
         {
             DbContext = dbContext;
         }
 
+        /// <summary>
+        /// Method to get all model tasks
+        /// </summary>
+        /// <returns>Enumerating Model Tasks</returns>
         public override async Task GetTasks(SendRequest request, IServerStreamWriter<SendReply> responseStream, ServerCallContext context)
         {
             var taskReply = new SendReply();
@@ -28,6 +41,10 @@ namespace Microservice.ModelTaskManager.Services
             await Task.FromResult(taskReply);
         }
 
+        /// <summary>
+        /// Method for getting detailed information about a task
+        /// </summary>
+        /// <returns>Task Detail Object</returns>
         public override async Task GetTaskDetails(GetTaskRequest request, IServerStreamWriter<GetTaskReply> responseStream, ServerCallContext context)
         {
             var taskReply = new GetTaskReply();
@@ -37,6 +54,10 @@ namespace Microservice.ModelTaskManager.Services
             await Task.FromResult(taskReply);
         }
 
+        /// <summary>
+        /// Getting a task by its Id
+        /// </summary>
+        /// <returns>Task object</returns>
         public override Task<GetTaskByIdReply> GetTaskById(GetTaskByIdRequest request, ServerCallContext context)
         {
             var task = DbContext.Tasks.FirstOrDefault(x => x.Id == request.TaskId);
@@ -55,6 +76,10 @@ namespace Microservice.ModelTaskManager.Services
             return Task.FromResult(new GetTaskByIdReply() { Task = modelTask });
         }
 
+        /// <summary>
+        /// Task detail update method
+        /// </summary>
+        /// <returns>Method execution status</returns>
         public override Task<UpdateDetailReply> UpdateDetail(UpdateDetailRequest request, ServerCallContext context)
         {
             var details = DbContext.Details.Where(x => x.TaskId == request.TaskId).ToList();

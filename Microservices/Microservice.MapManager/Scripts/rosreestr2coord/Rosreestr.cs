@@ -3,20 +3,17 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using static Microservice.MapManager.Scripts.rosreestr2coord.Util.CadasterResponse;
 
 namespace TestReestr.Scripts.rosreestr2coord
 {
+    /// <summary>
+    /// The class for obtaining data from the registry
+    /// </summary>
     public static class Rosreestr
     {
         private static string ScriptPath { get; } = "/usr/local/bin/rosreestr2coord";
-        /*
-         * Denchick: "C:/Python310/python.exe"
-         * Nastya: "C:/Users/Nastya/AppData/Local/Programs/Python/Python310/python.exe"
-         */
         /// <summary>
         /// The method allows you to get the coordinates of the cadastral object by cadastral number
         /// </summary>
@@ -45,7 +42,7 @@ namespace TestReestr.Scripts.rosreestr2coord
                     return result;
                 }
             }
-            
+
         }
 
         private static string ParseResult(string cadastre)

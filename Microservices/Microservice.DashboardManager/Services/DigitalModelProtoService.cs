@@ -10,15 +10,28 @@ using System.Threading.Tasks;
 
 namespace Microservice.DashboardManager.Services
 {
+    /// <summary>
+    /// gRPC service for interacting with the digital model
+    /// </summary>
     public class DigitalModelProtoService : DigitalModelService.DigitalModelServiceBase
     {
+        /// <summary>
+        /// Database access property
+        /// </summary>
         private ApplicationContext DbContext { get; }
 
+        /// <summary>
+        /// Dependency injection constructor
+        /// </summary>
         public DigitalModelProtoService(ApplicationContext dbContext)
         {
             DbContext = dbContext;
         }
 
+        /// <summary>
+        /// Method for adding a new model
+        /// </summary>
+        /// <returns>Method execution status</returns>
         public override Task<ModelReply> PushDigitalModels(ModelRequest request, ServerCallContext context)
         {
             var model = new DigitalModel
@@ -34,9 +47,17 @@ namespace Microservice.DashboardManager.Services
             return Task.FromResult(new ModelReply { Status = "ok", ModelId = model.Id });
         }
 
+        /// <summary>
+        /// Method for updating the map on the model
+        /// </summary>
+        /// <returns>Method execution status</returns>
         public override Task<ModelReply> UpdateMapDigitalModel(UpdateModelRequest request, ServerCallContext context)
         {
             var model = DbContext.DigitalModels.FirstOrDefault(x => x.Id == request.ModelId);
+
+            if (model == null)
+                return Task.FromResult(new ModelReply { Status = "not ok" });
+
             model.MapId = request.MapId;
 
             DbContext.Update(model);
@@ -59,7 +80,7 @@ namespace Microservice.DashboardManager.Services
             return DbContext.DigitalModels
                 .Include(x => x.Product)
                 .Where(x => x.CompanyId.ToString().Equals(userId))
-                .Select(x => new ModelProto 
+                .Select(x => new ModelProto
                 {
                     Id = x.Id,
                     Name = x.Name,

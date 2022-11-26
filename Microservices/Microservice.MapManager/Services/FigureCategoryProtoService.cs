@@ -8,15 +8,27 @@ using System.Threading.Tasks;
 
 namespace Microservice.MapManager.Services
 {
+    /// <summary>
+    /// GRPS service for working with categories of figures on the map
+    /// </summary>
     public class FigureCategoryProtoService : FigureCategoryService.FigureCategoryServiceBase
     {
+        /// <summary>
+        /// Database access property
+        /// </summary>
         private readonly ApplicationContext _dbContext;
-
+        /// <summary>
+        /// Dependency injection constructor
+        /// </summary>
+        /// <param name="dbContext"></param>
         public FigureCategoryProtoService(ApplicationContext dbContext) 
         {
             _dbContext = dbContext;
         }
-
+        /// <summary>
+        /// method for getting categories of shapes
+        /// </summary>
+        /// <returns>grps objects categories shapes</returns>
         public override async Task GetFigureCategories(FigureCategoryRequest request, IServerStreamWriter<FigureCategoryReply> responseStream, ServerCallContext context)
         {
             var reply = new FigureCategoryReply();

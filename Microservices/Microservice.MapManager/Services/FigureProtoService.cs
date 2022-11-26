@@ -8,14 +8,26 @@ using System.Threading.Tasks;
 
 namespace Microservice.MapManager.Services
 {
+    /// <summary>
+    /// GRPS service for working with figures on the map
+    /// </summary>
     public class FigureProtoService : FigureService.FigureServiceBase
     {
+        /// <summary>
+        /// Database access property
+        /// </summary>
         private readonly ApplicationContext _dbContext;
-
+        /// <summary>
+        /// Dependency injection constructor
+        /// </summary>
         public FigureProtoService(ApplicationContext dbContext)
         {
             _dbContext = dbContext;
         }
+        /// <summary>
+        /// method to get all shapes in the map
+        /// </summary>
+        /// <returns>enumeration of grps figure objects</returns>
         public override async Task GetFigures(SendRequest request, IServerStreamWriter<SendReply> responseStream, ServerCallContext context)
         {
             var sendReply = new SendReply();
