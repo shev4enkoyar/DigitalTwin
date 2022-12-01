@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
 import {
+    Button,
     Dropdown, DropdownItem, DropdownMenu, DropdownToggle, NavLink
 } from 'reactstrap';
 import '../../../../pages/pages.css'
@@ -47,8 +48,10 @@ function ProfileDropdown({ direction, ...args }) {
                     </DropdownToggle>
                     <DropdownMenu dark {...args} className="prof">
                     <DropdownItem>
-                        <NavLink style={{color: "black"}} tag={Link} to={ApplicationPaths.IdentityManagePath}>
-                            Профиль
+                        <NavLink style={{color: "black"}} tag={Link}>
+                            <Button style={{backgroundColor: "transparent", border: "none", overflow: "hidden", outline: "none", color: "black"}} onClick={() => window.location.replace("/Identity/Account/Manage")}>
+                                Профиль
+                            </Button>
                         </NavLink>
                     </DropdownItem>
                     {
