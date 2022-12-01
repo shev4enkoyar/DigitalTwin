@@ -49,7 +49,7 @@ function ProfileDropdown({ direction, ...args }) {
                     <DropdownMenu dark {...args} className="prof">
                     <DropdownItem>
                         <NavLink style={{color: "black"}} tag={Link}>
-                            <button style={{backgroundColor: "transparent", border: "none", overflow: "hidden", outline: "none", color: "black", backgroundRepeat: "no-repeat", padding: 0, width: }} onClick={() => window.location.replace("/Identity/Account/Manage")}>
+                            <button style={{backgroundColor: "transparent", border: "none", overflow: "hidden", outline: "none", color: "black", backgroundRepeat: "no-repeat", padding: 0}} onClick={() => window.location.replace("/Identity/Account/Manage")}>
                                 Профиль
                             </button>
                         </NavLink>
