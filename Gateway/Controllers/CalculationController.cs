@@ -7,6 +7,9 @@ using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Gateway.Controllers.Base;
+using System.Collections.Generic;
+using Microservice.WebClient.Protos;
+using Grpc.Core;
 
 namespace Gateway.Controllers
 {
@@ -155,6 +158,42 @@ namespace Gateway.Controllers
             if (reply == null) return 0;
             var currentDate = SharedTools.ConvertFromJsonDate(DateTime.UtcNow);
             return weather.FirstOrDefault(x => DateTime.ParseExact(x.Date, "MM/dd/yyyy", CultureInfo.InvariantCulture).Equals(currentDate))!.Evapotranspiration;
+        }
+
+        private async Task<IEnumerable<int>> GetAllTaskIdsByModelId(int modelId)
+        {
+            using var channel = GrpcChannel.ForAddress(MicroservicesIp.External.ModelTask,
+                new GrpcChannelOptions { HttpHandler = SharedTools.GetDefaultHttpHandler }
+            );
+
+            SendReply response = null;
+            using (var call = new ModelTaskService.ModelTaskServiceClient(channel)
+                .GetTasks(new SendRequest { ModelId = modelId }))
+            {
+                while (await call.ResponseStream.MoveNext())
+                {
+                    response = call.ResponseStream.Current;
+                }
+            }
+            return response?.Tasks.Select(x => x.Id);
+        }
+
+        private async Task<IEnumerable<DetailProto>> GetDetailsByTaskId(int taskId)
+        {
+            using var channel = GrpcChannel.ForAddress(MicroservicesIp.External.ModelTask,
+                new GrpcChannelOptions { HttpHandler = SharedTools.GetDefaultHttpHandler }
+            );
+
+            GetTaskReply response = null;
+            using (var call = new ModelTaskService.ModelTaskServiceClient(channel)
+                .GetTaskDetails(new GetTaskRequest { TaskId = taskId }))
+            {
+                while (await call.ResponseStream.MoveNext())
+                {
+                    response = call.ResponseStream.Current;
+                }
+            }
+            return response?.Details;
         }
     }
 }
