@@ -1,0 +1,122 @@
+\hypertarget{class_gateway_1_1_controllers_1_1_subscription_controller}{}\doxysection{Gateway.\+Controllers.\+Subscription\+Controller Class Reference}
+\label{class_gateway_1_1_controllers_1_1_subscription_controller}\index{Gateway.Controllers.SubscriptionController@{Gateway.Controllers.SubscriptionController}}
+
+
+Model subscriber interaction controller   
+
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+async Task$<$ IEnumerable$<$ \mbox{\hyperlink{class_microservice_1_1_subscription_manager_1_1_subscription_proto}{Subscription\+Proto}} $>$ $>$ \mbox{\hyperlink{class_gateway_1_1_controllers_1_1_subscription_controller_a8007a8aa193557c3a33547679babad0a}{Get\+All\+Subscriptions}} ()
+\begin{DoxyCompactList}\small\item\em Method to get all subscriptions  \end{DoxyCompactList}\item 
+IAction\+Result \mbox{\hyperlink{class_gateway_1_1_controllers_1_1_subscription_controller_a06dccaed7fee2598824b92ee8de7f89b}{Activate\+Subscription}} (int model\+Id, int days, int subscription\+Id)
+\begin{DoxyCompactList}\small\item\em Method to activate a subscription for a model  \end{DoxyCompactList}\item 
+IAction\+Result \mbox{\hyperlink{class_gateway_1_1_controllers_1_1_subscription_controller_a3d7332de9c3ad0814fea5e92f5e1f535}{Update\+Activated\+Subscription}} (int days, int subscription\+Id)
+\begin{DoxyCompactList}\small\item\em Method to update the current subscription for a model  \end{DoxyCompactList}\item 
+async Task$<$ Dictionary$<$ string, List$<$ string $>$ $>$ $>$ \mbox{\hyperlink{class_gateway_1_1_controllers_1_1_subscription_controller_a3b788b5f8b3537353b04862ccea9f78b}{Get\+All\+Models\+Subscriptions}} (string company\+Id)
+\begin{DoxyCompactList}\small\item\em Method for getting a dictionary of model names with their list of subscriptions  \end{DoxyCompactList}\item 
+async Task$<$ IEnumerable$<$ \mbox{\hyperlink{class_microservice_1_1_subscription_manager_1_1_subscription_proto}{Subscription\+Proto}} $>$ $>$ \mbox{\hyperlink{class_gateway_1_1_controllers_1_1_subscription_controller_a0631a8e27e449946650f1864b03bca6c}{Get\+Activated\+Subscription}} (int model\+Id)
+\begin{DoxyCompactList}\small\item\em Method for getting a list of activated model subscriptions  \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Model subscriber interaction controller  
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_gateway_1_1_controllers_1_1_subscription_controller_a06dccaed7fee2598824b92ee8de7f89b}\label{class_gateway_1_1_controllers_1_1_subscription_controller_a06dccaed7fee2598824b92ee8de7f89b}} 
+\index{Gateway.Controllers.SubscriptionController@{Gateway.Controllers.SubscriptionController}!ActivateSubscription@{ActivateSubscription}}
+\index{ActivateSubscription@{ActivateSubscription}!Gateway.Controllers.SubscriptionController@{Gateway.Controllers.SubscriptionController}}
+\doxysubsubsection{\texorpdfstring{ActivateSubscription()}{ActivateSubscription()}}
+{\footnotesize\ttfamily IAction\+Result Gateway.\+Controllers.\+Subscription\+Controller.\+Activate\+Subscription (\begin{DoxyParamCaption}\item[{int}]{model\+Id,  }\item[{int}]{days,  }\item[{int}]{subscription\+Id }\end{DoxyParamCaption})}
+
+
+
+Method to activate a subscription for a model  
+
+
+\begin{DoxyParams}{Parameters}
+{\em model\+Id} & Model Id\\
+\hline
+{\em days} & Num days to update\\
+\hline
+{\em subscription\+Id} & Subscription Id\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+HTTP code 200 or error
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_gateway_1_1_controllers_1_1_subscription_controller_a0631a8e27e449946650f1864b03bca6c}\label{class_gateway_1_1_controllers_1_1_subscription_controller_a0631a8e27e449946650f1864b03bca6c}} 
+\index{Gateway.Controllers.SubscriptionController@{Gateway.Controllers.SubscriptionController}!GetActivatedSubscription@{GetActivatedSubscription}}
+\index{GetActivatedSubscription@{GetActivatedSubscription}!Gateway.Controllers.SubscriptionController@{Gateway.Controllers.SubscriptionController}}
+\doxysubsubsection{\texorpdfstring{GetActivatedSubscription()}{GetActivatedSubscription()}}
+{\footnotesize\ttfamily async Task$<$ IEnumerable$<$ \mbox{\hyperlink{class_microservice_1_1_subscription_manager_1_1_subscription_proto}{Subscription\+Proto}} $>$ $>$ Gateway.\+Controllers.\+Subscription\+Controller.\+Get\+Activated\+Subscription (\begin{DoxyParamCaption}\item[{int}]{model\+Id }\end{DoxyParamCaption})}
+
+
+
+Method for getting a list of activated model subscriptions  
+
+
+\begin{DoxyParams}{Parameters}
+{\em model\+Id} & Model Id\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Enumerating Subscription Objects
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_gateway_1_1_controllers_1_1_subscription_controller_a3b788b5f8b3537353b04862ccea9f78b}\label{class_gateway_1_1_controllers_1_1_subscription_controller_a3b788b5f8b3537353b04862ccea9f78b}} 
+\index{Gateway.Controllers.SubscriptionController@{Gateway.Controllers.SubscriptionController}!GetAllModelsSubscriptions@{GetAllModelsSubscriptions}}
+\index{GetAllModelsSubscriptions@{GetAllModelsSubscriptions}!Gateway.Controllers.SubscriptionController@{Gateway.Controllers.SubscriptionController}}
+\doxysubsubsection{\texorpdfstring{GetAllModelsSubscriptions()}{GetAllModelsSubscriptions()}}
+{\footnotesize\ttfamily async Task$<$ Dictionary$<$ string, List$<$ string $>$ $>$ $>$ Gateway.\+Controllers.\+Subscription\+Controller.\+Get\+All\+Models\+Subscriptions (\begin{DoxyParamCaption}\item[{string}]{company\+Id }\end{DoxyParamCaption})}
+
+
+
+Method for getting a dictionary of model names with their list of subscriptions  
+
+
+\begin{DoxyParams}{Parameters}
+{\em company\+Id} & Company Id\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Dictionary Model Name\+:Subscription List
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_gateway_1_1_controllers_1_1_subscription_controller_a8007a8aa193557c3a33547679babad0a}\label{class_gateway_1_1_controllers_1_1_subscription_controller_a8007a8aa193557c3a33547679babad0a}} 
+\index{Gateway.Controllers.SubscriptionController@{Gateway.Controllers.SubscriptionController}!GetAllSubscriptions@{GetAllSubscriptions}}
+\index{GetAllSubscriptions@{GetAllSubscriptions}!Gateway.Controllers.SubscriptionController@{Gateway.Controllers.SubscriptionController}}
+\doxysubsubsection{\texorpdfstring{GetAllSubscriptions()}{GetAllSubscriptions()}}
+{\footnotesize\ttfamily async Task$<$ IEnumerable$<$ \mbox{\hyperlink{class_microservice_1_1_subscription_manager_1_1_subscription_proto}{Subscription\+Proto}} $>$ $>$ Gateway.\+Controllers.\+Subscription\+Controller.\+Get\+All\+Subscriptions (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Method to get all subscriptions  
+
+\begin{DoxyReturn}{Returns}
+Listing all subscriptions
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_gateway_1_1_controllers_1_1_subscription_controller_a3d7332de9c3ad0814fea5e92f5e1f535}\label{class_gateway_1_1_controllers_1_1_subscription_controller_a3d7332de9c3ad0814fea5e92f5e1f535}} 
+\index{Gateway.Controllers.SubscriptionController@{Gateway.Controllers.SubscriptionController}!UpdateActivatedSubscription@{UpdateActivatedSubscription}}
+\index{UpdateActivatedSubscription@{UpdateActivatedSubscription}!Gateway.Controllers.SubscriptionController@{Gateway.Controllers.SubscriptionController}}
+\doxysubsubsection{\texorpdfstring{UpdateActivatedSubscription()}{UpdateActivatedSubscription()}}
+{\footnotesize\ttfamily IAction\+Result Gateway.\+Controllers.\+Subscription\+Controller.\+Update\+Activated\+Subscription (\begin{DoxyParamCaption}\item[{int}]{days,  }\item[{int}]{subscription\+Id }\end{DoxyParamCaption})}
+
+
+
+Method to update the current subscription for a model  
+
+
+\begin{DoxyParams}{Parameters}
+{\em days} & Num day for subscription\\
+\hline
+{\em subscription\+Id} & Subscription Id\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+HTTP code 200 or error
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Source/shev4enkoyar/\+Digital\+Twin/\+Gateway/\+Controllers/Subscription\+Controller.\+cs\end{DoxyCompactItemize}

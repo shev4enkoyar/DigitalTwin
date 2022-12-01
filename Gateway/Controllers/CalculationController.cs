@@ -11,17 +11,17 @@ using Gateway.Controllers.Base;
 namespace Gateway.Controllers
 {
     /// <summary>
-    /// 
+    /// Controller for calculating recommendation data
     /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class CalculationController : WeatherControllerBase
     {
         /// <summary>
-        /// 
+        /// Method for obtaining the influence of tasks on the model
         /// </summary>
         /// <param name="modelId">Model Id</param>
-        /// <returns></returns>
+        /// <returns>Influence value</returns>
         [HttpGet("get_task_influence/{modelId:int}")]
         public async Task<double> GetTaskInfluenceByModelAsync(int modelId)
         {

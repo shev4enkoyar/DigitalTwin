@@ -32,26 +32,26 @@
     font-size: 14px;
 }
 
-[type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+#iostoggle[type="checkbox"]:not(:checked), #iostoggle[type="checkbox"]:checked {
     position: absolute;
     left: -9999px;
 }
 
-    [type="checkbox"]:not(:checked) + label, [type="checkbox"]:checked + label {
+    #iostoggle[type="checkbox"]:not(:checked) + label, #iostoggle[type="checkbox"]:checked + label {
         position: relative;
         padding-left: 4em;
         cursor: pointer;
         font-size: 18px;
     }
 
-        [type="checkbox"]:not(:checked) + label:before, [type="checkbox"]:checked + label:before, [type="checkbox"]:not(:checked) + label:after, [type="checkbox"]:checked + label:after {
+        #iostoggle[type="checkbox"]:not(:checked) + label:before, #iostoggle[type="checkbox"]:checked + label:before, #iostoggle[type="checkbox"]:not(:checked) + label:after, #iostoggle[type="checkbox"]:checked + label:after {
             content: '';
             position: absolute;
             height: 1.5em;
             transition: all .5s ease;
         }
 
-        [type="checkbox"]:not(:checked) + label:before, [type="checkbox"]:checked + label:before {
+        #iostoggle[type="checkbox"]:not(:checked) + label:before, #iostoggle[type="checkbox"]:checked + label:before {
             left: 0;
             top: 0;
             width: 3em;
@@ -61,7 +61,7 @@
             z-index: -1;
         }
 
-        [type="checkbox"]:not(:checked) + label:after, [type="checkbox"]:checked + label:after {
+        #iostoggle[type="checkbox"]:not(:checked) + label:after, #iostoggle[type="checkbox"]:checked + label:after {
             left: .15em;
             top: .15em;
             background-color: ghostwhite;
@@ -70,11 +70,11 @@
             height: 1.2em;
         }
 
-        [type="checkbox"]:checked + label:after {
+        #iostoggle[type="checkbox"]:checked + label:after {
             left: 1.65em;
         }
 
-        [type="checkbox"]:checked + label:before {
+        #iostoggle[type="checkbox"]:checked + label:before {
             background-color: #72da67;
             border-color: #72da67;
         }

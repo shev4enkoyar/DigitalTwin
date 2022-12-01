@@ -1,0 +1,43 @@
+\hypertarget{class_web_gateway_1_1_greeter_1_1_greeter_base}{}\doxysection{Web\+Gateway.\+Greeter.\+Greeter\+Base Class Reference}
+\label{class_web_gateway_1_1_greeter_1_1_greeter_base}\index{WebGateway.Greeter.GreeterBase@{WebGateway.Greeter.GreeterBase}}
+
+
+Base class for server-\/side implementations of Greeter  
+
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual global\+::\+System.\+Threading.\+Tasks.\+Task$<$ global\+::\+Web\+Gateway.\+Hello\+Reply $>$ \mbox{\hyperlink{class_web_gateway_1_1_greeter_1_1_greeter_base_a565970d4a6ce869c0ec716104fb88306}{Say\+Hello}} (global\+::\+Web\+Gateway.\+Hello\+Request request, grpc\+::\+Server\+Call\+Context context)
+\begin{DoxyCompactList}\small\item\em Sends a greeting  \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Base class for server-\/side implementations of Greeter 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_web_gateway_1_1_greeter_1_1_greeter_base_a565970d4a6ce869c0ec716104fb88306}\label{class_web_gateway_1_1_greeter_1_1_greeter_base_a565970d4a6ce869c0ec716104fb88306}} 
+\index{WebGateway.Greeter.GreeterBase@{WebGateway.Greeter.GreeterBase}!SayHello@{SayHello}}
+\index{SayHello@{SayHello}!WebGateway.Greeter.GreeterBase@{WebGateway.Greeter.GreeterBase}}
+\doxysubsubsection{\texorpdfstring{SayHello()}{SayHello()}}
+{\footnotesize\ttfamily virtual global.\+System.\+Threading.\+Tasks.\+Task$<$ global.\+Web\+Gateway.\+Hello\+Reply $>$ Web\+Gateway.\+Greeter.\+Greeter\+Base.\+Say\+Hello (\begin{DoxyParamCaption}\item[{global\+::\+Web\+Gateway.\+Hello\+Request}]{request,  }\item[{grpc\+::\+Server\+Call\+Context}]{context }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Sends a greeting  
+
+
+\begin{DoxyParams}{Parameters}
+{\em request} & The request received from the client.\\
+\hline
+{\em context} & The context of the server-\/side call handler being invoked.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The response to send back to the client (wrapped by a task).
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Source/shev4enkoyar/\+Digital\+Twin/\+Microservices/\+Microservice.\+Map\+Manager/obj/\+Debug/netcoreapp3.\+1/\+Protos/Greet\+Grpc.\+cs\end{DoxyCompactItemize}

@@ -32,10 +32,10 @@ class Models extends Component {
                                             {el.productName}
                                         </p>
                                         <p className="paramForModelCard">
-                                            {"Текущее мероприятие"}
+                                            {"Мероприятия отсутсвуют"}
                                         </p>
                                         <p className="paramForModelCard">
-                                            {"Совет"}
+                                            {"Советы отстутствуют"}
                                         </p>
                                     </CardModel>
                                 </button>

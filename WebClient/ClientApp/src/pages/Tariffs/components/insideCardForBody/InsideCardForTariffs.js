@@ -8,7 +8,7 @@ function CardForTariffs(props) {
             {context => (
                 <Card style={props.parentStyle} className={context.theme + "ForInsideCard" + " InsideCardTarriffs "}>
                     <Container className={context.theme + " " + context.theme + "ForInsideCard" + " textInsideForCardTarriffs"}>
-                        <Row >
+                        <Row style={props.styleContent}>
                             {props.children}
                         </Row>
                     </Container>

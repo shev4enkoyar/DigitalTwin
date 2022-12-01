@@ -15,24 +15,31 @@ using Shared;
 namespace Microservice.WeatherManager.Services
 {
     /// <summary>
-    /// 
+    /// gRPC service for interacting with the weather API
     /// </summary>
     public class WeatherService : Protos.WeatherService.WeatherServiceBase
     {
         /// <summary>
-        /// 
+        /// Number of rows in the day object
         /// </summary>
         private int RowsInDay { get; } = 24;
 
         /// <summary>
-        /// 
+        /// Database access property
         /// </summary>
         private ApplicationContext DbContext { get; }
+
+        /// <summary>
+        /// Dependency injection constructor
+        /// </summary>
         public WeatherService(ApplicationContext dbContext)
         {
             DbContext = dbContext;
         }
 
+        /// <summary>
+        /// Method to get weather conditions from API and write data to database
+        /// </summary>
         public override async Task GetWeather(Request request, IServerStreamWriter<WeatherReply> responseStream, ServerCallContext context)
         {
             const string weatherBase = "https://api.open-meteo.com/v1/forecast?";

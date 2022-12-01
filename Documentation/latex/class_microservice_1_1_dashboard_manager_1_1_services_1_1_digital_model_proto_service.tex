@@ -1,0 +1,57 @@
+\hypertarget{class_microservice_1_1_dashboard_manager_1_1_services_1_1_digital_model_proto_service}{}\doxysection{Microservice.\+Dashboard\+Manager.\+Services.\+Digital\+Model\+Proto\+Service Class Reference}
+\label{class_microservice_1_1_dashboard_manager_1_1_services_1_1_digital_model_proto_service}\index{Microservice.DashboardManager.Services.DigitalModelProtoService@{Microservice.DashboardManager.Services.DigitalModelProtoService}}
+
+
+g\+RPC service for interacting with the digital model   
+
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_microservice_1_1_dashboard_manager_1_1_services_1_1_digital_model_proto_service_a4b51d21c4af98240b38b4895ed5ad698}\label{class_microservice_1_1_dashboard_manager_1_1_services_1_1_digital_model_proto_service_a4b51d21c4af98240b38b4895ed5ad698}} 
+{\bfseries Digital\+Model\+Proto\+Service} (\mbox{\hyperlink{class_microservice_1_1_dashboard_manager_1_1_d_a_l_1_1_application_context}{Application\+Context}} db\+Context)
+\begin{DoxyCompactList}\small\item\em Dependency injection constructor  \end{DoxyCompactList}\item 
+override Task$<$ \mbox{\hyperlink{class_microservice_1_1_dashboard_manager_1_1_protos_1_1_model_reply}{Model\+Reply}} $>$ \mbox{\hyperlink{class_microservice_1_1_dashboard_manager_1_1_services_1_1_digital_model_proto_service_a5b8ef5f7b72b0d4787ee15eb1031047d}{Push\+Digital\+Models}} (\mbox{\hyperlink{class_microservice_1_1_dashboard_manager_1_1_protos_1_1_model_request}{Model\+Request}} request, Server\+Call\+Context context)
+\begin{DoxyCompactList}\small\item\em Method for adding a new model  \end{DoxyCompactList}\item 
+override Task$<$ \mbox{\hyperlink{class_microservice_1_1_dashboard_manager_1_1_protos_1_1_model_reply}{Model\+Reply}} $>$ \mbox{\hyperlink{class_microservice_1_1_dashboard_manager_1_1_services_1_1_digital_model_proto_service_a844d2a951d8b8fcf701c5d052bd963d0}{Update\+Map\+Digital\+Model}} (\mbox{\hyperlink{class_microservice_1_1_dashboard_manager_1_1_protos_1_1_update_model_request}{Update\+Model\+Request}} request, Server\+Call\+Context context)
+\begin{DoxyCompactList}\small\item\em Method for updating the map on the model  \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_microservice_1_1_dashboard_manager_1_1_services_1_1_digital_model_proto_service_a68f81b637333fe356c7e39e93ff25f9d}\label{class_microservice_1_1_dashboard_manager_1_1_services_1_1_digital_model_proto_service_a68f81b637333fe356c7e39e93ff25f9d}} 
+override async Task {\bfseries Get\+Digital\+Models} (\mbox{\hyperlink{class_microservice_1_1_dashboard_manager_1_1_protos_1_1_get_models_request}{Get\+Models\+Request}} request, IServer\+Stream\+Writer$<$ \mbox{\hyperlink{class_microservice_1_1_dashboard_manager_1_1_protos_1_1_get_models_reply}{Get\+Models\+Reply}} $>$ response\+Stream, Server\+Call\+Context context)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+g\+RPC service for interacting with the digital model  
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_microservice_1_1_dashboard_manager_1_1_services_1_1_digital_model_proto_service_a5b8ef5f7b72b0d4787ee15eb1031047d}\label{class_microservice_1_1_dashboard_manager_1_1_services_1_1_digital_model_proto_service_a5b8ef5f7b72b0d4787ee15eb1031047d}} 
+\index{Microservice.DashboardManager.Services.DigitalModelProtoService@{Microservice.DashboardManager.Services.DigitalModelProtoService}!PushDigitalModels@{PushDigitalModels}}
+\index{PushDigitalModels@{PushDigitalModels}!Microservice.DashboardManager.Services.DigitalModelProtoService@{Microservice.DashboardManager.Services.DigitalModelProtoService}}
+\doxysubsubsection{\texorpdfstring{PushDigitalModels()}{PushDigitalModels()}}
+{\footnotesize\ttfamily override Task$<$ \mbox{\hyperlink{class_microservice_1_1_dashboard_manager_1_1_protos_1_1_model_reply}{Model\+Reply}} $>$ Microservice.\+Dashboard\+Manager.\+Services.\+Digital\+Model\+Proto\+Service.\+Push\+Digital\+Models (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_microservice_1_1_dashboard_manager_1_1_protos_1_1_model_request}{Model\+Request}}}]{request,  }\item[{Server\+Call\+Context}]{context }\end{DoxyParamCaption})}
+
+
+
+Method for adding a new model  
+
+\begin{DoxyReturn}{Returns}
+Method execution status
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_microservice_1_1_dashboard_manager_1_1_services_1_1_digital_model_proto_service_a844d2a951d8b8fcf701c5d052bd963d0}\label{class_microservice_1_1_dashboard_manager_1_1_services_1_1_digital_model_proto_service_a844d2a951d8b8fcf701c5d052bd963d0}} 
+\index{Microservice.DashboardManager.Services.DigitalModelProtoService@{Microservice.DashboardManager.Services.DigitalModelProtoService}!UpdateMapDigitalModel@{UpdateMapDigitalModel}}
+\index{UpdateMapDigitalModel@{UpdateMapDigitalModel}!Microservice.DashboardManager.Services.DigitalModelProtoService@{Microservice.DashboardManager.Services.DigitalModelProtoService}}
+\doxysubsubsection{\texorpdfstring{UpdateMapDigitalModel()}{UpdateMapDigitalModel()}}
+{\footnotesize\ttfamily override Task$<$ \mbox{\hyperlink{class_microservice_1_1_dashboard_manager_1_1_protos_1_1_model_reply}{Model\+Reply}} $>$ Microservice.\+Dashboard\+Manager.\+Services.\+Digital\+Model\+Proto\+Service.\+Update\+Map\+Digital\+Model (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_microservice_1_1_dashboard_manager_1_1_protos_1_1_update_model_request}{Update\+Model\+Request}}}]{request,  }\item[{Server\+Call\+Context}]{context }\end{DoxyParamCaption})}
+
+
+
+Method for updating the map on the model  
+
+\begin{DoxyReturn}{Returns}
+Method execution status
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Source/shev4enkoyar/\+Digital\+Twin/\+Microservices/\+Microservice.\+Dashboard\+Manager/\+Services/Digital\+Model\+Proto\+Service.\+cs\end{DoxyCompactItemize}

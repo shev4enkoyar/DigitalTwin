@@ -5,6 +5,7 @@ namespace Microservice.ForecastManager.Calculations
 {
     public static class InfluenceCalculation
     {
+        private const int MinimalAvgDayliTemperature = 10;
         /// <summary>
         /// общее влияние на урожай. Чем ближе к 1, тем лучше
         /// </summary>
@@ -20,7 +21,7 @@ namespace Microservice.ForecastManager.Calculations
         /// <exception cref="Exception"></exception>
         public static double GetOverallInfluence(int[] dons, int[] dots, double g, double gtcOptinal, int averageTemperature, int[] maxAirTemperature, int[] minAirTemperature, int[] precipitationAmount)
         {
-            double result = GetSoilInfluence(); // первоначальное влияние почвы на культуру
+            var result = GetSoilInfluence(); // первоначальное влияние почвы на культуру
 
             if (!dons.Length.Equals(dots.Length)
                 || !(maxAirTemperature.Length.Equals(minAirTemperature.Length)
@@ -39,7 +40,7 @@ namespace Microservice.ForecastManager.Calculations
 
 
         /// <summary>
-        /// первоначальное влияние почвы на культуру. Зависит от содержания почвы и насколько оно подходит для выбранной культуры. 1 - это круто
+        /// первоначальное влияние почвы на культуру. Зависит от содержания почвы и насколько оно подходит для выбранной культуры. 1 - лучший вариант
         /// </summary>
         /// <returns></returns>
         private static double GetSoilInfluence()
@@ -49,7 +50,7 @@ namespace Microservice.ForecastManager.Calculations
 
 
         /// <summary>
-        /// влияние погоды (осадков) на урожай (видимо, всегда влияет плохо, потому с минусом). Чем ближе к нулю, тем лучше
+        /// влияние погоды (осадков) на урожай. Чем ближе к нулю, тем лучше
         /// </summary>
         /// <param name="g">калибровочный коэффициент</param>
         /// <param name="gtc">текущий уровень гтк</param>
@@ -63,13 +64,12 @@ namespace Microservice.ForecastManager.Calculations
         // ГТК - отражает текущий уровень влагообеспечённости территории
         private static double GetHydrothermalCoefficiens(int averageTemperature, int[] maxAirTemperature, int[] minAirTemperature, int[] precipitationAmount)
         {
-            //TODO Что такое 10. Нужно занести в переменную
-            if (averageTemperature < 10)
+            if (averageTemperature < MinimalAvgDayliTemperature)
                 return 0;
             if (!(maxAirTemperature.Length == minAirTemperature.Length && minAirTemperature.Length == precipitationAmount.Length))
                 throw new Exception("days count not equal");
 
-            double averageAirTemperature = GetAverageAirTempure(maxAirTemperature, minAirTemperature);
+            var averageAirTemperature = GetAverageAirTempure(maxAirTemperature, minAirTemperature);
 
             if (averageAirTemperature == 0)
                 return 0;
@@ -80,7 +80,7 @@ namespace Microservice.ForecastManager.Calculations
         private static double GetAverageAirTempure(int[] maxAirTemperature, int[] minAirTemperature)
         {
             double sum = 0;
-            for (int i = 0; i < minAirTemperature.Length; i++)
+            for (var i = 0; i < minAirTemperature.Length; i++)
             {
                 sum += (maxAirTemperature[i] + minAirTemperature[i]) / 2;
             }
@@ -89,19 +89,19 @@ namespace Microservice.ForecastManager.Calculations
         }
 
         /// <summary>
-        /// влияние на урожай по факту выполнения работ, где 1 - максимум
+        /// A method for obtaining the effect of a task on productivity
         /// </summary>
         /// <param name="dons"> 0 - работы не выполнены, 1 - выполнены </param>
         /// <param name="dots"> 0 - есть нарушение сроков работ, 1 - нет нарушения сроков работ </param>
-        /// <returns></returns>
+        /// <returns>Task Influence</returns>
         /// <exception cref="Exception"></exception>
         public static double GetTaskInfluence(int[] dons, int[] dots)
         {
             if (dons.Length != dots.Length)
                 throw new Exception("days count not equal");
-            int sum = 0;
+            var sum = 0;
 
-            for (int i = 0; i < dons.Length; i++)
+            for (var i = 0; i < dons.Length; i++)
             {
                 sum += GetTaskInfluencePerDay(dons[i], dots[i]);
             }
@@ -109,16 +109,13 @@ namespace Microservice.ForecastManager.Calculations
             return sum / dons.Length;
         }
 
-
-
-
-        /// <summary>
+        /*/// <summary>
         /// 
         /// </summary>
         /// <param name="don"> 0 - работы не выполнены, 1 - выполнены </param>
         /// <param name="dot">  0 - есть нарушение сроков работ, 1 - нет нарушения сроков работ </param>
         /// <param name="e"> экспертная оценка влияния работ на урожай </param>
-        /// <returns></returns>
+        /// <returns></returns>*/
         private static byte GetTaskInfluencePerDay(int don, int dot, byte e = 1)
         {
             return (byte)(e * don * dot);

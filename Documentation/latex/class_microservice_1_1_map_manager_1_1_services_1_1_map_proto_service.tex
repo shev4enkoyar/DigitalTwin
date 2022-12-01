@@ -1,0 +1,69 @@
+\hypertarget{class_microservice_1_1_map_manager_1_1_services_1_1_map_proto_service}{}\doxysection{Microservice.\+Map\+Manager.\+Services.\+Map\+Proto\+Service Class Reference}
+\label{class_microservice_1_1_map_manager_1_1_services_1_1_map_proto_service}\index{Microservice.MapManager.Services.MapProtoService@{Microservice.MapManager.Services.MapProtoService}}
+
+
+GRPS service for working with a map   
+
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_microservice_1_1_map_manager_1_1_services_1_1_map_proto_service_a526b1ec8a021a04968ce8466d90d1105}\label{class_microservice_1_1_map_manager_1_1_services_1_1_map_proto_service_a526b1ec8a021a04968ce8466d90d1105}} 
+{\bfseries Map\+Proto\+Service} (\mbox{\hyperlink{class_microservice_1_1_map_manager_1_1_d_a_l_1_1_application_context}{Application\+Context}} db\+Context)
+\begin{DoxyCompactList}\small\item\em Dependency injection constructor  \end{DoxyCompactList}\item 
+override Task$<$ \mbox{\hyperlink{class_microservice_1_1_map_manager_1_1_protos_1_1_get_map_id_reply}{Get\+Map\+Id\+Reply}} $>$ \mbox{\hyperlink{class_microservice_1_1_map_manager_1_1_services_1_1_map_proto_service_ace7e7676f242c373e493461d3f2acb49}{Get\+Map\+Id}} (\mbox{\hyperlink{class_microservice_1_1_map_manager_1_1_protos_1_1_get_map_id_request}{Get\+Map\+Id\+Request}} request, Server\+Call\+Context context)
+\begin{DoxyCompactList}\small\item\em method to get id or create map  \end{DoxyCompactList}\item 
+override Task$<$ \mbox{\hyperlink{class_microservice_1_1_map_manager_1_1_protos_1_1_get_map_center_reply}{Get\+Map\+Center\+Reply}} $>$ \mbox{\hyperlink{class_microservice_1_1_map_manager_1_1_services_1_1_map_proto_service_ad9670bacfb6df8dd19ad1acfb60b3967}{Get\+Map\+Center}} (\mbox{\hyperlink{class_microservice_1_1_map_manager_1_1_protos_1_1_get_map_center_request}{Get\+Map\+Center\+Request}} request, Server\+Call\+Context context)
+\begin{DoxyCompactList}\small\item\em method for getting the coordinates of the center of the culture polygon on the map  \end{DoxyCompactList}\item 
+override Task$<$ \mbox{\hyperlink{class_microservice_1_1_map_manager_1_1_protos_1_1_get_map_area_reply}{Get\+Map\+Area\+Reply}} $>$ \mbox{\hyperlink{class_microservice_1_1_map_manager_1_1_services_1_1_map_proto_service_a639acd17798bad30c7651784afac8272}{Get\+Map\+Area}} (\mbox{\hyperlink{class_microservice_1_1_map_manager_1_1_protos_1_1_get_map_area_request}{Get\+Map\+Area\+Request}} request, Server\+Call\+Context context)
+\begin{DoxyCompactList}\small\item\em method to get culture polygon area on map  \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+GRPS service for working with a map  
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_microservice_1_1_map_manager_1_1_services_1_1_map_proto_service_a639acd17798bad30c7651784afac8272}\label{class_microservice_1_1_map_manager_1_1_services_1_1_map_proto_service_a639acd17798bad30c7651784afac8272}} 
+\index{Microservice.MapManager.Services.MapProtoService@{Microservice.MapManager.Services.MapProtoService}!GetMapArea@{GetMapArea}}
+\index{GetMapArea@{GetMapArea}!Microservice.MapManager.Services.MapProtoService@{Microservice.MapManager.Services.MapProtoService}}
+\doxysubsubsection{\texorpdfstring{GetMapArea()}{GetMapArea()}}
+{\footnotesize\ttfamily override Task$<$ \mbox{\hyperlink{class_microservice_1_1_map_manager_1_1_protos_1_1_get_map_area_reply}{Get\+Map\+Area\+Reply}} $>$ Microservice.\+Map\+Manager.\+Services.\+Map\+Proto\+Service.\+Get\+Map\+Area (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_microservice_1_1_map_manager_1_1_protos_1_1_get_map_area_request}{Get\+Map\+Area\+Request}}}]{request,  }\item[{Server\+Call\+Context}]{context }\end{DoxyParamCaption})}
+
+
+
+method to get culture polygon area on map  
+
+\begin{DoxyReturn}{Returns}
+culture polygon area
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_microservice_1_1_map_manager_1_1_services_1_1_map_proto_service_ad9670bacfb6df8dd19ad1acfb60b3967}\label{class_microservice_1_1_map_manager_1_1_services_1_1_map_proto_service_ad9670bacfb6df8dd19ad1acfb60b3967}} 
+\index{Microservice.MapManager.Services.MapProtoService@{Microservice.MapManager.Services.MapProtoService}!GetMapCenter@{GetMapCenter}}
+\index{GetMapCenter@{GetMapCenter}!Microservice.MapManager.Services.MapProtoService@{Microservice.MapManager.Services.MapProtoService}}
+\doxysubsubsection{\texorpdfstring{GetMapCenter()}{GetMapCenter()}}
+{\footnotesize\ttfamily override Task$<$ \mbox{\hyperlink{class_microservice_1_1_map_manager_1_1_protos_1_1_get_map_center_reply}{Get\+Map\+Center\+Reply}} $>$ Microservice.\+Map\+Manager.\+Services.\+Map\+Proto\+Service.\+Get\+Map\+Center (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_microservice_1_1_map_manager_1_1_protos_1_1_get_map_center_request}{Get\+Map\+Center\+Request}}}]{request,  }\item[{Server\+Call\+Context}]{context }\end{DoxyParamCaption})}
+
+
+
+method for getting the coordinates of the center of the culture polygon on the map  
+
+\begin{DoxyReturn}{Returns}
+the coordinates of the center
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_microservice_1_1_map_manager_1_1_services_1_1_map_proto_service_ace7e7676f242c373e493461d3f2acb49}\label{class_microservice_1_1_map_manager_1_1_services_1_1_map_proto_service_ace7e7676f242c373e493461d3f2acb49}} 
+\index{Microservice.MapManager.Services.MapProtoService@{Microservice.MapManager.Services.MapProtoService}!GetMapId@{GetMapId}}
+\index{GetMapId@{GetMapId}!Microservice.MapManager.Services.MapProtoService@{Microservice.MapManager.Services.MapProtoService}}
+\doxysubsubsection{\texorpdfstring{GetMapId()}{GetMapId()}}
+{\footnotesize\ttfamily override Task$<$ \mbox{\hyperlink{class_microservice_1_1_map_manager_1_1_protos_1_1_get_map_id_reply}{Get\+Map\+Id\+Reply}} $>$ Microservice.\+Map\+Manager.\+Services.\+Map\+Proto\+Service.\+Get\+Map\+Id (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_microservice_1_1_map_manager_1_1_protos_1_1_get_map_id_request}{Get\+Map\+Id\+Request}}}]{request,  }\item[{Server\+Call\+Context}]{context }\end{DoxyParamCaption})}
+
+
+
+method to get id or create map  
+
+\begin{DoxyReturn}{Returns}
+map id
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Source/shev4enkoyar/\+Digital\+Twin/\+Microservices/\+Microservice.\+Map\+Manager/\+Services/Map\+Proto\+Service.\+cs\end{DoxyCompactItemize}

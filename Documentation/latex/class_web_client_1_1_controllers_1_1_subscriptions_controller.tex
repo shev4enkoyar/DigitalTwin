@@ -1,0 +1,106 @@
+\hypertarget{class_web_client_1_1_controllers_1_1_subscriptions_controller}{}\doxysection{Web\+Client.\+Controllers.\+Subscriptions\+Controller Class Reference}
+\label{class_web_client_1_1_controllers_1_1_subscriptions_controller}\index{WebClient.Controllers.SubscriptionsController@{WebClient.Controllers.SubscriptionsController}}
+
+
+Company Subscription Interaction Controller   
+
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_web_client_1_1_controllers_1_1_subscriptions_controller_a81e4736fd1500d351b860ade63ba959c}\label{class_web_client_1_1_controllers_1_1_subscriptions_controller_a81e4736fd1500d351b860ade63ba959c}} 
+{\bfseries Subscriptions\+Controller} (IConfiguration configuration, User\+Manager$<$ \mbox{\hyperlink{class_web_client_1_1_models_1_1_application_user}{Application\+User}} $>$ user\+Manager, \mbox{\hyperlink{class_web_client_1_1_data_1_1_application_db_context}{Application\+Db\+Context}} db\+Context)
+\begin{DoxyCompactList}\small\item\em Dependency injection constructor  \end{DoxyCompactList}\item 
+async Task$<$ IEnumerable$<$ \mbox{\hyperlink{class_web_client_1_1_models_1_1_sub_models_1_1_full_subscription_model}{Full\+Subscription\+Model}} $>$ $>$ \mbox{\hyperlink{class_web_client_1_1_controllers_1_1_subscriptions_controller_ac2a5f0d356d132adae69efae8a28452f}{Get\+All\+Subscriptions}} ()
+\begin{DoxyCompactList}\small\item\em Method for getting all possible subscriptions  \end{DoxyCompactList}\item 
+async Task$<$ IAction\+Result $>$ \mbox{\hyperlink{class_web_client_1_1_controllers_1_1_subscriptions_controller_a6af3d1af0f935cda27ba1994cdfe19b5}{Activate\+Subscription}} (int model\+Id, int days, int subscription\+Id)
+\begin{DoxyCompactList}\small\item\em Subscription activation method  \end{DoxyCompactList}\item 
+async Task$<$ IAction\+Result $>$ \mbox{\hyperlink{class_web_client_1_1_controllers_1_1_subscriptions_controller_aada1fcf8733fd86bf7bb12a6c1c9ca46}{Update\+Activated\+Subscription}} (int days, int subscription\+Id)
+\begin{DoxyCompactList}\small\item\em User Subscription Activation Update Method  \end{DoxyCompactList}\item 
+async Task$<$ string $>$ \mbox{\hyperlink{class_web_client_1_1_controllers_1_1_subscriptions_controller_a4684d5a4a570810154c4ce0ccb1e330f}{Get\+All\+Subscriptions\+By\+Company}} ()
+\begin{DoxyCompactList}\small\item\em Method for getting all company subscriptions  \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_web_client_1_1_controllers_1_1_subscriptions_controller_ae393b63fad86d298bfc9203c2d97ca7a}\label{class_web_client_1_1_controllers_1_1_subscriptions_controller_ae393b63fad86d298bfc9203c2d97ca7a}} 
+IConfiguration {\bfseries Configuration}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Property for accessing the configuration file  \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Company Subscription Interaction Controller  
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_web_client_1_1_controllers_1_1_subscriptions_controller_a6af3d1af0f935cda27ba1994cdfe19b5}\label{class_web_client_1_1_controllers_1_1_subscriptions_controller_a6af3d1af0f935cda27ba1994cdfe19b5}} 
+\index{WebClient.Controllers.SubscriptionsController@{WebClient.Controllers.SubscriptionsController}!ActivateSubscription@{ActivateSubscription}}
+\index{ActivateSubscription@{ActivateSubscription}!WebClient.Controllers.SubscriptionsController@{WebClient.Controllers.SubscriptionsController}}
+\doxysubsubsection{\texorpdfstring{ActivateSubscription()}{ActivateSubscription()}}
+{\footnotesize\ttfamily async Task$<$ IAction\+Result $>$ Web\+Client.\+Controllers.\+Subscriptions\+Controller.\+Activate\+Subscription (\begin{DoxyParamCaption}\item[{int}]{model\+Id,  }\item[{int}]{days,  }\item[{int}]{subscription\+Id }\end{DoxyParamCaption})}
+
+
+
+Subscription activation method  
+
+
+\begin{DoxyParams}{Parameters}
+{\em model\+Id} & Model Id\\
+\hline
+{\em days} & Num days\\
+\hline
+{\em subscription\+Id} & Subscription Id\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Status 200 if successful, otherwise 400
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_web_client_1_1_controllers_1_1_subscriptions_controller_ac2a5f0d356d132adae69efae8a28452f}\label{class_web_client_1_1_controllers_1_1_subscriptions_controller_ac2a5f0d356d132adae69efae8a28452f}} 
+\index{WebClient.Controllers.SubscriptionsController@{WebClient.Controllers.SubscriptionsController}!GetAllSubscriptions@{GetAllSubscriptions}}
+\index{GetAllSubscriptions@{GetAllSubscriptions}!WebClient.Controllers.SubscriptionsController@{WebClient.Controllers.SubscriptionsController}}
+\doxysubsubsection{\texorpdfstring{GetAllSubscriptions()}{GetAllSubscriptions()}}
+{\footnotesize\ttfamily async Task$<$ IEnumerable$<$ \mbox{\hyperlink{class_web_client_1_1_models_1_1_sub_models_1_1_full_subscription_model}{Full\+Subscription\+Model}} $>$ $>$ Web\+Client.\+Controllers.\+Subscriptions\+Controller.\+Get\+All\+Subscriptions (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Method for getting all possible subscriptions  
+
+\begin{DoxyReturn}{Returns}
+Subscription slice enumeration
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_web_client_1_1_controllers_1_1_subscriptions_controller_a4684d5a4a570810154c4ce0ccb1e330f}\label{class_web_client_1_1_controllers_1_1_subscriptions_controller_a4684d5a4a570810154c4ce0ccb1e330f}} 
+\index{WebClient.Controllers.SubscriptionsController@{WebClient.Controllers.SubscriptionsController}!GetAllSubscriptionsByCompany@{GetAllSubscriptionsByCompany}}
+\index{GetAllSubscriptionsByCompany@{GetAllSubscriptionsByCompany}!WebClient.Controllers.SubscriptionsController@{WebClient.Controllers.SubscriptionsController}}
+\doxysubsubsection{\texorpdfstring{GetAllSubscriptionsByCompany()}{GetAllSubscriptionsByCompany()}}
+{\footnotesize\ttfamily async Task$<$ string $>$ Web\+Client.\+Controllers.\+Subscriptions\+Controller.\+Get\+All\+Subscriptions\+By\+Company (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Method for getting all company subscriptions  
+
+\begin{DoxyReturn}{Returns}
+Company subscription string
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_web_client_1_1_controllers_1_1_subscriptions_controller_aada1fcf8733fd86bf7bb12a6c1c9ca46}\label{class_web_client_1_1_controllers_1_1_subscriptions_controller_aada1fcf8733fd86bf7bb12a6c1c9ca46}} 
+\index{WebClient.Controllers.SubscriptionsController@{WebClient.Controllers.SubscriptionsController}!UpdateActivatedSubscription@{UpdateActivatedSubscription}}
+\index{UpdateActivatedSubscription@{UpdateActivatedSubscription}!WebClient.Controllers.SubscriptionsController@{WebClient.Controllers.SubscriptionsController}}
+\doxysubsubsection{\texorpdfstring{UpdateActivatedSubscription()}{UpdateActivatedSubscription()}}
+{\footnotesize\ttfamily async Task$<$ IAction\+Result $>$ Web\+Client.\+Controllers.\+Subscriptions\+Controller.\+Update\+Activated\+Subscription (\begin{DoxyParamCaption}\item[{int}]{days,  }\item[{int}]{subscription\+Id }\end{DoxyParamCaption})}
+
+
+
+User Subscription Activation Update Method  
+
+
+\begin{DoxyParams}{Parameters}
+{\em days} & Num days\\
+\hline
+{\em subscription\+Id} & Subscription Id\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Status 200 if successful, otherwise 400
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Source/shev4enkoyar/\+Digital\+Twin/\+Web\+Client/\+Controllers/Subscriptions\+Controller.\+cs\end{DoxyCompactItemize}

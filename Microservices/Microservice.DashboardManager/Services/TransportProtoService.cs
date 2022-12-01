@@ -6,15 +6,28 @@ using System.Threading.Tasks;
 
 namespace Microservice.DashboardManager.Services
 {
+    /// <summary>
+    /// gRPC transport service
+    /// </summary>
     public class TransportProtoService : TransportService.TransportServiceBase
     {
+        /// <summary>
+        /// Database access property
+        /// </summary>
         private ApplicationContext DbContext { get; }
 
+        /// <summary>
+        /// Dependency injection constructor
+        /// </summary>
         public TransportProtoService(ApplicationContext dbContext)
         {
             DbContext = dbContext;
         }
 
+        /// <summary>
+        /// Method for getting all transport
+        /// </summary>
+        /// <returns>Enumeration of transport objects</returns>
         public override async Task GetAllTransport(GetAllTransportRequest request, IServerStreamWriter<GetAllTransportReply> responseStream, ServerCallContext context)
         {
             var transportReply = new GetAllTransportReply();
@@ -24,6 +37,10 @@ namespace Microservice.DashboardManager.Services
             await Task.FromResult(transportReply);
         }
 
+        /// <summary>
+        /// Method for obtaining a transport object by its Id
+        /// </summary>
+        /// <returns>Transport object</returns>
         public override Task<GetTransportByIdReply> GetTransportById(GetTransportByIdRequest request, ServerCallContext context)
         {
             var transport = DbContext.Transports.FirstOrDefault(x => x.Id == request.Id);

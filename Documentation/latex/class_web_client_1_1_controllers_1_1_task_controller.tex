@@ -1,0 +1,99 @@
+\hypertarget{class_web_client_1_1_controllers_1_1_task_controller}{}\doxysection{Web\+Client.\+Controllers.\+Task\+Controller Class Reference}
+\label{class_web_client_1_1_controllers_1_1_task_controller}\index{WebClient.Controllers.TaskController@{WebClient.Controllers.TaskController}}
+
+
+Controller for interaction with technological map tasks   
+
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_web_client_1_1_controllers_1_1_task_controller_aefc43b253aa0e5adb9fdfbf431bd454d}\label{class_web_client_1_1_controllers_1_1_task_controller_aefc43b253aa0e5adb9fdfbf431bd454d}} 
+{\bfseries Task\+Controller} (Role\+Manager$<$ \mbox{\hyperlink{class_web_client_1_1_models_1_1_application_role}{Application\+Role}} $>$ role\+Manager, User\+Manager$<$ \mbox{\hyperlink{class_web_client_1_1_models_1_1_application_user}{Application\+User}} $>$ user\+Manager, \mbox{\hyperlink{class_web_client_1_1_data_1_1_application_db_context}{Application\+Db\+Context}} db\+Context)
+\begin{DoxyCompactList}\small\item\em Dependency injection constructor  \end{DoxyCompactList}\item 
+async Task$<$ IEnumerable$<$ \mbox{\hyperlink{class_web_client_1_1_models_1_1_sub_models_1_1_model_task}{Model\+Task}} $>$ $>$ \mbox{\hyperlink{class_web_client_1_1_controllers_1_1_task_controller_a472e04e205aaf342fd686520c21e6e3e}{Get\+All\+By\+Model\+Id}} (int model\+Id)
+\begin{DoxyCompactList}\small\item\em Method for getting all tasks on the technological map  \end{DoxyCompactList}\item 
+async Task$<$ Action\+Result $>$ \mbox{\hyperlink{class_web_client_1_1_controllers_1_1_task_controller_aa17e6a5873e43837ee9b61f6ecd73d6b}{Update\+Detail\+By\+Model\+Id}} (int model\+Id, int task\+Id, string date, string status=\char`\"{}\char`\"{}, string fuel=\char`\"{}\char`\"{}, string seeds=\char`\"{}\char`\"{}, string fertilizers=\char`\"{}\char`\"{}, string pesticides=\char`\"{}\char`\"{})
+\begin{DoxyCompactList}\small\item\em Task information update method  \end{DoxyCompactList}\item 
+async Task$<$ \mbox{\hyperlink{class_web_client_1_1_util_1_1_task_json_1_1_root}{Task\+Json.\+Root}} $>$ \mbox{\hyperlink{class_web_client_1_1_controllers_1_1_task_controller_adcaefab8ab8ab7c3390ad42cf43c7698}{Get\+Details\+By\+Task\+Id}} (int task\+Id)
+\begin{DoxyCompactList}\small\item\em Method for obtaining detailed information on a task  \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+Controller for interaction with technological map tasks  
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_web_client_1_1_controllers_1_1_task_controller_a472e04e205aaf342fd686520c21e6e3e}\label{class_web_client_1_1_controllers_1_1_task_controller_a472e04e205aaf342fd686520c21e6e3e}} 
+\index{WebClient.Controllers.TaskController@{WebClient.Controllers.TaskController}!GetAllByModelId@{GetAllByModelId}}
+\index{GetAllByModelId@{GetAllByModelId}!WebClient.Controllers.TaskController@{WebClient.Controllers.TaskController}}
+\doxysubsubsection{\texorpdfstring{GetAllByModelId()}{GetAllByModelId()}}
+{\footnotesize\ttfamily async Task$<$ IEnumerable$<$ \mbox{\hyperlink{class_web_client_1_1_models_1_1_sub_models_1_1_model_task}{Model\+Task}} $>$ $>$ Web\+Client.\+Controllers.\+Task\+Controller.\+Get\+All\+By\+Model\+Id (\begin{DoxyParamCaption}\item[{int}]{model\+Id }\end{DoxyParamCaption})}
+
+
+
+Method for getting all tasks on the technological map  
+
+
+\begin{DoxyParams}{Parameters}
+{\em model\+Id} & Model Id\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Enumeration of the technological map task
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_web_client_1_1_controllers_1_1_task_controller_adcaefab8ab8ab7c3390ad42cf43c7698}\label{class_web_client_1_1_controllers_1_1_task_controller_adcaefab8ab8ab7c3390ad42cf43c7698}} 
+\index{WebClient.Controllers.TaskController@{WebClient.Controllers.TaskController}!GetDetailsByTaskId@{GetDetailsByTaskId}}
+\index{GetDetailsByTaskId@{GetDetailsByTaskId}!WebClient.Controllers.TaskController@{WebClient.Controllers.TaskController}}
+\doxysubsubsection{\texorpdfstring{GetDetailsByTaskId()}{GetDetailsByTaskId()}}
+{\footnotesize\ttfamily async Task$<$ \mbox{\hyperlink{class_web_client_1_1_util_1_1_task_json_1_1_root}{Task\+Json.\+Root}} $>$ Web\+Client.\+Controllers.\+Task\+Controller.\+Get\+Details\+By\+Task\+Id (\begin{DoxyParamCaption}\item[{int}]{task\+Id }\end{DoxyParamCaption})}
+
+
+
+Method for obtaining detailed information on a task  
+
+
+\begin{DoxyParams}{Parameters}
+{\em task\+Id} & Task Id\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Detailed Information Object
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_web_client_1_1_controllers_1_1_task_controller_aa17e6a5873e43837ee9b61f6ecd73d6b}\label{class_web_client_1_1_controllers_1_1_task_controller_aa17e6a5873e43837ee9b61f6ecd73d6b}} 
+\index{WebClient.Controllers.TaskController@{WebClient.Controllers.TaskController}!UpdateDetailByModelId@{UpdateDetailByModelId}}
+\index{UpdateDetailByModelId@{UpdateDetailByModelId}!WebClient.Controllers.TaskController@{WebClient.Controllers.TaskController}}
+\doxysubsubsection{\texorpdfstring{UpdateDetailByModelId()}{UpdateDetailByModelId()}}
+{\footnotesize\ttfamily async Task$<$ Action\+Result $>$ Web\+Client.\+Controllers.\+Task\+Controller.\+Update\+Detail\+By\+Model\+Id (\begin{DoxyParamCaption}\item[{int}]{model\+Id,  }\item[{int}]{task\+Id,  }\item[{string}]{date,  }\item[{string}]{status = {\ttfamily \char`\"{}\char`\"{}},  }\item[{string}]{fuel = {\ttfamily \char`\"{}\char`\"{}},  }\item[{string}]{seeds = {\ttfamily \char`\"{}\char`\"{}},  }\item[{string}]{fertilizers = {\ttfamily \char`\"{}\char`\"{}},  }\item[{string}]{pesticides = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})}
+
+
+
+Task information update method  
+
+
+\begin{DoxyParams}{Parameters}
+{\em model\+Id} & Model Id\\
+\hline
+{\em task\+Id} & Task Id\\
+\hline
+{\em date} & Date task\\
+\hline
+{\em status} & Day status\\
+\hline
+{\em fuel} & Fuel on day\\
+\hline
+{\em seeds} & Seeds on day\\
+\hline
+{\em fertilizers} & Fertilizers on day\\
+\hline
+{\em pesticides} & Pesticides on day\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Status 200 if successful, otherwise 400
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Source/shev4enkoyar/\+Digital\+Twin/\+Web\+Client/\+Controllers/Task\+Controller.\+cs\end{DoxyCompactItemize}

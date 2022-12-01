@@ -1,0 +1,110 @@
+\hypertarget{class_web_client_1_1_controllers_1_1_company_controller}{}\doxysection{Web\+Client.\+Controllers.\+Company\+Controller Class Reference}
+\label{class_web_client_1_1_controllers_1_1_company_controller}\index{WebClient.Controllers.CompanyController@{WebClient.Controllers.CompanyController}}
+
+
+Company management controller   
+
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_web_client_1_1_controllers_1_1_company_controller_a2cc97f158c92e45be67046b33a82d453}\label{class_web_client_1_1_controllers_1_1_company_controller_a2cc97f158c92e45be67046b33a82d453}} 
+{\bfseries Company\+Controller} (\mbox{\hyperlink{class_web_client_1_1_data_1_1_application_db_context}{Application\+Db\+Context}} db\+Context, User\+Manager$<$ \mbox{\hyperlink{class_web_client_1_1_models_1_1_application_user}{Application\+User}} $>$ user\+Manager, \mbox{\hyperlink{interface_web_client_1_1_interface_1_1_i_user_connection_manager}{IUser\+Connection\+Manager}} user\+Connection\+Manager, IHub\+Context$<$ \mbox{\hyperlink{class_web_client_1_1_hubs_1_1_notification_hub}{Notification\+Hub}}, \mbox{\hyperlink{interface_web_client_1_1_clients_1_1_i_notification_client}{INotification\+Client}} $>$ notification\+Hub, Role\+Manager$<$ \mbox{\hyperlink{class_web_client_1_1_models_1_1_application_role}{Application\+Role}} $>$ role\+Manager)
+\begin{DoxyCompactList}\small\item\em Dependency injection constructor  \end{DoxyCompactList}\item 
+async Task$<$ IAction\+Result $>$ \mbox{\hyperlink{class_web_client_1_1_controllers_1_1_company_controller_a6a09a4edb2adc9d8dbd03597350181df}{Create\+Company}} (string name, string inn, string supervisor\+Name, string contract\+Id)
+\begin{DoxyCompactList}\small\item\em Company Formation Method  \end{DoxyCompactList}\item 
+async Task$<$ string $>$ \mbox{\hyperlink{class_web_client_1_1_controllers_1_1_company_controller_ab3a3979332575688c8a861970af5ceee}{Get\+Company\+Id}} ()
+\begin{DoxyCompactList}\small\item\em Method for getting current user\textquotesingle{}s company  \end{DoxyCompactList}\item 
+async Task$<$ IAction\+Result $>$ \mbox{\hyperlink{class_web_client_1_1_controllers_1_1_company_controller_a738e553c52e1da224860f8fa8f42311c}{Company\+Invite}} (string email, string roles\+Id)
+\begin{DoxyCompactList}\small\item\em Method for inviting a user to a company  \end{DoxyCompactList}\item 
+async Task$<$ IAction\+Result $>$ \mbox{\hyperlink{class_web_client_1_1_controllers_1_1_company_controller_acae938c4c66fa060055f3eb0203fc2a5}{Accepting\+Invite}} (int id, bool is\+Accept)
+\begin{DoxyCompactList}\small\item\em Method of accepting an invitation to a company  \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+Company management controller  
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_web_client_1_1_controllers_1_1_company_controller_acae938c4c66fa060055f3eb0203fc2a5}\label{class_web_client_1_1_controllers_1_1_company_controller_acae938c4c66fa060055f3eb0203fc2a5}} 
+\index{WebClient.Controllers.CompanyController@{WebClient.Controllers.CompanyController}!AcceptingInvite@{AcceptingInvite}}
+\index{AcceptingInvite@{AcceptingInvite}!WebClient.Controllers.CompanyController@{WebClient.Controllers.CompanyController}}
+\doxysubsubsection{\texorpdfstring{AcceptingInvite()}{AcceptingInvite()}}
+{\footnotesize\ttfamily async Task$<$ IAction\+Result $>$ Web\+Client.\+Controllers.\+Company\+Controller.\+Accepting\+Invite (\begin{DoxyParamCaption}\item[{int}]{id,  }\item[{bool}]{is\+Accept }\end{DoxyParamCaption})}
+
+
+
+Method of accepting an invitation to a company  
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & Invite Id\\
+\hline
+{\em is\+Accept} & Acceptance or Rejection\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Status 200 if successful
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_web_client_1_1_controllers_1_1_company_controller_a738e553c52e1da224860f8fa8f42311c}\label{class_web_client_1_1_controllers_1_1_company_controller_a738e553c52e1da224860f8fa8f42311c}} 
+\index{WebClient.Controllers.CompanyController@{WebClient.Controllers.CompanyController}!CompanyInvite@{CompanyInvite}}
+\index{CompanyInvite@{CompanyInvite}!WebClient.Controllers.CompanyController@{WebClient.Controllers.CompanyController}}
+\doxysubsubsection{\texorpdfstring{CompanyInvite()}{CompanyInvite()}}
+{\footnotesize\ttfamily async Task$<$ IAction\+Result $>$ Web\+Client.\+Controllers.\+Company\+Controller.\+Company\+Invite (\begin{DoxyParamCaption}\item[{string}]{email,  }\item[{string}]{roles\+Id }\end{DoxyParamCaption})}
+
+
+
+Method for inviting a user to a company  
+
+
+\begin{DoxyParams}{Parameters}
+{\em email} & User email\\
+\hline
+{\em roles\+Id} & Roles Id\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Status 200 if successful
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_web_client_1_1_controllers_1_1_company_controller_a6a09a4edb2adc9d8dbd03597350181df}\label{class_web_client_1_1_controllers_1_1_company_controller_a6a09a4edb2adc9d8dbd03597350181df}} 
+\index{WebClient.Controllers.CompanyController@{WebClient.Controllers.CompanyController}!CreateCompany@{CreateCompany}}
+\index{CreateCompany@{CreateCompany}!WebClient.Controllers.CompanyController@{WebClient.Controllers.CompanyController}}
+\doxysubsubsection{\texorpdfstring{CreateCompany()}{CreateCompany()}}
+{\footnotesize\ttfamily async Task$<$ IAction\+Result $>$ Web\+Client.\+Controllers.\+Company\+Controller.\+Create\+Company (\begin{DoxyParamCaption}\item[{string}]{name,  }\item[{string}]{inn,  }\item[{string}]{supervisor\+Name,  }\item[{string}]{contract\+Id }\end{DoxyParamCaption})}
+
+
+
+Company Formation Method  
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & Company name\\
+\hline
+{\em inn} & Company Inn\\
+\hline
+{\em supervisor\+Name} & Supervisor name\\
+\hline
+{\em contract\+Id} & contract num\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Status 200 if successful, otherwise 400
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_web_client_1_1_controllers_1_1_company_controller_ab3a3979332575688c8a861970af5ceee}\label{class_web_client_1_1_controllers_1_1_company_controller_ab3a3979332575688c8a861970af5ceee}} 
+\index{WebClient.Controllers.CompanyController@{WebClient.Controllers.CompanyController}!GetCompanyId@{GetCompanyId}}
+\index{GetCompanyId@{GetCompanyId}!WebClient.Controllers.CompanyController@{WebClient.Controllers.CompanyController}}
+\doxysubsubsection{\texorpdfstring{GetCompanyId()}{GetCompanyId()}}
+{\footnotesize\ttfamily async Task$<$ string $>$ Web\+Client.\+Controllers.\+Company\+Controller.\+Get\+Company\+Id (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Method for getting current user\textquotesingle{}s company  
+
+\begin{DoxyReturn}{Returns}
+Company Id
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Source/shev4enkoyar/\+Digital\+Twin/\+Web\+Client/\+Controllers/Company\+Controller.\+cs\end{DoxyCompactItemize}

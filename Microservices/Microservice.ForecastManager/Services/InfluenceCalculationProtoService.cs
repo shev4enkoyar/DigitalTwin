@@ -6,8 +6,15 @@ using System.Threading.Tasks;
 
 namespace Microservice.ForecastManager.Services
 {
+    /// <summary>
+    /// gRPC service for yield impact calculation
+    /// </summary>
     public class InfluenceCalculationProtoService : InfluenceCalculationService.InfluenceCalculationServiceBase
     {
+        /// <summary>
+        /// Method for obtaining the overall effect on yield
+        /// </summary>
+        /// <returns>Object of overall influence</returns>
         public override Task<OverallInfluenceReply> GetOverallInfluence(OverallInfluenceRequest request, ServerCallContext context)
         {
             return Task.FromResult(new OverallInfluenceReply
@@ -25,6 +32,10 @@ namespace Microservice.ForecastManager.Services
             });
         }
 
+        /// <summary>
+        /// A method for obtaining the effect of a task on productivity
+        /// </summary>
+        /// <returns>Task Influence Object</returns>
         public override Task<TaskInfluenceReply> GetTaskInfluence(TaskInfluenceRequest request, ServerCallContext context)
         {
             return Task.FromResult(new TaskInfluenceReply
@@ -36,6 +47,10 @@ namespace Microservice.ForecastManager.Services
             });
         }
 
+        /// <summary>
+        /// Method for obtaining the influence of weather conditions on productivity
+        /// </summary>
+        /// <returns>Weather Influence Object</returns>
         public override Task<WeatherInfluenceReply> GetWeatherInfluenceInfluence(WeatherInfluenceRequest request, ServerCallContext context)
         {
             return Task.FromResult(new WeatherInfluenceReply
@@ -51,6 +66,10 @@ namespace Microservice.ForecastManager.Services
             });
         }
 
+        /// <summary>
+        /// Method for obtaining evapotranspiration
+        /// </summary>
+        /// <returns>Evapotranspiration facility</returns>
         public override Task<EvapotranspirationReply> GetEvapotranspiration(EvapotranspirationRequest request, ServerCallContext context)
         {
             return Task.FromResult(new EvapotranspirationReply

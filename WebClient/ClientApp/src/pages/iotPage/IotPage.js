@@ -163,7 +163,7 @@ class IotPage extends Component {
                                                 Инструкция по добавлению устройств
                                             </a>
                                         </div>
-                                        <Input disabled={(!(this.state.chosen === -1 && this.state.isAdded === false))} value={this.state.chosen > 0 ? this.state.sensors.find(sensor => sensor.id === this.state.chosen).name : this.state.newName} onInput={(event) => { if ((this.state.chosen === -1 && this.state.isAdded === false)) this.handleNewName(event.target.value.trim()) }} classNameP="textForSign16" className="input" Label="Ссылка для добавления" hidden={this.state.isAdded === false} />
+                                        <Input disabled={(!(this.state.chosen === -1 && this.state.isAdded === false))} value={"https://localhost:5001/api/iot/aed9631b-8ae8-4a6f-97bf-411dce2a27ec"} onInput={(event) => { if ((this.state.chosen === -1 && this.state.isAdded === false)) this.handleNewName(event.target.value.trim()) }} classNameP="textForSign16" className="input" Label="Ссылка для добавления" hidden={this.state.isAdded === false} />
                                     </CardForBody>
                                 </Col>
                             </Row>

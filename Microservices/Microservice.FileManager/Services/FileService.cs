@@ -11,15 +11,28 @@ using System.Threading.Tasks;
 
 namespace Microservice.FileManager.Services
 {
+    /// <summary>
+    /// grpc service for interacting with the file layer of the application
+    /// </summary>
     public class FileService : Protos.FileService.FileServiceBase
     {
+        /// <summary>
+        /// Database access property
+        /// </summary>
         private ApplicationContext DbContext { get; }
 
+        /// <summary>
+        /// Dependency injection constructor
+        /// </summary>
         public FileService(ApplicationContext dbContext)
         {
             DbContext = dbContext;
         }
 
+        /// <summary>
+        /// Method for getting all model documentation files
+        /// </summary>
+        /// <returns>Enumeration of Documentation Objects</returns>
         public override async Task GetPageFiles(PageFileRequest request, IServerStreamWriter<GetPageFileReply> responseStream, ServerCallContext context)
         {
             var pageFileReply = new GetPageFileReply();
@@ -66,6 +79,10 @@ namespace Microservice.FileManager.Services
                 .ToList();
         }
 
+        /// <summary>
+        /// Method for adding a file to the file indexing database
+        /// </summary>
+        /// <returns>Method execution status</returns>
         public override Task<PageFileStatus> AddPageFile(FullPageFile request, ServerCallContext context)
         {
             var section = DbContext.Sections
@@ -86,12 +103,16 @@ namespace Microservice.FileManager.Services
             DbContext.Papers.Add(newFile);
             DbContext.SaveChanges();
 
-            return Task.FromResult(new PageFileStatus() { Status = true, FileGuid = newFile.Id.ToString() });
+            return Task.FromResult(new PageFileStatus { Status = true, FileGuid = newFile.Id.ToString() });
         }
 
+        /// <summary>
+        /// Method for deleting a file from the file indexing database
+        /// </summary>
+        /// <returns>Method execution status</returns>
         public override Task<PageFileStatus> RemovePageFile(RemovePageRequest request, ServerCallContext context)
         {
-            var fileStatus = new PageFileStatus()
+            var fileStatus = new PageFileStatus
             {
                 Status = false
             };
@@ -118,6 +139,10 @@ namespace Microservice.FileManager.Services
             return true;
         }
 
+        /// <summary>
+        /// Method for creating a technological map document
+        /// </summary>
+        /// <returns>Technological map document object</returns>
         public override Task<CsvFileReply> CreateTechCsv(CsvFileRequest csvRequest, ServerCallContext context)
         {
             var cultura = csvRequest.Cultura;

@@ -8,8 +8,16 @@ using System.Threading.Tasks;
 
 namespace Microservice.FileManager
 {
+    /// <summary>
+    /// Documentation object creation class
+    /// </summary>
     public static class DocumentCreator
     {
+        /// <summary>
+        /// Method for creating csv file
+        /// </summary>
+        /// <param name="dataList">Creation object list</param>
+        /// <returns>The name of the created file</returns>
         public static async Task<string> CreateCsvDocument<T>(List<T> dataList)
         {
             var csvConfig = new CsvConfiguration(CultureInfo.InvariantCulture)

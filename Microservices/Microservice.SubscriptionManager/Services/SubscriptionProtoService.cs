@@ -10,15 +10,28 @@ using System.Threading.Tasks;
 
 namespace Microservice.SubscriptionManager.Services
 {
+    /// <summary>
+    /// gRPC service that allows you to interact with the functionality of subscriptions
+    /// </summary>
     public class SubscriptionProtoService : SubscriptionService.SubscriptionServiceBase
     {
+        /// <summary>
+        /// Database access property
+        /// </summary>
         private ApplicationContext DbContext { get; }
 
+        /// <summary>
+        /// Dependency injection constructor
+        /// </summary>
         public SubscriptionProtoService(ApplicationContext dbContext)
         {
             DbContext = dbContext;
         }
 
+        /// <summary>
+        /// Method to get all possible subscriptions
+        /// </summary>
+        /// <returns>Listing all possible subscriptions</returns>
         public override async Task GetAllSubscriptions(AllSubscriptionsRequest request, IServerStreamWriter<SubscriptionsReply> responseStream, ServerCallContext context)
         {
 
@@ -29,6 +42,10 @@ namespace Microservice.SubscriptionManager.Services
             await Task.FromResult(subscriptionsReply);
         }
 
+        /// <summary>
+        /// Method for getting an enumeration of activated subscriptions
+        /// </summary>
+        /// <returns>Enumeration Active Subscriptions</returns>
         public override async Task GetActivatedSubscriptions(ActivatedSubscriptionsRequest request, IServerStreamWriter<SubscriptionsReply> responseStream, ServerCallContext context)
         {
             var subscriptionsReply = new SubscriptionsReply();
@@ -38,6 +55,10 @@ namespace Microservice.SubscriptionManager.Services
             await Task.FromResult(subscriptionsReply);
         }
 
+        /// <summary>
+        /// Model Subscription Add Method
+        /// </summary>
+        /// <returns>Method execution status</returns>
         public override Task<AddSubscriptionReply> AddSubscription(AddSubscriptionRequest request, ServerCallContext context)
         {
             DbContext.Add(new ActivatedSubscription
@@ -52,6 +73,10 @@ namespace Microservice.SubscriptionManager.Services
             return Task.FromResult(new AddSubscriptionReply { Status = "ok" });
         }
 
+        /// <summary>
+        /// The method that updates the subscription to the model
+        /// </summary>
+        /// <returns>Method execution status</returns>
         public override Task<UpdateSubscriptionReply> UpdateSubscription(UpdateSubscriptionRequest request, ServerCallContext context)
         {
             var subscription = DbContext.ActivatedSubscriptions.FirstOrDefault(x => x.Id == request.ActivatedSubscriptionId);

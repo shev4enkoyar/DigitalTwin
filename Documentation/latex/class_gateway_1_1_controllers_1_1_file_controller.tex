@@ -1,0 +1,113 @@
+\hypertarget{class_gateway_1_1_controllers_1_1_file_controller}{}\doxysection{Gateway.\+Controllers.\+File\+Controller Class Reference}
+\label{class_gateway_1_1_controllers_1_1_file_controller}\index{Gateway.Controllers.FileController@{Gateway.Controllers.FileController}}
+
+
+File Level Interaction Controller   
+
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+async Task$<$ IEnumerable$<$ \mbox{\hyperlink{class_microservice_1_1_file_manager_1_1_protos_1_1_page_file_proto}{Page\+File\+Proto}} $>$ $>$ \mbox{\hyperlink{class_gateway_1_1_controllers_1_1_file_controller_a444236abed5d940ec6b839c7af1b7628}{Get\+All\+Page\+Files}} (int model\+Id, string section\+Name)
+\begin{DoxyCompactList}\small\item\em Method for getting enumeration of model documents  \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_gateway_1_1_controllers_1_1_file_controller_a468809ff161f581b770b4b0eae2c74b1}{Add\+Page\+File}} (int model\+Id, string name, string link, string extension, string section\+Name)
+\begin{DoxyCompactList}\small\item\em Method for adding a file to the system  \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_gateway_1_1_controllers_1_1_file_controller_a261a50d19fed41230bd43b417d7144b2}{Remove\+Page\+File}} (int model\+Id, string file\+Guid)
+\begin{DoxyCompactList}\small\item\em Method for deleting a document from a layer of files  \end{DoxyCompactList}\item 
+Task$<$ \mbox{\hyperlink{class_microservice_1_1_file_manager_1_1_protos_1_1_csv_file_reply}{Csv\+File\+Reply}} $>$ \mbox{\hyperlink{class_gateway_1_1_controllers_1_1_file_controller_a26ce67e63064acf0ac1c9dacec6c3248}{Create\+Async}} (int model\+Id)
+\begin{DoxyCompactList}\small\item\em csv file creation method  \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+File Level Interaction Controller  
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_gateway_1_1_controllers_1_1_file_controller_a468809ff161f581b770b4b0eae2c74b1}\label{class_gateway_1_1_controllers_1_1_file_controller_a468809ff161f581b770b4b0eae2c74b1}} 
+\index{Gateway.Controllers.FileController@{Gateway.Controllers.FileController}!AddPageFile@{AddPageFile}}
+\index{AddPageFile@{AddPageFile}!Gateway.Controllers.FileController@{Gateway.Controllers.FileController}}
+\doxysubsubsection{\texorpdfstring{AddPageFile()}{AddPageFile()}}
+{\footnotesize\ttfamily bool Gateway.\+Controllers.\+File\+Controller.\+Add\+Page\+File (\begin{DoxyParamCaption}\item[{int}]{model\+Id,  }\item[{string}]{name,  }\item[{string}]{link,  }\item[{string}]{extension,  }\item[{string}]{section\+Name }\end{DoxyParamCaption})}
+
+
+
+Method for adding a file to the system  
+
+
+\begin{DoxyParams}{Parameters}
+{\em model\+Id} & Model Id\\
+\hline
+{\em name} & File name\\
+\hline
+{\em link} & File link\\
+\hline
+{\em extension} & File extension\\
+\hline
+{\em section\+Name} & Section file\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if everything is successful, otherwise False
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_gateway_1_1_controllers_1_1_file_controller_a26ce67e63064acf0ac1c9dacec6c3248}\label{class_gateway_1_1_controllers_1_1_file_controller_a26ce67e63064acf0ac1c9dacec6c3248}} 
+\index{Gateway.Controllers.FileController@{Gateway.Controllers.FileController}!CreateAsync@{CreateAsync}}
+\index{CreateAsync@{CreateAsync}!Gateway.Controllers.FileController@{Gateway.Controllers.FileController}}
+\doxysubsubsection{\texorpdfstring{CreateAsync()}{CreateAsync()}}
+{\footnotesize\ttfamily Task$<$ \mbox{\hyperlink{class_microservice_1_1_file_manager_1_1_protos_1_1_csv_file_reply}{Csv\+File\+Reply}} $>$ Gateway.\+Controllers.\+File\+Controller.\+Create\+Async (\begin{DoxyParamCaption}\item[{int}]{model\+Id }\end{DoxyParamCaption})}
+
+
+
+csv file creation method  
+
+
+\begin{DoxyParams}{Parameters}
+{\em model\+Id} & Model Id\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Created csv object
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_gateway_1_1_controllers_1_1_file_controller_a444236abed5d940ec6b839c7af1b7628}\label{class_gateway_1_1_controllers_1_1_file_controller_a444236abed5d940ec6b839c7af1b7628}} 
+\index{Gateway.Controllers.FileController@{Gateway.Controllers.FileController}!GetAllPageFiles@{GetAllPageFiles}}
+\index{GetAllPageFiles@{GetAllPageFiles}!Gateway.Controllers.FileController@{Gateway.Controllers.FileController}}
+\doxysubsubsection{\texorpdfstring{GetAllPageFiles()}{GetAllPageFiles()}}
+{\footnotesize\ttfamily async Task$<$ IEnumerable$<$ \mbox{\hyperlink{class_microservice_1_1_file_manager_1_1_protos_1_1_page_file_proto}{Page\+File\+Proto}} $>$ $>$ Gateway.\+Controllers.\+File\+Controller.\+Get\+All\+Page\+Files (\begin{DoxyParamCaption}\item[{int}]{model\+Id,  }\item[{string}]{section\+Name }\end{DoxyParamCaption})}
+
+
+
+Method for getting enumeration of model documents  
+
+
+\begin{DoxyParams}{Parameters}
+{\em model\+Id} & Model Id\\
+\hline
+{\em section\+Name} & File section\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Enumeration of documents
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_gateway_1_1_controllers_1_1_file_controller_a261a50d19fed41230bd43b417d7144b2}\label{class_gateway_1_1_controllers_1_1_file_controller_a261a50d19fed41230bd43b417d7144b2}} 
+\index{Gateway.Controllers.FileController@{Gateway.Controllers.FileController}!RemovePageFile@{RemovePageFile}}
+\index{RemovePageFile@{RemovePageFile}!Gateway.Controllers.FileController@{Gateway.Controllers.FileController}}
+\doxysubsubsection{\texorpdfstring{RemovePageFile()}{RemovePageFile()}}
+{\footnotesize\ttfamily bool Gateway.\+Controllers.\+File\+Controller.\+Remove\+Page\+File (\begin{DoxyParamCaption}\item[{int}]{model\+Id,  }\item[{string}]{file\+Guid }\end{DoxyParamCaption})}
+
+
+
+Method for deleting a document from a layer of files  
+
+
+\begin{DoxyParams}{Parameters}
+{\em model\+Id} & Model Id\\
+\hline
+{\em file\+Guid} & File Id\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if everything is successful, otherwise False
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Source/shev4enkoyar/\+Digital\+Twin/\+Gateway/\+Controllers/File\+Controller.\+cs\end{DoxyCompactItemize}
