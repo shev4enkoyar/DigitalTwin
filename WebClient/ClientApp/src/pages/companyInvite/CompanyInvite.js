@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import BootstrapTable from 'react-bootstrap-table-next';
-import { Button, Container } from "reactstrap/lib";
+import { Button, Container } from "reactstrap";
 import authService from "../../components/api-authorization/AuthorizeService";
 import CardForBody from "../../components/cardForBody/CardForBody";
 import Input from "../../components/input/Input";
@@ -50,17 +50,17 @@ export class CompanyInvite extends Component{
                 { 
                     context => (
                         <Container>
-                            <CardForBody >
-                                <BootstrapTable classes={context.theme + " tableForCompanyInvite"} selectRow={selectRow} keyField='id' data={this.state.rolesDb} columns={columns} />
+                            <CardForBody classForContB="d-flex flex-column align-items-center" >
+                                <BootstrapTable classes={context.theme + " tableForCompanyInvite text-justify"} selectRow={selectRow} keyField='id' data={this.state.rolesDb} columns={columns} />
                                 <Input Label="Email" classNameP="textForSign12" className="inpCreateForDashCard" contClass="contForInpDashE" onInput={(event) => { this.setState({ email: event.target.value.trim() }) }} />
-                                <Button onClick={() => {
+                                <button className="btn btn-primary my-3" onClick={() => {
                                     let email = this.state.email;
                                     let rolesId = "";
                                     this.state.roles.map(el => rolesId += el.id + ";");
                                     inviteUser(email, rolesId);
                                 }}>
                                     Пригласить пользователя
-                                </Button>
+                                </button>
                             </CardForBody>
                         </Container>
                     )
