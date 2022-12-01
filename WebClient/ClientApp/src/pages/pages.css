@@ -146,6 +146,11 @@ body {
     left: auto;
     right: 20px;
 }*/
+.prof {
+    top: 45px !important;
+    left: -175px !important;
+    transform: none !important;
+}
 .HistoryTableText {
     font-family: 'Bitter';
     font-size: 14px;

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import {
     Dropdown, DropdownItem, DropdownMenu, DropdownToggle, NavLink
 } from 'reactstrap';
+import '../../../../pages/pages.css'
 import { ClientRoutes } from "../../../../util/ClientRoutes";
 import { ApplicationPaths } from "../../../api-authorization/ApiAuthorizationConstants";
 import authService from "../../../api-authorization/AuthorizeService";
@@ -43,8 +44,8 @@ function ProfileDropdown({ direction, ...args }) {
             <Dropdown isOpen={dropdownOpen} toggle={toggle} direction={direction}>
                 <DropdownToggle color="transparent" caret>
                     <img className={context.theme + "Icon" + " icon"} src="https://www.svgrepo.com/show/333287/profile.svg"/>
-                </DropdownToggle>
-                <DropdownMenu dark {...args}>
+                    </DropdownToggle>
+                    <DropdownMenu dark {...args} className="prof">
                     <DropdownItem>
                         <NavLink style={{color: "black"}} tag={Link} to={ApplicationPaths.IdentityManagePath}>
                             Профиль
