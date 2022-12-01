@@ -107,25 +107,25 @@ class Subscriptions extends Component {
                         :
                         props.map(prop => {
                             return (
-                                <CardForTariffs >
+                                <CardForTariffs styleContent={{ width:'100%', alignItems:'center' }}>
                                     <Col className="col" style={{ margin: '0% 6% 0% 0%' }}>
                                         <p style={{ margin: '0px', lineHeight: '15px' }} >
                                             {"Подписка: " + prop}
                                         </p>
                                     </Col>
-
-                                    <Col className="col d-flex justify-content-end">
-                                        <Button className="btn-success">
-                                            <img style={{ width: "25px", height: "25px" }} className="icon"
-                                                src="https://img.icons8.com/ios-filled/344/update-tag.png" />
-                                        </Button>
-                                    </Col>
-                                    <Col className="col">
-                                        <Button className="btn-danger" >
-                                            <img style={{ width: "25px", height: "25px" }} class="icon" src="https://www.svgrepo.com/show/59221/delete.svg" />
-                                        </Button>
-                                    </Col>
-
+                                    <Row style={{ width: 'auto'} }>
+                                        <Col className="col d-flex justify-content-end">
+                                            <Button className="btn-success" style={{ width: "50px", height: "50px" }}>
+                                                <img style={{ width: "25px", height: "25px" }} className="icon"
+                                                    src="https://img.icons8.com/ios-filled/344/update-tag.png" />
+                                            </Button>
+                                        </Col>
+                                        <Col className="col">
+                                            <Button className="btn-danger" style={{ width: "50px", height: "50px" }} >
+                                                <img style={{ width: "25px", height: "25px" }} class="icon" src="https://www.svgrepo.com/show/59221/delete.svg" />
+                                            </Button>
+                                        </Col>
+                                    </Row>
                                 </CardForTariffs>
                             );
                         })
@@ -146,11 +146,11 @@ class Subscriptions extends Component {
                                         {
                                             content
                                         }
-                                        <Button className="my-3 btn-primary" onClick={() => window.location.replace(ClientRoutes.PREFIX + ClientRoutes.SUBSCRIPTIONS_ALL)}>
+                                    <button className="my-3 btn-primary" style={{borderRadius:'3px'}} onClick={() => window.location.replace(ClientRoutes.PREFIX + ClientRoutes.SUBSCRIPTIONS_ALL)}>
                                             <img style={{ width: "35px", height: "35px" }} className="icon"
                                                 src="https://www.svgrepo.com/show/274451/add.svg" />
                                             {" Добавить подписку"}
-                                        </Button>
+                                        </button>
 
                                     </CardForBody>
                                 </Col>
