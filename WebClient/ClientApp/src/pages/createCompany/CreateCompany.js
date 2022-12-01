@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Container } from "reactstrap/lib";
+import { Button, Container } from "reactstrap";
 import authService from "../../components/api-authorization/AuthorizeService";
 import CardForBody from "../../components/cardForBody/CardForBody";
 import Input from "../../components/input/Input";
@@ -18,16 +18,17 @@ export class CreateCompany extends Component {
                 {
                     context => (
                         <Container className={context.theme + "Gray " + "d-flex justify-content-center"} style={{ marginTop: '3px' }}>
-                            <CardForBody styleForCard={{ width: 'max-content' }} >
+                            <CardForBody className="p-4" styleForCard={{ width: 'max-content' }} >
+                                <h2>Регистрация компании</h2>
                                 <p className="my-4" style={{ color: "red" }}>{this.state.error}</p>
                                 <Input Label="Название комании" classNameP="textForSign16" className="inpCreateForDashCard" contClass="contForInpDashE" onInput={(event) => { let reg = /^[0-9A-Za-zА-Яа-я]*$/i.test(event.target.value); if (reg) this.setState({ name: event.target.value.trim() }) }} />
                                 <Input Label="ИНН" classNameP="textForSign16" className="inpCreateForDashCard" contClass="contForInpDashE" onInput={(event) => { let reg = /^[0-9A-Za-zА-Яа-я]*$/i.test(event.target.value); if (reg) this.setState({ inn: event.target.value.trim() }) }} />
                                 <Input Label="Имя руководителя" classNameP="textForSign16" className="inpCreateForDashCard" contClass="contForInpDashE" onInput={(event) => { let reg = /^[0-9A-Za-zА-Яа-я]*$/i.test(event.target.value); if (reg) this.setState({ supervisorName: event.target.value.trim() }) }} />
                                 <Input Label="ID контракта" classNameP="textForSign16" className="inpCreateForDashCard" contClass="contForInpDashE" onInput={(event) => { this.setState({ contractId: event.target.value.trim() }) }} />
-                                <Container className="my-3 mb-4">
-                                    <Button onClick={() => this.createCompany()}>
+                                <Container className="my-3 mb-4 d-flex flex-column align-items-center">
+                                    <button className="btn btn-primary" onClick={() => this.createCompany()}>
                                         Зарегистрировать компанию
-                                    </Button>
+                                    </button>
                                 </Container>
                             </CardForBody>
                         </Container>
