@@ -99,7 +99,7 @@ const TaskModal = (props) => {
 
     async function ChangeStatus (daystatus) {
         const token = await authService.getAccessToken();
-        const response = await fetch(`api/task/update_detail/${props.modelId}?taskId=${props.task.taskId}&date=${curDate}&status=${daystatus}`, {
+        const response = await fetch(`api/task/update_detail/${props.modelId}?taskId=${props.task.taskId}&date=${props.task.curDate}&status=${daystatus}`, {
             headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
         });
         if (response.ok) {

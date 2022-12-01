@@ -140,9 +140,7 @@ function GantGraph(props) {
                             tasks={tasks}
                             listCellWidth={""}
                             locale={"RU"}
-                            onClick={(e) => {
-                            !props.height ? ClickedQuest(e) : null
-                        }}
+                            onClick={(e) => {ClickedQuest(e)}}
                             viewDate={curDate}
                         />
                     }
