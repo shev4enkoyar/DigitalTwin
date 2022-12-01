@@ -99,7 +99,7 @@ const TaskModal = (props) => {
 
     async function ChangeStatus (daystatus) {
         const token = await authService.getAccessToken();
-        const response = await fetch(`api/task/update_detail/${props.modelId}?taskId=${props.task.taskId}&date=${props.task.curDate}&status=${daystatus}`, {
+        const response = await fetch(`api/task/update_detail/${props.modelId}?taskId=${props.task.taskId}&date=${curDate}&status=${daystatus}`, {
             headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
         });
         if (response.ok) {
@@ -169,13 +169,18 @@ const TaskModal = (props) => {
 
     async function SendExpenses() {
         let fuel_str = "";
-        let ceeds_str = "";
-        let fertilizers_str = "";
-        let pesticides_str = "";
+        let ceeds_str = "0;0";
+        let fertilizers_str = "0;0";
+        let pesticides_str = "0;0";
         let valid = true
-        for (let f of fuel) {
-            if (f.num && f.price) {
-                fuel_str += f.num + ";" + f.price + "/"
+        console.log("validatioin", valid);
+        for (let f in fuel) {
+            if (fuel[f].num && fuel[f].price && !fuel[f].isArray) {
+                if (f == 0) {
+                    fuel_str += fuel[f].num + ";" + fuel[f].price
+                } else {
+                    fuel_str += "/" + fuel[f].num + ";" + fuel[f].price
+                }
             } else {
                 setError(true)
                 valid = false
@@ -183,7 +188,7 @@ const TaskModal = (props) => {
         }
         if (props.task.taskName == "Посев семян") {
             if (ceeds.num && ceeds.price) {
-                ceeds_str += ceeds.num + ";" + ceeds.price
+                ceeds_str = ceeds.num + ";" + ceeds.price
             } else {
                 setError(true)
                 valid = false
@@ -191,7 +196,7 @@ const TaskModal = (props) => {
         }
         if (props.task.taskName == "Внесение удобрений") {
             if (fertilizers.num && fertilizers.price) {
-                fertilizers_str += fertilizers.num + ";" + fertilizers.price
+                fertilizers_str = fertilizers.num + ";" + fertilizers.price
             } else {
                 setError(true)
                 valid = false
@@ -199,7 +204,7 @@ const TaskModal = (props) => {
         }
         if (props.task.taskName == "Внесение гербицитов") {
             if (herbicides.num && herbicides.price) {
-                pesticides_str += herbicides.num + ";" + herbicides.price
+                pesticides_str = herbicides.num + ";" + herbicides.price
             } else {
                 setError(true)
                 valid = false
@@ -207,7 +212,7 @@ const TaskModal = (props) => {
         }
         if (props.task.taskName == "Внесение пестицидов") {
             if (pesticides.num && pesticides.price) {
-                pesticides_str += pesticides.num + ";" + pesticides.price
+                pesticides_str = pesticides.num + ";" + pesticides.price
             } else {
                 setError(true)
                 valid = false
@@ -215,14 +220,13 @@ const TaskModal = (props) => {
         }
         //console.log(`api/task/update_detail/${props.modelId}?taskId=${props.task.taskId}&date=${props.task.curDate}&fuel=${fuel_str}&seeds=${ceeds_str}&fertilizers=${fertilizers_str}&Pesticides=${pesticides_str}`)
         if (valid) {
-            console.log("valid", valid)
-            /*const token = await authService.getAccessToken();
+            const token = await authService.getAccessToken();
             const response = await fetch(`api/task/update_detail/${props.modelId}?taskId=${props.task.taskId}&date=${props.task.curDate}&fuel=${fuel_str}&seeds=${ceeds_str}&fertilizers=${fertilizers_str}&Pesticides=${pesticides_str}`, {
                 headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
             });
             if (response.ok) {
                 props.setModal(false)
-            }*/
+            }
         }
     }
 
@@ -245,7 +249,7 @@ const TaskModal = (props) => {
             let defFuel = [];
             for (let l = 0; l <= maxLen - 1; l++) {
                 reses.push(<TableRow transport={props.task.Resources.transport[l]} persona={props.task.Resources.personal[l]} />)
-                expenses.push(<ExpensesField id={"fuel" + l} numText={"Потрачено топлива для " + props.task.Resources.transport[l]} priceText={"Цена в рублях"} onChange={onFuelChange} />)
+                expenses.push(<ExpensesField id={"fuel" + l} numText={"Потрачено топлива для " + props.task.Resources.transport[l] + ", литр"} priceText={"Цена в рублях"} onChange={onFuelChange} />)
                 defFuel.push({ "num": null, "price": null })
             }
             setFuel(defFuel)
@@ -306,7 +310,8 @@ const TaskModal = (props) => {
                                                     <Button color="warning" style={{ marginRight: "5px" }} onClick={() => { ChangeStatus("late") }}>Выполнена с опозданием</Button>
                                                     <Button color="danger" onClick={() => { ChangeStatus("undone") }}>Не выполнена</Button>
                                                         </Row>
-                                                    </>
+                                            </>
+                                            /*<h3 className="text-center" style={{ color: "green", fontSize: "18px" }}>Статус дня изменён</h3>*/
                                                 }
                                             </>
                                     : props.task.role == "ECONOMIST" ?
@@ -323,7 +328,8 @@ const TaskModal = (props) => {
                                                     </Form>
                                                         </>
                                                         : null
-                                                    }
+                                               /* <h3 className="text-center" style={{ color: "green", fontSize: "18px" }}>Затраты за день успешно отправлены</h3>*/
+                                                }
                                                 </> : null}
                                         <p className="text-center mt-3">{props.task.curDate}</p>
                                         <Row className="justify-content-center">
@@ -343,7 +349,8 @@ const TaskModal = (props) => {
 function GanttMain(props) {
 
     const [showModal, setModal] = useState(false);
-    const [taskData, setData] = useState();
+    const [taskData, setData] = useState()
+
 
     let {modelId} = useParams()
 
@@ -369,7 +376,7 @@ function GanttMain(props) {
 
     async function getTask(task) {
         const token = await authService.getAccessToken();
-        const response = await fetch(`api/task/get_Details/${task.id}`, {
+        const response = await fetch(`api/task/get_Details/${task.id}`, {   
             headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
         });
         const data = await response.json();
@@ -384,6 +391,7 @@ function GanttMain(props) {
         {context => (
 
         <>
+        {console.log("id",modelId) }
         {props.height ? null : <SideBarDashboard icons={iconsLeftBar} />}
         <Container fluid style={{ height: "100%", padding: "0", margin: "0" }} className={context.theme}>
         <GantGraph getTask={getTask} height={props.height? props.height : null} />

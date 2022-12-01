@@ -11,14 +11,14 @@ function GantGraph(props) {
 
     let {modelId} = useParams()
     const [tasks, setNewTasks] = useState([])
-    const [curDate, setDate] = useState(new Date(new Date().setDate(new Date().getDate() - 12)))
+        //const[curDate, setDate] = useState(new Date(new Date().setDate(new Date().getDate() - 12)))
+    const [curDate, setDate] = useState(new Date(11/14/22))
 
     let windowInnerHeight = window.innerHeight
     let addingTasks = (windowInnerHeight-250)/50 
 
     useEffect(() => {
-        console.log("hi")
-        getTasks()
+            getTasks()
     }, [props]);
 
     useEffect(() => {
@@ -29,7 +29,6 @@ function GantGraph(props) {
         //tasks request//
 
         const token = await authService.getAccessToken();
-        //const response = await fetch(`api/task/get_all/${props.modelId}`, {
         const response = await fetch(`api/task/get_all/${modelId}`, {
             headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
         });
@@ -43,14 +42,14 @@ function GantGraph(props) {
             task.end = new Date(d.endDate)
             task.name = d.name
             task.id = d.id
-            task.progress = d.progress
+            task.progress = 50
             task.type = 'task'
             task.isDisabled = true
             task.styles = { progressColor: '#ffbb54', progressSelectedColor: '#ff9e0d' }
             new_tasks.push(task)
         }
-        /*
-        let new_tasks = [
+        
+        /*new_tasks.push(
             {
                 start: new Date(2022, 9, 20),
                 end: new Date(2022, 10, 1),
@@ -68,17 +67,17 @@ function GantGraph(props) {
                 id: '2',
                 type: 'task',
                 progress: 100,
-                isDisabled: false,
+                isDisabled: true,
                 styles: { progressColor: '#ffbb54', progressSelectedColor: '#ff9e0d' },
             },
             {
                 start: new Date(2022, 10, 5),
-                end: new Date(2022, 10, 17),
+                end: new Date(2022, 10, 16),
                 name: 'Посев',
                 id: '3',
                 type: 'task',
-                progress: 78,
-                isDisabled: false,
+                progress: 76,
+                isDisabled: true,
                 styles: { progressColor: '#ffbb54', progressSelectedColor: '#ff9e0d' },
             },
             {
@@ -88,7 +87,7 @@ function GantGraph(props) {
                 id: '4',
                 type: 'task',
                 progress: 13,
-                isDisabled: false,
+                isDisabled: true,
                 styles: { progressColor: '#ffbb54', progressSelectedColor: '#ff9e0d' },
             },
             {
@@ -98,11 +97,11 @@ function GantGraph(props) {
                 id: '5',
                 type: 'task',
                 progress: 0,
-                isDisabled: false,
+                isDisabled: true,
                 styles: { progressColor: '#ffbb54', progressSelectedColor: '#ff9e0d' },
             },
-        ];
-        */
+        );*/
+        
 
         if (!props.height) {
             if (new_tasks.length < addingTasks) {
@@ -122,7 +121,7 @@ function GantGraph(props) {
             }
         }
 
-        console.log(new_tasks)
+        //console.log(new_tasks)
         setNewTasks(new_tasks);
     }
 
@@ -142,8 +141,8 @@ function GantGraph(props) {
                             listCellWidth={""}
                             locale={"RU"}
                             onClick={(e) => {
-                                !props.height ? ClickedQuest(e) : null
-                            }}
+                            !props.height ? ClickedQuest(e) : null
+                        }}
                             viewDate={curDate}
                         />
                     }
