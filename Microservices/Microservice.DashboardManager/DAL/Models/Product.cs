@@ -23,6 +23,8 @@ namespace Microservice.DashboardManager.DAL.Models
         [Required]
         public int SoilMoistureMax { get; set; }
 
+        public string TaskList { get; set; }
+
         [ForeignKey(nameof(ProductType))]
         public int TypeId { get; set; }
 
