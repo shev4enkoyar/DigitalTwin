@@ -1,7 +1,7 @@
 ﻿import React from "react";
 import { Button } from "reactstrap/lib";
 import { ThemeContextConsumer } from "../../ThemeContext";
-function VectorIcon(props) {
+function ThemeToggler(props) {
     return (
         <ThemeContextConsumer>
             {context => 
@@ -12,4 +12,4 @@ function VectorIcon(props) {
             )}
         </ThemeContextConsumer>
     )
-} export default VectorIcon;
+} export default ThemeToggler;
