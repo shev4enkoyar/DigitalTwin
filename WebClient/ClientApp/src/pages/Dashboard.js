@@ -118,10 +118,10 @@ export class Dashboard extends Component {
                             <SideBarDashboard icons={this.iconsLeftBar}></SideBarDashboard>
                             <Container fluid>
                                 <Row className={context.theme + "Gray mt-3 ml-5 d-flex"} style={{ width: "90%" }}>
-                                    <Col><h2 style={{ color: "white" }}>Технологическая карта поля {modelId}</h2></Col>
+                                    <Col><h2 style={{ color: "white" }} className={context.theme + "Gray "}>Технологическая карта поля {modelId}</h2></Col>
                                     <Col xs={3} className="text-right">
                                         <input type="checkbox" id="iostoggle" style={{ marginTop: "10px" }} onClick={(e) => { this.setState({classic: !this.state.classic}, console.log(this.state.classic))}}/>
-                                        <label for="iostoggle" style={{ color: "white" }}>Классический вид</label>
+                                        <label for="iostoggle" style={{ color: "white" }} className={context.theme +"Gray " }>Классический вид</label>
                                     </Col>
                                 </Row>
                                 {this.state.classic ? <DashboardClassic /> :
