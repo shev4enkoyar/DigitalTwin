@@ -14,7 +14,7 @@
     "leaflet-fullscreen": "^1.0.2",
     "leaflet-geometryutil": "^0.10.1",
     "merge": "^2.1.1",
-    "oidc-client": "~1.10.0",
+    "oidc-client": "~1.11.5",
     "react": "^16.14.0",
     "react-bootstrap-table-next": "^1.1.0",
     "react-bootstrap-table2-editor": "^1.4.0",
