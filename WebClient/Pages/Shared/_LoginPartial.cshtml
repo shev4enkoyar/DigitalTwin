@@ -20,25 +20,31 @@
 <ul class="navbar-nav">
     @if (SignInManager.IsSignedIn(User))
     {
-
         <li class="nav-item">
-            <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Профиль
+            <div>
+                <button class="@theme btn dropdown-toggle px-4" style="box-shadow: none;width: 33px;" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onClick="Context.toggleTheme">
+                    <img style="filter: invert(1);width: 24px;" src="https://www.svgrepo.com/show/71693/sun-bright.svg" />
+                </button>
+            </div>
+        </li>
+        <li class="nav-item">
+            <div>
+                <button class="@theme btn dropdown-toggle px-3" style="box-shadow: none;width: 24px;" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img style="filter: invert(1);" src="https://www.svgrepo.com/show/333287/profile.svg" />
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Профиль</a>
-                    <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Logout" title="Manage">Выйти</a>
+                    <a class="dropdown-item" href="/activatedSubscriptions">Подписки</a>
+                    <a class="dropdown-item" href="/models">Модели</a>
+                    <a class="dropdown-item" href="/registerCompany">Зарегистрировать компанию</a>
+                    <a class="dropdown-item" href="/inviteCompany">Пригласить в компанию</a>
+                    <a class="dropdown-item" href="/authentication/logged-out">Выйти</a>
                 </div>
             </div>
 
             @*<a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity.Name!</a>*@
         </li>
-        <li class="nav-item">
-            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="/">
-                <button type="submit" class="nav-link btn btn-link">Выйти</button>
-            </form>
-        </li>
+        
     }
     else
     {
