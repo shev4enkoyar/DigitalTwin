@@ -4,6 +4,7 @@ import {
 } from 'reactstrap';
 import { Col, Row } from "reactstrap/lib";
 import { Button } from "rsuite";
+import './../../../../pages/pages.css';
 import { ClientRoutes } from "../../../../util/ClientRoutes";
 import authService from "../../../api-authorization/AuthorizeService";
 import { ThemeContextConsumer } from "../../../ThemeContext";
@@ -66,7 +67,7 @@ function NotificationDropdown({ direction, ...args }) {
                     <DropdownToggle color="transparent" caret>
                         <img className={context.theme + "Icon" + " icon"} src="https://icons.getbootstrap.com/assets/icons/bell-fill.svg" />
                     </DropdownToggle>
-                    <DropdownMenu {...args}>
+                    <DropdownMenu {...args} id="notif">
                         {content}
                     </DropdownMenu>
                 </Dropdown>
