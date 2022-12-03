@@ -22,6 +22,7 @@ import Subscriptions from "./pages/Tariffs/Subscriptions";
 import Docs from "./pages/Docs/Docs";
 import { ClientRoutes } from "./util/ClientRoutes";
 import GanttMain from './pages/gant/gant_main';
+import HistoryPrice from './pages/HistoryPrice';
 
 export default class App extends Component {
     static displayName = App.name;
@@ -52,7 +53,7 @@ export default class App extends Component {
                     <AuthorizeRouteWithPermission path={ClientRoutes.PREFIX + ClientRoutes.COMPANY_INVITE} component={CompanyInvite} name={ClientRoutes.COMPANY_INVITE} />
                     <AuthorizeRouteWithPermission path={ClientRoutes.PREFIX + ClientRoutes.MODELS} component={Models} name={ClientRoutes.MODELS} />
                     <AuthorizeRouteWithPermission path={ClientRoutes.PREFIX + ClientRoutes.CREATE_MODEL} component={CreateModel} name={ClientRoutes.CREATE_MODEL} />
-
+                    <AuthorizeRoute path={ClientRoutes.PREFIX + ClientRoutes.HISTORY_PRICE + ClientRoutes.SUFFIX_MODEL_ID} component={HistoryPrice} name={ClientRoutes.HISTORY_PRICE} />
                     <Redirect from="*" to="/" />
                 </Switch>
             </Layout>
