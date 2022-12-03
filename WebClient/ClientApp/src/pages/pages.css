@@ -151,6 +151,11 @@ body {
     left: -175px !important;
     transform: none !important;
 }
+#notif {
+    left: -185px !important;
+    transform: none !important;
+    top: 45px !important;
+}
 .HistoryTableText {
     font-family: 'Bitter';
     font-size: 14px;
