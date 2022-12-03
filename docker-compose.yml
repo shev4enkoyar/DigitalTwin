@@ -97,3 +97,17 @@ services:
       - ASPNETCORE_Kestrel__Certificates__Default__Password=
       - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/localhost.pfx
 
+
+  microservice.recommendationmanager:
+    image: ${DOCKER_REGISTRY-}microservicerecommendationmanager
+    ports:
+      - "49180:49180"
+    build:
+      context: .
+      dockerfile: Microservices/Microservice.RecommendationManager/Dockerfile
+    environment:
+      - ASPNETCORE_URLS=https://0.0.0.0:49180
+      - ASPNETCORE_HTTPS_PORT=49180
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/localhost.pfx
+

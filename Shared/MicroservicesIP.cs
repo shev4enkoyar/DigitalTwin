@@ -23,6 +23,7 @@ namespace Shared
         {
             #region Constants
 
+            private const string RecommendationIp = "https://localhost:49180";
             private const string DashboardIp = "https://localhost:49162";
             private const string FilesIp = "https://localhost:49177";
             private const string MapIp = "https://localhost:49165";
@@ -36,6 +37,11 @@ namespace Shared
             #endregion
 
             #region Properties
+
+            /// <summary>RecommendationManager IP</summary>
+            /// <value>https://localhost:49180</value>
+            /// <exception cref="ArgumentNullException"/>
+            public static string Recommendation => CheckEmptyIp(RecommendationIp);
 
             /// <summary>DashboardManager IP</summary>
             /// <value>https://localhost:49162</value>
