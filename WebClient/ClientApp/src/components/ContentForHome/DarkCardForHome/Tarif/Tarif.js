@@ -10,7 +10,7 @@ function Tarif(props) {
             </ul>
         );*/
     return (
-        <Card className={props.light +" BorderForCard " + props.light+ " TarifCard px-5"}>
+        <Card className={props.light + " BorderForCard " + props.light + " TarifCard px-5"}>
             {props.children}
             {/*{myList}*/}
         </Card>

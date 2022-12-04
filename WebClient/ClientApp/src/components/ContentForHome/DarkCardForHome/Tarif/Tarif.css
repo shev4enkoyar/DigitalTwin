@@ -2,11 +2,17 @@
 .TarifCard {
     background-color: #262626;
     border: 1px solid #000000;
-    margin: 1%!important;
     text-align: center !important;
     min-width: 160px;
-    width: 45%;
+    width: 35%;
+
 }
+@media (max-width: 767px) {
+    .TarifCard {
+        width: 100%;
+        margin: 0px 0px 5px!important;
+    }
+    }
 .text {
     font-family: 'Open Sans';
     font-size: 12px;
