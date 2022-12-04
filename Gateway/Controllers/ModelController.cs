@@ -69,7 +69,7 @@ namespace Gateway.Controllers
         /// <param name="categoryName">Category name</param>
         /// <returns>True if the model was successfully created otherwise false</returns>
         [HttpGet("create")]
-        public bool CreateDigitalModel(string companyId, int productId, string name, string cadaster = null, string categoryName = null)
+        public int CreateDigitalModel(string companyId, int productId, string name, string cadaster = null, string categoryName = null)
         {
             var request = new ModelRequest
             {
@@ -86,7 +86,9 @@ namespace Gateway.Controllers
             var mapId = AddMap(reply.ModelId, cadaster, categoryName);
             reply = new DigitalModelService.DigitalModelServiceClient(channel).UpdateMapDigitalModel(new UpdateModelRequest() { MapId = mapId, ModelId = reply.ModelId });
 
-            return reply.Status.Equals("ok") && AddDefaultSubscription(reply.ModelId);
+            AddDefaultSubscription(reply.ModelId);
+
+            return reply.ModelId;
         }
 
         private bool AddDefaultSubscription(int modelId)

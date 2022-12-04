@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using IdentityServer4.Extensions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -145,20 +146,26 @@ namespace WebClient.Controllers
         /// <param name="categoryName">Category name</param>
         /// <returns>Status 200 if everything went well, otherwise 400 or 401</returns>
         [HttpGet("create")]
-        public async Task<IActionResult> CreateDigitalModel(int productId, string name, string cadaster = null, string categoryName = null)
+        public async Task<int> CreateDigitalModel(int productId, string name, string cadaster = null, string categoryName = null)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (userId == null)
-                return Unauthorized();
+                return -1;
             var user = await _userManager.FindByIdAsync(userId);
             var companyId = user.CompanyId.ToString();
 
             var response = await ConnectionClient.GetAsync($"api/model/create?companyId={companyId}&" +
                                                            $"productId={productId}&name={name}&cadaster={cadaster}&categoryName={categoryName}");
-
-            if (response.IsSuccessStatusCode)
-                return Ok();
-            return BadRequest();
+            if (response.IsSuccessStatusCode) 
+            {
+                var json = await response.Content.ReadAsStringAsync();
+                if(json.IsNullOrEmpty())
+                    return -1;
+                int result = JsonConvert.DeserializeObject<int>(json);
+                return result;
+            }
+                
+            return -1;
         }
     }
 }
