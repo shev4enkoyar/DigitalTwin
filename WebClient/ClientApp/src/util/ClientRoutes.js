@@ -13,6 +13,6 @@ export const ClientRoutes = {
     IOTPAGE: 'iot',
     DOCS: 'docs',
     GANT: 'workDiagram',
-    ADMIN: 'adminPanel'
+    ADMIN: 'adminPanel',
     HISTORY_PRICE:'historyPrice'
 }
