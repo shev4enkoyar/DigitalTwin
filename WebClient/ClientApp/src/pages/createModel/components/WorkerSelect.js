@@ -1,6 +1,7 @@
-﻿import React, { useState } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import PopUpWithBlurCanvas from "../../../components/popUp/PopUpWithBlurCanvas";
 import TabForWorkers from './TabForWorkers';
+import authService from "./../../../components/api-authorization/AuthorizeService";
 import './../../pages.css';
 import { TabContent, TabPane, Nav, NavItem, NavLink, Container, Button } from "reactstrap";
 const WorkerSelect = (props) => {
@@ -12,6 +13,35 @@ const WorkerSelect = (props) => {
             });
         }
     }
+    useEffect(() => {
+        let mounted = true;
+        (async () => {
+            try {
+                const token = await authService.getAccessToken();
+                const response = await fetch('api/worker/get_posts', {
+                    headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
+                });
+                console.log(33333);
+                const data = await response.json();
+                console.log(11111);
+                console.log(data);
+                let workerTemp = [];
+                workerTemp.push({ id: -1, post: "Выберите должность..." });
+                data.map(el => workerTemp.push(el));
+                console.log(workerTemp);
+                if (mounted) {
+                    /*handleSelectWorker({ workers: workerTemp });*/
+                    props.setStatus({dols:workerTemp});
+                }
+
+            } catch (e) {
+                console.log(e);
+            }
+        })();
+        return () => {
+            mounted = false;
+        };
+    }, []);
     return (
         <PopUpWithBlurCanvas isBlur={true} isActive={props.values.isActive} handleActiveChange={() => { props.setStatus({ isActive: false }) }} className="TranspCard" styleFlex={{ top: '0px!important', marginTop: '0px', margin: 'auto' }} >
             <Container style={{ padding: '0px' }}>
@@ -46,13 +76,13 @@ const WorkerSelect = (props) => {
                 </Nav>
                 <TabContent activeTab={state.activeTab}>
                     <TabPane tabId="1">
-                        <TabForWorkers onClick={() => { props.setStatus({ isActive: false }) }} setStatus={(v) => { props.setStatus({ rZasev: v }) }} values={props.values.rZasev} />
+                        <TabForWorkers onClick={() => { props.setStatus({ isActive: false }) }} setStatus={(v) => { props.setStatus({ rZasev: v }) }} values={props.values.rZasev} dols={ props.values.dols} />
                     </TabPane>
                     <TabPane tabId="2">
-                        <TabForWorkers onClick={() => { props.setStatus({ isActive: false }) }} setStatus={(v) => { props.setStatus({ rObrabotka: v }) }} values={props.values.rObrabotka} />
+                        <TabForWorkers onClick={() => { props.setStatus({ isActive: false }) }} setStatus={(v) => { props.setStatus({ rObrabotka: v }) }} values={props.values.rObrabotka} dols={props.values.dols} />
                     </TabPane>
                     <TabPane tabId="3">
-                        <TabForWorkers onClick={() => { props.setStatus({ isActive: false }) }} setStatus={(v) => { props.setStatus({ rSbor: v }) }} values={props.values.rSbor} />
+                        <TabForWorkers onClick={() => { props.setStatus({ isActive: false }) }} setStatus={(v) => { props.setStatus({ rSbor: v }) }} values={props.values.rSbor} dols={props.values.dols} />
                     </TabPane>
                 </TabContent>
             </Container>
