@@ -79,12 +79,12 @@ class CultureCard extends Component{
                             </Col>
                     </Container>
                     <Row className="py-3 px-0">
-                        <Col className="d-flex justify-content-center">
+                        <Col className="d-flex justify-content-center my-2">
                             <button onClick={() => { this.props.Back() }} className="btn btn-primary mx-5" style={{ width: "max-content" }} >
                                 Назад
                             </button>
                         </Col>
-                        <Col className="d-flex justify-content-center">
+                        <Col className="d-flex justify-content-center my-2">
                             <button onClick={() => { if (this.isFull() == true) this.props.onClick(); }} className="btn btn-primary mx-5" style={{ width: "max-content" }} >
                                 Далее
                             </button>
