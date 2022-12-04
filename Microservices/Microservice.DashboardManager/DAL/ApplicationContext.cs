@@ -9,6 +9,11 @@ namespace Microservice.DashboardManager.DAL
         public DbSet<ProductPriceHistory> ProductPriceHistory { get; set; }
 
         public DbSet<Product> Products { get; set; }
+
+        public DbSet<Post> Posts { get; set; }
+
+        public DbSet<Worker> Workers{ get; set; }
+
         public DbSet<ProductType> ProductTypes { get; set; }
 
         public DbSet<DigitalModel> DigitalModels { get; set; }
@@ -78,6 +83,29 @@ namespace Microservice.DashboardManager.DAL
                 SoilMoistureMax = 75,
                 SoilMoistureMin = 70,
                 TypeId = 2
+            });
+            #endregion
+
+            #region Post
+            modelBuilder.Entity<Post>().HasData(new Post() 
+            {
+                 Id=1,
+                 Title = "Тракторист"
+            },
+            new Post()
+            {
+                Id = 2,
+                Title = "Водитель автом."
+            },
+            new Post()
+            {
+                Id = 3,
+                Title = "Рабочий"
+            },
+            new Post()
+            {
+                Id = 4,
+                Title = "Оператор"
             });
             #endregion
 

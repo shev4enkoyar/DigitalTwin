@@ -32,10 +32,10 @@ class Models extends Component {
                                             {el.productName}
                                         </p>
                                         <p className="paramForModelCard">
-                                            {"Мероприятия отсутсвуют"}
+                                            {el.taskName}
                                         </p>
                                         <p className="paramForModelCard">
-                                            {"Советы отстутствуют"}
+                                            {el.recommendationName}
                                         </p>
                                     </CardModel>
                                 </button>
@@ -53,7 +53,7 @@ class Models extends Component {
                         :   <>
                                 <Container className={context.theme + "Gray " + "text-center mt-5"} style={{ minWidth: '100%' }} >
                                     {content}
-                                    <button className="btn createBut mt-3 btn-primary"  >
+                                    <button className="btn createBut mt-3 btn-primary">
                                         <a className="d-flex align-items-center" style={{ color: "#fff" }} href={'/createModel'}>
                                             <img style={{ width: "35px", height: "35px", paddingRight:"5px" }} className="icon"
                                                 src="https://www.svgrepo.com/show/274451/add.svg" />
@@ -70,7 +70,7 @@ class Models extends Component {
 
     async GetTechCardsData() {
         const token = await authService.getAccessToken();
-        const response = await fetch('api/techcard/get_all', {
+        const response = await fetch('api/techcard/get_all_with_rec', {
             headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
         });
         const data = await response.json();

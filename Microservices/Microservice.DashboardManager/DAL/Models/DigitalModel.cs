@@ -32,5 +32,7 @@ namespace Microservice.DashboardManager.DAL.Models
         public virtual Product Product { get; set; }
 
         public virtual List<ModelTransport> ModelTransports { get; set; }
+
+        public virtual List<Worker> Workers { get; set; }
     }
 }

@@ -42,6 +42,7 @@ namespace Microservice.DashboardManager
                 endpoints.MapGrpcService<DigitalModelProtoService>();
                 endpoints.MapGrpcService<ProductProtoService>();
                 endpoints.MapGrpcService<TransportProtoService>();
+                endpoints.MapGrpcService<WorkerProtoService>();
             });
         }
     }

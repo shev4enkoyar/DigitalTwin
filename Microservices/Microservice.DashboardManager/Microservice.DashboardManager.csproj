@@ -14,12 +14,14 @@
     <None Remove="Protos\subscriptionClientProto.proto~RFda21a00.TMP" />
     <None Remove="Protos\subscriptionClientProto.proto~RFdc7eea2.TMP" />
     <None Remove="Protos\subscriptionClientProto.proto~RFdcc66ec.TMP" />
+    <None Remove="Protos\workerProto.proto" />
   </ItemGroup>
 
   <ItemGroup>
 	<Protobuf Include="Protos\productProto.proto" GrpcServices="Server" />
 	<Protobuf Include="Protos\digitalModelProto.proto" GrpcServices="Server" />
-	  <Protobuf Include="Protos\transportProto.proto" GrpcServices="Server" />
+	<Protobuf Include="Protos\workerProto.proto" GrpcServices="Server" />
+	<Protobuf Include="Protos\transportProto.proto" GrpcServices="Server" />
   </ItemGroup>
 
   <ItemGroup>

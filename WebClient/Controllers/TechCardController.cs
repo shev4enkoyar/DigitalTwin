@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using WebClient.Controllers.Base;
@@ -54,6 +55,67 @@ namespace WebClient.Controllers
             var user = await _userManager.FindByIdAsync(userId);
 
             return await GetDigitalModelsByCompanyId(user.CompanyId);
+        }
+
+        [HttpGet("get_all_with_rec")]
+        public async Task<IEnumerable<ModelProtoWithRecs>> GetDigitalModelsWithRecs()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            if (userId == null) return null;
+
+            var user = await _userManager.FindByIdAsync(userId);
+            var models = await GetDigitalModelsByCompanyId(user.CompanyId);
+            List<ModelProtoWithRecs> modelsWithRecs = new List<ModelProtoWithRecs>();
+            foreach (var model in models) 
+            {
+                var tasks = await GetTasksByModelId(model.Id);
+                string taskName = "Текущие мероприятия отстутствуют";
+                if (tasks != null)
+                    if(tasks.Count() > 0)
+                        taskName = tasks.FirstOrDefault().Name;
+
+                var recomendations = await GetRecomendationsByModelId(model.Id);
+                string recomendationName = "Советы отстутствуют";
+                if (recomendations != null)
+                    if (recomendations.Count() > 0)
+                        recomendationName = recomendations.FirstOrDefault().RecommendationText;
+                modelsWithRecs.Add(new ModelProtoWithRecs()
+                {
+                    Id = model.Id,
+                    CompanyId = model.CompanyId,
+                    MapId = model.MapId,
+                    Name = model.Name,
+                    ProductCode = model.ProductCode,
+                    ProductCurrentPrice = model.ProductCurrentPrice,
+                    ProductName = model.ProductName,
+                    RecommendationName = recomendationName,
+                    TaskName = taskName
+                });
+            }
+            return modelsWithRecs;
+        }
+
+        private async Task<IEnumerable<ModelTask>> GetTasksByModelId(int modelId)
+        {
+            var response = await ConnectionClient.GetAsync($"api/task/get_all/{modelId}");
+
+            if (!response.IsSuccessStatusCode)
+                return null;
+
+            var json = await response.Content.ReadAsStringAsync();
+            var result = JsonConvert.DeserializeObject<IEnumerable<ModelTask>>(json);
+            return result;
+        }
+
+        private async Task<IEnumerable<ModelRecommendation>> GetRecomendationsByModelId(int modelId)
+        {
+            var response = await ConnectionClient.GetAsync($"api/recommendation/get_all/{modelId}");
+            if (!response.IsSuccessStatusCode)
+                return null;
+            var json = await response.Content.ReadAsStringAsync();
+            var result = JsonConvert.DeserializeObject<IEnumerable<ModelRecommendation>>(json);
+            return result;
         }
 
         /// <summary>

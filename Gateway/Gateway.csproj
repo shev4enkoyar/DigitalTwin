@@ -9,6 +9,7 @@
     <None Remove="Protos\recommendationProto.proto" />
     <None Remove="Protos\transportProto.proto" />
     <None Remove="Protos\weather.proto" />
+    <None Remove="Protos\workerProto.proto" />
   </ItemGroup>
 
   <ItemGroup>
@@ -37,6 +38,7 @@
     <Protobuf Include="Protos\testCadasterProto.proto" GrpcServices="Client" />
     <Protobuf Include="Protos\transportProto.proto" GrpcServices="Client" />
     <Protobuf Include="Protos\weather.proto" GrpcServices="Client" />
+    <Protobuf Include="Protos\workerProto.proto" GrpcServices="Client" />
   </ItemGroup>
 
 

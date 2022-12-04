@@ -1,0 +1,36 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "Microservice.DashboardManager";
+
+package workerProto;
+
+service WorkerService {
+  rpc GetAllPosts (GetAllPostsRequest) returns (stream GetAllPostsReply);
+  rpc AddWorker (AddWorkerRequest) returns (AddWorkerReply);
+}
+
+message GetAllPostsRequest {
+}
+
+message GetAllPostsReply {
+   repeated PostProto posts = 1;
+}
+
+message PostProto {
+    int32 id = 1;
+    string post = 2;
+}
+
+message AddWorkerRequest {
+    int32 id = 1;
+    string fio = 2;
+    double rate = 3;
+    double salary = 4;
+    int32 postId = 5;
+    int32 modelId = 6;
+}
+
+message AddWorkerReply {
+   string status = 1;
+}
+
