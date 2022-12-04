@@ -1,0 +1,22 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "Microservice.RecommendationManager.Protos";
+
+package recommendationProto;
+
+service RecommendationService {
+  rpc GetRecommendationsByModelId (GetRecommendationsByModelIdRequest) returns (stream GetRecommendationsByModelIdReply);
+}
+
+message GetRecommendationsByModelIdRequest {
+	int32 modelId = 1;
+}
+message GetRecommendationsByModelIdReply {
+   repeated ModelRecommendation modelRecommendations= 1;
+}
+message ModelRecommendation {
+  int32 id = 1;
+  string ForecastEventText = 2;
+  string RecommendationText = 3;
+  string CreateDate = 4;
+}

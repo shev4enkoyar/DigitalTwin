@@ -138,7 +138,7 @@ class Subscriptions extends Component {
                     ?   <LoadingFragment fullscreen={true}/>
                     :   <Container className={context.theme + "Gray " + "body_style"} style={{ "minWidth": '100%' }}>
                             <Row>
-                                <Col className="col">
+                            <Col className="col d-flex justify-content-center">
                                     <CardForBody styleForCard={{ position: 'relative', width: "fit-content" }} className="signUpWidth text-center" classForContB=" centerCard" >
                                         <p className="textOpenSansForHistTar">
                                             Продлить/отменить подписки
@@ -154,7 +154,7 @@ class Subscriptions extends Component {
 
                                     </CardForBody>
                                 </Col>
-                                <Col className="col p-0">
+                            <Col className="col p-0 d-flex justify-content-center align-items-start">
                                     <CardForBody styleForCard={{ position: 'relative', padding: '3%' }} className="signUpWidth">
                                         <Container className="ContForHistoryTariff p-0 contForReactTable">
                                             <BootstrapTable classes={context.theme + " HistoryTableText "} keyField='num' data={this.historyTariffs} columns={this.headerForTariffs} />

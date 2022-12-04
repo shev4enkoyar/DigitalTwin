@@ -14,4 +14,5 @@ export const ClientRoutes = {
     DOCS: 'docs',
     GANT: 'workDiagram',
     ADMIN: 'adminPanel'
+    HISTORY_PRICE:'historyPrice'
 }

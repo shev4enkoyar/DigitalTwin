@@ -5,6 +5,7 @@ import { IconButton } from "../components/sideBarDashboard/util/IconButton";
 import CardForBody from './../components/cardForBody/CardForBody';
 import SideBarDashboard from './../components/sideBarDashboard/SideBarDashboard';
 import { ThemeContextConsumer } from './../components/ThemeContext';
+import authService from "../components/api-authorization/AuthorizeService";
 import './pages.css';
 import {ClientRoutes} from "../util/ClientRoutes";
 class Recommendations extends Component {
@@ -19,33 +20,60 @@ class Recommendations extends Component {
             <img style={{ width: "25px", height: "25px", margin: "7px 0px 0px" }} className="icon" src="https://img.icons8.com/windows/344/sensor.png" />),
         new IconButton("/" + ClientRoutes.RECOMMENDATIONS + "/" + this.props.match.params.modelId, "Рекомендации",
             <img style={{ width: "25px", height: "25px", margin: "7px 0px 0px" }} className="icon" src="https://img.icons8.com/ios-glyphs/344/task.png" />),
-        new IconButton("#nogo", "История цен",
+        new IconButton("/" + ClientRoutes.HISTORY_PRICE + "/" + this.props.match.params.modelId, "История цен",
             <img style={{ width: "25px", height: "25px", margin: "7px 0px 0px" }} className="icon" src="https://img.icons8.com/material-outlined/344/ruble.png" />),
         new IconButton("/" + ClientRoutes.GANT + "/" + this.props.match.params.modelId, "График работ",
             <img style={{ width: "25px", height: "25px", margin: "7px 0px 0px"  }} className="icon" src="https://img.icons8.com/ios/344/rebalance-portfolio.png" />),
         new IconButton("/" + ClientRoutes.MODELS, "Вернуться к выбору модели",
             <img style={{ width: "25px", height: "25px", margin: "7px 0px 0px"  }} className="icon" src="https://img.icons8.com/ios/344/logout-rounded--v1.png" />)
     ];
+    constructor(props) {
+        super(props);
+        this.state = { recs: [] };
+    }
+    handleSelectRec = (value) => {
+        const prev = this.state;
+        this.setState({ ...prev, recs:[...value] })
+    }
+    GetProducts = async () => {
+        try {
+            const modelId = this.props.match.params.modelId;
+            console.log(modelId);
+            const token = await authService.getAccessToken();
+            const response = await fetch(`api/recommendation/get_all/${modelId}`, {
+                headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
+            });
+            const data = await response.json();
+            //console.log(data);
+            //let recTemp = [];
+            ////transpTemp.add();
+            //data.forEach(el => recTemp.add(el.name));
+            this.handleSelectRec(data);
+
+        }
+        catch (e) {
+            console.log(e)
+        }
+    }
+    componentDidMount() {
+        this.GetProducts();
+    }
     hRecommend = [
         {
-            dataField: 'num',
+            dataField: 'id',
             text: '#'
         },
         {
-            dataField: 'date',
+            dataField: 'createDate',
             text: 'Дата'
         },
         {
-            dataField: 'obj',
-            text: 'Объект'
-        },
-        {
-            dataField: 'progEv',
+            dataField: 'forecastEventText',
             text: 'Прогнозируемое событие'
         }
         ,
         {
-            dataField: 'rec',
+            dataField: 'recommendationText',
             text: 'Рекомендация'
         }
     ];
@@ -114,33 +142,7 @@ class Recommendations extends Component {
                     <SideBarDashboard icons={this.iconsLeftBar} />
                     <CardForBody styleForCard={{ position: 'relative', padding: '3%', margin: '5% 10% 0% 15%' }} styleTextForCard={{ padding: '0px' }}>
                         <Container className="ContForHistoryTariff p-0 contForReactTable">
-                            <BootstrapTable classes="HistoryTableText" keyField='num' data={this.recommend} columns={this.hRecommend} />
-
-                            {/*<Table style={{color: "#fff", background: "#212026"}} >*/}
-                            {/*    <thead>*/}
-                            {/*    <tr>*/}
-                            {/*        <th>{this.hRecommend.at(0)}</th>*/}
-                            {/*        <th>{this.hRecommend.at(1)}</th>*/}
-                            {/*        <th>{this.hRecommend.at(2)}</th>*/}
-                            {/*        <th>{this.hRecommend.at(3)}</th>*/}
-                            {/*        <th>{this.hRecommend.at(4)}</th>*/}
-                            {/*    </tr>*/}
-                            {/*    </thead>*/}
-                            {/*    <tbody>*/}
-                            {/*        {*/}
-                            {/*            this.recommend.map(el =>*/}
-                            {/*                <tr>*/}
-                            {/*                    <td>{el.num}</td>*/}
-                            {/*                    <td>{el.date}</td>*/}
-                            {/*                    <td>{el.obj}</td>*/}
-                            {/*                    <td>{el.progEv}</td>*/}
-                            {/*                    <td>{el.rec}</td>*/}
-                            {/*                </tr>*/}
-                            {/*            )*/}
-                            {/*        }*/}
-                            {/*    </tbody>*/}
-                            {/*</Table>*/}
-                            {/*<TableForTariffs classNameTab="margTable" classNamesTD="ForBox" textForTable="Рекомендации" contentsForTable={this.recommend} headersForTable={this.hRecommend} />*/}
+                            <BootstrapTable classes="HistoryTableText" keyField='num' data={this.state.recs} columns={this.hRecommend} />
                         </Container>
                     </CardForBody>
                 </div>
