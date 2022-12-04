@@ -18,6 +18,7 @@ import MapMain from "./pages/map/MapMain";
 import Models from "./pages/models/Models";
 import Recommendations from "./pages/Recommendations";
 import AllSubscriptions from "./pages/Tariffs/AllSubscriptions";
+import AdminPage from "./pages/AdminPanel/AdminPage";
 import Subscriptions from "./pages/Tariffs/Subscriptions";
 import Docs from "./pages/Docs/Docs";
 import { ClientRoutes } from "./util/ClientRoutes";
@@ -52,6 +53,7 @@ export default class App extends Component {
                     <AuthorizeRouteWithPermission path={ClientRoutes.PREFIX + ClientRoutes.COMPANY_INVITE} component={CompanyInvite} name={ClientRoutes.COMPANY_INVITE} />
                     <AuthorizeRouteWithPermission path={ClientRoutes.PREFIX + ClientRoutes.MODELS} component={Models} name={ClientRoutes.MODELS} />
                     <AuthorizeRouteWithPermission path={ClientRoutes.PREFIX + ClientRoutes.CREATE_MODEL} component={CreateModel} name={ClientRoutes.CREATE_MODEL} />
+                    <AuthorizeRoute path={ClientRoutes.PREFIX + ClientRoutes.ADMIN} component={AdminPage} />
 
                     <Redirect from="*" to="/" />
                 </Switch>

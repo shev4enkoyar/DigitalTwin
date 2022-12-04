@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
+import { Button } from 'reactstrap';
 import authService from './AuthorizeService';
 import { ApplicationPaths } from './ApiAuthorizationConstants';
 import ProfileDropdown from "../navMenu/components/profile/ProfileDropdown";
@@ -51,7 +52,7 @@ export class LoginMenu extends Component {
             <ThemeContextConsumer>{
                     context => (
                         <Fragment>
-                            <NotificationDropdown/>
+                            <NotificationDropdown />
                             <ProfileDropdown direction="down" />
                         </Fragment>
                         )
