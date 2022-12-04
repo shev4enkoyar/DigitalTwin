@@ -126,7 +126,7 @@ class AllSubscriptions extends Component {
                     this.state.loading
                         ?   <LoadingFragment fullscreen={true}/>
                         :   <Container className={context.theme + "Gray d-flex justify-content-center w-100"} fluid>
-                            <Row className={context.theme + "Gray mt-3 d-flex"}>
+                                <Row className={context.theme + "Gray mt-3 d-flex"}>
                                     {content}
                                 </Row>
                             {this.state.models && <Modal isOpen={this.state.modal} toggle={() => { this.Toggle() }} contentClassName={context.theme + " Gray subscriptions"}>

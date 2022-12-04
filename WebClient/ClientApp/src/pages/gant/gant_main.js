@@ -221,7 +221,7 @@ const TaskModal = (props) => {
         //console.log(`api/task/update_detail/${props.modelId}?taskId=${props.task.taskId}&date=${props.task.curDate}&fuel=${fuel_str}&seeds=${ceeds_str}&fertilizers=${fertilizers_str}&Pesticides=${pesticides_str}`)
         if (valid) {
             const token = await authService.getAccessToken();
-            const response = await fetch(`api/task/update_detail/${props.modelId}?taskId=${props.task.taskId}&date=${props.task.curDate}&fuel=${fuel_str}&seeds=${ceeds_str}&fertilizers=${fertilizers_str}&Pesticides=${pesticides_str}`, {
+            const response = await fetch(`api/task/update_detail/${props.modelId}?taskId=${props.task.taskId}&date=${props.task.Details.dates[currentDay]}&fuel=${fuel_str}&seeds=${ceeds_str}&fertilizers=${fertilizers_str}&Pesticides=${pesticides_str}`, {
                 headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
             });
             if (response.ok) {
