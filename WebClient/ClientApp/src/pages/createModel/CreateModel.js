@@ -14,7 +14,7 @@ import ElementStep from './ElementStep';
 class CreateModel extends Component {
     constructor(props) {
         super(props);
-        this.state = { children: [{ name: "", pred: "Да", visible: true }, { hist: false, visible: false }, { productId: -1, cult: 0, sort: 0, frac: "", gust: "", visible: false }, { kad: "", visible: false }, { zasev: [], obrabotka: [], sbor: [], visible: false, isActive: false }, { rZasev: [], rObrabotka: [], rSbor: [], visible: false, isActive: false }] };
+        this.state = { children: [{ name: "", pred: "Да", id:-1, visible: true }, { hist: false, visible: false }, { productId: -1, cult: 0, sort: 0, frac: "", gust: "", visible: false }, { kad: "", visible: false }, { zasev: [], obrabotka: [], sbor: [], visible: false, isActive: false }, { rZasev: [], rObrabotka: [], rSbor: [], visible: false, dols:[], isActive: false }] };
     }
     steps=["Создание технологической карты", "Загрузка исторических данных","Ввод данных о культуре", "Ввод данных о поле", "Добавление техники","Данные о работниках"]
     handleVisibleSwitch = (i) => {
@@ -65,7 +65,7 @@ class CreateModel extends Component {
                             <CultureCard setStatus={(v) => { this.setStatus(v, 2) }} values={this.state.children[2]} visible={this.state.children[2].visible} Back={() => { this.handleVisibleSwitch(this.state.children[0].pred == "Да" ? 1 : 0) }} onClick={() => { this.handleVisibleSwitch(3) }} />
                             <FieldCard setStatus={(v) => { this.setStatus(v, 3) }} values={this.state.children[3]} visible={this.state.children[3].visible} Back={() => { this.handleVisibleSwitch(2) }} onClick={() => { this.handleVisibleSwitch(4) }} />
                             <TransportCard setStatus={(v) => { this.setStatus(v, 4) }} values={this.state.children[4]} visible={this.state.children[4].visible} Back={() => { this.handleVisibleSwitch(3) }} onClick={() => { this.handleVisibleSwitch(5) }} />
-                            <WorkerCard setStatus={(v) => { this.setStatus(v, 5) }} values={this.state.children[5]} visible={this.state.children[5].visible} Back={() => { this.handleVisibleSwitch(4) }} data={this.state.children} onClick={() => { }} />
+                            <WorkerCard setStatus={(v) => { this.setStatus(v, 5) }} values={this.state.children[5]} visible={this.state.children[5].visible} Back={() => { this.handleVisibleSwitch(4) }} data={this.state.children} onClick={() => { }} setId={(v) => { this.setStatus({id:v},1) } }/>
                         </div>
                         )
                 }
