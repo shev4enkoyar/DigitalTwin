@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <None Remove="Protos\file.proto" />
+    <None Remove="Protos\iotProto.proto" />
     <None Remove="Protos\recommendationProto.proto" />
     <None Remove="Protos\transportProto.proto" />
     <None Remove="Protos\weather.proto" />
@@ -30,6 +31,7 @@
     <Protobuf Include="Protos\digitalModelProto.proto" GrpcServices="Client" />
     <Protobuf Include="Protos\file.proto" GrpcServices="Client" />
 	  <Protobuf Include="Protos\influenceCalculationProto.proto" GrpcServices="Client" />
+	  <Protobuf Include="Protos\iotProto.proto" GrpcServices="Client" />
     <Protobuf Include="Protos\mapProto.proto" GrpcServices="Client" />
     <Protobuf Include="Protos\productProto.proto" GrpcServices="Client" />
     <Protobuf Include="Protos\recommendationProto.proto" GrpcServices="Client" />

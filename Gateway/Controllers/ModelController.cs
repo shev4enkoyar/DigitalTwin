@@ -41,6 +41,23 @@ namespace Gateway.Controllers
             return response?.Products;
         }
 
+        [HttpGet("get_product_histories/{modelId}")]
+        public async Task<IEnumerable<ProductHistoryProto>> GetProductHistories(int modelId)
+        {
+            using var channel = GrpcChannel.ForAddress(MicroservicesIp.External.Dashboard,
+                new GrpcChannelOptions { HttpHandler = SharedTools.GetDefaultHttpHandler });
+
+            var client = new ProductService.ProductServiceClient(channel);
+
+            using var call = client.GetProductHistoryByModelId(new GetProductHistoryByModelIdRequest() { ModelId = modelId });
+            GetProductHistoryByModelIdReply response = null;
+            while (await call.ResponseStream.MoveNext())
+            {
+                response = call.ResponseStream.Current;
+            }
+            return response?.ProductHistories;
+        }
+
         /// <summary>
         /// Method for checking the existence of a plot with a given cadastral number
         /// </summary>
