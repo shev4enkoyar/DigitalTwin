@@ -111,3 +111,17 @@ services:
       - ASPNETCORE_Kestrel__Certificates__Default__Password=
       - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/localhost.pfx
 
+
+  microservice.internetofthingsmanager:
+    image: ${DOCKER_REGISTRY-}microserviceinternetofthingsmanager
+    ports:
+      - "49182:49182"
+    build:
+      context: .
+      dockerfile: Microservices/Microservice.InternetOfThingsManager/Dockerfile
+    environment:
+      - ASPNETCORE_URLS=https://0.0.0.0:49182
+      - ASPNETCORE_HTTPS_PORT=49182
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/localhost.pfx
+
