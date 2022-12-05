@@ -7,6 +7,7 @@ package productProto;
 service ProductService {
   rpc GetProducts (ProductRequest) returns (stream ProductReply);
   rpc GetProductByModelId (GetProductByModelIdRequest) returns (GetProductByModelIdReply);
+  rpc GetProductHistoryByModelId (GetProductHistoryByModelIdRequest) returns (stream GetProductHistoryByModelIdReply);
 }
 
 message ProductRequest {
@@ -27,4 +28,18 @@ message GetProductByModelIdRequest {
 }
 message GetProductByModelIdReply {
    string name = 1;
+}
+
+message GetProductHistoryByModelIdRequest {
+	int32 modelId = 1;
+}
+
+message GetProductHistoryByModelIdReply {
+   repeated ProductHistoryProto productHistories = 1;
+}
+
+message ProductHistoryProto {
+    int32 id = 1;
+    string price = 2;
+    string date = 3;
 }

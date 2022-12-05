@@ -60,6 +60,29 @@ namespace Microservice.DashboardManager.Services
                 Name = GetProductByModelId(request.ModelId)
             });
 
+        public override async Task GetProductHistoryByModelId(GetProductHistoryByModelIdRequest request, IServerStreamWriter<GetProductHistoryByModelIdReply> responseStream, ServerCallContext context)
+        {
+            var productReply = new GetProductHistoryByModelIdReply();
+            productReply.ProductHistories.AddRange(GetProtoProductHistories(request.ModelId));
+
+            await responseStream.WriteAsync(productReply);
+            await Task.FromResult(productReply);
+        }
+
+        private IEnumerable<ProductHistoryProto> GetProtoProductHistories(int modelId)
+        {
+            int productId = DbContext.DigitalModels.FirstOrDefault(x => x.Id == modelId).ProductId;
+            return DbContext.ProductPriceHistory
+                .Include(x => x.Product)
+                .Where(x => x.Product.Id == productId)
+                .Select(x => new ProductHistoryProto()
+                {
+                    Id = x.Id,
+                    Date = x.Date.ToString(),
+                    Price = x.Price.ToString()
+                });
+        }
+
         private string GetProductByModelId(int modelId) =>
             DbContext.DigitalModels
             .Include(x => x.Product)

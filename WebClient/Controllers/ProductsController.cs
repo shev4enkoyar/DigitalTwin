@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Grpc.Net.Client;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
+using Shared;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using WebClient.Controllers.Base;
@@ -41,6 +43,17 @@ namespace WebClient.Controllers
                 return null;
             var json = await response.Content.ReadAsStringAsync();
             var result = JsonConvert.DeserializeObject<IEnumerable<ProductProto>>(json);
+            return result;
+        }
+
+        [HttpGet("get_product_histories/{modelId}")]
+        public async Task<IEnumerable<ProductHistoryProto>> GetProductHistories(int modelId)
+        {
+            var response = await ConnectionClient.GetAsync($"api/model/get_product_histories/{modelId}");
+            if (!response.IsSuccessStatusCode)
+                return null;
+            var json = await response.Content.ReadAsStringAsync();
+            var result = JsonConvert.DeserializeObject<IEnumerable<ProductHistoryProto>>(json);
             return result;
         }
     }
