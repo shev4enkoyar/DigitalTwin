@@ -32,7 +32,7 @@ namespace Shared
             private const string WeatherIp = "https://localhost:49175";
             private const string SubscriptionIp = "https://localhost:49169";
             private const string ImageIp = "";
-            private const string InternetOfThingsIp = "https://localhost:49165";
+            private const string InternetOfThingsIp = "https://localhost:49182";
 
             #endregion
 
@@ -69,7 +69,7 @@ namespace Shared
             public static string Image => CheckEmptyIp(ImageIp);
 
             /// <summary>InternetOfThingsManager IP</summary>
-            /// <value>https://localhost:49165</value>
+            /// <value>https://localhost:49182</value>
             /// <exception cref="ArgumentNullException"/>
             public static string InternetOfThings => CheckEmptyIp(InternetOfThingsIp);
 
