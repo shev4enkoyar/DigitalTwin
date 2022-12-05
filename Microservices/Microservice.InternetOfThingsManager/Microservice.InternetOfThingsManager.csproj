@@ -5,10 +5,11 @@
     <UserSecretsId>898e8c89-ef84-4ca6-a504-d74a2c6c02d7</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerfileContext>..\..</DockerfileContext>
+    <DockerComposeProjectPath>..\..\docker-compose.dcproj</DockerComposeProjectPath>
   </PropertyGroup>
 
   <ItemGroup>
-    <Protobuf Include="Protos\iotProto.proto" GrpcServices="Server" />
+	  <Protobuf Include="Protos\iotProto.proto" GrpcServices="Server" />
   </ItemGroup>
   
   <ItemGroup>
