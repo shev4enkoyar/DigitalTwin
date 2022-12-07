@@ -17,6 +17,7 @@ namespace Microservice.InternetOfThingsManager
         {
             _configuration = configuration;
         }
+
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationContext>(options =>

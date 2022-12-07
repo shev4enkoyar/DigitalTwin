@@ -1,4 +1,5 @@
-﻿using Microservice.DashboardManager.DAL;
+﻿using Microservice.DashboardManager.BackgroundServices;
+using Microservice.DashboardManager.DAL;
 using Microservice.DashboardManager.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -20,6 +21,9 @@ namespace Microservice.DashboardManager
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddHostedService<ProductPriceUpdater>();
+            services.AddScoped<IProductPriceUpdaterScopedService, ProductPriceUpdaterScopedService>();
+
             services.AddDbContext<ApplicationContext>(options =>
             {
                 options.UseNpgsql(_configuration.GetConnectionString("DefaultConnection"));
