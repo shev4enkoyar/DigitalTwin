@@ -17,9 +17,8 @@ message OverallInfluenceRequest {
 	double g = 3;
 	double gtcOptinal = 4;
 	double averageTemperature = 5;
-	repeated double maxAirTemperature = 6;
-	repeated double minAirTemperature = 7;
-	repeated double precipitationAmount = 8;
+	repeated double airTemperature = 6;
+	repeated double precipitationAmount = 7;
 }
 message OverallInfluenceReply {
    double result = 1; 
@@ -28,10 +27,9 @@ message OverallInfluenceReply {
 message WeatherInfluenceRequest {
 	double g = 1;
 	int32 averageTemperature = 2;
-	repeated double maxAirTemperature = 3;
-	repeated double minAirTemperature = 4;
-	repeated double precipitationAmount = 5;
-	double gtcOptinal = 6;
+	repeated double airTemperature = 3;
+	repeated double precipitationAmount = 4;
+	double gtcOptinal = 5;
 }
 
 message WeatherInfluenceReply {

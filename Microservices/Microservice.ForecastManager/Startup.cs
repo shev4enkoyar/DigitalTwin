@@ -24,8 +24,8 @@ namespace Microservice.ForecastManager
             app.UseGrpcWeb();
 
             app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapGrpcService<InfluenceCalculationProtoService>();
+            {/*
+                endpoints.MapGrpcService<InfluenceCalculationProtoService>();*/
             });
         }
     }
