@@ -24,17 +24,19 @@ namespace Microservice.ForecastManager.Calculations
             var result = GetSoilInfluence(); // первоначальное влияние почвы на культуру
 
             if (!dons.Length.Equals(dots.Length)
-                    && airTemperature.Length.Equals(precipitationAmount.Length))
+                    || !airTemperature.Length.Equals(precipitationAmount.Length))
                 throw new Exception("days count not equal");
 
             for (int i = 0; i < dots.Length; i++)
             {
-                result *= 1
-                    + GetTaskInfluencePerDay(dons[i], dots[i])
-                    - GetWeatherInfluence(g, averageTemperature, airTemperature[0..i], precipitationAmount[0..i], gtcOptinal);
+                var weatherInfluence = GetWeatherInfluence(g, averageTemperature, airTemperature[0..i], precipitationAmount[0..i], gtcOptinal);
+                var taskInfluence = GetTaskInfluencePerDay(dons[i], dots[i]);
+                result *= (1
+                    + taskInfluence
+                    - weatherInfluence) / 2;
             }
 
-            return result / Math.Pow(2, dots.Length);
+            return result;
         }
 
 

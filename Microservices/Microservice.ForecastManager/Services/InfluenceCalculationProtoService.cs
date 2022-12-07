@@ -9,7 +9,7 @@ namespace Microservice.ForecastManager.Services
     /// <summary>
     /// gRPC service for yield impact calculation
     /// </summary>
-    /*public class InfluenceCalculationProtoService : InfluenceCalculationService.InfluenceCalculationServiceBase
+    public class InfluenceCalculationProtoService : InfluenceCalculationService.InfluenceCalculationServiceBase
     {
         /// <summary>
         /// Method for obtaining the overall effect on yield
@@ -26,8 +26,7 @@ namespace Microservice.ForecastManager.Services
                         request.G,
                         request.GtcOptinal,
                         request.AverageTemperature,
-                        request.MaxAirTemperature.ToArray(),
-                        request.MinAirTemperature.ToArray(),
+                        request.AirTemperature.ToArray(),
                         request.PrecipitationAmount.ToArray())
             });
         }
@@ -59,8 +58,7 @@ namespace Microservice.ForecastManager.Services
                     .GetWeatherInfluence(
                         request.G,
                         request.AverageTemperature,
-                        request.MaxAirTemperature.ToArray(),
-                        request.MinAirTemperature.ToArray(),
+                        request.AirTemperature.ToArray(),
                         request.PrecipitationAmount.ToArray(),
                         request.GtcOptinal)
             });
@@ -90,5 +88,5 @@ namespace Microservice.ForecastManager.Services
         }
 
 
-    }*/
+    }
 }

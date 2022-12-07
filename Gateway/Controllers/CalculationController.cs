@@ -53,13 +53,13 @@ namespace Gateway.Controllers
         [HttpGet("get_weather_influence/{modelId:int}")]
         public async Task<double> GetWeatherInfluenceByModelAsync(int modelId)
         {
-            const double g = 0.7; // калибровочный коэффициент, хз где его брать, по идее у каждой культуры свой
-            double gtcOptinal = 1; // оптимальный гтк для данной культуры. Либо вводится челом, либо можно нагуглить
-            var temperatureByMonth = new[] { 10, 20, 4, 30, 0, 10, 20, 4, 30, 0, 10, 20, 4, 30, 0, 10, 20, 4, 30, 0, 10, 20, 4, 30, 0, 10, 20, 4, 30, 0 };
-            var averageTemperature = (int)temperatureByMonth.Average(); // нужно для осадков
-            double[] maxAirTemperature = new[] { 15.0, 25, 6, 31, 2 };
-            double[] minAirTemperature = new[] { 7.0, 15, 3, 26, -3 };
-            double[] precipitationAmount = new[] { 0.1, 0.2, 0.3, 0.1, 0.4 };
+            var weather = await GetWeather(modelId);
+
+            const double g = 0.56; // калибровочный коэффициент, хз где его брать, по идее у каждой культуры свой
+            double gtcOptinal = 1.0; // оптимальный гтк для данной культуры. Либо вводится челом, либо можно нагуглить
+            double[] airTemperature = weather.Select(x => x.Temperature).ToArray();
+            var averageTemperature = (int)airTemperature.Average(); // нужно для осадков
+            double[] precipitationAmount = weather.Select(x => x.Precipitation).ToArray();
 
             using var channel = GrpcChannel.ForAddress(MicroservicesIp.External.Forecast,
                 new GrpcChannelOptions { HttpHandler = SharedTools.GetDefaultHttpHandler }
@@ -70,8 +70,7 @@ namespace Gateway.Controllers
             {
                 AverageTemperature = averageTemperature
             };
-            request.MaxAirTemperature.AddRange(maxAirTemperature);
-            request.MinAirTemperature.AddRange(minAirTemperature);
+            request.AirTemperature.AddRange(airTemperature);
             request.PrecipitationAmount.AddRange(precipitationAmount);
             request.G = g;
             request.GtcOptinal = gtcOptinal;
@@ -90,20 +89,20 @@ namespace Gateway.Controllers
         [HttpGet("get_overall_influence/{modelId:int}")]
         public async Task<double> GetOverallInfluenceByModelAsync(int modelId)
         {
-            var dons = new int[150];
-            var dots = new int[150];
-            for (int i = 0; i < 150; i++)
+            var weather = await GetWeather(modelId);
+
+            var dons = new int[5];
+            var dots = new int[5];
+            for (int i = 0; i < 5; i++)
             {
                 dons[i] = 1;
                 dots[i] = 1;
             }
-            var g = 0.7; // калибровочный коэффициент, хз где его брать, по идее у каждой культуры свой
-            double gtcOptinal = 1.2; // оптимальный гтк для данной культуры. Либо вводится челом, либо можно нагуглить
-            var temperatureByMonth = new[] { 10, 20, 4, 30, 0, 10, 20, 4, 30, 0, 10, 20, 4, 30, 0, 10, 20, 4, 30, 0, 10, 20, 4, 30, 0, 10, 20, 4, 30, 0 };
-            var averageTemperature = (int)temperatureByMonth.Average(); // нужно для осадков
-            double[] maxAirTemperature = new[] { 15.0, 25, 6, 31, 2 };
-            double[] minAirTemperature = new[] { 7.0, 15, 3, 26, -3 };
-            var precipitationAmount = new[] { 0.1 , 0.2 , 0.3, 0.1, 0.4 };
+            const double g = 0.56; // калибровочный коэффициент, хз где его брать, по идее у каждой культуры свой
+            double gtcOptinal = 2.2; // оптимальный гтк для данной культуры. Либо вводится челом, либо можно нагуглить
+            double[] airTemperature = weather.Select(x => x.Temperature).ToArray();
+            var averageTemperature = (int)airTemperature.Average(); // нужно для осадков
+            double[] precipitationAmount = weather.Select(x => x.Precipitation).ToArray();
 
             using var channel = GrpcChannel.ForAddress(MicroservicesIp.External.Forecast,
                 new GrpcChannelOptions { HttpHandler = SharedTools.GetDefaultHttpHandler }
@@ -115,8 +114,7 @@ namespace Gateway.Controllers
             {
                 AverageTemperature = averageTemperature
             };
-            request.MaxAirTemperature.AddRange(maxAirTemperature);
-            request.MinAirTemperature.AddRange(minAirTemperature);
+            request.AirTemperature.AddRange(airTemperature);
             request.PrecipitationAmount.AddRange(precipitationAmount);
             request.G = g;
             request.GtcOptinal = gtcOptinal;
