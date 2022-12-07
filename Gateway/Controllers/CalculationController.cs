@@ -91,9 +91,9 @@ namespace Gateway.Controllers
         {
             var weather = await GetWeather(modelId);
 
-            var dons = new int[30];
-            var dots = new int[30];
-            for (int i = 0; i < 30; i++)
+            var dons = new int[5];
+            var dots = new int[5];
+            for (int i = 0; i < 5; i++)
             {
                 dons[i] = 1;
                 dots[i] = 1;
