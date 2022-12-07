@@ -119,7 +119,7 @@ namespace Microservice.DashboardManager.BackgroundServices
                 var productPriceObj = prop.GetValue(jsonData.Data.Rates, null);
                 decimal productPrice;
                 if (productPriceObj != null)
-                    productPrice = (decimal)productPriceObj;
+                    productPrice = decimal.Parse(productPriceObj.ToString());
                 else
                     continue;
 
