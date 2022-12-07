@@ -98,7 +98,7 @@ namespace Gateway.Controllers
                 dots[i] = 1;
             }
             var g = 0.7; // калибровочный коэффициент, хз где его брать, по идее у каждой культуры свой
-            double gtcOptinal = 1; // оптимальный гтк для данной культуры. Либо вводится челом, либо можно нагуглить
+            double gtcOptinal = 1.2; // оптимальный гтк для данной культуры. Либо вводится челом, либо можно нагуглить
             var temperatureByMonth = new[] { 10, 20, 4, 30, 0, 10, 20, 4, 30, 0, 10, 20, 4, 30, 0, 10, 20, 4, 30, 0, 10, 20, 4, 30, 0, 10, 20, 4, 30, 0 };
             var averageTemperature = (int)temperatureByMonth.Average(); // нужно для осадков
             double[] maxAirTemperature = new[] { 15.0, 25, 6, 31, 2 };

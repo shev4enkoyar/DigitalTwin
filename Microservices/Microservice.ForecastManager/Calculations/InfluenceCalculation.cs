@@ -19,20 +19,19 @@ namespace Microservice.ForecastManager.Calculations
         /// <param name="precipitationAmount">количество осадков в мм</param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        public static double GetOverallInfluence(int[] dons, int[] dots, double g, double gtcOptinal, double averageTemperature, double[] maxAirTemperature, double[] minAirTemperature, double[] precipitationAmount)
+        public static double GetOverallInfluence(int[] dons, int[] dots, double g, double gtcOptinal, double averageTemperature, double[] airTemperature, double[] precipitationAmount)
         {
             var result = GetSoilInfluence(); // первоначальное влияние почвы на культуру
 
             if (!dons.Length.Equals(dots.Length)
-                || !(maxAirTemperature.Length.Equals(minAirTemperature.Length)
-                    && minAirTemperature.Length.Equals(precipitationAmount.Length)))
+                    && airTemperature.Length.Equals(precipitationAmount.Length))
                 throw new Exception("days count not equal");
 
             for (int i = 0; i < dots.Length; i++)
             {
                 result *= 1
                     + GetTaskInfluencePerDay(dons[i], dots[i])
-                    - GetWeatherInfluence(g, averageTemperature, maxAirTemperature[0..i], minAirTemperature[0..i], precipitationAmount[0..i], gtcOptinal);
+                    - GetWeatherInfluence(g, averageTemperature, airTemperature[0..i], precipitationAmount[0..i], gtcOptinal);
             }
 
             return result / Math.Pow(2, dots.Length);
@@ -56,20 +55,20 @@ namespace Microservice.ForecastManager.Calculations
         /// <param name="gtc">текущий уровень гтк</param>
         /// <param name="gtcOptinal">оптимальный гтк для данной культуры</param>
         /// <returns></returns>
-        public static double GetWeatherInfluence(double g, double averageTemperature, double[] maxAirTemperature, double[] minAirTemperature, double[] precipitationAmount, double gtcOptinal)
+        public static double GetWeatherInfluence(double g, double averageTemperature, double[] airTemperature, double[] precipitationAmount, double gtcOptinal)
         {
-            return g * (Math.Abs(GetHydrothermalCoefficiens(averageTemperature, maxAirTemperature, minAirTemperature, precipitationAmount) - gtcOptinal) / gtcOptinal);
+            return g * (Math.Abs(GetHydrothermalCoefficiens(averageTemperature, airTemperature, precipitationAmount) - gtcOptinal) / gtcOptinal);
         }
 
         // ГТК - отражает текущий уровень влагообеспечённости территории
-        private static double GetHydrothermalCoefficiens(double averageTemperature, double[] maxAirTemperature, double[] minAirTemperature, double[] precipitationAmount)
+        private static double GetHydrothermalCoefficiens(double averageTemperature, double[] airTemperature, double[] precipitationAmount)
         {
             if (averageTemperature < MinimalAvgDayliTemperature)
                 return 0;
-            if (!(maxAirTemperature.Length == minAirTemperature.Length && minAirTemperature.Length == precipitationAmount.Length))
+            if (!(airTemperature.Length == precipitationAmount.Length))
                 throw new Exception("days count not equal");
 
-            var averageAirTemperature = GetAverageAirTempure(maxAirTemperature, minAirTemperature);
+            var averageAirTemperature = GetAverageAirTempure(airTemperature);
 
             if (averageAirTemperature == 0)
                 return 0;
@@ -77,15 +76,9 @@ namespace Microservice.ForecastManager.Calculations
             return 10 * precipitationAmount.Sum() / averageAirTemperature;
         }
 
-        private static double GetAverageAirTempure(double[] maxAirTemperature, double[] minAirTemperature)
+        private static double GetAverageAirTempure( double[] airTemperature)
         {
-            double sum = 0;
-            for (var i = 0; i < minAirTemperature.Length; i++)
-            {
-                sum += (maxAirTemperature[i] + minAirTemperature[i]) / 2;
-            }
-
-            return sum;
+            return airTemperature.Sum();
         }
 
         /// <summary>
