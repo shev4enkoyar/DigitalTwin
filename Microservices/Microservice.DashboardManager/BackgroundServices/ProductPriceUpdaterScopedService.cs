@@ -72,6 +72,8 @@ namespace Microservice.DashboardManager.BackgroundServices
         {
             var oldData = _dbContext.ProductPriceHistory.Where(x =>
                 x.Date <= SharedTools.ConvertFromJsonDate(DateTime.UtcNow).AddDays(NumStoredDays));
+            if (!oldData.Any())
+                return;
 
             _dbContext.ProductPriceHistory.RemoveRange(oldData);
 
