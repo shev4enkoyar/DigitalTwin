@@ -57,9 +57,9 @@ namespace Gateway.Controllers
             double gtcOptinal = 1; // оптимальный гтк для данной культуры. Либо вводится челом, либо можно нагуглить
             var temperatureByMonth = new[] { 10, 20, 4, 30, 0, 10, 20, 4, 30, 0, 10, 20, 4, 30, 0, 10, 20, 4, 30, 0, 10, 20, 4, 30, 0, 10, 20, 4, 30, 0 };
             var averageTemperature = (int)temperatureByMonth.Average(); // нужно для осадков
-            var maxAirTemperature = new[] { 15, 25, 6, 31, 2 };
-            var minAirTemperature = new[] { 7, 15, 3, 26, -3 };
-            var precipitationAmount = new[] { 7, 15, 3, 26, -3 };
+            double[] maxAirTemperature = new[] { 15.0, 25, 6, 31, 2 };
+            double[] minAirTemperature = new[] { 7.0, 15, 3, 26, -3 };
+            double[] precipitationAmount = new[] { 0.1, 0.2, 0.3, 0.1, 0.4 };
 
             using var channel = GrpcChannel.ForAddress(MicroservicesIp.External.Forecast,
                 new GrpcChannelOptions { HttpHandler = SharedTools.GetDefaultHttpHandler }
@@ -90,15 +90,20 @@ namespace Gateway.Controllers
         [HttpGet("get_overall_influence/{modelId:int}")]
         public async Task<double> GetOverallInfluenceByModelAsync(int modelId)
         {
-            var dons = new[] { 1, 1, 0, 1, 1 };
-            var dots = new[] { 0, 0, 1, 1, 1 };
+            var dons = new int[150];
+            var dots = new int[150];
+            for (int i = 0; i < 150; i++)
+            {
+                dons[i] = 1;
+                dots[i] = 1;
+            }
             var g = 0.7; // калибровочный коэффициент, хз где его брать, по идее у каждой культуры свой
             double gtcOptinal = 1; // оптимальный гтк для данной культуры. Либо вводится челом, либо можно нагуглить
             var temperatureByMonth = new[] { 10, 20, 4, 30, 0, 10, 20, 4, 30, 0, 10, 20, 4, 30, 0, 10, 20, 4, 30, 0, 10, 20, 4, 30, 0, 10, 20, 4, 30, 0 };
             var averageTemperature = (int)temperatureByMonth.Average(); // нужно для осадков
-            var maxAirTemperature = new[] { 15, 25, 6, 31, 2 };
-            var minAirTemperature = new[] { 7, 15, 3, 26, -3 };
-            var precipitationAmount = new[] { 7, 15, 3, 26, -3 };
+            double[] maxAirTemperature = new[] { 15.0, 25, 6, 31, 2 };
+            double[] minAirTemperature = new[] { 7.0, 15, 3, 26, -3 };
+            var precipitationAmount = new[] { 0.1 , 0.2 , 0.3, 0.1, 0.4 };
 
             using var channel = GrpcChannel.ForAddress(MicroservicesIp.External.Forecast,
                 new GrpcChannelOptions { HttpHandler = SharedTools.GetDefaultHttpHandler }

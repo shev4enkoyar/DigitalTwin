@@ -17,10 +17,10 @@ message OverallInfluenceRequest {
 	repeated int32 dots = 2;
 	double g = 3;
 	double gtcOptinal = 4;
-	int32 averageTemperature = 5;
-	repeated int32 maxAirTemperature = 6;
-	repeated int32 minAirTemperature = 7;
-	repeated int32 precipitationAmount = 8;
+	double averageTemperature = 5;
+	repeated double maxAirTemperature = 6;
+	repeated double minAirTemperature = 7;
+	repeated double precipitationAmount = 8;
 }
 message OverallInfluenceReply {
    double result = 1; 
@@ -29,9 +29,9 @@ message OverallInfluenceReply {
 message WeatherInfluenceRequest {
 	double g = 1;
 	int32 averageTemperature = 2;
-	repeated int32 maxAirTemperature = 3;
-	repeated int32 minAirTemperature = 4;
-	repeated int32 precipitationAmount = 5;
+	repeated double maxAirTemperature = 3;
+	repeated double minAirTemperature = 4;
+	repeated double precipitationAmount = 5;
 	double gtcOptinal = 6;
 }
 

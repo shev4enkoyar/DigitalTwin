@@ -19,7 +19,7 @@ namespace Microservice.ForecastManager.Calculations
         /// <param name="precipitationAmount">количество осадков в мм</param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        public static double GetOverallInfluence(int[] dons, int[] dots, double g, double gtcOptinal, int averageTemperature, int[] maxAirTemperature, int[] minAirTemperature, int[] precipitationAmount)
+        public static double GetOverallInfluence(int[] dons, int[] dots, double g, double gtcOptinal, double averageTemperature, double[] maxAirTemperature, double[] minAirTemperature, double[] precipitationAmount)
         {
             var result = GetSoilInfluence(); // первоначальное влияние почвы на культуру
 
@@ -35,7 +35,7 @@ namespace Microservice.ForecastManager.Calculations
                     - GetWeatherInfluence(g, averageTemperature, maxAirTemperature[0..i], minAirTemperature[0..i], precipitationAmount[0..i], gtcOptinal);
             }
 
-            return result;
+            return result / Math.Pow(2, dots.Length);
         }
 
 
@@ -56,13 +56,13 @@ namespace Microservice.ForecastManager.Calculations
         /// <param name="gtc">текущий уровень гтк</param>
         /// <param name="gtcOptinal">оптимальный гтк для данной культуры</param>
         /// <returns></returns>
-        public static double GetWeatherInfluence(double g, int averageTemperature, int[] maxAirTemperature, int[] minAirTemperature, int[] precipitationAmount, double gtcOptinal)
+        public static double GetWeatherInfluence(double g, double averageTemperature, double[] maxAirTemperature, double[] minAirTemperature, double[] precipitationAmount, double gtcOptinal)
         {
             return g * (Math.Abs(GetHydrothermalCoefficiens(averageTemperature, maxAirTemperature, minAirTemperature, precipitationAmount) - gtcOptinal) / gtcOptinal);
         }
 
         // ГТК - отражает текущий уровень влагообеспечённости территории
-        private static double GetHydrothermalCoefficiens(int averageTemperature, int[] maxAirTemperature, int[] minAirTemperature, int[] precipitationAmount)
+        private static double GetHydrothermalCoefficiens(double averageTemperature, double[] maxAirTemperature, double[] minAirTemperature, double[] precipitationAmount)
         {
             if (averageTemperature < MinimalAvgDayliTemperature)
                 return 0;
@@ -77,7 +77,7 @@ namespace Microservice.ForecastManager.Calculations
             return 10 * precipitationAmount.Sum() / averageAirTemperature;
         }
 
-        private static double GetAverageAirTempure(int[] maxAirTemperature, int[] minAirTemperature)
+        private static double GetAverageAirTempure(double[] maxAirTemperature, double[] minAirTemperature)
         {
             double sum = 0;
             for (var i = 0; i < minAirTemperature.Length; i++)
