@@ -45,7 +45,7 @@ namespace Microservice.WeatherManager.Services
             const string weatherBase = "https://api.open-meteo.com/v1/forecast?";
             var latLng = $"latitude={request.Lat}&longitude={request.Lng}";
             var attributes = $"hourly=temperature_2m,precipitation,evapotranspiration,soil_moisture_0_1cm";
-            var dates = $"start_date={DateTime.UtcNow.AddDays(-585):yyyy-MM-dd}&end_date={DateTime.UtcNow.AddDays(-580):yyyy-MM-dd}";
+            var dates = $"start_date={DateTime.UtcNow.AddDays(-585):yyyy-MM-dd}&end_date={DateTime.UtcNow.AddDays(-555):yyyy-MM-dd}";
             var reply = new WeatherReply();
             if (IsWeatherUpdated(request.ModelId))
             {

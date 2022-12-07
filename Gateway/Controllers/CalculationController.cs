@@ -91,14 +91,14 @@ namespace Gateway.Controllers
         {
             var weather = await GetWeather(modelId);
 
-            var dons = new int[5];
-            var dots = new int[5];
-            for (int i = 0; i < 5; i++)
+            var dons = new int[30];
+            var dots = new int[30];
+            for (int i = 0; i < 30; i++)
             {
                 dons[i] = 1;
                 dots[i] = 1;
             }
-            const double g = 0.56; // калибровочный коэффициент, хз где его брать, по идее у каждой культуры свой
+            const double g = 0.1; // калибровочный коэффициент, хз где его брать, по идее у каждой культуры свой
             double gtcOptinal = 2.2; // оптимальный гтк для данной культуры. Либо вводится челом, либо можно нагуглить
             double[] airTemperature = weather.Select(x => x.Temperature).ToArray();
             var averageTemperature = (int)airTemperature.Average(); // нужно для осадков
