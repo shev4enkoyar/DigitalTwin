@@ -51,7 +51,7 @@ namespace Microservice.DashboardManager.DAL
             {
                 Id = 1,
                 Name = "Картофель;Спиридон",
-                Code = "4",
+                Code = null,
                 CurrentPrice = 0,
                 SoilMoistureMax = 90,
                 SoilMoistureMin = 70,
@@ -60,7 +60,7 @@ namespace Microservice.DashboardManager.DAL
             {
                 Id = 2,
                 Name = "Кукуруза;Кубанский101МВ",
-                Code = "5",
+                Code = "CORN",
                 CurrentPrice = 0,
                 SoilMoistureMax = 80,
                 SoilMoistureMin = 70,
@@ -69,7 +69,7 @@ namespace Microservice.DashboardManager.DAL
             {
                 Id = 3,
                 Name = "Яровая пшеница;Эритросперум65",
-                Code = "3",
+                Code = "WHEAT",
                 CurrentPrice = 0,
                 SoilMoistureMax = 75,
                 SoilMoistureMin = 70,
@@ -78,7 +78,7 @@ namespace Microservice.DashboardManager.DAL
             {
                 Id = 4,
                 Name = "Озимая пшеница;Скипетр",
-                Code = "1",
+                Code = null,
                 CurrentPrice = 0,
                 SoilMoistureMax = 75,
                 SoilMoistureMin = 70,

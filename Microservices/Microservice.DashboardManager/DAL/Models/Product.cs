@@ -5,7 +5,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Microservice.DashboardManager.DAL.Models
 {
-    [Index(nameof(Code), IsUnique = true)]
     [Index(nameof(Name), IsUnique = true)]
     public class Product
     {
@@ -14,7 +13,6 @@ namespace Microservice.DashboardManager.DAL.Models
         [Required]
         public string Name { get; set; }
 
-        [Required]
         public string Code { get; set; }
 
         [Required]
