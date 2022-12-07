@@ -40,7 +40,7 @@ namespace Microservice.DashboardManager.BackgroundServices
         public async Task UpdatePrices(CancellationToken stoppingToken)
         {
             _logger.LogInformation("Started background service \"ProductPriceUpdater\"");
-            //await Task.Delay(TimeSpan.FromSeconds(GetSecondsUntilMidnight()), stoppingToken);
+            await Task.Delay(TimeSpan.FromSeconds(GetSecondsUntilMidnight()), stoppingToken);
             _logger.LogInformation("Background service \"ProductPriceUpdater\" is working");
             while (!stoppingToken.IsCancellationRequested)
             {
@@ -121,7 +121,7 @@ namespace Microservice.DashboardManager.BackgroundServices
                 var productPriceObj = prop.GetValue(jsonData.Data.Rates, null);
                 decimal productPrice;
                 if (productPriceObj != null)
-                    productPrice = (decimal)double.Parse(productPriceObj.ToString());
+                    productPrice = 1 / (decimal)double.Parse(productPriceObj.ToString());
                 else
                     continue;
 
