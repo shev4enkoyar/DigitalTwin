@@ -27,6 +27,12 @@ namespace Microservice.DashboardManager.DAL.Models
         [Required]
         public DateTime CreateDate { get; set; }
 
+        [Required]
+        public double Fraction { get; set; }
+
+        [Required]
+        public double Density { get; set; }
+
         //Relationships
 
         public virtual Product Product { get; set; }

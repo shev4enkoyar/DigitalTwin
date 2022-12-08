@@ -6,6 +6,7 @@ package recommendationProto;
 
 service RecommendationService {
   rpc GetRecommendationsByModelId (GetRecommendationsByModelIdRequest) returns (stream GetRecommendationsByModelIdReply);
+  rpc AddRecommendation (AddRecommendationRequest) returns (AddRecommendationReply);
 }
 
 message GetRecommendationsByModelIdRequest {
@@ -19,4 +20,14 @@ message ModelRecommendation {
   string ForecastEventText = 2;
   string RecommendationText = 3;
   string CreateDate = 4;
+}
+
+message AddRecommendationRequest {
+	int32 modelId = 1;
+	string forecastEventText = 2;
+	string recommendationText = 3;
+}
+
+message AddRecommendationReply {
+	bool status = 1;
 }

@@ -86,13 +86,15 @@ namespace Gateway.Controllers
         /// <param name="categoryName">Category name</param>
         /// <returns>True if the model was successfully created otherwise false</returns>
         [HttpGet("create")]
-        public int CreateDigitalModel(string companyId, int productId, string name, string cadaster = null, string categoryName = null)
+        public int CreateDigitalModel(string companyId, int productId, string name, double fraction, double density, string cadaster = null, string categoryName = null)
         {
             var request = new ModelRequest
             {
                 Name = name,
                 ProductId = productId,
-                CompanyId = companyId
+                CompanyId = companyId,
+                Density = density,
+                Fraction = fraction
             };
 
             using var channel = GrpcChannel.ForAddress(MicroservicesIp.External.Dashboard,

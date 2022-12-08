@@ -38,7 +38,9 @@ namespace Microservice.DashboardManager.Services
             {
                 Name = request.Name,
                 CompanyId = Guid.Parse(request.CompanyId),
-                ProductId = request.ProductId
+                ProductId = request.ProductId,
+                Density = request.Density,
+                Fraction = request.Fraction
             };
 
             DbContext.DigitalModels.Add(model);
@@ -88,7 +90,9 @@ namespace Microservice.DashboardManager.Services
                     ProductName = x.Product.Name,
                     ProductCode = string.IsNullOrEmpty(x.Product.Code) ? "null" : x.Product.Code,
                     ProductCurrentPrice = x.Product.CurrentPrice.ToString(),
-                    MapId = x.MapId.Value
+                    MapId = x.MapId.Value,
+                    Density = x.Density,
+                    Fraction = x.Fraction
                 }).ToList();
         }
     }
