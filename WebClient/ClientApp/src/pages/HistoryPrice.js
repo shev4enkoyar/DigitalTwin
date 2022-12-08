@@ -1,17 +1,16 @@
 ﻿import React, { Component } from 'react';
-import BootstrapTable from 'react-bootstrap-table-next';
 import { Container } from "reactstrap";
 import { IconButton } from "../components/sideBarDashboard/util/IconButton";
 import CardForBody from './../components/cardForBody/CardForBody';
 import SideBarDashboard from './../components/sideBarDashboard/SideBarDashboard';
 import { ThemeContextConsumer } from './../components/ThemeContext';
 import { Chart, LineController, LineElement, PointElement, LinearScale, Title, CategoryScale } from 'chart.js';
-
-Chart.register(LineController, LineElement, PointElement, LinearScale, Title, CategoryScale);
 import { Line } from 'react-chartjs-2';
 
 import './pages.css';
 import { ClientRoutes } from "../util/ClientRoutes";
+Chart.register(LineController, LineElement, PointElement, LinearScale, Title, CategoryScale);
+
 class HistoryPrice extends Component {
     iconsLeftBar = [
         new IconButton("#/", "Главная панель",

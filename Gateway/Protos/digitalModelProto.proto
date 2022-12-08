@@ -16,6 +16,8 @@ message ModelRequest {
   int32 productId = 3; 
   string cadastre = 4;
   string categoryName = 5;
+  double fraction = 6;
+  double density = 7;
 }
 
 message ModelReply {
@@ -44,4 +46,6 @@ message ModelProto {
   string productCode = 5;
   string productCurrentPrice = 6;
   int32 mapId = 7;
+  double fraction = 8;
+  double density = 9;
 }

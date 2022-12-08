@@ -89,6 +89,7 @@ namespace Microservice.DashboardManager.Services
                     ProductCode = string.IsNullOrEmpty(x.Product.Code) ? "null" : x.Product.Code,
                     ProductCurrentPrice = x.Product.CurrentPrice.ToString(),
                     MapId = x.MapId.Value
+                    
                 }).ToList();
         }
     }
