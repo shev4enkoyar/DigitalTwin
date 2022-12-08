@@ -10,6 +10,7 @@ using Gateway.Controllers.Base;
 using System.Collections.Generic;
 using Microservice.WebClient.Protos;
 using Grpc.Core;
+using System.Net;
 
 namespace Gateway.Controllers
 {
@@ -91,9 +92,9 @@ namespace Gateway.Controllers
         {
             var weather = await GetWeather(modelId);
 
-            var dons = new int[5];
-            var dots = new int[5];
-            for (int i = 0; i < 5; i++)
+            var dons = new int[91];
+            var dots = new int[91];
+            for (int i = 0; i < 91; i++)
             {
                 dons[i] = 1;
                 dots[i] = 1;
@@ -104,6 +105,28 @@ namespace Gateway.Controllers
             var averageTemperature = (int)airTemperature.Average(); // нужно для осадков
             double[] precipitationAmount = weather.Select(x => x.Precipitation).ToArray();
 
+            double result = 0;
+            double divider = Math.Ceiling(airTemperature.Length / 30d);
+            int startNum = 0;
+            int endNum = 0;
+            for (int i = 0; i < airTemperature.Length; i += 30) 
+            {
+                startNum = i;
+                endNum = startNum + 29;
+                if (endNum > airTemperature.Length)
+                    endNum = airTemperature.Length;
+
+                //Method call
+                result += await GetOverallInfluenceAsync(averageTemperature, airTemperature[startNum..endNum], precipitationAmount[startNum..endNum], gtcOptinal, dons[startNum..endNum], dots[startNum..endNum], g);
+            }
+
+
+            
+            return result / divider;
+        }
+
+        private async Task<double> GetOverallInfluenceAsync(int averageTemperature, double[] airTemperature, double[] precipitationAmount, double gtcOptinal, int[] dons, int[] dots, double g) 
+        {
             using var channel = GrpcChannel.ForAddress(MicroservicesIp.External.Forecast,
                 new GrpcChannelOptions { HttpHandler = SharedTools.GetDefaultHttpHandler }
             );
