@@ -91,7 +91,9 @@ namespace WebClient.Controllers
                     ProductCurrentPrice = model.ProductCurrentPrice,
                     ProductName = model.ProductName,
                     RecommendationName = recomendationName,
-                    TaskName = taskName
+                    TaskName = taskName,
+                    Density = model.Density,
+                    Fraction = model.Fraction
                 });
             }
             return modelsWithRecs;

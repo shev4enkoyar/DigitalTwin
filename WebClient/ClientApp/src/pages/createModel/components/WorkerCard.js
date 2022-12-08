@@ -8,14 +8,14 @@ const WorkerCard = (props) => {
         const token = await authService.getAccessToken();
         let response = null;
         if (digitalModel.Cadaster === "" && digitalModel.CategoryName === "")
-            response=await fetch(`api/techcard/create?name=${digitalModel.Name}&productId=${digitalModel.ProductId}`, {
+            response=await fetch(`api/techcard/create?name=${digitalModel.Name}&productId=${digitalModel.ProductId}&fraction=${digitalModel.Fraction}&density=${digitalModel.Density}`, {
                 headers: !token ? {} :
                     {
                         'Authorization': `Bearer ${token}`,
                     }
             });
         else
-            response=await fetch(`api/techcard/create?name=${digitalModel.Name}&productId=${digitalModel.ProductId}&cadaster=${digitalModel.Cadaster}&categoryName=${digitalModel.CategoryName}`, {
+            response=await fetch(`api/techcard/create?name=${digitalModel.Name}&productId=${digitalModel.ProductId}&cadaster=${digitalModel.Cadaster}&categoryName=${digitalModel.CategoryName}&fraction=${digitalModel.Fraction}&density=${digitalModel.Density}`, {
                 headers: !token ? {} :
                     {
                         'Authorization': `Bearer ${token}`,
@@ -30,7 +30,7 @@ const WorkerCard = (props) => {
         let dols = await queryDol.json();
         props.data[5].rZasev.map(async el => {
             const dol= dols.find(dol => dol.post === el.dol);
-            const queryWorkers = await fetch(`api/worker/create?modelId=${id}&postId=${dol.id}&fio=${el.vak}&rate=${el.stavk}&salary=${el.oklad}`, {
+            const queryWorkers = await fetch(`api/worker/create?modelId=${id}&postId=${dol.id}&fio=${el.vak}&rate=${el.stavk}&salary=${el.oklad}&fraction=${digitalModel.Fraction}&density=${digitalModel.Density}`, {
                 headers: !token ? {} :
                     {
                         'Authorization': `Bearer ${token}`,
@@ -41,7 +41,7 @@ const WorkerCard = (props) => {
         });
         props.data[5].rObrabotka.map(async el => {
             const dol = dols.find(dol => dol.post === el.dol);
-            const queryWorkers = await fetch(`api/worker/create?modelId=${id}&postId=${dol.id}&fio=${el.vak}&rate=${el.stavk}&salary=${el.oklad}`, {
+            const queryWorkers = await fetch(`api/worker/create?modelId=${id}&postId=${dol.id}&fio=${el.vak}&rate=${el.stavk}&salary=${el.oklad}&fraction=${digitalModel.Fraction}&density=${digitalModel.Density}`, {
                 headers: !token ? {} :
                     {
                         'Authorization': `Bearer ${token}`,
@@ -52,7 +52,7 @@ const WorkerCard = (props) => {
         });
         props.data[5].rSbor.map(async el => {
             const dol = dols.find(dol => dol.post === el.dol);
-            const queryWorkers = await fetch(`api/worker/create?modelId=${id}&postId=${dol.id}&fio=${el.vak}&rate=${el.stavk}&salary=${el.oklad}`, {
+            const queryWorkers = await fetch(`api/worker/create?modelId=${id}&postId=${dol.id}&fio=${el.vak}&rate=${el.stavk}&salary=${el.oklad}&fraction=${digitalModel.Fraction}&density=${digitalModel.Density}`, {
                 headers: !token ? {} :
                     {
                         'Authorization': `Bearer ${token}`,
@@ -92,8 +92,9 @@ const WorkerCard = (props) => {
                         UserId: -1,
                         ProductId: props.data.at(2).productId,
                         Cadaster: props.data.at(3).kad,
-                        CategoryName: props.data.at(2).cult + " " + props.data.at(2).sort
-
+                        CategoryName: props.data.at(2).cult + " " + props.data.at(2).sort,
+                        Density: props.data.at(2).gust,
+                        Fraction: props.data.at(2).frac
                     };
                     CreateTechCard(digitalModel);
                 }}>
