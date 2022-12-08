@@ -121,7 +121,6 @@ function GantGraph(props) {
             }
         }
 
-        //console.log(new_tasks)
         setNewTasks(new_tasks);
     }
 

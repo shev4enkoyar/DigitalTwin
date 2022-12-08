@@ -6,6 +6,7 @@ import Input from '../../components/input/Input';
 import SideBarDashboard from "../../components/sideBarDashboard/SideBarDashboard";
 import { IconButton } from "../../components/sideBarDashboard/util/IconButton";
 import { ThemeContextConsumer } from "../../components/ThemeContext";
+import authService from "../../components/api-authorization/AuthorizeService";
 import '../pages.css';
 import {ClientRoutes} from "../../util/ClientRoutes";
 class IotPage extends Component {
@@ -18,11 +19,11 @@ class IotPage extends Component {
                 { id: 3, status: "online", color: "success", name: "IoT 003", func: [1, 5], link: "temp", dateAdd: "18.09.2020" },
                 { id: 4, status: "online", color: "success", name: "IoT 004", func: [3, 4], link: "temp", dateAdd: "24.10.2020" },
                 { id: 5, status: "online", color: "success", name: "IoT 005", func: [1, 4], link: "temp", dateAdd: "21.12.2020" }
-            ]
+            ], funcs: []
         }
     };
     iconsLeftBar = [
-        new IconButton("#/", "Главная панель",
+        new IconButton("/" + ClientRoutes.DASHBOARD + "/" + this.props.match.params.modelId, "Главная панель",
             <img style={{ width: "25px", height: "25px", margin: "7px 0px 0px" }} className="icon" src="https://img.icons8.com/windows/344/home.png" />),
         new IconButton("/" + ClientRoutes.MAP + "/" + this.props.match.params.modelId, "Карта",
             <img style={{ width: "25px", height: "25px", margin: "7px 0px 0px"  }} className="icon" src="https://img.icons8.com/small/344/map.png" />),
@@ -39,6 +40,12 @@ class IotPage extends Component {
         new IconButton("/" + ClientRoutes.MODELS, "Вернуться к выбору модели",
             <img style={{ width: "25px", height: "25px", margin: "7px 0px 0px"  }} className="icon" src="https://img.icons8.com/ios/344/logout-rounded--v1.png" />)
     ];
+
+    componentDidMount() {
+        this.GetIoTsData();
+        this.GetFunctional();
+    }
+
     handleBlocked = (value) => {
         this.setState({
             chosen: value,
@@ -174,4 +181,25 @@ class IotPage extends Component {
             </ThemeContextConsumer>
         );
     }
+
+    async GetIoTsData() {
+        const token = await authService.getAccessToken();
+        const response = await fetch(`api/sensor/get_all/${this.props.match.params.modelId}`, {
+            headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
+        });
+        const data = await response.json();
+        console.log(data);
+        //this.setState({ tariffs: data });
+    }
+
+    async GetFunctional() {
+        const token = await authService.getAccessToken();
+        const response = await fetch(`api/sensor/get_all_functional`, {
+            headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
+        });
+        const data = await response.json();
+        console.log(data);
+        //this.setState({ tariffs: data });
+    }
+
 } export default IotPage;

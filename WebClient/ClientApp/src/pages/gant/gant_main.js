@@ -4,6 +4,8 @@ import { Col, Container, Row, Modal, ModalHeader, ModalBody, Form, Label, Input,
 import authService from "../../components/api-authorization/AuthorizeService";
 import { ThemeContextConsumer } from "../../components/ThemeContext";
 import './Gantt.css';
+import { ClientRoutes } from "../../util/ClientRoutes";
+
 
 
 import BackIn_Icon from "../../components/sideBarDashboard/BackInModel_Icon";
@@ -356,21 +358,21 @@ function GanttMain(props) {
 
 
     let iconsLeftBar = [
-        new IconButton("/dashboard", "Главная панель",
+        new IconButton("/" + ClientRoutes.DASHBOARD + "/" + modelId, "Главная панель",
             <img style={{ width: "25px", height: "25px", margin: "7px 0px 0px" }} className="icon" src="https://img.icons8.com/windows/344/home.png" />),
-        new IconButton("/map/", "Карта",
+        new IconButton("/" + ClientRoutes.MAP + "/" + modelId, "Карта",
             <img style={{ width: "25px", height: "25px", margin: "7px 0px 0px" }} className="icon" src="https://img.icons8.com/small/344/map.png" />),
-        new IconButton("/docs", "Документы",
+        new IconButton("/" + ClientRoutes.DOCS + "/" + modelId, "Документы",
             <img style={{ width: "25px", height: "25px", margin: "7px 0px 0px" }} className="icon" src="https://img.icons8.com/ios/344/document--v1.png" />),
-        new IconButton("/iot", "Датчики IoT",
+        new IconButton("/" + ClientRoutes.IOTPAGE + "/" + modelId, "Датчики IoT",
             <img style={{ width: "25px", height: "25px", margin: "7px 0px 0px" }} className="icon" src="https://img.icons8.com/windows/344/sensor.png" />),
-        new IconButton("/recommendation", "Рекомендации",
+        new IconButton("/" + ClientRoutes.RECOMMENDATIONS + "/" + modelId, "Рекомендации",
             <img style={{ width: "25px", height: "25px", margin: "7px 0px 0px" }} className="icon" src="https://img.icons8.com/ios-glyphs/344/task.png" />),
-        new IconButton("/historyPrice", "История цен",
+        new IconButton("/" + ClientRoutes.HISTORY_PRICE + "/" + modelId, "История цен",
             <img style={{ width: "25px", height: "25px", margin: "7px 0px 0px" }} className="icon" src="https://img.icons8.com/material-outlined/344/ruble.png" />),
-        new IconButton("#/", "График работ",
+        new IconButton("/" + ClientRoutes.GANT + "/" + modelId, "График работ",
             <img style={{ width: "25px", height: "25px", margin: "7px 0px 0px" }} className="icon" src="https://img.icons8.com/ios/344/rebalance-portfolio.png" />),
-        new IconButton("/models", "Вернуться к выбору модели",
+        new IconButton("/" + ClientRoutes.MODELS, "Вернуться к выбору модели",
             <img style={{ width: "25px", height: "25px", margin: "7px 0px 0px" }} className="icon" src="https://img.icons8.com/ios/344/logout-rounded--v1.png" />)
     ];
 

@@ -50,25 +50,18 @@ export class Dashboard extends Component {
         super(props);
         this.state = {
             classis: false,
-            tasks_data: [
-                { "event": "Плановый полив", "date": "2 месяца назад", "color": "green" },
-                { "event": "Плановый полив", "date": "4 месяца назад", "color": "green" },
-                { "event": "Наступление засухи в окружающих регионах", "date": "5 месяцев назад", "color": "yellow" },
-                { "event": "Плановый полив", "date": "2 месяца назад", "color": "green" },
-                { "event": "Плановый полив", "date": "4 месяца назад", "color": "green" },
-                { "event": "Наступление засухи в окружающих регионах", "date": "5 месяцев назад", "color": "yellow" },
-            ],
+            tasks_data: [],
             model_status: {
-                "text": "Все отлично!", "color": "green"
+                "text": "", "color": ""
             },
             iot_status: {
-                "text": "Требуется заменить батарею", "color": "orange"
+                "text": "", "color": ""
             },
             recommendation: {
-                "text": "Добавить подкормку при поливе", "color": ""
+                "text": "", "color": ""
             },
-            prise: {
-                "prev": "177.21", "current": "179.74", "color": ""
+            price: {
+                "prev": "", "current": "", "color": ""
             }
         }
 
@@ -76,6 +69,9 @@ export class Dashboard extends Component {
 
     componentDidMount() {
         this.GetTasks();
+        this.GetIoTs();
+        this.GetRecommendations();
+        this.GetPriceDiff();
     }
 
     async GetTasks() {
@@ -85,6 +81,8 @@ export class Dashboard extends Component {
         });
         const data = await response.json();
         let tasks = []
+        let status = {}
+        let statuses = []
         for (let one of data) {
             let task = {}
             task.task = one.name
@@ -95,13 +93,83 @@ export class Dashboard extends Component {
             }
             task.date = one.endDate
             tasks.push(task)
+            if (!one.isComplete) {
+                statuses.push(one.name)
+            }
         }
-        this.setState({ tasks_data: tasks });
+        if (statuses.length > 1) {
+            status.text = `Работ в процеесе выполнения - ${statuses.length}`
+            status.color = "orange"
+        } else if (statuses.length == 1) {
+            status.text = `Выполняется работа "${statuses[0]}"`
+            status.color = "orange"
+        } else {
+            status.text = "Активных работ нет"
+            status.color = "green"
+        }
+        this.setState({ tasks_data: tasks, model_status: status });
+    }
+
+    async GetIoTs() {
+        const token = await authService.getAccessToken();
+        const response = await fetch(`api/sensor/get_all/${this.props.match.params.modelId}`, {
+            headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
+        });
+        const data = await response.json();
+        let off = 0
+        let status = {}
+        if (data.length > 0) {
+            for (let iot of data) {
+                if (!iot.isEnabled) {
+                    off += 1
+                }
+            }
+            if (off > 0) {
+                status.text = `Потеряна связь с ${off} датчиками`
+                status.color = "orange"
+            } else {
+                status.text = "Все датчики в норме"
+                status.color = "green"
+            }
+        } else {
+            status.text = "Нет данных"
+        }
+        this.setState({ iot_status: status});
+    }
+
+    async GetRecommendations() {
+        const token = await authService.getAccessToken();
+        const response = await fetch(`api/recommendation/get_all/${this.props.match.params.modelId}`, {
+            headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
+        });
+        const data = await response.json();
+        let status = {}
+        if (data.length > 0) {
+            status.text = data[data.length - 1].recommendationText
+        } else {
+        status.text = "Нет рекомендаций"}
+        this.setState({ recommendation: status });
+    }
+
+    async GetPriceDiff() {
+        const token = await authService.getAccessToken();
+        const response = await fetch(`api/products/get_product_histories/${this.props.match.params.modelId}`, {
+            headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
+        });
+        const data = await response.json();
+        let status = {}
+        if (data.length > 1) {
+            status.prev = data[data.length - 2].price
+            status.current = data[data.length - 1].price
+        } else {
+            status.text = "Нет данных"
+        }
+        this.setState({ price: status });
     }
 
 
     iconsLeftBar = [
-        new IconButton("#/", "Главная панель", 
+        new IconButton("/" + ClientRoutes.DASHBOARD + "/" + this.props.match.params.modelId, "Главная панель", 
             <img style={{ width: "25px", height: "25px", margin: "7px 0px 0px" }} className="icon" src="https://img.icons8.com/windows/344/home.png" />),
         new IconButton("/" + ClientRoutes.MAP + "/" + this.props.match.params.modelId, "Карта",
             <img style={{ width: "25px", height: "25px", margin: "7px 0px 0px"  }} className="icon" src="https://img.icons8.com/small/344/map.png" />),
@@ -166,9 +234,11 @@ export class Dashboard extends Component {
                                                 <p >Текущая рекомендация</p>
                                                 <p className="ptext" style={{ color: this.state.recommendation.color }}>{this.state.recommendation.text}</p>
                                             </StatusCard>
-                                            <StatusCard color={"green"} iconpath={"https://www.svgrepo.com/show/40868/rub-symbol.svg"} path={"#nogo"}>
+                                            <StatusCard color={"green"} iconpath={"https://www.svgrepo.com/show/40868/rub-symbol.svg"} path={"/" + ClientRoutes.HISTORY_PRICE + "/" + this.props.match.params.modelId}>
                                                 <p >Изменение цены за сутки</p>
-                                                <p className="ptext" style={{color: this.state.prise.color}}>{this.state.prise.prev} &#8594; {this.state.prise.current}</p>
+                                                {this.state.price.prev && this.state.price.current ? <p className="ptext" style={{ color: this.state.price.color }}>{this.state.price.prev} &#8594; {this.state.price.current}</p> :
+                                                    <p className="ptext" style={{ color: this.state.price.color }}>{this.state.price.text}</p>
+                                                }
                                             </StatusCard>
                                         </Row>
                                         <Row className={context.theme + "Gray mt-3 ml-5"} style={{ width: "90%" }}>

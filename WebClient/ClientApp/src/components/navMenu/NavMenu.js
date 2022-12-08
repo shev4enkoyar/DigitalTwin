@@ -34,11 +34,6 @@ export class NavMenu extends Component {
             <NavbarBrand className={context.theme + (this.props.Gray ? "Gray " : " ")} tag={Link} to="/">AgroDigitalTwin</NavbarBrand>
                 <ul style={{ flexDirection: "inherit" }} className="navbar-nav flex-grow">
                     <ThemeToggler />
-                    <Button style={{ backgroundColor: 'transparent', border: 'none' }} className={context.theme + "shadow-none"} >
-                         <Link to="/adminPanel">
-                                 <img fill="#000000" src="https://www.svgrepo.com/show/355353/user-admin.svg" className={context.theme} style={{ filter: 'invert(1)', width: '20px', height: '20px' }} />
-                         </Link>
-                    </Button>
                     <LoginMenu />
               </ul>
           </Container>

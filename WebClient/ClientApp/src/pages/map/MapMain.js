@@ -21,7 +21,7 @@ class MapMain extends Component {
         this.state = { mapId: -1, loading: true };
     }
     iconsSideBarDashboard = [
-        new IconButton("#/", "Главная панель",
+        new IconButton("/" + ClientRoutes.DASHBOARD + "/" + this.props.match.params.modelId, "Главная панель",
             <img style={{ width: "25px", height: "25px", margin: "7px 0px 0px" }} className="icon" src="https://img.icons8.com/windows/344/home.png" />),
         new IconButton("/" + ClientRoutes.MAP + "/" + this.props.match.params.modelId, "Карта",
             <img style={{ width: "25px", height: "25px", margin: "7px 0px 0px"  }} className="icon" src="https://img.icons8.com/small/344/map.png" />),

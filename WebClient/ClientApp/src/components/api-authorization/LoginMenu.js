@@ -52,6 +52,11 @@ export class LoginMenu extends Component {
             <ThemeContextConsumer>{
                     context => (
                         <Fragment>
+                            <Button style={{ backgroundColor: 'transparent', border: 'none' }} className={context.theme + "shadow-none"} >
+                                <Link to="/adminPanel">
+                                    <img fill="#000000" src="https://www.svgrepo.com/show/355353/user-admin.svg" className={context.theme} style={{ filter: 'invert(1)', width: '20px', height: '20px' }} />
+                                </Link>
+                            </Button>
                             <NotificationDropdown />
                             <ProfileDropdown direction="down" />
                         </Fragment>
