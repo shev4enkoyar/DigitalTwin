@@ -38,7 +38,7 @@ namespace Microservice.DashboardManager.Services
             {
                 Name = request.Name,
                 CompanyId = Guid.Parse(request.CompanyId),
-                ProductId = request.ProductId
+                ProductId = request.ProductId,
             };
 
             DbContext.DigitalModels.Add(model);

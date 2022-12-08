@@ -9,6 +9,7 @@
         public string ProductCode { get; set; }
         public string ProductCurrentPrice { get; set; }
         public int MapId { get; set; }
-
+        public double Fraction { get; set; }
+        public double Density { get; set; }
     }
 }
