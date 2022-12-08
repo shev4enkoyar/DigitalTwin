@@ -91,7 +91,9 @@ namespace WebClient.Controllers
                     ProductCurrentPrice = model.ProductCurrentPrice,
                     ProductName = model.ProductName,
                     RecommendationName = recomendationName,
-                    TaskName = taskName
+                    TaskName = taskName,
+                    Density = model.Density,
+                    Fraction = model.Fraction
                 });
             }
             return modelsWithRecs;
@@ -146,7 +148,7 @@ namespace WebClient.Controllers
         /// <param name="categoryName">Category name</param>
         /// <returns>Status 200 if everything went well, otherwise 400 or 401</returns>
         [HttpGet("create")]
-        public async Task<int> CreateDigitalModel(int productId, string name, string cadaster = null, string categoryName = null)
+        public async Task<int> CreateDigitalModel(int productId, string name, double fraction, double density, string cadaster = null, string categoryName = null)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (userId == null)
@@ -155,7 +157,7 @@ namespace WebClient.Controllers
             var companyId = user.CompanyId.ToString();
 
             var response = await ConnectionClient.GetAsync($"api/model/create?companyId={companyId}&" +
-                                                           $"productId={productId}&name={name}&cadaster={cadaster}&categoryName={categoryName}");
+                                                           $"productId={productId}&name={name}&cadaster={cadaster}&categoryName={categoryName}&fraction={fraction}&density={density}");
             if (response.IsSuccessStatusCode) 
             {
                 var json = await response.Content.ReadAsStringAsync();
