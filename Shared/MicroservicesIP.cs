@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Net.Http;
 
 namespace Shared
 {
@@ -8,12 +7,12 @@ namespace Shared
     /// </summary>
     public static class MicroservicesIp
     {
-        private const string ConstGatewayIp = "http://localhost:5100";
+        private const string ConstGatewayIp = "http://localhost:5000";
 
         #region Properties
 
         /// <summary>Gateway IP</summary>
-        /// <value>http://localhost:5100</value>
+        /// <value>http://localhost:5000</value>
         /// <exception cref="ArgumentNullException"/>
         public static string GatewayIp => CheckEmptyIp(ConstGatewayIp);
 
