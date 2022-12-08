@@ -1,10 +1,13 @@
-﻿using Grpc.Core;
+﻿using System;
+using Grpc.Core;
 using Microservice.RecommendationManager.DAL;
 using Microservice.RecommendationManager.Protos;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microservice.RecommendationManager.DAL.Models;
+using Shared;
 
 namespace Microservice.RecommendationManager.Services
 {
@@ -13,6 +16,9 @@ namespace Microservice.RecommendationManager.Services
     /// </summary>
     public class RecommendationProtoService : RecommendationService.RecommendationServiceBase
     {
+        private const int LimitDays = 60;
+        private const int LimitOldRows = 10;
+
         /// <summary>
         /// Database access property
         /// </summary>
@@ -31,10 +37,27 @@ namespace Microservice.RecommendationManager.Services
         public override async Task GetRecommendationsByModelId(GetRecommendationsByModelIdRequest request, IServerStreamWriter<GetRecommendationsByModelIdReply> responseStream, ServerCallContext context)
         {
             var reply = new GetRecommendationsByModelIdReply();
+            await RemoveOldRecommendations(request.ModelId);
             reply.ModelRecommendations.AddRange(GetProtoModelRecommendations(request.ModelId));
 
             await responseStream.WriteAsync(reply);
             await Task.FromResult(reply);
+        }
+
+        private async Task RemoveOldRecommendations(int modelId)
+        {
+            var oldDateRecommendations = DbContext.Recommendations
+                .Where(x => x.ModelId == modelId 
+                            && x.CreateDate <= SharedTools.ConvertFromJsonDate(DateTime.UtcNow).AddDays(-LimitDays))
+                .OrderBy(x => x.CreateDate).ToList();
+
+            if (oldDateRecommendations.Count <= LimitOldRows)
+                return;
+
+            DbContext.Recommendations
+                .RemoveRange(oldDateRecommendations
+                    .GetRange(0, oldDateRecommendations.Count - LimitOldRows));
+            await DbContext.SaveChangesAsync();
         }
 
         private IEnumerable<ModelRecommendation> GetProtoModelRecommendations(int modelId)
@@ -46,6 +69,21 @@ namespace Microservice.RecommendationManager.Services
                 ForecastEventText = x.ForecastEventText,
                 RecommendationText = x.RecommendationText
             }).ToList();
+        }
+
+        public override async Task<AddRecommendationReply> AddRecommendation(AddRecommendationRequest request, ServerCallContext context)
+        {
+            await DbContext.Recommendations.AddAsync(new Recommendation
+            {
+                ModelId = request.ModelId,
+                ForecastEventText = request.ForecastEventText,
+                RecommendationText = request.ForecastEventText,
+                CreateDate = SharedTools.ConvertFromJsonDate(DateTime.UtcNow)
+            });
+
+            await DbContext.SaveChangesAsync();
+
+            return await Task.FromResult(new AddRecommendationReply { Status = true });
         }
     }
 }
