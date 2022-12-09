@@ -111,18 +111,23 @@ export const DashboardClassic = (props) => {
                     const prevState = state;
                     setState({ ...state, works: taskTemp, first: prodTemp[0], second:fract }) ;
                 }
-                const response2 = await fetch(`api/digitalmodels/get_all`, {
-                    headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
+                console.log(1)
+                const token2 = await authService.getAccessToken();
+                const response2 = await fetch(`api/map/get_area/${props.modelId}`, {
+                    headers: !token ? {} : { 'Authorization': `Bearer ${token2}` }
                 });
+                console.log(response2)
                 const transp = await response2.json();
+                console.log(1)
                 console.log(transp)
                 let transpTemp = [];
                 transpTemp.push("");
                 data.map(el => transpTemp.push(el.name));
                 if (mounted) {
-                    handleSelectTransp({ transp: transp, brand: brand, staff: staff, transp: transpTemp });
+                    //handleSelectTransp({ transp: transp, brand: brand, staff: staff, transp: transpTemp });
                 }
             } catch (e) {
+                console.log(e)
             }
         })();
         return () => {
