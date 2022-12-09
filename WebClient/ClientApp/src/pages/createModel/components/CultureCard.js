@@ -55,7 +55,7 @@ class CultureCard extends Component{
                                 <p className="m-0 text-danger p-0" style={{ fontSize: '14px', fontFamily: 'Open Sans' }}>
                                     {this.state.errors.fracEr}
                                 </p>
-                                <Input Label="Фракция" classNameP="textForSign12" className="inpCreateForDashCard" contClass="contForInpDashE" value={this.props.values.frac} onInput={(event) => { let reg = /^[0-9A-Za-zА-Яа-я]*$/i.test(event.target.value); if (reg) { this.props.setStatus({ frac: event.target.value.trim() }); this.errorForInp({ fracEr: "" }); }  else this.errorForInp({fracEr: "Вводите только числа и буквы" }) }} />
+                            <Input Label="Фракция" classNameP="textForSign12" className="inpCreateForDashCard" contClass="contForInpDashE" value={this.props.values.frac} onInput={(event) => { let reg = /^ (0 | ([1 - 9][0 - 9]{ 0, 5}))?(\.|(\.[0-9]{1, 5}))?$/i.test(event.target.value); if (reg) { this.props.setStatus({ frac: event.target.value.trim() }); this.errorForInp({ fracEr: "" }); }  else this.errorForInp({fracEr: "Вводите только числа и буквы" }) }} />
                                 <p className="m-0 text-danger p-0" style={{ fontSize: '14px', fontFamily: 'Open Sans' }}>
                                     {this.state.errors.normEr}
                                 </p>
