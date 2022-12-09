@@ -1,13 +1,12 @@
-﻿using System;
-using Grpc.Core;
+﻿using Grpc.Core;
 using Microservice.RecommendationManager.DAL;
+using Microservice.RecommendationManager.DAL.Models;
 using Microservice.RecommendationManager.Protos;
-using Microsoft.EntityFrameworkCore;
+using Shared;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microservice.RecommendationManager.DAL.Models;
-using Shared;
 
 namespace Microservice.RecommendationManager.Services
 {
@@ -47,7 +46,7 @@ namespace Microservice.RecommendationManager.Services
         private async Task RemoveOldRecommendations(int modelId)
         {
             var oldDateRecommendations = DbContext.Recommendations
-                .Where(x => x.ModelId == modelId 
+                .Where(x => x.ModelId == modelId
                             && x.CreateDate <= SharedTools.ConvertFromJsonDate(DateTime.UtcNow).AddDays(-LimitDays))
                 .OrderBy(x => x.CreateDate).ToList();
 

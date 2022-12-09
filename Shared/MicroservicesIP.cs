@@ -7,7 +7,7 @@ namespace Shared
     /// </summary>
     public static class MicroservicesIp
     {
-        private const string ConstGatewayIp = "http://localhost:5000";
+        private const string ConstGatewayIp = "https://localhost:5001";
 
         #region Properties
 

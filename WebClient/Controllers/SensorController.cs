@@ -1,7 +1,5 @@
-﻿using Grpc.Net.Client;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -71,8 +69,8 @@ namespace WebClient.Controllers
             var json = await response.Content.ReadAsStringAsync();
             var sensors = JsonConvert.DeserializeObject<IEnumerable<SensorProto>>(json);
             var functional = await GetAllSensorsFunctional();
-            var result = sensors.Select(x => new SensorWithFunctionalProto 
-            { 
+            var result = sensors.Select(x => new SensorWithFunctionalProto
+            {
                 Id = x.Id,
                 ExpireTime = x.ExpireTime,
                 InitTime = x.InitTime,

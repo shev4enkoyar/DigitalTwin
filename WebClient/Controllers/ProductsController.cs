@@ -1,9 +1,7 @@
-﻿using Grpc.Net.Client;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
-using Shared;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using WebClient.Controllers.Base;

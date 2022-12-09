@@ -1,16 +1,15 @@
-﻿using Grpc.Net.Client;
+﻿using Gateway.Controllers.Base;
+using Grpc.Core;
+using Grpc.Net.Client;
 using Microservice.ForecastManager.Protos;
+using Microservice.WebClient.Protos;
 using Microsoft.AspNetCore.Mvc;
 using Shared;
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
-using Gateway.Controllers.Base;
-using System.Collections.Generic;
-using Microservice.WebClient.Protos;
-using Grpc.Core;
-using System.Net;
 
 namespace Gateway.Controllers
 {
@@ -33,8 +32,9 @@ namespace Gateway.Controllers
                 new GrpcChannelOptions { HttpHandler = SharedTools.GetDefaultHttpHandler }
             );
 
-            var dons = new[] { 1, 1, 0, 1, 1 };
-            var dots = new[] { 0, 0, 1, 1, 1 };
+            var details = await GetDetailsByModelId(modelId);
+            var dons = details.Where(x => DateTime.Parse(x.Date) <= DateTime.UtcNow).Select(x => x.Status == "done" || x.Status == "late" ? 1 : 0).ToArray();
+            var dots = details.Where(x => DateTime.Parse(x.Date) <= DateTime.UtcNow).Select(x => x.Status == "late" || x.Status == "undone" ? 0 : 1).ToArray();
 
             var client = new InfluenceCalculationService.InfluenceCalculationServiceClient(channel);
             var request = new TaskInfluenceRequest();
@@ -56,10 +56,10 @@ namespace Gateway.Controllers
         {
             var weather = await GetWeather(modelId);
 
-            const double g = 0.56; // калибровочный коэффициент, хз где его брать, по идее у каждой культуры свой
-            double gtcOptinal = 1.0; // оптимальный гтк для данной культуры. Либо вводится челом, либо можно нагуглить
+            const double g = 0.56;
+            double gtcOptinal = 1.0;
             double[] airTemperature = weather.Select(x => x.Temperature).ToArray();
-            var averageTemperature = (int)airTemperature.Average(); // нужно для осадков
+            var averageTemperature = (int)airTemperature.Average();
             double[] precipitationAmount = weather.Select(x => x.Precipitation).ToArray();
 
             using var channel = GrpcChannel.ForAddress(MicroservicesIp.External.Forecast,
@@ -91,16 +91,11 @@ namespace Gateway.Controllers
         public async Task<double> GetOverallInfluenceByModelAsync(int modelId)
         {
             var weather = await GetWeather(modelId);
-
-            var dons = new int[91];
-            var dots = new int[91];
-            for (int i = 0; i < 91; i++)
-            {
-                dons[i] = 1;
-                dots[i] = 1;
-            }
-            const double g = 0.1; // калибровочный коэффициент, хз где его брать, по идее у каждой культуры свой
-            double gtcOptinal = 2.2; // оптимальный гтк для данной культуры. Либо вводится челом, либо можно нагуглить
+            var details = await GetDetailsByModelId(modelId);
+            var dons = details.Where(x => DateTime.Parse(x.Date) <= DateTime.UtcNow).Select(x => x.Status == "done" || x.Status == "late" ? 1 : 0).ToArray();
+            var dots = details.Where(x => DateTime.Parse(x.Date) <= DateTime.UtcNow).Select(x => x.Status == "late" || x.Status == "undone" ? 0 : 1).ToArray();
+            const double g = 0.1;
+            double gtcOptinal = 2.2;
             double[] airTemperature = weather.Select(x => x.Temperature).ToArray();
             var averageTemperature = (int)airTemperature.Average(); // нужно для осадков
             double[] precipitationAmount = weather.Select(x => x.Precipitation).ToArray();
@@ -109,7 +104,7 @@ namespace Gateway.Controllers
             double divider = Math.Ceiling(airTemperature.Length / 30d);
             int startNum = 0;
             int endNum = 0;
-            for (int i = 0; i < airTemperature.Length; i += 30) 
+            for (int i = 0; i < airTemperature.Length; i += 30)
             {
                 startNum = i;
                 endNum = startNum + 29;
@@ -121,11 +116,45 @@ namespace Gateway.Controllers
             }
 
 
-            
+
             return result / divider;
         }
 
-        private async Task<double> GetOverallInfluenceAsync(int averageTemperature, double[] airTemperature, double[] precipitationAmount, double gtcOptinal, int[] dons, int[] dots, double g) 
+        private async Task<IEnumerable<DetailProto>> GetDetailsByModelId(int modelId)
+        {
+            var tasks = await GetTasksByModelId(modelId);
+            if (!tasks.Any())
+                return null;
+            List<DetailProto> details = new List<DetailProto>();
+
+            foreach (var task in tasks)
+            {
+                var detail = await GetDetailsByTaskId(task.Id);
+                if (detail != null)
+                    details.AddRange(detail);
+            }
+            return details;
+        }
+
+        private async Task<IEnumerable<ModelTask>> GetTasksByModelId(int modelId)
+        {
+            using var channel = GrpcChannel.ForAddress(MicroservicesIp.External.ModelTask,
+                new GrpcChannelOptions { HttpHandler = SharedTools.GetDefaultHttpHandler }
+            );
+
+            SendReply response = null;
+            using (var call = new ModelTaskService.ModelTaskServiceClient(channel)
+                .GetTasks(new SendRequest { ModelId = modelId }))
+            {
+                while (await call.ResponseStream.MoveNext())
+                {
+                    response = call.ResponseStream.Current;
+                }
+            }
+            return response?.Tasks;
+        }
+
+        private async Task<double> GetOverallInfluenceAsync(int averageTemperature, double[] airTemperature, double[] precipitationAmount, double gtcOptinal, int[] dons, int[] dots, double g)
         {
             using var channel = GrpcChannel.ForAddress(MicroservicesIp.External.Forecast,
                 new GrpcChannelOptions { HttpHandler = SharedTools.GetDefaultHttpHandler }
