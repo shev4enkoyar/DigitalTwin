@@ -219,7 +219,7 @@ export class Dashboard extends Component {
                                         <label for="iostoggle" style={{ color: "white" }} className={context.theme +"Gray " }>Классический вид</label>
                                     </Col>
                                 </Row>
-                                {this.state.classic ? <DashboardClassic /> :
+                                {this.state.classic ? <DashboardClassic modelId={modelId}/> :
                                     <Container fluid>
                                         <Row className={context.theme + "Gray mt-3 ml-5 d-flex"} style={{ width: "90%" }}>
                                             <StatusCard color={"blue"} iconpath={"https://www.svgrepo.com/show/38692/monitor.svg"} path={"/" + ClientRoutes.GANT + "/" + this.props.match.params.modelId}>
