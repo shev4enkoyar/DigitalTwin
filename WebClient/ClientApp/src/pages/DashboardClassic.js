@@ -104,11 +104,12 @@ export const DashboardClassic = (props) => {
                 //console.log(prod);
                 let prodTemp = [];
                 prodTemp.push({ cult: prodName[0], sort: prodName[1], square: 22.00, norma: 0.0 });
+                const fract = { frac: tech.fraction, thic: tech.density, harv: 18, weight: 20 }
 /*                prod.map(el => prodTemp.push(el));*/
                 console.log(prodTemp);
                 if (mounted) {
                     const prevState = state;
-                    setState({ ...state, works: taskTemp, first: prodTemp[0] }) ;
+                    setState({ ...state, works: taskTemp, first: prodTemp[0], second:fract }) ;
                 }
                 const response2 = await fetch(`api/digitalmodels/get_all`, {
                     headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
@@ -116,7 +117,7 @@ export const DashboardClassic = (props) => {
                 const transp = await response2.json();
                 console.log(transp)
                 let transpTemp = [];
-                transpTemp.push("Выберите транспорт...");
+                transpTemp.push("");
                 data.map(el => transpTemp.push(el.name));
                 if (mounted) {
                     handleSelectTransp({ transp: transp, brand: brand, staff: staff, transp: transpTemp });
