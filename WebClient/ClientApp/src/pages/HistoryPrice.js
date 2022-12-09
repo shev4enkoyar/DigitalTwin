@@ -6,7 +6,7 @@ import SideBarDashboard from './../components/sideBarDashboard/SideBarDashboard'
 import { ThemeContextConsumer } from './../components/ThemeContext';
 import { Chart, LineController, LineElement, PointElement, LinearScale, Title, CategoryScale } from 'chart.js';
 import { Line } from 'react-chartjs-2';
-
+import authService from "../../src/components/api-authorization/AuthorizeService";
 import './pages.css';
 import { ClientRoutes } from "../util/ClientRoutes";
 Chart.register(LineController, LineElement, PointElement, LinearScale, Title, CategoryScale);
@@ -30,6 +30,11 @@ class HistoryPrice extends Component {
         new IconButton("/" + ClientRoutes.MODELS, "Вернуться к выбору модели",
             <img style={{ width: "25px", height: "25px", margin: "7px 0px 0px" }} className="icon" src="https://img.icons8.com/ios/344/logout-rounded--v1.png" />)
     ];
+    constructor(props) {
+        super(props);
+        this.state = {
+        }
+    }
     Data = ["25.02.2020", "28.03.2020", "02.06.2020", "16.11.2020", "30.04.2021", "11.08.2021", "19.10.2021", "04.01.2022", "04.01.2022"]
     pie={
         labels: ["25.02.2020", "28.03.2020", "02.06.2020", "16.11.2020", "30.04.2021", "11.08.2021", "19.10.2021", "04.01.2022", "04.01.2022"],
@@ -44,6 +49,31 @@ class HistoryPrice extends Component {
             }
         ]
 }
+    componentDidMount() {
+        this.GetProducts();
+    }
+    async GetProducts() {
+        console.log(132)
+        const token = await authService.getAccessToken();
+        const response = await fetch(`api/models/get_product_histories/${this.props.match.params.modelId}`, {
+            headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
+        });
+        const data = await response.json();
+        console.log(data)
+        let cultureNameTemp = new Set();
+        cultureNameTemp.add("Введите наименование культуры...");
+        data.sort((a, b) => {
+            if (a.id < b.id) {
+                return -1;
+            }
+            if (a.id > b.id) {
+                return 1;
+            }
+            return 0;
+        });
+        data.forEach(el => cultureNameTemp.add(el.name.split(';')[0]));
+        this.setState({ productData: data, cultureNames: Array.from(cultureNameTemp), loading: false });
+    }
 
     render() {
         return (
