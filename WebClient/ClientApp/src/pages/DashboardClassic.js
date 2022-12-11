@@ -10,7 +10,7 @@ export const DashboardClassic = (props) => {
 
     const [state, setState] = useState(
         {
-            first: { cult: "Пшеница", sort: "Екатерина", square: 22.00, norma: 0.0 }, second: { frac: 0, thic: 0, harv: 18, weight: 20 }, third: { gros: 396, fund: 1461.4, labor: 1.58, cost: 7307, price: 12420 },
+            first: { cult: "", sort: "", square: "", norma: 0.0 }, second: { frac: 0, thic: 0, harv: 18, weight: 20 }, third: { gros: 396, fund: 1461.4, labor: 1.58, cost: 7307, price: 12420 },
             works: [{ task: "", date: "", amount: 22, refAmount: 27, brand: "", staff: "" }],
         }
     );
@@ -102,14 +102,11 @@ export const DashboardClassic = (props) => {
                 //});
                 //const prod = await response1.json();
                 //console.log(prod);
-                let prodTemp = [];
-                prodTemp.push({ cult: prodName[0], sort: prodName[1], square: 22.00, norma: 0.0 });
+                let prodTemp = { cult: prodName[0], sort: prodName[1], square: 22.00, norma: 0.0 };
                 const fract = { frac: tech.fraction, thic: tech.density, harv: 18, weight: 20 }
 /*                prod.map(el => prodTemp.push(el));*/
                 console.log(prodTemp);
                 if (mounted) {
-                    const prevState = state;
-                    setState({ ...state, works: taskTemp, first: prodTemp[0], second:fract }) ;
                 }
                 console.log(1)
                 const token2 = await authService.getAccessToken();
@@ -117,14 +114,14 @@ export const DashboardClassic = (props) => {
                     headers: !token ? {} : { 'Authorization': `Bearer ${token2}` }
                 });
                 console.log(response2)
-                const transp = await response2.json();
+                const sq = await response2.json();
                 console.log(1)
-                console.log(transp)
-                let transpTemp = [];
-                transpTemp.push("");
-                data.map(el => transpTemp.push(el.name));
+                console.log(sq)
+                prodTemp.square = sq;
+                console.log(prodTemp.square)
                 if (mounted) {
-                    //handleSelectTransp({ transp: transp, brand: brand, staff: staff, transp: transpTemp });
+                    const prevState = state;
+                    setState({ ...state, works: taskTemp, first: prodTemp, second: fract, }) 
                 }
             } catch (e) {
                 console.log(e)
