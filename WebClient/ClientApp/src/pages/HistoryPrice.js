@@ -33,46 +33,56 @@ class HistoryPrice extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            pie: {
+                labels: [],
+                datasets: [
+                    {
+                        label: "Users Gained ",
+                        data: [],
+                        pointBackgroundColor: '#047BF8',
+                        borderColor: '#047BF8',
+                        pointRadius: '1',
+
+                    }
+                ]
+            }
         }
     }
-    Data = ["25.02.2020", "28.03.2020", "02.06.2020", "16.11.2020", "30.04.2021", "11.08.2021", "19.10.2021", "04.01.2022", "04.01.2022"]
-    pie={
-        labels: ["25.02.2020", "28.03.2020", "02.06.2020", "16.11.2020", "30.04.2021", "11.08.2021", "19.10.2021", "04.01.2022", "04.01.2022"],
-        datasets: [
-            {
-                label: "Users Gained ",
-                data: [0,5000,10000,15000,20000,25000,30000,35000,40000],
-                pointBackgroundColor: '#047BF8',
-                borderColor: '#047BF8',
-                pointRadius: '1',
-
-            }
-        ]
-}
     componentDidMount() {
-        this.GetProducts();
+        this.GetPrice();
     }
-    async GetProducts() {
-        console.log(132)
+    async GetPrice() {
         const token = await authService.getAccessToken();
-        const response = await fetch(`api/models/get_product_histories/${this.props.match.params.modelId}`, {
+        const response = await fetch(`api/products/get_product_histories/${this.props.match.params.modelId}`, {
             headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
         });
-        const data = await response.json();
-        console.log(data)
-        let cultureNameTemp = new Set();
-        cultureNameTemp.add("Введите наименование культуры...");
-        data.sort((a, b) => {
-            if (a.id < b.id) {
-                return -1;
-            }
-            if (a.id > b.id) {
-                return 1;
-            }
-            return 0;
+        const d = await response.json();
+
+        console.log(d);
+        let prices = [];
+        let dates = [];
+        //if (d.length > 1) {
+        //    status.data1 = d[d.length - 2].price
+        //    status.data2 = d[d.length - 1].price
+        //    console.log(status.data1)
+        //    console.log(status.data2)
+        //    console.log(d[1].date)
+        //}
+        //status.label = d.date
+        //console.log(status.label)
+        //this.setState({ price: status, labels:status[2] });
+        d.forEach((el, index) => {
+            console.log("111")
+            const temp = el.date.split(" ")
+            dates.push(new Date(temp[0]).toLocaleDateString())
+            prices.push(el.price)
+            console.log(112)
         });
-        data.forEach(el => cultureNameTemp.add(el.name.split(';')[0]));
-        this.setState({ productData: data, cultureNames: Array.from(cultureNameTemp), loading: false });
+        const prev = this.state.pie.datasets[0]
+        const newState = { pie: { labels: dates, datasets: [{ ...prev, data: prices }] } }
+        console.log(prev)
+        console.log(newState)
+        this.setState(newState);
     }
 
     render() {
@@ -86,7 +96,7 @@ class HistoryPrice extends Component {
                                 <h2 style={{ textAlign: "center" }}>История цен</h2>
                                 <Line
                                     
-                                    data={this.pie}
+                                    data={this.state.pie}
 
                                     options={{
                                         plugins: {
