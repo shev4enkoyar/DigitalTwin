@@ -31,7 +31,7 @@ namespace WebClient.Controllers
 
         #region Get
 
-        [HttpGet("getUsers")]
+        [HttpGet("get_users")]
         public IEnumerable<dynamic> GetUsers()
         {
             return DbContext.Users
@@ -50,7 +50,7 @@ namespace WebClient.Controllers
                 });
         }
 
-        [HttpGet("getUser/{userId}")]
+        [HttpGet("get_user/{userId}")]
         public dynamic GetUser(string userId)
         {
             return DbContext.Users
@@ -70,7 +70,7 @@ namespace WebClient.Controllers
                 .FirstOrDefault(x => x.Id.Equals(userId));
         }
 
-        [HttpGet("getUserRoles/{userId}")]
+        [HttpGet("get_user_roles/{userId}")]
         public IEnumerable<dynamic> GetUserRoles(string userId)
         {
             return DbContext.UserRoles
@@ -79,19 +79,19 @@ namespace WebClient.Controllers
                     .FirstOrDefault(y => y.Id.Equals(x.RoleId)));
         }
 
-        [HttpGet("getRoles")]
+        [HttpGet("get_roles")]
         public IEnumerable<dynamic> GetRoles()
         {
             return DbContext.Roles;
         }
 
-        [HttpGet("getFunctionals")]
+        [HttpGet("get_functionals")]
         public IEnumerable<dynamic> GetFunctionals()
         {
             return DbContext.Functionals;
         }
 
-        [HttpGet("getCompanies")]
+        [HttpGet("get_companies")]
         public IEnumerable<dynamic> GetCompanies()
         {
             return DbContext.Companies;
@@ -101,7 +101,7 @@ namespace WebClient.Controllers
 
         #region Edit
 
-        [HttpGet("editFunctional/{functionalId:int}")]
+        [HttpGet("edit_functional/{functionalId:int}")]
         public async Task<IActionResult> EditFunctional(int functionalId,
             string name = null,
             string description = null)
@@ -123,7 +123,7 @@ namespace WebClient.Controllers
             return Ok();
         }
 
-        [HttpGet("editCompany/{companyId}")]
+        [HttpGet("edit_company/{companyId}")]
         public async Task<IActionResult> EditCompany(string companyId,
             string companyName = null,
             string companyInn = null,
