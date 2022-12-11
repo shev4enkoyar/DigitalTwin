@@ -6,23 +6,6 @@ using WebClient.Interface;
 
 namespace WebClient.Hubs
 {
-    //TODO Что это за код?
-    /*
-     Use example
-     [HttpPost]
-            public async Task<ActionResult> SendToSpecificUser(Article model)
-            {
-                var connections = _userConnectionManager.GetUserConnections(userId);
-                if (connections != null && connections.Count > 0)
-                {
-                    foreach (var connectionId in connections)
-                    {
-                        await _notificationUserHubContext.Clients.Client(connectionId).SendAsync("Recive", notification);
-                    }
-                }
-                return View();
-            }
-    */
     public class NotificationHub : Hub<INotificationClient>
     {
         private readonly IUserConnectionManager _userConnectionManager;

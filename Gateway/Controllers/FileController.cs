@@ -82,7 +82,6 @@ namespace Gateway.Controllers
         [HttpGet("remove_page")]
         public bool RemovePageFile(int modelId, string fileGuid)
         {
-            //TODO Change IP route
             using var channel = GrpcChannel.ForAddress(MicroservicesIp.External.Files,
                 new GrpcChannelOptions { HttpHandler = SharedTools.GetDefaultHttpHandler });
 
