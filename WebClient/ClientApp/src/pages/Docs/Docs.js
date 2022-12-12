@@ -33,7 +33,7 @@ class Docs extends Component {
 
 
     iconsSideBarDashboard = [
-        new IconButton("/" + ClientRoutes.DASHBOARD + "/" + this.props.match.params.modelId, "Главная панель",
+        new IconButton("/" + ClientRoutes.DASHBOARD + "/" + this.props.match.params.modelId , "Главная панель",
             <img style={{ width: "25px", height: "25px", margin: "7px 0px 0px" }} className="icon" src="https://img.icons8.com/windows/344/home.png" />),
         new IconButton("/" + ClientRoutes.MAP + "/" + this.props.match.params.modelId, "Карта",
             <img style={{ width: "25px", height: "25px", margin: "7px 0px 0px"  }} className="icon" src="https://img.icons8.com/small/344/map.png" />),
