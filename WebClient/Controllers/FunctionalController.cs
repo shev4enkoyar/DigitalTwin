@@ -54,7 +54,7 @@ namespace WebClient.Controllers
         public async Task<IEnumerable<string>> GetFunctional()
         {
             var user = await _userManager.FindByIdAsync(User.FindFirstValue(ClaimTypes.NameIdentifier));
-            //TODO Yarick, imagine something better pls
+
             if (user == null)
                 return null;
             var userRoles = _dbContext.UserRoles
