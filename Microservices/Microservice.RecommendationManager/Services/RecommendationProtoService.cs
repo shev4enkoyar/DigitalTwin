@@ -45,17 +45,24 @@ namespace Microservice.RecommendationManager.Services
 
         private async Task RemoveOldRecommendations(int modelId)
         {
-            var oldDateRecommendations = DbContext.Recommendations
-                .Where(x => x.ModelId == modelId
-                            && x.CreateDate <= SharedTools.ConvertFromJsonDate(DateTime.UtcNow).AddDays(-LimitDays))
-                .OrderBy(x => x.CreateDate).ToList();
+            var oldRecommendations = DbContext.Recommendations
+                .Where(x => x.ModelId == modelId)
+                .ToList();
 
-            if (oldDateRecommendations.Count <= LimitOldRows)
+            var oldDateRecommendations = oldRecommendations
+                .Where(x => x.CreateDate <= SharedTools.ConvertFromJsonDate(DateTime.UtcNow).AddDays(-LimitDays))
+                .ToList();
+
+            var orderedOldRecommendations = oldDateRecommendations
+                .OrderBy(x => x.CreateDate)
+                .ToList();
+
+            if (orderedOldRecommendations.Count <= LimitOldRows)
                 return;
 
             DbContext.Recommendations
-                .RemoveRange(oldDateRecommendations
-                    .GetRange(0, oldDateRecommendations.Count - LimitOldRows));
+                .RemoveRange(orderedOldRecommendations
+                    .GetRange(0, orderedOldRecommendations.Count - LimitOldRows));
             await DbContext.SaveChangesAsync();
         }
 

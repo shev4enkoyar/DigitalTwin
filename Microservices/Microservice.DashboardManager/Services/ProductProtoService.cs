@@ -73,14 +73,13 @@ namespace Microservice.DashboardManager.Services
         {
             int productId = DbContext.DigitalModels.FirstOrDefault(x => x.Id == modelId).ProductId;
             return DbContext.ProductPriceHistory
-                .Include(x => x.Product)
-                .Where(x => x.Product.Id == productId)
+                .Where(x => x.ProductId.Equals(productId))
                 .Select(x => new ProductHistoryProto()
                 {
                     Id = x.Id,
                     Date = x.Date.ToString(),
                     Price = x.Price.ToString()
-                });
+                }).ToList();
         }
 
         private string GetProductByModelId(int modelId) =>
